@@ -23,9 +23,9 @@ attrs = dict(
     # scripts
     # ext_modules
     classifiers=[
-        'Development Status :: 5 - Production/Stable',
+        'Development Status :: 2 - Pre-Alpha',
         'Intended Audience :: Developers',
-        'License :: OSI Approved :: MIT License',
+        'License :: OSI Approved :: BSD License',
         'Natural Language :: English',
         'Operating System :: OS Independent',
         'Programming Language :: Python',
@@ -36,7 +36,7 @@ attrs = dict(
     # script_name
     # script_args
     # options
-    license='MIT License',
+    license='BSD License',
     keywords=[
         'bro',
         'zeek',

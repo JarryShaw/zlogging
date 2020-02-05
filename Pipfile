@@ -18,6 +18,8 @@ blogging = {editable = true,path = "."}
 autopep8 = "*"
 ipython = "*"
 pylint = "*"
+beautifulsoup4 = {extras = ["html5lib"],version = "*"}
+requests = "*"
 
 [packages]
 pandas = "*"

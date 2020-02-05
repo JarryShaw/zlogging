@@ -3,6 +3,7 @@ global-exclude *.py[cod]$
 
 prune .venv
 prune __pycache__
+prune Cellar
 
 include README.md
 include LICENSE
