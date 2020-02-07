@@ -1,6 +1,9 @@
 # -*- coding: utf-8 -*-
 """Bro/Zeek enum namespace."""
 
+import warnings
+
+import blogging.typing as typing
 from blogging.enum.Broker import BackendType as Broker_BackendType
 from blogging.enum.Broker import DataType as Broker_DataType
 from blogging.enum.Broker import ErrorCode as Broker_ErrorCode
@@ -886,10 +889,27 @@ _enum_zeek = {
 }
 
 
-def enum(*namespaces):
-    """Fetch Bro/Zeek enum namespace."""
-    enum_data = _enum_zeek.copy()
+def globals(*namespaces: typing.Args, bare: bool = False) -> typing.Dict[str, typing.Enum]:  # pylint: disable=redefined-builtin
+    """Generate Bro/Zeek ``enum`` namespace.
+
+    Args:
+        *namespaces: namespaces to be loaded
+        bare: if ``True``, do not load ``zeek` namespace by default
+
+    Returns:
+        :obj:`Dict[str, Enum]`: global enum namespace
+
+    """
+    if bare:
+        enum_data = dict()
+    else:
+        enum_data = _enum_zeek.copy()
     for namespace in namespaces:
+        if namespace == 'bro':
+            warnings.warn("Use of 'bro' is deprecated. "
+                          "Please use 'zeek' instead.", DeprecationWarning)
+            namespace = 'zeek'
+
         enum_dict = globals().get('_enum_%s' % namespace)
         if enum_dict is None:
             raise ValueError('undefined namespace: %s' % namespace)

@@ -15,8 +15,6 @@ import urllib.parse
 
 import pandas
 
-decimal.getcontext().prec = 6
-
 ###############################################################################
 # data classes
 
@@ -100,7 +98,10 @@ def time_parser(s):
 def float_parser(s):
     if s == unset_field:
         return None
-    return decimal.Decimal(s)
+    with decimal.localcontext() as ctx:
+        ctx.prec = 6
+        value = decimal.Decimal(s)
+    return value
 
 
 def interval_parser(s):
