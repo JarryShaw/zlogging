@@ -3,7 +3,7 @@
 
 import warnings
 
-import blogging.typing as typing
+import blogging._typing as typing
 from blogging.enum.Broker import BackendType as Broker_BackendType
 from blogging.enum.Broker import DataType as Broker_DataType
 from blogging.enum.Broker import ErrorCode as Broker_ErrorCode

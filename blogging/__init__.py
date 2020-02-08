@@ -1,5 +1,8 @@
 # -*- coding: utf-8 -*-
+"""Bro/Zeek logging framework."""
 
-from blogging.parser import parse
+from blogging.loader import load, loads
 
-__all__ = ['parse']
+__all__ = [
+    'load', 'loads',
+]

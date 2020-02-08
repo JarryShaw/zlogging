@@ -31,7 +31,7 @@ TEMPLATE_INIT = '''\
 
 import warning
 
-import blogging.typing as typing
+import blogging._typing as typing
 '''
 TEMPLATE_FUNC = '''\
 def globals(*namespaces: typing.Args, bare: bool = False) -> typing.Dict[str, typing.Enum]:  # pylint: disable=redefined-builtin
