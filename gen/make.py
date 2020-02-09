@@ -32,6 +32,7 @@ TEMPLATE_INIT = '''\
 import warning
 
 import blogging._typing as typing
+from blogging._exc import BroDeprecationWarning
 '''
 TEMPLATE_FUNC = '''\
 def globals(*namespaces: typing.Args, bare: bool = False) -> typing.Dict[str, typing.Enum]:  # pylint: disable=redefined-builtin
@@ -52,7 +53,7 @@ def globals(*namespaces: typing.Args, bare: bool = False) -> typing.Dict[str, ty
     for namespace in namespaces:
         if namespace == 'bro':
             warnings.warn("Use of 'bro' is deprecated. "
-                          "Please use 'zeek' instead.", DeprecationWarning)
+                          "Please use 'zeek' instead.", BroDeprecationWarning)
             namespace = 'zeek'
 
         enum_dict = globals().get('_enum_%s' % namespace)
@@ -166,7 +167,7 @@ with open(os.path.join(PATH, '__init__.py'), 'w') as file:
         safe_name = match.group('enum')
         enum_line[safe_namespace].append(f'    {safe_name!r}: {namespace}_{enum}[{name!r}],')
     print('', file=file)
-    print("__all__ = ['enum']", file=file)
+    print("__all__ = ['globals']", file=file)
     print('', file=file)
 
     for namespace in sorted(enum_line):

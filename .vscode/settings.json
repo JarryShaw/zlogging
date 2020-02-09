@@ -1,11 +1,15 @@
 {
     "python.pythonPath": ".venv/bin/python",
     "cSpell.words": [
+        "asdict",
+        "astuple",
         "dgtlen",
+        "inited",
         "posixpath",
         "prec",
         "rb'set",
         "toascii",
+        "tobytes",
         "toctree",
         "tojson",
         "uint"

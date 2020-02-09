@@ -4,6 +4,7 @@
 import warnings
 
 import blogging._typing as typing
+from blogging._exc import BroDeprecationWarning
 from blogging.enum.Broker import BackendType as Broker_BackendType
 from blogging.enum.Broker import DataType as Broker_DataType
 from blogging.enum.Broker import ErrorCode as Broker_ErrorCode
@@ -69,7 +70,7 @@ from blogging.enum.zeek import pkt_profile_modes as zeek_pkt_profile_modes
 from blogging.enum.zeek import rpc_status as zeek_rpc_status
 from blogging.enum.zeek import transport_proto as zeek_transport_proto
 
-__all__ = ['enum']
+__all__ = ['globals']
 
 _enum_Barnyard2 = {
     'LOG': Log_ID['Barnyard2::LOG'],
@@ -907,7 +908,7 @@ def globals(*namespaces: typing.Args, bare: bool = False) -> typing.Dict[str, ty
     for namespace in namespaces:
         if namespace == 'bro':
             warnings.warn("Use of 'bro' is deprecated. "
-                          "Please use 'zeek' instead.", DeprecationWarning)
+                          "Please use 'zeek' instead.", BroDeprecationWarning)
             namespace = 'zeek'
 
         enum_dict = globals().get('_enum_%s' % namespace)

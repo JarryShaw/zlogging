@@ -2,23 +2,22 @@
 """Bro/Zeek log loader."""
 
 import abc
+import collections
 import datetime
 import io
 import json
 import re
 import warnings
 
-import pandas
-
 import blogging._typing as typing
 from blogging._aux import readline
 from blogging._data import ASCIIInfo, Info, JSONInfo
 from blogging._exc import (ASCIIParserWarning, ASCIIPaserError, JSONParserError, JSONParserWarning,
                            ParserError)
-from blogging.model import Model
-from blogging.types import (AddrType, BoolType, CountType, DoubleType, EnumType, IntervalType,
-                            IntType, PortType, SetType, StringType, SubnetType, TimeType, Type,
-                            VectorType, ZeekValueError)
+from blogging.model import Model, new_model
+from blogging.types import (AddrType, AnyType, BoolType, CountType, DoubleType, EnumType,
+                            IntervalType, IntType, PortType, SetType, StringType, SubnetType,
+                            TimeType, Type, VectorType, ZeekValueError)
 
 __all__ = [
     'parse', 'parse_ascii', 'parse_json',
@@ -75,6 +74,31 @@ class BaseParser(metaclass=abc.ABCMeta):
 
         """
 
+    def load(self, file: typing.BinaryFile) -> Info:
+        """Parse log file.
+
+        Args:
+            file: log file object opened in binary mode
+
+        Returns:
+            Info: The parsed log as a :obj:`pandas.DataFrame` per line.
+
+        """
+        return self.parse_file(file)
+
+    def loads(self, line: bytes, lineno: typing.Optional[int] = 0) -> dict:
+        """Parse log line as one-line record.
+
+        Args:
+            line: a simple line of log
+            lineno: line number of current line
+
+        Returns:
+            The parsed log as a :obj:`dict`.
+
+        """
+        return self.parse_line(line, lineno)
+
 
 class JSONParser(BaseParser):
     """JSON log parser.
@@ -101,7 +125,7 @@ class JSONParser(BaseParser):
 
         """
         if model is None:
-            warnings.warn('missing log model data type declarations', JSONParserWarning)
+            warnings.warn('missing log data model specification', JSONParserWarning)
         self.model = model
 
     def parse_file(self, file: typing.BinaryFile) -> JSONInfo:
@@ -118,7 +142,7 @@ class JSONParser(BaseParser):
         for index, line in enumerate(file, start=1):
             data.append(self.parse_line(line, lineno=index))
         return JSONInfo(
-            data=pandas.DataFrame(data)
+            data=data
         )
 
     def parse_line(self, line: bytes, lineno: typing.Optional[int] = 0) -> dict:
@@ -137,16 +161,9 @@ class JSONParser(BaseParser):
         except json.JSONDecodeError as error:
             raise JSONParserError(error.msg, lineno)
         if self.model is None:
-            return data
-
-        new_data = data.copy()
-        for key, val in data.items():
-            field = getattr(self.model, key, None)
-            if not hasattr(self.model, key):
-                raise JSONParserError('unknown field', lineno, key)
-            field = getattr(self.model, key)
-            new_data[key] = field(val)
-        return new_data
+            model = new_model('<unknown>', **{field: AnyType() for field in data.keys()})
+            return model(**data)
+        return self.model(**data)
 
 
 class ASCIIParser(BaseParser):
@@ -209,7 +226,7 @@ class ASCIIParser(BaseParser):
         """
         # data separator
         separator = readline(file, b' ', maxsplit=1)[1].decode('unicode_escape').encode('ascii')
-        # set seperator
+        # set separator
         set_separator = readline(file, separator, maxsplit=1)[1]
         # empty field
         empty_field = readline(file, separator, maxsplit=1)[1]
@@ -228,6 +245,7 @@ class ASCIIParser(BaseParser):
         types = readline(file, separator, decode=True)[1:]
 
         field_parser = list()
+        model_fields = collections.OrderedDict()
         for (field, type_) in zip(model, types):
             match_set = re.match(r'set\[(?P<type>.+?)\]', type_)
             if match_set is not None:
@@ -235,6 +253,7 @@ class ASCIIParser(BaseParser):
                 type_cls = SetType(empty_field, unset_field, set_separator,
                                    element_type=self.__type__[set_type](empty_field, unset_field, set_separator))
                 field_parser.append((field, type_cls))
+                model_fields[field] = type_cls
                 continue
 
             match_vector = re.match(r'^vector\[(?P<type>.+?)\]', type_)
@@ -243,16 +262,20 @@ class ASCIIParser(BaseParser):
                 type_cls = VectorType(empty_field, unset_field, set_separator,
                                       element_type=self.__type__[vector_type](empty_field, unset_field, set_separator))
                 field_parser.append((field, type_cls))
+                model_fields[field] = type_cls
                 continue
 
             if type_ == 'enum':
                 type_cls = EnumType(empty_field, unset_field, set_separator,
                                     namespaces=self.enum_namespaces, bare=self.bare)
                 field_parser.append((field, type_cls))
+                model_fields[field] = type_cls
                 continue
 
             type_cls = self.__type__[type_](empty_field, unset_field, set_separator)
             field_parser.append((field, type_cls))
+            model_fields[field] = type_cls
+        model_cls = new_model(path, **model_fields)
 
         exit_with_error = True
         data = list()
@@ -262,7 +285,10 @@ class ASCIIParser(BaseParser):
                 close_time = datetime.datetime.strptime(line.strip().split(separator)[1].decode(),
                                                         r'%Y-%m-%d-%H-%M-%S')
                 break
-            data.append(self.parse_line(line, lineno=index, parser=field_parser))
+
+            parsed = self.parse_line(line, lineno=index, parser=field_parser)
+            model = model_cls(**parsed)
+            data.append(model)
 
         if exit_with_error:
             warnings.warn('log file exited with error', ASCIIParserWarning)
@@ -272,7 +298,7 @@ class ASCIIParser(BaseParser):
             path=path,
             open=open_time,
             close=close_time,
-            context=pandas.DataFrame(data),
+            context=data,
             exit_with_error=exit_with_error,
         )
 
@@ -304,9 +330,10 @@ class ASCIIParser(BaseParser):
         return data
 
 
-def parse_json(filename: typing.PathLike,
+def parse_json(filename: typing.PathLike,  # pylint: disable=unused-argument,keyword-arg-before-vararg
                parser: typing.Optional[typing.Type[JSONParser]] = None,
-               model: typing.Optional[typing.Type[Model]] = None) -> JSONInfo:
+               model: typing.Optional[typing.Type[Model]] = None,
+               *args: typing.Args, **kwargs: typing.Kwargs) -> JSONInfo:
     """Parse JSON log file.
 
     Args:
@@ -326,9 +353,10 @@ def parse_json(filename: typing.PathLike,
     return json_parser.parse(filename)
 
 
-def load_json(file: typing.BinaryFile,
+def load_json(file: typing.BinaryFile,  # pylint: disable=unused-argument,keyword-arg-before-vararg
               parser: typing.Optional[typing.Type[JSONParser]] = None,
-              model: typing.Optional[typing.Type[Model]] = None) -> JSONInfo:
+              model: typing.Optional[typing.Type[Model]] = None,
+              *args: typing.Args, **kwargs: typing.Kwargs) -> JSONInfo:
     """Parse JSON log file.
 
     Args:
@@ -348,9 +376,10 @@ def load_json(file: typing.BinaryFile,
     return json_parser.parse_file(file)
 
 
-def loads_json(data: typing.AnyStr,
+def loads_json(data: typing.AnyStr,  # pylint: disable=unused-argument,keyword-arg-before-vararg
                parser: typing.Optional[typing.Type[JSONParser]] = None,
-               model: typing.Optional[typing.Type[Model]] = None) -> JSONInfo:
+               model: typing.Optional[typing.Type[Model]] = None,
+               *args: typing.Args, **kwargs: typing.Kwargs) -> JSONInfo:
     """Parse JSON log string.
 
     Args:
@@ -376,10 +405,11 @@ def loads_json(data: typing.AnyStr,
     return info
 
 
-def parse_ascii(filename: typing.PathLike,
+def parse_ascii(filename: typing.PathLike,  # pylint: disable=unused-argument,keyword-arg-before-vararg
                 parser: typing.Optional[typing.Type[ASCIIInfo]] = None,
                 type_hook: typing.Optional[typing.Dict[str, typing.Type[Type]]] = None,
-                enum_namespaces: typing.Optional[typing.List[str]] = None, bare: bool = False) -> ASCIIInfo:
+                enum_namespaces: typing.Optional[typing.List[str]] = None, bare: bool = False,
+                *args: typing.Args, **kwargs: typing.Kwargs) -> ASCIIInfo:
     """Parse ASCII log file.
 
     Args:
@@ -401,10 +431,11 @@ def parse_ascii(filename: typing.PathLike,
     return ascii_parser.parse(filename)
 
 
-def load_ascii(file: typing.BinaryFile,
+def load_ascii(file: typing.BinaryFile,  # pylint: disable=unused-argument,keyword-arg-before-vararg
                parser: typing.Optional[typing.Type[ASCIIInfo]] = None,
                type_hook: typing.Optional[typing.Dict[str, typing.Type[Type]]] = None,
-               enum_namespaces: typing.Optional[typing.List[str]] = None, bare: bool = False) -> ASCIIInfo:
+               enum_namespaces: typing.Optional[typing.List[str]] = None, bare: bool = False,
+               *args: typing.Args, **kwargs: typing.Kwargs) -> ASCIIInfo:
     """Parse ASCII log file.
 
     Args:
@@ -426,10 +457,11 @@ def load_ascii(file: typing.BinaryFile,
     return ascii_parser.parse_file(file)
 
 
-def loads_ascii(data: typing.AnyStr,
+def loads_ascii(data: typing.AnyStr,  # pylint: disable=unused-argument,keyword-arg-before-vararg
                 parser: typing.Optional[typing.Type[ASCIIInfo]] = None,
                 type_hook: typing.Optional[typing.Dict[str, typing.Type[Type]]] = None,
-                enum_namespaces: typing.Optional[typing.List[str]] = None, bare: bool = False) -> ASCIIInfo:
+                enum_namespaces: typing.Optional[typing.List[str]] = None, bare: bool = False,
+                *args: typing.Args, **kwargs: typing.Kwargs) -> ASCIIInfo:
     """Parse ASCII log string.
 
     Args:

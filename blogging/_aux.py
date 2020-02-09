@@ -2,10 +2,11 @@
 """Auxiliary function."""
 
 import decimal
+import textwrap
 
 import blogging._typing as typing
 
-__all__ = ['readline', 'decimal_toascii', 'float_toascii']
+__all__ = ['readline', 'decimal_toascii', 'float_toascii', 'unicode_escape']
 
 
 def readline(file: typing.BinaryFile, separator: bytes = b'\x09',
@@ -14,7 +15,7 @@ def readline(file: typing.BinaryFile, separator: bytes = b'\x09',
 
     Args:
         file: log file object opened in binary mode
-        seperator: data separator
+        separator: data separator
         maxsplit: maximum number of splits to do; see :meth:`bytes.split`
             and :meth:`str.split` for more information
         decode: if decide the buffered string with ``ascii`` encoding
@@ -69,3 +70,8 @@ def float_toascii(data: float) -> str:
     return '%s.%s%s' % (int_part,
                         flt_part[:6],
                         '0' * (6 - len(flt_part)))
+
+
+def unicode_escape(string: bytes) -> str:
+    """Conterprocess of ``bytes.decode('unicode_escape')``."""
+    return ''.join(map(lambda s: '\\x' % s, textwrap.wrap(string.hex(), 2)))

@@ -5,6 +5,7 @@ import abc
 import dataclasses
 
 import blogging._typing as typing
+from blogging.model import Model
 
 __all__ = [
     'ASCIIInfo', 'JSONInfo'
@@ -32,7 +33,7 @@ class ASCIIInfo(Info):
     path: typing.PathLike
     open: typing.DateTime
     close: typing.DateTime
-    data: typing.DataFrame
+    data: typing.List[Model]
     exit_with_error: bool
 
 
@@ -45,4 +46,4 @@ class JSONInfo(Info):
         """str: Log file format."""
         return 'json'
 
-    data: typing.DataFrame
+    data: typing.List[Model]
