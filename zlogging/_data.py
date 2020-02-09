@@ -4,8 +4,8 @@
 import abc
 import dataclasses
 
-import blogging._typing as typing
-from blogging.model import Model
+import zlogging._typing as typing
+from zlogging.model import Model
 
 __all__ = [
     'ASCIIInfo', 'JSONInfo'

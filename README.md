@@ -1,2 +1,3 @@
-# blogging
- Bro/Zeek logging framework for Python
+# ZLogging
+
+Bro/Zeek logging framework for Python

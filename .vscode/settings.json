@@ -12,6 +12,7 @@
         "tobytes",
         "toctree",
         "tojson",
-        "uint"
+        "uint",
+        "zlogging"
     ]
 }

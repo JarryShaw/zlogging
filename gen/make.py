@@ -10,7 +10,7 @@ import sys
 import bs4
 
 ROOT = os.path.dirname(os.path.abspath(__file__))
-PATH = os.path.abspath(os.path.join(ROOT, '..', 'blogging', 'enum'))
+PATH = os.path.abspath(os.path.join(ROOT, '..', 'zlogging', 'enum'))
 os.makedirs(PATH, exist_ok=True)
 shutil.rmtree(PATH)
 os.makedirs(PATH, exist_ok=True)
@@ -31,8 +31,8 @@ TEMPLATE_INIT = '''\
 
 import warning
 
-import blogging._typing as typing
-from blogging._exc import BroDeprecationWarning
+import zlogging._typing as typing
+from zlogging._exc import BroDeprecationWarning
 '''
 TEMPLATE_FUNC = '''\
 def globals(*namespaces: typing.Args, bare: bool = False) -> typing.Dict[str, typing.Enum]:  # pylint: disable=redefined-builtin
@@ -153,7 +153,7 @@ with open(os.path.join(PATH, '__init__.py'), 'w') as file:
     print('', file=file)
     for namespace, enum, name in sorted(enum_records):
         if (namespace, enum) not in imported:
-            print(f'from blogging.enum.{namespace} import {enum} as {namespace}_{enum}', file=file)
+            print(f'from zlogging.enum.{namespace} import {enum} as {namespace}_{enum}', file=file)
             imported.append((namespace, enum))
 
             enum_line[namespace].append(f'    {enum!r}: {namespace}_{enum},')

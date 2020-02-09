@@ -5,9 +5,9 @@ import functools
 import types
 import warnings
 
-import blogging._typing as typing
-from blogging._exc import BroDeprecationWarning
-from blogging.types import (AddrType, BoolType, CountType, DoubleType, EnumType, IntervalType,
+import zlogging._typing as typing
+from zlogging._exc import BroDeprecationWarning
+from zlogging.types import (AddrType, BoolType, CountType, DoubleType, EnumType, IntervalType,
                             IntType, PortType, RecordType, SetType, StringType, SubnetType,
                             TimeType, Type, VectorType, _data)
 

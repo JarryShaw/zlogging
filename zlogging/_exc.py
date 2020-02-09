@@ -3,7 +3,7 @@
 
 import json
 
-import blogging._typing as typing
+import zlogging._typing as typing
 
 
 class ZeekException(Exception):

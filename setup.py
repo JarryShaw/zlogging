@@ -9,7 +9,7 @@ with open('README.md') as file:
 
 # setup attributes
 attrs = dict(
-    name='blogging',
+    name='zlogging',
     version=__version__,
     description=__doc__,
     long_description=long_description,
@@ -17,10 +17,10 @@ attrs = dict(
     author_email='jarryshaw@icloud.com',
     maintainer='Jarry Shaw',
     maintainer_email='jarryshaw@icloud.com',
-    url='https://github.com/JarryShaw/blogging',
-    download_url='https://github.com/JarryShaw/blogging/archive/v%s.tar.gz' % __version__,
+    url='https://github.com/JarryShaw/zlogging',
+    download_url='https://github.com/JarryShaw/zlogging/archive/v%s.tar.gz' % __version__,
     # py_modules,
-    packages=['blogging'],
+    packages=['zlogging'],
     # scripts
     # ext_modules
     classifiers=[

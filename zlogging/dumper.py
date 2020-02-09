@@ -6,10 +6,10 @@ import json
 import os
 import time
 
-import blogging._typing as typing
-from blogging._aux import unicode_escape
-from blogging._exc import ASCIIWriterError, JSONWriterError, WriterFormatError
-from blogging.model import Model
+import zlogging._typing as typing
+from zlogging._aux import unicode_escape
+from zlogging._exc import ASCIIWriterError, JSONWriterError, WriterFormatError
+from zlogging.model import Model
 
 __all__ = [
     'write', 'write_ascii', 'write_json',

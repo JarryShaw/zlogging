@@ -4,19 +4,19 @@
 import os
 import unittest
 
-import blogging
+import zlogging
 
 ROOT = os.path.dirname(os.path.realpath(__file__))
 
 
-class TestBLogging(unittest.TestCase):
-    """Test BLogging."""
+class TestZLogging(unittest.TestCase):
+    """Test ZLogging."""
 
     maxDiff = None
 
     def test_load(self):
         with open(os.path.join(ROOT, 'logs', 'http.log'), 'rb') as file:
-            info = blogging.load(file)
+            info = zlogging.load(file)
         self.assertEqual(info.format, 'ascii')
 
 

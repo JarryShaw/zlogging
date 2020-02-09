@@ -9,13 +9,13 @@ import json
 import re
 import warnings
 
-import blogging._typing as typing
-from blogging._aux import readline
-from blogging._data import ASCIIInfo, Info, JSONInfo
-from blogging._exc import (ASCIIParserWarning, ASCIIPaserError, JSONParserError, JSONParserWarning,
+import zlogging._typing as typing
+from zlogging._aux import readline
+from zlogging._data import ASCIIInfo, Info, JSONInfo
+from zlogging._exc import (ASCIIParserWarning, ASCIIPaserError, JSONParserError, JSONParserWarning,
                            ParserError)
-from blogging.model import Model, new_model
-from blogging.types import (AddrType, AnyType, BoolType, CountType, DoubleType, EnumType,
+from zlogging.model import Model, new_model
+from zlogging.types import (AddrType, AnyType, BoolType, CountType, DoubleType, EnumType,
                             IntervalType, IntType, PortType, SetType, StringType, SubnetType,
                             TimeType, Type, VectorType, ZeekValueError)
 

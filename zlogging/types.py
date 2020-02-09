@@ -10,11 +10,11 @@ import ipaddress
 import json
 import warnings
 
-import blogging._typing as typing
-from blogging._aux import decimal_toascii, float_toascii, expand_typing
-from blogging._exc import (BroDeprecationWarning, ZeekNotImplemented, ZeekTypeError, ZeekValueError,
+import zlogging._typing as typing
+from zlogging._aux import decimal_toascii, float_toascii, expand_typing
+from zlogging._exc import (BroDeprecationWarning, ZeekNotImplemented, ZeekTypeError, ZeekValueError,
                            ZeekValueWarning)
-from blogging.enum import globals as enum_generator
+from zlogging.enum import globals as enum_generator
 
 __all__ = [
     'AddrType', 'BoolType', 'CountType', 'DoubleType', 'EnumType',

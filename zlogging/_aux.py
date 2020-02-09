@@ -8,8 +8,8 @@ import textwrap
 import warnings
 from typing import _GenericAlias
 
-import blogging._typing as typing
-from blogging._exc import BroDeprecationWarning
+import zlogging._typing as typing
+from zlogging._exc import BroDeprecationWarning
 
 __all__ = ['readline', 'decimal_toascii', 'float_toascii', 'unicode_escape', 'expand_typing']
 
@@ -84,7 +84,7 @@ def unicode_escape(string: bytes) -> str:
 
 def expand_typing(cls: object, exc: ValueError) -> typing.Dict[str, typing.Any]:
     """Expand model typing annotations."""
-    from blogging.types import _GenericType, _SimpleType, _VariadicType, Type  # pylint: disable=import-outside-toplevel
+    from zlogging.types import _GenericType, _SimpleType, _VariadicType, Type  # pylint: disable=import-outside-toplevel
 
     inited = False
     unset_field = b'-'

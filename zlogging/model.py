@@ -5,10 +5,10 @@ import abc
 import collections
 import types
 
-import blogging._typing as typing
-from blogging._aux import expand_typing
-from blogging._exc import ModelTypeError, ModelValueError, ModelFormatError
-from blogging.types import Type
+import zlogging._typing as typing
+from zlogging._aux import expand_typing
+from zlogging._exc import ModelTypeError, ModelValueError, ModelFormatError
+from zlogging.types import Type
 
 __all__ = [
     'Model', 'new_model',
@@ -34,7 +34,7 @@ class Model(metaclass=abc.ABCMeta):
 
     Example:
         Define a custom log data model using the prefines Bro/Zeek data types,
-        or subclasses of :cls:`blogging.types.Type`::
+        or subclasses of :cls:`zlogging.types.Type`::
 
             class MyLog(Model):
                 field_one = StringType()
@@ -42,7 +42,7 @@ class Model(metaclass=abc.ABCMeta):
 
         Or you may use type annotations as `PEP 484`_ introduced when declaring
         data models. All available type hints can be found in
-        :mod:`blogging.typing`::
+        :mod:`zlogging.typing`::
 
             class MyLog(Model):
                 field_one: zeek_string
