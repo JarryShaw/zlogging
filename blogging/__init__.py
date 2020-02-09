@@ -13,6 +13,6 @@ __all__ = [
     'Model', 'new_model',
 
     'AddrType', 'BoolType', 'CountType', 'DoubleType', 'EnumType',
-    'IntervalType', 'IntType', 'PortType', 'SetType', 'StringType',
-    'SubnetType', 'TimeType', 'VectorType',
+    'IntervalType', 'IntType', 'PortType', 'RecordType', 'SetType',
+    'StringType', 'SubnetType', 'TimeType', 'VectorType',
 ]

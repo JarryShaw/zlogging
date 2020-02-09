@@ -128,6 +128,10 @@ class ZeekValueError(ZeekException, ValueError):
     """Invalid Bro/Zeek data value."""
 
 
+class ZeekNotImplemented(ZeekException, NotImplementedError):
+    """Method not implemented."""
+
+
 class ModelError(ZeekException):
     """Invalid model data."""
 

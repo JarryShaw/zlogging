@@ -2,19 +2,19 @@
 """Bro/Zeek typing annotations."""
 
 import functools
-import warnings
 import types
+import warnings
 
 import blogging._typing as typing
 from blogging._exc import BroDeprecationWarning
-from blogging.types import (_data, AddrType, BoolType, CountType, DoubleType, EnumType, IntervalType,
-                            IntType, PortType, SetType, StringType, SubnetType, TimeType, Type,
-                            VectorType)
+from blogging.types import (AddrType, BoolType, CountType, DoubleType, EnumType, IntervalType,
+                            IntType, PortType, RecordType, SetType, StringType, SubnetType,
+                            TimeType, Type, VectorType, _data)
 
 __all__ = [
     'zeek_addr', 'zeek_bool', 'zeek_count', 'zeek_double', 'zeek_enum',
-    'zeek_interval', 'zeek_int', 'zeek_port', 'zeek_string', 'zeek_subnet',
-    'zeek_time',
+    'zeek_interval', 'zeek_int', 'zeek_port', 'zeek_record', 'zeek_string',
+    'zeek_subnet', 'zeek_time',
 ]
 
 zeek_addr = typing.TypeVar('addr', bound=AddrType)
@@ -29,6 +29,7 @@ zeek_string = typing.TypeVar('string', bound=StringType)
 zeek_subnet = typing.TypeVar('subnet', bound=SubnetType)
 zeek_time = typing.TypeVar('time', bound=TimeType)
 
+zeek_record = types.new_class('record', (RecordType,))
 zeek_set = types.new_class('set', (SetType, typing.Generic[_data]))
 zeek_vector = types.new_class('vector', (VectorType, typing.Generic[_data]))
 
@@ -71,5 +72,6 @@ bro_string = typing.TypeVar('bro_string', bound=StringType)
 bro_subnet = typing.TypeVar('bro_subnet', bound=SubnetType)
 bro_time = typing.TypeVar('bro_time', bound=TimeType)
 
+bro_record = types.new_class('bro_record', (RecordType,))
 bro_set = types.new_class('bro_set', (SetType, typing.Generic[_data]))
 bro_vector = types.new_class('bro_vector', (VectorType, typing.Generic[_data]))

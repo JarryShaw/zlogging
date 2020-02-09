@@ -1,0 +1,23 @@
+#separator \x09
+#set_separator	,
+#empty_field	(empty)
+#unset_field	-
+#path	weird
+#open	2020-02-09-18-53-49
+#fields	ts	uid	id.orig_h	id.orig_p	id.resp_h	id.resp_p	name	addl	notice	peer
+#types	time	string	addr	port	addr	port	string	string	bool	string
+1581245629.564857	ChVL5PJjifvwJvPqd	94.23.253.27	55006	192.168.2.108	55046	TCP_ack_underflow_or_misorder	-	F	zeek
+1581245629.713548	CIY3g41YPbCNiwRh96	171.211.35.77	22223	192.168.2.108	54291	TCP_ack_underflow_or_misorder	-	F	zeek
+1581245630.169119	ChVL5PJjifvwJvPqd	94.23.253.27	55006	192.168.2.108	55046	TCP_seq_underflow_or_misorder	-	F	zeek
+1581245630.170652	C0olyq2TwOnwmTYLH3	fe80::89c:f87a:a2f1:d33e	56380	fe80::1c35:4625:c695:8712	62078	TCP_ack_underflow_or_misorder	-	F	zeek
+1581245643.909208	C0olyq2TwOnwmTYLH3	fe80::89c:f87a:a2f1:d33e	56380	fe80::1c35:4625:c695:8712	62078	TCP_seq_underflow_or_misorder	-	F	zeek
+1581245737.411763	CR2RqO3LL6u4k3MjTl	192.168.2.108	56513	199.116.115.144	80	bad_HTTP_request	-	F	zeek
+1581245760.892824	CfuSib2ZYzsbHAOG7	192.168.2.108	56630	17.167.192.225	443	window_recision	-	F	zeek
+1581245776.718731	CdS6zo424OnufVVlz7	192.168.2.108	56663	17.167.194.224	443	window_recision	-	F	zeek
+1581245801.483265	Cu8GG54UN2TgHy5xDb	192.168.2.108	56314	17.248.156.75	443	TCP_ack_underflow_or_misorder	-	F	zeek
+1581245801.543422	Cu8GG54UN2TgHy5xDb	192.168.2.108	56314	17.248.156.75	443	TCP_seq_underflow_or_misorder	-	F	zeek
+1581245918.184888	CcrFuw4CsBaNu0f6ua	192.168.2.108	56798	199.116.115.144	80	bad_HTTP_request	-	F	zeek
+1581245918.184888	CcrFuw4CsBaNu0f6ua	192.168.2.108	56798	199.116.115.144	80	line_terminated_with_single_CR	-	F	zeek
+1581245966.779397	C8XMgv11IcjRFv0yJ1	192.168.2.108	56858	58.48.140.44	8970	window_recision	-	F	zeek
+1581246090.056854	C5aHKN1NR0N7OWeTf3	83.254.71.20	10699	192.168.2.108	57133	connection_originator_SYN_ack	-	F	zeek
+#close	2020-02-09-19-01-40

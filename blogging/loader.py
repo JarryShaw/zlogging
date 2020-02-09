@@ -298,7 +298,7 @@ class ASCIIParser(BaseParser):
             path=path,
             open=open_time,
             close=close_time,
-            context=data,
+            data=data,
             exit_with_error=exit_with_error,
         )
 

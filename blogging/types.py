@@ -5,20 +5,21 @@ import abc
 import ctypes
 import datetime
 import decimal
-import json
 import enum
 import ipaddress
+import json
 import warnings
 
 import blogging._typing as typing
-from blogging._aux import decimal_toascii, float_toascii
-from blogging._exc import BroDeprecationWarning, ZeekValueError, ZeekValueWarning, ZeekTypeError
+from blogging._aux import decimal_toascii, float_toascii, expand_typing
+from blogging._exc import (BroDeprecationWarning, ZeekNotImplemented, ZeekTypeError, ZeekValueError,
+                           ZeekValueWarning)
 from blogging.enum import globals as enum_generator
 
 __all__ = [
     'AddrType', 'BoolType', 'CountType', 'DoubleType', 'EnumType',
-    'IntervalType', 'IntType', 'PortType', 'SetType', 'StringType',
-    'SubnetType', 'TimeType', 'VectorType',
+    'IntervalType', 'IntType', 'PortType', 'RecordType', 'SetType',
+    'StringType', 'SubnetType', 'TimeType', 'VectorType',
 ]
 
 
@@ -89,8 +90,10 @@ class Type(metaclass=abc.ABCMeta):
             self.set_separator = set_separator
             self.str_set_separator = set_separator.decode('ascii')
 
-    def __call__(self, data: bytes) -> typing.Any:
+    def __call__(self, data: typing.Any) -> typing.Any:
         """Parse ``data`` from string."""
+        if data is None:
+            return data
         return self.parse(data)
 
     def __str__(self) -> str:
@@ -101,7 +104,7 @@ class Type(metaclass=abc.ABCMeta):
                                                                          self.unset_field, self.set_separator)
 
     @abc.abstractmethod
-    def parse(self, data: typing.Union[typing.AnyStr, typing.Any]) -> typing.Any:
+    def parse(self, data: typing.Any) -> typing.Any:
         """Parse ``data`` from string."""
 
     @abc.abstractmethod
@@ -1014,7 +1017,7 @@ class SetType(_GenericType, typing.Generic[_data]):
         empty_field (bytes): placeholder for empty field
         unset_field (bytes): placeholder for unset field
         set_separator (bytes): separator for set/list fields
-        element_type (:obj:`Type` instance), data type of container's elements
+        element_type (:obj:`Type` instance): data type of container's elements
 
     """
 
@@ -1026,10 +1029,10 @@ class SetType(_GenericType, typing.Generic[_data]):
     @property
     def zeek_type(self) -> str:
         """str: corresponding Zeek type name."""
-        return 'set'
+        return 'set[%s]' % self.element_type.zeek_type
 
     def __init__(self, empty_field=None, unset_field=None, set_separator=None,
-                 element_type: _SimpleType = None):
+                 element_type: _data = None):
         """Initialisation.
 
         Args:
@@ -1037,7 +1040,7 @@ class SetType(_GenericType, typing.Generic[_data]):
             unset_field (:obj:`bytes` or :obj:`str`, optional): placeholder for unset field
             set_separator (:obj:`bytes` or :obj:`str`, optional): separator for set/vector fields
             namespaces (:obj:`List[str]`, optional): namespaces to be loaded
-            element_type (:obj:`Type` instance or class, required), data type of container's elements
+            element_type (:obj:`Type` instance or class, required): data type of container's elements
 
         Raises:
             ZeekTypeError: if ``element_type`` is not supplied
@@ -1052,8 +1055,8 @@ class SetType(_GenericType, typing.Generic[_data]):
             if isinstance(element_type, type) and issubclass(element_type, _SimpleType):
                 element_type = element_type(empty_field=empty_field, unset_field=unset_field, set_separator=set_separator)  # pylint: disable=line-too-long
             else:
-                raise ZeekValueError('invalid element type: %r' % type(element_type).__name__)
-        self.element_type = element_type
+                raise ZeekValueError('invalid element type: %s' % type(element_type).__name__)
+        self.element_type: _SimpleType = element_type
 
     def __repr__(self) -> str:
         return ('%s(empty_field=%s, unset_field=%s, '
@@ -1121,7 +1124,7 @@ class VectorType(_GenericType, typing.Generic[_data]):
         empty_field (bytes): placeholder for empty field
         unset_field (bytes): placeholder for unset field
         set_separator (bytes): separator for set/list fields
-        element_type (:obj:`Type` instance), data type of container's elements
+        element_type (:obj:`Type` instance): data type of container's elements
 
     """
 
@@ -1133,10 +1136,10 @@ class VectorType(_GenericType, typing.Generic[_data]):
     @property
     def zeek_type(self) -> str:
         """str: corresponding Zeek type name."""
-        return 'vector'
+        return 'vector[%s]' % self.element_type.zeek_type
 
     def __init__(self, empty_field=None, unset_field=None, set_separator=None,
-                 element_type: _SimpleType = None):
+                 element_type: _data = None):
         """Initialisation.
 
         Args:
@@ -1144,7 +1147,7 @@ class VectorType(_GenericType, typing.Generic[_data]):
             unset_field (:obj:`bytes` or :obj:`str`, optional): placeholder for unset field
             set_separator (:obj:`bytes` or :obj:`str`, optional): separator for set/vector fields
             namespaces (:obj:`List[str]`, optional): namespaces to be loaded
-            element_type (:obj:`Type` instance or class, required), data type of container's elements
+            element_type (:obj:`Type` instance or class, required): data type of container's elements
 
         Raises:
             ZeekTypeError: if ``element_type`` is not supplied
@@ -1159,8 +1162,8 @@ class VectorType(_GenericType, typing.Generic[_data]):
             if isinstance(element_type, type) and issubclass(element_type, _SimpleType):
                 element_type = element_type(empty_field=empty_field, unset_field=unset_field, set_separator=set_separator)  # pylint: disable=line-too-long
             else:
-                raise ZeekValueError('invalid element type: %r' % type(element_type).__name__)
-        self.element_type = element_type
+                raise ZeekValueError('invalid element type: %s' % type(element_type).__name__)
+        self.element_type: _SimpleType = element_type
 
     def __repr__(self) -> str:
         return ('%s(empty_field=%s, unset_field=%s, '
@@ -1219,3 +1222,85 @@ class VectorType(_GenericType, typing.Generic[_data]):
         if not data:
             return self.str_empty_field
         return self.set_separator.join(self.element_type.toascii(element) for element in data)
+
+
+class _VariadicType(Type):  # pylint: disable=abstract-method
+    """Variadic data type."""
+
+    def parse(self, data: typing.Any) -> typing.NoReturn:
+        raise ZeekNotImplemented
+
+    def tojson(self, data: typing.Any) -> typing.NoReturn:
+        raise ZeekNotImplemented
+
+    def toascii(self, data: typing.Any) -> typing.NoReturn:
+        raise ZeekNotImplemented
+
+
+class RecordType(_VariadicType):
+    """Bro/Zeek ``record`` data type.
+
+    Attributes:
+        empty_field (bytes): placeholder for empty field
+        unset_field (bytes): placeholder for unset field
+        set_separator (bytes): separator for set/list fields
+        element_mapping (:obj:`Dict[str, Type]`): data type mapping of container's elements
+
+    """
+
+    @property
+    def python_type(self) -> typing.Type:
+        """type: corresponding Python type annotation."""
+        return typing.Dict[str, _data]
+
+    @property
+    def zeek_type(self) -> str:
+        """str: corresponding Zeek type name."""
+        return 'record'
+
+    def __init__(self, empty_field=None, unset_field=None, set_separator=None,
+                 **element_mapping: typing.Kwargs):
+        """Initialisation.
+
+        Args:
+            empty_field (:obj:`bytes` or :obj:`str`, optional): placeholder for empty field
+            unset_field (:obj:`bytes` or :obj:`str`, optional): placeholder for unset field
+            set_separator (:obj:`bytes` or :obj:`str`, optional): separator for set/vector fields
+            namespaces (:obj:`List[str]`, optional): namespaces to be loaded
+            **element_mapping: data type of container's elements
+
+        Raises:
+            ZeekTypeError: if ``element_mapping`` is not supplied
+            ZeekValueError: if values of ``element_mapping`` are not valid Bro/Zeek data types
+
+        """
+        super().__init__(empty_field=empty_field, unset_field=unset_field, set_separator=set_separator)
+
+        expanded = expand_typing(self, ZeekValueError)
+        if self.empty_field != expanded['empty_field']:
+            raise ZeekValueError("inconsistent value of 'empty_field': %r and %r" % (self.empty_field, expanded['empty_field']))  # pylint: disable=line-too-long
+        if self.unset_field != expanded['unset_field']:
+            raise ZeekValueError("inconsistent value of 'unset_field': %r and %r" % (self.unset_field, expanded['unset_field']))  # pylint: disable=line-too-long
+        if self.set_separator != expanded['set_separator']:
+            raise ZeekValueError("inconsistent value of 'set_separator': %r and %r" % (self.set_separator, expanded['set_separator']))  # pylint: disable=line-too-long
+
+        fields: typing.OrderedDict[str, _data] = expanded['fields']
+        for field, element_type in fields.items():
+            if isinstance(element_type, (_SimpleType, _GenericType)):
+                continue
+            raise ZeekValueError('invalid element type of field %r: %s' % (field, type(element_type).__name__))
+        for field, element_type in element_mapping.items():
+            if not isinstance(element_type, _SimpleType):
+                if isinstance(element_type, type) and issubclass(element_type, _SimpleType):
+                    element_type = element_type(empty_field=empty_field, unset_field=unset_field,
+                                                set_separator=set_separator)  # pylint: disable=line-too-long
+                else:
+                    raise ZeekValueError('invalid element type of field %r: %s' % (field, type(element_type).__name__))
+            fields[field] = element_type
+        self.element_mapping: typing.Dict[str, _data] = fields
+
+    def __repr__(self) -> str:
+        return ('%s(empty_field=%s, unset_field=%s, '
+                'set_separator=%s, element_mapping=%s)') % (type(self).__name__,
+                                                            self.empty_field, self.unset_field,
+                                                            self.set_separator, self.element_mapping)

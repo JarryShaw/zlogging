@@ -1,0 +1,19 @@
+# base configurations
+dist: xenial
+language: python
+python:
+  - "3.6"
+  - "3.7"
+  - "3.8"
+
+# command to install dependencies
+install:
+  - pip install tox-travis coveralls
+
+# command to run tests
+script:
+  - tox
+
+# coverage
+after_script:
+  - coveralls

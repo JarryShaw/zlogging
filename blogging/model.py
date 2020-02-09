@@ -3,14 +3,12 @@
 
 import abc
 import collections
-import itertools
-import warnings
 import types
-from typing import _GenericAlias
 
 import blogging._typing as typing
-from blogging._exc import BroDeprecationWarning, ModelTypeError, ModelValueError, ModelFormatError
-from blogging.types import Type, _GenericType, _SimpleType
+from blogging._aux import expand_typing
+from blogging._exc import ModelTypeError, ModelValueError, ModelFormatError
+from blogging.types import Type
 
 __all__ = [
     'Model', 'new_model',
@@ -89,82 +87,15 @@ class Model(metaclass=abc.ABCMeta):
         return self.__set_separator__
 
     def __new__(cls, *args: typing.Args, **kwargs: typing.Kwargs):  # pylint: disable=unused-argument
-        inited = False
-        unset_field = b'-'
-        empty_field = b'(empty)'
-        set_separator = b','
+        expanded = expand_typing(cls, ModelValueError)
 
-        fields = collections.OrderedDict()
-        for name, attr in itertools.chain(getattr(cls, '__annotations__', dict()).items(), cls.__dict__.items()):
-            if not isinstance(attr, Type):
-                if isinstance(attr, typing.TypeVar):
-                    type_name = attr.__name__
-                    bound = attr.__bound__
-
-                    if isinstance(bound, _SimpleType):
-                        attr = bound
-                    elif isinstance(bound, type) and issubclass(bound, _SimpleType):
-                        attr = bound()
-                    else:
-                        continue
-
-                    if type_name.startswith('bro'):
-                        warnings.warn("Use of 'bro_%(name)s' is deprecated. "
-                                      "Please use 'zeek_%(name)s' instead." % dict(name=attr), BroDeprecationWarning)  # pylint: disable=line-too-long
-                elif isinstance(attr, _GenericAlias) and _GenericType in attr.mro():
-                    origin = attr.__origin__
-                    parameter = attr.__parameters__[0]
-
-                    if isinstance(parameter, typing.TypeVar):
-                        bound = parameter.__bound__
-                        if issubclass(bound, _SimpleType):
-                            type_name = parameter.__name__
-                            element_type = bound()
-                            if type_name.startswith('bro'):
-                                warnings.warn("Use of 'bro_%(name)s' is deprecated. "
-                                              "Please use 'zeek_%(name)s' instead." % dict(name=element_type), BroDeprecationWarning)  # pylint: disable=line-too-long
-                        else:
-                            element_type = bound
-                    elif isinstance(parameter, type) and issubclass(parameter, _SimpleType):
-                        element_type = parameter()
-                    else:
-                        element_type = parameter
-
-                    type_name = origin.__name__
-                    attr = origin(element_type=element_type)
-                    if type_name.startswith('bro'):
-                        warnings.warn("Use of 'bro_%(name)s' is deprecated. "
-                                      "Please use 'zeek_%(name)s' instead." % dict(name=attr), BroDeprecationWarning)  # pylint: disable=line-too-long
-                elif isinstance(attr, type) and issubclass(attr, Type):
-                    attr = attr()
-                else:
-                    continue
-
-            existed = fields.get(name)
-            if existed is not None and type(attr) != type(existed):
-                raise ModelValueError('inconsistent data type of %r field: %s and %s' % (name, attr, existed))
-            fields[name] = attr
-
-            if not inited:
-                unset_field = attr.unset_field
-                empty_field = attr.empty_field
-                set_separator = attr.set_separator
-                inited = True
-                continue
-
-            if unset_field != attr.unset_field:
-                raise ModelValueError("inconsistent value of 'unset_field': %r and %r" % (unset_field, attr.unset_field))  # pylint: disable=line-too-long
-            if empty_field != attr.empty_field:
-                raise ModelValueError("inconsistent value of 'empty_field': %r and %r" % (empty_field, attr.empty_field))  # pylint: disable=line-too-long
-            if set_separator != attr.set_separator:
-                raise ModelValueError("inconsistent value of 'set_separator': %r and %r" % (set_separator, attr.set_separator))  # pylint: disable=line-too-long
-
-        cls.__fields__ = fields
+        cls.__fields__ = expanded['fields']
+        cls.__record_fields__ = expanded['record_fields']
         cls.__doc__ = 'Initialise ``%s`` data model.' % cls.__name__
 
-        cls.__unset_field__ = unset_field
-        cls.__empty_field__ = empty_field
-        cls.__set_separator__ = set_separator
+        cls.__unset_field__ = expanded['unset_field']
+        cls.__empty_field__ = expanded['empty_field']
+        cls.__set_separator__ = expanded['set_separator']
 
         return super().__new__(cls)
 
@@ -181,6 +112,13 @@ class Model(metaclass=abc.ABCMeta):
             if arg in init_args:
                 raise ModelTypeError('__init__() got multiple values for argument %r' % arg)
             if arg not in field_names:
+                if arg in self.__record_fields__ and isinstance(val, dict):
+                    for arg_nam, arg_val in val.items():
+                        name = '%s.%s' % (arg, arg_nam)
+                        if name not in self.__fields__:
+                            raise ModelTypeError('__init__() got an unexpected keyword argument %r' % name)
+                        init_args[name] = self.__fields__[name](arg_val)
+                    continue
                 raise ModelTypeError('__init__() got an unexpected keyword argument %r' % arg)
             init_args[arg] = self.__fields__[arg](val)
 

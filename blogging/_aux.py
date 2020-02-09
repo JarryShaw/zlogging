@@ -1,12 +1,17 @@
 # -*- coding: utf-8 -*-
 """Auxiliary function."""
 
+import collections
 import decimal
+import itertools
 import textwrap
+import warnings
+from typing import _GenericAlias
 
 import blogging._typing as typing
+from blogging._exc import BroDeprecationWarning
 
-__all__ = ['readline', 'decimal_toascii', 'float_toascii', 'unicode_escape']
+__all__ = ['readline', 'decimal_toascii', 'float_toascii', 'unicode_escape', 'expand_typing']
 
 
 def readline(file: typing.BinaryFile, separator: bytes = b'\x09',
@@ -75,3 +80,96 @@ def float_toascii(data: float) -> str:
 def unicode_escape(string: bytes) -> str:
     """Conterprocess of ``bytes.decode('unicode_escape')``."""
     return ''.join(map(lambda s: '\\x' % s, textwrap.wrap(string.hex(), 2)))
+
+
+def expand_typing(cls: object, exc: ValueError) -> typing.Dict[str, typing.Any]:
+    """Expand model typing annotations."""
+    from blogging.types import _GenericType, _SimpleType, _VariadicType, Type  # pylint: disable=import-outside-toplevel
+
+    inited = False
+    unset_field = b'-'
+    empty_field = b'(empty)'
+    set_separator = b','
+
+    def register(name: str, field: Type):
+        """Field registry."""
+        existed = fields.get(name)
+        if existed is not None and type(field) != type(existed):
+            raise exc('inconsistent data type of %r field: %s and %s' % (name, field, existed))
+        fields[name] = field
+
+    fields = collections.OrderedDict()
+    record_fields = collections.OrderedDict()
+    for name, attr in itertools.chain(getattr(cls, '__annotations__', dict()).items(), cls.__dict__.items()):
+        if not isinstance(attr, Type):
+            if isinstance(attr, typing.TypeVar):
+                type_name = attr.__name__
+                bound = attr.__bound__
+
+                if isinstance(bound, _SimpleType):
+                    attr = bound
+                elif isinstance(bound, type) and issubclass(bound, _SimpleType):
+                    attr = bound()
+                else:
+                    continue
+
+                if type_name.startswith('bro'):
+                    warnings.warn("Use of 'bro_%(name)s' is deprecated. "
+                                  "Please use 'zeek_%(name)s' instead." % dict(name=attr), BroDeprecationWarning)  # pylint: disable=line-too-long
+            elif isinstance(attr, _GenericAlias) and _GenericType in attr.mro():
+                origin = attr.__origin__
+                parameter = attr.__parameters__[0]
+
+                if isinstance(parameter, typing.TypeVar):
+                    bound = parameter.__bound__
+                    if issubclass(bound, _SimpleType):
+                        type_name = parameter.__name__
+                        element_type = bound()
+                        if type_name.startswith('bro'):
+                            warnings.warn("Use of 'bro_%(name)s' is deprecated. "
+                                          "Please use 'zeek_%(name)s' instead." % dict(name=element_type), BroDeprecationWarning)  # pylint: disable=line-too-long
+                    else:
+                        element_type = bound
+                elif isinstance(parameter, type) and issubclass(parameter, _SimpleType):
+                    element_type = parameter()
+                else:
+                    element_type = parameter
+
+                type_name = origin.__name__
+                attr = origin(element_type=element_type)
+                if type_name.startswith('bro'):
+                    warnings.warn("Use of 'bro_%(name)s' is deprecated. "
+                                  "Please use 'zeek_%(name)s' instead." % dict(name=attr), BroDeprecationWarning)  # pylint: disable=line-too-long
+            elif isinstance(attr, type) and issubclass(attr, Type):
+                attr = attr()
+            else:
+                continue
+
+        if isinstance(attr, _VariadicType):
+            for elm_name, elm_field in attr.element_mapping.items():
+                register('%s.%s' % (name, elm_name), elm_field)
+            record_fields[name] = attr
+        else:
+            register(name, attr)
+
+        if not inited:
+            unset_field = attr.unset_field
+            empty_field = attr.empty_field
+            set_separator = attr.set_separator
+            inited = True
+            continue
+
+        if unset_field != attr.unset_field:
+            raise exc("inconsistent value of 'unset_field': %r and %r" % (unset_field, attr.unset_field))  # pylint: disable=line-too-long
+        if empty_field != attr.empty_field:
+            raise exc("inconsistent value of 'empty_field': %r and %r" % (empty_field, attr.empty_field))  # pylint: disable=line-too-long
+        if set_separator != attr.set_separator:
+            raise exc("inconsistent value of 'set_separator': %r and %r" % (set_separator, attr.set_separator))  # pylint: disable=line-too-long
+
+    return dict(
+        fields=fields,
+        record_fields=record_fields,
+        unset_field=unset_field,
+        empty_field=empty_field,
+        set_separator=set_separator,
+    )

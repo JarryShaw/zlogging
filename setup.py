@@ -2,7 +2,7 @@
 """Bro/Zeek logging framework for Python."""
 
 # version string
-__version__ = '0.1.0'
+__version__ = '0.1.0rc1'
 
 with open('README.md') as file:
     long_description = file.read()
@@ -19,7 +19,8 @@ attrs = dict(
     maintainer_email='jarryshaw@icloud.com',
     url='https://github.com/JarryShaw/blogging',
     download_url='https://github.com/JarryShaw/blogging/archive/v%s.tar.gz' % __version__,
-    py_modules=['blogging'],
+    # py_modules,
+    packages=['blogging'],
     # scripts
     # ext_modules
     classifiers=[
@@ -58,7 +59,6 @@ attrs = dict(
             'LICENSE',
             'README.md',
         ],
-        'template': ['*'],
     },
     # include_package_data
     # libraries
@@ -68,17 +68,13 @@ attrs = dict(
     # password
     # fullname
     # long_description_content_type
-    # python_requires
+    python_requires='>=3.6',
     # zip_safe,
-    install_requires=[
-        # 'ConfigUpdater',
-        'PyYAML',
-        'simplejson',
-    ],
-    entry_points={
-        'console_scripts': [
-            'dummy = dummy:main',
-        ]
+    # install_requires,
+    # entry_points,
+    extras_require={
+        # version compatibility
+        ':python_version == "3.6"': ['dataclasses'],
     },
 )
 
