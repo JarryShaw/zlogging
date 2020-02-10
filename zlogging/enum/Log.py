@@ -1,8 +1,5 @@
 # -*- coding: utf-8 -*-
-"""Namespace: Log.
-
-:module: zlogging.enum.Log
-"""
+"""Namespace: ``Log``."""
 
 from zlogging._compat import enum
 
@@ -14,7 +11,7 @@ class ID(enum.IntFlag):
     The log ID implicitly determines the default name of the generated log
     file.
 
-    c.f. `base/frameworks/logging/main.zeek <https://docs.zeek.org/en/stable/scripts/base/frameworks/logging/main.zeek.html>`__
+    c.f. `base/frameworks/logging/main.zeek <https://docs.zeek.org/en/stable/scripts/base/frameworks/logging/main.zeek.html#type-Log::ID>`__
 
     """
 
@@ -22,287 +19,283 @@ class ID(enum.IntFlag):
     ID = vars()
 
     #: Dummy place-holder.
-    #: :currentmodule: zlogging.enum.Log
     ID['UNKNOWN'] = enum.auto()
 
+    #: Broker::LOG
     #: (present if base/frameworks/broker/log.zeek is loaded)
-    #: :currentmodule: zlogging.enum.Log
-    ID['Broker::LOG'] = enum.auto()
+    ID['Broker__LOG'] = enum.auto()
 
+    #: Files::LOG
     #: (present if base/frameworks/files/main.zeek is loaded)
     #: Logging stream for file analysis.
-    #: :currentmodule: zlogging.enum.Log
-    ID['Files::LOG'] = enum.auto()
+    ID['Files__LOG'] = enum.auto()
 
+    #: Reporter::LOG
     #: (present if base/frameworks/reporter/main.zeek is loaded)
-    #: :currentmodule: zlogging.enum.Log
-    ID['Reporter::LOG'] = enum.auto()
+    ID['Reporter__LOG'] = enum.auto()
 
+    #: Cluster::LOG
     #: (present if base/frameworks/cluster/main.zeek is loaded)
-    #: :currentmodule: zlogging.enum.Log
-    ID['Cluster::LOG'] = enum.auto()
+    ID['Cluster__LOG'] = enum.auto()
 
+    #: Notice::LOG
     #: (present if base/frameworks/notice/main.zeek is loaded)
     #: This is the primary logging stream for notices.
-    #: :currentmodule: zlogging.enum.Log
-    ID['Notice::LOG'] = enum.auto()
+    ID['Notice__LOG'] = enum.auto()
 
+    #: Notice::ALARM_LOG
     #: (present if base/frameworks/notice/main.zeek is loaded)
     #: This is the alarm stream.
-    #: :currentmodule: zlogging.enum.Log
-    ID['Notice::ALARM_LOG'] = enum.auto()
+    ID['Notice__ALARM_LOG'] = enum.auto()
 
+    #: Weird::LOG
     #: (present if base/frameworks/notice/weird.zeek is loaded)
-    #: :currentmodule: zlogging.enum.Log
-    ID['Weird::LOG'] = enum.auto()
+    ID['Weird__LOG'] = enum.auto()
 
+    #: DPD::LOG
     #: (present if base/frameworks/dpd/main.zeek is loaded)
-    #: :currentmodule: zlogging.enum.Log
-    ID['DPD::LOG'] = enum.auto()
+    ID['DPD__LOG'] = enum.auto()
 
+    #: Signatures::LOG
     #: (present if base/frameworks/signatures/main.zeek is loaded)
-    #: :currentmodule: zlogging.enum.Log
-    ID['Signatures::LOG'] = enum.auto()
+    ID['Signatures__LOG'] = enum.auto()
 
+    #: PacketFilter::LOG
     #: (present if base/frameworks/packet-filter/main.zeek is loaded)
-    #: :currentmodule: zlogging.enum.Log
-    ID['PacketFilter::LOG'] = enum.auto()
+    ID['PacketFilter__LOG'] = enum.auto()
 
+    #: Software::LOG
     #: (present if base/frameworks/software/main.zeek is loaded)
-    #: :currentmodule: zlogging.enum.Log
-    ID['Software::LOG'] = enum.auto()
+    ID['Software__LOG'] = enum.auto()
 
+    #: Intel::LOG
     #: (present if base/frameworks/intel/main.zeek is loaded)
-    #: :currentmodule: zlogging.enum.Log
-    ID['Intel::LOG'] = enum.auto()
+    ID['Intel__LOG'] = enum.auto()
 
+    #: Config::LOG
     #: (present if base/frameworks/config/main.zeek is loaded)
-    #: :currentmodule: zlogging.enum.Log
-    ID['Config::LOG'] = enum.auto()
+    ID['Config__LOG'] = enum.auto()
 
+    #: Tunnel::LOG
     #: (present if base/frameworks/tunnels/main.zeek is loaded)
-    #: :currentmodule: zlogging.enum.Log
-    ID['Tunnel::LOG'] = enum.auto()
+    ID['Tunnel__LOG'] = enum.auto()
 
+    #: OpenFlow::LOG
     #: (present if base/frameworks/openflow/plugins/log.zeek is loaded)
-    #: :currentmodule: zlogging.enum.Log
-    ID['OpenFlow::LOG'] = enum.auto()
+    ID['OpenFlow__LOG'] = enum.auto()
 
+    #: NetControl::LOG
     #: (present if base/frameworks/netcontrol/main.zeek is loaded)
-    #: :currentmodule: zlogging.enum.Log
-    ID['NetControl::LOG'] = enum.auto()
+    ID['NetControl__LOG'] = enum.auto()
 
+    #: NetControl::DROP
     #: (present if base/frameworks/netcontrol/types.zeek is loaded)
     #: Stop forwarding all packets matching the entity.
     #: No additional arguments.
-    #: :currentmodule: zlogging.enum.Log
-    ID['NetControl::DROP'] = enum.auto()
+    ID['NetControl__DROP'] = enum.auto()
 
+    #: NetControl::SHUNT
     #: (present if base/frameworks/netcontrol/shunt.zeek is loaded)
-    #: :currentmodule: zlogging.enum.Log
-    ID['NetControl::SHUNT'] = enum.auto()
+    ID['NetControl__SHUNT'] = enum.auto()
 
+    #: Conn::LOG
     #: (present if base/protocols/conn/main.zeek is loaded)
-    #: :currentmodule: zlogging.enum.Log
-    ID['Conn::LOG'] = enum.auto()
+    ID['Conn__LOG'] = enum.auto()
 
+    #: DCE_RPC::LOG
     #: (present if base/protocols/dce-rpc/main.zeek is loaded)
-    #: :currentmodule: zlogging.enum.Log
-    ID['DCE_RPC::LOG'] = enum.auto()
+    ID['DCE_RPC__LOG'] = enum.auto()
 
+    #: DHCP::LOG
     #: (present if base/protocols/dhcp/main.zeek is loaded)
-    #: :currentmodule: zlogging.enum.Log
-    ID['DHCP::LOG'] = enum.auto()
+    ID['DHCP__LOG'] = enum.auto()
 
+    #: DNP3::LOG
     #: (present if base/protocols/dnp3/main.zeek is loaded)
-    #: :currentmodule: zlogging.enum.Log
-    ID['DNP3::LOG'] = enum.auto()
+    ID['DNP3__LOG'] = enum.auto()
 
+    #: DNS::LOG
     #: (present if base/protocols/dns/main.zeek is loaded)
-    #: :currentmodule: zlogging.enum.Log
-    ID['DNS::LOG'] = enum.auto()
+    ID['DNS__LOG'] = enum.auto()
 
+    #: FTP::LOG
     #: (present if base/protocols/ftp/main.zeek is loaded)
-    #: :currentmodule: zlogging.enum.Log
-    ID['FTP::LOG'] = enum.auto()
+    ID['FTP__LOG'] = enum.auto()
 
+    #: SSL::LOG
     #: (present if base/protocols/ssl/main.zeek is loaded)
-    #: :currentmodule: zlogging.enum.Log
-    ID['SSL::LOG'] = enum.auto()
+    ID['SSL__LOG'] = enum.auto()
 
+    #: X509::LOG
     #: (present if base/files/x509/main.zeek is loaded)
-    #: :currentmodule: zlogging.enum.Log
-    ID['X509::LOG'] = enum.auto()
+    ID['X509__LOG'] = enum.auto()
 
+    #: HTTP::LOG
     #: (present if base/protocols/http/main.zeek is loaded)
-    #: :currentmodule: zlogging.enum.Log
-    ID['HTTP::LOG'] = enum.auto()
+    ID['HTTP__LOG'] = enum.auto()
 
+    #: IRC::LOG
     #: (present if base/protocols/irc/main.zeek is loaded)
-    #: :currentmodule: zlogging.enum.Log
-    ID['IRC::LOG'] = enum.auto()
+    ID['IRC__LOG'] = enum.auto()
 
+    #: KRB::LOG
     #: (present if base/protocols/krb/main.zeek is loaded)
-    #: :currentmodule: zlogging.enum.Log
-    ID['KRB::LOG'] = enum.auto()
+    ID['KRB__LOG'] = enum.auto()
 
+    #: Modbus::LOG
     #: (present if base/protocols/modbus/main.zeek is loaded)
-    #: :currentmodule: zlogging.enum.Log
-    ID['Modbus::LOG'] = enum.auto()
+    ID['Modbus__LOG'] = enum.auto()
 
+    #: mysql::LOG
     #: (present if base/protocols/mysql/main.zeek is loaded)
-    #: :currentmodule: zlogging.enum.Log
-    ID['mysql::LOG'] = enum.auto()
+    ID['mysql__LOG'] = enum.auto()
 
+    #: NTLM::LOG
     #: (present if base/protocols/ntlm/main.zeek is loaded)
-    #: :currentmodule: zlogging.enum.Log
-    ID['NTLM::LOG'] = enum.auto()
+    ID['NTLM__LOG'] = enum.auto()
 
+    #: NTP::LOG
     #: (present if base/protocols/ntp/main.zeek is loaded)
-    #: :currentmodule: zlogging.enum.Log
-    ID['NTP::LOG'] = enum.auto()
+    ID['NTP__LOG'] = enum.auto()
 
+    #: RADIUS::LOG
     #: (present if base/protocols/radius/main.zeek is loaded)
-    #: :currentmodule: zlogging.enum.Log
-    ID['RADIUS::LOG'] = enum.auto()
+    ID['RADIUS__LOG'] = enum.auto()
 
+    #: RDP::LOG
     #: (present if base/protocols/rdp/main.zeek is loaded)
-    #: :currentmodule: zlogging.enum.Log
-    ID['RDP::LOG'] = enum.auto()
+    ID['RDP__LOG'] = enum.auto()
 
+    #: RFB::LOG
     #: (present if base/protocols/rfb/main.zeek is loaded)
-    #: :currentmodule: zlogging.enum.Log
-    ID['RFB::LOG'] = enum.auto()
+    ID['RFB__LOG'] = enum.auto()
 
+    #: SIP::LOG
     #: (present if base/protocols/sip/main.zeek is loaded)
-    #: :currentmodule: zlogging.enum.Log
-    ID['SIP::LOG'] = enum.auto()
+    ID['SIP__LOG'] = enum.auto()
 
+    #: SNMP::LOG
     #: (present if base/protocols/snmp/main.zeek is loaded)
-    #: :currentmodule: zlogging.enum.Log
-    ID['SNMP::LOG'] = enum.auto()
+    ID['SNMP__LOG'] = enum.auto()
 
+    #: SMB::AUTH_LOG
     #: (present if base/protocols/smb/main.zeek is loaded)
-    #: :currentmodule: zlogging.enum.Log
-    ID['SMB::AUTH_LOG'] = enum.auto()
+    ID['SMB__AUTH_LOG'] = enum.auto()
 
+    #: SMB::MAPPING_LOG
     #: (present if base/protocols/smb/main.zeek is loaded)
-    #: :currentmodule: zlogging.enum.Log
-    ID['SMB::MAPPING_LOG'] = enum.auto()
+    ID['SMB__MAPPING_LOG'] = enum.auto()
 
+    #: SMB::FILES_LOG
     #: (present if base/protocols/smb/main.zeek is loaded)
-    #: :currentmodule: zlogging.enum.Log
-    ID['SMB::FILES_LOG'] = enum.auto()
+    ID['SMB__FILES_LOG'] = enum.auto()
 
+    #: SMTP::LOG
     #: (present if base/protocols/smtp/main.zeek is loaded)
-    #: :currentmodule: zlogging.enum.Log
-    ID['SMTP::LOG'] = enum.auto()
+    ID['SMTP__LOG'] = enum.auto()
 
+    #: SOCKS::LOG
     #: (present if base/protocols/socks/main.zeek is loaded)
-    #: :currentmodule: zlogging.enum.Log
-    ID['SOCKS::LOG'] = enum.auto()
+    ID['SOCKS__LOG'] = enum.auto()
 
+    #: SSH::LOG
     #: (present if base/protocols/ssh/main.zeek is loaded)
-    #: :currentmodule: zlogging.enum.Log
-    ID['SSH::LOG'] = enum.auto()
+    ID['SSH__LOG'] = enum.auto()
 
+    #: Syslog::LOG
     #: (present if base/protocols/syslog/main.zeek is loaded)
-    #: :currentmodule: zlogging.enum.Log
-    ID['Syslog::LOG'] = enum.auto()
+    ID['Syslog__LOG'] = enum.auto()
 
+    #: PE::LOG
     #: (present if base/files/pe/main.zeek is loaded)
-    #: :currentmodule: zlogging.enum.Log
-    ID['PE::LOG'] = enum.auto()
+    ID['PE__LOG'] = enum.auto()
 
+    #: NetControl::CATCH_RELEASE
     #: (present if policy/frameworks/netcontrol/catch-and-release.zeek is loaded)
-    #: :currentmodule: zlogging.enum.Log
-    ID['NetControl::CATCH_RELEASE'] = enum.auto()
+    ID['NetControl__CATCH_RELEASE'] = enum.auto()
 
+    #: Unified2::LOG
     #: (present if policy/files/unified2/main.zeek is loaded)
-    #: :currentmodule: zlogging.enum.Log
-    ID['Unified2::LOG'] = enum.auto()
+    ID['Unified2__LOG'] = enum.auto()
 
+    #: OCSP::LOG
     #: (present if policy/files/x509/log-ocsp.zeek is loaded)
-    #: :currentmodule: zlogging.enum.Log
-    ID['OCSP::LOG'] = enum.auto()
+    ID['OCSP__LOG'] = enum.auto()
 
+    #: Barnyard2::LOG
     #: (present if policy/integration/barnyard2/main.zeek is loaded)
-    #: :currentmodule: zlogging.enum.Log
-    ID['Barnyard2::LOG'] = enum.auto()
+    ID['Barnyard2__LOG'] = enum.auto()
 
+    #: CaptureLoss::LOG
     #: (present if policy/misc/capture-loss.zeek is loaded)
-    #: :currentmodule: zlogging.enum.Log
-    ID['CaptureLoss::LOG'] = enum.auto()
+    ID['CaptureLoss__LOG'] = enum.auto()
 
+    #: Traceroute::LOG
     #: (present if policy/misc/detect-traceroute/main.zeek is loaded)
-    #: :currentmodule: zlogging.enum.Log
-    ID['Traceroute::LOG'] = enum.auto()
+    ID['Traceroute__LOG'] = enum.auto()
 
+    #: LoadedScripts::LOG
     #: (present if policy/misc/loaded-scripts.zeek is loaded)
-    #: :currentmodule: zlogging.enum.Log
-    ID['LoadedScripts::LOG'] = enum.auto()
+    ID['LoadedScripts__LOG'] = enum.auto()
 
+    #: Stats::LOG
     #: (present if policy/misc/stats.zeek is loaded)
-    #: :currentmodule: zlogging.enum.Log
-    ID['Stats::LOG'] = enum.auto()
+    ID['Stats__LOG'] = enum.auto()
 
+    #: WeirdStats::LOG
     #: (present if policy/misc/weird-stats.zeek is loaded)
-    #: :currentmodule: zlogging.enum.Log
-    ID['WeirdStats::LOG'] = enum.auto()
+    ID['WeirdStats__LOG'] = enum.auto()
 
+    #: Known::HOSTS_LOG
     #: (present if policy/protocols/conn/known-hosts.zeek is loaded)
-    #: :currentmodule: zlogging.enum.Log
-    ID['Known::HOSTS_LOG'] = enum.auto()
+    ID['Known__HOSTS_LOG'] = enum.auto()
 
+    #: Known::SERVICES_LOG
     #: (present if policy/protocols/conn/known-services.zeek is loaded)
-    #: :currentmodule: zlogging.enum.Log
-    ID['Known::SERVICES_LOG'] = enum.auto()
+    ID['Known__SERVICES_LOG'] = enum.auto()
 
+    #: Known::MODBUS_LOG
     #: (present if policy/protocols/modbus/known-masters-slaves.zeek is loaded)
-    #: :currentmodule: zlogging.enum.Log
-    ID['Known::MODBUS_LOG'] = enum.auto()
+    ID['Known__MODBUS_LOG'] = enum.auto()
 
+    #: Modbus::REGISTER_CHANGE_LOG
     #: (present if policy/protocols/modbus/track-memmap.zeek is loaded)
-    #: :currentmodule: zlogging.enum.Log
-    ID['Modbus::REGISTER_CHANGE_LOG'] = enum.auto()
+    ID['Modbus__REGISTER_CHANGE_LOG'] = enum.auto()
 
+    #: MQTT::CONNECT_LOG
     #: (present if policy/protocols/mqtt/main.zeek is loaded)
-    #: :currentmodule: zlogging.enum.Log
-    ID['MQTT::CONNECT_LOG'] = enum.auto()
+    ID['MQTT__CONNECT_LOG'] = enum.auto()
 
+    #: MQTT::SUBSCRIBE_LOG
     #: (present if policy/protocols/mqtt/main.zeek is loaded)
-    #: :currentmodule: zlogging.enum.Log
-    ID['MQTT::SUBSCRIBE_LOG'] = enum.auto()
+    ID['MQTT__SUBSCRIBE_LOG'] = enum.auto()
 
+    #: MQTT::PUBLISH_LOG
     #: (present if policy/protocols/mqtt/main.zeek is loaded)
-    #: :currentmodule: zlogging.enum.Log
-    ID['MQTT::PUBLISH_LOG'] = enum.auto()
+    ID['MQTT__PUBLISH_LOG'] = enum.auto()
 
+    #: SMB::CMD_LOG
     #: (present if policy/protocols/smb/log-cmds.zeek is loaded)
-    #: :currentmodule: zlogging.enum.Log
-    ID['SMB::CMD_LOG'] = enum.auto()
+    ID['SMB__CMD_LOG'] = enum.auto()
 
+    #: Known::CERTS_LOG
     #: (present if policy/protocols/ssl/known-certs.zeek is loaded)
-    #: :currentmodule: zlogging.enum.Log
-    ID['Known::CERTS_LOG'] = enum.auto()
+    ID['Known__CERTS_LOG'] = enum.auto()
 
+    #: ZeekygenExample::LOG
     #: (present if zeekygen/example.zeek is loaded)
-    #: :currentmodule: zlogging.enum.Log
-    ID['ZeekygenExample::LOG'] = enum.auto()
+    ID['ZeekygenExample__LOG'] = enum.auto()
 
 
 @enum.unique
 class Writer(enum.IntFlag):
-    """c.f. `base/frameworks/logging/main.zeek <https://docs.zeek.org/en/stable/scripts/base/frameworks/logging/main.zeek.html>`__"""
+    """c.f. `base/frameworks/logging/main.zeek <https://docs.zeek.org/en/stable/scripts/base/frameworks/logging/main.zeek.html#type-Log::Writer>`__"""
 
     _ignore_ = 'Writer _'
     Writer = vars()
 
-    #: :currentmodule: zlogging.enum.Log
     Writer['WRITER_ASCII'] = enum.auto()
 
-    #: :currentmodule: zlogging.enum.Log
     Writer['WRITER_NONE'] = enum.auto()
 
-    #: :currentmodule: zlogging.enum.Log
     Writer['WRITER_SQLITE'] = enum.auto()

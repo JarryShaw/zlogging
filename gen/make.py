@@ -21,10 +21,7 @@ REGEX_ENUM = re.compile(r'((?P<namespace>[_a-z]+[_a-z0-9]*)::)?(?P<enum>[_a-z]+[
 # file template
 TEMPLATE_ENUM = '''\
 # -*- coding: utf-8 -*-
-"""Namespace: {namespace}.
-
-:module: zlogging.enum.{namespace}
-"""
+"""Namespace: ``{namespace}``."""
 
 from zlogging._compat import enum
 '''
@@ -119,7 +116,7 @@ for html_file in sorted(file_list):
         for p in tag.select('dd')[0].children:
             if p.name != 'p':
                 continue
-            docs = p.text.strip().replace('\n', '\n    ')
+            docs = p.text.strip().replace('\n', '\n    ').replace('_', r'\_')
             docs_list.append(docs)
 
         match = REGEX_ENUM.fullmatch(name)
@@ -138,9 +135,9 @@ for html_file in sorted(file_list):
 
         html_path = os.path.splitext(os.path.relpath(html_file, os.path.join(ROOT, 'sources')))[0]
         if docs_list:
-            docs_list.append(f'c.f. `{html_path} <https://docs.zeek.org/en/stable/scripts/{html_path}.html>`__\n\n    ')  # pylint: disable=line-too-long
+            docs_list.append(f'c.f. `{html_path} <https://docs.zeek.org/en/stable/scripts/{html_path}.html#type-{name}>`__\n\n    ')  # pylint: disable=line-too-long
         else:
-            docs_list.append(f'c.f. `{html_path} <https://docs.zeek.org/en/stable/scripts/{html_path}.html>`__')
+            docs_list.append(f'c.f. `{html_path} <https://docs.zeek.org/en/stable/scripts/{html_path}.html#type-{name}>`__')  # pylint: disable=line-too-long
         enum_docs = '\n\n    '.join(docs_list)
         with open(dest, 'a') as file:
             print('', file=file)
@@ -156,16 +153,17 @@ for html_file in sorted(file_list):
 
             length = len(enum_list)
             for index, (enum, docs) in enumerate(enum_list, start=1):
-                safe_docs = docs.replace('\n', '\n    #: ')
+                safe_docs = docs.replace('\n', '\n    #: ').replace('_', r'\_')
                 safe_enum = re.sub(f'{namespace}::', '', enum)
+                if '::' in safe_enum:
+                    safe_docs = f'{enum}\n    #: ' + safe_docs
+                    safe_enum = safe_enum.replace('::', '__')
                 if safe_docs:
-                    safe_docs += '\n    #: '
-                safe_docs += f':currentmodule: zlogging.enum.{namespace}'
-                print(f'    #: {safe_docs}', file=file)
+                    print(f'    #: {safe_docs}', file=file)
                 print(f'    {enum_name}[{safe_enum!r}] = enum.auto()', file=file)
                 if index != length:
                     print('', file=file)
-                enum_records.append((namespace, enum_name, safe_enum))
+                enum_records.append((namespace, enum_name, enum, safe_enum))
 
         dest_list.append(dest)
 
@@ -173,7 +171,7 @@ imported = list()
 enum_line = collections.defaultdict(list)
 with open(os.path.join(PATH, '__init__.py'), 'w') as file:
     file.write(TEMPLATE_INIT)
-    for namespace, enum, name in sorted(enum_records):
+    for namespace, enum, name, enum_name in sorted(enum_records):
         if (namespace, enum) not in imported:
             print(f'from zlogging.enum.{namespace} import {enum} as {namespace}_{enum}', file=file)
             imported.append((namespace, enum))
@@ -187,7 +185,7 @@ with open(os.path.join(PATH, '__init__.py'), 'w') as file:
         if safe_namespace is None:
             safe_namespace = namespace
         safe_name = match.group('enum')
-        enum_line[safe_namespace].append(f'    {safe_name!r}: {namespace}_{enum}[{name!r}],')
+        enum_line[safe_namespace].append(f'    {safe_name!r}: {namespace}_{enum}[{enum_name!r}],')
     print('', file=file)
     print("__all__ = ['globals']", file=file)
     print('', file=file)

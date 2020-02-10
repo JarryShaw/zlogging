@@ -570,7 +570,7 @@ class TimeType(_SimpleType):
         with decimal.localcontext() as ctx:
             ctx.prec = 6
             value = decimal.Decimal(data.decode('ascii'))
-        return datetime.datetime.fromtimestamp(value)
+        return datetime.datetime.fromtimestamp(float(value))
 
     def tojson(self, data: typing.Union[None, typing.DateTime]) -> typing.Union[None, float]:
         """Serialize ``data`` as JSON log format.

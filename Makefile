@@ -24,10 +24,7 @@ enum-make:
 	pipenv run python gen/make.py
 
 sphinx-build:
-	pipenv run python setup.py build_sphinx
-
-sphinx-upload:
-	pipenv run python setup.py upload_sphinx
+	pipenv run $(MAKE) -C docs html
 
 tox:
 	pipenv run tox

@@ -1,8 +1,5 @@
 # -*- coding: utf-8 -*-
-"""Namespace: Software.
-
-:module: zlogging.enum.Software
-"""
+"""Namespace: ``Software``."""
 
 from zlogging._compat import enum
 
@@ -13,7 +10,7 @@ class Type(enum.IntFlag):
     their own specific software types which would then be used when they
     create Software::Info records.
 
-    c.f. `base/frameworks/software/main.zeek <https://docs.zeek.org/en/stable/scripts/base/frameworks/software/main.zeek.html>`__
+    c.f. `base/frameworks/software/main.zeek <https://docs.zeek.org/en/stable/scripts/base/frameworks/software/main.zeek.html#type-Software::Type>`__
 
     """
 
@@ -21,82 +18,81 @@ class Type(enum.IntFlag):
     Type = vars()
 
     #: A placeholder type for when the type of software is not known.
-    #: :currentmodule: zlogging.enum.Software
     Type['UNKNOWN'] = enum.auto()
 
+    #: OS::WINDOWS
     #: (present if policy/frameworks/software/windows-version-detection.zeek is loaded)
     #: Identifier for Windows operating system versions
-    #: :currentmodule: zlogging.enum.Software
-    Type['OS::WINDOWS'] = enum.auto()
+    Type['OS__WINDOWS'] = enum.auto()
 
+    #: DHCP::SERVER
     #: (present if policy/protocols/dhcp/software.zeek is loaded)
     #: Identifier for web servers in the software framework.
-    #: :currentmodule: zlogging.enum.Software
-    Type['DHCP::SERVER'] = enum.auto()
+    Type['DHCP__SERVER'] = enum.auto()
 
+    #: DHCP::CLIENT
     #: (present if policy/protocols/dhcp/software.zeek is loaded)
     #: Identifier for web browsers in the software framework.
-    #: :currentmodule: zlogging.enum.Software
-    Type['DHCP::CLIENT'] = enum.auto()
+    Type['DHCP__CLIENT'] = enum.auto()
 
+    #: FTP::CLIENT
     #: (present if policy/protocols/ftp/software.zeek is loaded)
     #: Identifier for FTP clients in the software framework.
-    #: :currentmodule: zlogging.enum.Software
-    Type['FTP::CLIENT'] = enum.auto()
+    Type['FTP__CLIENT'] = enum.auto()
 
+    #: FTP::SERVER
     #: (present if policy/protocols/ftp/software.zeek is loaded)
     #: Not currently implemented.
-    #: :currentmodule: zlogging.enum.Software
-    Type['FTP::SERVER'] = enum.auto()
+    Type['FTP__SERVER'] = enum.auto()
 
+    #: HTTP::WEB_APPLICATION
     #: (present if policy/protocols/http/detect-webapps.zeek is loaded)
     #: Identifier for web applications in the software framework.
-    #: :currentmodule: zlogging.enum.Software
-    Type['HTTP::WEB_APPLICATION'] = enum.auto()
+    Type['HTTP__WEB_APPLICATION'] = enum.auto()
 
+    #: HTTP::BROWSER_PLUGIN
     #: (present if policy/protocols/http/software-browser-plugins.zeek is loaded)
     #: Identifier for browser plugins in the software framework.
-    #: :currentmodule: zlogging.enum.Software
-    Type['HTTP::BROWSER_PLUGIN'] = enum.auto()
+    Type['HTTP__BROWSER_PLUGIN'] = enum.auto()
 
+    #: HTTP::SERVER
     #: (present if policy/protocols/http/software.zeek is loaded)
     #: Identifier for web servers in the software framework.
-    #: :currentmodule: zlogging.enum.Software
-    Type['HTTP::SERVER'] = enum.auto()
+    Type['HTTP__SERVER'] = enum.auto()
 
+    #: HTTP::APPSERVER
     #: (present if policy/protocols/http/software.zeek is loaded)
     #: Identifier for app servers in the software framework.
-    #: :currentmodule: zlogging.enum.Software
-    Type['HTTP::APPSERVER'] = enum.auto()
+    Type['HTTP__APPSERVER'] = enum.auto()
 
+    #: HTTP::BROWSER
     #: (present if policy/protocols/http/software.zeek is loaded)
     #: Identifier for web browsers in the software framework.
-    #: :currentmodule: zlogging.enum.Software
-    Type['HTTP::BROWSER'] = enum.auto()
+    Type['HTTP__BROWSER'] = enum.auto()
 
+    #: MySQL::SERVER
     #: (present if policy/protocols/mysql/software.zeek is loaded)
     #: Identifier for MySQL servers in the software framework.
-    #: :currentmodule: zlogging.enum.Software
-    Type['MySQL::SERVER'] = enum.auto()
+    Type['MySQL__SERVER'] = enum.auto()
 
+    #: SMTP::MAIL_CLIENT
     #: (present if policy/protocols/smtp/software.zeek is loaded)
-    #: :currentmodule: zlogging.enum.Software
-    Type['SMTP::MAIL_CLIENT'] = enum.auto()
+    Type['SMTP__MAIL_CLIENT'] = enum.auto()
 
+    #: SMTP::MAIL_SERVER
     #: (present if policy/protocols/smtp/software.zeek is loaded)
-    #: :currentmodule: zlogging.enum.Software
-    Type['SMTP::MAIL_SERVER'] = enum.auto()
+    Type['SMTP__MAIL_SERVER'] = enum.auto()
 
+    #: SMTP::WEBMAIL_SERVER
     #: (present if policy/protocols/smtp/software.zeek is loaded)
-    #: :currentmodule: zlogging.enum.Software
-    Type['SMTP::WEBMAIL_SERVER'] = enum.auto()
+    Type['SMTP__WEBMAIL_SERVER'] = enum.auto()
 
+    #: SSH::SERVER
     #: (present if policy/protocols/ssh/software.zeek is loaded)
     #: Identifier for SSH clients in the software framework.
-    #: :currentmodule: zlogging.enum.Software
-    Type['SSH::SERVER'] = enum.auto()
+    Type['SSH__SERVER'] = enum.auto()
 
+    #: SSH::CLIENT
     #: (present if policy/protocols/ssh/software.zeek is loaded)
     #: Identifier for SSH servers in the software framework.
-    #: :currentmodule: zlogging.enum.Software
-    Type['SSH::CLIENT'] = enum.auto()
+    Type['SSH__CLIENT'] = enum.auto()

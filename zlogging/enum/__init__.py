@@ -73,7 +73,7 @@ from zlogging.enum.zeek import transport_proto as zeek_transport_proto
 __all__ = ['globals']
 
 _enum_Barnyard2 = {
-    'LOG': Log_ID['Barnyard2::LOG'],
+    'LOG': Log_ID['Barnyard2__LOG'],
 }
 
 _enum_Broker = {
@@ -96,7 +96,7 @@ _enum_Broker = {
     'INT': Broker_DataType['INT'],
     'INTERVAL': Broker_DataType['INTERVAL'],
     'INVALID_DATA': Broker_ErrorCode['INVALID_DATA'],
-    'LOG': Log_ID['Broker::LOG'],
+    'LOG': Log_ID['Broker__LOG'],
     'MASTER_EXISTS': Broker_ErrorCode['MASTER_EXISTS'],
     'MEMORY': Broker_BackendType['MEMORY'],
     'NONE': Broker_DataType['NONE'],
@@ -129,13 +129,13 @@ _enum_Broker = {
 }
 
 _enum_CaptureLoss = {
-    'LOG': Log_ID['CaptureLoss::LOG'],
-    'Too_Much_Loss': Notice_Type['CaptureLoss::Too_Much_Loss'],
+    'LOG': Log_ID['CaptureLoss__LOG'],
+    'Too_Much_Loss': Notice_Type['CaptureLoss__Too_Much_Loss'],
 }
 
 _enum_Cluster = {
     'CONTROL': Cluster_NodeType['CONTROL'],
-    'LOG': Log_ID['Cluster::LOG'],
+    'LOG': Log_ID['Cluster__LOG'],
     'LOGGER': Cluster_NodeType['LOGGER'],
     'MANAGER': Cluster_NodeType['MANAGER'],
     'NONE': Cluster_NodeType['NONE'],
@@ -146,15 +146,15 @@ _enum_Cluster = {
 }
 
 _enum_Config = {
-    'LOG': Log_ID['Config::LOG'],
+    'LOG': Log_ID['Config__LOG'],
 }
 
 _enum_Conn = {
-    'Content_Gap': Notice_Type['Conn::Content_Gap'],
-    'IN_ORIG': Intel_Where['Conn::IN_ORIG'],
-    'IN_RESP': Intel_Where['Conn::IN_RESP'],
-    'LOG': Log_ID['Conn::LOG'],
-    'Retransmission_Inconsistency': Notice_Type['Conn::Retransmission_Inconsistency'],
+    'Content_Gap': Notice_Type['Conn__Content_Gap'],
+    'IN_ORIG': Intel_Where['Conn__IN_ORIG'],
+    'IN_RESP': Intel_Where['Conn__IN_RESP'],
+    'LOG': Log_ID['Conn__LOG'],
+    'Retransmission_Inconsistency': Notice_Type['Conn__Retransmission_Inconsistency'],
 }
 
 _enum_DCE_RPC = {
@@ -172,7 +172,7 @@ _enum_DCE_RPC = {
     'FAULT': DCE_RPC_PType['FAULT'],
     'ISCMActivator': DCE_RPC_IfID['ISCMActivator'],
     'IfID': DCE_RPC_IfID,
-    'LOG': Log_ID['DCE_RPC::LOG'],
+    'LOG': Log_ID['DCE_RPC__LOG'],
     'NOCALL': DCE_RPC_PType['NOCALL'],
     'ORPHANED': DCE_RPC_PType['ORPHANED'],
     'PING': DCE_RPC_PType['PING'],
@@ -199,70 +199,70 @@ _enum_DCE_RPC = {
 }
 
 _enum_DHCP = {
-    'CLIENT': Software_Type['DHCP::CLIENT'],
-    'LOG': Log_ID['DHCP::LOG'],
-    'SERVER': Software_Type['DHCP::SERVER'],
+    'CLIENT': Software_Type['DHCP__CLIENT'],
+    'LOG': Log_ID['DHCP__LOG'],
+    'SERVER': Software_Type['DHCP__SERVER'],
 }
 
 _enum_DNP3 = {
-    'LOG': Log_ID['DNP3::LOG'],
+    'LOG': Log_ID['DNP3__LOG'],
 }
 
 _enum_DNS = {
-    'External_Name': Notice_Type['DNS::External_Name'],
-    'IN_REQUEST': Intel_Where['DNS::IN_REQUEST'],
-    'IN_RESPONSE': Intel_Where['DNS::IN_RESPONSE'],
-    'LOG': Log_ID['DNS::LOG'],
+    'External_Name': Notice_Type['DNS__External_Name'],
+    'IN_REQUEST': Intel_Where['DNS__IN_REQUEST'],
+    'IN_RESPONSE': Intel_Where['DNS__IN_RESPONSE'],
+    'LOG': Log_ID['DNS__LOG'],
 }
 
 _enum_DPD = {
-    'LOG': Log_ID['DPD::LOG'],
+    'LOG': Log_ID['DPD__LOG'],
 }
 
 _enum_FTP = {
-    'Bruteforcing': Notice_Type['FTP::Bruteforcing'],
-    'CLIENT': Software_Type['FTP::CLIENT'],
-    'LOG': Log_ID['FTP::LOG'],
-    'SERVER': Software_Type['FTP::SERVER'],
-    'Site_Exec_Success': Notice_Type['FTP::Site_Exec_Success'],
+    'Bruteforcing': Notice_Type['FTP__Bruteforcing'],
+    'CLIENT': Software_Type['FTP__CLIENT'],
+    'LOG': Log_ID['FTP__LOG'],
+    'SERVER': Software_Type['FTP__SERVER'],
+    'Site_Exec_Success': Notice_Type['FTP__Site_Exec_Success'],
 }
 
 _enum_Files = {
-    'IN_HASH': Intel_Where['Files::IN_HASH'],
-    'IN_NAME': Intel_Where['Files::IN_NAME'],
-    'LOG': Log_ID['Files::LOG'],
+    'IN_HASH': Intel_Where['Files__IN_HASH'],
+    'IN_NAME': Intel_Where['Files__IN_NAME'],
+    'LOG': Log_ID['Files__LOG'],
 }
 
 _enum_HTTP = {
-    'APPSERVER': Software_Type['HTTP::APPSERVER'],
-    'BROWSER': Software_Type['HTTP::BROWSER'],
-    'BROWSER_PLUGIN': Software_Type['HTTP::BROWSER_PLUGIN'],
+    'APPSERVER': Software_Type['HTTP__APPSERVER'],
+    'BROWSER': Software_Type['HTTP__BROWSER'],
+    'BROWSER_PLUGIN': Software_Type['HTTP__BROWSER_PLUGIN'],
     'COOKIE_SQLI': HTTP_Tags['COOKIE_SQLI'],
     'EMPTY': HTTP_Tags['EMPTY'],
-    'IN_HOST_HEADER': Intel_Where['HTTP::IN_HOST_HEADER'],
-    'IN_REFERRER_HEADER': Intel_Where['HTTP::IN_REFERRER_HEADER'],
-    'IN_URL': Intel_Where['HTTP::IN_URL'],
-    'IN_USER_AGENT_HEADER': Intel_Where['HTTP::IN_USER_AGENT_HEADER'],
-    'IN_X_FORWARDED_FOR_HEADER': Intel_Where['HTTP::IN_X_FORWARDED_FOR_HEADER'],
-    'LOG': Log_ID['HTTP::LOG'],
+    'IN_HOST_HEADER': Intel_Where['HTTP__IN_HOST_HEADER'],
+    'IN_REFERRER_HEADER': Intel_Where['HTTP__IN_REFERRER_HEADER'],
+    'IN_URL': Intel_Where['HTTP__IN_URL'],
+    'IN_USER_AGENT_HEADER': Intel_Where['HTTP__IN_USER_AGENT_HEADER'],
+    'IN_X_FORWARDED_FOR_HEADER': Intel_Where['HTTP__IN_X_FORWARDED_FOR_HEADER'],
+    'LOG': Log_ID['HTTP__LOG'],
     'POST_SQLI': HTTP_Tags['POST_SQLI'],
-    'SERVER': Software_Type['HTTP::SERVER'],
-    'SQL_Injection_Attacker': Notice_Type['HTTP::SQL_Injection_Attacker'],
-    'SQL_Injection_Victim': Notice_Type['HTTP::SQL_Injection_Victim'],
+    'SERVER': Software_Type['HTTP__SERVER'],
+    'SQL_Injection_Attacker': Notice_Type['HTTP__SQL_Injection_Attacker'],
+    'SQL_Injection_Victim': Notice_Type['HTTP__SQL_Injection_Victim'],
     'Tags': HTTP_Tags,
     'URI_SQLI': HTTP_Tags['URI_SQLI'],
-    'WEB_APPLICATION': Software_Type['HTTP::WEB_APPLICATION'],
+    'WEB_APPLICATION': Software_Type['HTTP__WEB_APPLICATION'],
 }
 
 _enum_Heartbleed = {
-    'SSL_Heartbeat_Attack': Notice_Type['Heartbleed::SSL_Heartbeat_Attack'],
-    'SSL_Heartbeat_Attack_Success': Notice_Type['Heartbleed::SSL_Heartbeat_Attack_Success'],
-    'SSL_Heartbeat_Many_Requests': Notice_Type['Heartbleed::SSL_Heartbeat_Many_Requests'],
-    'SSL_Heartbeat_Odd_Length': Notice_Type['Heartbleed::SSL_Heartbeat_Odd_Length'],
+    'SSL_Heartbeat_Attack': Notice_Type['Heartbleed__SSL_Heartbeat_Attack'],
+    'SSL_Heartbeat_Attack_Success': Notice_Type['Heartbleed__SSL_Heartbeat_Attack_Success'],
+    'SSL_Heartbeat_Many_Requests': Notice_Type['Heartbleed__SSL_Heartbeat_Many_Requests'],
+    'SSL_Heartbeat_Odd_Length': Notice_Type['Heartbleed__SSL_Heartbeat_Odd_Length'],
 }
 
 _enum_IRC = {
-    'LOG': Log_ID['IRC::LOG'],
+    'LOG': Log_ID['IRC__LOG'],
 }
 
 _enum_Input = {
@@ -291,8 +291,8 @@ _enum_Intel = {
     'FILE_HASH': Intel_Type['FILE_HASH'],
     'FILE_NAME': Intel_Type['FILE_NAME'],
     'IN_ANYWHERE': Intel_Where['IN_ANYWHERE'],
-    'LOG': Log_ID['Intel::LOG'],
-    'Notice': Notice_Type['Intel::Notice'],
+    'LOG': Log_ID['Intel__LOG'],
+    'Notice': Notice_Type['Intel__Notice'],
     'PUBKEY_HASH': Intel_Type['PUBKEY_HASH'],
     'SOFTWARE': Intel_Type['SOFTWARE'],
     'SUBNET': Intel_Type['SUBNET'],
@@ -310,17 +310,17 @@ _enum_JSON = {
 }
 
 _enum_KRB = {
-    'LOG': Log_ID['KRB::LOG'],
+    'LOG': Log_ID['KRB__LOG'],
 }
 
 _enum_Known = {
-    'CERTS_LOG': Log_ID['Known::CERTS_LOG'],
-    'HOSTS_LOG': Log_ID['Known::HOSTS_LOG'],
-    'MODBUS_LOG': Log_ID['Known::MODBUS_LOG'],
+    'CERTS_LOG': Log_ID['Known__CERTS_LOG'],
+    'HOSTS_LOG': Log_ID['Known__HOSTS_LOG'],
+    'MODBUS_LOG': Log_ID['Known__MODBUS_LOG'],
     'MODBUS_MASTER': Known_ModbusDeviceType['MODBUS_MASTER'],
     'MODBUS_SLAVE': Known_ModbusDeviceType['MODBUS_SLAVE'],
     'ModbusDeviceType': Known_ModbusDeviceType,
-    'SERVICES_LOG': Log_ID['Known::SERVICES_LOG'],
+    'SERVICES_LOG': Log_ID['Known__SERVICES_LOG'],
 }
 
 _enum_LoadBalancing = {
@@ -329,7 +329,7 @@ _enum_LoadBalancing = {
 }
 
 _enum_LoadedScripts = {
-    'LOG': Log_ID['LoadedScripts::LOG'],
+    'LOG': Log_ID['LoadedScripts__LOG'],
 }
 
 _enum_Log = {
@@ -370,21 +370,21 @@ _enum_MOUNT3 = {
 }
 
 _enum_MQTT = {
-    'CONNECT_LOG': Log_ID['MQTT::CONNECT_LOG'],
-    'PUBLISH_LOG': Log_ID['MQTT::PUBLISH_LOG'],
+    'CONNECT_LOG': Log_ID['MQTT__CONNECT_LOG'],
+    'PUBLISH_LOG': Log_ID['MQTT__PUBLISH_LOG'],
     'SUBSCRIBE': MQTT_SubUnsub['SUBSCRIBE'],
-    'SUBSCRIBE_LOG': Log_ID['MQTT::SUBSCRIBE_LOG'],
+    'SUBSCRIBE_LOG': Log_ID['MQTT__SUBSCRIBE_LOG'],
     'SubUnsub': MQTT_SubUnsub,
     'UNSUBSCRIBE': MQTT_SubUnsub['UNSUBSCRIBE'],
 }
 
 _enum_Modbus = {
-    'LOG': Log_ID['Modbus::LOG'],
-    'REGISTER_CHANGE_LOG': Log_ID['Modbus::REGISTER_CHANGE_LOG'],
+    'LOG': Log_ID['Modbus__LOG'],
+    'REGISTER_CHANGE_LOG': Log_ID['Modbus__REGISTER_CHANGE_LOG'],
 }
 
 _enum_MySQL = {
-    'SERVER': Software_Type['MySQL::SERVER'],
+    'SERVER': Software_Type['MySQL__SERVER'],
 }
 
 _enum_NFS3 = {
@@ -466,20 +466,20 @@ _enum_NFS3 = {
 }
 
 _enum_NTLM = {
-    'LOG': Log_ID['NTLM::LOG'],
+    'LOG': Log_ID['NTLM__LOG'],
 }
 
 _enum_NTP = {
-    'LOG': Log_ID['NTP::LOG'],
+    'LOG': Log_ID['NTP__LOG'],
 }
 
 _enum_NetControl = {
     'ADDED': NetControl_CatchReleaseActions['ADDED'],
     'ADDRESS': NetControl_EntityType['ADDRESS'],
-    'CATCH_RELEASE': Log_ID['NetControl::CATCH_RELEASE'],
+    'CATCH_RELEASE': Log_ID['NetControl__CATCH_RELEASE'],
     'CONNECTION': NetControl_EntityType['CONNECTION'],
     'CatchReleaseActions': NetControl_CatchReleaseActions,
-    'DROP': Log_ID['NetControl::DROP'],
+    'DROP': Log_ID['NetControl__DROP'],
     'DROP': NetControl_CatchReleaseActions['DROP'],
     'DROP': NetControl_RuleType['DROP'],
     'DROPPED': NetControl_CatchReleaseActions['DROPPED'],
@@ -493,7 +493,7 @@ _enum_NetControl = {
     'INFO': NetControl_CatchReleaseActions['INFO'],
     'InfoCategory': NetControl_InfoCategory,
     'InfoState': NetControl_InfoState,
-    'LOG': Log_ID['NetControl::LOG'],
+    'LOG': Log_ID['NetControl__LOG'],
     'MAC': NetControl_EntityType['MAC'],
     'MESSAGE': NetControl_InfoCategory['MESSAGE'],
     'MODIFY': NetControl_RuleType['MODIFY'],
@@ -504,7 +504,7 @@ _enum_NetControl = {
     'RULE': NetControl_InfoCategory['RULE'],
     'RuleType': NetControl_RuleType,
     'SEEN_AGAIN': NetControl_CatchReleaseActions['SEEN_AGAIN'],
-    'SHUNT': Log_ID['NetControl::SHUNT'],
+    'SHUNT': Log_ID['NetControl__SHUNT'],
     'SUCCEEDED': NetControl_InfoState['SUCCEEDED'],
     'TIMEOUT': NetControl_InfoState['TIMEOUT'],
     'TargetType': NetControl_TargetType,
@@ -521,25 +521,25 @@ _enum_Notice = {
     'ACTION_LOG': Notice_Action['ACTION_LOG'],
     'ACTION_NONE': Notice_Action['ACTION_NONE'],
     'ACTION_PAGE': Notice_Action['ACTION_PAGE'],
-    'ALARM_LOG': Log_ID['Notice::ALARM_LOG'],
+    'ALARM_LOG': Log_ID['Notice__ALARM_LOG'],
     'Action': Notice_Action,
-    'LOG': Log_ID['Notice::LOG'],
+    'LOG': Log_ID['Notice__LOG'],
     'Tally': Notice_Type['Tally'],
     'Type': Notice_Type,
 }
 
 _enum_OCSP = {
-    'LOG': Log_ID['OCSP::LOG'],
+    'LOG': Log_ID['OCSP__LOG'],
 }
 
 _enum_OS = {
-    'WINDOWS': Software_Type['OS::WINDOWS'],
+    'WINDOWS': Software_Type['OS__WINDOWS'],
 }
 
 _enum_OpenFlow = {
     'BROKER': OpenFlow_Plugin['BROKER'],
     'INVALID': OpenFlow_Plugin['INVALID'],
-    'LOG': Log_ID['OpenFlow::LOG'],
+    'LOG': Log_ID['OpenFlow__LOG'],
     'OFLOG': OpenFlow_Plugin['OFLOG'],
     'OFPAT_ENQUEUE': OpenFlow_ofp_action_type['OFPAT_ENQUEUE'],
     'OFPAT_OUTPUT': OpenFlow_ofp_action_type['OFPAT_OUTPUT'],
@@ -571,19 +571,19 @@ _enum_OpenFlow = {
 }
 
 _enum_PE = {
-    'LOG': Log_ID['PE::LOG'],
+    'LOG': Log_ID['PE__LOG'],
 }
 
 _enum_PacketFilter = {
-    'Cannot_BPF_Shunt_Conn': Notice_Type['PacketFilter::Cannot_BPF_Shunt_Conn'],
-    'Compile_Failure': Notice_Type['PacketFilter::Compile_Failure'],
-    'DefaultPcapFilter': zeek_PcapFilterID['PacketFilter::DefaultPcapFilter'],
-    'Dropped_Packets': Notice_Type['PacketFilter::Dropped_Packets'],
-    'FilterTester': zeek_PcapFilterID['PacketFilter::FilterTester'],
-    'Install_Failure': Notice_Type['PacketFilter::Install_Failure'],
-    'LOG': Log_ID['PacketFilter::LOG'],
-    'No_More_Conn_Shunts_Available': Notice_Type['PacketFilter::No_More_Conn_Shunts_Available'],
-    'Too_Long_To_Compile_Filter': Notice_Type['PacketFilter::Too_Long_To_Compile_Filter'],
+    'Cannot_BPF_Shunt_Conn': Notice_Type['PacketFilter__Cannot_BPF_Shunt_Conn'],
+    'Compile_Failure': Notice_Type['PacketFilter__Compile_Failure'],
+    'DefaultPcapFilter': zeek_PcapFilterID['PacketFilter__DefaultPcapFilter'],
+    'Dropped_Packets': Notice_Type['PacketFilter__Dropped_Packets'],
+    'FilterTester': zeek_PcapFilterID['PacketFilter__FilterTester'],
+    'Install_Failure': Notice_Type['PacketFilter__Install_Failure'],
+    'LOG': Log_ID['PacketFilter__LOG'],
+    'No_More_Conn_Shunts_Available': Notice_Type['PacketFilter__No_More_Conn_Shunts_Available'],
+    'Too_Long_To_Compile_Filter': Notice_Type['PacketFilter__Too_Long_To_Compile_Filter'],
 }
 
 _enum_ProtocolDetector = {
@@ -591,40 +591,40 @@ _enum_ProtocolDetector = {
     'INCOMING': ProtocolDetector_dir['INCOMING'],
     'NONE': ProtocolDetector_dir['NONE'],
     'OUTGOING': ProtocolDetector_dir['OUTGOING'],
-    'Protocol_Found': Notice_Type['ProtocolDetector::Protocol_Found'],
-    'Server_Found': Notice_Type['ProtocolDetector::Server_Found'],
+    'Protocol_Found': Notice_Type['ProtocolDetector__Protocol_Found'],
+    'Server_Found': Notice_Type['ProtocolDetector__Server_Found'],
     'dir': ProtocolDetector_dir,
 }
 
 _enum_RADIUS = {
-    'LOG': Log_ID['RADIUS::LOG'],
+    'LOG': Log_ID['RADIUS__LOG'],
 }
 
 _enum_RDP = {
-    'LOG': Log_ID['RDP::LOG'],
+    'LOG': Log_ID['RDP__LOG'],
 }
 
 _enum_RFB = {
-    'LOG': Log_ID['RFB::LOG'],
+    'LOG': Log_ID['RFB__LOG'],
 }
 
 _enum_Reporter = {
     'ERROR': Reporter_Level['ERROR'],
     'INFO': Reporter_Level['INFO'],
-    'LOG': Log_ID['Reporter::LOG'],
+    'LOG': Log_ID['Reporter__LOG'],
     'Level': Reporter_Level,
     'WARNING': Reporter_Level['WARNING'],
 }
 
 _enum_SIP = {
-    'LOG': Log_ID['SIP::LOG'],
+    'LOG': Log_ID['SIP__LOG'],
 }
 
 _enum_SMB = {
-    'AUTH_LOG': Log_ID['SMB::AUTH_LOG'],
+    'AUTH_LOG': Log_ID['SMB__AUTH_LOG'],
     'Action': SMB_Action,
-    'CMD_LOG': Log_ID['SMB::CMD_LOG'],
-    'FILES_LOG': Log_ID['SMB::FILES_LOG'],
+    'CMD_LOG': Log_ID['SMB__CMD_LOG'],
+    'FILES_LOG': Log_ID['SMB__FILES_LOG'],
     'FILE_CLOSE': SMB_Action['FILE_CLOSE'],
     'FILE_DELETE': SMB_Action['FILE_DELETE'],
     'FILE_OPEN': SMB_Action['FILE_OPEN'],
@@ -632,8 +632,8 @@ _enum_SMB = {
     'FILE_RENAME': SMB_Action['FILE_RENAME'],
     'FILE_SET_ATTRIBUTE': SMB_Action['FILE_SET_ATTRIBUTE'],
     'FILE_WRITE': SMB_Action['FILE_WRITE'],
-    'IN_FILE_NAME': Intel_Where['SMB::IN_FILE_NAME'],
-    'MAPPING_LOG': Log_ID['SMB::MAPPING_LOG'],
+    'IN_FILE_NAME': Intel_Where['SMB__IN_FILE_NAME'],
+    'MAPPING_LOG': Log_ID['SMB__MAPPING_LOG'],
     'PIPE_CLOSE': SMB_Action['PIPE_CLOSE'],
     'PIPE_OPEN': SMB_Action['PIPE_OPEN'],
     'PIPE_READ': SMB_Action['PIPE_READ'],
@@ -645,77 +645,77 @@ _enum_SMB = {
 }
 
 _enum_SMTP = {
-    'Blocklist_Blocked_Host': Notice_Type['SMTP::Blocklist_Blocked_Host'],
-    'Blocklist_Error_Message': Notice_Type['SMTP::Blocklist_Error_Message'],
-    'IN_CC': Intel_Where['SMTP::IN_CC'],
-    'IN_FROM': Intel_Where['SMTP::IN_FROM'],
-    'IN_HEADER': Intel_Where['SMTP::IN_HEADER'],
-    'IN_MAIL_FROM': Intel_Where['SMTP::IN_MAIL_FROM'],
-    'IN_MESSAGE': Intel_Where['SMTP::IN_MESSAGE'],
-    'IN_RCPT_TO': Intel_Where['SMTP::IN_RCPT_TO'],
-    'IN_RECEIVED_HEADER': Intel_Where['SMTP::IN_RECEIVED_HEADER'],
-    'IN_REPLY_TO': Intel_Where['SMTP::IN_REPLY_TO'],
-    'IN_TO': Intel_Where['SMTP::IN_TO'],
-    'IN_X_ORIGINATING_IP_HEADER': Intel_Where['SMTP::IN_X_ORIGINATING_IP_HEADER'],
-    'LOG': Log_ID['SMTP::LOG'],
-    'MAIL_CLIENT': Software_Type['SMTP::MAIL_CLIENT'],
-    'MAIL_SERVER': Software_Type['SMTP::MAIL_SERVER'],
-    'Suspicious_Origination': Notice_Type['SMTP::Suspicious_Origination'],
-    'WEBMAIL_SERVER': Software_Type['SMTP::WEBMAIL_SERVER'],
+    'Blocklist_Blocked_Host': Notice_Type['SMTP__Blocklist_Blocked_Host'],
+    'Blocklist_Error_Message': Notice_Type['SMTP__Blocklist_Error_Message'],
+    'IN_CC': Intel_Where['SMTP__IN_CC'],
+    'IN_FROM': Intel_Where['SMTP__IN_FROM'],
+    'IN_HEADER': Intel_Where['SMTP__IN_HEADER'],
+    'IN_MAIL_FROM': Intel_Where['SMTP__IN_MAIL_FROM'],
+    'IN_MESSAGE': Intel_Where['SMTP__IN_MESSAGE'],
+    'IN_RCPT_TO': Intel_Where['SMTP__IN_RCPT_TO'],
+    'IN_RECEIVED_HEADER': Intel_Where['SMTP__IN_RECEIVED_HEADER'],
+    'IN_REPLY_TO': Intel_Where['SMTP__IN_REPLY_TO'],
+    'IN_TO': Intel_Where['SMTP__IN_TO'],
+    'IN_X_ORIGINATING_IP_HEADER': Intel_Where['SMTP__IN_X_ORIGINATING_IP_HEADER'],
+    'LOG': Log_ID['SMTP__LOG'],
+    'MAIL_CLIENT': Software_Type['SMTP__MAIL_CLIENT'],
+    'MAIL_SERVER': Software_Type['SMTP__MAIL_SERVER'],
+    'Suspicious_Origination': Notice_Type['SMTP__Suspicious_Origination'],
+    'WEBMAIL_SERVER': Software_Type['SMTP__WEBMAIL_SERVER'],
 }
 
 _enum_SNMP = {
-    'LOG': Log_ID['SNMP::LOG'],
+    'LOG': Log_ID['SNMP__LOG'],
 }
 
 _enum_SOCKS = {
     'CONNECTION': SOCKS_RequestType['CONNECTION'],
-    'LOG': Log_ID['SOCKS::LOG'],
+    'LOG': Log_ID['SOCKS__LOG'],
     'PORT': SOCKS_RequestType['PORT'],
     'RequestType': SOCKS_RequestType,
     'UDP_ASSOCIATE': SOCKS_RequestType['UDP_ASSOCIATE'],
 }
 
 _enum_SSH = {
-    'CLIENT': Software_Type['SSH::CLIENT'],
-    'IN_SERVER_HOST_KEY': Intel_Where['SSH::IN_SERVER_HOST_KEY'],
-    'Interesting_Hostname_Login': Notice_Type['SSH::Interesting_Hostname_Login'],
-    'LOG': Log_ID['SSH::LOG'],
-    'Login_By_Password_Guesser': Notice_Type['SSH::Login_By_Password_Guesser'],
-    'Password_Guessing': Notice_Type['SSH::Password_Guessing'],
-    'SERVER': Software_Type['SSH::SERVER'],
-    'SUCCESSFUL_LOGIN': Intel_Where['SSH::SUCCESSFUL_LOGIN'],
-    'Watched_Country_Login': Notice_Type['SSH::Watched_Country_Login'],
+    'CLIENT': Software_Type['SSH__CLIENT'],
+    'IN_SERVER_HOST_KEY': Intel_Where['SSH__IN_SERVER_HOST_KEY'],
+    'Interesting_Hostname_Login': Notice_Type['SSH__Interesting_Hostname_Login'],
+    'LOG': Log_ID['SSH__LOG'],
+    'Login_By_Password_Guesser': Notice_Type['SSH__Login_By_Password_Guesser'],
+    'Password_Guessing': Notice_Type['SSH__Password_Guessing'],
+    'SERVER': Software_Type['SSH__SERVER'],
+    'SUCCESSFUL_LOGIN': Intel_Where['SSH__SUCCESSFUL_LOGIN'],
+    'Watched_Country_Login': Notice_Type['SSH__Watched_Country_Login'],
 }
 
 _enum_SSL = {
-    'Certificate_Expired': Notice_Type['SSL::Certificate_Expired'],
-    'Certificate_Expires_Soon': Notice_Type['SSL::Certificate_Expires_Soon'],
-    'Certificate_Not_Valid_Yet': Notice_Type['SSL::Certificate_Not_Valid_Yet'],
-    'IN_SERVER_NAME': Intel_Where['SSL::IN_SERVER_NAME'],
-    'Invalid_Ocsp_Response': Notice_Type['SSL::Invalid_Ocsp_Response'],
-    'Invalid_Server_Cert': Notice_Type['SSL::Invalid_Server_Cert'],
-    'LOG': Log_ID['SSL::LOG'],
-    'Old_Version': Notice_Type['SSL::Old_Version'],
+    'Certificate_Expired': Notice_Type['SSL__Certificate_Expired'],
+    'Certificate_Expires_Soon': Notice_Type['SSL__Certificate_Expires_Soon'],
+    'Certificate_Not_Valid_Yet': Notice_Type['SSL__Certificate_Not_Valid_Yet'],
+    'IN_SERVER_NAME': Intel_Where['SSL__IN_SERVER_NAME'],
+    'Invalid_Ocsp_Response': Notice_Type['SSL__Invalid_Ocsp_Response'],
+    'Invalid_Server_Cert': Notice_Type['SSL__Invalid_Server_Cert'],
+    'LOG': Log_ID['SSL__LOG'],
+    'Old_Version': Notice_Type['SSL__Old_Version'],
     'SCT_OCSP_EXT': SSL_SctSource['SCT_OCSP_EXT'],
     'SCT_TLS_EXT': SSL_SctSource['SCT_TLS_EXT'],
     'SCT_X509_EXT': SSL_SctSource['SCT_X509_EXT'],
     'SctSource': SSL_SctSource,
-    'Weak_Cipher': Notice_Type['SSL::Weak_Cipher'],
-    'Weak_Key': Notice_Type['SSL::Weak_Key'],
+    'Weak_Cipher': Notice_Type['SSL__Weak_Cipher'],
+    'Weak_Key': Notice_Type['SSL__Weak_Key'],
 }
 
 _enum_Scan = {
-    'Address_Scan': Notice_Type['Scan::Address_Scan'],
-    'Port_Scan': Notice_Type['Scan::Port_Scan'],
+    'Address_Scan': Notice_Type['Scan__Address_Scan'],
+    'Port_Scan': Notice_Type['Scan__Port_Scan'],
 }
 
 _enum_Signatures = {
     'Action': Signatures_Action,
-    'Count_Signature': Notice_Type['Signatures::Count_Signature'],
-    'LOG': Log_ID['Signatures::LOG'],
-    'Multiple_Sig_Responders': Notice_Type['Signatures::Multiple_Sig_Responders'],
-    'Multiple_Signatures': Notice_Type['Signatures::Multiple_Signatures'],
+    'Count_Signature': Notice_Type['Signatures__Count_Signature'],
+    'LOG': Log_ID['Signatures__LOG'],
+    'Multiple_Sig_Responders': Notice_Type['Signatures__Multiple_Sig_Responders'],
+    'Multiple_Signatures': Notice_Type['Signatures__Multiple_Signatures'],
     'SIG_ALARM': Signatures_Action['SIG_ALARM'],
     'SIG_ALARM_ONCE': Signatures_Action['SIG_ALARM_ONCE'],
     'SIG_ALARM_PER_ORIG': Signatures_Action['SIG_ALARM_PER_ORIG'],
@@ -725,20 +725,20 @@ _enum_Signatures = {
     'SIG_LOG': Signatures_Action['SIG_LOG'],
     'SIG_QUIET': Signatures_Action['SIG_QUIET'],
     'SIG_SUMMARY': Signatures_Action['SIG_SUMMARY'],
-    'Sensitive_Signature': Notice_Type['Signatures::Sensitive_Signature'],
-    'Signature_Summary': Notice_Type['Signatures::Signature_Summary'],
+    'Sensitive_Signature': Notice_Type['Signatures__Sensitive_Signature'],
+    'Signature_Summary': Notice_Type['Signatures__Signature_Summary'],
 }
 
 _enum_Software = {
-    'LOG': Log_ID['Software::LOG'],
-    'Software_Version_Change': Notice_Type['Software::Software_Version_Change'],
+    'LOG': Log_ID['Software__LOG'],
+    'Software_Version_Change': Notice_Type['Software__Software_Version_Change'],
     'Type': Software_Type,
     'UNKNOWN': Software_Type['UNKNOWN'],
-    'Vulnerable_Version': Notice_Type['Software::Vulnerable_Version'],
+    'Vulnerable_Version': Notice_Type['Software__Vulnerable_Version'],
 }
 
 _enum_Stats = {
-    'LOG': Log_ID['Stats::LOG'],
+    'LOG': Log_ID['Stats__LOG'],
 }
 
 _enum_SumStats = {
@@ -758,16 +758,16 @@ _enum_SumStats = {
 }
 
 _enum_Syslog = {
-    'LOG': Log_ID['Syslog::LOG'],
+    'LOG': Log_ID['Syslog__LOG'],
 }
 
 _enum_TeamCymruMalwareHashRegistry = {
-    'Match': Notice_Type['TeamCymruMalwareHashRegistry::Match'],
+    'Match': Notice_Type['TeamCymruMalwareHashRegistry__Match'],
 }
 
 _enum_Traceroute = {
-    'Detected': Notice_Type['Traceroute::Detected'],
-    'LOG': Log_ID['Traceroute::LOG'],
+    'Detected': Notice_Type['Traceroute__Detected'],
+    'LOG': Log_ID['Traceroute__LOG'],
 }
 
 _enum_Tunnel = {
@@ -780,7 +780,7 @@ _enum_Tunnel = {
     'GTPv1': Tunnel_Type['GTPv1'],
     'HTTP': Tunnel_Type['HTTP'],
     'IP': Tunnel_Type['IP'],
-    'LOG': Log_ID['Tunnel::LOG'],
+    'LOG': Log_ID['Tunnel__LOG'],
     'NONE': Tunnel_Type['NONE'],
     'SOCKS': Tunnel_Type['SOCKS'],
     'TEREDO': Tunnel_Type['TEREDO'],
@@ -789,7 +789,7 @@ _enum_Tunnel = {
 }
 
 _enum_Unified2 = {
-    'LOG': Log_ID['Unified2::LOG'],
+    'LOG': Log_ID['Unified2__LOG'],
 }
 
 _enum_Weird = {
@@ -804,35 +804,35 @@ _enum_Weird = {
     'ACTION_NOTICE_PER_ORIG': Weird_Action['ACTION_NOTICE_PER_ORIG'],
     'ACTION_UNSPECIFIED': Weird_Action['ACTION_UNSPECIFIED'],
     'Action': Weird_Action,
-    'Activity': Notice_Type['Weird::Activity'],
-    'LOG': Log_ID['Weird::LOG'],
+    'Activity': Notice_Type['Weird__Activity'],
+    'LOG': Log_ID['Weird__LOG'],
 }
 
 _enum_WeirdStats = {
-    'LOG': Log_ID['WeirdStats::LOG'],
+    'LOG': Log_ID['WeirdStats__LOG'],
 }
 
 _enum_X509 = {
-    'IN_CERT': Intel_Where['X509::IN_CERT'],
-    'LOG': Log_ID['X509::LOG'],
+    'IN_CERT': Intel_Where['X509__IN_CERT'],
+    'LOG': Log_ID['X509__LOG'],
 }
 
 _enum_ZeekygenExample = {
     'FIVE': ZeekygenExample_SimpleEnum['FIVE'],
     'FOUR': ZeekygenExample_SimpleEnum['FOUR'],
-    'LOG': Log_ID['ZeekygenExample::LOG'],
+    'LOG': Log_ID['ZeekygenExample__LOG'],
     'ONE': ZeekygenExample_SimpleEnum['ONE'],
     'SimpleEnum': ZeekygenExample_SimpleEnum,
     'THREE': ZeekygenExample_SimpleEnum['THREE'],
     'TWO': ZeekygenExample_SimpleEnum['TWO'],
-    'Zeekygen_Four': Notice_Type['ZeekygenExample::Zeekygen_Four'],
-    'Zeekygen_One': Notice_Type['ZeekygenExample::Zeekygen_One'],
-    'Zeekygen_Three': Notice_Type['ZeekygenExample::Zeekygen_Three'],
-    'Zeekygen_Two': Notice_Type['ZeekygenExample::Zeekygen_Two'],
+    'Zeekygen_Four': Notice_Type['ZeekygenExample__Zeekygen_Four'],
+    'Zeekygen_One': Notice_Type['ZeekygenExample__Zeekygen_One'],
+    'Zeekygen_Three': Notice_Type['ZeekygenExample__Zeekygen_Three'],
+    'Zeekygen_Two': Notice_Type['ZeekygenExample__Zeekygen_Two'],
 }
 
 _enum_mysql = {
-    'LOG': Log_ID['mysql::LOG'],
+    'LOG': Log_ID['mysql__LOG'],
 }
 
 _enum_zeek = {
