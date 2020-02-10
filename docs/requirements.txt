@@ -1,3 +1,6 @@
+# zlogging
+-e ..
+
 # sphinx
 Sphinx==2.4.0
 alabaster==0.7.12
