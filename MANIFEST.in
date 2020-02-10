@@ -4,6 +4,7 @@ global-exclude *.py[cod]$
 prune .venv
 prune __pycache__
 prune Cellar
+prune .tox
 
 include README.md
 include LICENSE

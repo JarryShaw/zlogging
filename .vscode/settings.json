@@ -15,6 +15,7 @@
         "tojson",
         "uint",
         "undoc",
+        "ungrouped",
         "zlogging"
     ],
     "restructuredtext.confPath": "${workspaceFolder}/docs/conf.py"

@@ -5,11 +5,12 @@
 import ctypes
 import datetime
 import decimal
-import enum
 import ipaddress
 import os
 import typing
 from typing import *
+
+from zlogging._compat import *
 
 T = typing.TypeVar('T')
 

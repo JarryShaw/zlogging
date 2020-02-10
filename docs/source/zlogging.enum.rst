@@ -32,7 +32,7 @@ Namespaces
    :show-inheritance:
    :noindex:
 
-``_RPC`` Namespace
+``DCE_RPC`` Namespace
 ----------------------
 
 .. automodule:: zlogging.enum.DCE_RPC

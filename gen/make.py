@@ -21,9 +21,12 @@ REGEX_ENUM = re.compile(r'((?P<namespace>[_a-z]+[_a-z0-9]*)::)?(?P<enum>[_a-z]+[
 # file template
 TEMPLATE_ENUM = '''\
 # -*- coding: utf-8 -*-
-"""Namespace: {namespace}."""
+"""Namespace: {namespace}.
 
-import enum
+:module: zlogging.enum.{namespace}
+"""
+
+from zlogging._compat import enum
 '''
 TEMPLATE_INIT = '''\
 # -*- coding: utf-8 -*-
@@ -35,15 +38,28 @@ import zlogging._typing as typing
 from zlogging._exc import BroDeprecationWarning
 '''
 TEMPLATE_FUNC = '''\
-def globals(*namespaces: typing.Args, bare: bool = False) -> typing.Dict[str, typing.Enum]:  # pylint: disable=redefined-builtin
+def globals(*namespaces, bare: bool = False) -> typing.Dict[str, typing.Enum]:  # pylint: disable=redefined-builtin
     """Generate Bro/Zeek ``enum`` namespace.
 
     Args:
-        *namespaces: namespaces to be loaded
-        bare: if ``True``, do not load ``zeek` namespace by default
+        *namespaces: Namespaces to be loaded.
+        bare: If ``True``, do not load ``zeek`` namespace by default.
+
+    Keyword Args:
+        bare: If ``True``, do not load ``zeek`` namespace by default.
 
     Returns:
-        :obj:`Dict[str, Enum]`: global enum namespace
+        :obj:`dict` mapping of :obj:`str` and :obj:`Enum`: Global enum namespace.
+
+    Warns:
+        BroDeprecationWarning: If ``bro`` namespace used.
+
+    Raises:
+        :exc:`ValueError`: If ``namespace`` is not defined.
+
+    Note:
+        For back-port compatibility, the ``bro`` namespace is an alias of the
+        ``zeek`` namespace.
 
     """
     if bare:
@@ -74,6 +90,8 @@ for dirpath, _, filenames in os.walk(os.path.join(ROOT, 'sources')):
 # namespace, enum, name
 enum_records = list()
 
+# postpone checks
+dest_list = list()
 for html_file in sorted(file_list):
     print(f'+ {html_file}')
     with open(html_file) as file:
@@ -101,7 +119,7 @@ for html_file in sorted(file_list):
         for p in tag.select('dd')[0].children:
             if p.name != 'p':
                 continue
-            docs = p.text.replace('\n', '\n    ')
+            docs = p.text.strip().replace('\n', '\n    ')
             docs_list.append(docs)
 
         match = REGEX_ENUM.fullmatch(name)
@@ -119,7 +137,10 @@ for html_file in sorted(file_list):
                 file.write(TEMPLATE_ENUM.format(namespace=namespace))
 
         html_path = os.path.splitext(os.path.relpath(html_file, os.path.join(ROOT, 'sources')))[0]
-        docs_list.append(f'\n    c.f. `{html_path} <https://docs.zeek.org/en/stable/scripts/{html_path}.html>`__\n    ')
+        if docs_list:
+            docs_list.append(f'c.f. `{html_path} <https://docs.zeek.org/en/stable/scripts/{html_path}.html>`__\n\n    ')  # pylint: disable=line-too-long
+        else:
+            docs_list.append(f'c.f. `{html_path} <https://docs.zeek.org/en/stable/scripts/{html_path}.html>`__')
         enum_docs = '\n\n    '.join(docs_list)
         with open(dest, 'a') as file:
             print('', file=file)
@@ -135,16 +156,18 @@ for html_file in sorted(file_list):
 
             length = len(enum_list)
             for index, (enum, docs) in enumerate(enum_list, start=1):
-                safe_docs = docs.replace('\n', '\n    # ')
+                safe_docs = docs.replace('\n', '\n    #: ')
                 safe_enum = re.sub(f'{namespace}::', '', enum)
                 if safe_docs:
-                    print(f'    # {safe_docs}', file=file)
+                    safe_docs += '\n    #: '
+                safe_docs += f':currentmodule: zlogging.enum.{namespace}'
+                print(f'    #: {safe_docs}', file=file)
                 print(f'    {enum_name}[{safe_enum!r}] = enum.auto()', file=file)
                 if index != length:
                     print('', file=file)
                 enum_records.append((namespace, enum_name, safe_enum))
 
-        subprocess.check_call([sys.executable, dest])
+        dest_list.append(dest)
 
 imported = list()
 enum_line = collections.defaultdict(list)
@@ -177,4 +200,7 @@ with open(os.path.join(PATH, '__init__.py'), 'w') as file:
         print('', file=file)
     print('', file=file)
     file.write(TEMPLATE_FUNC)
+
 subprocess.check_call([sys.executable, os.path.join(PATH, '__init__.py')])
+for dest in dest_list:
+    subprocess.check_call([sys.executable, dest])

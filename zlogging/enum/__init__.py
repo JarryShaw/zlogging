@@ -890,15 +890,28 @@ _enum_zeek = {
 }
 
 
-def globals(*namespaces: typing.Args, bare: bool = False) -> typing.Dict[str, typing.Enum]:  # pylint: disable=redefined-builtin
+def globals(*namespaces, bare: bool = False) -> typing.Dict[str, typing.Enum]:  # pylint: disable=redefined-builtin
     """Generate Bro/Zeek ``enum`` namespace.
 
     Args:
-        *namespaces: namespaces to be loaded
-        bare: if ``True``, do not load ``zeek` namespace by default
+        *namespaces: Namespaces to be loaded.
+        bare: If ``True``, do not load ``zeek`` namespace by default.
+
+    Keyword Args:
+        bare: If ``True``, do not load ``zeek`` namespace by default.
 
     Returns:
-        :obj:`Dict[str, Enum]`: global enum namespace
+        :obj:`dict` mapping of :obj:`str` and :obj:`Enum`: Global enum namespace.
+
+    Warns:
+        BroDeprecationWarning: If ``bro`` namespace used.
+
+    Raises:
+        :exc:`ValueError`: If ``namespace`` is not defined.
+
+    Note:
+        For back-port compatibility, the ``bro`` namespace is an alias of the
+        ``zeek`` namespace.
 
     """
     if bare:

@@ -18,6 +18,9 @@ zlogging = {editable = true,path = "."}
 autopep8 = "*"
 ipython = "*"
 pylint = "*"
+coverage = "*"
+codecov = "*"
+tox = "*"
 beautifulsoup4 = {extras = ["html5lib"],version = "*"}
 requests = "*"
 sphinx = "*"

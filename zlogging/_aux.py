@@ -7,10 +7,10 @@ import itertools
 import math
 import textwrap
 import warnings
-from typing import _GenericAlias
 
 import zlogging._typing as typing
 from zlogging._exc import BroDeprecationWarning
+from zlogging._typing import GenericMeta
 
 __all__ = ['readline', 'decimal_toascii', 'float_toascii', 'unicode_escape', 'expand_typing']
 
@@ -273,7 +273,7 @@ def expand_typing(cls: object, exc: typing.Optional[ValueError] = None) -> typin
                 if type_name.startswith('bro'):
                     warnings.warn("Use of 'bro_%(name)s' is deprecated. "
                                   "Please use 'zeek_%(name)s' instead." % dict(name=attr), BroDeprecationWarning)  # pylint: disable=line-too-long
-            elif isinstance(attr, _GenericAlias) and _GenericType in attr.mro():
+            elif isinstance(attr, GenericMeta) and _GenericType in attr.mro():
                 origin = attr.__origin__
                 parameter = attr.__parameters__[0]
 
