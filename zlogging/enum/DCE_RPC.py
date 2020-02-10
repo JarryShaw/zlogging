@@ -7,7 +7,7 @@ import enum
 @enum.unique
 class IfID(enum.IntFlag):
     """
-    c.f. {html_path}
+    c.f. `base/bif/plugins/Zeek_DCE_RPC.types.bif.zeek <https://docs.zeek.org/en/stable/scripts/base/bif/plugins/Zeek_DCE_RPC.types.bif.zeek.html>`__
     """
 
     _ignore_ = 'IfID _'
@@ -45,7 +45,7 @@ class IfID(enum.IntFlag):
 @enum.unique
 class PType(enum.IntFlag):
     """
-    c.f. {html_path}
+    c.f. `base/bif/plugins/Zeek_DCE_RPC.types.bif.zeek <https://docs.zeek.org/en/stable/scripts/base/bif/plugins/Zeek_DCE_RPC.types.bif.zeek.html>`__
     """
 
     _ignore_ = 'PType _'

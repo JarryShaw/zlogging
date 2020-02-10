@@ -7,7 +7,7 @@ import enum
 @enum.unique
 class Method(enum.IntFlag):
     """
-    c.f. {html_path}
+    c.f. `policy/misc/load-balancing.zeek <https://docs.zeek.org/en/stable/scripts/policy/misc/load-balancing.zeek.html>`__
     """
 
     _ignore_ = 'Method _'

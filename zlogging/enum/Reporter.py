@@ -7,7 +7,7 @@ import enum
 @enum.unique
 class Level(enum.IntFlag):
     """
-    c.f. {html_path}
+    c.f. `base/bif/types.bif.zeek <https://docs.zeek.org/en/stable/scripts/base/bif/types.bif.zeek.html>`__
     """
 
     _ignore_ = 'Level _'

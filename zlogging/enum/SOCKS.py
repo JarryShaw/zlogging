@@ -7,7 +7,7 @@ import enum
 @enum.unique
 class RequestType(enum.IntFlag):
     """
-    c.f. {html_path}
+    c.f. `base/protocols/socks/consts.zeek <https://docs.zeek.org/en/stable/scripts/base/protocols/socks/consts.zeek.html>`__
     """
 
     _ignore_ = 'RequestType _'

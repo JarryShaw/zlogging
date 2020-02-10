@@ -9,7 +9,7 @@ class Event(enum.IntFlag):
     """Type that describes what kind of change occurred.
 
     
-    c.f. {html_path}
+    c.f. `base/frameworks/input/main.zeek <https://docs.zeek.org/en/stable/scripts/base/frameworks/input/main.zeek.html>`__
     """
 
     _ignore_ = 'Event _'
@@ -30,7 +30,7 @@ class Mode(enum.IntFlag):
     """Type that defines the input stream read mode.
 
     
-    c.f. {html_path}
+    c.f. `base/frameworks/input/main.zeek <https://docs.zeek.org/en/stable/scripts/base/frameworks/input/main.zeek.html>`__
     """
 
     _ignore_ = 'Mode _'
@@ -49,7 +49,7 @@ class Mode(enum.IntFlag):
 @enum.unique
 class Reader(enum.IntFlag):
     """
-    c.f. {html_path}
+    c.f. `base/frameworks/input/main.zeek <https://docs.zeek.org/en/stable/scripts/base/frameworks/input/main.zeek.html>`__
     """
 
     _ignore_ = 'Reader _'

@@ -9,7 +9,7 @@ class InfoCategory(enum.IntFlag):
     """Type of an entry in the NetControl log.
 
     
-    c.f. {html_path}
+    c.f. `base/frameworks/netcontrol/main.zeek <https://docs.zeek.org/en/stable/scripts/base/frameworks/netcontrol/main.zeek.html>`__
     """
 
     _ignore_ = 'InfoCategory _'
@@ -30,7 +30,7 @@ class InfoState(enum.IntFlag):
     """State of an entry in the NetControl log.
 
     
-    c.f. {html_path}
+    c.f. `base/frameworks/netcontrol/main.zeek <https://docs.zeek.org/en/stable/scripts/base/frameworks/netcontrol/main.zeek.html>`__
     """
 
     _ignore_ = 'InfoState _'
@@ -60,7 +60,7 @@ class EntityType(enum.IntFlag):
     """Type defining the entity that a rule applies to.
 
     
-    c.f. {html_path}
+    c.f. `base/frameworks/netcontrol/types.zeek <https://docs.zeek.org/en/stable/scripts/base/frameworks/netcontrol/types.zeek.html>`__
     """
 
     _ignore_ = 'EntityType _'
@@ -87,7 +87,7 @@ class RuleType(enum.IntFlag):
     Plugins may extend this type to define their own.
 
     
-    c.f. {html_path}
+    c.f. `base/frameworks/netcontrol/types.zeek <https://docs.zeek.org/en/stable/scripts/base/frameworks/netcontrol/types.zeek.html>`__
     """
 
     _ignore_ = 'RuleType _'
@@ -123,7 +123,7 @@ class TargetType(enum.IntFlag):
     it wants to no longer see traffic that it identified as benign.
 
     
-    c.f. {html_path}
+    c.f. `base/frameworks/netcontrol/types.zeek <https://docs.zeek.org/en/stable/scripts/base/frameworks/netcontrol/types.zeek.html>`__
     """
 
     _ignore_ = 'TargetType _'
@@ -140,7 +140,7 @@ class CatchReleaseActions(enum.IntFlag):
     catch and release.
 
     
-    c.f. {html_path}
+    c.f. `policy/frameworks/netcontrol/catch-and-release.zeek <https://docs.zeek.org/en/stable/scripts/policy/frameworks/netcontrol/catch-and-release.zeek.html>`__
     """
 
     _ignore_ = 'CatchReleaseActions _'

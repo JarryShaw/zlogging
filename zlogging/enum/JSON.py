@@ -7,7 +7,7 @@ import enum
 @enum.unique
 class TimestampFormat(enum.IntFlag):
     """
-    c.f. {html_path}
+    c.f. `base/init-bare.zeek <https://docs.zeek.org/en/stable/scripts/base/init-bare.zeek.html>`__
     """
 
     _ignore_ = 'TimestampFormat _'

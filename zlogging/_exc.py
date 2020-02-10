@@ -17,24 +17,21 @@ class ZeekWarning(Warning):
 class ParserError(ZeekException, ValueError):
     """Error when parsing logs.
 
+    Args:
+        msg (str): The unformatted error message.
+        lineno (:obj:`int`, optional): The line corresponding to the failure.
+        field (:obj:`str`, optional): The field name where parsing failed.
+
     Attributes:
-        msg: the unformatted error message
-        field: the field name where parsing failed
-        lineno: the line corresponding to the failure
+        msg (str): The unformatted error message.
+        field: (str) The field name where parsing failed.
+        lineno (int): The line corresponding to the failure.
 
     """
 
     def __init__(self, msg: str,
                  lineno: typing.Optional[int] = None,
                  field: typing.Optional[str] = None):
-        """Initialisation.
-
-        Args:
-            msg: the unformatted error message
-            lineno (:obj:`int`, optional): the line corresponding to the failure
-            field (:obj:`str`, optional): the field name where parsing failed
-
-        """
         if lineno is None:
             errmsg = msg
         elif field is None:
@@ -52,34 +49,55 @@ class ParserError(ZeekException, ValueError):
 
 
 class JSONParserError(ParserError, json.JSONDecodeError):
-    """Error when parsing JSON log."""
+    """Error when parsing JSON log.
+
+    Args:
+        msg (str): The unformatted error message.
+        lineno (:obj:`int`, optional): The line corresponding to the failure.
+        field (:obj:`str`, optional): The field name where parsing failed.
+
+    Attributes:
+        msg (str): The unformatted error message.
+        field: (str) The field name where parsing failed.
+        lineno (int): The line corresponding to the failure.
+
+    """
 
 
 class ASCIIPaserError(ParserError):
-    """Error when parsing ASCII log."""
+    """Error when parsing ASCII log.
+
+    Args:
+        msg (str): The unformatted error message.
+        lineno (:obj:`int`, optional): The line corresponding to the failure.
+        field (:obj:`str`, optional): The field name where parsing failed.
+
+    Attributes:
+        msg (str): The unformatted error message.
+        field: (str) The field name where parsing failed.
+        lineno (int): The line corresponding to the failure.
+
+    """
 
 
 class WriterError(ZeekException, TypeError):
     """Error when writing logs.
 
+    Args:
+        msg (str): The unformatted error message.
+        lineno (:obj:`int`, optional): The line corresponding to the failure.
+        field (:obj:`str`, optional): The field name where writing failed.
+
     Attributes:
-        msg: the unformatted error message
-        field: the field name where writing failed
-        lineno: the line corresponding to the failure
+        msg (str): The unformatted error message.
+        field (str): The field name where writing failed.
+        lineno (int): The line corresponding to the failure.
 
     """
 
     def __init__(self, msg: str,
                  lineno: typing.Optional[int] = None,
                  field: typing.Optional[str] = None):
-        """Initialisation.
-
-        Args:
-            msg: the unformatted error message
-            lineno (:obj:`int`, optional): the line corresponding to the failure
-            field (:obj:`str`, optional): the field name where writing failed
-
-        """
         if lineno is None:
             errmsg = msg
         elif field is None:
@@ -97,15 +115,51 @@ class WriterError(ZeekException, TypeError):
 
 
 class JSONWriterError(WriterError):
-    """Error when writing JSON logs."""
+    """Error when writing JSON logs.
+
+    Args:
+        msg (str): The unformatted error message.
+        lineno (:obj:`int`, optional): The line corresponding to the failure.
+        field (:obj:`str`, optional): The field name where writing failed.
+
+    Attributes:
+        msg (str): The unformatted error message.
+        field (str): The field name where writing failed.
+        lineno (int): The line corresponding to the failure.
+
+    """
 
 
 class ASCIIWriterError(WriterError):
-    """Error when writing ASCII logs."""
+    """Error when writing ASCII logs.
+
+    Args:
+        msg (str): The unformatted error message.
+        lineno (:obj:`int`, optional): The line corresponding to the failure.
+        field (:obj:`str`, optional): The field name where writing failed.
+
+    Attributes:
+        msg (str): The unformatted error message.
+        field (str): The field name where writing failed.
+        lineno (int): The line corresponding to the failure.
+
+    """
 
 
 class WriterFormatError(WriterError, ValueError):
-    """Unsupported format."""
+    """Unsupported format.
+
+    Args:
+        msg (str): the unformatted error message
+        lineno (:obj:`int`, optional): the line corresponding to the failure
+        field (:obj:`str`, optional): the field name where writing failed
+
+    Attributes:
+        msg (str): the unformatted error message
+        field (str): the field name where writing failed
+        lineno (int): the line corresponding to the failure
+
+    """
 
 
 class ParserWarning(ZeekWarning, UserWarning):

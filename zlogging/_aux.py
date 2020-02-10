@@ -1,9 +1,10 @@
 # -*- coding: utf-8 -*-
-"""Auxiliary function."""
+"""Auxiliary functions."""
 
 import collections
 import decimal
 import itertools
+import math
 import textwrap
 import warnings
 from typing import _GenericAlias
@@ -16,14 +17,14 @@ __all__ = ['readline', 'decimal_toascii', 'float_toascii', 'unicode_escape', 'ex
 
 def readline(file: typing.BinaryFile, separator: bytes = b'\x09',
              maxsplit: int = -1, decode: bool = False) -> typing.List[typing.AnyStr]:
-    """Wrapper for ``readline`` function.
+    """Wrapper for :meth:`file.readline` function.
 
     Args:
-        file: log file object opened in binary mode
-        separator: data separator
-        maxsplit: maximum number of splits to do; see :meth:`bytes.split`
-            and :meth:`str.split` for more information
-        decode: if decide the buffered string with ``ascii`` encoding
+        file: Log file object opened in binary mode.
+        separator: Data separator.
+        maxsplit: Maximum number of splits to do; see :meth:`bytes.split`
+            and :meth:`str.split` for more information.
+        decode: If decide the buffered string with ``ascii`` encoding.
 
     Returns:
         The splitted line as a :obj:`list` of :obj:`bytes`, or as :obj:`str` if
@@ -36,8 +37,40 @@ def readline(file: typing.BinaryFile, separator: bytes = b'\x09',
     return line.split(separator, maxsplit)
 
 
-def decimal_toascii(data: typing.Decimal) -> str:
-    """Convert ``decimal.Decimal`` to ASCII."""
+def decimal_toascii(data: typing.Decimal, infinite: str = None) -> str:
+    """Convert :obj:`decimal.Decimal` to ASCII.
+
+    Args:
+        data: A :obj:`decimal.Decimal` object.
+        infinite: The ASCII representation of infinite numbers (``NaN`` and infinity).
+
+    Returns:
+        The converted ASCII string.
+
+    Example:
+        When converting a :obj:`decimal.Decimal` object, for example::
+
+            >>> d = decimal.Decimal('-123.123456789')
+
+        the function will preserve only **6 digits** of its fractional part,
+        i.e.::
+
+            >>> decimal_toascii(d)
+            '-123.123456'
+
+    Note:
+        Infinite numbers, i.e. ``NaN`` and infinity (``inf``), will be
+        converted as the value specified in ``infinite``, in default the string
+        representation of the number itself, i.e.:
+
+        * ``NaN`` -> ``'NaN'``
+        * Infinity -> ``'Infinity'``
+
+    """
+    if data.is_infinite():
+        if infinite is None:
+            return str(data)
+        return infinite
     tpl: decimal.DecimalTuple = data.as_tuple()
 
     exp = tpl.exponent
@@ -69,8 +102,40 @@ def decimal_toascii(data: typing.Decimal) -> str:
                           '0' * (6 - len(buf_flt)))
 
 
-def float_toascii(data: float) -> str:
-    """Convert ``float`` to ASCII."""
+def float_toascii(data: float, infinite: str = None) -> str:
+    """Convert :obj:`float` to ASCII.
+
+    Args:
+        data: A :obj:`float` number.
+        infinite: The ASCII representation of infinite numbers (``NaN`` and infinity).
+
+    Returns:
+        The converted ASCII string.
+
+    Example:
+        When converting a :obj:`float` number, for example::
+
+            >>> f = -123.123456789
+
+        the function will preserve only **6 digits** of its fractional part,
+        i.e.::
+
+            >>> float_toascii(f)
+            '-123.123456'
+
+    Note:
+        Infinite numbers, i.e. ``NaN`` and infinity (``inf``), will be
+        converted as the value specified in ``infinite``, in default the string
+        representation of the number itself, i.e.:
+
+        * ``NaN`` -> ``'nan'``
+        * Infinity -> ``'inf'``
+
+    """
+    if not math.isfinite(data):
+        if infinite is None:
+            return str(data)
+        return infinite
     int_part, flt_part = str(data).split('.')
     return '%s.%s%s' % (int_part,
                         flt_part[:6],
@@ -78,20 +143,112 @@ def float_toascii(data: float) -> str:
 
 
 def unicode_escape(string: bytes) -> str:
-    """Conterprocess of ``bytes.decode('unicode_escape')``."""
+    """Conterprocess of :meth:`bytes.decode('unicode_escape')`.
+
+    Args:
+        string: The bytestring to be escaped.
+
+    Returns:
+        The escaped bytestring as an encoded string
+
+    Example:
+
+        >>> b'\\x09'.decode('unicode_escape')
+        '\\t'
+        >>> unicode_escape(b'\\t')
+        '\\x09'
+
+    """
     return ''.join(map(lambda s: '\\x' % s, textwrap.wrap(string.hex(), 2)))
 
 
-def expand_typing(cls: object, exc: ValueError) -> typing.Dict[str, typing.Any]:
-    """Expand model typing annotations."""
-    from zlogging.types import _GenericType, _SimpleType, _VariadicType, Type  # pylint: disable=import-outside-toplevel
+def expand_typing(cls: object, exc: typing.Optional[ValueError] = None) -> typing.Dict[str, typing.Any]:
+    """Expand typing annotations.
+
+    Args:
+        cls (:class:`~zlogging.model.Model` or :class:`~zlogging.types.RecordType` object):
+            a variadic class which supports `PEP 484`_ style attribute typing
+            annotations
+        exc: (:obj:`ValueError`, optional): exception to be used in case of
+            inconsistent values for ``unset_field``, ``empty_field``
+            and ``set_separator``
+
+    Returns:
+        :obj:`Dict[str, Any]`: The returned dictionary contains the
+            following directives:
+
+            * ``fields`` (:obj:`OrderedDict` mapping :obj:`str` and :class:`~zlogging.types.BaseType`):
+                a mapping proxy of field names and their corresponding data
+                types, i.e. an instance of a :class:`~zlogging.types.BaseType`
+                subclass
+
+            * ``record_fields`` (:obj:`OrderedDict` mapping :obj:`str` and :class:`~zlogging.types.RecordType`):
+                a mapping proxy for fields of ``record`` data type, i.e. an
+                instance of :class:`~zlogging.types.RecordType`
+
+            * ``unset_fields`` (:obj:`bytes`): placeholder for unset field
+
+            * ``empty_fields`` (:obj:`bytes`): placeholder for empty field
+
+            * ``set_separator`` (:obj:`bytes`): separator for ``set``/``vector`` fields
+
+    Warns:
+        BroDeprecationWarning: Use of ``bro_*`` prefixed typing annotations.
+
+    Raises:
+        :exc:`ValueError`: In case of inconsistent values for ``unset_field``,
+            ``empty_field`` and ``set_separator``.
+
+    Example:
+        Define a custom log data model from :class:`~zlogging.model.Model` using
+        the prefines Bro/Zeek data types, or subclasses of
+        :class:`~zlogging.types.BaseType`::
+
+            class MyLog(Model):
+                field_one = StringType()
+                field_two = SetType(element_type=PortType)
+
+        Or you may use type annotations as `PEP 484`_ introduced when declaring
+        data models. All available type hints can be found in
+        :mod:`zlogging.typing`::
+
+            class MyLog(Model):
+                field_one: zeek_string
+                field_two: zeek_set[zeek_port]
+
+        However, when mixing annotations and direct assignments, annotations
+        will take proceedings, i.e. the function shall process first typing
+        annotations then ``cls`` attribute assignments. Should there be any
+        conflicts, the ``exc`` will be raised.
+
+    Note:
+        Fields of :class:`zlogging.types.RecordType` type will be expanded as
+        plain fields of the ``cls``, i.e. for the variadic class as below::
+
+            class MyLog(Model):
+                record = RecrodType(one=StringType(),
+                                    two=VectorType(element_type=CountType()))
+
+        will have the following fields:
+
+        * ``record.one`` -> ``string`` data type
+        * ``record.two`` -> ``vector[count]`` data type
+
+    .. _PEP 484:
+        https://www.python.org/dev/peps/pep-0484/
+
+    """
+    from zlogging.types import _GenericType, _SimpleType, _VariadicType, BaseType  # pylint: disable=import-outside-toplevel
+
+    if exc is None:
+        exc = ValueError
 
     inited = False
     unset_field = b'-'
     empty_field = b'(empty)'
     set_separator = b','
 
-    def register(name: str, field: Type):
+    def register(name: str, field: BaseType):
         """Field registry."""
         existed = fields.get(name)
         if existed is not None and type(field) != type(existed):
@@ -101,7 +258,7 @@ def expand_typing(cls: object, exc: ValueError) -> typing.Dict[str, typing.Any]:
     fields = collections.OrderedDict()
     record_fields = collections.OrderedDict()
     for name, attr in itertools.chain(getattr(cls, '__annotations__', dict()).items(), cls.__dict__.items()):
-        if not isinstance(attr, Type):
+        if not isinstance(attr, BaseType):
             if isinstance(attr, typing.TypeVar):
                 type_name = attr.__name__
                 bound = attr.__bound__
@@ -140,7 +297,7 @@ def expand_typing(cls: object, exc: ValueError) -> typing.Dict[str, typing.Any]:
                 if type_name.startswith('bro'):
                     warnings.warn("Use of 'bro_%(name)s' is deprecated. "
                                   "Please use 'zeek_%(name)s' instead." % dict(name=attr), BroDeprecationWarning)  # pylint: disable=line-too-long
-            elif isinstance(attr, type) and issubclass(attr, Type):
+            elif isinstance(attr, type) and issubclass(attr, BaseType):
                 attr = attr()
             else:
                 continue

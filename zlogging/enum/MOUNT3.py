@@ -7,7 +7,7 @@ import enum
 @enum.unique
 class auth_flavor_t(enum.IntFlag):
     """
-    c.f. {html_path}
+    c.f. `base/bif/types.bif.zeek <https://docs.zeek.org/en/stable/scripts/base/bif/types.bif.zeek.html>`__
     """
 
     _ignore_ = 'auth_flavor_t _'
@@ -25,7 +25,7 @@ class auth_flavor_t(enum.IntFlag):
 @enum.unique
 class proc_t(enum.IntFlag):
     """
-    c.f. {html_path}
+    c.f. `base/bif/types.bif.zeek <https://docs.zeek.org/en/stable/scripts/base/bif/types.bif.zeek.html>`__
     """
 
     _ignore_ = 'proc_t _'
@@ -49,7 +49,7 @@ class proc_t(enum.IntFlag):
 @enum.unique
 class status_t(enum.IntFlag):
     """
-    c.f. {html_path}
+    c.f. `base/bif/types.bif.zeek <https://docs.zeek.org/en/stable/scripts/base/bif/types.bif.zeek.html>`__
     """
 
     _ignore_ = 'status_t _'

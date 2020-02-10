@@ -5,6 +5,7 @@
         "astuple",
         "dgtlen",
         "inited",
+        "isfinite",
         "posixpath",
         "prec",
         "rb'set",
@@ -13,6 +14,8 @@
         "toctree",
         "tojson",
         "uint",
+        "undoc",
         "zlogging"
-    ]
+    ],
+    "restructuredtext.confPath": "${workspaceFolder}/docs/conf.py"
 }

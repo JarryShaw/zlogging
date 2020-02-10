@@ -7,7 +7,7 @@ import enum
 @enum.unique
 class ModbusDeviceType(enum.IntFlag):
     """
-    c.f. {html_path}
+    c.f. `policy/protocols/modbus/known-masters-slaves.zeek <https://docs.zeek.org/en/stable/scripts/policy/protocols/modbus/known-masters-slaves.zeek.html>`__
     """
 
     _ignore_ = 'ModbusDeviceType _'

@@ -12,7 +12,7 @@ class ID(enum.IntFlag):
     file.
 
     
-    c.f. {html_path}
+    c.f. `base/frameworks/logging/main.zeek <https://docs.zeek.org/en/stable/scripts/base/frameworks/logging/main.zeek.html>`__
     """
 
     _ignore_ = 'ID _'
@@ -225,7 +225,7 @@ class ID(enum.IntFlag):
 @enum.unique
 class Writer(enum.IntFlag):
     """
-    c.f. {html_path}
+    c.f. `base/frameworks/logging/main.zeek <https://docs.zeek.org/en/stable/scripts/base/frameworks/logging/main.zeek.html>`__
     """
 
     _ignore_ = 'Writer _'

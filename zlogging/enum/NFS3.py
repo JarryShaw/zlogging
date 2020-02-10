@@ -7,7 +7,7 @@ import enum
 @enum.unique
 class createmode_t(enum.IntFlag):
     """
-    c.f. {html_path}
+    c.f. `base/bif/types.bif.zeek <https://docs.zeek.org/en/stable/scripts/base/bif/types.bif.zeek.html>`__
     """
 
     _ignore_ = 'createmode_t _'
@@ -23,7 +23,7 @@ class createmode_t(enum.IntFlag):
 @enum.unique
 class file_type_t(enum.IntFlag):
     """
-    c.f. {html_path}
+    c.f. `base/bif/types.bif.zeek <https://docs.zeek.org/en/stable/scripts/base/bif/types.bif.zeek.html>`__
     """
 
     _ignore_ = 'file_type_t _'
@@ -47,7 +47,7 @@ class file_type_t(enum.IntFlag):
 @enum.unique
 class proc_t(enum.IntFlag):
     """
-    c.f. {html_path}
+    c.f. `base/bif/types.bif.zeek <https://docs.zeek.org/en/stable/scripts/base/bif/types.bif.zeek.html>`__
     """
 
     _ignore_ = 'proc_t _'
@@ -103,7 +103,7 @@ class proc_t(enum.IntFlag):
 @enum.unique
 class stable_how_t(enum.IntFlag):
     """
-    c.f. {html_path}
+    c.f. `base/bif/types.bif.zeek <https://docs.zeek.org/en/stable/scripts/base/bif/types.bif.zeek.html>`__
     """
 
     _ignore_ = 'stable_how_t _'
@@ -119,7 +119,7 @@ class stable_how_t(enum.IntFlag):
 @enum.unique
 class status_t(enum.IntFlag):
     """
-    c.f. {html_path}
+    c.f. `base/bif/types.bif.zeek <https://docs.zeek.org/en/stable/scripts/base/bif/types.bif.zeek.html>`__
     """
 
     _ignore_ = 'status_t _'
@@ -189,7 +189,7 @@ class status_t(enum.IntFlag):
 @enum.unique
 class time_how_t(enum.IntFlag):
     """
-    c.f. {html_path}
+    c.f. `base/bif/types.bif.zeek <https://docs.zeek.org/en/stable/scripts/base/bif/types.bif.zeek.html>`__
     """
 
     _ignore_ = 'time_how_t _'

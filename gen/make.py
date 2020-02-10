@@ -29,7 +29,7 @@ TEMPLATE_INIT = '''\
 # -*- coding: utf-8 -*-
 """Bro/Zeek enum namespace."""
 
-import warning
+import warnings
 
 import zlogging._typing as typing
 from zlogging._exc import BroDeprecationWarning
@@ -119,7 +119,7 @@ for html_file in sorted(file_list):
                 file.write(TEMPLATE_ENUM.format(namespace=namespace))
 
         html_path = os.path.splitext(os.path.relpath(html_file, os.path.join(ROOT, 'sources')))[0]
-        docs_list.append('\n    c.f. {html_path}\n    ')
+        docs_list.append(f'\n    c.f. `{html_path} <https://docs.zeek.org/en/stable/scripts/{html_path}.html>`__\n    ')
         enum_docs = '\n\n    '.join(docs_list)
         with open(dest, 'a') as file:
             print('', file=file)
@@ -150,7 +150,6 @@ imported = list()
 enum_line = collections.defaultdict(list)
 with open(os.path.join(PATH, '__init__.py'), 'w') as file:
     file.write(TEMPLATE_INIT)
-    print('', file=file)
     for namespace, enum, name in sorted(enum_records):
         if (namespace, enum) not in imported:
             print(f'from zlogging.enum.{namespace} import {enum} as {namespace}_{enum}', file=file)

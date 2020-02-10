@@ -7,7 +7,7 @@ import enum
 @enum.unique
 class dir(enum.IntFlag):
     """
-    c.f. {html_path}
+    c.f. `policy/frameworks/dpd/detect-protocols.zeek <https://docs.zeek.org/en/stable/scripts/policy/frameworks/dpd/detect-protocols.zeek.html>`__
     """
 
     _ignore_ = 'dir _'

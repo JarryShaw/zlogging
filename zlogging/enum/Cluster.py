@@ -10,7 +10,7 @@ class NodeType(enum.IntFlag):
     configuration.
 
     
-    c.f. {html_path}
+    c.f. `base/frameworks/cluster/main.zeek <https://docs.zeek.org/en/stable/scripts/base/frameworks/cluster/main.zeek.html>`__
     """
 
     _ignore_ = 'NodeType _'

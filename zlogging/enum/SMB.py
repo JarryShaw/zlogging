@@ -9,7 +9,7 @@ class Action(enum.IntFlag):
     """Abstracted actions for SMB file actions.
 
     
-    c.f. {html_path}
+    c.f. `base/protocols/smb/main.zeek <https://docs.zeek.org/en/stable/scripts/base/protocols/smb/main.zeek.html>`__
     """
 
     _ignore_ = 'Action _'

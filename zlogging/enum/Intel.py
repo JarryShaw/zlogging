@@ -9,7 +9,7 @@ class Type(enum.IntFlag):
     """Enum type to represent various types of intelligence data.
 
     
-    c.f. {html_path}
+    c.f. `base/frameworks/intel/main.zeek <https://docs.zeek.org/en/stable/scripts/base/frameworks/intel/main.zeek.html>`__
     """
 
     _ignore_ = 'Type _'
@@ -59,7 +59,7 @@ class Where(enum.IntFlag):
     The convention is to prefix the name with IN_.
 
     
-    c.f. {html_path}
+    c.f. `base/frameworks/intel/main.zeek <https://docs.zeek.org/en/stable/scripts/base/frameworks/intel/main.zeek.html>`__
     """
 
     _ignore_ = 'Where _'

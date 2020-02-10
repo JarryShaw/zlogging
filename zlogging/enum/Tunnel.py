@@ -7,7 +7,7 @@ import enum
 @enum.unique
 class Type(enum.IntFlag):
     """
-    c.f. {html_path}
+    c.f. `base/bif/types.bif.zeek <https://docs.zeek.org/en/stable/scripts/base/bif/types.bif.zeek.html>`__
     """
 
     _ignore_ = 'Type _'
@@ -37,7 +37,7 @@ class Action(enum.IntFlag):
     """Types of interesting activity that can occur with a tunnel.
 
     
-    c.f. {html_path}
+    c.f. `base/frameworks/tunnels/main.zeek <https://docs.zeek.org/en/stable/scripts/base/frameworks/tunnels/main.zeek.html>`__
     """
 
     _ignore_ = 'Action _'

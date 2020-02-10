@@ -10,7 +10,7 @@ class SimpleEnum(enum.IntFlag):
     It can span multiple lines.
 
     
-    c.f. {html_path}
+    c.f. `zeekygen/example.zeek <https://docs.zeek.org/en/stable/scripts/zeekygen/example.zeek.html>`__
     """
 
     _ignore_ = 'SimpleEnum _'

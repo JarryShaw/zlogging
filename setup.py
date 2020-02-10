@@ -2,7 +2,7 @@
 """Bro/Zeek logging framework for Python."""
 
 # version string
-__version__ = '0.1.0rc1'
+__version__ = '0.1.0rc2'
 
 with open('README.md') as file:
     long_description = file.read()
@@ -68,7 +68,8 @@ attrs = dict(
     # password
     # fullname
     # long_description_content_type
-    python_requires='>=3.6',
+    # python_requires='>=3.6',
+    python_requires='>=3.8',
     # zip_safe,
     # install_requires,
     # entry_points,

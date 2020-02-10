@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-"""Data models."""
+"""Data classes for parsed logs."""
 
 import abc
 import dataclasses
@@ -13,7 +13,15 @@ __all__ = [
 
 
 class Info(metaclass=abc.ABCMeta):
-    """Parsed log info."""
+    """Parsed log info.
+
+    The parsed log will be stored as in this :obj:`dataclass`, as introduced in
+    `PEP 557`_.
+
+    .. _PEP 557:
+        https://www.python.org/dev/peps/pep-557/
+
+    """
 
     @property
     @abc.abstractmethod
@@ -23,7 +31,27 @@ class Info(metaclass=abc.ABCMeta):
 
 @dataclasses.dataclass(frozen=True)
 class ASCIIInfo(Info):
-    """Parsed log info for ASCII logs."""
+    """Parsed log info for ASCII logs.
+
+    The ASCII log will be stored as in this :obj:`dataclass`, as introduced in
+    `PEP 557`_.
+
+    Args:
+        path (:obj:`os.PathLike`): The value is specified in the ASCII log file
+            under ``# path`` directive.
+        open (:obj:`datetime.datetime`): The value is specified in the ASCII
+            log file under ``# open`` directive.
+        close (:obj:`datetime.datetime`): The value is specified in the ASCII
+            log file under ``# close`` directive.
+        data (:obj:`list` or :class:`~zlogging.model.Model`): The log records
+            parsed as a :obj:`list` of :class:`~zlogging.model.Model` per line.
+        exit_with_error (:obj:`bool`): When exit with error, the ASCII log
+            file doesn't has a ``# close`` directive.
+
+    .. _PEP 557:
+        https://www.python.org/dev/peps/pep-557/
+
+    """
 
     @property
     def format(self) -> str:
@@ -31,15 +59,47 @@ class ASCIIInfo(Info):
         return 'ascii'
 
     path: typing.PathLike
+    """:obj:`os.PathLike`: Log path.
+
+    The value is specified in the ASCII log file under ``# path`` directive.
+    """
     open: typing.DateTime
+    """:obj:`datetime.datetime`: Log open time.
+
+    The value is specified in the ASCII log file under ``# open`` directive.
+    """
     close: typing.DateTime
+    """:obj:`datetime.datetime`: Log close time.
+
+    The value is specified in the ASCII log file under ``# close`` directive.
+    """
     data: typing.List[Model]
+    """:obj:`list` of :class:`~zlogging.model.Model`: Log records.
+
+    The log records parsed as a :obj:`list` of :class:`~zlogging.model.Model` per line.
+    """
     exit_with_error: bool
+    """:obj:`bool`: Log exit with error.
+
+    When exit with error, the ASCII log file doesn't has a ``# close`` directive.
+    """
 
 
 @dataclasses.dataclass(frozen=True)
 class JSONInfo(Info):
-    """Parsed log info for JSON logs."""
+    """Parsed log info for JSON logs.
+
+    The JSON log will be stored as in this :obj:`dataclass`, as introduced in
+    `PEP 557`_.
+
+    Args:
+        data (:obj:`list` of :class:`~zlogging.model.Model`): The log records
+            parsed as a :obj:`list` of :class:`~zlogging.model.Model` per line.
+
+    .. _PEP 557:
+        https://www.python.org/dev/peps/pep-557/
+
+    """
 
     @property
     def format(self) -> str:
@@ -47,3 +107,7 @@ class JSONInfo(Info):
         return 'json'
 
     data: typing.List[Model]
+    """:obj:`list` of :class:`~zlogging.model.Model`: Log records.
+
+    The log records parsed as a :obj:`list` of :class:`~zlogging.model.Model` per line.
+    """

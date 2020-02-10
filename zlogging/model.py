@@ -8,7 +8,7 @@ import types
 import zlogging._typing as typing
 from zlogging._aux import expand_typing
 from zlogging._exc import ModelTypeError, ModelValueError, ModelFormatError
-from zlogging.types import Type
+from zlogging.types import BaseType
 
 __all__ = [
     'Model', 'new_model',
@@ -18,23 +18,31 @@ __all__ = [
 class Model(metaclass=abc.ABCMeta):
     """Log data model.
 
-     Attributes:
-        fields (:obj:`OrderedDict[str, Type]`): fields of the data model, alias
-            of ``__fields__``
-        empty_field (bytes): placeholder for empty field, alias of
-            ``__empty_field__``
-        unset_field (bytes): placeholder for unset field, alias of
-            ``__unset_field__``
-        set_separator (bytes): separator for set/vector fields, alias of
-            ``__set_separator__``
+    Attributes:
+        __fields__ (:obj:`OrderedDict` mapping :obj:`str` and :class:`~zlogging.types.BaseType`):
+            Fields of the data model.
+        __record_fields__ (:obj:`OrderedDict` mapping :obj:`str` and :class:`RecordType`):
+            Fields of ``record`` data type in the data model.
+        __empty_field__ (bytes): Placeholder for empty field.
+        __unset_field__ (bytes): Placeholder for unset field.
+        __set_separator__ (bytes): Separator for set/vector fields.
+
+    Warns:
+        BroDeprecationWarning: Use of ``bro_*`` type annotations.
+
+    Raises:
+        :exc:`ModelValueError`: In case of inconsistency between field
+            data types, or values of ``unset_field``, ``empty_field`` and
+            ``set_separator``.
+        :exc:`ModelTypeError`: Wrong parameters when initialisation.
 
     Note:
-        Customise the ``__post_init__`` method in your subclassed data model to
-        implement your own ideas.
+        Customise the :meth:`Model.__post_init__ <zlogging.mode.Model.__post_init__>` method
+        in your subclassed data model to implement your own ideas.
 
     Example:
         Define a custom log data model using the prefines Bro/Zeek data types,
-        or subclasses of :cls:`zlogging.types.Type`::
+        or subclasses of :class:`~zlogging.types.BaseType`::
 
             class MyLog(Model):
                 field_one = StringType()
@@ -49,17 +57,14 @@ class Model(metaclass=abc.ABCMeta):
                 field_two: zeek_set[zeek_port]
 
         However, when mixing annotations and direct assignments, annotations
-        will take proceedings, i.e. the :cls:`Model` class shall process first
+        will take proceedings, i.e. the :class:`Model` class shall process first
         annotations then assignments. Should there be any conflicts,
         ``ModelError`` will be raised.
 
-    Warnings:
-        BroDeprecationWarning: use of ``bro_*`` type annotations
+    See Also:
 
-    Raises:
-        ModelValueError: in case of inconsistency between field data types, or
-            values of ``unset_field``, ``empty_field`` and ``set_separator``
-        ModelTypeError: wrong parameters when initialisation
+        See :func:`~zlogging._aux_expand_typing` for more information about
+        processing the fields.
 
     .. _PEP 484:
         https://www.python.org/dev/peps/pep-0484/
@@ -67,8 +72,8 @@ class Model(metaclass=abc.ABCMeta):
     """
 
     @property
-    def fields(self) -> typing.OrderedDict[str, Type]:
-        """`OrderedDict[str, Type]`: fields of the data model"""
+    def fields(self) -> typing.OrderedDict[str, BaseType]:
+        """:obj:`OrderedDict` mapping :obj:`str` and :class:`~zlogging.types.BaseType`: fields of the data model"""
         return self.__fields__
 
     @property
@@ -86,7 +91,7 @@ class Model(metaclass=abc.ABCMeta):
         """bytes: separator for set/vector fields"""
         return self.__set_separator__
 
-    def __new__(cls, *args: typing.Args, **kwargs: typing.Kwargs):  # pylint: disable=unused-argument
+    def __new__(cls, *args, **kwargs):  # pylint: disable=unused-argument
         expanded = expand_typing(cls, ModelValueError)
 
         cls.__fields__ = expanded['fields']
@@ -99,7 +104,7 @@ class Model(metaclass=abc.ABCMeta):
 
         return super().__new__(cls)
 
-    def __init__(self, *args: typing.Args, **kwargs: typing.Kwargs):
+    def __init__(self, *args, **kwargs):
         init_args = collections.OrderedDict()
 
         field_names = list(self.__fields__)
@@ -159,14 +164,33 @@ class Model(metaclass=abc.ABCMeta):
         return '%s(%s)' % (type(self).__name__, ', '.join(fields))
 
     def __call__(self, format: str) -> typing.Any:  # pylint: disable=redefined-builtin
-        """Serialise data model with given format."""
+        """Serialise data model with given format.
+
+        Args:
+            format: Serialisation format.
+
+        Returns:
+            The serialised data.
+
+        Raises:
+            :exc:`ModelFormatError`: If ``format`` is not
+                supproted, i.e. :meth:`Mode.to{format}` does not
+                exist.
+
+        """
         func = 'to%s' % format
         if hasattr(self, func):
             return getattr(self, func)()
         raise ModelFormatError('unsupported format: %s' % format)
 
     def tojson(self) -> typing.OrderedDict[str, typing.Any]:
-        """Serialise data model as JSON log format."""
+        """Serialise data model as JSON log format.
+
+        Returns:
+            An :obj:`OrderedDict` mapping each field and serialised JSON
+            serialisable data.
+
+        """
         fields = collections.OrderedDict()
         for field, type_cls in self.__fields__.items():
             value = getattr(self, field)
@@ -174,19 +198,27 @@ class Model(metaclass=abc.ABCMeta):
         return fields
 
     def toascii(self) -> typing.OrderedDict[str, str]:
-        """Serialise data model as ASCII log format."""
+        """Serialise data model as ASCII log format.
+
+        Returns:
+            An :obj:`OrderedDict` mapping each field and serialised text data.
+
+        """
         fields = collections.OrderedDict()
         for field, type_cls in self.__fields__.items():
             value = getattr(self, field)
             fields[field] = type_cls.toascii(value)
         return fields
 
-    def asdict(self, dict_factory: typing.Optional[typing.Type] = None) -> typing.Dict[str, typing.Any]:
+    def asdict(self, dict_factory: typing.Optional[type] = None) -> typing.Dict[str, typing.Any]:
         """Convert data model as a dictionary mapping field names to field values.
 
         Args:
             dict_factory: If given, ``dict_factory`` will be used instead of
                 built-in :obj:`dict`.
+
+        Returns:
+            A dictionary mapping field names to field values.
 
         """
         if dict_factory is None:
@@ -198,12 +230,15 @@ class Model(metaclass=abc.ABCMeta):
             fields[field] = value
         return fields
 
-    def astuple(self, tuple_factory: typing.Optional[typing.Type] = None) -> typing.Tuple[typing.Any]:
+    def astuple(self, tuple_factory: typing.Optional[type] = None) -> typing.Tuple[typing.Any]:
         """Convert data model as a tuple of field values.
 
         Args:
             tuple_factory: If given, ``tuple_factory`` will be used instead of
                 built-in :obj:`tuple`.
+
+        Returns:
+            A tuple of field values.
 
         """
         fields = list()
@@ -218,6 +253,13 @@ class Model(metaclass=abc.ABCMeta):
 
 def new_model(name: str, **fields: typing.Kwargs) -> Model:
     """Create a data model dynamically with the appropriate fields.
+
+    Args:
+        name: data model name
+        **fields: defined fields of the data model
+
+    Returns:
+        :class:`Model`: created data model
 
     Examples:
         Typically, we define a data model by subclassing the :obj:`Model`

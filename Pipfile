@@ -20,6 +20,9 @@ ipython = "*"
 pylint = "*"
 beautifulsoup4 = {extras = ["html5lib"],version = "*"}
 requests = "*"
+sphinx = "*"
+sphinxcontrib-napoleon = "*"
+doc8 = "*"
 
 [packages]
 

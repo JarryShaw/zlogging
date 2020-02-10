@@ -11,7 +11,7 @@ class Action(enum.IntFlag):
     declared otherwise.
 
     
-    c.f. {html_path}
+    c.f. `base/frameworks/signatures/main.zeek <https://docs.zeek.org/en/stable/scripts/base/frameworks/signatures/main.zeek.html>`__
     """
 
     _ignore_ = 'Action _'

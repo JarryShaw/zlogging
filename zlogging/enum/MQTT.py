@@ -7,7 +7,7 @@ import enum
 @enum.unique
 class SubUnsub(enum.IntFlag):
     """
-    c.f. {html_path}
+    c.f. `policy/protocols/mqtt/main.zeek <https://docs.zeek.org/en/stable/scripts/policy/protocols/mqtt/main.zeek.html>`__
     """
 
     _ignore_ = 'SubUnsub _'

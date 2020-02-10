@@ -13,7 +13,7 @@ class ofp_action_type(enum.IntFlag):
     to modify a packet
 
     
-    c.f. {html_path}
+    c.f. `base/frameworks/openflow/consts.zeek <https://docs.zeek.org/en/stable/scripts/base/frameworks/openflow/consts.zeek.html>`__
     """
 
     _ignore_ = 'ofp_action_type _'
@@ -66,7 +66,7 @@ class ofp_config_flags(enum.IntFlag):
     TODO: describe
 
     
-    c.f. {html_path}
+    c.f. `base/frameworks/openflow/consts.zeek <https://docs.zeek.org/en/stable/scripts/base/frameworks/openflow/consts.zeek.html>`__
     """
 
     _ignore_ = 'ofp_config_flags _'
@@ -92,7 +92,7 @@ class ofp_flow_mod_command(enum.IntFlag):
     of what kind an action is.
 
     
-    c.f. {html_path}
+    c.f. `base/frameworks/openflow/consts.zeek <https://docs.zeek.org/en/stable/scripts/base/frameworks/openflow/consts.zeek.html>`__
     """
 
     _ignore_ = 'ofp_flow_mod_command _'
@@ -119,7 +119,7 @@ class Plugin(enum.IntFlag):
     """Available openflow plugins.
 
     
-    c.f. {html_path}
+    c.f. `base/frameworks/openflow/types.zeek <https://docs.zeek.org/en/stable/scripts/base/frameworks/openflow/types.zeek.html>`__
     """
 
     _ignore_ = 'Plugin _'

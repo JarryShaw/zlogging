@@ -9,7 +9,7 @@ class Action(enum.IntFlag):
     """These are values representing actions that can be taken with notices.
 
     
-    c.f. {html_path}
+    c.f. `base/frameworks/notice/main.zeek <https://docs.zeek.org/en/stable/scripts/base/frameworks/notice/main.zeek.html>`__
     """
 
     _ignore_ = 'Action _'
@@ -68,7 +68,7 @@ class Type(enum.IntFlag):
     failed SSH logins.
 
     
-    c.f. {html_path}
+    c.f. `base/frameworks/notice/main.zeek <https://docs.zeek.org/en/stable/scripts/base/frameworks/notice/main.zeek.html>`__
     """
 
     _ignore_ = 'Type _'

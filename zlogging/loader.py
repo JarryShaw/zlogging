@@ -15,9 +15,9 @@ from zlogging._data import ASCIIInfo, Info, JSONInfo
 from zlogging._exc import (ASCIIParserWarning, ASCIIPaserError, JSONParserError, JSONParserWarning,
                            ParserError)
 from zlogging.model import Model, new_model
-from zlogging.types import (AddrType, AnyType, BoolType, CountType, DoubleType, EnumType,
+from zlogging.types import (AddrType, AnyType, BaseType, BoolType, CountType, DoubleType, EnumType,
                             IntervalType, IntType, PortType, SetType, StringType, SubnetType,
-                            TimeType, Type, VectorType, ZeekValueError)
+                            TimeType, VectorType, ZeekValueError)
 
 __all__ = [
     'parse', 'parse_ascii', 'parse_json',
@@ -39,10 +39,10 @@ class BaseParser(metaclass=abc.ABCMeta):
         """Parse log file.
 
         Args:
-            filename: log file name
+            filename: Log file name.
 
         Returns:
-            The parsed log as an :obj:`ASCIIInfo` or :obj:`JSONInfo`.
+            The parsed log as an :class:`~zlogging._data.ASCIIInfo` or :class:`~zlogging._data.JSONInfo`.
 
         """
         with open(filename, 'rb') as file:
@@ -54,23 +54,23 @@ class BaseParser(metaclass=abc.ABCMeta):
         """Parse log file.
 
         Args:
-            file: log file object opened in binary mode
+            file: Log file object opened in binary mode.
 
         Returns:
-            Info: The parsed log as a :obj:`pandas.DataFrame` per line.
+            :class:`~zlogging._data.Info`: The parsed log as a :class:`~zlogging.model.Model` per line.
 
         """
 
     @abc.abstractmethod
-    def parse_line(self, line: bytes, lineno: typing.Optional[int] = 0) -> dict:
+    def parse_line(self, line: bytes, lineno: typing.Optional[int] = 0) -> typing.Dict[str, typing.Any]:
         """Parse log line as one-line record.
 
         Args:
-            line: a simple line of log
-            lineno: line number of current line
+            line: A simple line of log.
+            lineno: Line number of current line.
 
         Returns:
-            The parsed log as a :obj:`dict`.
+            The parsed log as a plain :obj:`dict`.
 
         """
 
@@ -78,23 +78,23 @@ class BaseParser(metaclass=abc.ABCMeta):
         """Parse log file.
 
         Args:
-            file: log file object opened in binary mode
+            file: Log file object opened in binary mode.
 
         Returns:
-            Info: The parsed log as a :obj:`pandas.DataFrame` per line.
+            :class:`~zlogging._data.Info`: The parsed log as a :class:`~zlogging.model.Model` per line.
 
         """
         return self.parse_file(file)
 
-    def loads(self, line: bytes, lineno: typing.Optional[int] = 0) -> dict:
+    def loads(self, line: bytes, lineno: typing.Optional[int] = 0) -> typing.Dict[str, typing.Any]:
         """Parse log line as one-line record.
 
         Args:
-            line: a simple line of log
-            lineno: line number of current line
+            line: A simple line of log.
+            lineno: Line number of current line.
 
         Returns:
-            The parsed log as a :obj:`dict`.
+            The parsed log as a plain :obj:`dict`.
 
         """
         return self.parse_line(line, lineno)
@@ -103,10 +103,20 @@ class BaseParser(metaclass=abc.ABCMeta):
 class JSONParser(BaseParser):
     """JSON log parser.
 
+    Args:
+        model (:class:`~zlogging.model.Model` class, optional): Field
+            declrations for :class:`~zlogging.loader.JSONParser`, as in JSON
+            logs the field typing information are omitted by the Bro/Zeek
+            logging framework.
+
     Attributes:
-        model (:obj:`Model` class, optional): field declrations for
-            :obj:`JSONParser`, as in JSON logs the field typing information are
-            omitted by the Bro/Zeek Logging framework.
+        model (:class:`~zlogging.model.Model` class, optional): Field
+            declrations for :class:`~zlogging.loader.JSONParser`, as in JSON
+            logs the field typing information are omitted by the Bro/Zeek
+            logging framework.
+
+    Warns:
+        JSONParserWarning: If ``model`` is not specified.
 
     """
 
@@ -116,14 +126,6 @@ class JSONParser(BaseParser):
         return 'json'
 
     def __init__(self, model: typing.Optional[typing.Type[Model]] = None):
-        """Initialisation.
-
-        Args:
-            model (:obj:`Model` class, optional): field declarations for
-                :obj:`JSONParser`, as in JSON logs the field typing information
-                are omitted by the Bro/Zeek Logging framework.
-
-        """
         if model is None:
             warnings.warn('missing log data model specification', JSONParserWarning)
         self.model = model
@@ -132,10 +134,11 @@ class JSONParser(BaseParser):
         """Parse log file.
 
         Args:
-            file: log file object opened in binary mode
+            file: Log file object opened in binary mode.
 
         Returns:
-            Info: The parsed log as a :obj:`pandas.DataFrame` per line.
+            :class:`~zlogging._data.JSONInfo`: The parsed log as a
+                :class:`~zlogging.model.Model` per line.
 
         """
         data = list()
@@ -145,15 +148,18 @@ class JSONParser(BaseParser):
             data=data
         )
 
-    def parse_line(self, line: bytes, lineno: typing.Optional[int] = 0) -> dict:
+    def parse_line(self, line: bytes, lineno: typing.Optional[int] = 0) -> typing.Dict[str, typing.Any]:
         """Parse log line as one-line record.
 
         Args:
-            line: a simple line of log
-            lineno: line number of current line
+            line: A simple line of log.
+            lineno: Line number of current line.
 
         Returns:
-            The parsed log as a :obj:`dict`.
+            The parsed log as a plain :obj:`dict`.
+
+        Raises:
+            :exc:`JSONParserError`: If failed to serialise the ``line`` from JSON.
 
         """
         try:
@@ -169,10 +175,18 @@ class JSONParser(BaseParser):
 class ASCIIParser(BaseParser):
     """ASCII log parser.
 
+    Args:
+        type_hook (:obj:`dict` mapping :obj:`str` and :class:`~zlogging.types.BaseType` class, optional):
+            Bro/Zeek type parser hooks. User may customise subclasses of
+            :class:`~zlogging.types.BaseType` to modify parsing behaviours.
+        enum_namespaces (:obj:`List[str]`, optional): Namespaces to be loaded.
+        bare (:obj:`bool`, optional): If ``True``, do not load ``zeek`` namespace by default.
+
     Attributes:
-        type_hook (dict): Bro/Zeek type parsing hooks
-        __type__ (:obj:`Dict[str, Type[Type]]`): Bro/Zeek type parser hooks
-        enum_namespaces (:obj:`Dict[str, Enum]`): global namespace for ``enum`` data type
+        __type__ (:obj:`dict` mapping :obj:`str` and :class:`~zlogging.types.BaseType` class):
+            Bro/Zeek type parser hooks.
+        enum_namespaces (:obj:`List[str]`): Namespaces to be loaded.
+        bare (bool): If ``True``, do not load ``zeek`` namespace by default.
 
     """
 
@@ -181,19 +195,9 @@ class ASCIIParser(BaseParser):
         """str: Log file format."""
         return 'ascii'
 
-    def __init__(self, type_hook: typing.Optional[typing.Dict[str, typing.Type[Type]]] = None,
+    def __init__(self, type_hook: typing.Optional[typing.Dict[str, typing.Type[BaseType]]] = None,
                  enum_namespaces: typing.Optional[typing.List[str]] = None, bare: bool = False):
-        """Initialisation.
-
-        Args:
-            type_hook (:obj:`Dict[str, Type[Type]]`, optional): Bro/Zeek type
-                parser hooks. User may customise subclasses of :obj:`Type` to
-                modify parsing behaviours.
-            enum_namespaces (:obj:`List[str]`, optional): namespaces to be loaded
-            bare (:obj:`bool`, optional): if ``True``, do not load ``zeek`` namespace by default
-
-        """
-        self.__type__: typing.Dict[str, typing.Type[Type]] = dict(
+        self.__type__: typing.Dict[str, typing.Type[BaseType]] = dict(
             bool=BoolType,
             count=CountType,
             int=IntType,
@@ -218,10 +222,16 @@ class ASCIIParser(BaseParser):
         """Parse log file.
 
         Args:
-            file: log file object opened in binary mode
+            file: Log file object opened in binary mode.
 
         Returns:
-            Info: The parsed log as a :obj:`pandas.DataFrame` per line.
+            :class:`~zlogging._data.ASCIIInfo`: The parsed log as a
+                :class:`~zlogging.model.Model` per line.
+
+        Warns:
+            ASCIIParserWarning: If the ASCII log file exited with error, see
+                :attr:`ASCIIInfo.exit_with_error <zlogging._data.ASCIIInfo.exit_with_error>`
+                for more information.
 
         """
         # data separator
@@ -302,19 +312,23 @@ class ASCIIParser(BaseParser):
             exit_with_error=exit_with_error,
         )
 
-    def parse_line(self, line, lineno=0,  # pylint: disable=arguments-differ
+    def parse_line(self, line: bytes, lineno: typing.Optional[int] = 0,  # pylint: disable=arguments-differ
                    separator: typing.Optional[bytes] = b'\x09',
-                   parser: typing.List[typing.Tuple[str, Type]] = None) -> dict:
+                   parser: typing.List[typing.Tuple[str, BaseType]] = None) -> typing.Dict[str, typing.Any]:
         """Parse log line as one-line record.
 
         Args:
-            line: a simple line of log
-            lineno: line number of current line
-            separator: data separator
-            parser (:obj:`List[Type]`, required): field data type parsers
+            line: A simple line of log.
+            lineno: Line number of current line.
+            separator: Data separator.
+            parser (:obj:`List` of :class:`~zlogging.types.BaseType`, required): Field data type parsers.
 
         Returns:
-            The parsed log as a :obj:`dict`.
+            The parsed log as a plain :obj:`dict`.
+
+        Raises:
+            :exc:`ASCIIPaserError`: If ``parser`` is not provided; or failed to
+                serialise ``line`` as ASCII.
 
         """
         if parser is None:
@@ -333,15 +347,18 @@ class ASCIIParser(BaseParser):
 def parse_json(filename: typing.PathLike,  # pylint: disable=unused-argument,keyword-arg-before-vararg
                parser: typing.Optional[typing.Type[JSONParser]] = None,
                model: typing.Optional[typing.Type[Model]] = None,
-               *args: typing.Args, **kwargs: typing.Kwargs) -> JSONInfo:
+               *args, **kwargs) -> JSONInfo:
     """Parse JSON log file.
 
     Args:
-        filename: log file name
-        parser (:obj:`JSONParser`, optional): parser class
-        model (:obj:`Model` class, optional): field declarations for
-            :obj:`JSONParser`, as in JSON logs the field typing information are
-            omitted by the Bro/Zeek Logging framework.
+        filename: Log file name.
+        parser (:class:`~zlogging.loader.JSONParser`, optional): Parser class.
+        model (:class:`~zlogging.models.Model` class, optional): Field
+            declarations for :class:`~zlogging.loader.JSONParser`, as in JSON
+            logs the field typing information are omitted by the Bro/Zeek
+            logging framework.
+        *args: Variable length argument list.
+        **kwargs: Arbitrary keyword arguments.
 
     Returns:
         The parsed JSON log data.
@@ -356,15 +373,18 @@ def parse_json(filename: typing.PathLike,  # pylint: disable=unused-argument,key
 def load_json(file: typing.BinaryFile,  # pylint: disable=unused-argument,keyword-arg-before-vararg
               parser: typing.Optional[typing.Type[JSONParser]] = None,
               model: typing.Optional[typing.Type[Model]] = None,
-              *args: typing.Args, **kwargs: typing.Kwargs) -> JSONInfo:
+              *args, **kwargs) -> JSONInfo:
     """Parse JSON log file.
 
     Args:
-        file: log file object opened in binary mode
-        parser (:obj:`JSONParser`, optional): parser class
-        model (:obj:`Model` class, optional): field declarations for
-            :obj:`JSONParser`, as in JSON logs the field typing information are
-            omitted by the Bro/Zeek Logging framework.
+        file: Log file object opened in binary mode.
+        parser (:class:`~zlogging.loader.JSONParser`, optional): Parser class.
+        model (:class:`~zlogging.models.Model` class, optional): Field
+            declarations for :class:`~zlogging.loader.JSONParser`, as in JSON
+            logs the field typing information are omitted by the Bro/Zeek
+            logging framework.
+        *args: Variable length argument list.
+        **kwargs: Arbitrary keyword arguments.
 
     Returns:
         The parsed JSON log data.
@@ -379,15 +399,18 @@ def load_json(file: typing.BinaryFile,  # pylint: disable=unused-argument,keywor
 def loads_json(data: typing.AnyStr,  # pylint: disable=unused-argument,keyword-arg-before-vararg
                parser: typing.Optional[typing.Type[JSONParser]] = None,
                model: typing.Optional[typing.Type[Model]] = None,
-               *args: typing.Args, **kwargs: typing.Kwargs) -> JSONInfo:
+               *args, **kwargs) -> JSONInfo:
     """Parse JSON log string.
 
     Args:
-        data: log string as binary or encoded string
-        parser (:obj:`JSONParser`, optional): parser class
-        model (:obj:`Model` class, optional): field declarations for
-            :obj:`JSONParser`, as in JSON logs the field typing information are
-            omitted by the Bro/Zeek Logging framework.
+        data: Log string as binary or encoded string.
+        parser (:class:`~zlogging.loader.JSONParser`, optional): Parser class.
+        model (:class:`~zlogging.models.Model` class, optional): Field
+            declarations for :class:`~zlogging.loader.JSONParser`, as in JSON
+            logs the field typing information are omitted by the Bro/Zeek
+            logging framework.
+        *args: Variable length argument list.
+        **kwargs: Arbitrary keyword arguments.
 
     Returns:
         The parsed JSON log data.
@@ -406,20 +429,22 @@ def loads_json(data: typing.AnyStr,  # pylint: disable=unused-argument,keyword-a
 
 
 def parse_ascii(filename: typing.PathLike,  # pylint: disable=unused-argument,keyword-arg-before-vararg
-                parser: typing.Optional[typing.Type[ASCIIInfo]] = None,
-                type_hook: typing.Optional[typing.Dict[str, typing.Type[Type]]] = None,
+                parser: typing.Optional[typing.Type[ASCIIParser]] = None,
+                type_hook: typing.Optional[typing.Dict[str, typing.Type[BaseType]]] = None,
                 enum_namespaces: typing.Optional[typing.List[str]] = None, bare: bool = False,
-                *args: typing.Args, **kwargs: typing.Kwargs) -> ASCIIInfo:
+                *args, **kwargs) -> ASCIIInfo:
     """Parse ASCII log file.
 
     Args:
-        filename: log file name
-        parser (:obj:`ASCIIParser`, optional): parser class
-        type_hook (:obj:`Dict[str, Type[Type]]`, optional): Bro/Zeek type
-                parser hooks. User may customise subclasses of :obj:`Type` to
-                modify parsing behaviours.
-            enum_namespaces (:obj:`List[str]`, optional): namespaces to be loaded
-            bare (:obj:`bool`, optional): if ``True``, do not load ``zeek`` namespace by default
+        filename: Log file name.
+        parser (:class:`~zlogging.loader.ASCIIParser`, optional): Parser class.
+        type_hook (:obj:`dict` mapping :obj:`str` and :class:`~zlogging.types.BaseType` class, optional):
+            Bro/Zeek type parser hooks. User may customise subclasses of
+            :class:`~zlogging.types.BaseType` to modify parsing behaviours.
+        enum_namespaces (:obj:`List[str]`, optional): Namespaces to be loaded.
+        bare (:obj:`bool`, optional): If ``True``, do not load ``zeek`` namespace by default.
+        *args: Variable length argument list.
+        **kwargs: Arbitrary keyword arguments.
 
     Returns:
         The parsed ASCII log data.
@@ -432,20 +457,22 @@ def parse_ascii(filename: typing.PathLike,  # pylint: disable=unused-argument,ke
 
 
 def load_ascii(file: typing.BinaryFile,  # pylint: disable=unused-argument,keyword-arg-before-vararg
-               parser: typing.Optional[typing.Type[ASCIIInfo]] = None,
-               type_hook: typing.Optional[typing.Dict[str, typing.Type[Type]]] = None,
+               parser: typing.Optional[typing.Type[ASCIIParser]] = None,
+               type_hook: typing.Optional[typing.Dict[str, typing.Type[BaseType]]] = None,
                enum_namespaces: typing.Optional[typing.List[str]] = None, bare: bool = False,
-               *args: typing.Args, **kwargs: typing.Kwargs) -> ASCIIInfo:
+               *args, **kwargs) -> ASCIIInfo:
     """Parse ASCII log file.
 
     Args:
-        file: log file object opened in binary mode
-        parser (:obj:`ASCIIParser`, optional): parser class
-        type_hook (:obj:`Dict[str, Type[Type]]`, optional): Bro/Zeek type
-                parser hooks. User may customise subclasses of :obj:`Type` to
-                modify parsing behaviours.
-            enum_namespaces (:obj:`List[str]`, optional): namespaces to be loaded
-            bare (:obj:`bool`, optional): if ``True``, do not load ``zeek`` namespace by default
+        file: Log file object opened in binary mode.
+        parser (:class:`~zlogging.loader.ASCIIParser`, optional): Parser class.
+        type_hook (:obj:`dict` mapping :obj:`str` and :class:`~zlogging.types.BaseType` class, optional):
+            Bro/Zeek type parser hooks. User may customise subclasses of
+            :class:`~zlogging.types.BaseType` to modify parsing behaviours.
+        enum_namespaces (:obj:`List[str]`, optional): Namespaces to be loaded.
+        bare (:obj:`bool`, optional): If ``True``, do not load ``zeek`` namespace by default.
+        *args: Variable length argument list.
+        **kwargs: Arbitrary keyword arguments.
 
     Returns:
         The parsed ASCII log data.
@@ -458,20 +485,22 @@ def load_ascii(file: typing.BinaryFile,  # pylint: disable=unused-argument,keywo
 
 
 def loads_ascii(data: typing.AnyStr,  # pylint: disable=unused-argument,keyword-arg-before-vararg
-                parser: typing.Optional[typing.Type[ASCIIInfo]] = None,
-                type_hook: typing.Optional[typing.Dict[str, typing.Type[Type]]] = None,
+                parser: typing.Optional[typing.Type[ASCIIParser]] = None,
+                type_hook: typing.Optional[typing.Dict[str, typing.Type[BaseType]]] = None,
                 enum_namespaces: typing.Optional[typing.List[str]] = None, bare: bool = False,
-                *args: typing.Args, **kwargs: typing.Kwargs) -> ASCIIInfo:
+                *args, **kwargs) -> ASCIIInfo:
     """Parse ASCII log string.
 
     Args:
-        data: log string as binary or encoded string
-        parser (:obj:`ASCIIParser`, optional): parser class
-        type_hook (:obj:`Dict[str, Type[Type]]`, optional): Bro/Zeek type
-                parser hooks. User may customise subclasses of :obj:`Type` to
-                modify parsing behaviours.
-            enum_namespaces (:obj:`List[str]`, optional): namespaces to be loaded
-            bare (:obj:`bool`, optional): if ``True``, do not load ``zeek`` namespace by default
+        data: Log string as binary or encoded string.
+        parser (:class:`~zlogging.loader.ASCIIParser`, optional): Parser class.
+        type_hook (:obj:`dict` mapping :obj:`str` and :class:`~zlogging.types.BaseType` class, optional):
+            Bro/Zeek type parser hooks. User may customise subclasses of
+            :class:`~zlogging.types.BaseType` to modify parsing behaviours.
+        enum_namespaces (:obj:`List[str]`, optional): Namespaces to be loaded.
+        bare (:obj:`bool`, optional): If ``True``, do not load ``zeek`` namespace by default.
+        *args: Variable length argument list.
+        **kwargs: Arbitrary keyword arguments.
 
     Returns:
         The parsed ASCII log data.
@@ -489,17 +518,21 @@ def loads_ascii(data: typing.AnyStr,  # pylint: disable=unused-argument,keyword-
     return info
 
 
-def parse(filename: typing.PathLike,
-          *args: typing.Args, **kwargs: typing.Kwargs) -> typing.Union[JSONInfo, ASCIIInfo]:
+def parse(filename: typing.PathLike, *args, **kwargs) -> typing.Union[JSONInfo, ASCIIInfo]:
     """Parse Bro/Zeek log file.
 
     Args:
-        filename: log file name
-        *args: see :func:`parse_json` and :func:`parse_ascii` for more information
-        **kwargs: see :func:`parse_json` and :func:`parse_ascii` for more information
+        filename: Log file name.
+        *args: See :func:`~zlogging.loader.parse_json` and
+            :func:`~zlogging.loader.parse_ascii` for more information.
+        **kwargs: See :func:`~zlogging.loader.parse_json` and
+            :func:`~zlogging.loader.parse_ascii` for more information.
 
     Returns:
         The parsed JSON log data.
+
+    Raises:
+        :exc:`ParserError`: If the format of the log file is unknown.
 
     """
     with open(filename, 'rb') as file:
@@ -512,17 +545,21 @@ def parse(filename: typing.PathLike,
     raise ParserError('unknown format')
 
 
-def load(file: typing.BinaryFile,
-         *args: typing.Args, **kwargs: typing.Kwargs) -> typing.Union[JSONInfo, ASCIIInfo]:
+def load(file: typing.BinaryFile, *args, **kwargs) -> typing.Union[JSONInfo, ASCIIInfo]:
     """Parse Bro/Zeek log file.
 
     Args:
-        file: log file object opened in binary mode
-        *args: see :func:`parse_json` and :func:`parse_ascii` for more information
-        **kwargs: see :func:`parse_json` and :func:`parse_ascii` for more information
+        file: Log file object opened in binary mode.
+        *args: See :func:`~zlogging.loader.load_json` and
+            :func:`~zlogging.loader.load_ascii` for more information.
+        **kwargs: See :func:`~zlogging.loader.load_json` and
+            :func:`~zlogging.loader.load_ascii` for more information.
 
     Returns:
         The parsed JSON log data.
+
+    Raises:
+        :exc:`ParserError`: If the format of the log file is unknown.
 
     """
     tell = file.tell()
@@ -537,16 +574,21 @@ def load(file: typing.BinaryFile,
 
 
 def loads(data: typing.AnyStr,
-          *args: typing.Args, **kwargs: typing.Kwargs) -> typing.Union[JSONInfo, ASCIIInfo]:
+          *args, **kwargs) -> typing.Union[JSONInfo, ASCIIInfo]:
     """Parse Bro/Zeek log string.
 
     Args:
-        data: log string as binary or encoded string
-        *args: see :func:`parse_json` and :func:`parse_ascii` for more information
-        **kwargs: see :func:`parse_json` and :func:`parse_ascii` for more information
+        data: Log string as binary or encoded string.
+        *args: See :func:`~zlogging.loader.loads_json` and
+            :func:`~zlogging.loader.loads_ascii` for more information.
+        **kwargs: See :func:`~zlogging.loader.loads_json` and
+            :func:`~zlogging.loader.loads_ascii` for more information.
 
     Returns:
         The parsed JSON log data.
+
+    Raises:
+        :exc:`ParserError`: If the format of the log file is unknown.
 
     """
     if isinstance(data, str):

@@ -9,7 +9,7 @@ class Action(enum.IntFlag):
     """Types of actions that may be taken when handling weird activity events.
 
     
-    c.f. {html_path}
+    c.f. `base/frameworks/notice/weird.zeek <https://docs.zeek.org/en/stable/scripts/base/frameworks/notice/weird.zeek.html>`__
     """
 
     _ignore_ = 'Action _'

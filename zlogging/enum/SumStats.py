@@ -10,7 +10,7 @@ class Calculation(enum.IntFlag):
     are all defined as plugins.
 
     
-    c.f. {html_path}
+    c.f. `base/frameworks/sumstats/main.zeek <https://docs.zeek.org/en/stable/scripts/base/frameworks/sumstats/main.zeek.html>`__
     """
 
     _ignore_ = 'Calculation _'

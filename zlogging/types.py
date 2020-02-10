@@ -23,45 +23,45 @@ __all__ = [
 ]
 
 
-class Type(metaclass=abc.ABCMeta):
+class BaseType(metaclass=abc.ABCMeta):
     """Base Bro/Zeek data type.
 
+    Args:
+        empty_field (:obj:`bytes` or :obj:`str`, optional): Placeholder for empty field.
+        unset_field (:obj:`bytes` or :obj:`str`, optional): Placeholder for unset field.
+        set_separator (:obj:`bytes` or :obj:`str`, optional): Separator for ``set``/``vector`` fields.
+        *args: Variable length argument list.
+        **kwargs: Arbitrary keyword arguments.
+
     Attributes:
-        empty_field (bytes): placeholder for empty field
-        unset_field (bytes): placeholder for unset field
-        set_separator (bytes): separator for set/list fields
+        empty_field (bytes): Placeholder for empty field.
+        unset_field (bytes): Placeholder for unset field.
+        set_separator (bytes): Separator for ``set``/``vector`` fields.
 
     """
 
     @property
     @abc.abstractmethod
-    def python_type(self) -> typing.Type:
-        """type: corresponding Python type annotation."""
+    def python_type(self)-> type:
+        """type: Corresponding Python type annotation."""
 
     @property
     @abc.abstractmethod
     def zeek_type(self) -> str:
-        """str: corresponding Zeek type name."""
+        """str: Corresponding Zeek type name."""
 
     @property
     def bro_type(self) -> str:
-        """str: corresponding Bro type name."""
+        """str: Corresponding Bro type name."""
         warnings.warn("Use of 'bro_type' is deprecated. "
                       "Please use 'zeek_type' instead.", BroDeprecationWarning)
         return self.zeek_type
 
-    def __init__(self,
+    def __init__(self,  # pylint: disable=unused-argument,keyword-arg-before-vararg
                  empty_field: typing.Optional[typing.AnyStr] = None,
                  unset_field: typing.Optional[typing.AnyStr] = None,
-                 set_separator: typing.Optional[typing.AnyStr] = None):
-        """Initialisation.
-
-        Args:
-            empty_field (:obj:`bytes` or :obj:`str`, optional): placeholder for empty field
-            unset_field (:obj:`bytes` or :obj:`str`, optional): placeholder for unset field
-            set_separator (:obj:`bytes` or :obj:`str`, optional): separator for set/vector fields
-
-        """
+                 set_separator: typing.Optional[typing.AnyStr] = None,
+                 *args, **kwargs):
         if empty_field is None:
             empty_field = b'(empty)'
         if unset_field is None:
@@ -116,28 +116,49 @@ class Type(metaclass=abc.ABCMeta):
         """Serialize ``data`` as ASCII log format."""
 
 
-class _SimpleType(Type):  # pylint: disable=abstract-method
-    """Simple data type."""
+class _SimpleType(BaseType):  # pylint: disable=abstract-method
+    """Simple data type.
+
+    In Bro/Zeek script language, such simple type includes ``bool``, ``count``,
+    ``int``, ``double``, ``time``, ``interval``, ``string``, ``addr``,
+    ``port``, ``subnet`` and ``enum``.
+
+    To support arbitrary typing as required in :class:`~zlogging.loader.JSONParser`,
+    ``any``, the arbitrary date type is also included.
+
+    """
 
 
 class AnyType(_SimpleType):
     """Bro/Zeek ``any`` data type.
 
+    Args:
+        empty_field (:obj:`bytes` or :obj:`str`, optional): Placeholder for empty field.
+        unset_field (:obj:`bytes` or :obj:`str`, optional): Placeholder for unset field.
+        set_separator (:obj:`bytes` or :obj:`str`, optional): Separator for ``set``/``vector`` fields.
+        *args: Variable length argument list.
+        **kwargs: Arbitrary keyword arguments.
+
     Attributes:
-        empty_field (bytes): placeholder for empty field
-        unset_field (bytes): placeholder for unset field
-        set_separator (bytes): separator for set/list fields
+        empty_field (bytes): Placeholder for empty field.
+        unset_field (bytes): Placeholder for unset field.
+        set_separator (bytes): Separator for ``set``/``vector`` fields.
+
+    Note:
+        The :class:`~zlogging.types.AnyType` is only used for arbitrary typing
+        as required in :class:`~zlogging.loader.JSONParser`. It is **NOT** a
+        valid type of Bro/Zeek logging framework.
 
     """
 
     @property
-    def python_type(self) -> typing.Type:
-        """type: corresponding Python type annotation."""
+    def python_type(self)-> type:
+        """type: Corresponding Python type annotation."""
         return typing.Any
 
     @property
     def zeek_type(self) -> str:
-        """str: corresponding Zeek type name."""
+        """str: Corresponding Zeek type name."""
         return 'any'
 
     def parse(self, data: typing.Any) -> typing.Any:
@@ -191,21 +212,28 @@ class AnyType(_SimpleType):
 class BoolType(_SimpleType):
     """Bro/Zeek ``bool`` data type.
 
+    Args:
+        empty_field (:obj:`bytes` or :obj:`str`, optional): Placeholder for empty field.
+        unset_field (:obj:`bytes` or :obj:`str`, optional): Placeholder for unset field.
+        set_separator (:obj:`bytes` or :obj:`str`, optional): Separator for ``set``/``vector`` fields.
+        *args: Variable length argument list.
+        **kwargs: Arbitrary keyword arguments.
+
     Attributes:
-        empty_field (bytes): placeholder for empty field
-        unset_field (bytes): placeholder for unset field
-        set_separator (bytes): separator for set/list fields
+        empty_field (bytes): Placeholder for empty field.
+        unset_field (bytes): Placeholder for unset field.
+        set_separator (bytes): Separator for ``set``/``vector`` fields.
 
     """
 
     @property
-    def python_type(self) -> typing.Type:
-        """type: corresponding Python type annotation."""
+    def python_type(self)-> type:
+        """type: Corresponding Python type annotation."""
         return bool
 
     @property
     def zeek_type(self) -> str:
-        """str: corresponding Zeek type name."""
+        """str: Corresponding Zeek type name."""
         return 'bool'
 
     def parse(self, data: typing.Union[typing.AnyStr, bool]) -> typing.Union[None, bool]:
@@ -219,8 +247,8 @@ class BoolType(_SimpleType):
             be returned.
 
         Raises:
-            ZeekValueError: If ``data`` is NOT *unset* and NOT ``T`` (``True``)
-                nor ``F`` (``False``) in Bro/Zeek script language.
+            :exc:`ZeekValueError`: If ``data`` is NOT *unset* and NOT ``T``
+                (``True``) nor ``F`` (``False``) in Bro/Zeek script language.
 
         """
         if isinstance(data, bool):
@@ -266,21 +294,28 @@ class BoolType(_SimpleType):
 class CountType(_SimpleType):
     """Bro/Zeek ``count`` data type.
 
+    Args:
+        empty_field (:obj:`bytes` or :obj:`str`, optional): Placeholder for empty field.
+        unset_field (:obj:`bytes` or :obj:`str`, optional): Placeholder for unset field.
+        set_separator (:obj:`bytes` or :obj:`str`, optional): Separator for ``set``/``vector`` fields.
+        *args: Variable length argument list.
+        **kwargs: Arbitrary keyword arguments.
+
     Attributes:
-        empty_field (bytes): placeholder for empty field
-        unset_field (bytes): placeholder for unset field
-        set_separator (bytes): separator for set/list fields
+        empty_field (bytes): Placeholder for empty field.
+        unset_field (bytes): Placeholder for unset field.
+        set_separator (bytes): Separator for ``set``/``vector`` fields.
 
     """
 
     @property
-    def python_type(self) -> typing.Type:
-        """type: corresponding Python type annotation."""
+    def python_type(self)-> type:
+        """type: Corresponding Python type annotation."""
         return typing.uint64
 
     @property
     def zeek_type(self) -> str:
-        """str: corresponding Zeek type name."""
+        """str: Corresponding Zeek type name."""
         return 'count'
 
     def parse(self, data: typing.Union[typing.AnyStr, typing.uint64]) -> typing.Union[None, typing.uint64]:
@@ -335,21 +370,28 @@ class CountType(_SimpleType):
 class IntType(_SimpleType):
     """Bro/Zeek ``int`` data type.
 
+    Args:
+        empty_field (:obj:`bytes` or :obj:`str`, optional): Placeholder for empty field.
+        unset_field (:obj:`bytes` or :obj:`str`, optional): Placeholder for unset field.
+        set_separator (:obj:`bytes` or :obj:`str`, optional): Separator for ``set``/``vector`` fields.
+        *args: Variable length argument list.
+        **kwargs: Arbitrary keyword arguments.
+
     Attributes:
-        empty_field (bytes): placeholder for empty field
-        unset_field (bytes): placeholder for unset field
-        set_separator (bytes): separator for set/list fields
+        empty_field (bytes): Placeholder for empty field.
+        unset_field (bytes): Placeholder for unset field.
+        set_separator (bytes): Separator for ``set``/``vector`` fields.
 
     """
 
     @property
-    def python_type(self) -> typing.Type:
-        """type: corresponding Python type annotation."""
+    def python_type(self)-> type:
+        """type: Corresponding Python type annotation."""
         return typing.int64
 
     @property
     def zeek_type(self) -> str:
-        """str: corresponding Zeek type name."""
+        """str: Corresponding Zeek type name."""
         return 'int'
 
     def parse(self, data: typing.Union[typing.AnyStr, typing.int64]) -> typing.Union[None, typing.int64]:
@@ -404,21 +446,28 @@ class IntType(_SimpleType):
 class DoubleType(_SimpleType):
     """Bro/Zeek ``double`` data type.
 
+    Args:
+        empty_field (:obj:`bytes` or :obj:`str`, optional): Placeholder for empty field.
+        unset_field (:obj:`bytes` or :obj:`str`, optional): Placeholder for unset field.
+        set_separator (:obj:`bytes` or :obj:`str`, optional): Separator for ``set``/``vector`` fields.
+        *args: Variable length argument list.
+        **kwargs: Arbitrary keyword arguments.
+
     Attributes:
-        empty_field (bytes): placeholder for empty field
-        unset_field (bytes): placeholder for unset field
-        set_separator (bytes): separator for set/list fields
+        empty_field (bytes): Placeholder for empty field.
+        unset_field (bytes): Placeholder for unset field.
+        set_separator (bytes): Separator for ``set``/``vector`` fields.
 
     """
 
     @property
-    def python_type(self) -> typing.Type:
-        """type: corresponding Python type annotation."""
+    def python_type(self)-> type:
+        """type: Corresponding Python type annotation."""
         return typing.Decimal
 
     @property
     def zeek_type(self) -> str:
-        """str: corresponding Zeek type name."""
+        """str: Corresponding Zeek type name."""
         return 'double'
 
     def parse(self, data: typing.Union[typing.AnyStr, typing.Decimal]) -> typing.Union[None, typing.Decimal]:
@@ -470,27 +519,34 @@ class DoubleType(_SimpleType):
         """
         if data is None:
             return self.str_unset_field
-        return decimal_toascii(data)
+        return decimal_toascii(data, self.str_unset_field)
 
 
 class TimeType(_SimpleType):
     """Bro/Zeek ``time`` data type.
 
+    Args:
+        empty_field (:obj:`bytes` or :obj:`str`, optional): Placeholder for empty field.
+        unset_field (:obj:`bytes` or :obj:`str`, optional): Placeholder for unset field.
+        set_separator (:obj:`bytes` or :obj:`str`, optional): Separator for ``set``/``vector`` fields.
+        *args: Variable length argument list.
+        **kwargs: Arbitrary keyword arguments.
+
     Attributes:
-        empty_field (bytes): placeholder for empty field
-        unset_field (bytes): placeholder for unset field
-        set_separator (bytes): separator for set/list fields
+        empty_field (bytes): Placeholder for empty field.
+        unset_field (bytes): Placeholder for unset field.
+        set_separator (bytes): Separator for ``set``/``vector`` fields.
 
     """
 
     @property
-    def python_type(self) -> typing.Type:
-        """type: corresponding Python type annotation."""
+    def python_type(self)-> type:
+        """type: Corresponding Python type annotation."""
         return typing.DateTime
 
     @property
     def zeek_type(self) -> str:
-        """str: corresponding Zeek type name."""
+        """str: Corresponding Zeek type name."""
         return 'time'
 
     def parse(self, data: typing.Union[typing.AnyStr, typing.DateTime]) -> typing.Union[None, typing.DateTime]:
@@ -542,27 +598,34 @@ class TimeType(_SimpleType):
         """
         if data is None:
             return self.str_unset_field
-        return float_toascii(data.timestamp())
+        return float_toascii(data.timestamp(), self.str_unset_field)
 
 
 class IntervalType(_SimpleType):
     """Bro/Zeek ``interval`` data type.
 
+    Args:
+        empty_field (:obj:`bytes` or :obj:`str`, optional): Placeholder for empty field.
+        unset_field (:obj:`bytes` or :obj:`str`, optional): Placeholder for unset field.
+        set_separator (:obj:`bytes` or :obj:`str`, optional): Separator for ``set``/``vector`` fields.
+        *args: Variable length argument list.
+        **kwargs: Arbitrary keyword arguments.
+
     Attributes:
-        empty_field (bytes): placeholder for empty field
-        unset_field (bytes): placeholder for unset field
-        set_separator (bytes): separator for set/list fields
+        empty_field (bytes): Placeholder for empty field.
+        unset_field (bytes): Placeholder for unset field.
+        set_separator (bytes): Separator for ``set``/``vector`` fields.
 
     """
 
     @property
-    def python_type(self) -> typing.Type:
-        """type: corresponding Python type annotation."""
+    def python_type(self)-> type:
+        """type: Corresponding Python type annotation."""
         return typing.TimeDelta
 
     @property
     def zeek_type(self) -> str:
-        """str: corresponding Zeek type name."""
+        """str: Corresponding Zeek type name."""
         return 'interval'
 
     def parse(self, data: typing.Union[typing.AnyStr, typing.TimeDelta]) -> typing.Union[None, typing.TimeDelta]:
@@ -614,27 +677,34 @@ class IntervalType(_SimpleType):
         """
         if data is None:
             return self.str_unset_field
-        return float_toascii(data.total_seconds())
+        return float_toascii(data.total_seconds(), self.str_unset_field)
 
 
 class StringType(_SimpleType):
     """Bro/Zeek ``string`` data type.
 
+    Args:
+        empty_field (:obj:`bytes` or :obj:`str`, optional): Placeholder for empty field.
+        unset_field (:obj:`bytes` or :obj:`str`, optional): Placeholder for unset field.
+        set_separator (:obj:`bytes` or :obj:`str`, optional): Separator for ``set``/``vector`` fields.
+        *args: Variable length argument list.
+        **kwargs: Arbitrary keyword arguments.
+
     Attributes:
-        empty_field (bytes): placeholder for empty field
-        unset_field (bytes): placeholder for unset field
-        set_separator (bytes): separator for set/list fields
+        empty_field (bytes): Placeholder for empty field.
+        unset_field (bytes): Placeholder for unset field.
+        set_separator (bytes): Separator for ``set``/``vector`` fields.
 
     """
 
     @property
-    def python_type(self) -> typing.Type:
-        """type: corresponding Python type annotation."""
+    def python_type(self)-> type:
+        """type: Corresponding Python type annotation."""
         return typing.ByteString
 
     @property
     def zeek_type(self) -> str:
-        """str: corresponding Zeek type name."""
+        """str: Corresponding Zeek type name."""
         return 'string'
 
     def parse(self, data: typing.Union[typing.AnyStr, memoryview, bytearray]) -> typing.Union[None, typing.ByteString]:
@@ -695,21 +765,28 @@ class StringType(_SimpleType):
 class AddrType(_SimpleType):
     """Bro/Zeek ``addr`` data type.
 
+    Args:
+        empty_field (:obj:`bytes` or :obj:`str`, optional): Placeholder for empty field.
+        unset_field (:obj:`bytes` or :obj:`str`, optional): Placeholder for unset field.
+        set_separator (:obj:`bytes` or :obj:`str`, optional): Separator for ``set``/``vector`` fields.
+        *args: Variable length argument list.
+        **kwargs: Arbitrary keyword arguments.
+
     Attributes:
-        empty_field (bytes): placeholder for empty field
-        unset_field (bytes): placeholder for unset field
-        set_separator (bytes): separator for set/list fields
+        empty_field (bytes): Placeholder for empty field.
+        unset_field (bytes): Placeholder for unset field.
+        set_separator (bytes): Separator for ``set``/``vector`` fields.
 
     """
 
     @property
-    def python_type(self) -> typing.Type:
-        """type: corresponding Python type annotation."""
+    def python_type(self)-> type:
+        """type: Corresponding Python type annotation."""
         return typing.IPAddress
 
     @property
     def zeek_type(self) -> str:
-        """str: corresponding Zeek type name."""
+        """str: Corresponding Zeek type name."""
         return 'addr'
 
     def parse(self, data: typing.Union[typing.AnyStr, typing.IPAddress]) -> typing.Union[None, typing.IPAddress]:
@@ -761,24 +838,31 @@ class AddrType(_SimpleType):
         return str(data)
 
 
-class PortType(Type):
+class PortType(_SimpleType):
     """Bro/Zeek ``port`` data type.
 
+    Args:
+        empty_field (:obj:`bytes` or :obj:`str`, optional): Placeholder for empty field.
+        unset_field (:obj:`bytes` or :obj:`str`, optional): Placeholder for unset field.
+        set_separator (:obj:`bytes` or :obj:`str`, optional): Separator for ``set``/``vector`` fields.
+        *args: Variable length argument list.
+        **kwargs: Arbitrary keyword arguments.
+
     Attributes:
-        empty_field (bytes): placeholder for empty field
-        unset_field (bytes): placeholder for unset field
-        set_separator (bytes): separator for set/list fields
+        empty_field (bytes): Placeholder for empty field.
+        unset_field (bytes): Placeholder for unset field.
+        set_separator (bytes): Separator for ``set``/``vector`` fields.
 
     """
 
     @property
-    def python_type(self) -> typing.Type:
-        """type: corresponding Python type annotation."""
+    def python_type(self)-> type:
+        """type: Corresponding Python type annotation."""
         return typing.uint16
 
     @property
     def zeek_type(self) -> str:
-        """str: corresponding Zeek type name."""
+        """str: Corresponding Zeek type name."""
         return 'port'
 
     def parse(self, data: typing.Union[typing.AnyStr, typing.uint16]) -> typing.Union[None, typing.uint16]:
@@ -833,21 +917,28 @@ class PortType(Type):
 class SubnetType(_SimpleType):
     """Bro/Zeek ``subnet`` data type.
 
+    Args:
+        empty_field (:obj:`bytes` or :obj:`str`, optional): Placeholder for empty field.
+        unset_field (:obj:`bytes` or :obj:`str`, optional): Placeholder for unset field.
+        set_separator (:obj:`bytes` or :obj:`str`, optional): Separator for ``set``/``vector`` fields.
+        *args: Variable length argument list.
+        **kwargs: Arbitrary keyword arguments.
+
     Attributes:
-        empty_field (bytes): placeholder for empty field
-        unset_field (bytes): placeholder for unset field
-        set_separator (bytes): separator for set/list fields
+        empty_field (bytes): Placeholder for empty field.
+        unset_field (bytes): Placeholder for unset field.
+        set_separator (bytes): Separator for ``set``/``vector`` fields.
 
     """
 
     @property
-    def python_type(self) -> typing.Type:
-        """type: corresponding Python type annotation."""
+    def python_type(self)-> type:
+        """type: Corresponding Python type annotation."""
         return typing.IPNetwork
 
     @property
     def zeek_type(self) -> str:
-        """str: corresponding Zeek type name."""
+        """str: Corresponding Zeek type name."""
         return 'port'
 
     def parse(self, data: typing.Union[typing.AnyStr, typing.IPNetwork]) -> typing.Union[None, typing.IPNetwork]:
@@ -902,38 +993,43 @@ class SubnetType(_SimpleType):
 class EnumType(_SimpleType):
     """Bro/Zeek ``enum`` data type.
 
+    Args:
+        empty_field (:obj:`bytes` or :obj:`str`, optional): Placeholder for empty field.
+        unset_field (:obj:`bytes` or :obj:`str`, optional): Placeholder for unset field.
+        set_separator (:obj:`bytes` or :obj:`str`, optional): Separator for ``set``/``vector`` fields.
+        namespaces (:obj:`List[str]`, optional): Namespaces to be loaded.
+        bare (:obj:`bool`, optional): If ``True``, do not load ``zeek`` namespace by default.
+        enum_hook (:obj:`dict` mapping of :obj:`str` and :obj:`enum.Enum`, optional):
+            Additional enum to be included in the namespace.
+        *args: Variable length argument list.
+        **kwargs: Arbitrary keyword arguments.
+
     Attributes:
-        empty_field (bytes): placeholder for empty field
-        unset_field (bytes): placeholder for unset field
-        set_separator (bytes): separator for set/list fields
-        enum_namespaces (:obj:`Dict[str, Enum]`): global namespace for ``enum`` data type
+        empty_field (bytes): Placeholder for empty field.
+        unset_field (bytes): Placeholder for unset field.
+        set_separator (bytes): Separator for ``set``/``vector`` fields.
+        enum_namespaces (:obj:`dict` mapping :obj:`str` and :obj:`enum.Enum`):
+            Global namespace for ``enum`` data type.
 
     """
 
     @property
-    def python_type(self) -> typing.Type:
-        """type: corresponding Python type annotation."""
+    def python_type(self)-> type:
+        """type: Corresponding Python type annotation."""
         return typing.Enum
 
     @property
     def zeek_type(self) -> str:
-        """str: corresponding Zeek type name."""
+        """str: Corresponding Zeek type name."""
         return 'enum'
 
-    def __init__(self, empty_field=None, unset_field=None, set_separator=None,
+    def __init__(self,  # pylint: disable=unused-argument,keyword-arg-before-vararg
+                 empty_field: typing.Optional[typing.AnyStr] = None,
+                 unset_field: typing.Optional[typing.AnyStr] = None,
+                 set_separator: typing.Optional[typing.AnyStr] = None,
                  namespaces: typing.Optional[typing.List[str]] = None, bare: bool = False,
-                 enum_hook: typing.Optional[typing.Dict[str, typing.Enum]] = None):
-        """Initialisation.
-
-        Args:
-            empty_field (:obj:`bytes` or :obj:`str`, optional): placeholder for empty field
-            unset_field (:obj:`bytes` or :obj:`str`, optional): placeholder for unset field
-            set_separator (:obj:`bytes` or :obj:`str`, optional): separator for set/vector fields
-            namespaces (:obj:`List[str]`, optional): namespaces to be loaded
-            bare (:obj:`bool`, optional): if ``True``, do not load ``zeek`` namespace by default
-            enum_hook (:obj:`Dict[str, Enum]`, optional): additional enum to be included in the namespace
-
-        """
+                 enum_hook: typing.Optional[typing.Dict[str, typing.Enum]] = None,
+                 *args, **kwargs):
         super().__init__(empty_field=empty_field, unset_field=unset_field, set_separator=set_separator)
 
         if namespaces is None:
@@ -957,6 +1053,9 @@ class EnumType(_SimpleType):
         Returns:
             The parsed enum data. If ``data`` is *unset*, ``None`` will
             be returned.
+
+        Warns:
+            ZeekValueWarning: If ``date`` is not defined in the enum namespace.
 
         """
         if isinstance(data, enum.Enum):
@@ -1004,49 +1103,74 @@ class EnumType(_SimpleType):
 
 _data = typing.TypeVar('data', AddrType, BoolType, CountType, DoubleType, EnumType, IntervalType,
                        IntType, PortType, StringType, SubnetType, TimeType)
+"""type: A typing variable representing all valid data types for Bro/Zeek log framework."""
 
 
-class _GenericType(Type):  # pylint: disable=abstract-method
-    """Generic data type."""
+class _GenericType(BaseType):  # pylint: disable=abstract-method
+    """Generic data type.
+
+    In Bro/Zeek script language, such generic type includes ``set`` and
+    ``vector``, which are also known as *container* types.
+
+    """
 
 
 class SetType(_GenericType, typing.Generic[_data]):
     """Bro/Zeek ``set`` data type.
 
+    Args:
+        empty_field (:obj:`bytes` or :obj:`str`, optional): Placeholder for empty field.
+        unset_field (:obj:`bytes` or :obj:`str`, optional): Placeholder for unset field.
+        set_separator (:obj:`bytes` or :obj:`str`, optional): Separator for ``set``/``vector`` fields.
+        element_type (:class:`~zlogging.types.BaseType` instance): Data type of container's elements.
+        *args: Variable length argument list.
+        **kwargs: Arbitrary keyword arguments.
+
     Attributes:
-        empty_field (bytes): placeholder for empty field
-        unset_field (bytes): placeholder for unset field
-        set_separator (bytes): separator for set/list fields
-        element_type (:obj:`Type` instance): data type of container's elements
+        empty_field (bytes): Placeholder for empty field.
+        unset_field (bytes): Placeholder for unset field.
+        set_separator (bytes): Separator for ``set``/``vector`` fields.
+        element_type (:class:`~zlogging.types.BaseType` instance): Data type of container's elements.
+
+    Raises:
+        :exc:`ZeekTypeError`: If ``element_type`` is not supplied.
+        :exc:`ZeekValueError`: If ``element_type`` is not a valid Bro/Zeek data type.
+
+    Example:
+        As a *generic* data type, the class supports the typing proxy as introduced
+        `PEP 484`_::
+
+            >>> SetType[StringType]
+
+        which is the same **at runtime** as following::
+
+            >>> SetType(element_type=StringType())
+
+    Note:
+        A valid ``element_type`` should be a *simple* data type, i.e. a subclass
+        of :class:`~zlogging.types._SimpleType`.
+
+    .. _PEP 484:
+        https://www.python.org/dev/peps/pep-0484/
 
     """
 
     @property
-    def python_type(self) -> typing.Type:
-        """type: corresponding Python type annotation."""
+    def python_type(self)-> type:
+        """type: Corresponding Python type annotation."""
         return typing.Set[_data]
 
     @property
     def zeek_type(self) -> str:
-        """str: corresponding Zeek type name."""
+        """str: Corresponding Zeek type name."""
         return 'set[%s]' % self.element_type.zeek_type
 
-    def __init__(self, empty_field=None, unset_field=None, set_separator=None,
-                 element_type: _data = None):
-        """Initialisation.
-
-        Args:
-            empty_field (:obj:`bytes` or :obj:`str`, optional): placeholder for empty field
-            unset_field (:obj:`bytes` or :obj:`str`, optional): placeholder for unset field
-            set_separator (:obj:`bytes` or :obj:`str`, optional): separator for set/vector fields
-            namespaces (:obj:`List[str]`, optional): namespaces to be loaded
-            element_type (:obj:`Type` instance or class, required): data type of container's elements
-
-        Raises:
-            ZeekTypeError: if ``element_type`` is not supplied
-            ZeekValueError: if ``element_type`` is not a valid Bro/Zeek data type
-
-        """
+    def __init__(self,  # pylint: disable=unused-argument,keyword-arg-before-vararg
+                 empty_field: typing.Optional[typing.AnyStr] = None,
+                 unset_field: typing.Optional[typing.AnyStr] = None,
+                 set_separator: typing.Optional[typing.AnyStr] = None,
+                 element_type: _data = None,
+                 *args, **kwargs):
         super().__init__(empty_field=empty_field, unset_field=unset_field, set_separator=set_separator)
 
         if element_type is None:
@@ -1120,40 +1244,59 @@ class SetType(_GenericType, typing.Generic[_data]):
 class VectorType(_GenericType, typing.Generic[_data]):
     """Bro/Zeek ``vector`` data type.
 
+    Args:
+        empty_field (:obj:`bytes` or :obj:`str`, optional): Placeholder for empty field.
+        unset_field (:obj:`bytes` or :obj:`str`, optional): Placeholder for unset field.
+        set_separator (:obj:`bytes` or :obj:`str`, optional): Separator for ``set``/``vector`` fields.
+        element_type (:class:`~zlogging.types.BaseType` instance): Data type of container's elements.
+        *args: Variable length argument list.
+        **kwargs: Arbitrary keyword arguments.
+
     Attributes:
-        empty_field (bytes): placeholder for empty field
-        unset_field (bytes): placeholder for unset field
-        set_separator (bytes): separator for set/list fields
-        element_type (:obj:`Type` instance): data type of container's elements
+        empty_field (bytes): Placeholder for empty field.
+        unset_field (bytes): Placeholder for unset field.
+        set_separator (bytes): Separator for ``set``/``vector`` fields.
+        element_type (:class:`~zlogging.types.BaseType` instance): Data type of container's elements.
+
+    Raises:
+        :exc:`ZeekTypeError`: If ``element_type`` is not supplied.
+        :exc:`ZeekValueError`: If ``element_type`` is not a valid Bro/Zeek data type.
+
+    Example:
+        As a *generic* data type, the class supports the typing proxy as introduced
+        `PEP 484`_::
+
+            >>> VectorType[StringType]
+
+        which is the same **at runtime** as following::
+
+            >>> VectorType(element_type=StringType())
+
+    Note:
+        A valid ``element_type`` should be a *simple* data type, i.e. a subclass
+        of :class:`~zlogging.types._SimpleType`.
+
+    .. _PEP 484:
+        https://www.python.org/dev/peps/pep-0484/
 
     """
 
     @property
-    def python_type(self) -> typing.Type:
-        """type: corresponding Python type annotation."""
+    def python_type(self)-> type:
+        """type: Corresponding Python type annotation."""
         return typing.List[_data]
 
     @property
     def zeek_type(self) -> str:
-        """str: corresponding Zeek type name."""
+        """str: Corresponding Zeek type name."""
         return 'vector[%s]' % self.element_type.zeek_type
 
-    def __init__(self, empty_field=None, unset_field=None, set_separator=None,
-                 element_type: _data = None):
-        """Initialisation.
-
-        Args:
-            empty_field (:obj:`bytes` or :obj:`str`, optional): placeholder for empty field
-            unset_field (:obj:`bytes` or :obj:`str`, optional): placeholder for unset field
-            set_separator (:obj:`bytes` or :obj:`str`, optional): separator for set/vector fields
-            namespaces (:obj:`List[str]`, optional): namespaces to be loaded
-            element_type (:obj:`Type` instance or class, required): data type of container's elements
-
-        Raises:
-            ZeekTypeError: if ``element_type`` is not supplied
-            ZeekValueError: if ``element_type`` is not a valid Bro/Zeek data type
-
-        """
+    def __init__(self,  # pylint: disable=unused-argument,keyword-arg-before-vararg
+                 empty_field: typing.Optional[typing.AnyStr] = None,
+                 unset_field: typing.Optional[typing.AnyStr] = None,
+                 set_separator: typing.Optional[typing.AnyStr] = None,
+                 element_type: _data = None,
+                 *args, **kwargs):
         super().__init__(empty_field=empty_field, unset_field=unset_field, set_separator=set_separator)
 
         if element_type is None:
@@ -1224,56 +1367,101 @@ class VectorType(_GenericType, typing.Generic[_data]):
         return self.set_separator.join(self.element_type.toascii(element) for element in data)
 
 
-class _VariadicType(Type):  # pylint: disable=abstract-method
-    """Variadic data type."""
+class _VariadicType(BaseType):  # pylint: disable=abstract-method
+    """Variadic data type.
+
+    In Bro/Zeek script language, such variadic type refers to ``record``, which
+    is also a *container* type.
+
+    """
 
     def parse(self, data: typing.Any) -> typing.NoReturn:
+        """Not supported for a variadic data type.
+
+        Args:
+            data: data to process
+
+        Raises:
+            :exc:`ZeekNotImplemented`: If try to call such method.
+
+        """
         raise ZeekNotImplemented
 
     def tojson(self, data: typing.Any) -> typing.NoReturn:
+        """Not supported for a variadic data type.
+
+        Args:
+            data: data to process
+
+        Raises:
+            :exc:`ZeekNotImplemented`: If try to call such method.
+
+        """
         raise ZeekNotImplemented
 
     def toascii(self, data: typing.Any) -> typing.NoReturn:
+        """Not supported for a variadic data type.
+
+        Args:
+            data: data to process
+
+        Raises:
+            :exc:`ZeekNotImplemented`: If try to call such method.
+
+        """
         raise ZeekNotImplemented
 
 
 class RecordType(_VariadicType):
     """Bro/Zeek ``record`` data type.
 
+    Args:
+        empty_field (:obj:`bytes` or :obj:`str`, optional): Placeholder for empty field.
+        unset_field (:obj:`bytes` or :obj:`str`, optional): Placeholder for unset field.
+        set_separator (:obj:`bytes` or :obj:`str`, optional): Separator for ``set``/``vector`` fields.
+        *args: Variable length argument list.
+        **kwargs: element_mapping (:obj:`dict` mapping :obj:`str` and :class:`~zlogging.types.BaseType` instance):
+            Data type of container's elements.
+
     Attributes:
-        empty_field (bytes): placeholder for empty field
-        unset_field (bytes): placeholder for unset field
-        set_separator (bytes): separator for set/list fields
-        element_mapping (:obj:`Dict[str, Type]`): data type mapping of container's elements
+        empty_field (bytes): Placeholder for empty field.
+        unset_field (bytes): Placeholder for unset field.
+        set_separator (bytes): Separator for ``set``/``vector`` fields.
+        element_mapping (:obj:`dict` mapping :obj:`str` and :class:`~zlogging.types.BaseType` instance):
+            Data type of container's elements.
+
+    Raises:
+        :exc:`ZeekTypeError`: If ``element_mapping`` is not supplied.
+        :exc:`ZeekValueError`: If ``element_mapping`` is not a valid Bro/Zeek
+            data type; or in case of inconsistency from ``empty_field``,
+            ``unset_field`` and ``set_separator`` of each field.
+
+    Note:
+        A valid ``element_mapping`` should be a *simple* or *generic* data type,
+        i.e. a subclass of :class:`~zlogging.types._SimpleType` or
+        :class:`~zlogging.types._GenericType`.
+
+    See Also:
+        See :func:`~zlogging._aux_expand_typing` for more information about
+        processing the fields.
 
     """
 
     @property
-    def python_type(self) -> typing.Type:
-        """type: corresponding Python type annotation."""
+    def python_type(self)-> type:
+        """type: Corresponding Python type annotation."""
         return typing.Dict[str, _data]
 
     @property
     def zeek_type(self) -> str:
-        """str: corresponding Zeek type name."""
+        """str: Corresponding Zeek type name."""
         return 'record'
 
-    def __init__(self, empty_field=None, unset_field=None, set_separator=None,
-                 **element_mapping: typing.Kwargs):
-        """Initialisation.
-
-        Args:
-            empty_field (:obj:`bytes` or :obj:`str`, optional): placeholder for empty field
-            unset_field (:obj:`bytes` or :obj:`str`, optional): placeholder for unset field
-            set_separator (:obj:`bytes` or :obj:`str`, optional): separator for set/vector fields
-            namespaces (:obj:`List[str]`, optional): namespaces to be loaded
-            **element_mapping: data type of container's elements
-
-        Raises:
-            ZeekTypeError: if ``element_mapping`` is not supplied
-            ZeekValueError: if values of ``element_mapping`` are not valid Bro/Zeek data types
-
-        """
+    def __init__(self,  # pylint: disable=unused-argument,keyword-arg-before-vararg
+                 empty_field: typing.Optional[typing.AnyStr] = None,
+                 unset_field: typing.Optional[typing.AnyStr] = None,
+                 set_separator: typing.Optional[typing.AnyStr] = None,
+                 *args, **element_mapping):
         super().__init__(empty_field=empty_field, unset_field=unset_field, set_separator=set_separator)
 
         expanded = expand_typing(self, ZeekValueError)

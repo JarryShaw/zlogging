@@ -11,7 +11,7 @@ class Type(enum.IntFlag):
     create Software::Info records.
 
     
-    c.f. {html_path}
+    c.f. `base/frameworks/software/main.zeek <https://docs.zeek.org/en/stable/scripts/base/frameworks/software/main.zeek.html>`__
     """
 
     _ignore_ = 'Type _'

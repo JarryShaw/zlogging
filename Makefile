@@ -16,3 +16,9 @@ pypi-upload:
 	twine check dist/* || true
 	twine upload dist/* -r pypi --skip-existing
 	twine upload dist/* -r pypitest --skip-existing
+
+sphinx-build:
+	pipenv run python setup.py build_sphinx
+
+sphinx-upload:
+	pipenv run python setup.py upload_sphinx

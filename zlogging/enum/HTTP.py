@@ -9,7 +9,7 @@ class Tags(enum.IntFlag):
     """Indicate a type of attack or compromise in the record to be logged.
 
     
-    c.f. {html_path}
+    c.f. `base/protocols/http/main.zeek <https://docs.zeek.org/en/stable/scripts/base/protocols/http/main.zeek.html>`__
     """
 
     _ignore_ = 'Tags _'

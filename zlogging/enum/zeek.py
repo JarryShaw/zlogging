@@ -7,7 +7,7 @@ import enum
 @enum.unique
 class layer3_proto(enum.IntFlag):
     """
-    c.f. {html_path}
+    c.f. `base/bif/types.bif.zeek <https://docs.zeek.org/en/stable/scripts/base/bif/types.bif.zeek.html>`__
     """
 
     _ignore_ = 'layer3_proto _'
@@ -25,7 +25,7 @@ class layer3_proto(enum.IntFlag):
 @enum.unique
 class link_encap(enum.IntFlag):
     """
-    c.f. {html_path}
+    c.f. `base/bif/types.bif.zeek <https://docs.zeek.org/en/stable/scripts/base/bif/types.bif.zeek.html>`__
     """
 
     _ignore_ = 'link_encap _'
@@ -39,7 +39,7 @@ class link_encap(enum.IntFlag):
 @enum.unique
 class rpc_status(enum.IntFlag):
     """
-    c.f. {html_path}
+    c.f. `base/bif/types.bif.zeek <https://docs.zeek.org/en/stable/scripts/base/bif/types.bif.zeek.html>`__
     """
 
     _ignore_ = 'rpc_status _'
@@ -71,7 +71,7 @@ class IPAddrAnonymization(enum.IntFlag):
     """See also: anonymize_addr
 
     
-    c.f. {html_path}
+    c.f. `base/init-bare.zeek <https://docs.zeek.org/en/stable/scripts/base/init-bare.zeek.html>`__
     """
 
     _ignore_ = 'IPAddrAnonymization _'
@@ -93,7 +93,7 @@ class IPAddrAnonymizationClass(enum.IntFlag):
     """See also: anonymize_addr
 
     
-    c.f. {html_path}
+    c.f. `base/init-bare.zeek <https://docs.zeek.org/en/stable/scripts/base/init-bare.zeek.html>`__
     """
 
     _ignore_ = 'IPAddrAnonymizationClass _'
@@ -112,7 +112,7 @@ class PcapFilterID(enum.IntFlag):
     Pcap::precompile_pcap_filter and Pcap::precompile_pcap_filter.
 
     
-    c.f. {html_path}
+    c.f. `base/init-bare.zeek <https://docs.zeek.org/en/stable/scripts/base/init-bare.zeek.html>`__
     """
 
     _ignore_ = 'PcapFilterID _'
@@ -134,7 +134,7 @@ class pkt_profile_modes(enum.IntFlag):
     See also: pkt_profile_mode, pkt_profile_freq, pkt_profile_file
 
     
-    c.f. {html_path}
+    c.f. `base/init-bare.zeek <https://docs.zeek.org/en/stable/scripts/base/init-bare.zeek.html>`__
     """
 
     _ignore_ = 'pkt_profile_modes _'
@@ -159,7 +159,7 @@ class transport_proto(enum.IntFlag):
     “connection” broadly, using flow semantics for ICMP and UDP.
 
     
-    c.f. {html_path}
+    c.f. `base/init-bare.zeek <https://docs.zeek.org/en/stable/scripts/base/init-bare.zeek.html>`__
     """
 
     _ignore_ = 'transport_proto _'
@@ -181,7 +181,7 @@ class transport_proto(enum.IntFlag):
 @enum.unique
 class Direction(enum.IntFlag):
     """
-    c.f. {html_path}
+    c.f. `base/utils/directions-and-hosts.zeek <https://docs.zeek.org/en/stable/scripts/base/utils/directions-and-hosts.zeek.html>`__
     """
 
     _ignore_ = 'Direction _'
@@ -206,7 +206,7 @@ class Direction(enum.IntFlag):
 @enum.unique
 class Host(enum.IntFlag):
     """
-    c.f. {html_path}
+    c.f. `base/utils/directions-and-hosts.zeek <https://docs.zeek.org/en/stable/scripts/base/utils/directions-and-hosts.zeek.html>`__
     """
 
     _ignore_ = 'Host _'

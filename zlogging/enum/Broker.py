@@ -10,7 +10,7 @@ class DataType(enum.IntFlag):
     terms of Zeek data types.
 
     
-    c.f. {html_path}
+    c.f. `base/bif/data.bif.zeek <https://docs.zeek.org/en/stable/scripts/base/bif/data.bif.zeek.html>`__
     """
 
     _ignore_ = 'DataType _'
@@ -52,7 +52,7 @@ class Type(enum.IntFlag):
     """The type of a Broker activity being logged.
 
     
-    c.f. {html_path}
+    c.f. `base/frameworks/broker/log.zeek <https://docs.zeek.org/en/stable/scripts/base/frameworks/broker/log.zeek.html>`__
     """
 
     _ignore_ = 'Type _'
@@ -70,7 +70,7 @@ class ErrorCode(enum.IntFlag):
     """Enumerates the possible error types.
 
     
-    c.f. {html_path}
+    c.f. `base/frameworks/broker/main.zeek <https://docs.zeek.org/en/stable/scripts/base/frameworks/broker/main.zeek.html>`__
     """
 
     _ignore_ = 'ErrorCode _'
@@ -124,7 +124,7 @@ class PeerStatus(enum.IntFlag):
     """The possible states of a peer endpoint.
 
     
-    c.f. {html_path}
+    c.f. `base/frameworks/broker/main.zeek <https://docs.zeek.org/en/stable/scripts/base/frameworks/broker/main.zeek.html>`__
     """
 
     _ignore_ = 'PeerStatus _'
@@ -154,7 +154,7 @@ class BackendType(enum.IntFlag):
     """Enumerates the possible storage backends.
 
     
-    c.f. {html_path}
+    c.f. `base/frameworks/broker/store.zeek <https://docs.zeek.org/en/stable/scripts/base/frameworks/broker/store.zeek.html>`__
     """
 
     _ignore_ = 'BackendType _'
@@ -172,7 +172,7 @@ class QueryStatus(enum.IntFlag):
     """Whether a data store query could be completed or not.
 
     
-    c.f. {html_path}
+    c.f. `base/frameworks/broker/store.zeek <https://docs.zeek.org/en/stable/scripts/base/frameworks/broker/store.zeek.html>`__
     """
 
     _ignore_ = 'QueryStatus _'
