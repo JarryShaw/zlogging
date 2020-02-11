@@ -1,15 +1,8 @@
-.. ZLogging documentation master file, created by
-   sphinx-quickstart on Mon Feb 10 09:31:25 2020.
-   You can adapt this file completely to your liking, but it should at least
-   contain the root `toctree` directive.
-
+================================================
 ZLogging - Bro/Zeek logging framework for Python
 ================================================
 
-.. toctree::
-   :maxdepth: 3
-
-   zlogging
+    Online documentation is available at https://zlogging.readthedocs.io/
 
 The ``ZLogging`` module provides an easy-to-use bridge between the logging
 framework of the well-known Bro/Zeek Network Security Monitor (IDS).
@@ -78,8 +71,8 @@ How to Load/Parse a Log File?
 -----------------------------
 
 To load (parse) a log file generically, i.e. when you don't know what format
-the log file is, you can simple call the :func:`~zlogging.loader.parse`,
-:func:`~zlogging.loader.load`, or :func:`~zlogging.loader.loads` functions::
+the log file is, you can simple call the ``~zlogging.loader.parse``,
+``zlogging.loader.loads`` functions::
 
     # to parse log at filename
     >>> parse('path/to/log')
@@ -92,28 +85,18 @@ the log file is, you can simple call the :func:`~zlogging.loader.parse`,
 
 .. note::
 
-    When calling :func:`~zlogging.loader.load`, the file object must be opened
-    in binary mode.
+    ``zlogging.loader.load``, the file object must be opened
+        in binary mode.
 
-    When calling :func:`~zlogging.loader.loads`, if the ``data`` suplied is an
-    encoded string (:obj:`str`), the function will first try to decode it as a
-    bytestring (:obj:`bytes`) with ``'ascii'`` encoding.
+    ``zlogging.loader.loads``, if the ``data`` suplied is an
+        encoded string (``str``), the function will first try to decode it as a
+        bytestring (``bytes``) with ``'ascii'`` encoding.
 
 If you do know the format, you may call the specified functions for each
-format, e.g. :func:`~zlogging.loader.parse_ascii` and
-:func:`~zlogging.loader.parse_json`, etc.
-
-.. seealso::
-
-    * :func:`~zlogging.loader.parse_ascii`
-    * :func:`~zlogging.loader.parse_json`
-    * :func:`~zlogging.loader.load_ascii`
-    * :func:`~zlogging.loader.load_json`
-    * :func:`~zlogging.loader.loads_ascii`
-    * :func:`~zlogging.loader.loads_json`
+``zlogging.loader.parse_ascii`` and ``zlogging.loader.parse_json``, etc.
 
 If you would like to customise your own parser, just subclass
-:class:`~zlogging.loader.BaseParser` and implement your own ideas.
+``zlogging.loader.BaseParser`` and implement your own ideas.
 
 How to Dump/Write a Log File?
 -----------------------------
@@ -123,52 +106,31 @@ first. Just like in the Bro/Zeek script language, when customise logging, you
 need to notify the logging framework with a new log stream. Here, in
 ``ZLogging``, we introduced **data model** for the same purpose.
 
-A **data model** is a subclass of :class:`~zlogging.model.Model` with fields
+A **data model** is a subclass of ``zlogging.model.Model`` with fields
 and data types declared. A typical **data model** can be as following::
 
     class MyLog(Model):
         field_one = StringType()
         field_two = SetType(element_type=PortType)
 
-where ``field_one`` is ``string`` type, i.e. :class:`~zlogging.types.StringType`;
-and ``field_two`` is ``set[port]`` types, i.e. :class:`~zlogging.types.SetType`
-of :class:`~zlogging.types.PortType`.
+where ``field_one`` is ``string`` type, i.e. ``zlogging.types.StringType``;
+and ``field_two`` is ``set[port]`` types, i.e. ``zlogging.types.SetType``
+of ``zlogging.types.PortType``.
 
 Or you may use type annotations as `PEP 484`_ introduced when declaring **data models**.
-All available type hints can be found in :mod:`~zlogging.typing`::
+All available type hints can be found in ``zlogging.typing``::
 
     class MyLog(Model):
         field_one: zeek_string
         field_two: zeek_set[zeek_port]
 
-.. seealso::
-
-    See :class:`~zlogging.types.BaseType` and :class:`~zlogging.model.Model`
-    for more information about the data types and data model.
-
 After declaration of your **data model**, you can know dump (write) your log
 file with the corresponding functions.
 
-.. seealso::
-
-    * :func:`~zlogging.dumper.write_ascii`
-    * :func:`~zlogging.dumper.write_json`
-    * :func:`~zlogging.dumper.dump_ascii`
-    * :func:`~zlogging.dumper.dump_json`
-    * :func:`~zlogging.dumper.dumps_ascii`
-    * :func:`~zlogging.dumper.dumps_json`
-
 If you would like to customise your own writer, just subclass
-:class:`~zlogging.loader.BaseWriter` and implement your own ideas.
+``zlogging.loader.BaseWriter`` and implement your own ideas.
 
 .. _PEP 484:
     https://www.python.org/dev/peps/pep-0484/
 
 .. [1] https://blog.zeek.org/2018/10/renaming-bro-project_11.html
-
-Indices and tables
-==================
-
-* :ref:`genindex`
-* :ref:`modindex`
-* :ref:`search`

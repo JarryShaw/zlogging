@@ -4,7 +4,7 @@
 # version string
 __version__ = '0.1.0rc3'
 
-with open('README.md') as file:
+with open('README.rst') as file:
     long_description = file.read()
 
 # setup attributes
@@ -89,7 +89,7 @@ try:
         # include_dirs
         # password
         # fullname
-        long_description_content_type='text/markdown',
+        long_description_content_type='text/x-rst',
         # python_requires
         # zip_safe
     ))

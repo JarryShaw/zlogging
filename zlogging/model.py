@@ -50,7 +50,7 @@ class Model(metaclass=abc.ABCMeta):
 
         Or you may use type annotations as `PEP 484`_ introduced when declaring
         data models. All available type hints can be found in
-        :mod:`zlogging.typing`::
+        :mod:`~zlogging.typing`::
 
             class MyLog(Model):
                 field_one: zeek_string
