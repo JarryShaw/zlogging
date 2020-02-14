@@ -19,10 +19,9 @@ Zeek Data Types
 .. autodata:: zlogging.typing.zeek_port
 
 .. data:: zlogging.typing.zeek_record
+    :value: ~record
 
     Zeek ``record`` data type.
-
-    :type: type
 
     .. note::
 
@@ -47,10 +46,9 @@ Zeek Data Types
         processing of typing proxy.
 
 .. data:: zlogging.typing.zeek_set
+    :value: ~set
 
     Zeek ``set`` data type.
-
-    :type: type
 
     .. note::
 
@@ -73,10 +71,9 @@ Zeek Data Types
 .. autodata:: zlogging.typing.zeek_time
 
 .. data:: zlogging.typing.zeek_vector
+    :value: ~vector
 
     Zeek ``vector`` data type.
-
-    :type: type
 
     .. note::
 
@@ -109,20 +106,18 @@ Use of ``bro`` is deprecated. Please use ``zeek`` instead.
 .. autodata:: zlogging.typing.bro_port
 
 .. data:: zlogging.typing.bro_record
+    :value: ~bro_record
 
     Bro ``record`` data type.
-
-    :type: type
 
     .. seealso::
 
         See :attr:`~zlogging.typing.zeek_record` for more information.
 
 .. data:: zlogging.typing.bro_set
+    :value: ~bro_set
 
     Bro ``set`` data type.
-
-    :type: type
 
     .. seealso::
 
@@ -133,10 +128,9 @@ Use of ``bro`` is deprecated. Please use ``zeek`` instead.
 .. autodata:: zlogging.typing.bro_time
 
 .. data:: zlogging.typing.bro_vector
+    :value: ~bro_vector
 
     Bro ``vector`` data type.
-
-    :type: type
 
     .. seealso::
 
