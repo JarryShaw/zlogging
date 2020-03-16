@@ -37,7 +37,7 @@ class Model(metaclass=abc.ABCMeta):
         :exc:`ModelTypeError`: Wrong parameters when initialisation.
 
     Note:
-        Customise the :meth:`Model.__post_init__ <zlogging.mode.Model.__post_init__>` method
+        Customise the :meth:`Model.__post_init__ <zlogging.model.Model.__post_init__>` method
         in your subclassed data model to implement your own ideas.
 
     Example:
@@ -50,7 +50,7 @@ class Model(metaclass=abc.ABCMeta):
 
         Or you may use type annotations as `PEP 484`_ introduced when declaring
         data models. All available type hints can be found in
-        :mod:`~zlogging.typing`::
+        :mod:`zlogging.typing`::
 
             class MyLog(Model):
                 field_one: zeek_string
@@ -63,7 +63,7 @@ class Model(metaclass=abc.ABCMeta):
 
     See Also:
 
-        See :func:`~zlogging._aux_expand_typing` for more information about
+        See :func:`~zlogging._aux.expand_typing` for more information about
         processing the fields.
 
     .. _PEP 484:

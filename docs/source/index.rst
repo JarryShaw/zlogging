@@ -135,7 +135,7 @@ and ``field_two`` is ``set[port]`` types, i.e. :class:`~zlogging.types.SetType`
 of :class:`~zlogging.types.PortType`.
 
 Or you may use type annotations as `PEP 484`_ introduced when declaring **data models**.
-All available type hints can be found in :mod:`~zlogging.typing`::
+All available type hints can be found in :mod:`zlogging.typing`::
 
     class MyLog(Model):
         field_one: zeek_string

@@ -174,8 +174,7 @@ def expand_typing(cls: object, exc: typing.Optional[ValueError] = None) -> typin
             and ``set_separator``
 
     Returns:
-        :obj:`Dict[str, Any]`: The returned dictionary contains the
-            following directives:
+        :obj:`Dict[str, Any]`: The returned dictionary contains the following directives:
 
             * ``fields`` (:obj:`OrderedDict` mapping :obj:`str` and :class:`~zlogging.types.BaseType`):
                 a mapping proxy of field names and their corresponding data
