@@ -21,7 +21,7 @@ It was originally developed and derived from the |BroAPT|_ project, which is an
 APT detection framework based on the Bro/Zeek IDS and extended with highly
 customised and customisable Python wrappers.
 
-.. _BroAPT: https://github.com/JarryShaw/BroAPT
+.. _BroAPT: https://broapt.jarryshaw.me
 .. |BroAPT| replace:: ``BroAPT``
 
 ------------
