@@ -6,6 +6,7 @@
         "dgtlen",
         "inited",
         "isfinite",
+        "noindex",
         "posixpath",
         "prec",
         "rb'set",
