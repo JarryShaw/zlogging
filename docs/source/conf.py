@@ -31,9 +31,17 @@ release = '0.1.0.post1'
 # extensions coming with Sphinx (named 'sphinx.ext.*') or your custom
 # ones.
 extensions = [
+    'sphinx.ext.intersphinx',
     'sphinx.ext.autodoc', 'sphinx.ext.autodoc.typehints',
     'sphinxcontrib.napoleon'
 ]
+
+intersphinx_mapping = {
+    'python': ('https://docs.python.org/3', None),
+    'broapt': ('https://broapt.jarryshaw.me/en/latest/', None),
+    'zeek': ('https://docs.zeek.org/en/stable/', None),
+    'bro': ('https://docs.zeek.org/en/stable/', None),
+}
 
 autodoc_typehints = 'description'
 autodoc_member_order = 'bysource'
