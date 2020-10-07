@@ -1,5 +1,5 @@
 {
-    "python.pythonPath": ".venv/bin/python",
+    "python.pythonPath": "/Users/jarryshaw/GitHub/playground/zlogging/.venv/bin/python3.8",
     "cSpell.words": [
         "asdict",
         "astuple",

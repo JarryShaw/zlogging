@@ -16,15 +16,17 @@ verify_ssl = true
 [dev-packages]
 zlogging = {editable = true,path = "."}
 autopep8 = "*"
-ipython = "*"
+bandit = "*"
+mypy = "*"
 pylint = "*"
+ipython = "*"
 coverage = "*"
 codecov = "*"
+sphinx = "*"
+rstcheck = "*"
 tox = "*"
 beautifulsoup4 = {extras = ["html5lib"],version = "*"}
 requests = "*"
-sphinx = "*"
-doc8 = "*"
 
 [packages]
 
