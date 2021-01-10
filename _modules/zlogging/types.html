@@ -1,0 +1,1601 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>zlogging.types &#8212; ZLogging 0.1.0.post1 documentation</title>
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/alabaster.css" type="text/css" />
+    <script id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+   
+  <link rel="stylesheet" href="../../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <h1>Source code for zlogging.types</h1><div class="highlight"><pre>
+<span></span><span class="c1"># -*- coding: utf-8 -*-</span>
+<span class="sd">&quot;&quot;&quot;Bro/Zeek data types.&quot;&quot;&quot;</span>
+
+<span class="kn">import</span> <span class="nn">abc</span>
+<span class="kn">import</span> <span class="nn">ctypes</span>
+<span class="kn">import</span> <span class="nn">datetime</span>
+<span class="kn">import</span> <span class="nn">decimal</span>
+<span class="kn">import</span> <span class="nn">enum</span>
+<span class="kn">import</span> <span class="nn">ipaddress</span>
+<span class="kn">import</span> <span class="nn">json</span>
+<span class="kn">import</span> <span class="nn">warnings</span>
+
+<span class="kn">import</span> <span class="nn">zlogging._typing</span> <span class="k">as</span> <span class="nn">typing</span>
+<span class="kn">from</span> <span class="nn">zlogging._aux</span> <span class="kn">import</span> <span class="n">decimal_toascii</span><span class="p">,</span> <span class="n">float_toascii</span><span class="p">,</span> <span class="n">expand_typing</span>
+<span class="kn">from</span> <span class="nn">zlogging._exc</span> <span class="kn">import</span> <span class="p">(</span><span class="n">BroDeprecationWarning</span><span class="p">,</span> <span class="n">ZeekNotImplemented</span><span class="p">,</span> <span class="n">ZeekTypeError</span><span class="p">,</span> <span class="n">ZeekValueError</span><span class="p">,</span>
+                           <span class="n">ZeekValueWarning</span><span class="p">)</span>
+<span class="kn">from</span> <span class="nn">zlogging.enum</span> <span class="kn">import</span> <span class="nb">globals</span> <span class="k">as</span> <span class="n">enum_generator</span>
+
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s1">&#39;AddrType&#39;</span><span class="p">,</span> <span class="s1">&#39;BoolType&#39;</span><span class="p">,</span> <span class="s1">&#39;CountType&#39;</span><span class="p">,</span> <span class="s1">&#39;DoubleType&#39;</span><span class="p">,</span> <span class="s1">&#39;EnumType&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;IntervalType&#39;</span><span class="p">,</span> <span class="s1">&#39;IntType&#39;</span><span class="p">,</span> <span class="s1">&#39;PortType&#39;</span><span class="p">,</span> <span class="s1">&#39;RecordType&#39;</span><span class="p">,</span> <span class="s1">&#39;SetType&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;StringType&#39;</span><span class="p">,</span> <span class="s1">&#39;SubnetType&#39;</span><span class="p">,</span> <span class="s1">&#39;TimeType&#39;</span><span class="p">,</span> <span class="s1">&#39;VectorType&#39;</span><span class="p">,</span>
+<span class="p">]</span>
+
+
+<div class="viewcode-block" id="BaseType"><a class="viewcode-back" href="../../zlogging.types.html#zlogging.BaseType">[docs]</a><span class="k">class</span> <span class="nc">BaseType</span><span class="p">(</span><span class="n">metaclass</span><span class="o">=</span><span class="n">abc</span><span class="o">.</span><span class="n">ABCMeta</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Base Bro/Zeek data type.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        empty_field (:obj:`bytes` or :obj:`str`, optional): Placeholder for empty field.</span>
+<span class="sd">        unset_field (:obj:`bytes` or :obj:`str`, optional): Placeholder for unset field.</span>
+<span class="sd">        set_separator (:obj:`bytes` or :obj:`str`, optional): Separator for ``set``/``vector`` fields.</span>
+<span class="sd">        *args: Variable length argument list.</span>
+<span class="sd">        **kwargs: Arbitrary keyword arguments.</span>
+
+<span class="sd">    Attributes:</span>
+<span class="sd">        empty_field (bytes): Placeholder for empty field.</span>
+<span class="sd">        unset_field (bytes): Placeholder for unset field.</span>
+<span class="sd">        set_separator (bytes): Separator for ``set``/``vector`` fields.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="nd">@property</span>
+    <span class="nd">@abc</span><span class="o">.</span><span class="n">abstractmethod</span>
+    <span class="k">def</span> <span class="nf">python_type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span><span class="o">-&gt;</span> <span class="nb">type</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;type: Corresponding Python type annotation.&quot;&quot;&quot;</span>
+
+    <span class="nd">@property</span>
+    <span class="nd">@abc</span><span class="o">.</span><span class="n">abstractmethod</span>
+    <span class="k">def</span> <span class="nf">zeek_type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;str: Corresponding Zeek type name.&quot;&quot;&quot;</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">bro_type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;str: Corresponding Bro type name.&quot;&quot;&quot;</span>
+        <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s2">&quot;Use of &#39;bro_type&#39; is deprecated. &quot;</span>
+                      <span class="s2">&quot;Please use &#39;zeek_type&#39; instead.&quot;</span><span class="p">,</span> <span class="n">BroDeprecationWarning</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">zeek_type</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>  <span class="c1"># pylint: disable=unused-argument,keyword-arg-before-vararg</span>
+                 <span class="n">empty_field</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">Optional</span><span class="p">[</span><span class="n">typing</span><span class="o">.</span><span class="n">AnyStr</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+                 <span class="n">unset_field</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">Optional</span><span class="p">[</span><span class="n">typing</span><span class="o">.</span><span class="n">AnyStr</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+                 <span class="n">set_separator</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">Optional</span><span class="p">[</span><span class="n">typing</span><span class="o">.</span><span class="n">AnyStr</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+                 <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">empty_field</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">empty_field</span> <span class="o">=</span> <span class="sa">b</span><span class="s1">&#39;(empty)&#39;</span>
+        <span class="k">if</span> <span class="n">unset_field</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">unset_field</span> <span class="o">=</span> <span class="sa">b</span><span class="s1">&#39;-&#39;</span>
+        <span class="k">if</span> <span class="n">set_separator</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">set_separator</span> <span class="o">=</span> <span class="sa">b</span><span class="s1">&#39;,&#39;</span>
+
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">empty_field</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">empty_field</span> <span class="o">=</span> <span class="n">empty_field</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s1">&#39;ascii&#39;</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">str_empty_field</span> <span class="o">=</span> <span class="n">empty_field</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">empty_field</span> <span class="o">=</span> <span class="n">empty_field</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">str_empty_field</span> <span class="o">=</span> <span class="n">empty_field</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s1">&#39;ascii&#39;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">unset_field</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">unset_field</span> <span class="o">=</span> <span class="n">unset_field</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s1">&#39;ascii&#39;</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">str_unset_field</span> <span class="o">=</span> <span class="n">unset_field</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">unset_field</span> <span class="o">=</span> <span class="n">unset_field</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">str_unset_field</span> <span class="o">=</span> <span class="n">unset_field</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s1">&#39;ascii&#39;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">set_separator</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">set_separator</span> <span class="o">=</span> <span class="n">set_separator</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s1">&#39;ascii&#39;</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">str_set_separator</span> <span class="o">=</span> <span class="n">set_separator</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">set_separator</span> <span class="o">=</span> <span class="n">set_separator</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">str_set_separator</span> <span class="o">=</span> <span class="n">set_separator</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s1">&#39;ascii&#39;</span><span class="p">)</span>
+
+<div class="viewcode-block" id="BaseType.__call__"><a class="viewcode-back" href="../../zlogging.types.html#zlogging.BaseType.__call__">[docs]</a>    <span class="k">def</span> <span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">typing</span><span class="o">.</span><span class="n">Any</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Parse ``data`` from string.&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">data</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">data</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="n">data</span><span class="p">)</span></div>
+
+    <span class="k">def</span> <span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">zeek_type</span>
+
+    <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="k">return</span> <span class="s1">&#39;</span><span class="si">%s</span><span class="s1">(empty_field=</span><span class="si">%s</span><span class="s1">, unset_field=</span><span class="si">%s</span><span class="s1">, set_separator=</span><span class="si">%s</span><span class="s1">)&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">empty_field</span><span class="p">,</span>
+                                                                         <span class="bp">self</span><span class="o">.</span><span class="n">unset_field</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">set_separator</span><span class="p">)</span>
+
+<div class="viewcode-block" id="BaseType.parse"><a class="viewcode-back" href="../../zlogging.types.html#zlogging.BaseType.parse">[docs]</a>    <span class="nd">@abc</span><span class="o">.</span><span class="n">abstractmethod</span>
+    <span class="k">def</span> <span class="nf">parse</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">typing</span><span class="o">.</span><span class="n">Any</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Parse ``data`` from string.&quot;&quot;&quot;</span></div>
+
+<div class="viewcode-block" id="BaseType.tojson"><a class="viewcode-back" href="../../zlogging.types.html#zlogging.BaseType.tojson">[docs]</a>    <span class="nd">@abc</span><span class="o">.</span><span class="n">abstractmethod</span>
+    <span class="k">def</span> <span class="nf">tojson</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">typing</span><span class="o">.</span><span class="n">Any</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Serialize ``data`` as JSON log format.&quot;&quot;&quot;</span></div>
+
+<div class="viewcode-block" id="BaseType.toascii"><a class="viewcode-back" href="../../zlogging.types.html#zlogging.BaseType.toascii">[docs]</a>    <span class="nd">@abc</span><span class="o">.</span><span class="n">abstractmethod</span>
+    <span class="k">def</span> <span class="nf">toascii</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Serialize ``data`` as ASCII log format.&quot;&quot;&quot;</span></div></div>
+
+
+<div class="viewcode-block" id="_SimpleType"><a class="viewcode-back" href="../../zlogging.types.html#zlogging._SimpleType">[docs]</a><span class="k">class</span> <span class="nc">_SimpleType</span><span class="p">(</span><span class="n">BaseType</span><span class="p">):</span>  <span class="c1"># pylint: disable=abstract-method</span>
+    <span class="sd">&quot;&quot;&quot;Simple data type.</span>
+
+<span class="sd">    In Bro/Zeek script language, such simple type includes ``bool``, ``count``,</span>
+<span class="sd">    ``int``, ``double``, ``time``, ``interval``, ``string``, ``addr``,</span>
+<span class="sd">    ``port``, ``subnet`` and ``enum``.</span>
+
+<span class="sd">    To support arbitrary typing as required in :class:`~zlogging.loader.JSONParser`,</span>
+<span class="sd">    ``any``, the arbitrary date type is also included.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span></div>
+
+
+<span class="k">class</span> <span class="nc">AnyType</span><span class="p">(</span><span class="n">_SimpleType</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Bro/Zeek ``any`` data type.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        empty_field (:obj:`bytes` or :obj:`str`, optional): Placeholder for empty field.</span>
+<span class="sd">        unset_field (:obj:`bytes` or :obj:`str`, optional): Placeholder for unset field.</span>
+<span class="sd">        set_separator (:obj:`bytes` or :obj:`str`, optional): Separator for ``set``/``vector`` fields.</span>
+<span class="sd">        *args: Variable length argument list.</span>
+<span class="sd">        **kwargs: Arbitrary keyword arguments.</span>
+
+<span class="sd">    Attributes:</span>
+<span class="sd">        empty_field (bytes): Placeholder for empty field.</span>
+<span class="sd">        unset_field (bytes): Placeholder for unset field.</span>
+<span class="sd">        set_separator (bytes): Separator for ``set``/``vector`` fields.</span>
+
+<span class="sd">    Note:</span>
+<span class="sd">        The :class:`~zlogging.types.AnyType` is only used for arbitrary typing</span>
+<span class="sd">        as required in :class:`~zlogging.loader.JSONParser`. It is **NOT** a</span>
+<span class="sd">        valid type of Bro/Zeek logging framework.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">python_type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span><span class="o">-&gt;</span> <span class="nb">type</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;type: Corresponding Python type annotation.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">typing</span><span class="o">.</span><span class="n">Any</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">zeek_type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;str: Corresponding Zeek type name.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="s1">&#39;any&#39;</span>
+
+    <span class="k">def</span> <span class="nf">parse</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">typing</span><span class="o">.</span><span class="n">Any</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Parse ``data`` from string.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            data: raw data</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            The parsed data. If ``data`` is *unset*, ``None`` will</span>
+<span class="sd">            be returned.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+            <span class="n">data</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s1">&#39;ascii&#39;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">data</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">unset_field</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">None</span>
+        <span class="k">return</span> <span class="n">data</span>
+
+    <span class="k">def</span> <span class="nf">tojson</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">typing</span><span class="o">.</span><span class="n">Any</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Serialize ``data`` as JSON log format.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            data: raw data</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            The JSON representation of data.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+        <span class="k">except</span> <span class="ne">TypeError</span><span class="p">:</span>
+            <span class="k">return</span> <span class="nb">str</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">data</span>
+
+    <span class="k">def</span> <span class="nf">toascii</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Serialize ``data`` as ASCII log format.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            data: raw data</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            The ASCII representation of data.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">data</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">str_unset_field</span>
+        <span class="k">return</span> <span class="nb">str</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+
+
+<div class="viewcode-block" id="BoolType"><a class="viewcode-back" href="../../zlogging.types.html#zlogging.BoolType">[docs]</a><span class="k">class</span> <span class="nc">BoolType</span><span class="p">(</span><span class="n">_SimpleType</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Bro/Zeek ``bool`` data type.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        empty_field (:obj:`bytes` or :obj:`str`, optional): Placeholder for empty field.</span>
+<span class="sd">        unset_field (:obj:`bytes` or :obj:`str`, optional): Placeholder for unset field.</span>
+<span class="sd">        set_separator (:obj:`bytes` or :obj:`str`, optional): Separator for ``set``/``vector`` fields.</span>
+<span class="sd">        *args: Variable length argument list.</span>
+<span class="sd">        **kwargs: Arbitrary keyword arguments.</span>
+
+<span class="sd">    Attributes:</span>
+<span class="sd">        empty_field (bytes): Placeholder for empty field.</span>
+<span class="sd">        unset_field (bytes): Placeholder for unset field.</span>
+<span class="sd">        set_separator (bytes): Separator for ``set``/``vector`` fields.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">python_type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span><span class="o">-&gt;</span> <span class="nb">type</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;type: Corresponding Python type annotation.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="nb">bool</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">zeek_type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;str: Corresponding Zeek type name.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="s1">&#39;bool&#39;</span>
+
+<div class="viewcode-block" id="BoolType.parse"><a class="viewcode-back" href="../../zlogging.types.html#zlogging.BoolType.parse">[docs]</a>    <span class="k">def</span> <span class="nf">parse</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">Union</span><span class="p">[</span><span class="n">typing</span><span class="o">.</span><span class="n">AnyStr</span><span class="p">,</span> <span class="nb">bool</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">typing</span><span class="o">.</span><span class="n">Union</span><span class="p">[</span><span class="kc">None</span><span class="p">,</span> <span class="nb">bool</span><span class="p">]:</span>
+        <span class="sd">&quot;&quot;&quot;Parse ``data`` from string.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            data: raw data</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            The parsed boolean data. If ``data`` is *unset*, ``None`` will</span>
+<span class="sd">            be returned.</span>
+
+<span class="sd">        Raises:</span>
+<span class="sd">            :exc:`ZeekValueError`: If ``data`` is NOT *unset* and NOT ``T``</span>
+<span class="sd">                (``True``) nor ``F`` (``False``) in Bro/Zeek script language.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="nb">bool</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">data</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+            <span class="n">data</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s1">&#39;ascii&#39;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">data</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">unset_field</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">None</span>
+        <span class="k">if</span> <span class="n">data</span> <span class="o">==</span> <span class="sa">b</span><span class="s1">&#39;T&#39;</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">True</span>
+        <span class="k">if</span> <span class="n">data</span> <span class="o">==</span> <span class="sa">b</span><span class="s1">&#39;F&#39;</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">False</span>
+        <span class="k">raise</span> <span class="n">ZeekValueError</span><span class="p">(</span><span class="s1">&#39;invalid bool value: </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">data</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s1">&#39;ascii&#39;</span><span class="p">))</span></div>
+
+<div class="viewcode-block" id="BoolType.tojson"><a class="viewcode-back" href="../../zlogging.types.html#zlogging.BoolType.tojson">[docs]</a>    <span class="k">def</span> <span class="nf">tojson</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">Union</span><span class="p">[</span><span class="kc">None</span><span class="p">,</span> <span class="nb">bool</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">typing</span><span class="o">.</span><span class="n">Union</span><span class="p">[</span><span class="kc">None</span><span class="p">,</span> <span class="nb">bool</span><span class="p">]:</span>
+        <span class="sd">&quot;&quot;&quot;Serialize ``data`` as JSON log format.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            data: raw data</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            The JSON serialisable boolean data.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">data</span></div>
+
+<div class="viewcode-block" id="BoolType.toascii"><a class="viewcode-back" href="../../zlogging.types.html#zlogging.BoolType.toascii">[docs]</a>    <span class="k">def</span> <span class="nf">toascii</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">Union</span><span class="p">[</span><span class="kc">None</span><span class="p">,</span> <span class="nb">bool</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Serialize ``data`` as ASCII log format.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            data: raw data</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            str: ``T`` if ``True``, ``F`` if ``False``.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">data</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">str_unset_field</span>
+        <span class="k">return</span> <span class="s1">&#39;T&#39;</span> <span class="k">if</span> <span class="n">data</span> <span class="k">else</span> <span class="s1">&#39;F&#39;</span></div></div>
+
+
+<div class="viewcode-block" id="CountType"><a class="viewcode-back" href="../../zlogging.types.html#zlogging.CountType">[docs]</a><span class="k">class</span> <span class="nc">CountType</span><span class="p">(</span><span class="n">_SimpleType</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Bro/Zeek ``count`` data type.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        empty_field (:obj:`bytes` or :obj:`str`, optional): Placeholder for empty field.</span>
+<span class="sd">        unset_field (:obj:`bytes` or :obj:`str`, optional): Placeholder for unset field.</span>
+<span class="sd">        set_separator (:obj:`bytes` or :obj:`str`, optional): Separator for ``set``/``vector`` fields.</span>
+<span class="sd">        *args: Variable length argument list.</span>
+<span class="sd">        **kwargs: Arbitrary keyword arguments.</span>
+
+<span class="sd">    Attributes:</span>
+<span class="sd">        empty_field (bytes): Placeholder for empty field.</span>
+<span class="sd">        unset_field (bytes): Placeholder for unset field.</span>
+<span class="sd">        set_separator (bytes): Separator for ``set``/``vector`` fields.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">python_type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span><span class="o">-&gt;</span> <span class="nb">type</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;type: Corresponding Python type annotation.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">typing</span><span class="o">.</span><span class="n">uint64</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">zeek_type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;str: Corresponding Zeek type name.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="s1">&#39;count&#39;</span>
+
+<div class="viewcode-block" id="CountType.parse"><a class="viewcode-back" href="../../zlogging.types.html#zlogging.CountType.parse">[docs]</a>    <span class="k">def</span> <span class="nf">parse</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">Union</span><span class="p">[</span><span class="n">typing</span><span class="o">.</span><span class="n">AnyStr</span><span class="p">,</span> <span class="n">typing</span><span class="o">.</span><span class="n">uint64</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">typing</span><span class="o">.</span><span class="n">Union</span><span class="p">[</span><span class="kc">None</span><span class="p">,</span> <span class="n">typing</span><span class="o">.</span><span class="n">uint64</span><span class="p">]:</span>
+        <span class="sd">&quot;&quot;&quot;Parse ``data`` from string.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            data: raw data</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            The parsed numeral data. If ``data`` is *unset*, ``None`` will</span>
+<span class="sd">            be returned.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">c_uint64</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">data</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+            <span class="n">data</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s1">&#39;ascii&#39;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">data</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">unset_field</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">None</span>
+        <span class="k">return</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">c_uint64</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">data</span><span class="p">))</span></div>
+
+<div class="viewcode-block" id="CountType.tojson"><a class="viewcode-back" href="../../zlogging.types.html#zlogging.CountType.tojson">[docs]</a>    <span class="k">def</span> <span class="nf">tojson</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">Union</span><span class="p">[</span><span class="kc">None</span><span class="p">,</span> <span class="n">typing</span><span class="o">.</span><span class="n">uint64</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">typing</span><span class="o">.</span><span class="n">Union</span><span class="p">[</span><span class="kc">None</span><span class="p">,</span> <span class="nb">int</span><span class="p">]:</span>
+        <span class="sd">&quot;&quot;&quot;Serialize ``data`` as JSON log format.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            data: raw data</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            int: The JSON serialisable numeral data.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">data</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">data</span>
+        <span class="k">return</span> <span class="n">data</span><span class="o">.</span><span class="n">value</span></div>
+
+<div class="viewcode-block" id="CountType.toascii"><a class="viewcode-back" href="../../zlogging.types.html#zlogging.CountType.toascii">[docs]</a>    <span class="k">def</span> <span class="nf">toascii</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">Union</span><span class="p">[</span><span class="kc">None</span><span class="p">,</span> <span class="n">typing</span><span class="o">.</span><span class="n">uint64</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Serialize ``data`` as ASCII log format.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            data: raw data</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            str: The ASCII representation of numeral data.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">data</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">str_unset_field</span>
+        <span class="k">return</span> <span class="nb">str</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">value</span><span class="p">)</span></div></div>
+
+
+<div class="viewcode-block" id="IntType"><a class="viewcode-back" href="../../zlogging.types.html#zlogging.IntType">[docs]</a><span class="k">class</span> <span class="nc">IntType</span><span class="p">(</span><span class="n">_SimpleType</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Bro/Zeek ``int`` data type.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        empty_field (:obj:`bytes` or :obj:`str`, optional): Placeholder for empty field.</span>
+<span class="sd">        unset_field (:obj:`bytes` or :obj:`str`, optional): Placeholder for unset field.</span>
+<span class="sd">        set_separator (:obj:`bytes` or :obj:`str`, optional): Separator for ``set``/``vector`` fields.</span>
+<span class="sd">        *args: Variable length argument list.</span>
+<span class="sd">        **kwargs: Arbitrary keyword arguments.</span>
+
+<span class="sd">    Attributes:</span>
+<span class="sd">        empty_field (bytes): Placeholder for empty field.</span>
+<span class="sd">        unset_field (bytes): Placeholder for unset field.</span>
+<span class="sd">        set_separator (bytes): Separator for ``set``/``vector`` fields.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">python_type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span><span class="o">-&gt;</span> <span class="nb">type</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;type: Corresponding Python type annotation.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">typing</span><span class="o">.</span><span class="n">int64</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">zeek_type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;str: Corresponding Zeek type name.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="s1">&#39;int&#39;</span>
+
+<div class="viewcode-block" id="IntType.parse"><a class="viewcode-back" href="../../zlogging.types.html#zlogging.IntType.parse">[docs]</a>    <span class="k">def</span> <span class="nf">parse</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">Union</span><span class="p">[</span><span class="n">typing</span><span class="o">.</span><span class="n">AnyStr</span><span class="p">,</span> <span class="n">typing</span><span class="o">.</span><span class="n">int64</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">typing</span><span class="o">.</span><span class="n">Union</span><span class="p">[</span><span class="kc">None</span><span class="p">,</span> <span class="n">typing</span><span class="o">.</span><span class="n">int64</span><span class="p">]:</span>
+        <span class="sd">&quot;&quot;&quot;Parse ``data`` from string.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            data: raw data</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            The parsed numeral data. If ``data`` is *unset*, ``None`` will</span>
+<span class="sd">            be returned.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">c_int64</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">data</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+            <span class="n">data</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s1">&#39;ascii&#39;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">data</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">unset_field</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">None</span>
+        <span class="k">return</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">c_int64</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">data</span><span class="p">))</span></div>
+
+<div class="viewcode-block" id="IntType.tojson"><a class="viewcode-back" href="../../zlogging.types.html#zlogging.IntType.tojson">[docs]</a>    <span class="k">def</span> <span class="nf">tojson</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">Union</span><span class="p">[</span><span class="kc">None</span><span class="p">,</span> <span class="n">typing</span><span class="o">.</span><span class="n">int64</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">typing</span><span class="o">.</span><span class="n">Union</span><span class="p">[</span><span class="kc">None</span><span class="p">,</span> <span class="nb">int</span><span class="p">]:</span>
+        <span class="sd">&quot;&quot;&quot;Serialize ``data`` as JSON log format.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            data: raw data</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            int: The JSON serialisable numeral data.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">data</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">data</span>
+        <span class="k">return</span> <span class="n">data</span><span class="o">.</span><span class="n">value</span></div>
+
+<div class="viewcode-block" id="IntType.toascii"><a class="viewcode-back" href="../../zlogging.types.html#zlogging.IntType.toascii">[docs]</a>    <span class="k">def</span> <span class="nf">toascii</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">Union</span><span class="p">[</span><span class="kc">None</span><span class="p">,</span> <span class="n">typing</span><span class="o">.</span><span class="n">int64</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Serialize ``data`` as ASCII log format.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            data: raw data</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            str: The ASCII representation of numeral data.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">data</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">str_unset_field</span>
+        <span class="k">return</span> <span class="nb">str</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">value</span><span class="p">)</span></div></div>
+
+
+<div class="viewcode-block" id="DoubleType"><a class="viewcode-back" href="../../zlogging.types.html#zlogging.DoubleType">[docs]</a><span class="k">class</span> <span class="nc">DoubleType</span><span class="p">(</span><span class="n">_SimpleType</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Bro/Zeek ``double`` data type.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        empty_field (:obj:`bytes` or :obj:`str`, optional): Placeholder for empty field.</span>
+<span class="sd">        unset_field (:obj:`bytes` or :obj:`str`, optional): Placeholder for unset field.</span>
+<span class="sd">        set_separator (:obj:`bytes` or :obj:`str`, optional): Separator for ``set``/``vector`` fields.</span>
+<span class="sd">        *args: Variable length argument list.</span>
+<span class="sd">        **kwargs: Arbitrary keyword arguments.</span>
+
+<span class="sd">    Attributes:</span>
+<span class="sd">        empty_field (bytes): Placeholder for empty field.</span>
+<span class="sd">        unset_field (bytes): Placeholder for unset field.</span>
+<span class="sd">        set_separator (bytes): Separator for ``set``/``vector`` fields.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">python_type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span><span class="o">-&gt;</span> <span class="nb">type</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;type: Corresponding Python type annotation.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">typing</span><span class="o">.</span><span class="n">Decimal</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">zeek_type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;str: Corresponding Zeek type name.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="s1">&#39;double&#39;</span>
+
+<div class="viewcode-block" id="DoubleType.parse"><a class="viewcode-back" href="../../zlogging.types.html#zlogging.DoubleType.parse">[docs]</a>    <span class="k">def</span> <span class="nf">parse</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">Union</span><span class="p">[</span><span class="n">typing</span><span class="o">.</span><span class="n">AnyStr</span><span class="p">,</span> <span class="n">typing</span><span class="o">.</span><span class="n">Decimal</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">typing</span><span class="o">.</span><span class="n">Union</span><span class="p">[</span><span class="kc">None</span><span class="p">,</span> <span class="n">typing</span><span class="o">.</span><span class="n">Decimal</span><span class="p">]:</span>
+        <span class="sd">&quot;&quot;&quot;Parse ``data`` from string.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            data: raw data</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            The parsed numeral data. If ``data`` is *unset*, ``None`` will</span>
+<span class="sd">            be returned.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">decimal</span><span class="o">.</span><span class="n">Decimal</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">data</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+            <span class="n">data</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s1">&#39;ascii&#39;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">data</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">unset_field</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">None</span>
+        <span class="k">with</span> <span class="n">decimal</span><span class="o">.</span><span class="n">localcontext</span><span class="p">()</span> <span class="k">as</span> <span class="n">ctx</span><span class="p">:</span>
+            <span class="n">ctx</span><span class="o">.</span><span class="n">prec</span> <span class="o">=</span> <span class="mi">6</span>
+            <span class="n">value</span> <span class="o">=</span> <span class="n">decimal</span><span class="o">.</span><span class="n">Decimal</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s1">&#39;ascii&#39;</span><span class="p">))</span>
+        <span class="k">return</span> <span class="n">value</span></div>
+
+<div class="viewcode-block" id="DoubleType.tojson"><a class="viewcode-back" href="../../zlogging.types.html#zlogging.DoubleType.tojson">[docs]</a>    <span class="k">def</span> <span class="nf">tojson</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">Union</span><span class="p">[</span><span class="kc">None</span><span class="p">,</span> <span class="n">typing</span><span class="o">.</span><span class="n">Decimal</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">typing</span><span class="o">.</span><span class="n">Union</span><span class="p">[</span><span class="kc">None</span><span class="p">,</span> <span class="nb">float</span><span class="p">]:</span>
+        <span class="sd">&quot;&quot;&quot;Serialize ``data`` as JSON log format.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            data: raw data</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            float: The JSON serialisable numeral data.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">data</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">data</span>
+        <span class="k">return</span> <span class="nb">float</span><span class="p">(</span><span class="n">data</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="DoubleType.toascii"><a class="viewcode-back" href="../../zlogging.types.html#zlogging.DoubleType.toascii">[docs]</a>    <span class="k">def</span> <span class="nf">toascii</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">Union</span><span class="p">[</span><span class="kc">None</span><span class="p">,</span> <span class="n">typing</span><span class="o">.</span><span class="n">Decimal</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Serialize ``data`` as ASCII log format.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            data: raw data</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            str: The ASCII representation of numeral data.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">data</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">str_unset_field</span>
+        <span class="k">return</span> <span class="n">decimal_toascii</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">str_unset_field</span><span class="p">)</span></div></div>
+
+
+<div class="viewcode-block" id="TimeType"><a class="viewcode-back" href="../../zlogging.types.html#zlogging.TimeType">[docs]</a><span class="k">class</span> <span class="nc">TimeType</span><span class="p">(</span><span class="n">_SimpleType</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Bro/Zeek ``time`` data type.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        empty_field (:obj:`bytes` or :obj:`str`, optional): Placeholder for empty field.</span>
+<span class="sd">        unset_field (:obj:`bytes` or :obj:`str`, optional): Placeholder for unset field.</span>
+<span class="sd">        set_separator (:obj:`bytes` or :obj:`str`, optional): Separator for ``set``/``vector`` fields.</span>
+<span class="sd">        *args: Variable length argument list.</span>
+<span class="sd">        **kwargs: Arbitrary keyword arguments.</span>
+
+<span class="sd">    Attributes:</span>
+<span class="sd">        empty_field (bytes): Placeholder for empty field.</span>
+<span class="sd">        unset_field (bytes): Placeholder for unset field.</span>
+<span class="sd">        set_separator (bytes): Separator for ``set``/``vector`` fields.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">python_type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span><span class="o">-&gt;</span> <span class="nb">type</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;type: Corresponding Python type annotation.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">typing</span><span class="o">.</span><span class="n">DateTime</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">zeek_type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;str: Corresponding Zeek type name.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="s1">&#39;time&#39;</span>
+
+<div class="viewcode-block" id="TimeType.parse"><a class="viewcode-back" href="../../zlogging.types.html#zlogging.TimeType.parse">[docs]</a>    <span class="k">def</span> <span class="nf">parse</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">Union</span><span class="p">[</span><span class="n">typing</span><span class="o">.</span><span class="n">AnyStr</span><span class="p">,</span> <span class="n">typing</span><span class="o">.</span><span class="n">DateTime</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">typing</span><span class="o">.</span><span class="n">Union</span><span class="p">[</span><span class="kc">None</span><span class="p">,</span> <span class="n">typing</span><span class="o">.</span><span class="n">DateTime</span><span class="p">]:</span>
+        <span class="sd">&quot;&quot;&quot;Parse ``data`` from string.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            data: raw data</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            The parsed numeral data. If ``data`` is *unset*, ``None`` will</span>
+<span class="sd">            be returned.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">data</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+            <span class="n">data</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s1">&#39;ascii&#39;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">data</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">unset_field</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">None</span>
+        <span class="k">with</span> <span class="n">decimal</span><span class="o">.</span><span class="n">localcontext</span><span class="p">()</span> <span class="k">as</span> <span class="n">ctx</span><span class="p">:</span>
+            <span class="n">ctx</span><span class="o">.</span><span class="n">prec</span> <span class="o">=</span> <span class="mi">6</span>
+            <span class="n">value</span> <span class="o">=</span> <span class="n">decimal</span><span class="o">.</span><span class="n">Decimal</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s1">&#39;ascii&#39;</span><span class="p">))</span>
+        <span class="k">return</span> <span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="o">.</span><span class="n">fromtimestamp</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">value</span><span class="p">))</span></div>
+
+<div class="viewcode-block" id="TimeType.tojson"><a class="viewcode-back" href="../../zlogging.types.html#zlogging.TimeType.tojson">[docs]</a>    <span class="k">def</span> <span class="nf">tojson</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">Union</span><span class="p">[</span><span class="kc">None</span><span class="p">,</span> <span class="n">typing</span><span class="o">.</span><span class="n">DateTime</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">typing</span><span class="o">.</span><span class="n">Union</span><span class="p">[</span><span class="kc">None</span><span class="p">,</span> <span class="nb">float</span><span class="p">]:</span>
+        <span class="sd">&quot;&quot;&quot;Serialize ``data`` as JSON log format.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            data: raw data</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            int: The JSON serialisable numeral data.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">data</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">data</span>
+        <span class="k">return</span> <span class="n">data</span><span class="o">.</span><span class="n">timestamp</span><span class="p">()</span></div>
+
+<div class="viewcode-block" id="TimeType.toascii"><a class="viewcode-back" href="../../zlogging.types.html#zlogging.TimeType.toascii">[docs]</a>    <span class="k">def</span> <span class="nf">toascii</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">Union</span><span class="p">[</span><span class="kc">None</span><span class="p">,</span> <span class="n">typing</span><span class="o">.</span><span class="n">DateTime</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Serialize ``data`` as ASCII log format.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            data: raw data</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            str: The ASCII representation of numeral data.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">data</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">str_unset_field</span>
+        <span class="k">return</span> <span class="n">float_toascii</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">timestamp</span><span class="p">(),</span> <span class="bp">self</span><span class="o">.</span><span class="n">str_unset_field</span><span class="p">)</span></div></div>
+
+
+<div class="viewcode-block" id="IntervalType"><a class="viewcode-back" href="../../zlogging.types.html#zlogging.IntervalType">[docs]</a><span class="k">class</span> <span class="nc">IntervalType</span><span class="p">(</span><span class="n">_SimpleType</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Bro/Zeek ``interval`` data type.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        empty_field (:obj:`bytes` or :obj:`str`, optional): Placeholder for empty field.</span>
+<span class="sd">        unset_field (:obj:`bytes` or :obj:`str`, optional): Placeholder for unset field.</span>
+<span class="sd">        set_separator (:obj:`bytes` or :obj:`str`, optional): Separator for ``set``/``vector`` fields.</span>
+<span class="sd">        *args: Variable length argument list.</span>
+<span class="sd">        **kwargs: Arbitrary keyword arguments.</span>
+
+<span class="sd">    Attributes:</span>
+<span class="sd">        empty_field (bytes): Placeholder for empty field.</span>
+<span class="sd">        unset_field (bytes): Placeholder for unset field.</span>
+<span class="sd">        set_separator (bytes): Separator for ``set``/``vector`` fields.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">python_type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span><span class="o">-&gt;</span> <span class="nb">type</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;type: Corresponding Python type annotation.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">typing</span><span class="o">.</span><span class="n">TimeDelta</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">zeek_type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;str: Corresponding Zeek type name.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="s1">&#39;interval&#39;</span>
+
+<div class="viewcode-block" id="IntervalType.parse"><a class="viewcode-back" href="../../zlogging.types.html#zlogging.IntervalType.parse">[docs]</a>    <span class="k">def</span> <span class="nf">parse</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">Union</span><span class="p">[</span><span class="n">typing</span><span class="o">.</span><span class="n">AnyStr</span><span class="p">,</span> <span class="n">typing</span><span class="o">.</span><span class="n">TimeDelta</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">typing</span><span class="o">.</span><span class="n">Union</span><span class="p">[</span><span class="kc">None</span><span class="p">,</span> <span class="n">typing</span><span class="o">.</span><span class="n">TimeDelta</span><span class="p">]:</span>
+        <span class="sd">&quot;&quot;&quot;Parse ``data`` from string.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            data: raw data</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            The parsed numeral data. If ``data`` is *unset*, ``None`` will</span>
+<span class="sd">            be returned.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">datetime</span><span class="o">.</span><span class="n">timedelta</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">data</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+            <span class="n">data</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s1">&#39;ascii&#39;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">data</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">unset_field</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">None</span>
+        <span class="n">int_part</span><span class="p">,</span> <span class="n">flt_part</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="sa">b</span><span class="s1">&#39;.&#39;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">datetime</span><span class="o">.</span><span class="n">timedelta</span><span class="p">(</span><span class="n">seconds</span><span class="o">=</span><span class="n">int_part</span><span class="p">,</span>
+                                  <span class="n">microseconds</span><span class="o">=</span><span class="n">flt_part</span><span class="p">[:</span><span class="mi">3</span><span class="p">],</span>
+                                  <span class="n">milliseconds</span><span class="o">=</span><span class="n">flt_part</span><span class="p">[</span><span class="mi">3</span><span class="p">:])</span></div>
+
+<div class="viewcode-block" id="IntervalType.tojson"><a class="viewcode-back" href="../../zlogging.types.html#zlogging.IntervalType.tojson">[docs]</a>    <span class="k">def</span> <span class="nf">tojson</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">Union</span><span class="p">[</span><span class="kc">None</span><span class="p">,</span> <span class="n">typing</span><span class="o">.</span><span class="n">TimeDelta</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">typing</span><span class="o">.</span><span class="n">Union</span><span class="p">[</span><span class="kc">None</span><span class="p">,</span> <span class="nb">float</span><span class="p">]:</span>
+        <span class="sd">&quot;&quot;&quot;Serialize ``data`` as JSON log format.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            data: raw data</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            int: The JSON serialisable numeral data.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">data</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">data</span>
+        <span class="k">return</span> <span class="n">data</span><span class="o">.</span><span class="n">total_seconds</span><span class="p">()</span></div>
+
+<div class="viewcode-block" id="IntervalType.toascii"><a class="viewcode-back" href="../../zlogging.types.html#zlogging.IntervalType.toascii">[docs]</a>    <span class="k">def</span> <span class="nf">toascii</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">Union</span><span class="p">[</span><span class="kc">None</span><span class="p">,</span> <span class="n">typing</span><span class="o">.</span><span class="n">TimeDelta</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Serialize ``data`` as ASCII log format.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            data: raw data</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            str: The ASCII representation of numeral data.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">data</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">str_unset_field</span>
+        <span class="k">return</span> <span class="n">float_toascii</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">total_seconds</span><span class="p">(),</span> <span class="bp">self</span><span class="o">.</span><span class="n">str_unset_field</span><span class="p">)</span></div></div>
+
+
+<div class="viewcode-block" id="StringType"><a class="viewcode-back" href="../../zlogging.types.html#zlogging.StringType">[docs]</a><span class="k">class</span> <span class="nc">StringType</span><span class="p">(</span><span class="n">_SimpleType</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Bro/Zeek ``string`` data type.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        empty_field (:obj:`bytes` or :obj:`str`, optional): Placeholder for empty field.</span>
+<span class="sd">        unset_field (:obj:`bytes` or :obj:`str`, optional): Placeholder for unset field.</span>
+<span class="sd">        set_separator (:obj:`bytes` or :obj:`str`, optional): Separator for ``set``/``vector`` fields.</span>
+<span class="sd">        *args: Variable length argument list.</span>
+<span class="sd">        **kwargs: Arbitrary keyword arguments.</span>
+
+<span class="sd">    Attributes:</span>
+<span class="sd">        empty_field (bytes): Placeholder for empty field.</span>
+<span class="sd">        unset_field (bytes): Placeholder for unset field.</span>
+<span class="sd">        set_separator (bytes): Separator for ``set``/``vector`` fields.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">python_type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span><span class="o">-&gt;</span> <span class="nb">type</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;type: Corresponding Python type annotation.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">typing</span><span class="o">.</span><span class="n">ByteString</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">zeek_type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;str: Corresponding Zeek type name.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="s1">&#39;string&#39;</span>
+
+<div class="viewcode-block" id="StringType.parse"><a class="viewcode-back" href="../../zlogging.types.html#zlogging.StringType.parse">[docs]</a>    <span class="k">def</span> <span class="nf">parse</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">Union</span><span class="p">[</span><span class="n">typing</span><span class="o">.</span><span class="n">AnyStr</span><span class="p">,</span> <span class="nb">memoryview</span><span class="p">,</span> <span class="nb">bytearray</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">typing</span><span class="o">.</span><span class="n">Union</span><span class="p">[</span><span class="kc">None</span><span class="p">,</span> <span class="n">typing</span><span class="o">.</span><span class="n">ByteString</span><span class="p">]:</span>
+        <span class="sd">&quot;&quot;&quot;Parse ``data`` from string.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            data: raw data</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            The parsed string data. If ``data`` is *unset*, ``None`` will</span>
+<span class="sd">            be returned.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="nb">bytes</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">data</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="nb">bytearray</span><span class="p">):</span>
+            <span class="k">return</span> <span class="nb">bytes</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="nb">memoryview</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">data</span><span class="o">.</span><span class="n">tobytes</span><span class="p">()</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">data</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s1">&#39;ascii&#39;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">data</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">empty_field</span><span class="p">:</span>
+            <span class="k">return</span> <span class="nb">bytes</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">data</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">unset_field</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">None</span>
+        <span class="k">return</span> <span class="nb">bytes</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">data</span><span class="p">),</span> <span class="n">encoding</span><span class="o">=</span><span class="s1">&#39;ascii&#39;</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="StringType.tojson"><a class="viewcode-back" href="../../zlogging.types.html#zlogging.StringType.tojson">[docs]</a>    <span class="k">def</span> <span class="nf">tojson</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">Union</span><span class="p">[</span><span class="kc">None</span><span class="p">,</span> <span class="n">typing</span><span class="o">.</span><span class="n">ByteString</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">typing</span><span class="o">.</span><span class="n">Union</span><span class="p">[</span><span class="kc">None</span><span class="p">,</span> <span class="nb">str</span><span class="p">]:</span>
+        <span class="sd">&quot;&quot;&quot;Serialize ``data`` as JSON log format.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            data: raw data</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            str: The JSON serialisable string data encoded in ASCII.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">data</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s1">&#39;ascii&#39;</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="StringType.toascii"><a class="viewcode-back" href="../../zlogging.types.html#zlogging.StringType.toascii">[docs]</a>    <span class="k">def</span> <span class="nf">toascii</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">Union</span><span class="p">[</span><span class="kc">None</span><span class="p">,</span> <span class="n">typing</span><span class="o">.</span><span class="n">ByteString</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Serialize ``data`` as ASCII log format.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            data: raw data</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            str: The ASCII encoded string data.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">data</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">str_unset_field</span>
+        <span class="k">if</span> <span class="n">data</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">data</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s1">&#39;ascii&#39;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">str_empty_field</span></div></div>
+
+
+<div class="viewcode-block" id="AddrType"><a class="viewcode-back" href="../../zlogging.types.html#zlogging.AddrType">[docs]</a><span class="k">class</span> <span class="nc">AddrType</span><span class="p">(</span><span class="n">_SimpleType</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Bro/Zeek ``addr`` data type.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        empty_field (:obj:`bytes` or :obj:`str`, optional): Placeholder for empty field.</span>
+<span class="sd">        unset_field (:obj:`bytes` or :obj:`str`, optional): Placeholder for unset field.</span>
+<span class="sd">        set_separator (:obj:`bytes` or :obj:`str`, optional): Separator for ``set``/``vector`` fields.</span>
+<span class="sd">        *args: Variable length argument list.</span>
+<span class="sd">        **kwargs: Arbitrary keyword arguments.</span>
+
+<span class="sd">    Attributes:</span>
+<span class="sd">        empty_field (bytes): Placeholder for empty field.</span>
+<span class="sd">        unset_field (bytes): Placeholder for unset field.</span>
+<span class="sd">        set_separator (bytes): Separator for ``set``/``vector`` fields.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">python_type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span><span class="o">-&gt;</span> <span class="nb">type</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;type: Corresponding Python type annotation.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">typing</span><span class="o">.</span><span class="n">IPAddress</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">zeek_type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;str: Corresponding Zeek type name.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="s1">&#39;addr&#39;</span>
+
+<div class="viewcode-block" id="AddrType.parse"><a class="viewcode-back" href="../../zlogging.types.html#zlogging.AddrType.parse">[docs]</a>    <span class="k">def</span> <span class="nf">parse</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">Union</span><span class="p">[</span><span class="n">typing</span><span class="o">.</span><span class="n">AnyStr</span><span class="p">,</span> <span class="n">typing</span><span class="o">.</span><span class="n">IPAddress</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">typing</span><span class="o">.</span><span class="n">Union</span><span class="p">[</span><span class="kc">None</span><span class="p">,</span> <span class="n">typing</span><span class="o">.</span><span class="n">IPAddress</span><span class="p">]:</span>
+        <span class="sd">&quot;&quot;&quot;Parse ``data`` from string.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            data: raw data</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            The parsed IP address. If ``data`` is *unset*, ``None`` will</span>
+<span class="sd">            be returned.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="p">(</span><span class="n">ipaddress</span><span class="o">.</span><span class="n">IPv4Address</span><span class="p">,</span> <span class="n">ipaddress</span><span class="o">.</span><span class="n">IPv6Address</span><span class="p">)):</span>
+            <span class="k">return</span> <span class="n">data</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">data</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s1">&#39;ascii&#39;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">data</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">unset_field</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">None</span>
+        <span class="k">return</span> <span class="n">ipaddress</span><span class="o">.</span><span class="n">ip_address</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s1">&#39;ascii&#39;</span><span class="p">))</span></div>
+
+<div class="viewcode-block" id="AddrType.tojson"><a class="viewcode-back" href="../../zlogging.types.html#zlogging.AddrType.tojson">[docs]</a>    <span class="k">def</span> <span class="nf">tojson</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">Union</span><span class="p">[</span><span class="kc">None</span><span class="p">,</span> <span class="n">typing</span><span class="o">.</span><span class="n">IPAddress</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">typing</span><span class="o">.</span><span class="n">Union</span><span class="p">[</span><span class="kc">None</span><span class="p">,</span> <span class="nb">str</span><span class="p">]:</span>
+        <span class="sd">&quot;&quot;&quot;Serialize ``data`` as JSON log format.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            data: raw data</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            str: The JSON serialisable IP address string.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">data</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">data</span>
+        <span class="k">return</span> <span class="nb">str</span><span class="p">(</span><span class="n">data</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="AddrType.toascii"><a class="viewcode-back" href="../../zlogging.types.html#zlogging.AddrType.toascii">[docs]</a>    <span class="k">def</span> <span class="nf">toascii</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">Union</span><span class="p">[</span><span class="kc">None</span><span class="p">,</span> <span class="n">typing</span><span class="o">.</span><span class="n">IPAddress</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Serialize ``data`` as ASCII log format.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            data: raw data</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            str: The ASCII representation of the IP address.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">data</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">str_unset_field</span>
+        <span class="k">return</span> <span class="nb">str</span><span class="p">(</span><span class="n">data</span><span class="p">)</span></div></div>
+
+
+<div class="viewcode-block" id="PortType"><a class="viewcode-back" href="../../zlogging.types.html#zlogging.PortType">[docs]</a><span class="k">class</span> <span class="nc">PortType</span><span class="p">(</span><span class="n">_SimpleType</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Bro/Zeek ``port`` data type.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        empty_field (:obj:`bytes` or :obj:`str`, optional): Placeholder for empty field.</span>
+<span class="sd">        unset_field (:obj:`bytes` or :obj:`str`, optional): Placeholder for unset field.</span>
+<span class="sd">        set_separator (:obj:`bytes` or :obj:`str`, optional): Separator for ``set``/``vector`` fields.</span>
+<span class="sd">        *args: Variable length argument list.</span>
+<span class="sd">        **kwargs: Arbitrary keyword arguments.</span>
+
+<span class="sd">    Attributes:</span>
+<span class="sd">        empty_field (bytes): Placeholder for empty field.</span>
+<span class="sd">        unset_field (bytes): Placeholder for unset field.</span>
+<span class="sd">        set_separator (bytes): Separator for ``set``/``vector`` fields.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">python_type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span><span class="o">-&gt;</span> <span class="nb">type</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;type: Corresponding Python type annotation.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">typing</span><span class="o">.</span><span class="n">uint16</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">zeek_type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;str: Corresponding Zeek type name.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="s1">&#39;port&#39;</span>
+
+<div class="viewcode-block" id="PortType.parse"><a class="viewcode-back" href="../../zlogging.types.html#zlogging.PortType.parse">[docs]</a>    <span class="k">def</span> <span class="nf">parse</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">Union</span><span class="p">[</span><span class="n">typing</span><span class="o">.</span><span class="n">AnyStr</span><span class="p">,</span> <span class="n">typing</span><span class="o">.</span><span class="n">uint16</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">typing</span><span class="o">.</span><span class="n">Union</span><span class="p">[</span><span class="kc">None</span><span class="p">,</span> <span class="n">typing</span><span class="o">.</span><span class="n">uint16</span><span class="p">]:</span>
+        <span class="sd">&quot;&quot;&quot;Parse ``data`` from string.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            data: raw data</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            The parsed port number. If ``data`` is *unset*, ``None`` will</span>
+<span class="sd">            be returned.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">c_uint16</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">data</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">data</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s1">&#39;ascii&#39;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">data</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">unset_field</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">None</span>
+        <span class="k">return</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">c_uint16</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">data</span><span class="p">))</span></div>
+
+<div class="viewcode-block" id="PortType.tojson"><a class="viewcode-back" href="../../zlogging.types.html#zlogging.PortType.tojson">[docs]</a>    <span class="k">def</span> <span class="nf">tojson</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">Union</span><span class="p">[</span><span class="kc">None</span><span class="p">,</span> <span class="n">typing</span><span class="o">.</span><span class="n">uint16</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">typing</span><span class="o">.</span><span class="n">Union</span><span class="p">[</span><span class="kc">None</span><span class="p">,</span> <span class="nb">int</span><span class="p">]:</span>
+        <span class="sd">&quot;&quot;&quot;Serialize ``data`` as JSON log format.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            data: raw data</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            int: The JSON serialisable port number string.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">data</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">data</span>
+        <span class="k">return</span> <span class="n">data</span><span class="o">.</span><span class="n">value</span></div>
+
+<div class="viewcode-block" id="PortType.toascii"><a class="viewcode-back" href="../../zlogging.types.html#zlogging.PortType.toascii">[docs]</a>    <span class="k">def</span> <span class="nf">toascii</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">Union</span><span class="p">[</span><span class="kc">None</span><span class="p">,</span> <span class="n">typing</span><span class="o">.</span><span class="n">uint16</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Serialize ``data`` as ASCII log format.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            data: raw data</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            str: The ASCII representation of the port number.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">data</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">str_unset_field</span>
+        <span class="k">return</span> <span class="nb">str</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">value</span><span class="p">)</span></div></div>
+
+
+<div class="viewcode-block" id="SubnetType"><a class="viewcode-back" href="../../zlogging.types.html#zlogging.SubnetType">[docs]</a><span class="k">class</span> <span class="nc">SubnetType</span><span class="p">(</span><span class="n">_SimpleType</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Bro/Zeek ``subnet`` data type.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        empty_field (:obj:`bytes` or :obj:`str`, optional): Placeholder for empty field.</span>
+<span class="sd">        unset_field (:obj:`bytes` or :obj:`str`, optional): Placeholder for unset field.</span>
+<span class="sd">        set_separator (:obj:`bytes` or :obj:`str`, optional): Separator for ``set``/``vector`` fields.</span>
+<span class="sd">        *args: Variable length argument list.</span>
+<span class="sd">        **kwargs: Arbitrary keyword arguments.</span>
+
+<span class="sd">    Attributes:</span>
+<span class="sd">        empty_field (bytes): Placeholder for empty field.</span>
+<span class="sd">        unset_field (bytes): Placeholder for unset field.</span>
+<span class="sd">        set_separator (bytes): Separator for ``set``/``vector`` fields.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">python_type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span><span class="o">-&gt;</span> <span class="nb">type</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;type: Corresponding Python type annotation.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">typing</span><span class="o">.</span><span class="n">IPNetwork</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">zeek_type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;str: Corresponding Zeek type name.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="s1">&#39;port&#39;</span>
+
+<div class="viewcode-block" id="SubnetType.parse"><a class="viewcode-back" href="../../zlogging.types.html#zlogging.SubnetType.parse">[docs]</a>    <span class="k">def</span> <span class="nf">parse</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">Union</span><span class="p">[</span><span class="n">typing</span><span class="o">.</span><span class="n">AnyStr</span><span class="p">,</span> <span class="n">typing</span><span class="o">.</span><span class="n">IPNetwork</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">typing</span><span class="o">.</span><span class="n">Union</span><span class="p">[</span><span class="kc">None</span><span class="p">,</span> <span class="n">typing</span><span class="o">.</span><span class="n">IPNetwork</span><span class="p">]:</span>
+        <span class="sd">&quot;&quot;&quot;Parse ``data`` from string.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            data: raw data</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            The parsed IP network. If ``data`` is *unset*, ``None`` will</span>
+<span class="sd">            be returned.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="p">(</span><span class="n">ipaddress</span><span class="o">.</span><span class="n">IPv4Network</span><span class="p">,</span> <span class="n">ipaddress</span><span class="o">.</span><span class="n">IPv6Network</span><span class="p">)):</span>
+            <span class="k">return</span> <span class="n">data</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+            <span class="n">data</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s1">&#39;ascii&#39;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">data</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">unset_field</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">None</span>
+        <span class="k">return</span> <span class="n">ipaddress</span><span class="o">.</span><span class="n">ip_network</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s1">&#39;ascii&#39;</span><span class="p">))</span></div>
+
+<div class="viewcode-block" id="SubnetType.tojson"><a class="viewcode-back" href="../../zlogging.types.html#zlogging.SubnetType.tojson">[docs]</a>    <span class="k">def</span> <span class="nf">tojson</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">Union</span><span class="p">[</span><span class="kc">None</span><span class="p">,</span> <span class="n">typing</span><span class="o">.</span><span class="n">IPNetwork</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">typing</span><span class="o">.</span><span class="n">Union</span><span class="p">[</span><span class="kc">None</span><span class="p">,</span> <span class="nb">str</span><span class="p">]:</span>
+        <span class="sd">&quot;&quot;&quot;Serialize ``data`` as JSON log format.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            data: raw data</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            str: The JSON serialisable IP network string.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">data</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">data</span>
+        <span class="k">return</span> <span class="nb">str</span><span class="p">(</span><span class="n">data</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="SubnetType.toascii"><a class="viewcode-back" href="../../zlogging.types.html#zlogging.SubnetType.toascii">[docs]</a>    <span class="k">def</span> <span class="nf">toascii</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">Union</span><span class="p">[</span><span class="kc">None</span><span class="p">,</span> <span class="n">typing</span><span class="o">.</span><span class="n">IPNetwork</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Serialize ``data`` as ASCII log format.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            data: raw data</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            str: The ASCII representation of the IP network.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">data</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">str_unset_field</span>
+        <span class="k">return</span> <span class="nb">str</span><span class="p">(</span><span class="n">data</span><span class="p">)</span></div></div>
+
+
+<div class="viewcode-block" id="EnumType"><a class="viewcode-back" href="../../zlogging.types.html#zlogging.EnumType">[docs]</a><span class="k">class</span> <span class="nc">EnumType</span><span class="p">(</span><span class="n">_SimpleType</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Bro/Zeek ``enum`` data type.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        empty_field (:obj:`bytes` or :obj:`str`, optional): Placeholder for empty field.</span>
+<span class="sd">        unset_field (:obj:`bytes` or :obj:`str`, optional): Placeholder for unset field.</span>
+<span class="sd">        set_separator (:obj:`bytes` or :obj:`str`, optional): Separator for ``set``/``vector`` fields.</span>
+<span class="sd">        namespaces (:obj:`List[str]`, optional): Namespaces to be loaded.</span>
+<span class="sd">        bare (:obj:`bool`, optional): If ``True``, do not load ``zeek`` namespace by default.</span>
+<span class="sd">        enum_hook (:obj:`dict` mapping of :obj:`str` and :obj:`enum.Enum`, optional):</span>
+<span class="sd">            Additional enum to be included in the namespace.</span>
+<span class="sd">        *args: Variable length argument list.</span>
+<span class="sd">        **kwargs: Arbitrary keyword arguments.</span>
+
+<span class="sd">    Attributes:</span>
+<span class="sd">        empty_field (bytes): Placeholder for empty field.</span>
+<span class="sd">        unset_field (bytes): Placeholder for unset field.</span>
+<span class="sd">        set_separator (bytes): Separator for ``set``/``vector`` fields.</span>
+<span class="sd">        enum_namespaces (:obj:`dict` mapping :obj:`str` and :obj:`enum.Enum`):</span>
+<span class="sd">            Global namespace for ``enum`` data type.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">python_type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span><span class="o">-&gt;</span> <span class="nb">type</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;type: Corresponding Python type annotation.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">typing</span><span class="o">.</span><span class="n">Enum</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">zeek_type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;str: Corresponding Zeek type name.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="s1">&#39;enum&#39;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>  <span class="c1"># pylint: disable=unused-argument,keyword-arg-before-vararg</span>
+                 <span class="n">empty_field</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">Optional</span><span class="p">[</span><span class="n">typing</span><span class="o">.</span><span class="n">AnyStr</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+                 <span class="n">unset_field</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">Optional</span><span class="p">[</span><span class="n">typing</span><span class="o">.</span><span class="n">AnyStr</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+                 <span class="n">set_separator</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">Optional</span><span class="p">[</span><span class="n">typing</span><span class="o">.</span><span class="n">AnyStr</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+                 <span class="n">namespaces</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">Optional</span><span class="p">[</span><span class="n">typing</span><span class="o">.</span><span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">bare</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+                 <span class="n">enum_hook</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">Optional</span><span class="p">[</span><span class="n">typing</span><span class="o">.</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">typing</span><span class="o">.</span><span class="n">Enum</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+                 <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">empty_field</span><span class="o">=</span><span class="n">empty_field</span><span class="p">,</span> <span class="n">unset_field</span><span class="o">=</span><span class="n">unset_field</span><span class="p">,</span> <span class="n">set_separator</span><span class="o">=</span><span class="n">set_separator</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">namespaces</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">namespaces</span> <span class="o">=</span> <span class="nb">list</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">enum_namespaces</span> <span class="o">=</span> <span class="n">enum_generator</span><span class="p">(</span><span class="o">*</span><span class="n">namespaces</span><span class="p">,</span> <span class="n">bare</span><span class="o">=</span><span class="n">bare</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">enum_hook</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">enum_namespaces</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">enum_hook</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="k">return</span> <span class="p">(</span><span class="s1">&#39;</span><span class="si">%s</span><span class="s1">(empty_field=</span><span class="si">%s</span><span class="s1">, unset_field=</span><span class="si">%s</span><span class="s1">, &#39;</span>
+                <span class="s1">&#39;set_separator=</span><span class="si">%s</span><span class="s1">, enum_namespaces=</span><span class="si">%s</span><span class="s1">)&#39;</span><span class="p">)</span> <span class="o">%</span> <span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span><span class="p">,</span>
+                                                            <span class="bp">self</span><span class="o">.</span><span class="n">empty_field</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">unset_field</span><span class="p">,</span>
+                                                            <span class="bp">self</span><span class="o">.</span><span class="n">set_separator</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">enum_namespaces</span><span class="p">)</span>
+
+<div class="viewcode-block" id="EnumType.parse"><a class="viewcode-back" href="../../zlogging.types.html#zlogging.EnumType.parse">[docs]</a>    <span class="k">def</span> <span class="nf">parse</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">Union</span><span class="p">[</span><span class="n">typing</span><span class="o">.</span><span class="n">AnyStr</span><span class="p">,</span> <span class="n">typing</span><span class="o">.</span><span class="n">Enum</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">typing</span><span class="o">.</span><span class="n">Union</span><span class="p">[</span><span class="kc">None</span><span class="p">,</span> <span class="n">typing</span><span class="o">.</span><span class="n">Enum</span><span class="p">]:</span>
+        <span class="sd">&quot;&quot;&quot;Parse ``data`` from string.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            data: raw data</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            The parsed enum data. If ``data`` is *unset*, ``None`` will</span>
+<span class="sd">            be returned.</span>
+
+<span class="sd">        Warns:</span>
+<span class="sd">            ZeekValueWarning: If ``date`` is not defined in the enum namespace.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">enum</span><span class="o">.</span><span class="n">Enum</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">data</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+            <span class="n">data</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s1">&#39;ascii&#39;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">data</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">unset_field</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">None</span>
+        <span class="n">data_str</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s1">&#39;ascii&#39;</span><span class="p">)</span>
+        <span class="n">item</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">enum_namespaces</span><span class="o">.</span><span class="n">get</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">item</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s1">&#39;unrecognised enum value: </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">data_str</span><span class="p">,</span> <span class="n">ZeekValueWarning</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">enum</span><span class="o">.</span><span class="n">IntFlag</span><span class="p">(</span><span class="s1">&#39;&lt;unknown&gt;&#39;</span><span class="p">,</span> <span class="p">[(</span><span class="n">data_str</span><span class="p">,</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">())])[</span><span class="n">data_str</span><span class="p">]</span>
+        <span class="k">return</span> <span class="n">item</span></div>
+
+<div class="viewcode-block" id="EnumType.tojson"><a class="viewcode-back" href="../../zlogging.types.html#zlogging.EnumType.tojson">[docs]</a>    <span class="k">def</span> <span class="nf">tojson</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">Union</span><span class="p">[</span><span class="kc">None</span><span class="p">,</span> <span class="n">typing</span><span class="o">.</span><span class="n">Enum</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">typing</span><span class="o">.</span><span class="n">Union</span><span class="p">[</span><span class="kc">None</span><span class="p">,</span> <span class="nb">str</span><span class="p">]:</span>
+        <span class="sd">&quot;&quot;&quot;Serialize ``data`` as JSON log format.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            data: raw data</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            str: The JSON serialisable enum data.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">data</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">data</span>
+        <span class="k">return</span> <span class="n">data</span><span class="o">.</span><span class="n">name</span></div>
+
+<div class="viewcode-block" id="EnumType.toascii"><a class="viewcode-back" href="../../zlogging.types.html#zlogging.EnumType.toascii">[docs]</a>    <span class="k">def</span> <span class="nf">toascii</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">Union</span><span class="p">[</span><span class="kc">None</span><span class="p">,</span> <span class="n">typing</span><span class="o">.</span><span class="n">Enum</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Serialize ``data`` as ASCII log format.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            data: raw data</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            str: The ASCII representation of the enum data.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">data</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">str_unset_field</span>
+        <span class="k">return</span> <span class="n">data</span><span class="o">.</span><span class="n">name</span></div></div>
+
+
+<span class="n">_data</span> <span class="o">=</span> <span class="n">typing</span><span class="o">.</span><span class="n">TypeVar</span><span class="p">(</span><span class="s1">&#39;data&#39;</span><span class="p">,</span> <span class="n">AddrType</span><span class="p">,</span> <span class="n">BoolType</span><span class="p">,</span> <span class="n">CountType</span><span class="p">,</span> <span class="n">DoubleType</span><span class="p">,</span> <span class="n">EnumType</span><span class="p">,</span> <span class="n">IntervalType</span><span class="p">,</span>
+                       <span class="n">IntType</span><span class="p">,</span> <span class="n">PortType</span><span class="p">,</span> <span class="n">StringType</span><span class="p">,</span> <span class="n">SubnetType</span><span class="p">,</span> <span class="n">TimeType</span><span class="p">)</span>
+<span class="sd">&quot;&quot;&quot;type: A typing variable representing all valid data types for Bro/Zeek log framework.&quot;&quot;&quot;</span>
+
+
+<div class="viewcode-block" id="_GenericType"><a class="viewcode-back" href="../../zlogging.types.html#zlogging._GenericType">[docs]</a><span class="k">class</span> <span class="nc">_GenericType</span><span class="p">(</span><span class="n">BaseType</span><span class="p">):</span>  <span class="c1"># pylint: disable=abstract-method</span>
+    <span class="sd">&quot;&quot;&quot;Generic data type.</span>
+
+<span class="sd">    In Bro/Zeek script language, such generic type includes ``set`` and</span>
+<span class="sd">    ``vector``, which are also known as *container* types.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span></div>
+
+
+<div class="viewcode-block" id="SetType"><a class="viewcode-back" href="../../zlogging.types.html#zlogging.SetType">[docs]</a><span class="k">class</span> <span class="nc">SetType</span><span class="p">(</span><span class="n">_GenericType</span><span class="p">,</span> <span class="n">typing</span><span class="o">.</span><span class="n">Generic</span><span class="p">[</span><span class="n">_data</span><span class="p">]):</span>
+    <span class="sd">&quot;&quot;&quot;Bro/Zeek ``set`` data type.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        empty_field (:obj:`bytes` or :obj:`str`, optional): Placeholder for empty field.</span>
+<span class="sd">        unset_field (:obj:`bytes` or :obj:`str`, optional): Placeholder for unset field.</span>
+<span class="sd">        set_separator (:obj:`bytes` or :obj:`str`, optional): Separator for ``set``/``vector`` fields.</span>
+<span class="sd">        element_type (:class:`~zlogging.types.BaseType` instance): Data type of container&#39;s elements.</span>
+<span class="sd">        *args: Variable length argument list.</span>
+<span class="sd">        **kwargs: Arbitrary keyword arguments.</span>
+
+<span class="sd">    Attributes:</span>
+<span class="sd">        empty_field (bytes): Placeholder for empty field.</span>
+<span class="sd">        unset_field (bytes): Placeholder for unset field.</span>
+<span class="sd">        set_separator (bytes): Separator for ``set``/``vector`` fields.</span>
+<span class="sd">        element_type (:class:`~zlogging.types.BaseType` instance): Data type of container&#39;s elements.</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        :exc:`ZeekTypeError`: If ``element_type`` is not supplied.</span>
+<span class="sd">        :exc:`ZeekValueError`: If ``element_type`` is not a valid Bro/Zeek data type.</span>
+
+<span class="sd">    Example:</span>
+<span class="sd">        As a *generic* data type, the class supports the typing proxy as introduced</span>
+<span class="sd">        `PEP 484`_::</span>
+
+<span class="sd">            &gt;&gt;&gt; SetType[StringType]</span>
+
+<span class="sd">        which is the same **at runtime** as following::</span>
+
+<span class="sd">            &gt;&gt;&gt; SetType(element_type=StringType())</span>
+
+<span class="sd">    Note:</span>
+<span class="sd">        A valid ``element_type`` should be a *simple* data type, i.e. a subclass</span>
+<span class="sd">        of :class:`~zlogging.types._SimpleType`.</span>
+
+<span class="sd">    .. _PEP 484:</span>
+<span class="sd">        https://www.python.org/dev/peps/pep-0484/</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">python_type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span><span class="o">-&gt;</span> <span class="nb">type</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;type: Corresponding Python type annotation.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">typing</span><span class="o">.</span><span class="n">Set</span><span class="p">[</span><span class="n">_data</span><span class="p">]</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">zeek_type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;str: Corresponding Zeek type name.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="s1">&#39;set[</span><span class="si">%s</span><span class="s1">]&#39;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">element_type</span><span class="o">.</span><span class="n">zeek_type</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>  <span class="c1"># pylint: disable=unused-argument,keyword-arg-before-vararg</span>
+                 <span class="n">empty_field</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">Optional</span><span class="p">[</span><span class="n">typing</span><span class="o">.</span><span class="n">AnyStr</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+                 <span class="n">unset_field</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">Optional</span><span class="p">[</span><span class="n">typing</span><span class="o">.</span><span class="n">AnyStr</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+                 <span class="n">set_separator</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">Optional</span><span class="p">[</span><span class="n">typing</span><span class="o">.</span><span class="n">AnyStr</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+                 <span class="n">element_type</span><span class="p">:</span> <span class="n">_data</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+                 <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">empty_field</span><span class="o">=</span><span class="n">empty_field</span><span class="p">,</span> <span class="n">unset_field</span><span class="o">=</span><span class="n">unset_field</span><span class="p">,</span> <span class="n">set_separator</span><span class="o">=</span><span class="n">set_separator</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">element_type</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">ZeekTypeError</span><span class="p">(</span><span class="s2">&quot;__init__() missing 1 required positional argument: &#39;element_type&#39;&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">element_type</span><span class="p">,</span> <span class="n">_SimpleType</span><span class="p">):</span>
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">element_type</span><span class="p">,</span> <span class="nb">type</span><span class="p">)</span> <span class="ow">and</span> <span class="nb">issubclass</span><span class="p">(</span><span class="n">element_type</span><span class="p">,</span> <span class="n">_SimpleType</span><span class="p">):</span>
+                <span class="n">element_type</span> <span class="o">=</span> <span class="n">element_type</span><span class="p">(</span><span class="n">empty_field</span><span class="o">=</span><span class="n">empty_field</span><span class="p">,</span> <span class="n">unset_field</span><span class="o">=</span><span class="n">unset_field</span><span class="p">,</span> <span class="n">set_separator</span><span class="o">=</span><span class="n">set_separator</span><span class="p">)</span>  <span class="c1"># pylint: disable=line-too-long</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="n">ZeekValueError</span><span class="p">(</span><span class="s1">&#39;invalid element type: </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="nb">type</span><span class="p">(</span><span class="n">element_type</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">element_type</span><span class="p">:</span> <span class="n">_SimpleType</span> <span class="o">=</span> <span class="n">element_type</span>
+
+    <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="k">return</span> <span class="p">(</span><span class="s1">&#39;</span><span class="si">%s</span><span class="s1">(empty_field=</span><span class="si">%s</span><span class="s1">, unset_field=</span><span class="si">%s</span><span class="s1">, &#39;</span>
+                <span class="s1">&#39;set_separator=</span><span class="si">%s</span><span class="s1">, element_type=</span><span class="si">%s</span><span class="s1">)&#39;</span><span class="p">)</span> <span class="o">%</span> <span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span><span class="p">,</span>
+                                                         <span class="bp">self</span><span class="o">.</span><span class="n">empty_field</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">unset_field</span><span class="p">,</span>
+                                                         <span class="bp">self</span><span class="o">.</span><span class="n">set_separator</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">element_type</span><span class="p">)</span>
+
+<div class="viewcode-block" id="SetType.parse"><a class="viewcode-back" href="../../zlogging.types.html#zlogging.SetType.parse">[docs]</a>    <span class="k">def</span> <span class="nf">parse</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">Union</span><span class="p">[</span><span class="n">typing</span><span class="o">.</span><span class="n">AnyStr</span><span class="p">,</span> <span class="n">typing</span><span class="o">.</span><span class="n">Set</span><span class="p">[</span><span class="n">_data</span><span class="p">]])</span> <span class="o">-&gt;</span> <span class="n">typing</span><span class="o">.</span><span class="n">Union</span><span class="p">[</span><span class="kc">None</span><span class="p">,</span> <span class="n">typing</span><span class="o">.</span><span class="n">Set</span><span class="p">[</span><span class="n">_data</span><span class="p">]]:</span>
+        <span class="sd">&quot;&quot;&quot;Parse ``data`` from string.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            data: raw data</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            The parsed set data. If ``data`` is *unset*, ``None`` will</span>
+<span class="sd">            be returned.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="nb">set</span><span class="p">):</span>
+            <span class="k">return</span> <span class="nb">set</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">element_type</span><span class="p">(</span><span class="n">element</span><span class="p">)</span> <span class="k">for</span> <span class="n">element</span> <span class="ow">in</span> <span class="n">data</span><span class="p">)</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+            <span class="n">data</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s1">&#39;ascii&#39;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">data</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">unset_field</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">None</span>
+        <span class="k">if</span> <span class="n">data</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">empty_field</span><span class="p">:</span>
+            <span class="k">return</span> <span class="nb">set</span><span class="p">()</span>
+        <span class="k">return</span> <span class="nb">set</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">element_type</span><span class="p">(</span><span class="n">element</span><span class="p">)</span> <span class="k">for</span> <span class="n">element</span> <span class="ow">in</span> <span class="n">data</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">set_separator</span><span class="p">))</span></div>
+
+<div class="viewcode-block" id="SetType.tojson"><a class="viewcode-back" href="../../zlogging.types.html#zlogging.SetType.tojson">[docs]</a>    <span class="k">def</span> <span class="nf">tojson</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">Union</span><span class="p">[</span><span class="kc">None</span><span class="p">,</span> <span class="n">typing</span><span class="o">.</span><span class="n">Set</span><span class="p">[</span><span class="n">_data</span><span class="p">]])</span> <span class="o">-&gt;</span> <span class="n">typing</span><span class="o">.</span><span class="n">Union</span><span class="p">[</span><span class="kc">None</span><span class="p">,</span> <span class="n">typing</span><span class="o">.</span><span class="n">List</span><span class="p">[</span><span class="n">_data</span><span class="p">]]:</span>
+        <span class="sd">&quot;&quot;&quot;Serialize ``data`` as JSON log format.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            data: raw data</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            list: The JSON serialisable set data.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">data</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">None</span>
+        <span class="k">return</span> <span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">element_type</span><span class="o">.</span><span class="n">tojson</span><span class="p">(</span><span class="n">element</span><span class="p">)</span> <span class="k">for</span> <span class="n">element</span> <span class="ow">in</span> <span class="n">data</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="SetType.toascii"><a class="viewcode-back" href="../../zlogging.types.html#zlogging.SetType.toascii">[docs]</a>    <span class="k">def</span> <span class="nf">toascii</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">Union</span><span class="p">[</span><span class="kc">None</span><span class="p">,</span> <span class="n">typing</span><span class="o">.</span><span class="n">Set</span><span class="p">[</span><span class="n">_data</span><span class="p">]])</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Serialize ``data`` as ASCII log format.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            data: raw data</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            str: The ASCII representation of the set data.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">data</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">str_unset_field</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">data</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">str_empty_field</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">set_separator</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">element_type</span><span class="o">.</span><span class="n">toascii</span><span class="p">(</span><span class="n">element</span><span class="p">)</span> <span class="k">for</span> <span class="n">element</span> <span class="ow">in</span> <span class="n">data</span><span class="p">)</span></div></div>
+
+
+<div class="viewcode-block" id="VectorType"><a class="viewcode-back" href="../../zlogging.types.html#zlogging.VectorType">[docs]</a><span class="k">class</span> <span class="nc">VectorType</span><span class="p">(</span><span class="n">_GenericType</span><span class="p">,</span> <span class="n">typing</span><span class="o">.</span><span class="n">Generic</span><span class="p">[</span><span class="n">_data</span><span class="p">]):</span>
+    <span class="sd">&quot;&quot;&quot;Bro/Zeek ``vector`` data type.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        empty_field (:obj:`bytes` or :obj:`str`, optional): Placeholder for empty field.</span>
+<span class="sd">        unset_field (:obj:`bytes` or :obj:`str`, optional): Placeholder for unset field.</span>
+<span class="sd">        set_separator (:obj:`bytes` or :obj:`str`, optional): Separator for ``set``/``vector`` fields.</span>
+<span class="sd">        element_type (:class:`~zlogging.types.BaseType` instance): Data type of container&#39;s elements.</span>
+<span class="sd">        *args: Variable length argument list.</span>
+<span class="sd">        **kwargs: Arbitrary keyword arguments.</span>
+
+<span class="sd">    Attributes:</span>
+<span class="sd">        empty_field (bytes): Placeholder for empty field.</span>
+<span class="sd">        unset_field (bytes): Placeholder for unset field.</span>
+<span class="sd">        set_separator (bytes): Separator for ``set``/``vector`` fields.</span>
+<span class="sd">        element_type (:class:`~zlogging.types.BaseType` instance): Data type of container&#39;s elements.</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        :exc:`ZeekTypeError`: If ``element_type`` is not supplied.</span>
+<span class="sd">        :exc:`ZeekValueError`: If ``element_type`` is not a valid Bro/Zeek data type.</span>
+
+<span class="sd">    Example:</span>
+<span class="sd">        As a *generic* data type, the class supports the typing proxy as introduced</span>
+<span class="sd">        `PEP 484`_::</span>
+
+<span class="sd">            &gt;&gt;&gt; VectorType[StringType]</span>
+
+<span class="sd">        which is the same **at runtime** as following::</span>
+
+<span class="sd">            &gt;&gt;&gt; VectorType(element_type=StringType())</span>
+
+<span class="sd">    Note:</span>
+<span class="sd">        A valid ``element_type`` should be a *simple* data type, i.e. a subclass</span>
+<span class="sd">        of :class:`~zlogging.types._SimpleType`.</span>
+
+<span class="sd">    .. _PEP 484:</span>
+<span class="sd">        https://www.python.org/dev/peps/pep-0484/</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">python_type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span><span class="o">-&gt;</span> <span class="nb">type</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;type: Corresponding Python type annotation.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">typing</span><span class="o">.</span><span class="n">List</span><span class="p">[</span><span class="n">_data</span><span class="p">]</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">zeek_type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;str: Corresponding Zeek type name.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="s1">&#39;vector[</span><span class="si">%s</span><span class="s1">]&#39;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">element_type</span><span class="o">.</span><span class="n">zeek_type</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>  <span class="c1"># pylint: disable=unused-argument,keyword-arg-before-vararg</span>
+                 <span class="n">empty_field</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">Optional</span><span class="p">[</span><span class="n">typing</span><span class="o">.</span><span class="n">AnyStr</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+                 <span class="n">unset_field</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">Optional</span><span class="p">[</span><span class="n">typing</span><span class="o">.</span><span class="n">AnyStr</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+                 <span class="n">set_separator</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">Optional</span><span class="p">[</span><span class="n">typing</span><span class="o">.</span><span class="n">AnyStr</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+                 <span class="n">element_type</span><span class="p">:</span> <span class="n">_data</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+                 <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">empty_field</span><span class="o">=</span><span class="n">empty_field</span><span class="p">,</span> <span class="n">unset_field</span><span class="o">=</span><span class="n">unset_field</span><span class="p">,</span> <span class="n">set_separator</span><span class="o">=</span><span class="n">set_separator</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">element_type</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">ZeekTypeError</span><span class="p">(</span><span class="s1">&#39;__init__() missing 1 required positional argument: </span><span class="si">%r</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">element_type</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">element_type</span><span class="p">,</span> <span class="n">_SimpleType</span><span class="p">):</span>
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">element_type</span><span class="p">,</span> <span class="nb">type</span><span class="p">)</span> <span class="ow">and</span> <span class="nb">issubclass</span><span class="p">(</span><span class="n">element_type</span><span class="p">,</span> <span class="n">_SimpleType</span><span class="p">):</span>
+                <span class="n">element_type</span> <span class="o">=</span> <span class="n">element_type</span><span class="p">(</span><span class="n">empty_field</span><span class="o">=</span><span class="n">empty_field</span><span class="p">,</span> <span class="n">unset_field</span><span class="o">=</span><span class="n">unset_field</span><span class="p">,</span> <span class="n">set_separator</span><span class="o">=</span><span class="n">set_separator</span><span class="p">)</span>  <span class="c1"># pylint: disable=line-too-long</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="n">ZeekValueError</span><span class="p">(</span><span class="s1">&#39;invalid element type: </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="nb">type</span><span class="p">(</span><span class="n">element_type</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">element_type</span><span class="p">:</span> <span class="n">_SimpleType</span> <span class="o">=</span> <span class="n">element_type</span>
+
+    <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="k">return</span> <span class="p">(</span><span class="s1">&#39;</span><span class="si">%s</span><span class="s1">(empty_field=</span><span class="si">%s</span><span class="s1">, unset_field=</span><span class="si">%s</span><span class="s1">, &#39;</span>
+                <span class="s1">&#39;set_separator=</span><span class="si">%s</span><span class="s1">, element_type=</span><span class="si">%s</span><span class="s1">)&#39;</span><span class="p">)</span> <span class="o">%</span> <span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span><span class="p">,</span>
+                                                         <span class="bp">self</span><span class="o">.</span><span class="n">empty_field</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">unset_field</span><span class="p">,</span>
+                                                         <span class="bp">self</span><span class="o">.</span><span class="n">set_separator</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">element_type</span><span class="p">)</span>
+
+<div class="viewcode-block" id="VectorType.parse"><a class="viewcode-back" href="../../zlogging.types.html#zlogging.VectorType.parse">[docs]</a>    <span class="k">def</span> <span class="nf">parse</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">Union</span><span class="p">[</span><span class="n">typing</span><span class="o">.</span><span class="n">AnyStr</span><span class="p">,</span> <span class="n">typing</span><span class="o">.</span><span class="n">List</span><span class="p">[</span><span class="n">_data</span><span class="p">]])</span> <span class="o">-&gt;</span> <span class="n">typing</span><span class="o">.</span><span class="n">Union</span><span class="p">[</span><span class="kc">None</span><span class="p">,</span> <span class="n">typing</span><span class="o">.</span><span class="n">List</span><span class="p">[</span><span class="n">_data</span><span class="p">]]:</span>
+        <span class="sd">&quot;&quot;&quot;Parse ``data`` from string.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            data: raw data</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            The parsed list data. If ``data`` is *unset*, ``None`` will</span>
+<span class="sd">            be returned.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">data</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+            <span class="n">data</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s1">&#39;ascii&#39;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">data</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">unset_field</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">None</span>
+        <span class="k">if</span> <span class="n">data</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">empty_field</span><span class="p">:</span>
+            <span class="k">return</span> <span class="nb">list</span><span class="p">()</span>
+        <span class="k">return</span> <span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">element_type</span><span class="p">(</span><span class="n">element</span><span class="p">)</span> <span class="k">for</span> <span class="n">element</span> <span class="ow">in</span> <span class="n">data</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">set_separator</span><span class="p">))</span></div>
+
+<div class="viewcode-block" id="VectorType.tojson"><a class="viewcode-back" href="../../zlogging.types.html#zlogging.VectorType.tojson">[docs]</a>    <span class="k">def</span> <span class="nf">tojson</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">Union</span><span class="p">[</span><span class="kc">None</span><span class="p">,</span> <span class="n">typing</span><span class="o">.</span><span class="n">List</span><span class="p">[</span><span class="n">_data</span><span class="p">]])</span> <span class="o">-&gt;</span> <span class="n">typing</span><span class="o">.</span><span class="n">Union</span><span class="p">[</span><span class="kc">None</span><span class="p">,</span> <span class="n">typing</span><span class="o">.</span><span class="n">List</span><span class="p">[</span><span class="n">_data</span><span class="p">]]:</span>  <span class="c1"># pylint: disable=line-too-long</span>
+        <span class="sd">&quot;&quot;&quot;Serialize ``data`` as JSON log format.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            data: raw data</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            list: The JSON serialisable list data.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">data</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">None</span>
+        <span class="k">return</span> <span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">element_type</span><span class="o">.</span><span class="n">tojson</span><span class="p">(</span><span class="n">element</span><span class="p">)</span> <span class="k">for</span> <span class="n">element</span> <span class="ow">in</span> <span class="n">data</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="VectorType.toascii"><a class="viewcode-back" href="../../zlogging.types.html#zlogging.VectorType.toascii">[docs]</a>    <span class="k">def</span> <span class="nf">toascii</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">Union</span><span class="p">[</span><span class="kc">None</span><span class="p">,</span> <span class="n">typing</span><span class="o">.</span><span class="n">List</span><span class="p">[</span><span class="n">_data</span><span class="p">]])</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Serialize ``data`` as ASCII log format.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            data: raw data</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            str: The ASCII representation of the list data.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">data</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">str_unset_field</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">data</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">str_empty_field</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">set_separator</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">element_type</span><span class="o">.</span><span class="n">toascii</span><span class="p">(</span><span class="n">element</span><span class="p">)</span> <span class="k">for</span> <span class="n">element</span> <span class="ow">in</span> <span class="n">data</span><span class="p">)</span></div></div>
+
+
+<div class="viewcode-block" id="_VariadicType"><a class="viewcode-back" href="../../zlogging.types.html#zlogging._VariadicType">[docs]</a><span class="k">class</span> <span class="nc">_VariadicType</span><span class="p">(</span><span class="n">BaseType</span><span class="p">):</span>  <span class="c1"># pylint: disable=abstract-method</span>
+    <span class="sd">&quot;&quot;&quot;Variadic data type.</span>
+
+<span class="sd">    In Bro/Zeek script language, such variadic type refers to ``record``, which</span>
+<span class="sd">    is also a *container* type.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="_VariadicType.parse"><a class="viewcode-back" href="../../zlogging.types.html#zlogging._VariadicType.parse">[docs]</a>    <span class="k">def</span> <span class="nf">parse</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">typing</span><span class="o">.</span><span class="n">NoReturn</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Not supported for a variadic data type.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            data: data to process</span>
+
+<span class="sd">        Raises:</span>
+<span class="sd">            :exc:`ZeekNotImplemented`: If try to call such method.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">raise</span> <span class="n">ZeekNotImplemented</span></div>
+
+<div class="viewcode-block" id="_VariadicType.tojson"><a class="viewcode-back" href="../../zlogging.types.html#zlogging._VariadicType.tojson">[docs]</a>    <span class="k">def</span> <span class="nf">tojson</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">typing</span><span class="o">.</span><span class="n">NoReturn</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Not supported for a variadic data type.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            data: data to process</span>
+
+<span class="sd">        Raises:</span>
+<span class="sd">            :exc:`ZeekNotImplemented`: If try to call such method.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">raise</span> <span class="n">ZeekNotImplemented</span></div>
+
+<div class="viewcode-block" id="_VariadicType.toascii"><a class="viewcode-back" href="../../zlogging.types.html#zlogging._VariadicType.toascii">[docs]</a>    <span class="k">def</span> <span class="nf">toascii</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">typing</span><span class="o">.</span><span class="n">NoReturn</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Not supported for a variadic data type.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            data: data to process</span>
+
+<span class="sd">        Raises:</span>
+<span class="sd">            :exc:`ZeekNotImplemented`: If try to call such method.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">raise</span> <span class="n">ZeekNotImplemented</span></div></div>
+
+
+<div class="viewcode-block" id="RecordType"><a class="viewcode-back" href="../../zlogging.types.html#zlogging.RecordType">[docs]</a><span class="k">class</span> <span class="nc">RecordType</span><span class="p">(</span><span class="n">_VariadicType</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Bro/Zeek ``record`` data type.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        empty_field (:obj:`bytes` or :obj:`str`, optional): Placeholder for empty field.</span>
+<span class="sd">        unset_field (:obj:`bytes` or :obj:`str`, optional): Placeholder for unset field.</span>
+<span class="sd">        set_separator (:obj:`bytes` or :obj:`str`, optional): Separator for ``set``/``vector`` fields.</span>
+<span class="sd">        *args: Variable length argument list.</span>
+<span class="sd">        **kwargs: element_mapping (:obj:`dict` mapping :obj:`str` and :class:`~zlogging.types.BaseType` instance):</span>
+<span class="sd">            Data type of container&#39;s elements.</span>
+
+<span class="sd">    Attributes:</span>
+<span class="sd">        empty_field (bytes): Placeholder for empty field.</span>
+<span class="sd">        unset_field (bytes): Placeholder for unset field.</span>
+<span class="sd">        set_separator (bytes): Separator for ``set``/``vector`` fields.</span>
+<span class="sd">        element_mapping (:obj:`dict` mapping :obj:`str` and :class:`~zlogging.types.BaseType` instance):</span>
+<span class="sd">            Data type of container&#39;s elements.</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        :exc:`ZeekTypeError`: If ``element_mapping`` is not supplied.</span>
+<span class="sd">        :exc:`ZeekValueError`: If ``element_mapping`` is not a valid Bro/Zeek</span>
+<span class="sd">            data type; or in case of inconsistency from ``empty_field``,</span>
+<span class="sd">            ``unset_field`` and ``set_separator`` of each field.</span>
+
+<span class="sd">    Note:</span>
+<span class="sd">        A valid ``element_mapping`` should be a *simple* or *generic* data type,</span>
+<span class="sd">        i.e. a subclass of :class:`~zlogging.types._SimpleType` or</span>
+<span class="sd">        :class:`~zlogging.types._GenericType`.</span>
+
+<span class="sd">    See Also:</span>
+<span class="sd">        See :func:`~zlogging._aux_expand_typing` for more information about</span>
+<span class="sd">        processing the fields.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">python_type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span><span class="o">-&gt;</span> <span class="nb">type</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;type: Corresponding Python type annotation.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">typing</span><span class="o">.</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">_data</span><span class="p">]</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">zeek_type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;str: Corresponding Zeek type name.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="s1">&#39;record&#39;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>  <span class="c1"># pylint: disable=unused-argument,keyword-arg-before-vararg</span>
+                 <span class="n">empty_field</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">Optional</span><span class="p">[</span><span class="n">typing</span><span class="o">.</span><span class="n">AnyStr</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+                 <span class="n">unset_field</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">Optional</span><span class="p">[</span><span class="n">typing</span><span class="o">.</span><span class="n">AnyStr</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+                 <span class="n">set_separator</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">Optional</span><span class="p">[</span><span class="n">typing</span><span class="o">.</span><span class="n">AnyStr</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+                 <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">element_mapping</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">empty_field</span><span class="o">=</span><span class="n">empty_field</span><span class="p">,</span> <span class="n">unset_field</span><span class="o">=</span><span class="n">unset_field</span><span class="p">,</span> <span class="n">set_separator</span><span class="o">=</span><span class="n">set_separator</span><span class="p">)</span>
+
+        <span class="n">expanded</span> <span class="o">=</span> <span class="n">expand_typing</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ZeekValueError</span><span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">empty_field</span> <span class="o">!=</span> <span class="n">expanded</span><span class="p">[</span><span class="s1">&#39;empty_field&#39;</span><span class="p">]:</span>
+            <span class="k">raise</span> <span class="n">ZeekValueError</span><span class="p">(</span><span class="s2">&quot;inconsistent value of &#39;empty_field&#39;: </span><span class="si">%r</span><span class="s2"> and </span><span class="si">%r</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">empty_field</span><span class="p">,</span> <span class="n">expanded</span><span class="p">[</span><span class="s1">&#39;empty_field&#39;</span><span class="p">]))</span>  <span class="c1"># pylint: disable=line-too-long</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">unset_field</span> <span class="o">!=</span> <span class="n">expanded</span><span class="p">[</span><span class="s1">&#39;unset_field&#39;</span><span class="p">]:</span>
+            <span class="k">raise</span> <span class="n">ZeekValueError</span><span class="p">(</span><span class="s2">&quot;inconsistent value of &#39;unset_field&#39;: </span><span class="si">%r</span><span class="s2"> and </span><span class="si">%r</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">unset_field</span><span class="p">,</span> <span class="n">expanded</span><span class="p">[</span><span class="s1">&#39;unset_field&#39;</span><span class="p">]))</span>  <span class="c1"># pylint: disable=line-too-long</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">set_separator</span> <span class="o">!=</span> <span class="n">expanded</span><span class="p">[</span><span class="s1">&#39;set_separator&#39;</span><span class="p">]:</span>
+            <span class="k">raise</span> <span class="n">ZeekValueError</span><span class="p">(</span><span class="s2">&quot;inconsistent value of &#39;set_separator&#39;: </span><span class="si">%r</span><span class="s2"> and </span><span class="si">%r</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">set_separator</span><span class="p">,</span> <span class="n">expanded</span><span class="p">[</span><span class="s1">&#39;set_separator&#39;</span><span class="p">]))</span>  <span class="c1"># pylint: disable=line-too-long</span>
+
+        <span class="n">fields</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">OrderedDict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">_data</span><span class="p">]</span> <span class="o">=</span> <span class="n">expanded</span><span class="p">[</span><span class="s1">&#39;fields&#39;</span><span class="p">]</span>
+        <span class="k">for</span> <span class="n">field</span><span class="p">,</span> <span class="n">element_type</span> <span class="ow">in</span> <span class="n">fields</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">element_type</span><span class="p">,</span> <span class="p">(</span><span class="n">_SimpleType</span><span class="p">,</span> <span class="n">_GenericType</span><span class="p">)):</span>
+                <span class="k">continue</span>
+            <span class="k">raise</span> <span class="n">ZeekValueError</span><span class="p">(</span><span class="s1">&#39;invalid element type of field </span><span class="si">%r</span><span class="s1">: </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">field</span><span class="p">,</span> <span class="nb">type</span><span class="p">(</span><span class="n">element_type</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span><span class="p">))</span>
+        <span class="k">for</span> <span class="n">field</span><span class="p">,</span> <span class="n">element_type</span> <span class="ow">in</span> <span class="n">element_mapping</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">element_type</span><span class="p">,</span> <span class="n">_SimpleType</span><span class="p">):</span>
+                <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">element_type</span><span class="p">,</span> <span class="nb">type</span><span class="p">)</span> <span class="ow">and</span> <span class="nb">issubclass</span><span class="p">(</span><span class="n">element_type</span><span class="p">,</span> <span class="n">_SimpleType</span><span class="p">):</span>
+                    <span class="n">element_type</span> <span class="o">=</span> <span class="n">element_type</span><span class="p">(</span><span class="n">empty_field</span><span class="o">=</span><span class="n">empty_field</span><span class="p">,</span> <span class="n">unset_field</span><span class="o">=</span><span class="n">unset_field</span><span class="p">,</span>
+                                                <span class="n">set_separator</span><span class="o">=</span><span class="n">set_separator</span><span class="p">)</span>  <span class="c1"># pylint: disable=line-too-long</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="k">raise</span> <span class="n">ZeekValueError</span><span class="p">(</span><span class="s1">&#39;invalid element type of field </span><span class="si">%r</span><span class="s1">: </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">field</span><span class="p">,</span> <span class="nb">type</span><span class="p">(</span><span class="n">element_type</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span><span class="p">))</span>
+            <span class="n">fields</span><span class="p">[</span><span class="n">field</span><span class="p">]</span> <span class="o">=</span> <span class="n">element_type</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">element_mapping</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">_data</span><span class="p">]</span> <span class="o">=</span> <span class="n">fields</span>
+
+    <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="k">return</span> <span class="p">(</span><span class="s1">&#39;</span><span class="si">%s</span><span class="s1">(empty_field=</span><span class="si">%s</span><span class="s1">, unset_field=</span><span class="si">%s</span><span class="s1">, &#39;</span>
+                <span class="s1">&#39;set_separator=</span><span class="si">%s</span><span class="s1">, element_mapping=</span><span class="si">%s</span><span class="s1">)&#39;</span><span class="p">)</span> <span class="o">%</span> <span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span><span class="p">,</span>
+                                                            <span class="bp">self</span><span class="o">.</span><span class="n">empty_field</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">unset_field</span><span class="p">,</span>
+                                                            <span class="bp">self</span><span class="o">.</span><span class="n">set_separator</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">element_mapping</span><span class="p">)</span></div>
+</pre></div>
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../../index.html">ZLogging</a></h1>
+
+
+
+
+
+
+<p>
+<iframe src="https://ghbtns.com/github-btn.html?user=JarryShaw&repo=zlogging&type=star&count=true&size=large&v=2"
+  allowtransparency="true" frameborder="0" scrolling="0" width="200px" height="35px"></iframe>
+</p>
+
+
+
+
+
+<h3>Navigation</h3>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../zlogging.html">Bro/Zeek Logging Framework for Python</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../index.html">Documentation overview</a><ul>
+  <li><a href="../index.html">Module code</a><ul>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2020, Jarry Shaw.
+      
+    </div>
+
+    
+    <a href="https://github.com/JarryShaw/zlogging" class="github">
+        <img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub"  class="github"/>
+    </a>
+    
+
+    
+  </body>
+</html>

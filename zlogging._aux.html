@@ -1,0 +1,357 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Internal Auxiliary Functions &#8212; ZLogging 0.1.0.post1 documentation</title>
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Enum Namespace" href="zlogging.enum.html" />
+    <link rel="prev" title="Exceptions &amp; Warnings" href="zlogging._exc.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="module-zlogging._aux">
+<span id="internal-auxiliary-functions"></span><h1>Internal Auxiliary Functions<a class="headerlink" href="#module-zlogging._aux" title="Permalink to this headline">¶</a></h1>
+<p>Auxiliary functions.</p>
+<dl class="py function">
+<dt id="zlogging._aux.readline">
+<code class="sig-prename descclassname">zlogging._aux.</code><code class="sig-name descname">readline</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">file</span></em>, <em class="sig-param"><span class="n">separator</span><span class="o">=</span><span class="default_value">b'\t'</span></em>, <em class="sig-param"><span class="n">maxsplit</span><span class="o">=</span><span class="default_value">- 1</span></em>, <em class="sig-param"><span class="n">decode</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/zlogging/_aux.html#readline"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zlogging._aux.readline" title="Permalink to this definition">¶</a></dt>
+<dd><p>Wrapper for <code class="xref py py-meth docutils literal notranslate"><span class="pre">file.readline()</span></code> function.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>file</strong> (<em>_io.BufferedReader</em>) – Log file object opened in binary mode.</p></li>
+<li><p><strong>separator</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(in Python v3.9)"><em>bytes</em></a>) – Data separator.</p></li>
+<li><p><strong>maxsplit</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><em>int</em></a>) – Maximum number of splits to do; see <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes.split" title="(in Python v3.9)"><code class="xref py py-meth docutils literal notranslate"><span class="pre">bytes.split()</span></code></a>
+and <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str.split" title="(in Python v3.9)"><code class="xref py py-meth docutils literal notranslate"><span class="pre">str.split()</span></code></a> for more information.</p></li>
+<li><p><strong>decode</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)"><em>bool</em></a>) – If decide the buffered string with <code class="docutils literal notranslate"><span class="pre">ascii</span></code> encoding.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The splitted line as a <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.9)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code></a> of <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(in Python v3.9)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">bytes</span></code></a>, or as <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a> if
+<code class="docutils literal notranslate"><span class="pre">decode</span></code> if set to <code class="docutils literal notranslate"><span class="pre">True</span></code>.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>List</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="zlogging._aux.decimal_toascii">
+<code class="sig-prename descclassname">zlogging._aux.</code><code class="sig-name descname">decimal_toascii</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">data</span></em>, <em class="sig-param"><span class="n">infinite</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/zlogging/_aux.html#decimal_toascii"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zlogging._aux.decimal_toascii" title="Permalink to this definition">¶</a></dt>
+<dd><p>Convert <a class="reference external" href="https://docs.python.org/3/library/decimal.html#decimal.Decimal" title="(in Python v3.9)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">decimal.Decimal</span></code></a> to ASCII.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>data</strong> (<a class="reference external" href="https://docs.python.org/3/library/decimal.html#decimal.Decimal" title="(in Python v3.9)"><em>decimal.Decimal</em></a>) – A <a class="reference external" href="https://docs.python.org/3/library/decimal.html#decimal.Decimal" title="(in Python v3.9)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">decimal.Decimal</span></code></a> object.</p></li>
+<li><p><strong>infinite</strong> (<em>Optional</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a><em>]</em>) – The ASCII representation of infinite numbers (<code class="docutils literal notranslate"><span class="pre">NaN</span></code> and infinity).</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The converted ASCII string.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)">str</a></p>
+</dd>
+</dl>
+<div class="admonition-example admonition">
+<p class="admonition-title">Example</p>
+<p>When converting a <a class="reference external" href="https://docs.python.org/3/library/decimal.html#decimal.Decimal" title="(in Python v3.9)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">decimal.Decimal</span></code></a> object, for example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">d</span> <span class="o">=</span> <span class="n">decimal</span><span class="o">.</span><span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;-123.123456789&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>the function will preserve only <strong>6 digits</strong> of its fractional part,
+i.e.:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">decimal_toascii</span><span class="p">(</span><span class="n">d</span><span class="p">)</span>
+<span class="go">&#39;-123.123456&#39;</span>
+</pre></div>
+</div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Infinite numbers, i.e. <code class="docutils literal notranslate"><span class="pre">NaN</span></code> and infinity (<code class="docutils literal notranslate"><span class="pre">inf</span></code>), will be
+converted as the value specified in <code class="docutils literal notranslate"><span class="pre">infinite</span></code>, in default the string
+representation of the number itself, i.e.:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">NaN</span></code> -&gt; <code class="docutils literal notranslate"><span class="pre">'NaN'</span></code></p></li>
+<li><p>Infinity -&gt; <code class="docutils literal notranslate"><span class="pre">'Infinity'</span></code></p></li>
+</ul>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt id="zlogging._aux.float_toascii">
+<code class="sig-prename descclassname">zlogging._aux.</code><code class="sig-name descname">float_toascii</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">data</span></em>, <em class="sig-param"><span class="n">infinite</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/zlogging/_aux.html#float_toascii"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zlogging._aux.float_toascii" title="Permalink to this definition">¶</a></dt>
+<dd><p>Convert <a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.9)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">float</span></code></a> to ASCII.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>data</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.9)"><em>float</em></a>) – A <a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.9)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">float</span></code></a> number.</p></li>
+<li><p><strong>infinite</strong> (<em>Optional</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a><em>]</em>) – The ASCII representation of infinite numbers (<code class="docutils literal notranslate"><span class="pre">NaN</span></code> and infinity).</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The converted ASCII string.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)">str</a></p>
+</dd>
+</dl>
+<div class="admonition-example admonition">
+<p class="admonition-title">Example</p>
+<p>When converting a <a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.9)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">float</span></code></a> number, for example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">f</span> <span class="o">=</span> <span class="o">-</span><span class="mf">123.123456789</span>
+</pre></div>
+</div>
+<p>the function will preserve only <strong>6 digits</strong> of its fractional part,
+i.e.:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">float_toascii</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+<span class="go">&#39;-123.123456&#39;</span>
+</pre></div>
+</div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Infinite numbers, i.e. <code class="docutils literal notranslate"><span class="pre">NaN</span></code> and infinity (<code class="docutils literal notranslate"><span class="pre">inf</span></code>), will be
+converted as the value specified in <code class="docutils literal notranslate"><span class="pre">infinite</span></code>, in default the string
+representation of the number itself, i.e.:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">NaN</span></code> -&gt; <code class="docutils literal notranslate"><span class="pre">'nan'</span></code></p></li>
+<li><p>Infinity -&gt; <code class="docutils literal notranslate"><span class="pre">'inf'</span></code></p></li>
+</ul>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt id="zlogging._aux.unicode_escape">
+<code class="sig-prename descclassname">zlogging._aux.</code><code class="sig-name descname">unicode_escape</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">string</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/zlogging/_aux.html#unicode_escape"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zlogging._aux.unicode_escape" title="Permalink to this definition">¶</a></dt>
+<dd><p>Conterprocess of <code class="xref py py-meth docutils literal notranslate"><span class="pre">bytes.decode('unicode_escape')()</span></code>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>string</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(in Python v3.9)"><em>bytes</em></a>) – The bytestring to be escaped.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The escaped bytestring as an encoded string</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)">str</a></p>
+</dd>
+</dl>
+<div class="admonition-example admonition">
+<p class="admonition-title">Example</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="sa">b</span><span class="s1">&#39;</span><span class="se">\x09</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s1">&#39;unicode_escape&#39;</span><span class="p">)</span>
+<span class="go">&#39;\t&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">unicode_escape</span><span class="p">(</span><span class="sa">b</span><span class="s1">&#39;</span><span class="se">\t</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="go">&#39;\x09&#39;</span>
+</pre></div>
+</div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt id="zlogging._aux.expand_typing">
+<code class="sig-prename descclassname">zlogging._aux.</code><code class="sig-name descname">expand_typing</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">cls</span></em>, <em class="sig-param"><span class="n">exc</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/zlogging/_aux.html#expand_typing"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zlogging._aux.expand_typing" title="Permalink to this definition">¶</a></dt>
+<dd><p>Expand typing annotations.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>cls</strong> (<a class="reference internal" href="zlogging.model.html#zlogging.model.Model" title="zlogging.model.Model"><code class="xref py py-class docutils literal notranslate"><span class="pre">Model</span></code></a> or <a class="reference internal" href="zlogging.types.html#zlogging.types.RecordType" title="zlogging.types.RecordType"><code class="xref py py-class docutils literal notranslate"><span class="pre">RecordType</span></code></a> object) – a variadic class which supports <a class="reference external" href="https://www.python.org/dev/peps/pep-0484/">PEP 484</a> style attribute typing
+annotations</p></li>
+<li><p><strong>exc</strong> (<em>Optional</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#ValueError" title="(in Python v3.9)"><em>ValueError</em></a><em>]</em>) – (<a class="reference external" href="https://docs.python.org/3/library/exceptions.html#ValueError" title="(in Python v3.9)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ValueError</span></code></a>, optional): exception to be used in case of
+inconsistent values for <code class="docutils literal notranslate"><span class="pre">unset_field</span></code>, <code class="docutils literal notranslate"><span class="pre">empty_field</span></code>
+and <code class="docutils literal notranslate"><span class="pre">set_separator</span></code></p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><p>The returned dictionary contains the following directives:</p>
+<blockquote>
+<div><ul class="simple">
+<li><dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">fields</span></code> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">OrderedDict</span></code> mapping <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a> and <a class="reference internal" href="zlogging.types.html#zlogging.types.BaseType" title="zlogging.types.BaseType"><code class="xref py py-class docutils literal notranslate"><span class="pre">BaseType</span></code></a>):</dt><dd><p>a mapping proxy of field names and their corresponding data
+types, i.e. an instance of a <a class="reference internal" href="zlogging.types.html#zlogging.types.BaseType" title="zlogging.types.BaseType"><code class="xref py py-class docutils literal notranslate"><span class="pre">BaseType</span></code></a>
+subclass</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">record_fields</span></code> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">OrderedDict</span></code> mapping <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a> and <a class="reference internal" href="zlogging.types.html#zlogging.types.RecordType" title="zlogging.types.RecordType"><code class="xref py py-class docutils literal notranslate"><span class="pre">RecordType</span></code></a>):</dt><dd><p>a mapping proxy for fields of <code class="docutils literal notranslate"><span class="pre">record</span></code> data type, i.e. an
+instance of <a class="reference internal" href="zlogging.types.html#zlogging.types.RecordType" title="zlogging.types.RecordType"><code class="xref py py-class docutils literal notranslate"><span class="pre">RecordType</span></code></a></p>
+</dd>
+</dl>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">unset_fields</span></code> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(in Python v3.9)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">bytes</span></code></a>): placeholder for unset field</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">empty_fields</span></code> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(in Python v3.9)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">bytes</span></code></a>): placeholder for empty field</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">set_separator</span></code> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(in Python v3.9)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">bytes</span></code></a>): separator for <code class="docutils literal notranslate"><span class="pre">set</span></code>/<code class="docutils literal notranslate"><span class="pre">vector</span></code> fields</p></li>
+</ul>
+</div></blockquote>
+</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">Dict[str,</span> <span class="pre">Any]</span></code></p>
+</dd>
+<dt class="field-even">Warns</dt>
+<dd class="field-even"><p><strong>BroDeprecationWarning</strong> – Use of <code class="docutils literal notranslate"><span class="pre">bro_*</span></code> prefixed typing annotations.</p>
+</dd>
+<dt class="field-odd">Raises</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#ValueError" title="(in Python v3.9)"><strong>ValueError</strong></a> – In case of inconsistent values for <code class="docutils literal notranslate"><span class="pre">unset_field</span></code>,
+    <code class="docutils literal notranslate"><span class="pre">empty_field</span></code> and <code class="docutils literal notranslate"><span class="pre">set_separator</span></code>.</p>
+</dd>
+</dl>
+<div class="admonition-example admonition">
+<p class="admonition-title">Example</p>
+<p>Define a custom log data model from <a class="reference internal" href="zlogging.model.html#zlogging.model.Model" title="zlogging.model.Model"><code class="xref py py-class docutils literal notranslate"><span class="pre">Model</span></code></a> using
+the prefines Bro/Zeek data types, or subclasses of
+<a class="reference internal" href="zlogging.types.html#zlogging.types.BaseType" title="zlogging.types.BaseType"><code class="xref py py-class docutils literal notranslate"><span class="pre">BaseType</span></code></a>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">MyLog</span><span class="p">(</span><span class="n">Model</span><span class="p">):</span>
+    <span class="n">field_one</span> <span class="o">=</span> <span class="n">StringType</span><span class="p">()</span>
+    <span class="n">field_two</span> <span class="o">=</span> <span class="n">SetType</span><span class="p">(</span><span class="n">element_type</span><span class="o">=</span><span class="n">PortType</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Or you may use type annotations as <a class="reference external" href="https://www.python.org/dev/peps/pep-0484/">PEP 484</a> introduced when declaring
+data models. All available type hints can be found in
+<code class="xref py py-mod docutils literal notranslate"><span class="pre">zlogging.typing</span></code>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">MyLog</span><span class="p">(</span><span class="n">Model</span><span class="p">):</span>
+    <span class="n">field_one</span><span class="p">:</span> <span class="n">zeek_string</span>
+    <span class="n">field_two</span><span class="p">:</span> <span class="n">zeek_set</span><span class="p">[</span><span class="n">zeek_port</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>However, when mixing annotations and direct assignments, annotations
+will take proceedings, i.e. the function shall process first typing
+annotations then <code class="docutils literal notranslate"><span class="pre">cls</span></code> attribute assignments. Should there be any
+conflicts, the <code class="docutils literal notranslate"><span class="pre">exc</span></code> will be raised.</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Fields of <a class="reference internal" href="zlogging.types.html#zlogging.types.RecordType" title="zlogging.types.RecordType"><code class="xref py py-class docutils literal notranslate"><span class="pre">zlogging.types.RecordType</span></code></a> type will be expanded as
+plain fields of the <code class="docutils literal notranslate"><span class="pre">cls</span></code>, i.e. for the variadic class as below:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">MyLog</span><span class="p">(</span><span class="n">Model</span><span class="p">):</span>
+    <span class="n">record</span> <span class="o">=</span> <span class="n">RecrodType</span><span class="p">(</span><span class="n">one</span><span class="o">=</span><span class="n">StringType</span><span class="p">(),</span>
+                        <span class="n">two</span><span class="o">=</span><span class="n">VectorType</span><span class="p">(</span><span class="n">element_type</span><span class="o">=</span><span class="n">CountType</span><span class="p">()))</span>
+</pre></div>
+</div>
+<p>will have the following fields:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">record.one</span></code> -&gt; <code class="docutils literal notranslate"><span class="pre">string</span></code> data type</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">record.two</span></code> -&gt; <code class="docutils literal notranslate"><span class="pre">vector[count]</span></code> data type</p></li>
+</ul>
+</div>
+</dd></dl>
+
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">ZLogging</a></h1>
+
+
+
+
+
+
+<p>
+<iframe src="https://ghbtns.com/github-btn.html?user=JarryShaw&repo=zlogging&type=star&count=true&size=large&v=2"
+  allowtransparency="true" frameborder="0" scrolling="0" width="200px" height="35px"></iframe>
+</p>
+
+
+
+
+
+<h3>Navigation</h3>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="zlogging.html">Bro/Zeek Logging Framework for Python</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="zlogging.html#table-of-contents">Table of Contents</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="zlogging.dumper.html">Dumpers</a></li>
+<li class="toctree-l3"><a class="reference internal" href="zlogging.loader.html">Loaders</a></li>
+<li class="toctree-l3"><a class="reference internal" href="zlogging.model.html">Data Model</a></li>
+<li class="toctree-l3"><a class="reference internal" href="zlogging.types.html">Data Types</a></li>
+<li class="toctree-l3"><a class="reference internal" href="zlogging.typing.html">Typing Annotations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="zlogging._data.html">Data Classes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="zlogging._exc.html">Exceptions &amp; Warnings</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Internal Auxiliary Functions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="zlogging.enum.html">Enum Namespace</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="zlogging.html#module-contents">Module Contents</a></li>
+</ul>
+</li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+  <li><a href="zlogging.html">Bro/Zeek Logging Framework for Python</a><ul>
+      <li>Previous: <a href="zlogging._exc.html" title="previous chapter">Exceptions &amp; Warnings</a></li>
+      <li>Next: <a href="zlogging.enum.html" title="next chapter">Enum Namespace</a></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2020, Jarry Shaw.
+      
+      |
+      <a href="_sources/zlogging._aux.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+    <a href="https://github.com/JarryShaw/zlogging" class="github">
+        <img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub"  class="github"/>
+    </a>
+    
+
+    
+  </body>
+</html>

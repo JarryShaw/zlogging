@@ -1,0 +1,391 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Exceptions &amp; Warnings &#8212; ZLogging 0.1.0.post1 documentation</title>
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Internal Auxiliary Functions" href="zlogging._aux.html" />
+    <link rel="prev" title="Data Classes" href="zlogging._data.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="module-zlogging._exc">
+<span id="exceptions-warnings"></span><h1>Exceptions &amp; Warnings<a class="headerlink" href="#module-zlogging._exc" title="Permalink to this headline">¶</a></h1>
+<p>Exceptions &amp; warnings.</p>
+<dl class="py exception">
+<dt id="zlogging._exc.ZeekException">
+<em class="property">exception </em><code class="sig-prename descclassname">zlogging._exc.</code><code class="sig-name descname">ZeekException</code><a class="reference internal" href="_modules/zlogging/_exc.html#ZeekException"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zlogging._exc.ZeekException" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/exceptions.html#Exception" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Exception</span></code></a></p>
+<p>Base exception.</p>
+</dd></dl>
+
+<dl class="py exception">
+<dt id="zlogging._exc.ZeekWarning">
+<em class="property">exception </em><code class="sig-prename descclassname">zlogging._exc.</code><code class="sig-name descname">ZeekWarning</code><a class="reference internal" href="_modules/zlogging/_exc.html#ZeekWarning"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zlogging._exc.ZeekWarning" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/exceptions.html#Warning" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Warning</span></code></a></p>
+<p>Base warning.</p>
+</dd></dl>
+
+<dl class="py exception">
+<dt id="zlogging._exc.ParserError">
+<em class="property">exception </em><code class="sig-prename descclassname">zlogging._exc.</code><code class="sig-name descname">ParserError</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">msg</span></em>, <em class="sig-param"><span class="n">lineno</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">field</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/zlogging/_exc.html#ParserError"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zlogging._exc.ParserError" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#zlogging._exc.ZeekException" title="zlogging._exc.ZeekException"><code class="xref py py-class docutils literal notranslate"><span class="pre">zlogging._exc.ZeekException</span></code></a>, <a class="reference external" href="https://docs.python.org/3/library/exceptions.html#ValueError" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ValueError</span></code></a></p>
+<p>Error when parsing logs.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>msg</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a>) – The unformatted error message.</p></li>
+<li><p><strong>lineno</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">int</span></code></a>, optional) – The line corresponding to the failure.</p></li>
+<li><p><strong>field</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a>, optional) – The field name where parsing failed.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Variables</dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>msg</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a>) – The unformatted error message.</p></li>
+<li><p><strong>field</strong> – (str) The field name where parsing failed.</p></li>
+<li><p><strong>lineno</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><em>int</em></a>) – The line corresponding to the failure.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py exception">
+<dt id="zlogging._exc.JSONParserError">
+<em class="property">exception </em><code class="sig-prename descclassname">zlogging._exc.</code><code class="sig-name descname">JSONParserError</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">msg</span></em>, <em class="sig-param"><span class="n">lineno</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">field</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/zlogging/_exc.html#JSONParserError"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zlogging._exc.JSONParserError" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#zlogging._exc.ParserError" title="zlogging._exc.ParserError"><code class="xref py py-class docutils literal notranslate"><span class="pre">zlogging._exc.ParserError</span></code></a>, <code class="xref py py-class docutils literal notranslate"><span class="pre">json.decoder.JSONDecodeError</span></code></p>
+<p>Error when parsing JSON log.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>msg</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a>) – The unformatted error message.</p></li>
+<li><p><strong>lineno</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">int</span></code></a>, optional) – The line corresponding to the failure.</p></li>
+<li><p><strong>field</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a>, optional) – The field name where parsing failed.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Variables</dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>msg</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a>) – The unformatted error message.</p></li>
+<li><p><strong>field</strong> – (str) The field name where parsing failed.</p></li>
+<li><p><strong>lineno</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><em>int</em></a>) – The line corresponding to the failure.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py exception">
+<dt id="zlogging._exc.ASCIIPaserError">
+<em class="property">exception </em><code class="sig-prename descclassname">zlogging._exc.</code><code class="sig-name descname">ASCIIPaserError</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">msg</span></em>, <em class="sig-param"><span class="n">lineno</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">field</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/zlogging/_exc.html#ASCIIPaserError"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zlogging._exc.ASCIIPaserError" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#zlogging._exc.ParserError" title="zlogging._exc.ParserError"><code class="xref py py-class docutils literal notranslate"><span class="pre">zlogging._exc.ParserError</span></code></a></p>
+<p>Error when parsing ASCII log.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>msg</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a>) – The unformatted error message.</p></li>
+<li><p><strong>lineno</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">int</span></code></a>, optional) – The line corresponding to the failure.</p></li>
+<li><p><strong>field</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a>, optional) – The field name where parsing failed.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Variables</dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>msg</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a>) – The unformatted error message.</p></li>
+<li><p><strong>field</strong> – (str) The field name where parsing failed.</p></li>
+<li><p><strong>lineno</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><em>int</em></a>) – The line corresponding to the failure.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py exception">
+<dt id="zlogging._exc.WriterError">
+<em class="property">exception </em><code class="sig-prename descclassname">zlogging._exc.</code><code class="sig-name descname">WriterError</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">msg</span></em>, <em class="sig-param"><span class="n">lineno</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">field</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/zlogging/_exc.html#WriterError"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zlogging._exc.WriterError" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#zlogging._exc.ZeekException" title="zlogging._exc.ZeekException"><code class="xref py py-class docutils literal notranslate"><span class="pre">zlogging._exc.ZeekException</span></code></a>, <a class="reference external" href="https://docs.python.org/3/library/exceptions.html#TypeError" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">TypeError</span></code></a></p>
+<p>Error when writing logs.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>msg</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a>) – The unformatted error message.</p></li>
+<li><p><strong>lineno</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">int</span></code></a>, optional) – The line corresponding to the failure.</p></li>
+<li><p><strong>field</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a>, optional) – The field name where writing failed.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Variables</dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>msg</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a>) – The unformatted error message.</p></li>
+<li><p><strong>field</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a>) – The field name where writing failed.</p></li>
+<li><p><strong>lineno</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><em>int</em></a>) – The line corresponding to the failure.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py exception">
+<dt id="zlogging._exc.JSONWriterError">
+<em class="property">exception </em><code class="sig-prename descclassname">zlogging._exc.</code><code class="sig-name descname">JSONWriterError</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">msg</span></em>, <em class="sig-param"><span class="n">lineno</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">field</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/zlogging/_exc.html#JSONWriterError"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zlogging._exc.JSONWriterError" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#zlogging._exc.WriterError" title="zlogging._exc.WriterError"><code class="xref py py-class docutils literal notranslate"><span class="pre">zlogging._exc.WriterError</span></code></a></p>
+<p>Error when writing JSON logs.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>msg</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a>) – The unformatted error message.</p></li>
+<li><p><strong>lineno</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">int</span></code></a>, optional) – The line corresponding to the failure.</p></li>
+<li><p><strong>field</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a>, optional) – The field name where writing failed.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Variables</dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>msg</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a>) – The unformatted error message.</p></li>
+<li><p><strong>field</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a>) – The field name where writing failed.</p></li>
+<li><p><strong>lineno</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><em>int</em></a>) – The line corresponding to the failure.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py exception">
+<dt id="zlogging._exc.ASCIIWriterError">
+<em class="property">exception </em><code class="sig-prename descclassname">zlogging._exc.</code><code class="sig-name descname">ASCIIWriterError</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">msg</span></em>, <em class="sig-param"><span class="n">lineno</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">field</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/zlogging/_exc.html#ASCIIWriterError"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zlogging._exc.ASCIIWriterError" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#zlogging._exc.WriterError" title="zlogging._exc.WriterError"><code class="xref py py-class docutils literal notranslate"><span class="pre">zlogging._exc.WriterError</span></code></a></p>
+<p>Error when writing ASCII logs.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>msg</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a>) – The unformatted error message.</p></li>
+<li><p><strong>lineno</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">int</span></code></a>, optional) – The line corresponding to the failure.</p></li>
+<li><p><strong>field</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a>, optional) – The field name where writing failed.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Variables</dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>msg</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a>) – The unformatted error message.</p></li>
+<li><p><strong>field</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a>) – The field name where writing failed.</p></li>
+<li><p><strong>lineno</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><em>int</em></a>) – The line corresponding to the failure.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py exception">
+<dt id="zlogging._exc.WriterFormatError">
+<em class="property">exception </em><code class="sig-prename descclassname">zlogging._exc.</code><code class="sig-name descname">WriterFormatError</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">msg</span></em>, <em class="sig-param"><span class="n">lineno</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">field</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/zlogging/_exc.html#WriterFormatError"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zlogging._exc.WriterFormatError" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#zlogging._exc.WriterError" title="zlogging._exc.WriterError"><code class="xref py py-class docutils literal notranslate"><span class="pre">zlogging._exc.WriterError</span></code></a>, <a class="reference external" href="https://docs.python.org/3/library/exceptions.html#ValueError" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ValueError</span></code></a></p>
+<p>Unsupported format.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>msg</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a>) – the unformatted error message</p></li>
+<li><p><strong>lineno</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">int</span></code></a>, optional) – the line corresponding to the failure</p></li>
+<li><p><strong>field</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a>, optional) – the field name where writing failed</p></li>
+</ul>
+</dd>
+<dt class="field-even">Variables</dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>msg</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a>) – the unformatted error message</p></li>
+<li><p><strong>field</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a>) – the field name where writing failed</p></li>
+<li><p><strong>lineno</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><em>int</em></a>) – the line corresponding to the failure</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py exception">
+<dt id="zlogging._exc.ParserWarning">
+<em class="property">exception </em><code class="sig-prename descclassname">zlogging._exc.</code><code class="sig-name descname">ParserWarning</code><a class="reference internal" href="_modules/zlogging/_exc.html#ParserWarning"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zlogging._exc.ParserWarning" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#zlogging._exc.ZeekWarning" title="zlogging._exc.ZeekWarning"><code class="xref py py-class docutils literal notranslate"><span class="pre">zlogging._exc.ZeekWarning</span></code></a>, <a class="reference external" href="https://docs.python.org/3/library/exceptions.html#UserWarning" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">UserWarning</span></code></a></p>
+<p>Warning when parsing logs.</p>
+</dd></dl>
+
+<dl class="py exception">
+<dt id="zlogging._exc.JSONParserWarning">
+<em class="property">exception </em><code class="sig-prename descclassname">zlogging._exc.</code><code class="sig-name descname">JSONParserWarning</code><a class="reference internal" href="_modules/zlogging/_exc.html#JSONParserWarning"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zlogging._exc.JSONParserWarning" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#zlogging._exc.ParserWarning" title="zlogging._exc.ParserWarning"><code class="xref py py-class docutils literal notranslate"><span class="pre">zlogging._exc.ParserWarning</span></code></a></p>
+<p>Warning when parsing logs in JSON format.</p>
+</dd></dl>
+
+<dl class="py exception">
+<dt id="zlogging._exc.ASCIIParserWarning">
+<em class="property">exception </em><code class="sig-prename descclassname">zlogging._exc.</code><code class="sig-name descname">ASCIIParserWarning</code><a class="reference internal" href="_modules/zlogging/_exc.html#ASCIIParserWarning"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zlogging._exc.ASCIIParserWarning" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#zlogging._exc.ParserWarning" title="zlogging._exc.ParserWarning"><code class="xref py py-class docutils literal notranslate"><span class="pre">zlogging._exc.ParserWarning</span></code></a></p>
+<p>Warning when parsing logs in ASCII format.</p>
+</dd></dl>
+
+<dl class="py exception">
+<dt id="zlogging._exc.ZeekTypeError">
+<em class="property">exception </em><code class="sig-prename descclassname">zlogging._exc.</code><code class="sig-name descname">ZeekTypeError</code><a class="reference internal" href="_modules/zlogging/_exc.html#ZeekTypeError"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zlogging._exc.ZeekTypeError" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#zlogging._exc.ZeekException" title="zlogging._exc.ZeekException"><code class="xref py py-class docutils literal notranslate"><span class="pre">zlogging._exc.ZeekException</span></code></a>, <a class="reference external" href="https://docs.python.org/3/library/exceptions.html#TypeError" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">TypeError</span></code></a></p>
+<p>Invalid Bro/Zeek data type.</p>
+</dd></dl>
+
+<dl class="py exception">
+<dt id="zlogging._exc.ZeekValueError">
+<em class="property">exception </em><code class="sig-prename descclassname">zlogging._exc.</code><code class="sig-name descname">ZeekValueError</code><a class="reference internal" href="_modules/zlogging/_exc.html#ZeekValueError"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zlogging._exc.ZeekValueError" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#zlogging._exc.ZeekException" title="zlogging._exc.ZeekException"><code class="xref py py-class docutils literal notranslate"><span class="pre">zlogging._exc.ZeekException</span></code></a>, <a class="reference external" href="https://docs.python.org/3/library/exceptions.html#ValueError" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ValueError</span></code></a></p>
+<p>Invalid Bro/Zeek data value.</p>
+</dd></dl>
+
+<dl class="py exception">
+<dt id="zlogging._exc.ZeekNotImplemented">
+<em class="property">exception </em><code class="sig-prename descclassname">zlogging._exc.</code><code class="sig-name descname">ZeekNotImplemented</code><a class="reference internal" href="_modules/zlogging/_exc.html#ZeekNotImplemented"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zlogging._exc.ZeekNotImplemented" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#zlogging._exc.ZeekException" title="zlogging._exc.ZeekException"><code class="xref py py-class docutils literal notranslate"><span class="pre">zlogging._exc.ZeekException</span></code></a>, <a class="reference external" href="https://docs.python.org/3/library/exceptions.html#NotImplementedError" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">NotImplementedError</span></code></a></p>
+<p>Method not implemented.</p>
+</dd></dl>
+
+<dl class="py exception">
+<dt id="zlogging._exc.ModelError">
+<em class="property">exception </em><code class="sig-prename descclassname">zlogging._exc.</code><code class="sig-name descname">ModelError</code><a class="reference internal" href="_modules/zlogging/_exc.html#ModelError"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zlogging._exc.ModelError" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#zlogging._exc.ZeekException" title="zlogging._exc.ZeekException"><code class="xref py py-class docutils literal notranslate"><span class="pre">zlogging._exc.ZeekException</span></code></a></p>
+<p>Invalid model data.</p>
+</dd></dl>
+
+<dl class="py exception">
+<dt id="zlogging._exc.ModelTypeError">
+<em class="property">exception </em><code class="sig-prename descclassname">zlogging._exc.</code><code class="sig-name descname">ModelTypeError</code><a class="reference internal" href="_modules/zlogging/_exc.html#ModelTypeError"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zlogging._exc.ModelTypeError" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#zlogging._exc.ModelError" title="zlogging._exc.ModelError"><code class="xref py py-class docutils literal notranslate"><span class="pre">zlogging._exc.ModelError</span></code></a>, <a class="reference external" href="https://docs.python.org/3/library/exceptions.html#TypeError" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">TypeError</span></code></a></p>
+<p>Invalid model data type.</p>
+</dd></dl>
+
+<dl class="py exception">
+<dt id="zlogging._exc.ModelValueError">
+<em class="property">exception </em><code class="sig-prename descclassname">zlogging._exc.</code><code class="sig-name descname">ModelValueError</code><a class="reference internal" href="_modules/zlogging/_exc.html#ModelValueError"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zlogging._exc.ModelValueError" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#zlogging._exc.ModelError" title="zlogging._exc.ModelError"><code class="xref py py-class docutils literal notranslate"><span class="pre">zlogging._exc.ModelError</span></code></a>, <a class="reference external" href="https://docs.python.org/3/library/exceptions.html#ValueError" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ValueError</span></code></a></p>
+<p>Invalid model data value.</p>
+</dd></dl>
+
+<dl class="py exception">
+<dt id="zlogging._exc.ModelFormatError">
+<em class="property">exception </em><code class="sig-prename descclassname">zlogging._exc.</code><code class="sig-name descname">ModelFormatError</code><a class="reference internal" href="_modules/zlogging/_exc.html#ModelFormatError"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zlogging._exc.ModelFormatError" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#zlogging._exc.ModelError" title="zlogging._exc.ModelError"><code class="xref py py-class docutils literal notranslate"><span class="pre">zlogging._exc.ModelError</span></code></a>, <a class="reference external" href="https://docs.python.org/3/library/exceptions.html#ValueError" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ValueError</span></code></a></p>
+<p>Unsupported format.</p>
+</dd></dl>
+
+<dl class="py exception">
+<dt id="zlogging._exc.ZeekValueWarning">
+<em class="property">exception </em><code class="sig-prename descclassname">zlogging._exc.</code><code class="sig-name descname">ZeekValueWarning</code><a class="reference internal" href="_modules/zlogging/_exc.html#ZeekValueWarning"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zlogging._exc.ZeekValueWarning" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#zlogging._exc.ZeekWarning" title="zlogging._exc.ZeekWarning"><code class="xref py py-class docutils literal notranslate"><span class="pre">zlogging._exc.ZeekWarning</span></code></a>, <a class="reference external" href="https://docs.python.org/3/library/exceptions.html#UserWarning" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">UserWarning</span></code></a></p>
+<p>Dubious Bro/Zeek data value.</p>
+</dd></dl>
+
+<dl class="py exception">
+<dt id="zlogging._exc.BroDeprecationWarning">
+<em class="property">exception </em><code class="sig-prename descclassname">zlogging._exc.</code><code class="sig-name descname">BroDeprecationWarning</code><a class="reference internal" href="_modules/zlogging/_exc.html#BroDeprecationWarning"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zlogging._exc.BroDeprecationWarning" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#zlogging._exc.ZeekWarning" title="zlogging._exc.ZeekWarning"><code class="xref py py-class docutils literal notranslate"><span class="pre">zlogging._exc.ZeekWarning</span></code></a>, <a class="reference external" href="https://docs.python.org/3/library/exceptions.html#DeprecationWarning" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">DeprecationWarning</span></code></a></p>
+<p>Bro is now deprecated, use Zeek instead.</p>
+</dd></dl>
+
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">ZLogging</a></h1>
+
+
+
+
+
+
+<p>
+<iframe src="https://ghbtns.com/github-btn.html?user=JarryShaw&repo=zlogging&type=star&count=true&size=large&v=2"
+  allowtransparency="true" frameborder="0" scrolling="0" width="200px" height="35px"></iframe>
+</p>
+
+
+
+
+
+<h3>Navigation</h3>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="zlogging.html">Bro/Zeek Logging Framework for Python</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="zlogging.html#table-of-contents">Table of Contents</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="zlogging.dumper.html">Dumpers</a></li>
+<li class="toctree-l3"><a class="reference internal" href="zlogging.loader.html">Loaders</a></li>
+<li class="toctree-l3"><a class="reference internal" href="zlogging.model.html">Data Model</a></li>
+<li class="toctree-l3"><a class="reference internal" href="zlogging.types.html">Data Types</a></li>
+<li class="toctree-l3"><a class="reference internal" href="zlogging.typing.html">Typing Annotations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="zlogging._data.html">Data Classes</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Exceptions &amp; Warnings</a></li>
+<li class="toctree-l3"><a class="reference internal" href="zlogging._aux.html">Internal Auxiliary Functions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="zlogging.enum.html">Enum Namespace</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="zlogging.html#module-contents">Module Contents</a></li>
+</ul>
+</li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+  <li><a href="zlogging.html">Bro/Zeek Logging Framework for Python</a><ul>
+      <li>Previous: <a href="zlogging._data.html" title="previous chapter">Data Classes</a></li>
+      <li>Next: <a href="zlogging._aux.html" title="next chapter">Internal Auxiliary Functions</a></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2020, Jarry Shaw.
+      
+      |
+      <a href="_sources/zlogging._exc.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+    <a href="https://github.com/JarryShaw/zlogging" class="github">
+        <img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub"  class="github"/>
+    </a>
+    
+
+    
+  </body>
+</html>

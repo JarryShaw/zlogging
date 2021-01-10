@@ -1,0 +1,220 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>zlogging._data &#8212; ZLogging 0.1.0.post1 documentation</title>
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/alabaster.css" type="text/css" />
+    <script id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+   
+  <link rel="stylesheet" href="../../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <h1>Source code for zlogging._data</h1><div class="highlight"><pre>
+<span></span><span class="c1"># -*- coding: utf-8 -*-</span>
+<span class="sd">&quot;&quot;&quot;Data classes for parsed logs.&quot;&quot;&quot;</span>
+
+<span class="kn">import</span> <span class="nn">abc</span>
+<span class="kn">import</span> <span class="nn">dataclasses</span>
+
+<span class="kn">import</span> <span class="nn">zlogging._typing</span> <span class="k">as</span> <span class="nn">typing</span>
+<span class="kn">from</span> <span class="nn">zlogging.model</span> <span class="kn">import</span> <span class="n">Model</span>
+
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s1">&#39;ASCIIInfo&#39;</span><span class="p">,</span> <span class="s1">&#39;JSONInfo&#39;</span>
+<span class="p">]</span>
+
+
+<div class="viewcode-block" id="Info"><a class="viewcode-back" href="../../zlogging._data.html#zlogging._data.Info">[docs]</a><span class="k">class</span> <span class="nc">Info</span><span class="p">(</span><span class="n">metaclass</span><span class="o">=</span><span class="n">abc</span><span class="o">.</span><span class="n">ABCMeta</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Parsed log info.</span>
+
+<span class="sd">    The parsed log will be stored as in this :obj:`dataclass`, as introduced in</span>
+<span class="sd">    `PEP 557`_.</span>
+
+<span class="sd">    .. _PEP 557:</span>
+<span class="sd">        https://www.python.org/dev/peps/pep-557/</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="nd">@property</span>
+    <span class="nd">@abc</span><span class="o">.</span><span class="n">abstractmethod</span>
+    <span class="k">def</span> <span class="nf">format</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;str: Log file format.&quot;&quot;&quot;</span></div>
+
+
+<div class="viewcode-block" id="ASCIIInfo"><a class="viewcode-back" href="../../zlogging._data.html#zlogging._data.ASCIIInfo">[docs]</a><span class="nd">@dataclasses</span><span class="o">.</span><span class="n">dataclass</span><span class="p">(</span><span class="n">frozen</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="k">class</span> <span class="nc">ASCIIInfo</span><span class="p">(</span><span class="n">Info</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Parsed log info for ASCII logs.</span>
+
+<span class="sd">    The ASCII log will be stored as in this :obj:`dataclass`, as introduced in</span>
+<span class="sd">    `PEP 557`_.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        path (:obj:`os.PathLike`): The value is specified in the ASCII log file</span>
+<span class="sd">            under ``# path`` directive.</span>
+<span class="sd">        open (:obj:`datetime.datetime`): The value is specified in the ASCII</span>
+<span class="sd">            log file under ``# open`` directive.</span>
+<span class="sd">        close (:obj:`datetime.datetime`): The value is specified in the ASCII</span>
+<span class="sd">            log file under ``# close`` directive.</span>
+<span class="sd">        data (:obj:`list` or :class:`~zlogging.model.Model`): The log records</span>
+<span class="sd">            parsed as a :obj:`list` of :class:`~zlogging.model.Model` per line.</span>
+<span class="sd">        exit_with_error (:obj:`bool`): When exit with error, the ASCII log</span>
+<span class="sd">            file doesn&#39;t has a ``# close`` directive.</span>
+
+<span class="sd">    .. _PEP 557:</span>
+<span class="sd">        https://www.python.org/dev/peps/pep-557/</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">format</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;str: Log file format.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="s1">&#39;ascii&#39;</span>
+
+    <span class="n">path</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">PathLike</span>
+    <span class="sd">&quot;&quot;&quot;:obj:`os.PathLike`: Log path.</span>
+
+<span class="sd">    The value is specified in the ASCII log file under ``# path`` directive.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="nb">open</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">DateTime</span>
+    <span class="sd">&quot;&quot;&quot;:obj:`datetime.datetime`: Log open time.</span>
+
+<span class="sd">    The value is specified in the ASCII log file under ``# open`` directive.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">close</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">DateTime</span>
+    <span class="sd">&quot;&quot;&quot;:obj:`datetime.datetime`: Log close time.</span>
+
+<span class="sd">    The value is specified in the ASCII log file under ``# close`` directive.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">data</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">List</span><span class="p">[</span><span class="n">Model</span><span class="p">]</span>
+    <span class="sd">&quot;&quot;&quot;:obj:`list` of :class:`~zlogging.model.Model`: Log records.</span>
+
+<span class="sd">    The log records parsed as a :obj:`list` of :class:`~zlogging.model.Model` per line.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">exit_with_error</span><span class="p">:</span> <span class="nb">bool</span>
+    <span class="sd">&quot;&quot;&quot;:obj:`bool`: Log exit with error.</span>
+
+<span class="sd">    When exit with error, the ASCII log file doesn&#39;t has a ``# close`` directive.</span>
+<span class="sd">    &quot;&quot;&quot;</span></div>
+
+
+<div class="viewcode-block" id="JSONInfo"><a class="viewcode-back" href="../../zlogging._data.html#zlogging._data.JSONInfo">[docs]</a><span class="nd">@dataclasses</span><span class="o">.</span><span class="n">dataclass</span><span class="p">(</span><span class="n">frozen</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="k">class</span> <span class="nc">JSONInfo</span><span class="p">(</span><span class="n">Info</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Parsed log info for JSON logs.</span>
+
+<span class="sd">    The JSON log will be stored as in this :obj:`dataclass`, as introduced in</span>
+<span class="sd">    `PEP 557`_.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        data (:obj:`list` of :class:`~zlogging.model.Model`): The log records</span>
+<span class="sd">            parsed as a :obj:`list` of :class:`~zlogging.model.Model` per line.</span>
+
+<span class="sd">    .. _PEP 557:</span>
+<span class="sd">        https://www.python.org/dev/peps/pep-557/</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">format</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;str: Log file format.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="s1">&#39;json&#39;</span>
+
+    <span class="n">data</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">List</span><span class="p">[</span><span class="n">Model</span><span class="p">]</span>
+    <span class="sd">&quot;&quot;&quot;:obj:`list` of :class:`~zlogging.model.Model`: Log records.</span>
+
+<span class="sd">    The log records parsed as a :obj:`list` of :class:`~zlogging.model.Model` per line.</span>
+<span class="sd">    &quot;&quot;&quot;</span></div>
+</pre></div>
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../../index.html">ZLogging</a></h1>
+
+
+
+
+
+
+<p>
+<iframe src="https://ghbtns.com/github-btn.html?user=JarryShaw&repo=zlogging&type=star&count=true&size=large&v=2"
+  allowtransparency="true" frameborder="0" scrolling="0" width="200px" height="35px"></iframe>
+</p>
+
+
+
+
+
+<h3>Navigation</h3>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../zlogging.html">Bro/Zeek Logging Framework for Python</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../index.html">Documentation overview</a><ul>
+  <li><a href="../index.html">Module code</a><ul>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2020, Jarry Shaw.
+      
+    </div>
+
+    
+    <a href="https://github.com/JarryShaw/zlogging" class="github">
+        <img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub"  class="github"/>
+    </a>
+    
+
+    
+  </body>
+</html>

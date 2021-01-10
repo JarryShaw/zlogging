@@ -1,0 +1,292 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>zlogging.enum.Broker &#8212; ZLogging 0.1.0.post1 documentation</title>
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/alabaster.css" type="text/css" />
+    <script id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+    <script src="../../../_static/jquery.js"></script>
+    <script src="../../../_static/underscore.js"></script>
+    <script src="../../../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+   
+  <link rel="stylesheet" href="../../../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <h1>Source code for zlogging.enum.Broker</h1><div class="highlight"><pre>
+<span></span><span class="c1"># -*- coding: utf-8 -*-</span>
+<span class="sd">&quot;&quot;&quot;Namespace: ``Broker``.&quot;&quot;&quot;</span>
+
+<span class="kn">from</span> <span class="nn">zlogging._compat</span> <span class="kn">import</span> <span class="n">enum</span>
+
+
+<div class="viewcode-block" id="DataType"><a class="viewcode-back" href="../../../zlogging.enum.html#zlogging.enum.Broker.DataType">[docs]</a><span class="nd">@enum</span><span class="o">.</span><span class="n">unique</span>
+<span class="k">class</span> <span class="nc">DataType</span><span class="p">(</span><span class="n">enum</span><span class="o">.</span><span class="n">IntFlag</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Enumerates the possible types that Broker::Data may be in</span>
+<span class="sd">    terms of Zeek data types.</span>
+
+<span class="sd">    c.f. `base/bif/data.bif.zeek &lt;https://docs.zeek.org/en/stable/scripts/base/bif/data.bif.zeek.html#type-Broker::DataType&gt;`__</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">_ignore_</span> <span class="o">=</span> <span class="s1">&#39;DataType _&#39;</span>
+    <span class="n">DataType</span> <span class="o">=</span> <span class="nb">vars</span><span class="p">()</span>
+
+    <span class="n">DataType</span><span class="p">[</span><span class="s1">&#39;NONE&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span>
+
+    <span class="n">DataType</span><span class="p">[</span><span class="s1">&#39;BOOL&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span>
+
+    <span class="n">DataType</span><span class="p">[</span><span class="s1">&#39;INT&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span>
+
+    <span class="n">DataType</span><span class="p">[</span><span class="s1">&#39;COUNT&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span>
+
+    <span class="n">DataType</span><span class="p">[</span><span class="s1">&#39;DOUBLE&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span>
+
+    <span class="n">DataType</span><span class="p">[</span><span class="s1">&#39;STRING&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span>
+
+    <span class="n">DataType</span><span class="p">[</span><span class="s1">&#39;ADDR&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span>
+
+    <span class="n">DataType</span><span class="p">[</span><span class="s1">&#39;SUBNET&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span>
+
+    <span class="n">DataType</span><span class="p">[</span><span class="s1">&#39;PORT&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span>
+
+    <span class="n">DataType</span><span class="p">[</span><span class="s1">&#39;TIME&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span>
+
+    <span class="n">DataType</span><span class="p">[</span><span class="s1">&#39;INTERVAL&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span>
+
+    <span class="n">DataType</span><span class="p">[</span><span class="s1">&#39;ENUM&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span>
+
+    <span class="n">DataType</span><span class="p">[</span><span class="s1">&#39;SET&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span>
+
+    <span class="n">DataType</span><span class="p">[</span><span class="s1">&#39;TABLE&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span>
+
+    <span class="n">DataType</span><span class="p">[</span><span class="s1">&#39;VECTOR&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="Type"><a class="viewcode-back" href="../../../zlogging.enum.html#zlogging.enum.Broker.Type">[docs]</a><span class="nd">@enum</span><span class="o">.</span><span class="n">unique</span>
+<span class="k">class</span> <span class="nc">Type</span><span class="p">(</span><span class="n">enum</span><span class="o">.</span><span class="n">IntFlag</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;The type of a Broker activity being logged.</span>
+
+<span class="sd">    c.f. `base/frameworks/broker/log.zeek &lt;https://docs.zeek.org/en/stable/scripts/base/frameworks/broker/log.zeek.html#type-Broker::Type&gt;`__</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">_ignore_</span> <span class="o">=</span> <span class="s1">&#39;Type _&#39;</span>
+    <span class="n">Type</span> <span class="o">=</span> <span class="nb">vars</span><span class="p">()</span>
+
+    <span class="c1">#: An informational status update.</span>
+    <span class="n">Type</span><span class="p">[</span><span class="s1">&#39;STATUS&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span>
+
+    <span class="c1">#: An error situation.</span>
+    <span class="n">Type</span><span class="p">[</span><span class="s1">&#39;ERROR&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="ErrorCode"><a class="viewcode-back" href="../../../zlogging.enum.html#zlogging.enum.Broker.ErrorCode">[docs]</a><span class="nd">@enum</span><span class="o">.</span><span class="n">unique</span>
+<span class="k">class</span> <span class="nc">ErrorCode</span><span class="p">(</span><span class="n">enum</span><span class="o">.</span><span class="n">IntFlag</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Enumerates the possible error types.</span>
+
+<span class="sd">    c.f. `base/frameworks/broker/main.zeek &lt;https://docs.zeek.org/en/stable/scripts/base/frameworks/broker/main.zeek.html#type-Broker::ErrorCode&gt;`__</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">_ignore_</span> <span class="o">=</span> <span class="s1">&#39;ErrorCode _&#39;</span>
+    <span class="n">ErrorCode</span> <span class="o">=</span> <span class="nb">vars</span><span class="p">()</span>
+
+    <span class="c1">#: The unspecified default error code.</span>
+    <span class="n">ErrorCode</span><span class="p">[</span><span class="s1">&#39;UNSPECIFIED&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span>
+
+    <span class="c1">#: Version incompatibility.</span>
+    <span class="n">ErrorCode</span><span class="p">[</span><span class="s1">&#39;PEER_INCOMPATIBLE&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span>
+
+    <span class="c1">#: Referenced peer does not exist.</span>
+    <span class="n">ErrorCode</span><span class="p">[</span><span class="s1">&#39;PEER_INVALID&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span>
+
+    <span class="c1">#: Remote peer not listening.</span>
+    <span class="n">ErrorCode</span><span class="p">[</span><span class="s1">&#39;PEER_UNAVAILABLE&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span>
+
+    <span class="c1">#: A peering request timed out.</span>
+    <span class="n">ErrorCode</span><span class="p">[</span><span class="s1">&#39;PEER_TIMEOUT&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span>
+
+    <span class="c1">#: Master with given name already exists.</span>
+    <span class="n">ErrorCode</span><span class="p">[</span><span class="s1">&#39;MASTER_EXISTS&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span>
+
+    <span class="c1">#: Master with given name does not exist.</span>
+    <span class="n">ErrorCode</span><span class="p">[</span><span class="s1">&#39;NO_SUCH_MASTER&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span>
+
+    <span class="c1">#: The given data store key does not exist.</span>
+    <span class="n">ErrorCode</span><span class="p">[</span><span class="s1">&#39;NO_SUCH_KEY&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span>
+
+    <span class="c1">#: The store operation timed out.</span>
+    <span class="n">ErrorCode</span><span class="p">[</span><span class="s1">&#39;REQUEST_TIMEOUT&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span>
+
+    <span class="c1">#: The operation expected a different type than provided.</span>
+    <span class="n">ErrorCode</span><span class="p">[</span><span class="s1">&#39;TYPE_CLASH&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span>
+
+    <span class="c1">#: The data value cannot be used to carry out the desired operation.</span>
+    <span class="n">ErrorCode</span><span class="p">[</span><span class="s1">&#39;INVALID_DATA&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span>
+
+    <span class="c1">#: The storage backend failed to execute the operation.</span>
+    <span class="n">ErrorCode</span><span class="p">[</span><span class="s1">&#39;BACKEND_FAILURE&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span>
+
+    <span class="c1">#: The storage backend failed to execute the operation.</span>
+    <span class="n">ErrorCode</span><span class="p">[</span><span class="s1">&#39;STALE_DATA&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span>
+
+    <span class="c1">#: Catch-all for a CAF-level problem.</span>
+    <span class="n">ErrorCode</span><span class="p">[</span><span class="s1">&#39;CAF_ERROR&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="PeerStatus"><a class="viewcode-back" href="../../../zlogging.enum.html#zlogging.enum.Broker.PeerStatus">[docs]</a><span class="nd">@enum</span><span class="o">.</span><span class="n">unique</span>
+<span class="k">class</span> <span class="nc">PeerStatus</span><span class="p">(</span><span class="n">enum</span><span class="o">.</span><span class="n">IntFlag</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;The possible states of a peer endpoint.</span>
+
+<span class="sd">    c.f. `base/frameworks/broker/main.zeek &lt;https://docs.zeek.org/en/stable/scripts/base/frameworks/broker/main.zeek.html#type-Broker::PeerStatus&gt;`__</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">_ignore_</span> <span class="o">=</span> <span class="s1">&#39;PeerStatus _&#39;</span>
+    <span class="n">PeerStatus</span> <span class="o">=</span> <span class="nb">vars</span><span class="p">()</span>
+
+    <span class="c1">#: The peering process is initiated.</span>
+    <span class="n">PeerStatus</span><span class="p">[</span><span class="s1">&#39;INITIALIZING&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span>
+
+    <span class="c1">#: Connection establishment in process.</span>
+    <span class="n">PeerStatus</span><span class="p">[</span><span class="s1">&#39;CONNECTING&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span>
+
+    <span class="c1">#: Connection established, peering pending.</span>
+    <span class="n">PeerStatus</span><span class="p">[</span><span class="s1">&#39;CONNECTED&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span>
+
+    <span class="c1">#: Successfully peered.</span>
+    <span class="n">PeerStatus</span><span class="p">[</span><span class="s1">&#39;PEERED&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span>
+
+    <span class="c1">#: Connection to remote peer lost.</span>
+    <span class="n">PeerStatus</span><span class="p">[</span><span class="s1">&#39;DISCONNECTED&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span>
+
+    <span class="c1">#: Reconnecting to peer after a lost connection.</span>
+    <span class="n">PeerStatus</span><span class="p">[</span><span class="s1">&#39;RECONNECTING&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="BackendType"><a class="viewcode-back" href="../../../zlogging.enum.html#zlogging.enum.Broker.BackendType">[docs]</a><span class="nd">@enum</span><span class="o">.</span><span class="n">unique</span>
+<span class="k">class</span> <span class="nc">BackendType</span><span class="p">(</span><span class="n">enum</span><span class="o">.</span><span class="n">IntFlag</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Enumerates the possible storage backends.</span>
+
+<span class="sd">    c.f. `base/frameworks/broker/store.zeek &lt;https://docs.zeek.org/en/stable/scripts/base/frameworks/broker/store.zeek.html#type-Broker::BackendType&gt;`__</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">_ignore_</span> <span class="o">=</span> <span class="s1">&#39;BackendType _&#39;</span>
+    <span class="n">BackendType</span> <span class="o">=</span> <span class="nb">vars</span><span class="p">()</span>
+
+    <span class="n">BackendType</span><span class="p">[</span><span class="s1">&#39;MEMORY&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span>
+
+    <span class="n">BackendType</span><span class="p">[</span><span class="s1">&#39;SQLITE&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span>
+
+    <span class="n">BackendType</span><span class="p">[</span><span class="s1">&#39;ROCKSDB&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="QueryStatus"><a class="viewcode-back" href="../../../zlogging.enum.html#zlogging.enum.Broker.QueryStatus">[docs]</a><span class="nd">@enum</span><span class="o">.</span><span class="n">unique</span>
+<span class="k">class</span> <span class="nc">QueryStatus</span><span class="p">(</span><span class="n">enum</span><span class="o">.</span><span class="n">IntFlag</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Whether a data store query could be completed or not.</span>
+
+<span class="sd">    c.f. `base/frameworks/broker/store.zeek &lt;https://docs.zeek.org/en/stable/scripts/base/frameworks/broker/store.zeek.html#type-Broker::QueryStatus&gt;`__</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">_ignore_</span> <span class="o">=</span> <span class="s1">&#39;QueryStatus _&#39;</span>
+    <span class="n">QueryStatus</span> <span class="o">=</span> <span class="nb">vars</span><span class="p">()</span>
+
+    <span class="n">QueryStatus</span><span class="p">[</span><span class="s1">&#39;SUCCESS&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span>
+
+    <span class="n">QueryStatus</span><span class="p">[</span><span class="s1">&#39;FAILURE&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span></div>
+</pre></div>
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../../../index.html">ZLogging</a></h1>
+
+
+
+
+
+
+<p>
+<iframe src="https://ghbtns.com/github-btn.html?user=JarryShaw&repo=zlogging&type=star&count=true&size=large&v=2"
+  allowtransparency="true" frameborder="0" scrolling="0" width="200px" height="35px"></iframe>
+</p>
+
+
+
+
+
+<h3>Navigation</h3>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../zlogging.html">Bro/Zeek Logging Framework for Python</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../../index.html">Documentation overview</a><ul>
+  <li><a href="../../index.html">Module code</a><ul>
+  <li><a href="../enum.html">zlogging.enum</a><ul>
+  </ul></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2020, Jarry Shaw.
+      
+    </div>
+
+    
+    <a href="https://github.com/JarryShaw/zlogging" class="github">
+        <img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub"  class="github"/>
+    </a>
+    
+
+    
+  </body>
+</html>

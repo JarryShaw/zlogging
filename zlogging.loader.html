@@ -1,0 +1,647 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Loaders &#8212; ZLogging 0.1.0.post1 documentation</title>
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Data Model" href="zlogging.model.html" />
+    <link rel="prev" title="Dumpers" href="zlogging.dumper.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="loaders">
+<h1>Loaders<a class="headerlink" href="#loaders" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="module-zlogging.loader">
+<span id="predefined-loaders"></span><h2>Predefined Loaders<a class="headerlink" href="#module-zlogging.loader" title="Permalink to this headline">¶</a></h2>
+<p>Bro/Zeek log loader.</p>
+<dl class="py function">
+<dt id="zlogging.loader.parse">
+<code class="sig-prename descclassname">zlogging.loader.</code><code class="sig-name descname">parse</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">filename</span></em>, <em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/zlogging/loader.html#parse"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zlogging.loader.parse" title="Permalink to this definition">¶</a></dt>
+<dd><p>Parse Bro/Zeek log file.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>filename</strong> (<a class="reference external" href="https://docs.python.org/3/library/os.html#os.PathLike" title="(in Python v3.9)"><em>os.PathLike</em></a>) – Log file name.</p></li>
+<li><p><strong>*args</strong> – See <a class="reference internal" href="#zlogging.loader.parse_json" title="zlogging.loader.parse_json"><code class="xref py py-func docutils literal notranslate"><span class="pre">parse_json()</span></code></a> and
+<a class="reference internal" href="#zlogging.loader.parse_ascii" title="zlogging.loader.parse_ascii"><code class="xref py py-func docutils literal notranslate"><span class="pre">parse_ascii()</span></code></a> for more information.</p></li>
+<li><p><strong>**kwargs</strong> – See <a class="reference internal" href="#zlogging.loader.parse_json" title="zlogging.loader.parse_json"><code class="xref py py-func docutils literal notranslate"><span class="pre">parse_json()</span></code></a> and
+<a class="reference internal" href="#zlogging.loader.parse_ascii" title="zlogging.loader.parse_ascii"><code class="xref py py-func docutils literal notranslate"><span class="pre">parse_ascii()</span></code></a> for more information.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The parsed JSON log data.</p>
+</dd>
+<dt class="field-odd">Raises</dt>
+<dd class="field-odd"><p><a class="reference internal" href="zlogging._exc.html#zlogging._exc.ParserError" title="zlogging._exc.ParserError"><strong>ParserError</strong></a> – If the format of the log file is unknown.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>Union[<a class="reference internal" href="zlogging._data.html#zlogging._data.JSONInfo" title="zlogging._data.JSONInfo">zlogging._data.JSONInfo</a>, <a class="reference internal" href="zlogging._data.html#zlogging._data.ASCIIInfo" title="zlogging._data.ASCIIInfo">zlogging._data.ASCIIInfo</a>]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="zlogging.loader.parse_ascii">
+<code class="sig-prename descclassname">zlogging.loader.</code><code class="sig-name descname">parse_ascii</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">filename</span></em>, <em class="sig-param"><span class="n">parser</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">type_hook</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">enum_namespaces</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">bare</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/zlogging/loader.html#parse_ascii"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zlogging.loader.parse_ascii" title="Permalink to this definition">¶</a></dt>
+<dd><p>Parse ASCII log file.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>filename</strong> (<a class="reference external" href="https://docs.python.org/3/library/os.html#os.PathLike" title="(in Python v3.9)"><em>os.PathLike</em></a>) – Log file name.</p></li>
+<li><p><strong>parser</strong> (<a class="reference internal" href="#zlogging.loader.ASCIIParser" title="zlogging.loader.ASCIIParser"><code class="xref py py-class docutils literal notranslate"><span class="pre">ASCIIParser</span></code></a>, optional) – Parser class.</p></li>
+<li><p><strong>type_hook</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.9)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">dict</span></code></a> mapping <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a> and <a class="reference internal" href="zlogging.types.html#zlogging.types.BaseType" title="zlogging.types.BaseType"><code class="xref py py-class docutils literal notranslate"><span class="pre">BaseType</span></code></a> class, optional) – Bro/Zeek type parser hooks. User may customise subclasses of
+<a class="reference internal" href="zlogging.types.html#zlogging.types.BaseType" title="zlogging.types.BaseType"><code class="xref py py-class docutils literal notranslate"><span class="pre">BaseType</span></code></a> to modify parsing behaviours.</p></li>
+<li><p><strong>enum_namespaces</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">List[str]</span></code>, optional) – Namespaces to be loaded.</p></li>
+<li><p><strong>bare</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">bool</span></code></a>, optional) – If <code class="docutils literal notranslate"><span class="pre">True</span></code>, do not load <code class="docutils literal notranslate"><span class="pre">zeek</span></code> namespace by default.</p></li>
+<li><p><strong>*args</strong> – Variable length argument list.</p></li>
+<li><p><strong>**kwargs</strong> – Arbitrary keyword arguments.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The parsed ASCII log data.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="zlogging._data.html#zlogging._data.ASCIIInfo" title="zlogging._data.ASCIIInfo">zlogging._data.ASCIIInfo</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="zlogging.loader.parse_json">
+<code class="sig-prename descclassname">zlogging.loader.</code><code class="sig-name descname">parse_json</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">filename</span></em>, <em class="sig-param"><span class="n">parser</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">model</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/zlogging/loader.html#parse_json"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zlogging.loader.parse_json" title="Permalink to this definition">¶</a></dt>
+<dd><p>Parse JSON log file.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>filename</strong> (<a class="reference external" href="https://docs.python.org/3/library/os.html#os.PathLike" title="(in Python v3.9)"><em>os.PathLike</em></a>) – Log file name.</p></li>
+<li><p><strong>parser</strong> (<a class="reference internal" href="#zlogging.loader.JSONParser" title="zlogging.loader.JSONParser"><code class="xref py py-class docutils literal notranslate"><span class="pre">JSONParser</span></code></a>, optional) – Parser class.</p></li>
+<li><p><strong>model</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">Model</span></code> class, optional) – Field
+declarations for <a class="reference internal" href="#zlogging.loader.JSONParser" title="zlogging.loader.JSONParser"><code class="xref py py-class docutils literal notranslate"><span class="pre">JSONParser</span></code></a>, as in JSON
+logs the field typing information are omitted by the Bro/Zeek
+logging framework.</p></li>
+<li><p><strong>*args</strong> – Variable length argument list.</p></li>
+<li><p><strong>**kwargs</strong> – Arbitrary keyword arguments.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The parsed JSON log data.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="zlogging._data.html#zlogging._data.JSONInfo" title="zlogging._data.JSONInfo">zlogging._data.JSONInfo</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="zlogging.loader.loads">
+<code class="sig-prename descclassname">zlogging.loader.</code><code class="sig-name descname">loads</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">data</span></em>, <em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/zlogging/loader.html#loads"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zlogging.loader.loads" title="Permalink to this definition">¶</a></dt>
+<dd><p>Parse Bro/Zeek log string.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>data</strong> (<em>AnyStr</em>) – Log string as binary or encoded string.</p></li>
+<li><p><strong>*args</strong> – See <a class="reference internal" href="#zlogging.loader.loads_json" title="zlogging.loader.loads_json"><code class="xref py py-func docutils literal notranslate"><span class="pre">loads_json()</span></code></a> and
+<a class="reference internal" href="#zlogging.loader.loads_ascii" title="zlogging.loader.loads_ascii"><code class="xref py py-func docutils literal notranslate"><span class="pre">loads_ascii()</span></code></a> for more information.</p></li>
+<li><p><strong>**kwargs</strong> – See <a class="reference internal" href="#zlogging.loader.loads_json" title="zlogging.loader.loads_json"><code class="xref py py-func docutils literal notranslate"><span class="pre">loads_json()</span></code></a> and
+<a class="reference internal" href="#zlogging.loader.loads_ascii" title="zlogging.loader.loads_ascii"><code class="xref py py-func docutils literal notranslate"><span class="pre">loads_ascii()</span></code></a> for more information.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The parsed JSON log data.</p>
+</dd>
+<dt class="field-odd">Raises</dt>
+<dd class="field-odd"><p><a class="reference internal" href="zlogging._exc.html#zlogging._exc.ParserError" title="zlogging._exc.ParserError"><strong>ParserError</strong></a> – If the format of the log file is unknown.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>Union[<a class="reference internal" href="zlogging._data.html#zlogging._data.JSONInfo" title="zlogging._data.JSONInfo">zlogging._data.JSONInfo</a>, <a class="reference internal" href="zlogging._data.html#zlogging._data.ASCIIInfo" title="zlogging._data.ASCIIInfo">zlogging._data.ASCIIInfo</a>]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="zlogging.loader.loads_ascii">
+<code class="sig-prename descclassname">zlogging.loader.</code><code class="sig-name descname">loads_ascii</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">data</span></em>, <em class="sig-param"><span class="n">parser</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">type_hook</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">enum_namespaces</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">bare</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/zlogging/loader.html#loads_ascii"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zlogging.loader.loads_ascii" title="Permalink to this definition">¶</a></dt>
+<dd><p>Parse ASCII log string.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>data</strong> (<em>AnyStr</em>) – Log string as binary or encoded string.</p></li>
+<li><p><strong>parser</strong> (<a class="reference internal" href="#zlogging.loader.ASCIIParser" title="zlogging.loader.ASCIIParser"><code class="xref py py-class docutils literal notranslate"><span class="pre">ASCIIParser</span></code></a>, optional) – Parser class.</p></li>
+<li><p><strong>type_hook</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.9)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">dict</span></code></a> mapping <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a> and <a class="reference internal" href="zlogging.types.html#zlogging.types.BaseType" title="zlogging.types.BaseType"><code class="xref py py-class docutils literal notranslate"><span class="pre">BaseType</span></code></a> class, optional) – Bro/Zeek type parser hooks. User may customise subclasses of
+<a class="reference internal" href="zlogging.types.html#zlogging.types.BaseType" title="zlogging.types.BaseType"><code class="xref py py-class docutils literal notranslate"><span class="pre">BaseType</span></code></a> to modify parsing behaviours.</p></li>
+<li><p><strong>enum_namespaces</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">List[str]</span></code>, optional) – Namespaces to be loaded.</p></li>
+<li><p><strong>bare</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">bool</span></code></a>, optional) – If <code class="docutils literal notranslate"><span class="pre">True</span></code>, do not load <code class="docutils literal notranslate"><span class="pre">zeek</span></code> namespace by default.</p></li>
+<li><p><strong>*args</strong> – Variable length argument list.</p></li>
+<li><p><strong>**kwargs</strong> – Arbitrary keyword arguments.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The parsed ASCII log data.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="zlogging._data.html#zlogging._data.ASCIIInfo" title="zlogging._data.ASCIIInfo">zlogging._data.ASCIIInfo</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="zlogging.loader.loads_json">
+<code class="sig-prename descclassname">zlogging.loader.</code><code class="sig-name descname">loads_json</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">data</span></em>, <em class="sig-param"><span class="n">parser</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">model</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/zlogging/loader.html#loads_json"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zlogging.loader.loads_json" title="Permalink to this definition">¶</a></dt>
+<dd><p>Parse JSON log string.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>data</strong> (<em>AnyStr</em>) – Log string as binary or encoded string.</p></li>
+<li><p><strong>parser</strong> (<a class="reference internal" href="#zlogging.loader.JSONParser" title="zlogging.loader.JSONParser"><code class="xref py py-class docutils literal notranslate"><span class="pre">JSONParser</span></code></a>, optional) – Parser class.</p></li>
+<li><p><strong>model</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">Model</span></code> class, optional) – Field
+declarations for <a class="reference internal" href="#zlogging.loader.JSONParser" title="zlogging.loader.JSONParser"><code class="xref py py-class docutils literal notranslate"><span class="pre">JSONParser</span></code></a>, as in JSON
+logs the field typing information are omitted by the Bro/Zeek
+logging framework.</p></li>
+<li><p><strong>*args</strong> – Variable length argument list.</p></li>
+<li><p><strong>**kwargs</strong> – Arbitrary keyword arguments.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The parsed JSON log data.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="zlogging._data.html#zlogging._data.JSONInfo" title="zlogging._data.JSONInfo">zlogging._data.JSONInfo</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="zlogging.loader.load">
+<code class="sig-prename descclassname">zlogging.loader.</code><code class="sig-name descname">load</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">file</span></em>, <em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/zlogging/loader.html#load"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zlogging.loader.load" title="Permalink to this definition">¶</a></dt>
+<dd><p>Parse Bro/Zeek log file.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>file</strong> (<em>_io.BufferedReader</em>) – Log file object opened in binary mode.</p></li>
+<li><p><strong>*args</strong> – See <a class="reference internal" href="#zlogging.loader.load_json" title="zlogging.loader.load_json"><code class="xref py py-func docutils literal notranslate"><span class="pre">load_json()</span></code></a> and
+<a class="reference internal" href="#zlogging.loader.load_ascii" title="zlogging.loader.load_ascii"><code class="xref py py-func docutils literal notranslate"><span class="pre">load_ascii()</span></code></a> for more information.</p></li>
+<li><p><strong>**kwargs</strong> – See <a class="reference internal" href="#zlogging.loader.load_json" title="zlogging.loader.load_json"><code class="xref py py-func docutils literal notranslate"><span class="pre">load_json()</span></code></a> and
+<a class="reference internal" href="#zlogging.loader.load_ascii" title="zlogging.loader.load_ascii"><code class="xref py py-func docutils literal notranslate"><span class="pre">load_ascii()</span></code></a> for more information.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The parsed JSON log data.</p>
+</dd>
+<dt class="field-odd">Raises</dt>
+<dd class="field-odd"><p><a class="reference internal" href="zlogging._exc.html#zlogging._exc.ParserError" title="zlogging._exc.ParserError"><strong>ParserError</strong></a> – If the format of the log file is unknown.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>Union[<a class="reference internal" href="zlogging._data.html#zlogging._data.JSONInfo" title="zlogging._data.JSONInfo">zlogging._data.JSONInfo</a>, <a class="reference internal" href="zlogging._data.html#zlogging._data.ASCIIInfo" title="zlogging._data.ASCIIInfo">zlogging._data.ASCIIInfo</a>]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="zlogging.loader.load_ascii">
+<code class="sig-prename descclassname">zlogging.loader.</code><code class="sig-name descname">load_ascii</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">file</span></em>, <em class="sig-param"><span class="n">parser</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">type_hook</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">enum_namespaces</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">bare</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/zlogging/loader.html#load_ascii"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zlogging.loader.load_ascii" title="Permalink to this definition">¶</a></dt>
+<dd><p>Parse ASCII log file.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>file</strong> (<em>_io.BufferedReader</em>) – Log file object opened in binary mode.</p></li>
+<li><p><strong>parser</strong> (<a class="reference internal" href="#zlogging.loader.ASCIIParser" title="zlogging.loader.ASCIIParser"><code class="xref py py-class docutils literal notranslate"><span class="pre">ASCIIParser</span></code></a>, optional) – Parser class.</p></li>
+<li><p><strong>type_hook</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.9)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">dict</span></code></a> mapping <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a> and <a class="reference internal" href="zlogging.types.html#zlogging.types.BaseType" title="zlogging.types.BaseType"><code class="xref py py-class docutils literal notranslate"><span class="pre">BaseType</span></code></a> class, optional) – Bro/Zeek type parser hooks. User may customise subclasses of
+<a class="reference internal" href="zlogging.types.html#zlogging.types.BaseType" title="zlogging.types.BaseType"><code class="xref py py-class docutils literal notranslate"><span class="pre">BaseType</span></code></a> to modify parsing behaviours.</p></li>
+<li><p><strong>enum_namespaces</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">List[str]</span></code>, optional) – Namespaces to be loaded.</p></li>
+<li><p><strong>bare</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">bool</span></code></a>, optional) – If <code class="docutils literal notranslate"><span class="pre">True</span></code>, do not load <code class="docutils literal notranslate"><span class="pre">zeek</span></code> namespace by default.</p></li>
+<li><p><strong>*args</strong> – Variable length argument list.</p></li>
+<li><p><strong>**kwargs</strong> – Arbitrary keyword arguments.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The parsed ASCII log data.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="zlogging._data.html#zlogging._data.ASCIIInfo" title="zlogging._data.ASCIIInfo">zlogging._data.ASCIIInfo</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="zlogging.loader.load_json">
+<code class="sig-prename descclassname">zlogging.loader.</code><code class="sig-name descname">load_json</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">file</span></em>, <em class="sig-param"><span class="n">parser</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">model</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/zlogging/loader.html#load_json"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zlogging.loader.load_json" title="Permalink to this definition">¶</a></dt>
+<dd><p>Parse JSON log file.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>file</strong> (<em>_io.BufferedReader</em>) – Log file object opened in binary mode.</p></li>
+<li><p><strong>parser</strong> (<a class="reference internal" href="#zlogging.loader.JSONParser" title="zlogging.loader.JSONParser"><code class="xref py py-class docutils literal notranslate"><span class="pre">JSONParser</span></code></a>, optional) – Parser class.</p></li>
+<li><p><strong>model</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">Model</span></code> class, optional) – Field
+declarations for <a class="reference internal" href="#zlogging.loader.JSONParser" title="zlogging.loader.JSONParser"><code class="xref py py-class docutils literal notranslate"><span class="pre">JSONParser</span></code></a>, as in JSON
+logs the field typing information are omitted by the Bro/Zeek
+logging framework.</p></li>
+<li><p><strong>*args</strong> – Variable length argument list.</p></li>
+<li><p><strong>**kwargs</strong> – Arbitrary keyword arguments.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The parsed JSON log data.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="zlogging._data.html#zlogging._data.JSONInfo" title="zlogging._data.JSONInfo">zlogging._data.JSONInfo</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py class">
+<dt id="zlogging.loader.ASCIIParser">
+<em class="property">class </em><code class="sig-prename descclassname">zlogging.loader.</code><code class="sig-name descname">ASCIIParser</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">type_hook</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">enum_namespaces</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">bare</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/zlogging/loader.html#ASCIIParser"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zlogging.loader.ASCIIParser" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#zlogging.loader.BaseParser" title="zlogging.loader.BaseParser"><code class="xref py py-class docutils literal notranslate"><span class="pre">zlogging.loader.BaseParser</span></code></a></p>
+<p>ASCII log parser.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>type_hook</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.9)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">dict</span></code></a> mapping <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a> and <a class="reference internal" href="zlogging.types.html#zlogging.types.BaseType" title="zlogging.types.BaseType"><code class="xref py py-class docutils literal notranslate"><span class="pre">BaseType</span></code></a> class, optional) – Bro/Zeek type parser hooks. User may customise subclasses of
+<a class="reference internal" href="zlogging.types.html#zlogging.types.BaseType" title="zlogging.types.BaseType"><code class="xref py py-class docutils literal notranslate"><span class="pre">BaseType</span></code></a> to modify parsing behaviours.</p></li>
+<li><p><strong>enum_namespaces</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">List[str]</span></code>, optional) – Namespaces to be loaded.</p></li>
+<li><p><strong>bare</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">bool</span></code></a>, optional) – If <code class="docutils literal notranslate"><span class="pre">True</span></code>, do not load <code class="docutils literal notranslate"><span class="pre">zeek</span></code> namespace by default.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Variables</dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>__type__</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.9)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">dict</span></code></a> mapping <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a> and <a class="reference internal" href="zlogging.types.html#zlogging.types.BaseType" title="zlogging.types.BaseType"><code class="xref py py-class docutils literal notranslate"><span class="pre">BaseType</span></code></a> class) – Bro/Zeek type parser hooks.</p></li>
+<li><p><strong>enum_namespaces</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">List[str]</span></code>) – Namespaces to be loaded.</p></li>
+<li><p><strong>bare</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)"><em>bool</em></a>) – If <code class="docutils literal notranslate"><span class="pre">True</span></code>, do not load <code class="docutils literal notranslate"><span class="pre">zeek</span></code> namespace by default.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt id="zlogging.loader.ASCIIParser.format">
+<em class="property">property </em><code class="sig-name descname">format</code><a class="headerlink" href="#zlogging.loader.ASCIIParser.format" title="Permalink to this definition">¶</a></dt>
+<dd><p>Log file format.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)">str</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="zlogging.loader.ASCIIParser.parse_file">
+<code class="sig-name descname">parse_file</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">file</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/zlogging/loader.html#ASCIIParser.parse_file"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zlogging.loader.ASCIIParser.parse_file" title="Permalink to this definition">¶</a></dt>
+<dd><p>Parse log file.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>file</strong> (<em>_io.BufferedReader</em>) – Log file object opened in binary mode.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><dl class="simple">
+<dt>The parsed log as a</dt><dd><p><a class="reference internal" href="zlogging.model.html#zlogging.model.Model" title="zlogging.model.Model"><code class="xref py py-class docutils literal notranslate"><span class="pre">Model</span></code></a> per line.</p>
+</dd>
+</dl>
+</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="zlogging._data.html#zlogging._data.ASCIIInfo" title="zlogging._data.ASCIIInfo"><code class="xref py py-class docutils literal notranslate"><span class="pre">ASCIIInfo</span></code></a></p>
+</dd>
+<dt class="field-even">Warns</dt>
+<dd class="field-even"><p><strong>ASCIIParserWarning</strong> – If the ASCII log file exited with error, see
+<a class="reference internal" href="zlogging._data.html#zlogging._data.ASCIIInfo.exit_with_error" title="zlogging._data.ASCIIInfo.exit_with_error"><code class="xref py py-attr docutils literal notranslate"><span class="pre">ASCIIInfo.exit_with_error</span></code></a>
+for more information.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="zlogging.loader.ASCIIParser.parse_line">
+<code class="sig-name descname">parse_line</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">line</span></em>, <em class="sig-param"><span class="n">lineno</span><span class="o">=</span><span class="default_value">0</span></em>, <em class="sig-param"><span class="n">separator</span><span class="o">=</span><span class="default_value">b'\t'</span></em>, <em class="sig-param"><span class="n">parser</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/zlogging/loader.html#ASCIIParser.parse_line"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zlogging.loader.ASCIIParser.parse_line" title="Permalink to this definition">¶</a></dt>
+<dd><p>Parse log line as one-line record.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>line</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(in Python v3.9)"><em>bytes</em></a>) – A simple line of log.</p></li>
+<li><p><strong>lineno</strong> (<em>Optional</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><em>int</em></a><em>]</em>) – Line number of current line.</p></li>
+<li><p><strong>separator</strong> (<em>Optional</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(in Python v3.9)"><em>bytes</em></a><em>]</em>) – Data separator.</p></li>
+<li><p><strong>parser</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">List</span></code> of <a class="reference internal" href="zlogging.types.html#zlogging.types.BaseType" title="zlogging.types.BaseType"><code class="xref py py-class docutils literal notranslate"><span class="pre">BaseType</span></code></a>, required) – Field data type parsers.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The parsed log as a plain <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.9)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">dict</span></code></a>.</p>
+</dd>
+<dt class="field-odd">Raises</dt>
+<dd class="field-odd"><p><a class="reference internal" href="zlogging._exc.html#zlogging._exc.ASCIIPaserError" title="zlogging._exc.ASCIIPaserError"><strong>ASCIIPaserError</strong></a> – If <code class="docutils literal notranslate"><span class="pre">parser</span></code> is not provided; or failed to
+    serialise <code class="docutils literal notranslate"><span class="pre">line</span></code> as ASCII.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>Dict[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)">str</a>, Any]</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="zlogging.loader.JSONParser">
+<em class="property">class </em><code class="sig-prename descclassname">zlogging.loader.</code><code class="sig-name descname">JSONParser</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">model</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/zlogging/loader.html#JSONParser"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zlogging.loader.JSONParser" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#zlogging.loader.BaseParser" title="zlogging.loader.BaseParser"><code class="xref py py-class docutils literal notranslate"><span class="pre">zlogging.loader.BaseParser</span></code></a></p>
+<p>JSON log parser.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>model</strong> (<a class="reference internal" href="zlogging.model.html#zlogging.model.Model" title="zlogging.model.Model"><code class="xref py py-class docutils literal notranslate"><span class="pre">Model</span></code></a> class, optional) – Field
+declrations for <a class="reference internal" href="#zlogging.loader.JSONParser" title="zlogging.loader.JSONParser"><code class="xref py py-class docutils literal notranslate"><span class="pre">JSONParser</span></code></a>, as in JSON
+logs the field typing information are omitted by the Bro/Zeek
+logging framework.</p>
+</dd>
+<dt class="field-even">Variables</dt>
+<dd class="field-even"><p><strong>model</strong> (<a class="reference internal" href="zlogging.model.html#zlogging.model.Model" title="zlogging.model.Model"><code class="xref py py-class docutils literal notranslate"><span class="pre">Model</span></code></a> class, optional) – Field
+declrations for <a class="reference internal" href="#zlogging.loader.JSONParser" title="zlogging.loader.JSONParser"><code class="xref py py-class docutils literal notranslate"><span class="pre">JSONParser</span></code></a>, as in JSON
+logs the field typing information are omitted by the Bro/Zeek
+logging framework.</p>
+</dd>
+<dt class="field-odd">Warns</dt>
+<dd class="field-odd"><p><strong>JSONParserWarning</strong> – If <code class="docutils literal notranslate"><span class="pre">model</span></code> is not specified.</p>
+</dd>
+</dl>
+<dl class="py method">
+<dt id="zlogging.loader.JSONParser.format">
+<em class="property">property </em><code class="sig-name descname">format</code><a class="headerlink" href="#zlogging.loader.JSONParser.format" title="Permalink to this definition">¶</a></dt>
+<dd><p>Log file format.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)">str</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="zlogging.loader.JSONParser.parse_file">
+<code class="sig-name descname">parse_file</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">file</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/zlogging/loader.html#JSONParser.parse_file"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zlogging.loader.JSONParser.parse_file" title="Permalink to this definition">¶</a></dt>
+<dd><p>Parse log file.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>file</strong> (<em>_io.BufferedReader</em>) – Log file object opened in binary mode.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><dl class="simple">
+<dt>The parsed log as a</dt><dd><p><a class="reference internal" href="zlogging.model.html#zlogging.model.Model" title="zlogging.model.Model"><code class="xref py py-class docutils literal notranslate"><span class="pre">Model</span></code></a> per line.</p>
+</dd>
+</dl>
+</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="zlogging._data.html#zlogging._data.JSONInfo" title="zlogging._data.JSONInfo"><code class="xref py py-class docutils literal notranslate"><span class="pre">JSONInfo</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="zlogging.loader.JSONParser.parse_line">
+<code class="sig-name descname">parse_line</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">line</span></em>, <em class="sig-param"><span class="n">lineno</span><span class="o">=</span><span class="default_value">0</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/zlogging/loader.html#JSONParser.parse_line"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zlogging.loader.JSONParser.parse_line" title="Permalink to this definition">¶</a></dt>
+<dd><p>Parse log line as one-line record.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>line</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(in Python v3.9)"><em>bytes</em></a>) – A simple line of log.</p></li>
+<li><p><strong>lineno</strong> (<em>Optional</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><em>int</em></a><em>]</em>) – Line number of current line.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The parsed log as a plain <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.9)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">dict</span></code></a>.</p>
+</dd>
+<dt class="field-odd">Raises</dt>
+<dd class="field-odd"><p><a class="reference internal" href="zlogging._exc.html#zlogging._exc.JSONParserError" title="zlogging._exc.JSONParserError"><strong>JSONParserError</strong></a> – If failed to serialise the <code class="docutils literal notranslate"><span class="pre">line</span></code> from JSON.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>Dict[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)">str</a>, Any]</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="abstract-base-loaders">
+<h2>Abstract Base Loaders<a class="headerlink" href="#abstract-base-loaders" title="Permalink to this headline">¶</a></h2>
+<dl class="py class">
+<dt id="zlogging.loader.BaseParser">
+<em class="property">class </em><code class="sig-prename descclassname">zlogging.loader.</code><code class="sig-name descname">BaseParser</code><a class="reference internal" href="_modules/zlogging/loader.html#BaseParser"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zlogging.loader.BaseParser" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<p>Basic log parser.</p>
+<dl class="py method">
+<dt id="zlogging.loader.BaseParser.format">
+<em class="property">abstract property </em><code class="sig-name descname">format</code><a class="headerlink" href="#zlogging.loader.BaseParser.format" title="Permalink to this definition">¶</a></dt>
+<dd><p>Log file format.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)">str</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="zlogging.loader.BaseParser.parse">
+<code class="sig-name descname">parse</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">filename</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/zlogging/loader.html#BaseParser.parse"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zlogging.loader.BaseParser.parse" title="Permalink to this definition">¶</a></dt>
+<dd><p>Parse log file.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>filename</strong> (<a class="reference external" href="https://docs.python.org/3/library/os.html#os.PathLike" title="(in Python v3.9)"><em>os.PathLike</em></a>) – Log file name.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The parsed log as an <a class="reference internal" href="zlogging._data.html#zlogging._data.ASCIIInfo" title="zlogging._data.ASCIIInfo"><code class="xref py py-class docutils literal notranslate"><span class="pre">ASCIIInfo</span></code></a> or <a class="reference internal" href="zlogging._data.html#zlogging._data.JSONInfo" title="zlogging._data.JSONInfo"><code class="xref py py-class docutils literal notranslate"><span class="pre">JSONInfo</span></code></a>.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="zlogging._data.html#zlogging._data.Info" title="zlogging._data.Info">zlogging._data.Info</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="zlogging.loader.BaseParser.parse_file">
+<em class="property">abstract </em><code class="sig-name descname">parse_file</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">file</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/zlogging/loader.html#BaseParser.parse_file"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zlogging.loader.BaseParser.parse_file" title="Permalink to this definition">¶</a></dt>
+<dd><p>Parse log file.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>file</strong> (<em>_io.BufferedReader</em>) – Log file object opened in binary mode.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The parsed log as a <a class="reference internal" href="zlogging.model.html#zlogging.model.Model" title="zlogging.model.Model"><code class="xref py py-class docutils literal notranslate"><span class="pre">Model</span></code></a> per line.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="zlogging._data.html#zlogging._data.Info" title="zlogging._data.Info"><code class="xref py py-class docutils literal notranslate"><span class="pre">Info</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="zlogging.loader.BaseParser.parse_line">
+<em class="property">abstract </em><code class="sig-name descname">parse_line</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">line</span></em>, <em class="sig-param"><span class="n">lineno</span><span class="o">=</span><span class="default_value">0</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/zlogging/loader.html#BaseParser.parse_line"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zlogging.loader.BaseParser.parse_line" title="Permalink to this definition">¶</a></dt>
+<dd><p>Parse log line as one-line record.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>line</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(in Python v3.9)"><em>bytes</em></a>) – A simple line of log.</p></li>
+<li><p><strong>lineno</strong> (<em>Optional</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><em>int</em></a><em>]</em>) – Line number of current line.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The parsed log as a plain <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.9)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">dict</span></code></a>.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>Dict[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)">str</a>, Any]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="zlogging.loader.BaseParser.load">
+<code class="sig-name descname">load</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">file</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/zlogging/loader.html#BaseParser.load"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zlogging.loader.BaseParser.load" title="Permalink to this definition">¶</a></dt>
+<dd><p>Parse log file.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>file</strong> (<em>_io.BufferedReader</em>) – Log file object opened in binary mode.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The parsed log as a <a class="reference internal" href="zlogging.model.html#zlogging.model.Model" title="zlogging.model.Model"><code class="xref py py-class docutils literal notranslate"><span class="pre">Model</span></code></a> per line.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="zlogging._data.html#zlogging._data.Info" title="zlogging._data.Info"><code class="xref py py-class docutils literal notranslate"><span class="pre">Info</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="zlogging.loader.BaseParser.loads">
+<code class="sig-name descname">loads</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">line</span></em>, <em class="sig-param"><span class="n">lineno</span><span class="o">=</span><span class="default_value">0</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/zlogging/loader.html#BaseParser.loads"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zlogging.loader.BaseParser.loads" title="Permalink to this definition">¶</a></dt>
+<dd><p>Parse log line as one-line record.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>line</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(in Python v3.9)"><em>bytes</em></a>) – A simple line of log.</p></li>
+<li><p><strong>lineno</strong> (<em>Optional</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><em>int</em></a><em>]</em>) – Line number of current line.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The parsed log as a plain <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.9)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">dict</span></code></a>.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>Dict[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)">str</a>, Any]</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">ZLogging</a></h1>
+
+
+
+
+
+
+<p>
+<iframe src="https://ghbtns.com/github-btn.html?user=JarryShaw&repo=zlogging&type=star&count=true&size=large&v=2"
+  allowtransparency="true" frameborder="0" scrolling="0" width="200px" height="35px"></iframe>
+</p>
+
+
+
+
+
+<h3>Navigation</h3>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="zlogging.html">Bro/Zeek Logging Framework for Python</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="zlogging.html#table-of-contents">Table of Contents</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="zlogging.dumper.html">Dumpers</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Loaders</a></li>
+<li class="toctree-l3"><a class="reference internal" href="zlogging.model.html">Data Model</a></li>
+<li class="toctree-l3"><a class="reference internal" href="zlogging.types.html">Data Types</a></li>
+<li class="toctree-l3"><a class="reference internal" href="zlogging.typing.html">Typing Annotations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="zlogging._data.html">Data Classes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="zlogging._exc.html">Exceptions &amp; Warnings</a></li>
+<li class="toctree-l3"><a class="reference internal" href="zlogging._aux.html">Internal Auxiliary Functions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="zlogging.enum.html">Enum Namespace</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="zlogging.html#module-contents">Module Contents</a></li>
+</ul>
+</li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+  <li><a href="zlogging.html">Bro/Zeek Logging Framework for Python</a><ul>
+      <li>Previous: <a href="zlogging.dumper.html" title="previous chapter">Dumpers</a></li>
+      <li>Next: <a href="zlogging.model.html" title="next chapter">Data Model</a></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2020, Jarry Shaw.
+      
+      |
+      <a href="_sources/zlogging.loader.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+    <a href="https://github.com/JarryShaw/zlogging" class="github">
+        <img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub"  class="github"/>
+    </a>
+    
+
+    
+  </body>
+</html>
