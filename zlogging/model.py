@@ -7,7 +7,7 @@ import types
 
 import zlogging._typing as typing
 from zlogging._aux import expand_typing
-from zlogging._exc import ModelTypeError, ModelValueError, ModelFormatError
+from zlogging._exc import ModelFormatError, ModelTypeError, ModelValueError
 from zlogging.types import BaseType
 
 __all__ = [

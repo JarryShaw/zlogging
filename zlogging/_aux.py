@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+# pylint: disable=ungrouped-imports
 """Auxiliary functions."""
 
 import collections
@@ -7,16 +8,37 @@ import itertools
 import math
 import textwrap
 import warnings
+from typing import TYPE_CHECKING, TypeVar, overload
 
-import zlogging._typing as typing
-from zlogging._exc import BroDeprecationWarning
-from zlogging._typing import GenericMeta
+from ._compat import GenericMeta
+from ._exc import BroDeprecationWarning
+
+if TYPE_CHECKING:
+    from collections import OrderedDict
+    from decimal import Decimal
+    from io import BufferedReader as BinaryFile
+    from typing import Any, Dict, List, Optional, Type, Union
+
+    from typing_extensions import Literal
+
+    from .model import Model
+    from .types import RecordType
 
 __all__ = ['readline', 'decimal_toascii', 'float_toascii', 'unicode_escape', 'expand_typing']
 
 
-def readline(file: typing.BinaryFile, separator: bytes = b'\x09',
-             maxsplit: int = -1, decode: bool = False) -> typing.List[typing.AnyStr]:
+@overload
+def readline(file: 'BinaryFile', seperator: bytes, maxsplit: int, decode: 'Literal[True]') -> 'List[str]':  # pylint: disable=redefined-outer-name
+    ...  # pragma: no cover
+
+
+@overload
+def readline(file: 'BinaryFile', seperator: bytes, maxsplit: int, decode: 'Literal[False]') -> 'List[bytes]':  # pylint: disable=redefined-outer-name
+    ...  # pragma: no cover
+
+
+def readline(file: 'BinaryFile', separator: bytes = b'\x09',  # type: ignore[misc]
+             maxsplit: int = -1, decode: bool = False) -> 'Union[List[str], List[bytes]]':  # pylint: disable=redefined-outer-name
     """Wrapper for :meth:`file.readline` function.
 
     Args:
@@ -37,7 +59,7 @@ def readline(file: typing.BinaryFile, separator: bytes = b'\x09',
     return line.split(separator, maxsplit)
 
 
-def decimal_toascii(data: typing.Decimal, infinite: str = None) -> str:
+def decimal_toascii(data: 'Decimal', infinite: 'Optional[str]' = None) -> str:
     """Convert :obj:`decimal.Decimal` to ASCII.
 
     Args:
@@ -102,7 +124,7 @@ def decimal_toascii(data: typing.Decimal, infinite: str = None) -> str:
                           '0' * (6 - len(buf_flt)))
 
 
-def float_toascii(data: float, infinite: str = None) -> str:
+def float_toascii(data: float, infinite: 'Optional[str]' = None) -> str:
     """Convert :obj:`float` to ASCII.
 
     Args:
@@ -154,15 +176,16 @@ def unicode_escape(string: bytes) -> str:
     Example:
 
         >>> b'\\x09'.decode('unicode_escape')
-        '\\t'
+        '\\\\t'
         >>> unicode_escape(b'\\t')
-        '\\x09'
+        '\\\\x09'
 
     """
-    return ''.join(map(lambda s: '\\x' % s, textwrap.wrap(string.hex(), 2)))
+    return ''.join(map(lambda s: '\\x%s' % s, textwrap.wrap(string.hex(), 2)))
 
 
-def expand_typing(cls: object, exc: typing.Optional[ValueError] = None) -> typing.Dict[str, typing.Any]:
+def expand_typing(cls: 'Union[Model, RecordType]',
+                  exc: 'Optional[Type[ValueError]]' = None) -> 'Dict[str, Any]':
     """Expand typing annotations.
 
     Args:
@@ -237,7 +260,8 @@ def expand_typing(cls: object, exc: typing.Optional[ValueError] = None) -> typin
         https://www.python.org/dev/peps/pep-0484/
 
     """
-    from zlogging.types import _GenericType, _SimpleType, _VariadicType, BaseType  # pylint: disable=import-outside-toplevel
+    from zlogging.types import (BaseType, _GenericType,  # pylint: disable=import-outside-toplevel
+                                _SimpleType, _VariadicType)
 
     if exc is None:
         exc = ValueError
@@ -247,18 +271,25 @@ def expand_typing(cls: object, exc: typing.Optional[ValueError] = None) -> typin
     empty_field = b'(empty)'
     set_separator = b','
 
-    def register(name: str, field: BaseType):
+    def register(name: str, field: BaseType) -> None:
         """Field registry."""
         existed = fields.get(name)
-        if existed is not None and type(field) != type(existed):
-            raise exc('inconsistent data type of %r field: %s and %s' % (name, field, existed))
+        if existed is not None and field.zeek_type != existed.zeek_type:
+            raise exc('inconsistent data type of %r field: %s and %s' % (name, field, existed))  # type: ignore[misc]
         fields[name] = field
 
-    fields = collections.OrderedDict()
+    fields = collections.OrderedDict()  # type: OrderedDict[str, BaseType]
     record_fields = collections.OrderedDict()
     for name, attr in itertools.chain(getattr(cls, '__annotations__', dict()).items(), cls.__dict__.items()):
-        if not isinstance(attr, BaseType):
-            if isinstance(attr, typing.TypeVar):
+        if isinstance(attr, BaseType):
+            if isinstance(attr, _VariadicType):
+                for elm_name, elm_field in attr.element_mapping.items():
+                    register('%s.%s' % (name, elm_name), elm_field)
+                record_fields[name] = attr
+            else:
+                register(name, attr)
+        else:
+            if isinstance(attr, TypeVar):
                 type_name = attr.__name__
                 bound = attr.__bound__
 
@@ -276,7 +307,7 @@ def expand_typing(cls: object, exc: typing.Optional[ValueError] = None) -> typin
                 origin = attr.__origin__
                 parameter = attr.__parameters__[0]
 
-                if isinstance(parameter, typing.TypeVar):
+                if isinstance(parameter, TypeVar):
                     bound = parameter.__bound__
                     if issubclass(bound, _SimpleType):
                         type_name = parameter.__name__
@@ -300,13 +331,6 @@ def expand_typing(cls: object, exc: typing.Optional[ValueError] = None) -> typin
                 attr = attr()
             else:
                 continue
-
-        if isinstance(attr, _VariadicType):
-            for elm_name, elm_field in attr.element_mapping.items():
-                register('%s.%s' % (name, elm_name), elm_field)
-            record_fields[name] = attr
-        else:
-            register(name, attr)
 
         if not inited:
             unset_field = attr.unset_field

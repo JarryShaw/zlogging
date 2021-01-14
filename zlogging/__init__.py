@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 """Bro/Zeek logging framework."""
 
-from zlogging.dumper import write, dump, dumps
-from zlogging.loader import parse, load, loads
+from zlogging.dumper import dump, dumps, write
+from zlogging.loader import load, loads, parse
 from zlogging.model import Model, new_model
 from zlogging.types import *  # pylint: disable=unused-wildcard-import
 

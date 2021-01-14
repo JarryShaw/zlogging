@@ -70,19 +70,25 @@ attrs = dict(
     # long_description_content_type
     python_requires='>=3.6',
     # zip_safe,
-    # install_requires,
-    # entry_points,
-    extras_require={
+    install_requires=[
+        'typing-inspect',
+        'typing_extensions',
         # version compatibility
-        ':python_version == "3.6"': ['dataclasses', 'aenum'],
-    },
+        'dataclasses; python_version < "3.7"',
+        'aenum; python_version < "3.7"',
+    ],
+    # entry_points,
+    #extras_require={
+    #    # version compatibility
+    #    ':python_version == "3.6"': ['dataclasses', 'aenum'],
+    #},
 )
 
 try:
     from setuptools import setup
 
     attrs.update(dict(
-        include_package_data=True,
+        include_package_data=True,  # type: ignore[dict-item]
         # libraries
         # headers
         # ext_package

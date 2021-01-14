@@ -23,12 +23,17 @@ ipython = "*"
 coverage = "*"
 codecov = "*"
 sphinx = "*"
+sphinx-autodoc-typehints = "*"
 rstcheck = "*"
 tox = "*"
 beautifulsoup4 = {extras = ["html5lib"],version = "*"}
 requests = "*"
 
 [packages]
+aenum = "*"
+dataclasses = "*"
+typing-inspect = "*"
+typing_extensions = "*"
 
 [requires]
 python_version = "3.9"

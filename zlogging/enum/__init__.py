@@ -29,18 +29,18 @@ from zlogging.enum.MOUNT3 import auth_flavor_t as MOUNT3_auth_flavor_t
 from zlogging.enum.MOUNT3 import proc_t as MOUNT3_proc_t
 from zlogging.enum.MOUNT3 import status_t as MOUNT3_status_t
 from zlogging.enum.MQTT import SubUnsub as MQTT_SubUnsub
-from zlogging.enum.NFS3 import createmode_t as NFS3_createmode_t
-from zlogging.enum.NFS3 import file_type_t as NFS3_file_type_t
-from zlogging.enum.NFS3 import proc_t as NFS3_proc_t
-from zlogging.enum.NFS3 import stable_how_t as NFS3_stable_how_t
-from zlogging.enum.NFS3 import status_t as NFS3_status_t
-from zlogging.enum.NFS3 import time_how_t as NFS3_time_how_t
 from zlogging.enum.NetControl import CatchReleaseActions as NetControl_CatchReleaseActions
 from zlogging.enum.NetControl import EntityType as NetControl_EntityType
 from zlogging.enum.NetControl import InfoCategory as NetControl_InfoCategory
 from zlogging.enum.NetControl import InfoState as NetControl_InfoState
 from zlogging.enum.NetControl import RuleType as NetControl_RuleType
 from zlogging.enum.NetControl import TargetType as NetControl_TargetType
+from zlogging.enum.NFS3 import createmode_t as NFS3_createmode_t
+from zlogging.enum.NFS3 import file_type_t as NFS3_file_type_t
+from zlogging.enum.NFS3 import proc_t as NFS3_proc_t
+from zlogging.enum.NFS3 import stable_how_t as NFS3_stable_how_t
+from zlogging.enum.NFS3 import status_t as NFS3_status_t
+from zlogging.enum.NFS3 import time_how_t as NFS3_time_how_t
 from zlogging.enum.Notice import Action as Notice_Action
 from zlogging.enum.Notice import Type as Notice_Type
 from zlogging.enum.OpenFlow import Plugin as OpenFlow_Plugin
@@ -49,16 +49,15 @@ from zlogging.enum.OpenFlow import ofp_config_flags as OpenFlow_ofp_config_flags
 from zlogging.enum.OpenFlow import ofp_flow_mod_command as OpenFlow_ofp_flow_mod_command
 from zlogging.enum.ProtocolDetector import dir as ProtocolDetector_dir
 from zlogging.enum.Reporter import Level as Reporter_Level
+from zlogging.enum.Signatures import Action as Signatures_Action
 from zlogging.enum.SMB import Action as SMB_Action
 from zlogging.enum.SOCKS import RequestType as SOCKS_RequestType
-from zlogging.enum.SSL import SctSource as SSL_SctSource
-from zlogging.enum.Signatures import Action as Signatures_Action
 from zlogging.enum.Software import Type as Software_Type
+from zlogging.enum.SSL import SctSource as SSL_SctSource
 from zlogging.enum.SumStats import Calculation as SumStats_Calculation
 from zlogging.enum.Tunnel import Action as Tunnel_Action
 from zlogging.enum.Tunnel import Type as Tunnel_Type
 from zlogging.enum.Weird import Action as Weird_Action
-from zlogging.enum.ZeekygenExample import SimpleEnum as ZeekygenExample_SimpleEnum
 from zlogging.enum.zeek import Direction as zeek_Direction
 from zlogging.enum.zeek import Host as zeek_Host
 from zlogging.enum.zeek import IPAddrAnonymization as zeek_IPAddrAnonymization
@@ -69,6 +68,7 @@ from zlogging.enum.zeek import link_encap as zeek_link_encap
 from zlogging.enum.zeek import pkt_profile_modes as zeek_pkt_profile_modes
 from zlogging.enum.zeek import rpc_status as zeek_rpc_status
 from zlogging.enum.zeek import transport_proto as zeek_transport_proto
+from zlogging.enum.ZeekygenExample import SimpleEnum as ZeekygenExample_SimpleEnum
 
 __all__ = ['globals']
 

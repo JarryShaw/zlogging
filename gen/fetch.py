@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
-import pathlib
 import os
+import pathlib
 import urllib.parse
 
 import bs4

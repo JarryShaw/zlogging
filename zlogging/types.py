@@ -1,20 +1,56 @@
 # -*- coding: utf-8 -*-
+# pylint: disable=ungrouped-imports,unsubscriptable-object
 """Bro/Zeek data types."""
 
 import abc
 import ctypes
 import datetime
 import decimal
-import enum
 import ipaddress
 import json
 import warnings
+from typing import TYPE_CHECKING, Any, Generic, List, Set, TypeVar, Union, cast, overload
 
-import zlogging._typing as typing
-from zlogging._aux import decimal_toascii, float_toascii, expand_typing
+from typing_extensions import TypedDict
+from typing_inspect import get_args, is_union_type
+
+from zlogging._aux import decimal_toascii, expand_typing, float_toascii
+from zlogging._compat import enum
 from zlogging._exc import (BroDeprecationWarning, ZeekNotImplemented, ZeekTypeError, ZeekValueError,
                            ZeekValueWarning)
 from zlogging.enum import globals as enum_generator
+
+_T = TypeVar("_T")
+_Str = TypeVar('_Str', str, bytes)
+_Bool = TypeVar('_Bool', 'Literal[True]', 'Literal[False]')
+if TYPE_CHECKING:
+    from collections import OrderedDict
+    from ctypes import c_int64 as int64
+    from ctypes import c_uint16 as uint16
+    from ctypes import c_uint64 as uint64
+    from datetime import datetime as DateTimeType
+    from datetime import timedelta as TimeDeltaType
+    from decimal import Decimal
+    from enum import Enum as _Enum
+    from ipaddress import IPv4Address, IPv4Network, IPv6Address, IPv6Network
+    from typing import Dict, NoReturn, Optional, Tuple, Type
+
+    from aenum import Enum as _AEnum
+    from typing_extensions import Literal
+
+    AnyStr = Union[str, bytes]
+    ByteString = Union[bytes, bytearray, memoryview]
+    IPAddress = Union[IPv4Address, IPv6Address]
+    IPNetwork = Union[IPv4Network, IPv6Network]
+
+    class Enum(_Enum, _AEnum):  # pylint: disable=duplicate-bases
+        def __init__(self, value: str, names: Union[str, List[str], List[Tuple[str, Any]], Dict[str, Any]], *,  # pylint: disable=unused-argument,super-init-not-called
+                     module: Optional[str] = None, qualname: Optional[str] = None,  # pylint: disable=unused-argument
+                     type: Optional[type] = None, start: Optional[int] = 1):  # pylint: disable=unused-argument,redefined-builtin
+            ...
+
+        def __getitem__(self: '_T', name: str) -> '_T':
+            ...
 
 __all__ = [
     'AddrType', 'BoolType', 'CountType', 'DoubleType', 'EnumType',
@@ -42,8 +78,8 @@ class BaseType(metaclass=abc.ABCMeta):
 
     @property
     @abc.abstractmethod
-    def python_type(self)-> type:
-        """type: Corresponding Python type annotation."""
+    def python_type(self)-> 'Any':
+        """Any: Corresponding Python type annotation."""
 
     @property
     @abc.abstractmethod
@@ -57,62 +93,70 @@ class BaseType(metaclass=abc.ABCMeta):
                       "Please use 'zeek_type' instead.", BroDeprecationWarning)
         return self.zeek_type
 
-    def __init__(self,  # pylint: disable=unused-argument,keyword-arg-before-vararg
-                 empty_field: typing.Optional[typing.AnyStr] = None,
-                 unset_field: typing.Optional[typing.AnyStr] = None,
-                 set_separator: typing.Optional[typing.AnyStr] = None,
-                 *args, **kwargs):
+    def __init__(self,   # pylint: disable=unused-argument,keyword-arg-before-vararg
+                 empty_field: 'Optional[AnyStr]' = None, unset_field: 'Optional[AnyStr]' = None,
+                 set_separator: 'Optional[AnyStr]' = None, *args: 'Any', **kwargs: 'Any') -> None:
         if empty_field is None:
-            empty_field = b'(empty)'
-        if unset_field is None:
-            unset_field = b'-'
-        if set_separator is None:
-            set_separator = b','
-
-        if isinstance(empty_field, str):
+            self.empty_field = b'(empty)'
+            self.str_empty_field = '(empty)'
+        elif isinstance(empty_field, str):
             self.empty_field = empty_field.encode('ascii')
             self.str_empty_field = empty_field
         else:
             self.empty_field = empty_field
             self.str_empty_field = empty_field.decode('ascii')
 
-        if isinstance(unset_field, str):
+        if unset_field is None:
+            self.unset_field = b'-'
+            self.str_unset_field = '-'
+        elif isinstance(unset_field, str):
             self.unset_field = unset_field.encode('ascii')
             self.str_unset_field = unset_field
         else:
             self.unset_field = unset_field
             self.str_unset_field = unset_field.decode('ascii')
 
-        if isinstance(set_separator, str):
+        if set_separator is None:
+            self.set_separator = b','
+            self.str_set_separator = ','
+        elif isinstance(set_separator, str):
             self.set_separator = set_separator.encode('ascii')
             self.str_set_separator = set_separator
         else:
             self.set_separator = set_separator
             self.str_set_separator = set_separator.decode('ascii')
 
-    def __call__(self, data: typing.Any) -> typing.Any:
-        """Parse ``data`` from string."""
+        self._name = type(self).__name__
+
+    def __call__(self, data: 'Any') -> 'Any':
+        """Parse ``data`` from string.
+
+        This is a proxy method which calls to :meth:`~zlogging.types.BaseType.parse`
+        of the type implementation.
+
+        """
         if data is None:
             return data
         return self.parse(data)
 
     def __str__(self) -> str:
+        """Returns the corresponding Zeek type name."""
         return self.zeek_type
 
     def __repr__(self) -> str:
-        return '%s(empty_field=%s, unset_field=%s, set_separator=%s)' % (type(self).__name__, self.empty_field,
-                                                                         self.unset_field, self.set_separator)
+        return (f'{self._name}(empty_field={self.str_empty_field}, '
+                f'unset_field={self.str_unset_field}, set_separator={self.str_set_separator})')
 
     @abc.abstractmethod
-    def parse(self, data: typing.Any) -> typing.Any:
+    def parse(self, data: 'Any') -> 'Any':
         """Parse ``data`` from string."""
 
     @abc.abstractmethod
-    def tojson(self, data: typing.Any) -> typing.Any:
+    def tojson(self, data: 'Any') -> 'Any':
         """Serialize ``data`` as JSON log format."""
 
     @abc.abstractmethod
-    def toascii(self, data: typing.Any) -> str:
+    def toascii(self, data: 'Any') -> str:
         """Serialize ``data`` as ASCII log format."""
 
 
@@ -152,33 +196,32 @@ class AnyType(_SimpleType):
     """
 
     @property
-    def python_type(self)-> type:
-        """type: Corresponding Python type annotation."""
-        return typing.Any
+    def python_type(self) -> 'Any':
+        """Any: Corresponding Python type annotation."""
+        return Any
 
     @property
-    def zeek_type(self) -> str:
+    def zeek_type(self) -> 'Literal["any"]':
         """str: Corresponding Zeek type name."""
         return 'any'
 
-    def parse(self, data: typing.Any) -> typing.Any:
+    def parse(self, data: '_T') -> 'Optional[_T]':
         """Parse ``data`` from string.
 
         Args:
             data: raw data
 
         Returns:
-            The parsed data. If ``data`` is *unset*, ``None`` will
+            The parsed data. If ``data`` is *unset*, :data:`None` will
             be returned.
 
         """
-        if isinstance(data, str):
-            data = data.encode('ascii')
-        if data == self.unset_field:
+        r_data = data.encode('ascii') if isinstance(data, str) else data
+        if r_data == self.unset_field:
             return None
         return data
 
-    def tojson(self, data: typing.Any) -> typing.Any:
+    def tojson(self, data: 'Any') -> 'Any':
         """Serialize ``data`` as JSON log format.
 
         Args:
@@ -187,14 +230,23 @@ class AnyType(_SimpleType):
         Returns:
             The JSON representation of data.
 
+        Notes:
+            If the data is not JSON serialisable, i.e. :func:`json.dumps`
+            raises :exc:`TypeError`, the method will return a :obj:`dict`
+            object with ``data`` representing :obj:`str` sanitised raw data
+            and ``error`` representing the error message.
+
         """
         try:
             json.dumps(data)
-        except TypeError:
-            return str(data)
+        except TypeError as error:
+            return {
+                'data': str(data),
+                'error': str(error),
+            }
         return data
 
-    def toascii(self, data: typing.Any) -> str:
+    def toascii(self, data: 'Any') -> str:
         """Serialize ``data`` as ASCII log format.
 
         Args:
@@ -227,28 +279,40 @@ class BoolType(_SimpleType):
     """
 
     @property
-    def python_type(self)-> type:
-        """type: Corresponding Python type annotation."""
+    def python_type(self)-> 'Type[bool]':
+        """Any: Corresponding Python type annotation."""
         return bool
 
     @property
-    def zeek_type(self) -> str:
+    def zeek_type(self) -> 'Literal["bool"]':
         """str: Corresponding Zeek type name."""
         return 'bool'
 
-    def parse(self, data: typing.Union[typing.AnyStr, bool]) -> typing.Union[None, bool]:
+    @overload
+    def parse(self, data: 'Literal["T", b"T"]') -> 'Literal[True]':
+        ...
+
+    @overload
+    def parse(self, data: 'Literal["F", b"F"]') -> 'Literal[False]':
+        ...
+
+    @overload
+    def parse(self, data: '_Str') -> 'Optional[bool]':
+        ...
+
+    def parse(self, data: 'Union[AnyStr, bool]') -> 'Optional[bool]':
         """Parse ``data`` from string.
 
         Args:
             data: raw data
 
         Returns:
-            The parsed boolean data. If ``data`` is *unset*, ``None`` will
+            The parsed boolean data. If ``data`` is *unset*, :data:`None` will
             be returned.
 
         Raises:
-            :exc:`ZeekValueError`: If ``data`` is NOT *unset* and NOT ``T``
-                (``True``) nor ``F`` (``False``) in Bro/Zeek script language.
+            ZeekValueError: If ``data`` is NOT *unset* and NOT ``T`` (:data:`True`)
+                nor ``F`` (:data:`False`) in Bro/Zeek script language.
 
         """
         if isinstance(data, bool):
@@ -264,7 +328,15 @@ class BoolType(_SimpleType):
             return False
         raise ZeekValueError('invalid bool value: %s' % data.decode('ascii'))
 
-    def tojson(self, data: typing.Union[None, bool]) -> typing.Union[None, bool]:
+    @overload
+    def tojson(self, data: _Bool) -> _Bool:
+        ...
+
+    @overload
+    def tojson(self, data: None) -> None:
+        ...
+
+    def tojson(self, data: 'Optional[bool]') -> 'Optional[bool]':
         """Serialize ``data`` as JSON log format.
 
         Args:
@@ -276,14 +348,26 @@ class BoolType(_SimpleType):
         """
         return data
 
-    def toascii(self, data: typing.Union[None, bool]) -> str:
+    @overload
+    def toascii(self, data: 'Literal[True]') -> 'Literal["T"]':
+        ...
+
+    @overload
+    def toascii(self, data: 'Literal[False]') -> 'Literal["F"]':
+        ...
+
+    @overload
+    def toascii(self, data: None) -> str:
+        ...
+
+    def toascii(self, data: 'Optional[bool]') -> str:
         """Serialize ``data`` as ASCII log format.
 
         Args:
             data: raw data
 
         Returns:
-            str: ``T`` if ``True``, ``F`` if ``False``.
+            str: ``T`` if :data:`True`, ``F`` if :data:`False`.
 
         """
         if data is None:
@@ -309,23 +393,31 @@ class CountType(_SimpleType):
     """
 
     @property
-    def python_type(self)-> type:
-        """type: Corresponding Python type annotation."""
-        return typing.uint64
+    def python_type(self) -> 'Type[uint64]':
+        """Any: Corresponding Python type annotation."""
+        return ctypes.c_uint64
 
     @property
-    def zeek_type(self) -> str:
+    def zeek_type(self) -> 'Literal["count"]':
         """str: Corresponding Zeek type name."""
         return 'count'
 
-    def parse(self, data: typing.Union[typing.AnyStr, typing.uint64]) -> typing.Union[None, typing.uint64]:
+    @overload
+    def parse(self, data: 'AnyStr') -> 'Optional[uint64]':
+        ...
+
+    @overload
+    def parse(self, data: 'uint64') -> 'uint64':
+        ...
+
+    def parse(self, data: 'Union[AnyStr, uint64]') -> 'Optional[uint64]':
         """Parse ``data`` from string.
 
         Args:
             data: raw data
 
         Returns:
-            The parsed numeral data. If ``data`` is *unset*, ``None`` will
+            The parsed numeral data. If ``data`` is *unset*, :data:`None` will
             be returned.
 
         """
@@ -338,7 +430,15 @@ class CountType(_SimpleType):
             return None
         return ctypes.c_uint64(int(data))
 
-    def tojson(self, data: typing.Union[None, typing.uint64]) -> typing.Union[None, int]:
+    @overload
+    def tojson(self, data: 'uint64') -> int:
+        ...
+
+    @overload
+    def tojson(self, data: None) -> None:
+        ...
+
+    def tojson(self, data: 'Optional[uint64]') -> 'Optional[int]':
         """Serialize ``data`` as JSON log format.
 
         Args:
@@ -349,10 +449,10 @@ class CountType(_SimpleType):
 
         """
         if data is None:
-            return data
+            return None
         return data.value
 
-    def toascii(self, data: typing.Union[None, typing.uint64]) -> str:
+    def toascii(self, data: 'Optional[uint64]') -> str:
         """Serialize ``data`` as ASCII log format.
 
         Args:
@@ -385,23 +485,31 @@ class IntType(_SimpleType):
     """
 
     @property
-    def python_type(self)-> type:
-        """type: Corresponding Python type annotation."""
-        return typing.int64
+    def python_type(self) -> 'Type[int64]':
+        """Any: Corresponding Python type annotation."""
+        return ctypes.c_int64
 
     @property
-    def zeek_type(self) -> str:
+    def zeek_type(self) -> 'Literal["int"]':
         """str: Corresponding Zeek type name."""
         return 'int'
 
-    def parse(self, data: typing.Union[typing.AnyStr, typing.int64]) -> typing.Union[None, typing.int64]:
+    @overload
+    def parse(self, data: 'AnyStr') -> 'Optional[int64]':
+        ...
+
+    @overload
+    def parse(self, data: 'int64') -> 'int64':
+        ...
+
+    def parse(self, data: 'Union[AnyStr, int64]') -> 'Optional[int64]':
         """Parse ``data`` from string.
 
         Args:
             data: raw data
 
         Returns:
-            The parsed numeral data. If ``data`` is *unset*, ``None`` will
+            The parsed numeral data. If ``data`` is *unset*, :data:`None` will
             be returned.
 
         """
@@ -414,7 +522,15 @@ class IntType(_SimpleType):
             return None
         return ctypes.c_int64(int(data))
 
-    def tojson(self, data: typing.Union[None, typing.int64]) -> typing.Union[None, int]:
+    @overload
+    def tojson(self, data: 'int64') -> int:
+        ...
+
+    @overload
+    def tojson(self, data: None) -> None:
+        ...
+
+    def tojson(self, data: 'Optional[int64]') -> 'Optional[int]':
         """Serialize ``data`` as JSON log format.
 
         Args:
@@ -425,10 +541,10 @@ class IntType(_SimpleType):
 
         """
         if data is None:
-            return data
+            return None
         return data.value
 
-    def toascii(self, data: typing.Union[None, typing.int64]) -> str:
+    def toascii(self, data: 'Optional[int64]') -> str:
         """Serialize ``data`` as ASCII log format.
 
         Args:
@@ -461,23 +577,31 @@ class DoubleType(_SimpleType):
     """
 
     @property
-    def python_type(self)-> type:
-        """type: Corresponding Python type annotation."""
-        return typing.Decimal
+    def python_type(self) -> 'Type[Decimal]':
+        """Any: Corresponding Python type annotation."""
+        return decimal.Decimal
 
     @property
-    def zeek_type(self) -> str:
+    def zeek_type(self) -> 'Literal["double"]':
         """str: Corresponding Zeek type name."""
         return 'double'
 
-    def parse(self, data: typing.Union[typing.AnyStr, typing.Decimal]) -> typing.Union[None, typing.Decimal]:
+    @overload
+    def parse(self, data: 'AnyStr') -> 'Optional[Decimal]':
+        ...
+
+    @overload
+    def parse(self, data: 'Decimal') -> 'Decimal':
+        ...
+
+    def parse(self, data: 'Union[AnyStr, Decimal]') -> 'Optional[Decimal]':
         """Parse ``data`` from string.
 
         Args:
             data: raw data
 
         Returns:
-            The parsed numeral data. If ``data`` is *unset*, ``None`` will
+            The parsed numeral data. If ``data`` is *unset*, :data:`None` will
             be returned.
 
         """
@@ -493,7 +617,15 @@ class DoubleType(_SimpleType):
             value = decimal.Decimal(data.decode('ascii'))
         return value
 
-    def tojson(self, data: typing.Union[None, typing.Decimal]) -> typing.Union[None, float]:
+    @overload
+    def tojson(self, data: 'Decimal') -> float:
+        ...
+
+    @overload
+    def tojson(self, data: None) -> None:
+        ...
+
+    def tojson(self, data: 'Optional[Decimal]') -> 'Optional[float]':
         """Serialize ``data`` as JSON log format.
 
         Args:
@@ -504,10 +636,10 @@ class DoubleType(_SimpleType):
 
         """
         if data is None:
-            return data
+            return None
         return float(data)
 
-    def toascii(self, data: typing.Union[None, typing.Decimal]) -> str:
+    def toascii(self, data: 'Optional[Decimal]') -> str:
         """Serialize ``data`` as ASCII log format.
 
         Args:
@@ -540,23 +672,31 @@ class TimeType(_SimpleType):
     """
 
     @property
-    def python_type(self)-> type:
-        """type: Corresponding Python type annotation."""
-        return typing.DateTime
+    def python_type(self) -> 'Type[DateTimeType]':
+        """Any: Corresponding Python type annotation."""
+        return datetime.datetime
 
     @property
-    def zeek_type(self) -> str:
+    def zeek_type(self) -> 'Literal["time"]':
         """str: Corresponding Zeek type name."""
         return 'time'
 
-    def parse(self, data: typing.Union[typing.AnyStr, typing.DateTime]) -> typing.Union[None, typing.DateTime]:
+    @overload
+    def parse(self, data: 'AnyStr') -> 'Optional[DateTimeType]':
+        ...
+
+    @overload
+    def parse(self, data: 'DateTimeType') -> 'DateTimeType':
+        ...
+
+    def parse(self, data: 'Union[AnyStr, DateTimeType]') -> 'Optional[DateTimeType]':
         """Parse ``data`` from string.
 
         Args:
             data: raw data
 
         Returns:
-            The parsed numeral data. If ``data`` is *unset*, ``None`` will
+            The parsed numeral data. If ``data`` is *unset*, :data:`None` will
             be returned.
 
         """
@@ -572,21 +712,29 @@ class TimeType(_SimpleType):
             value = decimal.Decimal(data.decode('ascii'))
         return datetime.datetime.fromtimestamp(float(value))
 
-    def tojson(self, data: typing.Union[None, typing.DateTime]) -> typing.Union[None, float]:
+    @overload
+    def tojson(self, data: 'DateTimeType') -> float:
+        ...
+
+    @overload
+    def tojson(self, data: None) -> None:
+        ...
+
+    def tojson(self, data: 'Optional[DateTimeType]') -> 'Optional[float]':
         """Serialize ``data`` as JSON log format.
 
         Args:
             data: raw data
 
         Returns:
-            int: The JSON serialisable numeral data.
+            float: The JSON serialisable numeral data.
 
         """
         if data is None:
-            return data
+            return None
         return data.timestamp()
 
-    def toascii(self, data: typing.Union[None, typing.DateTime]) -> str:
+    def toascii(self, data: 'Optional[DateTimeType]') -> str:
         """Serialize ``data`` as ASCII log format.
 
         Args:
@@ -619,23 +767,31 @@ class IntervalType(_SimpleType):
     """
 
     @property
-    def python_type(self)-> type:
-        """type: Corresponding Python type annotation."""
-        return typing.TimeDelta
+    def python_type(self) -> 'Type[TimeDeltaType]':
+        """Any: Corresponding Python type annotation."""
+        return datetime.timedelta
 
     @property
-    def zeek_type(self) -> str:
+    def zeek_type(self) -> 'Literal["interval"]':
         """str: Corresponding Zeek type name."""
         return 'interval'
 
-    def parse(self, data: typing.Union[typing.AnyStr, typing.TimeDelta]) -> typing.Union[None, typing.TimeDelta]:
+    @overload
+    def parse(self, data: 'AnyStr') -> 'Optional[TimeDeltaType]':
+        ...
+
+    @overload
+    def parse(self, data: 'TimeDeltaType') -> 'TimeDeltaType':
+        ...
+
+    def parse(self, data: 'Union[AnyStr, TimeDeltaType]') -> 'Optional[TimeDeltaType]':
         """Parse ``data`` from string.
 
         Args:
             data: raw data
 
         Returns:
-            The parsed numeral data. If ``data`` is *unset*, ``None`` will
+            The parsed numeral data. If ``data`` is *unset*, :data:`None` will
             be returned.
 
         """
@@ -647,11 +803,19 @@ class IntervalType(_SimpleType):
         if data == self.unset_field:
             return None
         int_part, flt_part = data.split(b'.')
-        return datetime.timedelta(seconds=int_part,
-                                  microseconds=flt_part[:3],
-                                  milliseconds=flt_part[3:])
+        return datetime.timedelta(seconds=int(int_part),
+                                  microseconds=int(flt_part[:3]),
+                                  milliseconds=int(flt_part[3:]))
 
-    def tojson(self, data: typing.Union[None, typing.TimeDelta]) -> typing.Union[None, float]:
+    @overload
+    def tojson(self, data: 'TimeDeltaType') -> float:
+        ...
+
+    @overload
+    def tojson(self, data: None) -> None:
+        ...
+
+    def tojson(self, data: 'Optional[TimeDeltaType]') -> 'Optional[float]':
         """Serialize ``data`` as JSON log format.
 
         Args:
@@ -662,10 +826,10 @@ class IntervalType(_SimpleType):
 
         """
         if data is None:
-            return data
+            return None
         return data.total_seconds()
 
-    def toascii(self, data: typing.Union[None, typing.TimeDelta]) -> str:
+    def toascii(self, data: 'Optional[TimeDeltaType]') -> str:
         """Serialize ``data`` as ASCII log format.
 
         Args:
@@ -698,42 +862,40 @@ class StringType(_SimpleType):
     """
 
     @property
-    def python_type(self)-> type:
-        """type: Corresponding Python type annotation."""
-        return typing.ByteString
+    def python_type(self) -> 'Any':
+        """Any: Corresponding Python type annotation."""
+        return Union[bytes, memoryview, bytearray]
 
     @property
-    def zeek_type(self) -> str:
+    def zeek_type(self) -> 'Literal["string"]':
         """str: Corresponding Zeek type name."""
         return 'string'
 
-    def parse(self, data: typing.Union[typing.AnyStr, memoryview, bytearray]) -> typing.Union[None, typing.ByteString]:
+    def parse(self, data: 'Union[AnyStr, ByteString]') -> 'Optional[bytes]':
         """Parse ``data`` from string.
 
         Args:
             data: raw data
 
         Returns:
-            The parsed string data. If ``data`` is *unset*, ``None`` will
+            The parsed string data. If ``data`` is *unset*, :data:`None` will
             be returned.
 
         """
-        if isinstance(data, bytes):
-            return data
         if isinstance(data, bytearray):
-            return bytes(data)
+            data = bytes(data)
         if isinstance(data, memoryview):
-            return data.tobytes()
+            data = data.tobytes()
         if isinstance(data, str):
-            return data.encode('ascii')
+            data = data.encode('ascii')
 
         if data == self.empty_field:
-            return bytes()
+            return b''
         if data == self.unset_field:
             return None
-        return bytes(str(data), encoding='ascii')
+        return data
 
-    def tojson(self, data: typing.Union[None, typing.ByteString]) -> typing.Union[None, str]:
+    def tojson(self, data: 'Optional[ByteString]') -> 'Optional[str]':
         """Serialize ``data`` as JSON log format.
 
         Args:
@@ -743,9 +905,16 @@ class StringType(_SimpleType):
             str: The JSON serialisable string data encoded in ASCII.
 
         """
+        if data is None:
+            return None
+
+        if isinstance(data, bytearray):
+            data = bytes(data)
+        if isinstance(data, memoryview):
+            data = data.tobytes()
         return data.decode('ascii')
 
-    def toascii(self, data: typing.Union[None, typing.ByteString]) -> str:
+    def toascii(self, data: 'Optional[ByteString]') -> str:
         """Serialize ``data`` as ASCII log format.
 
         Args:
@@ -757,6 +926,12 @@ class StringType(_SimpleType):
         """
         if data is None:
             return self.str_unset_field
+
+        if isinstance(data, bytearray):
+            data = bytes(data)
+        if isinstance(data, memoryview):
+            data = data.tobytes()
+
         if data:
             return data.decode('ascii')
         return self.str_empty_field
@@ -780,36 +955,36 @@ class AddrType(_SimpleType):
     """
 
     @property
-    def python_type(self)-> type:
-        """type: Corresponding Python type annotation."""
-        return typing.IPAddress
+    def python_type(self) -> 'Any':
+        """Any: Corresponding Python type annotation."""
+        return Union[ipaddress.IPv4Address, ipaddress.IPv6Address]
 
     @property
     def zeek_type(self) -> str:
         """str: Corresponding Zeek type name."""
         return 'addr'
 
-    def parse(self, data: typing.Union[typing.AnyStr, typing.IPAddress]) -> typing.Union[None, typing.IPAddress]:
+    def parse(self, data: 'Union[AnyStr, IPAddress]') -> 'Optional[IPAddress]':
         """Parse ``data`` from string.
 
         Args:
             data: raw data
 
         Returns:
-            The parsed IP address. If ``data`` is *unset*, ``None`` will
+            The parsed IP address. If ``data`` is *unset*, :data:`None` will
             be returned.
 
         """
         if isinstance(data, (ipaddress.IPv4Address, ipaddress.IPv6Address)):
             return data
         if isinstance(data, str):
-            return data.encode('ascii')
+            data = data.encode('ascii')
 
         if data == self.unset_field:
             return None
         return ipaddress.ip_address(data.decode('ascii'))
 
-    def tojson(self, data: typing.Union[None, typing.IPAddress]) -> typing.Union[None, str]:
+    def tojson(self, data: 'Optional[IPAddress]') -> 'Optional[str]':
         """Serialize ``data`` as JSON log format.
 
         Args:
@@ -820,10 +995,10 @@ class AddrType(_SimpleType):
 
         """
         if data is None:
-            return data
+            return None
         return str(data)
 
-    def toascii(self, data: typing.Union[None, typing.IPAddress]) -> str:
+    def toascii(self, data: 'Optional[IPAddress]') -> str:
         """Serialize ``data`` as ASCII log format.
 
         Args:
@@ -856,36 +1031,36 @@ class PortType(_SimpleType):
     """
 
     @property
-    def python_type(self)-> type:
-        """type: Corresponding Python type annotation."""
-        return typing.uint16
+    def python_type(self) -> 'Any':
+        """Any: Corresponding Python type annotation."""
+        return ctypes.c_uint16
 
     @property
     def zeek_type(self) -> str:
         """str: Corresponding Zeek type name."""
         return 'port'
 
-    def parse(self, data: typing.Union[typing.AnyStr, typing.uint16]) -> typing.Union[None, typing.uint16]:
+    def parse(self, data: 'Union[AnyStr, uint16]') -> 'Optional[uint16]':
         """Parse ``data`` from string.
 
         Args:
             data: raw data
 
         Returns:
-            The parsed port number. If ``data`` is *unset*, ``None`` will
+            The parsed port number. If ``data`` is *unset*, :data:`None` will
             be returned.
 
         """
         if isinstance(data, ctypes.c_uint16):
             return data
         if isinstance(data, str):
-            return data.encode('ascii')
+            data = data.encode('ascii')
 
         if data == self.unset_field:
             return None
         return ctypes.c_uint16(int(data))
 
-    def tojson(self, data: typing.Union[None, typing.uint16]) -> typing.Union[None, int]:
+    def tojson(self, data: 'Optional[uint16]') -> 'Optional[int]':
         """Serialize ``data`` as JSON log format.
 
         Args:
@@ -896,10 +1071,10 @@ class PortType(_SimpleType):
 
         """
         if data is None:
-            return data
+            return None
         return data.value
 
-    def toascii(self, data: typing.Union[None, typing.uint16]) -> str:
+    def toascii(self, data: 'Optional[uint16]') -> str:
         """Serialize ``data`` as ASCII log format.
 
         Args:
@@ -932,23 +1107,23 @@ class SubnetType(_SimpleType):
     """
 
     @property
-    def python_type(self)-> type:
-        """type: Corresponding Python type annotation."""
-        return typing.IPNetwork
+    def python_type(self) -> 'Any':
+        """Any: Corresponding Python type annotation."""
+        return Union[ipaddress.IPv4Network, ipaddress.IPv6Network]
 
     @property
     def zeek_type(self) -> str:
         """str: Corresponding Zeek type name."""
         return 'port'
 
-    def parse(self, data: typing.Union[typing.AnyStr, typing.IPNetwork]) -> typing.Union[None, typing.IPNetwork]:
+    def parse(self, data: 'Union[AnyStr, IPNetwork]') -> 'Optional[IPNetwork]':
         """Parse ``data`` from string.
 
         Args:
             data: raw data
 
         Returns:
-            The parsed IP network. If ``data`` is *unset*, ``None`` will
+            The parsed IP network. If ``data`` is *unset*, :data:`None` will
             be returned.
 
         """
@@ -961,7 +1136,7 @@ class SubnetType(_SimpleType):
             return None
         return ipaddress.ip_network(data.decode('ascii'))
 
-    def tojson(self, data: typing.Union[None, typing.IPNetwork]) -> typing.Union[None, str]:
+    def tojson(self, data: 'Optional[IPNetwork]') -> 'Optional[str]':
         """Serialize ``data`` as JSON log format.
 
         Args:
@@ -972,10 +1147,10 @@ class SubnetType(_SimpleType):
 
         """
         if data is None:
-            return data
+            return None
         return str(data)
 
-    def toascii(self, data: typing.Union[None, typing.IPNetwork]) -> str:
+    def toascii(self, data: 'Optional[IPNetwork]') -> str:
         """Serialize ``data`` as ASCII log format.
 
         Args:
@@ -998,7 +1173,7 @@ class EnumType(_SimpleType):
         unset_field (:obj:`bytes` or :obj:`str`, optional): Placeholder for unset field.
         set_separator (:obj:`bytes` or :obj:`str`, optional): Separator for ``set``/``vector`` fields.
         namespaces (:obj:`List[str]`, optional): Namespaces to be loaded.
-        bare (:obj:`bool`, optional): If ``True``, do not load ``zeek`` namespace by default.
+        bare (:obj:`bool`, optional): If :data:`True`, do not load ``zeek`` namespace by default.
         enum_hook (:obj:`dict` mapping of :obj:`str` and :obj:`enum.Enum`, optional):
             Additional enum to be included in the namespace.
         *args: Variable length argument list.
@@ -1014,9 +1189,9 @@ class EnumType(_SimpleType):
     """
 
     @property
-    def python_type(self)-> type:
-        """type: Corresponding Python type annotation."""
-        return typing.Enum
+    def python_type(self) -> 'Any':
+        """Any: Corresponding Python type annotation."""
+        return enum.Enum
 
     @property
     def zeek_type(self) -> str:
@@ -1024,12 +1199,13 @@ class EnumType(_SimpleType):
         return 'enum'
 
     def __init__(self,  # pylint: disable=unused-argument,keyword-arg-before-vararg
-                 empty_field: typing.Optional[typing.AnyStr] = None,
-                 unset_field: typing.Optional[typing.AnyStr] = None,
-                 set_separator: typing.Optional[typing.AnyStr] = None,
-                 namespaces: typing.Optional[typing.List[str]] = None, bare: bool = False,
-                 enum_hook: typing.Optional[typing.Dict[str, typing.Enum]] = None,
-                 *args, **kwargs):
+                 empty_field: 'Optional[AnyStr]' = None,
+                 unset_field: 'Optional[AnyStr]' = None,
+                 set_separator: 'Optional[AnyStr]' = None,
+                 namespaces: 'Optional[List[str]]' = None,
+                 bare: bool = False,
+                 enum_hook: 'Optional[Dict[str, Enum]]' = None,
+                 *args: 'Any', **kwargs: 'Any') -> None:
         super().__init__(empty_field=empty_field, unset_field=unset_field, set_separator=set_separator)
 
         if namespaces is None:
@@ -1039,19 +1215,17 @@ class EnumType(_SimpleType):
             self.enum_namespaces.update(enum_hook)
 
     def __repr__(self) -> str:
-        return ('%s(empty_field=%s, unset_field=%s, '
-                'set_separator=%s, enum_namespaces=%s)') % (type(self).__name__,
-                                                            self.empty_field, self.unset_field,
-                                                            self.set_separator, self.enum_namespaces)
+        return (f'{self._name}(empty_field={self.str_empty_field}, unset_field={self.str_unset_field}, '
+                f'set_separator={self.str_set_separator}, enum_namespaces={self.enum_namespaces})')
 
-    def parse(self, data: typing.Union[typing.AnyStr, typing.Enum]) -> typing.Union[None, typing.Enum]:
+    def parse(self, data: 'Union[AnyStr, Enum]') -> 'Optional[Enum]':
         """Parse ``data`` from string.
 
         Args:
             data: raw data
 
         Returns:
-            The parsed enum data. If ``data`` is *unset*, ``None`` will
+            The parsed enum data. If ``data`` is *unset*, :data:`None` will
             be returned.
 
         Warns:
@@ -1066,13 +1240,17 @@ class EnumType(_SimpleType):
         if data == self.unset_field:
             return None
         data_str = data.decode('ascii')
-        item = self.enum_namespaces.get()
+
+        item = self.enum_namespaces.get(data_str)
         if item is None:
             warnings.warn('unrecognised enum value: %s' % data_str, ZeekValueWarning)
-            return enum.IntFlag('<unknown>', [(data_str, enum.auto())])[data_str]
+            unknown = cast('Type[Enum]', enum.IntFlag)('<unknown>', {
+                data_str: enum.auto(),
+            }, module='zlogging.enum', qualname='zlogging.enum.<unknown>')
+            item = unknown[data_str]
         return item
 
-    def tojson(self, data: typing.Union[None, typing.Enum]) -> typing.Union[None, str]:
+    def tojson(self, data: 'Optional[Enum]') -> 'Optional[str]':
         """Serialize ``data`` as JSON log format.
 
         Args:
@@ -1083,10 +1261,10 @@ class EnumType(_SimpleType):
 
         """
         if data is None:
-            return data
+            return None
         return data.name
 
-    def toascii(self, data: typing.Union[None, typing.Enum]) -> str:
+    def toascii(self, data: 'Optional[Enum]') -> str:
         """Serialize ``data`` as ASCII log format.
 
         Args:
@@ -1101,8 +1279,8 @@ class EnumType(_SimpleType):
         return data.name
 
 
-_data = typing.TypeVar('data', AddrType, BoolType, CountType, DoubleType, EnumType, IntervalType,
-                       IntType, PortType, StringType, SubnetType, TimeType)
+_S = TypeVar('_S', AddrType, BoolType, CountType, DoubleType, EnumType, IntervalType,
+                    IntType, PortType, StringType, SubnetType, TimeType)
 """type: A typing variable representing all valid data types for Bro/Zeek log framework."""
 
 
@@ -1115,7 +1293,7 @@ class _GenericType(BaseType):  # pylint: disable=abstract-method
     """
 
 
-class SetType(_GenericType, typing.Generic[_data]):
+class SetType(_GenericType, Generic[_S]):
     """Bro/Zeek ``set`` data type.
 
     Args:
@@ -1156,9 +1334,15 @@ class SetType(_GenericType, typing.Generic[_data]):
     """
 
     @property
-    def python_type(self)-> type:
-        """type: Corresponding Python type annotation."""
-        return typing.Set[_data]
+    def python_type(self) -> 'Any':
+        """Any: Corresponding Python type annotation."""
+        python_type = self.element_type.python_type
+        is_union = is_union_type(python_type)
+        if is_union:
+            args = get_args(python_type)  # type: Tuple[Any]
+            sets = tuple(Set[arg] for arg in args)  # type: ignore[valid-type]
+            return Union[sets]
+        return Set[python_type]  # type: ignore[valid-type]
 
     @property
     def zeek_type(self) -> str:
@@ -1166,36 +1350,34 @@ class SetType(_GenericType, typing.Generic[_data]):
         return 'set[%s]' % self.element_type.zeek_type
 
     def __init__(self,  # pylint: disable=unused-argument,keyword-arg-before-vararg
-                 empty_field: typing.Optional[typing.AnyStr] = None,
-                 unset_field: typing.Optional[typing.AnyStr] = None,
-                 set_separator: typing.Optional[typing.AnyStr] = None,
-                 element_type: _data = None,
-                 *args, **kwargs):
+                 empty_field: 'Optional[AnyStr]' = None,
+                 unset_field: 'Optional[AnyStr]' = None,
+                 set_separator: 'Optional[AnyStr]' = None,
+                 element_type: 'Optional[Union[_S, Type[_S]]]' = None,
+                 *args: 'Any', **kwargs: 'Any'):
         super().__init__(empty_field=empty_field, unset_field=unset_field, set_separator=set_separator)
 
         if element_type is None:
             raise ZeekTypeError("__init__() missing 1 required positional argument: 'element_type'")
         if not isinstance(element_type, _SimpleType):
-            if isinstance(element_type, type) and issubclass(element_type, _SimpleType):
+            if isinstance(element_type, type) and issubclass(element_type, _SimpleType):  # type: ignore[unreachable]
                 element_type = element_type(empty_field=empty_field, unset_field=unset_field, set_separator=set_separator)  # pylint: disable=line-too-long
             else:
                 raise ZeekValueError('invalid element type: %s' % type(element_type).__name__)
-        self.element_type: _SimpleType = element_type
+        self.element_type = cast('_SimpleType', element_type)
 
     def __repr__(self) -> str:
-        return ('%s(empty_field=%s, unset_field=%s, '
-                'set_separator=%s, element_type=%s)') % (type(self).__name__,
-                                                         self.empty_field, self.unset_field,
-                                                         self.set_separator, self.element_type)
+        return (f'{self._name}(empty_field={self.str_empty_field}, unset_field={self.str_unset_field}, '
+                f'set_separator={self.str_set_separator}, element_type={self.element_type})')
 
-    def parse(self, data: typing.Union[typing.AnyStr, typing.Set[_data]]) -> typing.Union[None, typing.Set[_data]]:
+    def parse(self, data: 'Union[AnyStr, Set[_S]]') -> 'Optional[Set[_S]]':
         """Parse ``data`` from string.
 
         Args:
             data: raw data
 
         Returns:
-            The parsed set data. If ``data`` is *unset*, ``None`` will
+            The parsed set data. If ``data`` is *unset*, :data:`None` will
             be returned.
 
         """
@@ -1210,7 +1392,7 @@ class SetType(_GenericType, typing.Generic[_data]):
             return set()
         return set(self.element_type(element) for element in data.split(self.set_separator))
 
-    def tojson(self, data: typing.Union[None, typing.Set[_data]]) -> typing.Union[None, typing.List[_data]]:
+    def tojson(self, data: 'Optional[Set[_S]]') -> 'Optional[List[_S]]':
         """Serialize ``data`` as JSON log format.
 
         Args:
@@ -1224,7 +1406,7 @@ class SetType(_GenericType, typing.Generic[_data]):
             return None
         return list(self.element_type.tojson(element) for element in data)
 
-    def toascii(self, data: typing.Union[None, typing.Set[_data]]) -> str:
+    def toascii(self, data: 'Optional[Set[_S]]') -> str:
         """Serialize ``data`` as ASCII log format.
 
         Args:
@@ -1238,10 +1420,10 @@ class SetType(_GenericType, typing.Generic[_data]):
             return self.str_unset_field
         if not data:
             return self.str_empty_field
-        return self.set_separator.join(self.element_type.toascii(element) for element in data)
+        return self.str_set_separator.join(self.element_type.toascii(element) for element in data)
 
 
-class VectorType(_GenericType, typing.Generic[_data]):
+class VectorType(_GenericType, Generic[_S]):
     """Bro/Zeek ``vector`` data type.
 
     Args:
@@ -1282,9 +1464,15 @@ class VectorType(_GenericType, typing.Generic[_data]):
     """
 
     @property
-    def python_type(self)-> type:
-        """type: Corresponding Python type annotation."""
-        return typing.List[_data]
+    def python_type(self) -> 'Any':
+        """Any: Corresponding Python type annotation."""
+        python_type = self.element_type.python_type
+        is_union = is_union_type(python_type)
+        if is_union:
+            args = get_args(python_type)  # type: Tuple[Any]
+            name = tuple(List[arg] for arg in args)  # type: ignore[valid-type]
+            return Union[name]
+        return List[python_type]  # type: ignore[valid-type]
 
     @property
     def zeek_type(self) -> str:
@@ -1292,36 +1480,34 @@ class VectorType(_GenericType, typing.Generic[_data]):
         return 'vector[%s]' % self.element_type.zeek_type
 
     def __init__(self,  # pylint: disable=unused-argument,keyword-arg-before-vararg
-                 empty_field: typing.Optional[typing.AnyStr] = None,
-                 unset_field: typing.Optional[typing.AnyStr] = None,
-                 set_separator: typing.Optional[typing.AnyStr] = None,
-                 element_type: _data = None,
-                 *args, **kwargs):
+                 empty_field: 'Optional[AnyStr]' = None,
+                 unset_field: 'Optional[AnyStr]' = None,
+                 set_separator: 'Optional[AnyStr]' = None,
+                 element_type: 'Optional[Union[_S, Type[_S]]]' = None,
+                 *args: 'Any', **kwargs: 'Any'):
         super().__init__(empty_field=empty_field, unset_field=unset_field, set_separator=set_separator)
 
         if element_type is None:
             raise ZeekTypeError('__init__() missing 1 required positional argument: %r' % element_type)
         if not isinstance(element_type, _SimpleType):
-            if isinstance(element_type, type) and issubclass(element_type, _SimpleType):
+            if isinstance(element_type, type) and issubclass(element_type, _SimpleType):  # type: ignore[unreachable]
                 element_type = element_type(empty_field=empty_field, unset_field=unset_field, set_separator=set_separator)  # pylint: disable=line-too-long
             else:
                 raise ZeekValueError('invalid element type: %s' % type(element_type).__name__)
-        self.element_type: _SimpleType = element_type
+        self.element_type = cast('_SimpleType', element_type)
 
     def __repr__(self) -> str:
-        return ('%s(empty_field=%s, unset_field=%s, '
-                'set_separator=%s, element_type=%s)') % (type(self).__name__,
-                                                         self.empty_field, self.unset_field,
-                                                         self.set_separator, self.element_type)
+        return (f'{self._name}(empty_field={self.str_empty_field}, unset_field={self.str_unset_field}, '
+                f'set_separator={self.str_set_separator}, element_type={self.element_type})')
 
-    def parse(self, data: typing.Union[typing.AnyStr, typing.List[_data]]) -> typing.Union[None, typing.List[_data]]:
+    def parse(self, data: 'Union[AnyStr, List[_S]]') -> 'Optional[List[_S]]':
         """Parse ``data`` from string.
 
         Args:
             data: raw data
 
         Returns:
-            The parsed list data. If ``data`` is *unset*, ``None`` will
+            The parsed list data. If ``data`` is *unset*, :data:`None` will
             be returned.
 
         """
@@ -1336,7 +1522,7 @@ class VectorType(_GenericType, typing.Generic[_data]):
             return list()
         return list(self.element_type(element) for element in data.split(self.set_separator))
 
-    def tojson(self, data: typing.Union[None, typing.List[_data]]) -> typing.Union[None, typing.List[_data]]:  # pylint: disable=line-too-long
+    def tojson(self, data: 'Optional[List[_S]]') -> 'Optional[List[_S]]':
         """Serialize ``data`` as JSON log format.
 
         Args:
@@ -1350,7 +1536,7 @@ class VectorType(_GenericType, typing.Generic[_data]):
             return None
         return list(self.element_type.tojson(element) for element in data)
 
-    def toascii(self, data: typing.Union[None, typing.List[_data]]) -> str:
+    def toascii(self, data: 'Optional[List[_S]]') -> str:
         """Serialize ``data`` as ASCII log format.
 
         Args:
@@ -1364,7 +1550,7 @@ class VectorType(_GenericType, typing.Generic[_data]):
             return self.str_unset_field
         if not data:
             return self.str_empty_field
-        return self.set_separator.join(self.element_type.toascii(element) for element in data)
+        return self.str_set_separator.join(self.element_type.toascii(element) for element in data)
 
 
 class _VariadicType(BaseType):  # pylint: disable=abstract-method
@@ -1375,7 +1561,7 @@ class _VariadicType(BaseType):  # pylint: disable=abstract-method
 
     """
 
-    def parse(self, data: typing.Any) -> typing.NoReturn:
+    def parse(self, data: 'Any') -> 'NoReturn':
         """Not supported for a variadic data type.
 
         Args:
@@ -1387,7 +1573,7 @@ class _VariadicType(BaseType):  # pylint: disable=abstract-method
         """
         raise ZeekNotImplemented
 
-    def tojson(self, data: typing.Any) -> typing.NoReturn:
+    def tojson(self, data: 'Any') -> 'NoReturn':
         """Not supported for a variadic data type.
 
         Args:
@@ -1399,7 +1585,7 @@ class _VariadicType(BaseType):  # pylint: disable=abstract-method
         """
         raise ZeekNotImplemented
 
-    def toascii(self, data: typing.Any) -> typing.NoReturn:
+    def toascii(self, data: 'Any') -> 'NoReturn':
         """Not supported for a variadic data type.
 
         Args:
@@ -1448,9 +1634,13 @@ class RecordType(_VariadicType):
     """
 
     @property
-    def python_type(self)-> type:
-        """type: Corresponding Python type annotation."""
-        return typing.Dict[str, _data]
+    def python_type(self) -> 'Any':
+        """Any: Corresponding Python type annotation."""
+        dict_entries = {
+            field: element_type.python_type
+            for field, element_type in self.element_mapping.items()
+        }  # type: Dict[str, Any]
+        return TypedDict('record', dict_entries)  # type: ignore[operator]
 
     @property
     def zeek_type(self) -> str:
@@ -1458,10 +1648,10 @@ class RecordType(_VariadicType):
         return 'record'
 
     def __init__(self,  # pylint: disable=unused-argument,keyword-arg-before-vararg
-                 empty_field: typing.Optional[typing.AnyStr] = None,
-                 unset_field: typing.Optional[typing.AnyStr] = None,
-                 set_separator: typing.Optional[typing.AnyStr] = None,
-                 *args, **element_mapping):
+                 empty_field: 'Optional[AnyStr]' = None,
+                 unset_field: 'Optional[AnyStr]' = None,
+                 set_separator: 'Optional[AnyStr]' = None,
+                 *args: 'Any', **element_mapping: 'BaseType'):
         super().__init__(empty_field=empty_field, unset_field=unset_field, set_separator=set_separator)
 
         expanded = expand_typing(self, ZeekValueError)
@@ -1472,23 +1662,20 @@ class RecordType(_VariadicType):
         if self.set_separator != expanded['set_separator']:
             raise ZeekValueError("inconsistent value of 'set_separator': %r and %r" % (self.set_separator, expanded['set_separator']))  # pylint: disable=line-too-long
 
-        fields: typing.OrderedDict[str, _data] = expanded['fields']
+        fields = expanded['fields']  # type: OrderedDict[str, BaseType]
         for field, element_type in fields.items():
             if isinstance(element_type, (_SimpleType, _GenericType)):
                 continue
             raise ZeekValueError('invalid element type of field %r: %s' % (field, type(element_type).__name__))
         for field, element_type in element_mapping.items():
             if not isinstance(element_type, _SimpleType):
-                if isinstance(element_type, type) and issubclass(element_type, _SimpleType):
-                    element_type = element_type(empty_field=empty_field, unset_field=unset_field,
-                                                set_separator=set_separator)  # pylint: disable=line-too-long
+                if isinstance(element_type, type) and issubclass(element_type, _SimpleType):  # type: ignore[unreachable]  # pylint: disable=line-too-long
+                    element_type = element_type(empty_field=empty_field, unset_field=unset_field, set_separator=set_separator)  # type: ignore[unreachable] # pylint: disable=line-too-long
                 else:
                     raise ZeekValueError('invalid element type of field %r: %s' % (field, type(element_type).__name__))
-            fields[field] = element_type
-        self.element_mapping: typing.Dict[str, _data] = fields
+            fields[field] = cast('BaseType', element_type)
+        self.element_mapping = fields  # type: OrderedDict[str, BaseType]
 
     def __repr__(self) -> str:
-        return ('%s(empty_field=%s, unset_field=%s, '
-                'set_separator=%s, element_mapping=%s)') % (type(self).__name__,
-                                                            self.empty_field, self.unset_field,
-                                                            self.set_separator, self.element_mapping)
+        return (f'{self._name}(empty_field={self.str_empty_field}, unset_field={self.str_unset_field}, '
+                f'set_separator={self.str_set_separator}, element_mapping={self.element_mapping})')

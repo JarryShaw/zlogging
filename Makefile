@@ -28,3 +28,6 @@ sphinx-build:
 
 tox:
 	pipenv run tox
+
+isort:
+	pipenv run isort -l100 -pzlogging zlogging tests gen
