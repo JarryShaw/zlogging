@@ -66,7 +66,10 @@
 <dd><p>Corresponding Python type annotation.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#type" title="(in Python v3.9)">type</a></p>
+<dd class="field-odd"><p>Any</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.9)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Any</span></code></a></p>
 </dd>
 </dl>
 </dd></dl>
@@ -79,6 +82,9 @@
 <dt class="field-odd">Type</dt>
 <dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)">str</a></p>
 </dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></p>
+</dd>
 </dl>
 </dd></dl>
 
@@ -88,14 +94,14 @@
 <dd><p>Parse <code class="docutils literal notranslate"><span class="pre">data</span></code> from string.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>data</strong> (<em>Union</em><em>[</em><em>AnyStr</em><em>, </em><a class="reference external" href="https://docs.python.org/3/library/ipaddress.html#ipaddress.IPv4Address" title="(in Python v3.9)"><em>ipaddress.IPv4Address</em></a><em>, </em><a class="reference external" href="https://docs.python.org/3/library/ipaddress.html#ipaddress.IPv6Address" title="(in Python v3.9)"><em>ipaddress.IPv6Address</em></a><em>]</em>) – raw data</p>
+<dd class="field-odd"><p><strong>data</strong> (<em>Union</em><em>[</em><em>AnyStr</em><em>, </em><em>IPAddress</em><em>]</em>) – raw data</p>
 </dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p>The parsed IP address. If <code class="docutils literal notranslate"><span class="pre">data</span></code> is <em>unset</em>, <code class="docutils literal notranslate"><span class="pre">None</span></code> will
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>Optional[IPAddress]</p>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>The parsed IP address. If <code class="docutils literal notranslate"><span class="pre">data</span></code> is <em>unset</em>, <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)"><code class="xref py py-data docutils literal notranslate"><span class="pre">None</span></code></a> will
 be returned.</p>
-</dd>
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>Union[<a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)">None</a>, <a class="reference external" href="https://docs.python.org/3/library/ipaddress.html#ipaddress.IPv4Address" title="(in Python v3.9)">ipaddress.IPv4Address</a>, <a class="reference external" href="https://docs.python.org/3/library/ipaddress.html#ipaddress.IPv6Address" title="(in Python v3.9)">ipaddress.IPv6Address</a>]</p>
 </dd>
 </dl>
 </dd></dl>
@@ -106,7 +112,7 @@ be returned.</p>
 <dd><p>Serialize <code class="docutils literal notranslate"><span class="pre">data</span></code> as JSON log format.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>data</strong> (<em>Union</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)"><em>None</em></a><em>, </em><a class="reference external" href="https://docs.python.org/3/library/ipaddress.html#ipaddress.IPv4Address" title="(in Python v3.9)"><em>ipaddress.IPv4Address</em></a><em>, </em><a class="reference external" href="https://docs.python.org/3/library/ipaddress.html#ipaddress.IPv6Address" title="(in Python v3.9)"><em>ipaddress.IPv6Address</em></a><em>]</em>) – raw data</p>
+<dd class="field-odd"><p><strong>data</strong> (<em>Optional</em><em>[</em><em>IPAddress</em><em>]</em>) – raw data</p>
 </dd>
 <dt class="field-even">Returns</dt>
 <dd class="field-even"><p>The JSON serialisable IP address string.</p>
@@ -123,7 +129,7 @@ be returned.</p>
 <dd><p>Serialize <code class="docutils literal notranslate"><span class="pre">data</span></code> as ASCII log format.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>data</strong> (<em>Union</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)"><em>None</em></a><em>, </em><a class="reference external" href="https://docs.python.org/3/library/ipaddress.html#ipaddress.IPv4Address" title="(in Python v3.9)"><em>ipaddress.IPv4Address</em></a><em>, </em><a class="reference external" href="https://docs.python.org/3/library/ipaddress.html#ipaddress.IPv6Address" title="(in Python v3.9)"><em>ipaddress.IPv6Address</em></a><em>]</em>) – raw data</p>
+<dd class="field-odd"><p><strong>data</strong> (<em>Optional</em><em>[</em><em>IPAddress</em><em>]</em>) – raw data</p>
 </dd>
 <dt class="field-even">Returns</dt>
 <dd class="field-even"><p>The ASCII representation of the IP address.</p>
@@ -165,7 +171,10 @@ be returned.</p>
 <dd><p>Corresponding Python type annotation.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#type" title="(in Python v3.9)">type</a></p>
+<dd class="field-odd"><p>Any</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>Type[<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)">bool</a>]</p>
 </dd>
 </dl>
 </dd></dl>
@@ -178,6 +187,9 @@ be returned.</p>
 <dt class="field-odd">Type</dt>
 <dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)">str</a></p>
 </dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>Literal[“bool”]</p>
+</dd>
 </dl>
 </dd></dl>
 
@@ -189,16 +201,16 @@ be returned.</p>
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><p><strong>data</strong> (<em>Union</em><em>[</em><em>AnyStr</em><em>, </em><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)"><em>bool</em></a><em>]</em>) – raw data</p>
 </dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p>The parsed boolean data. If <code class="docutils literal notranslate"><span class="pre">data</span></code> is <em>unset</em>, <code class="docutils literal notranslate"><span class="pre">None</span></code> will
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>Optional[<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)">bool</a>]</p>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>The parsed boolean data. If <code class="docutils literal notranslate"><span class="pre">data</span></code> is <em>unset</em>, <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)"><code class="xref py py-data docutils literal notranslate"><span class="pre">None</span></code></a> will
 be returned.</p>
 </dd>
-<dt class="field-odd">Raises</dt>
-<dd class="field-odd"><p><a class="reference internal" href="zlogging._exc.html#zlogging._exc.ZeekValueError" title="zlogging._exc.ZeekValueError"><strong>ZeekValueError</strong></a> – If <code class="docutils literal notranslate"><span class="pre">data</span></code> is NOT <em>unset</em> and NOT <code class="docutils literal notranslate"><span class="pre">T</span></code>
-    (<code class="docutils literal notranslate"><span class="pre">True</span></code>) nor <code class="docutils literal notranslate"><span class="pre">F</span></code> (<code class="docutils literal notranslate"><span class="pre">False</span></code>) in Bro/Zeek script language.</p>
-</dd>
-<dt class="field-even">Return type</dt>
-<dd class="field-even"><p>Union[<a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)">None</a>, <a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)">bool</a>]</p>
+<dt class="field-even">Raises</dt>
+<dd class="field-even"><p><a class="reference internal" href="zlogging._exc.html#zlogging._exc.ZeekValueError" title="zlogging._exc.ZeekValueError"><strong>ZeekValueError</strong></a> – If <code class="docutils literal notranslate"><span class="pre">data</span></code> is NOT <em>unset</em> and NOT <code class="docutils literal notranslate"><span class="pre">T</span></code> (<a class="reference external" href="https://docs.python.org/3/library/constants.html#True" title="(in Python v3.9)"><code class="xref py py-data docutils literal notranslate"><span class="pre">True</span></code></a>)
+    nor <code class="docutils literal notranslate"><span class="pre">F</span></code> (<a class="reference external" href="https://docs.python.org/3/library/constants.html#False" title="(in Python v3.9)"><code class="xref py py-data docutils literal notranslate"><span class="pre">False</span></code></a>) in Bro/Zeek script language.</p>
 </dd>
 </dl>
 </dd></dl>
@@ -209,13 +221,13 @@ be returned.</p>
 <dd><p>Serialize <code class="docutils literal notranslate"><span class="pre">data</span></code> as JSON log format.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>data</strong> (<em>Union</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)"><em>None</em></a><em>, </em><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)"><em>bool</em></a><em>]</em>) – raw data</p>
+<dd class="field-odd"><p><strong>data</strong> (<em>Optional</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)"><em>bool</em></a><em>]</em>) – raw data</p>
 </dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p>The JSON serialisable boolean data.</p>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>Optional[<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)">bool</a>]</p>
 </dd>
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>Union[<a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)">None</a>, <a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)">bool</a>]</p>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>The JSON serialisable boolean data.</p>
 </dd>
 </dl>
 </dd></dl>
@@ -226,10 +238,10 @@ be returned.</p>
 <dd><p>Serialize <code class="docutils literal notranslate"><span class="pre">data</span></code> as ASCII log format.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>data</strong> (<em>Union</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)"><em>None</em></a><em>, </em><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)"><em>bool</em></a><em>]</em>) – raw data</p>
+<dd class="field-odd"><p><strong>data</strong> (<em>Optional</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)"><em>bool</em></a><em>]</em>) – raw data</p>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">T</span></code> if <code class="docutils literal notranslate"><span class="pre">True</span></code>, <code class="docutils literal notranslate"><span class="pre">F</span></code> if <code class="docutils literal notranslate"><span class="pre">False</span></code>.</p>
+<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">T</span></code> if <a class="reference external" href="https://docs.python.org/3/library/constants.html#True" title="(in Python v3.9)"><code class="xref py py-data docutils literal notranslate"><span class="pre">True</span></code></a>, <code class="docutils literal notranslate"><span class="pre">F</span></code> if <a class="reference external" href="https://docs.python.org/3/library/constants.html#False" title="(in Python v3.9)"><code class="xref py py-data docutils literal notranslate"><span class="pre">False</span></code></a>.</p>
 </dd>
 <dt class="field-odd">Return type</dt>
 <dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)">str</a></p>
@@ -268,7 +280,10 @@ be returned.</p>
 <dd><p>Corresponding Python type annotation.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#type" title="(in Python v3.9)">type</a></p>
+<dd class="field-odd"><p>Any</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>Type[uint64]</p>
 </dd>
 </dl>
 </dd></dl>
@@ -281,6 +296,9 @@ be returned.</p>
 <dt class="field-odd">Type</dt>
 <dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)">str</a></p>
 </dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>Literal[“count”]</p>
+</dd>
 </dl>
 </dd></dl>
 
@@ -290,14 +308,14 @@ be returned.</p>
 <dd><p>Parse <code class="docutils literal notranslate"><span class="pre">data</span></code> from string.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>data</strong> (<em>Union</em><em>[</em><em>AnyStr</em><em>, </em><a class="reference external" href="https://docs.python.org/3/library/ctypes.html#ctypes.c_ulong" title="(in Python v3.9)"><em>ctypes.c_ulong</em></a><em>]</em>) – raw data</p>
+<dd class="field-odd"><p><strong>data</strong> (<em>Union</em><em>[</em><em>AnyStr</em><em>, </em><em>uint64</em><em>]</em>) – raw data</p>
 </dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p>The parsed numeral data. If <code class="docutils literal notranslate"><span class="pre">data</span></code> is <em>unset</em>, <code class="docutils literal notranslate"><span class="pre">None</span></code> will
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>Optional[uint64]</p>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>The parsed numeral data. If <code class="docutils literal notranslate"><span class="pre">data</span></code> is <em>unset</em>, <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)"><code class="xref py py-data docutils literal notranslate"><span class="pre">None</span></code></a> will
 be returned.</p>
-</dd>
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>Union[<a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)">None</a>, <a class="reference external" href="https://docs.python.org/3/library/ctypes.html#ctypes.c_ulong" title="(in Python v3.9)">ctypes.c_ulong</a>]</p>
 </dd>
 </dl>
 </dd></dl>
@@ -308,7 +326,7 @@ be returned.</p>
 <dd><p>Serialize <code class="docutils literal notranslate"><span class="pre">data</span></code> as JSON log format.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>data</strong> (<em>Union</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)"><em>None</em></a><em>, </em><a class="reference external" href="https://docs.python.org/3/library/ctypes.html#ctypes.c_ulong" title="(in Python v3.9)"><em>ctypes.c_ulong</em></a><em>]</em>) – raw data</p>
+<dd class="field-odd"><p><strong>data</strong> (<em>Optional</em><em>[</em><em>uint64</em><em>]</em>) – raw data</p>
 </dd>
 <dt class="field-even">Returns</dt>
 <dd class="field-even"><p>The JSON serialisable numeral data.</p>
@@ -325,7 +343,7 @@ be returned.</p>
 <dd><p>Serialize <code class="docutils literal notranslate"><span class="pre">data</span></code> as ASCII log format.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>data</strong> (<em>Union</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)"><em>None</em></a><em>, </em><a class="reference external" href="https://docs.python.org/3/library/ctypes.html#ctypes.c_ulong" title="(in Python v3.9)"><em>ctypes.c_ulong</em></a><em>]</em>) – raw data</p>
+<dd class="field-odd"><p><strong>data</strong> (<em>Optional</em><em>[</em><em>uint64</em><em>]</em>) – raw data</p>
 </dd>
 <dt class="field-even">Returns</dt>
 <dd class="field-even"><p>The ASCII representation of numeral data.</p>
@@ -367,7 +385,10 @@ be returned.</p>
 <dd><p>Corresponding Python type annotation.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#type" title="(in Python v3.9)">type</a></p>
+<dd class="field-odd"><p>Any</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>Type[Decimal]</p>
 </dd>
 </dl>
 </dd></dl>
@@ -380,6 +401,9 @@ be returned.</p>
 <dt class="field-odd">Type</dt>
 <dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)">str</a></p>
 </dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>Literal[“double”]</p>
+</dd>
 </dl>
 </dd></dl>
 
@@ -389,14 +413,14 @@ be returned.</p>
 <dd><p>Parse <code class="docutils literal notranslate"><span class="pre">data</span></code> from string.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>data</strong> (<em>Union</em><em>[</em><em>AnyStr</em><em>, </em><a class="reference external" href="https://docs.python.org/3/library/decimal.html#decimal.Decimal" title="(in Python v3.9)"><em>decimal.Decimal</em></a><em>]</em>) – raw data</p>
+<dd class="field-odd"><p><strong>data</strong> (<em>Union</em><em>[</em><em>AnyStr</em><em>, </em><em>Decimal</em><em>]</em>) – raw data</p>
 </dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p>The parsed numeral data. If <code class="docutils literal notranslate"><span class="pre">data</span></code> is <em>unset</em>, <code class="docutils literal notranslate"><span class="pre">None</span></code> will
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>Optional[Decimal]</p>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>The parsed numeral data. If <code class="docutils literal notranslate"><span class="pre">data</span></code> is <em>unset</em>, <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)"><code class="xref py py-data docutils literal notranslate"><span class="pre">None</span></code></a> will
 be returned.</p>
-</dd>
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>Union[<a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)">None</a>, <a class="reference external" href="https://docs.python.org/3/library/decimal.html#decimal.Decimal" title="(in Python v3.9)">decimal.Decimal</a>]</p>
 </dd>
 </dl>
 </dd></dl>
@@ -407,7 +431,7 @@ be returned.</p>
 <dd><p>Serialize <code class="docutils literal notranslate"><span class="pre">data</span></code> as JSON log format.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>data</strong> (<em>Union</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)"><em>None</em></a><em>, </em><a class="reference external" href="https://docs.python.org/3/library/decimal.html#decimal.Decimal" title="(in Python v3.9)"><em>decimal.Decimal</em></a><em>]</em>) – raw data</p>
+<dd class="field-odd"><p><strong>data</strong> (<em>Optional</em><em>[</em><em>Decimal</em><em>]</em>) – raw data</p>
 </dd>
 <dt class="field-even">Returns</dt>
 <dd class="field-even"><p>The JSON serialisable numeral data.</p>
@@ -424,7 +448,7 @@ be returned.</p>
 <dd><p>Serialize <code class="docutils literal notranslate"><span class="pre">data</span></code> as ASCII log format.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>data</strong> (<em>Union</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)"><em>None</em></a><em>, </em><a class="reference external" href="https://docs.python.org/3/library/decimal.html#decimal.Decimal" title="(in Python v3.9)"><em>decimal.Decimal</em></a><em>]</em>) – raw data</p>
+<dd class="field-odd"><p><strong>data</strong> (<em>Optional</em><em>[</em><em>Decimal</em><em>]</em>) – raw data</p>
 </dd>
 <dt class="field-even">Returns</dt>
 <dd class="field-even"><p>The ASCII representation of numeral data.</p>
@@ -449,7 +473,7 @@ be returned.</p>
 <li><p><strong>unset_field</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(in Python v3.9)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">bytes</span></code></a> or <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a>, optional) – Placeholder for unset field.</p></li>
 <li><p><strong>set_separator</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(in Python v3.9)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">bytes</span></code></a> or <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a>, optional) – Separator for <code class="docutils literal notranslate"><span class="pre">set</span></code>/<code class="docutils literal notranslate"><span class="pre">vector</span></code> fields.</p></li>
 <li><p><strong>namespaces</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">List[str]</span></code>, optional) – Namespaces to be loaded.</p></li>
-<li><p><strong>bare</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">bool</span></code></a>, optional) – If <code class="docutils literal notranslate"><span class="pre">True</span></code>, do not load <code class="docutils literal notranslate"><span class="pre">zeek</span></code> namespace by default.</p></li>
+<li><p><strong>bare</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">bool</span></code></a>, optional) – If <a class="reference external" href="https://docs.python.org/3/library/constants.html#True" title="(in Python v3.9)"><code class="xref py py-data docutils literal notranslate"><span class="pre">True</span></code></a>, do not load <code class="docutils literal notranslate"><span class="pre">zeek</span></code> namespace by default.</p></li>
 <li><p><strong>enum_hook</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.9)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">dict</span></code></a> mapping of <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a> and <a class="reference external" href="https://docs.python.org/3/library/enum.html#enum.Enum" title="(in Python v3.9)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">enum.Enum</span></code></a>, optional) – Additional enum to be included in the namespace.</p></li>
 <li><p><strong>*args</strong> – Variable length argument list.</p></li>
 <li><p><strong>**kwargs</strong> – Arbitrary keyword arguments.</p></li>
@@ -470,7 +494,10 @@ be returned.</p>
 <dd><p>Corresponding Python type annotation.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#type" title="(in Python v3.9)">type</a></p>
+<dd class="field-odd"><p>Any</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.9)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Any</span></code></a></p>
 </dd>
 </dl>
 </dd></dl>
@@ -483,6 +510,9 @@ be returned.</p>
 <dt class="field-odd">Type</dt>
 <dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)">str</a></p>
 </dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></p>
+</dd>
 </dl>
 </dd></dl>
 
@@ -492,17 +522,17 @@ be returned.</p>
 <dd><p>Parse <code class="docutils literal notranslate"><span class="pre">data</span></code> from string.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>data</strong> (<em>Union</em><em>[</em><em>AnyStr</em><em>, </em><a class="reference external" href="https://docs.python.org/3/library/enum.html#enum.Enum" title="(in Python v3.9)"><em>enum.Enum</em></a><em>]</em>) – raw data</p>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p>The parsed enum data. If <code class="docutils literal notranslate"><span class="pre">data</span></code> is <em>unset</em>, <code class="docutils literal notranslate"><span class="pre">None</span></code> will
-be returned.</p>
-</dd>
-<dt class="field-odd">Warns</dt>
-<dd class="field-odd"><p><strong>ZeekValueWarning</strong> – If <code class="docutils literal notranslate"><span class="pre">date</span></code> is not defined in the enum namespace.</p>
+<dd class="field-odd"><p><strong>data</strong> (<em>Union</em><em>[</em><em>AnyStr</em><em>, </em><em>Enum</em><em>]</em>) – raw data</p>
 </dd>
 <dt class="field-even">Return type</dt>
-<dd class="field-even"><p>Union[<a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)">None</a>, <a class="reference external" href="https://docs.python.org/3/library/enum.html#enum.Enum" title="(in Python v3.9)">enum.Enum</a>]</p>
+<dd class="field-even"><p>Optional[Enum]</p>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>The parsed enum data. If <code class="docutils literal notranslate"><span class="pre">data</span></code> is <em>unset</em>, <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)"><code class="xref py py-data docutils literal notranslate"><span class="pre">None</span></code></a> will
+be returned.</p>
+</dd>
+<dt class="field-even">Warns</dt>
+<dd class="field-even"><p><strong>ZeekValueWarning</strong> – If <code class="docutils literal notranslate"><span class="pre">date</span></code> is not defined in the enum namespace.</p>
 </dd>
 </dl>
 </dd></dl>
@@ -513,7 +543,7 @@ be returned.</p>
 <dd><p>Serialize <code class="docutils literal notranslate"><span class="pre">data</span></code> as JSON log format.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>data</strong> (<em>Union</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)"><em>None</em></a><em>, </em><a class="reference external" href="https://docs.python.org/3/library/enum.html#enum.Enum" title="(in Python v3.9)"><em>enum.Enum</em></a><em>]</em>) – raw data</p>
+<dd class="field-odd"><p><strong>data</strong> (<em>Optional</em><em>[</em><em>Enum</em><em>]</em>) – raw data</p>
 </dd>
 <dt class="field-even">Returns</dt>
 <dd class="field-even"><p>The JSON serialisable enum data.</p>
@@ -530,7 +560,7 @@ be returned.</p>
 <dd><p>Serialize <code class="docutils literal notranslate"><span class="pre">data</span></code> as ASCII log format.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>data</strong> (<em>Union</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)"><em>None</em></a><em>, </em><a class="reference external" href="https://docs.python.org/3/library/enum.html#enum.Enum" title="(in Python v3.9)"><em>enum.Enum</em></a><em>]</em>) – raw data</p>
+<dd class="field-odd"><p><strong>data</strong> (<em>Optional</em><em>[</em><em>Enum</em><em>]</em>) – raw data</p>
 </dd>
 <dt class="field-even">Returns</dt>
 <dd class="field-even"><p>The ASCII representation of the enum data.</p>
@@ -572,7 +602,10 @@ be returned.</p>
 <dd><p>Corresponding Python type annotation.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#type" title="(in Python v3.9)">type</a></p>
+<dd class="field-odd"><p>Any</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>Type[TimeDeltaType]</p>
 </dd>
 </dl>
 </dd></dl>
@@ -585,6 +618,9 @@ be returned.</p>
 <dt class="field-odd">Type</dt>
 <dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)">str</a></p>
 </dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>Literal[“interval”]</p>
+</dd>
 </dl>
 </dd></dl>
 
@@ -594,14 +630,14 @@ be returned.</p>
 <dd><p>Parse <code class="docutils literal notranslate"><span class="pre">data</span></code> from string.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>data</strong> (<em>Union</em><em>[</em><em>AnyStr</em><em>, </em><a class="reference external" href="https://docs.python.org/3/library/datetime.html#datetime.timedelta" title="(in Python v3.9)"><em>datetime.timedelta</em></a><em>]</em>) – raw data</p>
+<dd class="field-odd"><p><strong>data</strong> (<em>Union</em><em>[</em><em>AnyStr</em><em>, </em><em>TimeDeltaType</em><em>]</em>) – raw data</p>
 </dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p>The parsed numeral data. If <code class="docutils literal notranslate"><span class="pre">data</span></code> is <em>unset</em>, <code class="docutils literal notranslate"><span class="pre">None</span></code> will
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>Optional[TimeDeltaType]</p>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>The parsed numeral data. If <code class="docutils literal notranslate"><span class="pre">data</span></code> is <em>unset</em>, <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)"><code class="xref py py-data docutils literal notranslate"><span class="pre">None</span></code></a> will
 be returned.</p>
-</dd>
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>Union[<a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)">None</a>, <a class="reference external" href="https://docs.python.org/3/library/datetime.html#datetime.timedelta" title="(in Python v3.9)">datetime.timedelta</a>]</p>
 </dd>
 </dl>
 </dd></dl>
@@ -612,7 +648,7 @@ be returned.</p>
 <dd><p>Serialize <code class="docutils literal notranslate"><span class="pre">data</span></code> as JSON log format.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>data</strong> (<em>Union</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)"><em>None</em></a><em>, </em><a class="reference external" href="https://docs.python.org/3/library/datetime.html#datetime.timedelta" title="(in Python v3.9)"><em>datetime.timedelta</em></a><em>]</em>) – raw data</p>
+<dd class="field-odd"><p><strong>data</strong> (<em>Optional</em><em>[</em><em>TimeDeltaType</em><em>]</em>) – raw data</p>
 </dd>
 <dt class="field-even">Returns</dt>
 <dd class="field-even"><p>The JSON serialisable numeral data.</p>
@@ -629,7 +665,7 @@ be returned.</p>
 <dd><p>Serialize <code class="docutils literal notranslate"><span class="pre">data</span></code> as ASCII log format.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>data</strong> (<em>Union</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)"><em>None</em></a><em>, </em><a class="reference external" href="https://docs.python.org/3/library/datetime.html#datetime.timedelta" title="(in Python v3.9)"><em>datetime.timedelta</em></a><em>]</em>) – raw data</p>
+<dd class="field-odd"><p><strong>data</strong> (<em>Optional</em><em>[</em><em>TimeDeltaType</em><em>]</em>) – raw data</p>
 </dd>
 <dt class="field-even">Returns</dt>
 <dd class="field-even"><p>The ASCII representation of numeral data.</p>
@@ -671,7 +707,10 @@ be returned.</p>
 <dd><p>Corresponding Python type annotation.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#type" title="(in Python v3.9)">type</a></p>
+<dd class="field-odd"><p>Any</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>Type[int64]</p>
 </dd>
 </dl>
 </dd></dl>
@@ -684,6 +723,9 @@ be returned.</p>
 <dt class="field-odd">Type</dt>
 <dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)">str</a></p>
 </dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>Literal[“int”]</p>
+</dd>
 </dl>
 </dd></dl>
 
@@ -693,14 +735,14 @@ be returned.</p>
 <dd><p>Parse <code class="docutils literal notranslate"><span class="pre">data</span></code> from string.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>data</strong> (<em>Union</em><em>[</em><em>AnyStr</em><em>, </em><a class="reference external" href="https://docs.python.org/3/library/ctypes.html#ctypes.c_long" title="(in Python v3.9)"><em>ctypes.c_long</em></a><em>]</em>) – raw data</p>
+<dd class="field-odd"><p><strong>data</strong> (<em>Union</em><em>[</em><em>AnyStr</em><em>, </em><em>int64</em><em>]</em>) – raw data</p>
 </dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p>The parsed numeral data. If <code class="docutils literal notranslate"><span class="pre">data</span></code> is <em>unset</em>, <code class="docutils literal notranslate"><span class="pre">None</span></code> will
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>Optional[int64]</p>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>The parsed numeral data. If <code class="docutils literal notranslate"><span class="pre">data</span></code> is <em>unset</em>, <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)"><code class="xref py py-data docutils literal notranslate"><span class="pre">None</span></code></a> will
 be returned.</p>
-</dd>
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>Union[<a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)">None</a>, <a class="reference external" href="https://docs.python.org/3/library/ctypes.html#ctypes.c_long" title="(in Python v3.9)">ctypes.c_long</a>]</p>
 </dd>
 </dl>
 </dd></dl>
@@ -711,7 +753,7 @@ be returned.</p>
 <dd><p>Serialize <code class="docutils literal notranslate"><span class="pre">data</span></code> as JSON log format.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>data</strong> (<em>Union</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)"><em>None</em></a><em>, </em><a class="reference external" href="https://docs.python.org/3/library/ctypes.html#ctypes.c_long" title="(in Python v3.9)"><em>ctypes.c_long</em></a><em>]</em>) – raw data</p>
+<dd class="field-odd"><p><strong>data</strong> (<em>Optional</em><em>[</em><em>int64</em><em>]</em>) – raw data</p>
 </dd>
 <dt class="field-even">Returns</dt>
 <dd class="field-even"><p>The JSON serialisable numeral data.</p>
@@ -728,7 +770,7 @@ be returned.</p>
 <dd><p>Serialize <code class="docutils literal notranslate"><span class="pre">data</span></code> as ASCII log format.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>data</strong> (<em>Union</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)"><em>None</em></a><em>, </em><a class="reference external" href="https://docs.python.org/3/library/ctypes.html#ctypes.c_long" title="(in Python v3.9)"><em>ctypes.c_long</em></a><em>]</em>) – raw data</p>
+<dd class="field-odd"><p><strong>data</strong> (<em>Optional</em><em>[</em><em>int64</em><em>]</em>) – raw data</p>
 </dd>
 <dt class="field-even">Returns</dt>
 <dd class="field-even"><p>The ASCII representation of numeral data.</p>
@@ -770,7 +812,10 @@ be returned.</p>
 <dd><p>Corresponding Python type annotation.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#type" title="(in Python v3.9)">type</a></p>
+<dd class="field-odd"><p>Any</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.9)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Any</span></code></a></p>
 </dd>
 </dl>
 </dd></dl>
@@ -783,6 +828,9 @@ be returned.</p>
 <dt class="field-odd">Type</dt>
 <dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)">str</a></p>
 </dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></p>
+</dd>
 </dl>
 </dd></dl>
 
@@ -792,14 +840,14 @@ be returned.</p>
 <dd><p>Parse <code class="docutils literal notranslate"><span class="pre">data</span></code> from string.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>data</strong> (<em>Union</em><em>[</em><em>AnyStr</em><em>, </em><a class="reference external" href="https://docs.python.org/3/library/ctypes.html#ctypes.c_ushort" title="(in Python v3.9)"><em>ctypes.c_ushort</em></a><em>]</em>) – raw data</p>
+<dd class="field-odd"><p><strong>data</strong> (<em>Union</em><em>[</em><em>AnyStr</em><em>, </em><em>uint16</em><em>]</em>) – raw data</p>
 </dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p>The parsed port number. If <code class="docutils literal notranslate"><span class="pre">data</span></code> is <em>unset</em>, <code class="docutils literal notranslate"><span class="pre">None</span></code> will
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>Optional[uint16]</p>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>The parsed port number. If <code class="docutils literal notranslate"><span class="pre">data</span></code> is <em>unset</em>, <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)"><code class="xref py py-data docutils literal notranslate"><span class="pre">None</span></code></a> will
 be returned.</p>
-</dd>
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>Union[<a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)">None</a>, <a class="reference external" href="https://docs.python.org/3/library/ctypes.html#ctypes.c_ushort" title="(in Python v3.9)">ctypes.c_ushort</a>]</p>
 </dd>
 </dl>
 </dd></dl>
@@ -810,7 +858,7 @@ be returned.</p>
 <dd><p>Serialize <code class="docutils literal notranslate"><span class="pre">data</span></code> as JSON log format.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>data</strong> (<em>Union</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)"><em>None</em></a><em>, </em><a class="reference external" href="https://docs.python.org/3/library/ctypes.html#ctypes.c_ushort" title="(in Python v3.9)"><em>ctypes.c_ushort</em></a><em>]</em>) – raw data</p>
+<dd class="field-odd"><p><strong>data</strong> (<em>Optional</em><em>[</em><em>uint16</em><em>]</em>) – raw data</p>
 </dd>
 <dt class="field-even">Returns</dt>
 <dd class="field-even"><p>The JSON serialisable port number string.</p>
@@ -827,7 +875,7 @@ be returned.</p>
 <dd><p>Serialize <code class="docutils literal notranslate"><span class="pre">data</span></code> as ASCII log format.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>data</strong> (<em>Union</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)"><em>None</em></a><em>, </em><a class="reference external" href="https://docs.python.org/3/library/ctypes.html#ctypes.c_ushort" title="(in Python v3.9)"><em>ctypes.c_ushort</em></a><em>]</em>) – raw data</p>
+<dd class="field-odd"><p><strong>data</strong> (<em>Optional</em><em>[</em><em>uint16</em><em>]</em>) – raw data</p>
 </dd>
 <dt class="field-even">Returns</dt>
 <dd class="field-even"><p>The ASCII representation of the port number.</p>
@@ -890,7 +938,10 @@ processing the fields.</p>
 <dd><p>Corresponding Python type annotation.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#type" title="(in Python v3.9)">type</a></p>
+<dd class="field-odd"><p>Any</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.9)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Any</span></code></a></p>
 </dd>
 </dl>
 </dd></dl>
@@ -903,6 +954,9 @@ processing the fields.</p>
 <dt class="field-odd">Type</dt>
 <dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)">str</a></p>
 </dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></p>
+</dd>
 </dl>
 </dd></dl>
 
@@ -911,7 +965,7 @@ processing the fields.</p>
 <dl class="py class">
 <dt id="zlogging.types.SetType">
 <em class="property">class </em><code class="sig-prename descclassname">zlogging.types.</code><code class="sig-name descname">SetType</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">empty_field</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">unset_field</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">set_separator</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">element_type</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/zlogging/types.html#SetType"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zlogging.types.SetType" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#id2" title="zlogging.types._GenericType"><code class="xref py py-class docutils literal notranslate"><span class="pre">zlogging.types._GenericType</span></code></a>, <code class="xref py py-class docutils literal notranslate"><span class="pre">Generic</span></code>[<code class="xref py py-obj docutils literal notranslate"><span class="pre">zlogging.types.data</span></code>]</p>
+<dd><p>Bases: <a class="reference internal" href="#id2" title="zlogging.types._GenericType"><code class="xref py py-class docutils literal notranslate"><span class="pre">zlogging.types._GenericType</span></code></a>, <code class="xref py py-class docutils literal notranslate"><span class="pre">Generic</span></code>[<a class="reference internal" href="#zlogging.types._S" title="zlogging.types._S"><code class="xref py py-obj docutils literal notranslate"><span class="pre">zlogging.types._S</span></code></a>]</p>
 <p>Bro/Zeek <code class="docutils literal notranslate"><span class="pre">set</span></code> data type.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -962,7 +1016,10 @@ of <a class="reference internal" href="#id0" title="zlogging.types._SimpleType">
 <dd><p>Corresponding Python type annotation.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#type" title="(in Python v3.9)">type</a></p>
+<dd class="field-odd"><p>Any</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.9)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Any</span></code></a></p>
 </dd>
 </dl>
 </dd></dl>
@@ -975,6 +1032,9 @@ of <a class="reference internal" href="#id0" title="zlogging.types._SimpleType">
 <dt class="field-odd">Type</dt>
 <dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)">str</a></p>
 </dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></p>
+</dd>
 </dl>
 </dd></dl>
 
@@ -984,14 +1044,14 @@ of <a class="reference internal" href="#id0" title="zlogging.types._SimpleType">
 <dd><p>Parse <code class="docutils literal notranslate"><span class="pre">data</span></code> from string.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>data</strong> (<em>Union</em><em>[</em><em>AnyStr</em><em>, </em><em>Set</em><em>[</em><em>data</em><em>]</em><em>]</em>) – raw data</p>
+<dd class="field-odd"><p><strong>data</strong> (<em>Union</em><em>[</em><em>AnyStr</em><em>, </em><em>Set</em><em>[</em><em>_S</em><em>]</em><em>]</em>) – raw data</p>
 </dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p>The parsed set data. If <code class="docutils literal notranslate"><span class="pre">data</span></code> is <em>unset</em>, <code class="docutils literal notranslate"><span class="pre">None</span></code> will
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>Optional[Set[_S]]</p>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>The parsed set data. If <code class="docutils literal notranslate"><span class="pre">data</span></code> is <em>unset</em>, <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)"><code class="xref py py-data docutils literal notranslate"><span class="pre">None</span></code></a> will
 be returned.</p>
-</dd>
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>Union[<a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)">None</a>, Set[data]]</p>
 </dd>
 </dl>
 </dd></dl>
@@ -1002,7 +1062,7 @@ be returned.</p>
 <dd><p>Serialize <code class="docutils literal notranslate"><span class="pre">data</span></code> as JSON log format.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>data</strong> (<em>Union</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)"><em>None</em></a><em>, </em><em>Set</em><em>[</em><em>data</em><em>]</em><em>]</em>) – raw data</p>
+<dd class="field-odd"><p><strong>data</strong> (<em>Optional</em><em>[</em><em>Set</em><em>[</em><em>_S</em><em>]</em><em>]</em>) – raw data</p>
 </dd>
 <dt class="field-even">Returns</dt>
 <dd class="field-even"><p>The JSON serialisable set data.</p>
@@ -1019,7 +1079,7 @@ be returned.</p>
 <dd><p>Serialize <code class="docutils literal notranslate"><span class="pre">data</span></code> as ASCII log format.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>data</strong> (<em>Union</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)"><em>None</em></a><em>, </em><em>Set</em><em>[</em><em>data</em><em>]</em><em>]</em>) – raw data</p>
+<dd class="field-odd"><p><strong>data</strong> (<em>Optional</em><em>[</em><em>Set</em><em>[</em><em>_S</em><em>]</em><em>]</em>) – raw data</p>
 </dd>
 <dt class="field-even">Returns</dt>
 <dd class="field-even"><p>The ASCII representation of the set data.</p>
@@ -1061,7 +1121,10 @@ be returned.</p>
 <dd><p>Corresponding Python type annotation.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#type" title="(in Python v3.9)">type</a></p>
+<dd class="field-odd"><p>Any</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.9)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Any</span></code></a></p>
 </dd>
 </dl>
 </dd></dl>
@@ -1074,6 +1137,9 @@ be returned.</p>
 <dt class="field-odd">Type</dt>
 <dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)">str</a></p>
 </dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>Literal[“string”]</p>
+</dd>
 </dl>
 </dd></dl>
 
@@ -1083,14 +1149,14 @@ be returned.</p>
 <dd><p>Parse <code class="docutils literal notranslate"><span class="pre">data</span></code> from string.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>data</strong> (<em>Union</em><em>[</em><em>AnyStr</em><em>, </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#memoryview" title="(in Python v3.9)"><em>memoryview</em></a><em>, </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytearray" title="(in Python v3.9)"><em>bytearray</em></a><em>]</em>) – raw data</p>
+<dd class="field-odd"><p><strong>data</strong> (<em>Union</em><em>[</em><em>AnyStr</em><em>, </em><em>ByteString</em><em>]</em>) – raw data</p>
 </dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p>The parsed string data. If <code class="docutils literal notranslate"><span class="pre">data</span></code> is <em>unset</em>, <code class="docutils literal notranslate"><span class="pre">None</span></code> will
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>Optional[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(in Python v3.9)">bytes</a>]</p>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>The parsed string data. If <code class="docutils literal notranslate"><span class="pre">data</span></code> is <em>unset</em>, <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)"><code class="xref py py-data docutils literal notranslate"><span class="pre">None</span></code></a> will
 be returned.</p>
-</dd>
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>Union[<a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)">None</a>, ByteString]</p>
 </dd>
 </dl>
 </dd></dl>
@@ -1101,7 +1167,7 @@ be returned.</p>
 <dd><p>Serialize <code class="docutils literal notranslate"><span class="pre">data</span></code> as JSON log format.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>data</strong> (<em>Union</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)"><em>None</em></a><em>, </em><em>ByteString</em><em>]</em>) – raw data</p>
+<dd class="field-odd"><p><strong>data</strong> (<em>Optional</em><em>[</em><em>ByteString</em><em>]</em>) – raw data</p>
 </dd>
 <dt class="field-even">Returns</dt>
 <dd class="field-even"><p>The JSON serialisable string data encoded in ASCII.</p>
@@ -1118,7 +1184,7 @@ be returned.</p>
 <dd><p>Serialize <code class="docutils literal notranslate"><span class="pre">data</span></code> as ASCII log format.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>data</strong> (<em>Union</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)"><em>None</em></a><em>, </em><em>ByteString</em><em>]</em>) – raw data</p>
+<dd class="field-odd"><p><strong>data</strong> (<em>Optional</em><em>[</em><em>ByteString</em><em>]</em>) – raw data</p>
 </dd>
 <dt class="field-even">Returns</dt>
 <dd class="field-even"><p>The ASCII encoded string data.</p>
@@ -1160,7 +1226,10 @@ be returned.</p>
 <dd><p>Corresponding Python type annotation.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#type" title="(in Python v3.9)">type</a></p>
+<dd class="field-odd"><p>Any</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.9)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Any</span></code></a></p>
 </dd>
 </dl>
 </dd></dl>
@@ -1173,6 +1242,9 @@ be returned.</p>
 <dt class="field-odd">Type</dt>
 <dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)">str</a></p>
 </dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></p>
+</dd>
 </dl>
 </dd></dl>
 
@@ -1182,14 +1254,14 @@ be returned.</p>
 <dd><p>Parse <code class="docutils literal notranslate"><span class="pre">data</span></code> from string.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>data</strong> (<em>Union</em><em>[</em><em>AnyStr</em><em>, </em><a class="reference external" href="https://docs.python.org/3/library/ipaddress.html#ipaddress.IPv4Network" title="(in Python v3.9)"><em>ipaddress.IPv4Network</em></a><em>, </em><a class="reference external" href="https://docs.python.org/3/library/ipaddress.html#ipaddress.IPv6Network" title="(in Python v3.9)"><em>ipaddress.IPv6Network</em></a><em>]</em>) – raw data</p>
+<dd class="field-odd"><p><strong>data</strong> (<em>Union</em><em>[</em><em>AnyStr</em><em>, </em><em>IPNetwork</em><em>]</em>) – raw data</p>
 </dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p>The parsed IP network. If <code class="docutils literal notranslate"><span class="pre">data</span></code> is <em>unset</em>, <code class="docutils literal notranslate"><span class="pre">None</span></code> will
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>Optional[IPNetwork]</p>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>The parsed IP network. If <code class="docutils literal notranslate"><span class="pre">data</span></code> is <em>unset</em>, <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)"><code class="xref py py-data docutils literal notranslate"><span class="pre">None</span></code></a> will
 be returned.</p>
-</dd>
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>Union[<a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)">None</a>, <a class="reference external" href="https://docs.python.org/3/library/ipaddress.html#ipaddress.IPv4Network" title="(in Python v3.9)">ipaddress.IPv4Network</a>, <a class="reference external" href="https://docs.python.org/3/library/ipaddress.html#ipaddress.IPv6Network" title="(in Python v3.9)">ipaddress.IPv6Network</a>]</p>
 </dd>
 </dl>
 </dd></dl>
@@ -1200,7 +1272,7 @@ be returned.</p>
 <dd><p>Serialize <code class="docutils literal notranslate"><span class="pre">data</span></code> as JSON log format.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>data</strong> (<em>Union</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)"><em>None</em></a><em>, </em><a class="reference external" href="https://docs.python.org/3/library/ipaddress.html#ipaddress.IPv4Network" title="(in Python v3.9)"><em>ipaddress.IPv4Network</em></a><em>, </em><a class="reference external" href="https://docs.python.org/3/library/ipaddress.html#ipaddress.IPv6Network" title="(in Python v3.9)"><em>ipaddress.IPv6Network</em></a><em>]</em>) – raw data</p>
+<dd class="field-odd"><p><strong>data</strong> (<em>Optional</em><em>[</em><em>IPNetwork</em><em>]</em>) – raw data</p>
 </dd>
 <dt class="field-even">Returns</dt>
 <dd class="field-even"><p>The JSON serialisable IP network string.</p>
@@ -1217,7 +1289,7 @@ be returned.</p>
 <dd><p>Serialize <code class="docutils literal notranslate"><span class="pre">data</span></code> as ASCII log format.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>data</strong> (<em>Union</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)"><em>None</em></a><em>, </em><a class="reference external" href="https://docs.python.org/3/library/ipaddress.html#ipaddress.IPv4Network" title="(in Python v3.9)"><em>ipaddress.IPv4Network</em></a><em>, </em><a class="reference external" href="https://docs.python.org/3/library/ipaddress.html#ipaddress.IPv6Network" title="(in Python v3.9)"><em>ipaddress.IPv6Network</em></a><em>]</em>) – raw data</p>
+<dd class="field-odd"><p><strong>data</strong> (<em>Optional</em><em>[</em><em>IPNetwork</em><em>]</em>) – raw data</p>
 </dd>
 <dt class="field-even">Returns</dt>
 <dd class="field-even"><p>The ASCII representation of the IP network.</p>
@@ -1259,7 +1331,10 @@ be returned.</p>
 <dd><p>Corresponding Python type annotation.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#type" title="(in Python v3.9)">type</a></p>
+<dd class="field-odd"><p>Any</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>Type[DateTimeType]</p>
 </dd>
 </dl>
 </dd></dl>
@@ -1272,6 +1347,9 @@ be returned.</p>
 <dt class="field-odd">Type</dt>
 <dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)">str</a></p>
 </dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>Literal[“time”]</p>
+</dd>
 </dl>
 </dd></dl>
 
@@ -1281,14 +1359,14 @@ be returned.</p>
 <dd><p>Parse <code class="docutils literal notranslate"><span class="pre">data</span></code> from string.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>data</strong> (<em>Union</em><em>[</em><em>AnyStr</em><em>, </em><a class="reference external" href="https://docs.python.org/3/library/datetime.html#datetime.datetime" title="(in Python v3.9)"><em>datetime.datetime</em></a><em>]</em>) – raw data</p>
+<dd class="field-odd"><p><strong>data</strong> (<em>Union</em><em>[</em><em>AnyStr</em><em>, </em><em>DateTimeType</em><em>]</em>) – raw data</p>
 </dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p>The parsed numeral data. If <code class="docutils literal notranslate"><span class="pre">data</span></code> is <em>unset</em>, <code class="docutils literal notranslate"><span class="pre">None</span></code> will
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>Optional[DateTimeType]</p>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>The parsed numeral data. If <code class="docutils literal notranslate"><span class="pre">data</span></code> is <em>unset</em>, <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)"><code class="xref py py-data docutils literal notranslate"><span class="pre">None</span></code></a> will
 be returned.</p>
-</dd>
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>Union[<a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)">None</a>, <a class="reference external" href="https://docs.python.org/3/library/datetime.html#datetime.datetime" title="(in Python v3.9)">datetime.datetime</a>]</p>
 </dd>
 </dl>
 </dd></dl>
@@ -1299,13 +1377,13 @@ be returned.</p>
 <dd><p>Serialize <code class="docutils literal notranslate"><span class="pre">data</span></code> as JSON log format.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>data</strong> (<em>Union</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)"><em>None</em></a><em>, </em><a class="reference external" href="https://docs.python.org/3/library/datetime.html#datetime.datetime" title="(in Python v3.9)"><em>datetime.datetime</em></a><em>]</em>) – raw data</p>
+<dd class="field-odd"><p><strong>data</strong> (<em>Optional</em><em>[</em><em>DateTimeType</em><em>]</em>) – raw data</p>
 </dd>
 <dt class="field-even">Returns</dt>
 <dd class="field-even"><p>The JSON serialisable numeral data.</p>
 </dd>
 <dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)">int</a></p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.9)">float</a></p>
 </dd>
 </dl>
 </dd></dl>
@@ -1316,7 +1394,7 @@ be returned.</p>
 <dd><p>Serialize <code class="docutils literal notranslate"><span class="pre">data</span></code> as ASCII log format.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>data</strong> (<em>Union</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)"><em>None</em></a><em>, </em><a class="reference external" href="https://docs.python.org/3/library/datetime.html#datetime.datetime" title="(in Python v3.9)"><em>datetime.datetime</em></a><em>]</em>) – raw data</p>
+<dd class="field-odd"><p><strong>data</strong> (<em>Optional</em><em>[</em><em>DateTimeType</em><em>]</em>) – raw data</p>
 </dd>
 <dt class="field-even">Returns</dt>
 <dd class="field-even"><p>The ASCII representation of numeral data.</p>
@@ -1332,7 +1410,7 @@ be returned.</p>
 <dl class="py class">
 <dt id="zlogging.types.VectorType">
 <em class="property">class </em><code class="sig-prename descclassname">zlogging.types.</code><code class="sig-name descname">VectorType</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">empty_field</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">unset_field</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">set_separator</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">element_type</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/zlogging/types.html#VectorType"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zlogging.types.VectorType" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#id2" title="zlogging.types._GenericType"><code class="xref py py-class docutils literal notranslate"><span class="pre">zlogging.types._GenericType</span></code></a>, <code class="xref py py-class docutils literal notranslate"><span class="pre">Generic</span></code>[<code class="xref py py-obj docutils literal notranslate"><span class="pre">zlogging.types.data</span></code>]</p>
+<dd><p>Bases: <a class="reference internal" href="#id2" title="zlogging.types._GenericType"><code class="xref py py-class docutils literal notranslate"><span class="pre">zlogging.types._GenericType</span></code></a>, <code class="xref py py-class docutils literal notranslate"><span class="pre">Generic</span></code>[<a class="reference internal" href="#zlogging.types._S" title="zlogging.types._S"><code class="xref py py-obj docutils literal notranslate"><span class="pre">zlogging.types._S</span></code></a>]</p>
 <p>Bro/Zeek <code class="docutils literal notranslate"><span class="pre">vector</span></code> data type.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -1383,7 +1461,10 @@ of <a class="reference internal" href="#id0" title="zlogging.types._SimpleType">
 <dd><p>Corresponding Python type annotation.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#type" title="(in Python v3.9)">type</a></p>
+<dd class="field-odd"><p>Any</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.9)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Any</span></code></a></p>
 </dd>
 </dl>
 </dd></dl>
@@ -1396,6 +1477,9 @@ of <a class="reference internal" href="#id0" title="zlogging.types._SimpleType">
 <dt class="field-odd">Type</dt>
 <dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)">str</a></p>
 </dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></p>
+</dd>
 </dl>
 </dd></dl>
 
@@ -1405,14 +1489,14 @@ of <a class="reference internal" href="#id0" title="zlogging.types._SimpleType">
 <dd><p>Parse <code class="docutils literal notranslate"><span class="pre">data</span></code> from string.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>data</strong> (<em>Union</em><em>[</em><em>AnyStr</em><em>, </em><em>List</em><em>[</em><em>data</em><em>]</em><em>]</em>) – raw data</p>
+<dd class="field-odd"><p><strong>data</strong> (<em>Union</em><em>[</em><em>AnyStr</em><em>, </em><em>List</em><em>[</em><em>_S</em><em>]</em><em>]</em>) – raw data</p>
 </dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p>The parsed list data. If <code class="docutils literal notranslate"><span class="pre">data</span></code> is <em>unset</em>, <code class="docutils literal notranslate"><span class="pre">None</span></code> will
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>Optional[List[_S]]</p>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>The parsed list data. If <code class="docutils literal notranslate"><span class="pre">data</span></code> is <em>unset</em>, <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)"><code class="xref py py-data docutils literal notranslate"><span class="pre">None</span></code></a> will
 be returned.</p>
-</dd>
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>Union[<a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)">None</a>, List[data]]</p>
 </dd>
 </dl>
 </dd></dl>
@@ -1423,7 +1507,7 @@ be returned.</p>
 <dd><p>Serialize <code class="docutils literal notranslate"><span class="pre">data</span></code> as JSON log format.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>data</strong> (<em>Union</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)"><em>None</em></a><em>, </em><em>List</em><em>[</em><em>data</em><em>]</em><em>]</em>) – raw data</p>
+<dd class="field-odd"><p><strong>data</strong> (<em>Optional</em><em>[</em><em>List</em><em>[</em><em>_S</em><em>]</em><em>]</em>) – raw data</p>
 </dd>
 <dt class="field-even">Returns</dt>
 <dd class="field-even"><p>The JSON serialisable list data.</p>
@@ -1440,7 +1524,7 @@ be returned.</p>
 <dd><p>Serialize <code class="docutils literal notranslate"><span class="pre">data</span></code> as ASCII log format.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>data</strong> (<em>Union</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)"><em>None</em></a><em>, </em><em>List</em><em>[</em><em>data</em><em>]</em><em>]</em>) – raw data</p>
+<dd class="field-odd"><p><strong>data</strong> (<em>Optional</em><em>[</em><em>List</em><em>[</em><em>_S</em><em>]</em><em>]</em>) – raw data</p>
 </dd>
 <dt class="field-even">Returns</dt>
 <dd class="field-even"><p>The ASCII representation of the list data.</p>
@@ -1460,6 +1544,18 @@ be returned.</p>
 <p>Generic data type.</p>
 <p>In Bro/Zeek script language, such generic type includes <code class="docutils literal notranslate"><span class="pre">set</span></code> and
 <code class="docutils literal notranslate"><span class="pre">vector</span></code>, which are also known as <em>container</em> types.</p>
+</dd></dl>
+
+<dl class="py data">
+<dt id="zlogging.types._S">
+<code class="sig-prename descclassname">zlogging.types.</code><code class="sig-name descname">_S</code><a class="headerlink" href="#zlogging.types._S" title="Permalink to this definition">¶</a></dt>
+<dd><p>A typing variable representing all valid data types for Bro/Zeek log framework.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#type" title="(in Python v3.9)">type</a></p>
+</dd>
+</dl>
+<p>alias of TypeVar(‘_S’, zlogging.types.AddrType, zlogging.types.BoolType, zlogging.types.CountType, zlogging.types.DoubleType, zlogging.types.EnumType, zlogging.types.IntervalType, zlogging.types.IntType, zlogging.types.PortType, zlogging.types.StringType, zlogging.types.SubnetType, zlogging.types.TimeType)</p>
 </dd></dl>
 
 <dl class="py class">
@@ -1534,18 +1630,6 @@ is also a <em>container</em> type.</p>
 
 </dd></dl>
 
-<dl class="py data">
-<dt id="zlogging.types._data">
-<code class="sig-prename descclassname">zlogging.types.</code><code class="sig-name descname">_data</code><a class="headerlink" href="#zlogging.types._data" title="Permalink to this definition">¶</a></dt>
-<dd><p>A typing variable representing all valid data types for Bro/Zeek log framework.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Type</dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#type" title="(in Python v3.9)">type</a></p>
-</dd>
-</dl>
-<p>alias of TypeVar(‘data’, zlogging.types.AddrType, zlogging.types.BoolType, zlogging.types.CountType, zlogging.types.DoubleType, zlogging.types.EnumType, zlogging.types.IntervalType, zlogging.types.IntType, zlogging.types.PortType, zlogging.types.StringType, zlogging.types.SubnetType, zlogging.types.TimeType)</p>
-</dd></dl>
-
 </div>
 <div class="section" id="abstract-base-types">
 <h2>Abstract Base Types<a class="headerlink" href="#abstract-base-types" title="Permalink to this headline">¶</a></h2>
@@ -1578,7 +1662,10 @@ is also a <em>container</em> type.</p>
 <dd><p>Corresponding Python type annotation.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#type" title="(in Python v3.9)">type</a></p>
+<dd class="field-odd"><p>Any</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.9)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Any</span></code></a></p>
 </dd>
 </dl>
 </dd></dl>
@@ -1591,6 +1678,9 @@ is also a <em>container</em> type.</p>
 <dt class="field-odd">Type</dt>
 <dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)">str</a></p>
 </dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></p>
+</dd>
 </dl>
 </dd></dl>
 
@@ -1602,6 +1692,9 @@ is also a <em>container</em> type.</p>
 <dt class="field-odd">Type</dt>
 <dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)">str</a></p>
 </dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></p>
+</dd>
 </dl>
 </dd></dl>
 
@@ -1609,12 +1702,25 @@ is also a <em>container</em> type.</p>
 <dt id="zlogging.types.BaseType.__call__">
 <code class="sig-name descname">__call__</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">data</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/zlogging/types.html#BaseType.__call__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zlogging.types.BaseType.__call__" title="Permalink to this definition">¶</a></dt>
 <dd><p>Parse <code class="docutils literal notranslate"><span class="pre">data</span></code> from string.</p>
+<p>This is a proxy method which calls to <a class="reference internal" href="#zlogging.types.BaseType.parse" title="zlogging.types.BaseType.parse"><code class="xref py py-meth docutils literal notranslate"><span class="pre">parse()</span></code></a>
+of the type implementation.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>data</strong> (<em>Any</em>) – </p>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.9)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Any</span></code></a></p>
 </dd>
-<dt class="field-even">Return type</dt>
-<dd class="field-even"><p>Any</p>
+<dt class="field-even">Parameters</dt>
+<dd class="field-even"><p><strong>data</strong> (<em>Any</em>) – </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="zlogging.types.BaseType.__str__">
+<code class="sig-name descname">__str__</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/zlogging/types.html#BaseType.__str__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zlogging.types.BaseType.__str__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the corresponding Zeek type name.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></p>
 </dd>
 </dl>
 </dd></dl>
@@ -1624,11 +1730,11 @@ is also a <em>container</em> type.</p>
 <em class="property">abstract </em><code class="sig-name descname">parse</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">data</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/zlogging/types.html#BaseType.parse"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zlogging.types.BaseType.parse" title="Permalink to this definition">¶</a></dt>
 <dd><p>Parse <code class="docutils literal notranslate"><span class="pre">data</span></code> from string.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>data</strong> (<em>Any</em>) – </p>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.9)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Any</span></code></a></p>
 </dd>
-<dt class="field-even">Return type</dt>
-<dd class="field-even"><p>Any</p>
+<dt class="field-even">Parameters</dt>
+<dd class="field-even"><p><strong>data</strong> (<em>Any</em>) – </p>
 </dd>
 </dl>
 </dd></dl>
@@ -1638,11 +1744,11 @@ is also a <em>container</em> type.</p>
 <em class="property">abstract </em><code class="sig-name descname">tojson</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">data</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/zlogging/types.html#BaseType.tojson"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zlogging.types.BaseType.tojson" title="Permalink to this definition">¶</a></dt>
 <dd><p>Serialize <code class="docutils literal notranslate"><span class="pre">data</span></code> as JSON log format.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>data</strong> (<em>Any</em>) – </p>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.9)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Any</span></code></a></p>
 </dd>
-<dt class="field-even">Return type</dt>
-<dd class="field-even"><p>Any</p>
+<dt class="field-even">Parameters</dt>
+<dd class="field-even"><p><strong>data</strong> (<em>Any</em>) – </p>
 </dd>
 </dl>
 </dd></dl>
@@ -1652,11 +1758,11 @@ is also a <em>container</em> type.</p>
 <em class="property">abstract </em><code class="sig-name descname">toascii</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">data</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/zlogging/types.html#BaseType.toascii"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zlogging.types.BaseType.toascii" title="Permalink to this definition">¶</a></dt>
 <dd><p>Serialize <code class="docutils literal notranslate"><span class="pre">data</span></code> as ASCII log format.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>data</strong> (<em>Any</em>) – </p>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></p>
 </dd>
-<dt class="field-even">Return type</dt>
-<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)">str</a></p>
+<dt class="field-even">Parameters</dt>
+<dd class="field-even"><p><strong>data</strong> (<em>Any</em>) – </p>
 </dd>
 </dl>
 </dd></dl>
@@ -1747,18 +1853,6 @@ is also a <em>container</em> type.</p>
 </div>
 <div class="section" id="internal-data">
 <h2>Internal Data<a class="headerlink" href="#internal-data" title="Permalink to this headline">¶</a></h2>
-<dl class="py data">
-<dt id="id7">
-<code class="sig-prename descclassname">zlogging.types.</code><code class="sig-name descname">_data</code><a class="headerlink" href="#id7" title="Permalink to this definition">¶</a></dt>
-<dd><p>A typing variable representing all valid data types for Bro/Zeek log framework.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Type</dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#type" title="(in Python v3.9)">type</a></p>
-</dd>
-</dl>
-<p>alias of TypeVar(‘data’, zlogging.types.AddrType, zlogging.types.BoolType, zlogging.types.CountType, zlogging.types.DoubleType, zlogging.types.EnumType, zlogging.types.IntervalType, zlogging.types.IntType, zlogging.types.PortType, zlogging.types.StringType, zlogging.types.SubnetType, zlogging.types.TimeType)</p>
-</dd></dl>
-
 </div>
 </div>
 
