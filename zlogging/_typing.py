@@ -1,40 +1,20 @@
 # -*- coding: utf-8 -*-
+# pylint: disable=unsubscriptable-object
 """Typing annotations."""
-# pylint: disable=unused-import,unused-wildcard-import
 
-import ctypes
-import datetime
-import decimal
-import ipaddress
-import os
-import typing
-from typing import *
+from collections import OrderedDict
+from typing import Union
 
-from zlogging._compat import *
+from typing_extensions import TypedDict
 
-T = typing.TypeVar('T')
+from zlogging.types import _GenericType, _SimpleType, _VariadicType
 
-with open(__file__, 'rb') as file:
-    BinaryFile = type(file)
 
-with open(__file__, 'r') as file:
-    TextFile = type(file)
+class ExpandedTyping(TypedDict):
+    """Return type of :func:`zlogging._aux.expand_typing`."""
 
-Args = typing.List[str]
-Kwargs = typing.Dict[str, typing.Any]
-
-PathLike = os.PathLike
-
-uint16 = ctypes.c_uint16
-int64 = ctypes.c_int64
-uint64 = ctypes.c_uint64
-
-Decimal = decimal.Decimal
-
-DateTime = datetime.datetime
-TimeDelta = datetime.timedelta
-
-IPAddress = typing.Union[ipaddress.IPv4Address, ipaddress.IPv6Address]
-IPNetwork = typing.Union[ipaddress.IPv4Network, ipaddress.IPv6Network]
-
-Enum = enum.Enum
+    fields: OrderedDict[str, Union[_SimpleType, _GenericType]]
+    record_fields: OrderedDict[str, _VariadicType]
+    unset_field: bytes
+    empty_field: bytes
+    set_separator: bytes

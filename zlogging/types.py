@@ -14,13 +14,14 @@ from typing import TYPE_CHECKING, Any, Generic, List, Set, TypeVar, Union, cast,
 from typing_extensions import TypedDict
 from typing_inspect import get_args, is_union_type
 
-from zlogging._aux import decimal_toascii, expand_typing, float_toascii
-from zlogging._compat import enum
-from zlogging._exc import (BroDeprecationWarning, ZeekNotImplemented, ZeekTypeError, ZeekValueError,
-                           ZeekValueWarning)
-from zlogging.enum import globals as enum_generator
+from ._aux import decimal_toascii, expand_typing, float_toascii
+from ._compat import enum
+from ._exc import (BroDeprecationWarning, ZeekNotImplemented, ZeekTypeError, ZeekValueError,
+                   ZeekValueWarning)
+from .enum import globals as enum_generator
 
 _T = TypeVar("_T")
+_S = TypeVar('_S', bound='_SimpleType')
 _Str = TypeVar('_Str', str, bytes)
 _Bool = TypeVar('_Bool', 'Literal[True]', 'Literal[False]')
 if TYPE_CHECKING:
@@ -46,11 +47,8 @@ if TYPE_CHECKING:
     class Enum(_Enum, _AEnum):  # pylint: disable=duplicate-bases
         def __init__(self, value: str, names: Union[str, List[str], List[Tuple[str, Any]], Dict[str, Any]], *,  # pylint: disable=unused-argument,super-init-not-called
                      module: Optional[str] = None, qualname: Optional[str] = None,  # pylint: disable=unused-argument
-                     type: Optional[type] = None, start: Optional[int] = 1):  # pylint: disable=unused-argument,redefined-builtin
-            ...
-
-        def __getitem__(self: '_T', name: str) -> '_T':
-            ...
+                     type: Optional[type] = None, start: Optional[int] = 1): ...  # pylint: disable=unused-argument,redefined-builtin
+        def __getitem__(self: '_T', name: str) -> '_T': ...  # pylint: disable=multiple-statements
 
 __all__ = [
     'AddrType', 'BoolType', 'CountType', 'DoubleType', 'EnumType',
@@ -289,17 +287,11 @@ class BoolType(_SimpleType):
         return 'bool'
 
     @overload
-    def parse(self, data: 'Literal["T", b"T"]') -> 'Literal[True]':
-        ...
-
+    def parse(self, data: 'Literal["T", b"T"]') -> 'Literal[True]': ...
     @overload
-    def parse(self, data: 'Literal["F", b"F"]') -> 'Literal[False]':
-        ...
-
+    def parse(self, data: 'Literal["F", b"F"]') -> 'Literal[False]': ...
     @overload
-    def parse(self, data: '_Str') -> 'Optional[bool]':
-        ...
-
+    def parse(self, data: '_Str') -> 'Optional[bool]': ...
     def parse(self, data: 'Union[AnyStr, bool]') -> 'Optional[bool]':
         """Parse ``data`` from string.
 
@@ -329,13 +321,9 @@ class BoolType(_SimpleType):
         raise ZeekValueError('invalid bool value: %s' % data.decode('ascii'))
 
     @overload
-    def tojson(self, data: _Bool) -> _Bool:
-        ...
-
+    def tojson(self, data: _Bool) -> _Bool: ...
     @overload
-    def tojson(self, data: None) -> None:
-        ...
-
+    def tojson(self, data: None) -> None: ...
     def tojson(self, data: 'Optional[bool]') -> 'Optional[bool]':
         """Serialize ``data`` as JSON log format.
 
@@ -349,17 +337,11 @@ class BoolType(_SimpleType):
         return data
 
     @overload
-    def toascii(self, data: 'Literal[True]') -> 'Literal["T"]':
-        ...
-
+    def toascii(self, data: 'Literal[True]') -> 'Literal["T"]': ...
     @overload
-    def toascii(self, data: 'Literal[False]') -> 'Literal["F"]':
-        ...
-
+    def toascii(self, data: 'Literal[False]') -> 'Literal["F"]': ...
     @overload
-    def toascii(self, data: None) -> str:
-        ...
-
+    def toascii(self, data: None) -> str: ...
     def toascii(self, data: 'Optional[bool]') -> str:
         """Serialize ``data`` as ASCII log format.
 
@@ -403,13 +385,9 @@ class CountType(_SimpleType):
         return 'count'
 
     @overload
-    def parse(self, data: 'AnyStr') -> 'Optional[uint64]':
-        ...
-
+    def parse(self, data: 'AnyStr') -> 'Optional[uint64]': ...
     @overload
-    def parse(self, data: 'uint64') -> 'uint64':
-        ...
-
+    def parse(self, data: 'uint64') -> 'uint64': ...
     def parse(self, data: 'Union[AnyStr, uint64]') -> 'Optional[uint64]':
         """Parse ``data`` from string.
 
@@ -431,13 +409,9 @@ class CountType(_SimpleType):
         return ctypes.c_uint64(int(data))
 
     @overload
-    def tojson(self, data: 'uint64') -> int:
-        ...
-
+    def tojson(self, data: 'uint64') -> int: ...
     @overload
-    def tojson(self, data: None) -> None:
-        ...
-
+    def tojson(self, data: None) -> None: ...
     def tojson(self, data: 'Optional[uint64]') -> 'Optional[int]':
         """Serialize ``data`` as JSON log format.
 
@@ -495,13 +469,9 @@ class IntType(_SimpleType):
         return 'int'
 
     @overload
-    def parse(self, data: 'AnyStr') -> 'Optional[int64]':
-        ...
-
+    def parse(self, data: 'AnyStr') -> 'Optional[int64]': ...
     @overload
-    def parse(self, data: 'int64') -> 'int64':
-        ...
-
+    def parse(self, data: 'int64') -> 'int64': ...
     def parse(self, data: 'Union[AnyStr, int64]') -> 'Optional[int64]':
         """Parse ``data`` from string.
 
@@ -523,13 +493,9 @@ class IntType(_SimpleType):
         return ctypes.c_int64(int(data))
 
     @overload
-    def tojson(self, data: 'int64') -> int:
-        ...
-
+    def tojson(self, data: 'int64') -> int: ...
     @overload
-    def tojson(self, data: None) -> None:
-        ...
-
+    def tojson(self, data: None) -> None: ...
     def tojson(self, data: 'Optional[int64]') -> 'Optional[int]':
         """Serialize ``data`` as JSON log format.
 
@@ -587,13 +553,9 @@ class DoubleType(_SimpleType):
         return 'double'
 
     @overload
-    def parse(self, data: 'AnyStr') -> 'Optional[Decimal]':
-        ...
-
+    def parse(self, data: 'AnyStr') -> 'Optional[Decimal]': ...
     @overload
-    def parse(self, data: 'Decimal') -> 'Decimal':
-        ...
-
+    def parse(self, data: 'Decimal') -> 'Decimal': ...
     def parse(self, data: 'Union[AnyStr, Decimal]') -> 'Optional[Decimal]':
         """Parse ``data`` from string.
 
@@ -618,13 +580,9 @@ class DoubleType(_SimpleType):
         return value
 
     @overload
-    def tojson(self, data: 'Decimal') -> float:
-        ...
-
+    def tojson(self, data: 'Decimal') -> float: ...
     @overload
-    def tojson(self, data: None) -> None:
-        ...
-
+    def tojson(self, data: None) -> None: ...
     def tojson(self, data: 'Optional[Decimal]') -> 'Optional[float]':
         """Serialize ``data`` as JSON log format.
 
@@ -682,13 +640,9 @@ class TimeType(_SimpleType):
         return 'time'
 
     @overload
-    def parse(self, data: 'AnyStr') -> 'Optional[DateTimeType]':
-        ...
-
+    def parse(self, data: 'AnyStr') -> 'Optional[DateTimeType]': ...
     @overload
-    def parse(self, data: 'DateTimeType') -> 'DateTimeType':
-        ...
-
+    def parse(self, data: 'DateTimeType') -> 'DateTimeType': ...
     def parse(self, data: 'Union[AnyStr, DateTimeType]') -> 'Optional[DateTimeType]':
         """Parse ``data`` from string.
 
@@ -713,13 +667,9 @@ class TimeType(_SimpleType):
         return datetime.datetime.fromtimestamp(float(value))
 
     @overload
-    def tojson(self, data: 'DateTimeType') -> float:
-        ...
-
+    def tojson(self, data: 'DateTimeType') -> float: ...
     @overload
-    def tojson(self, data: None) -> None:
-        ...
-
+    def tojson(self, data: None) -> None: ...
     def tojson(self, data: 'Optional[DateTimeType]') -> 'Optional[float]':
         """Serialize ``data`` as JSON log format.
 
@@ -777,13 +727,9 @@ class IntervalType(_SimpleType):
         return 'interval'
 
     @overload
-    def parse(self, data: 'AnyStr') -> 'Optional[TimeDeltaType]':
-        ...
-
+    def parse(self, data: 'AnyStr') -> 'Optional[TimeDeltaType]': ...
     @overload
-    def parse(self, data: 'TimeDeltaType') -> 'TimeDeltaType':
-        ...
-
+    def parse(self, data: 'TimeDeltaType') -> 'TimeDeltaType': ...
     def parse(self, data: 'Union[AnyStr, TimeDeltaType]') -> 'Optional[TimeDeltaType]':
         """Parse ``data`` from string.
 
@@ -808,13 +754,9 @@ class IntervalType(_SimpleType):
                                   milliseconds=int(flt_part[3:]))
 
     @overload
-    def tojson(self, data: 'TimeDeltaType') -> float:
-        ...
-
+    def tojson(self, data: 'TimeDeltaType') -> float: ...
     @overload
-    def tojson(self, data: None) -> None:
-        ...
-
+    def tojson(self, data: None) -> None: ...
     def tojson(self, data: 'Optional[TimeDeltaType]') -> 'Optional[float]':
         """Serialize ``data`` as JSON log format.
 
@@ -895,6 +837,10 @@ class StringType(_SimpleType):
             return None
         return data
 
+    @overload
+    def tojson(self, data: 'ByteString') -> str: ...
+    @overload
+    def tojson(self, data: None) -> None: ...
     def tojson(self, data: 'Optional[ByteString]') -> 'Optional[str]':
         """Serialize ``data`` as JSON log format.
 
@@ -964,6 +910,10 @@ class AddrType(_SimpleType):
         """str: Corresponding Zeek type name."""
         return 'addr'
 
+    @overload
+    def parse(self, data: 'AnyStr') -> 'Optional[IPAddress]': ...
+    @overload
+    def parse(self, data: 'IPAddress') -> 'IPAddress': ...
     def parse(self, data: 'Union[AnyStr, IPAddress]') -> 'Optional[IPAddress]':
         """Parse ``data`` from string.
 
@@ -984,6 +934,10 @@ class AddrType(_SimpleType):
             return None
         return ipaddress.ip_address(data.decode('ascii'))
 
+    @overload
+    def tojson(self, data: 'IPAddress') -> str: ...
+    @overload
+    def tojson(self, data: None) -> None: ...
     def tojson(self, data: 'Optional[IPAddress]') -> 'Optional[str]':
         """Serialize ``data`` as JSON log format.
 
@@ -1031,15 +985,19 @@ class PortType(_SimpleType):
     """
 
     @property
-    def python_type(self) -> 'Any':
+    def python_type(self) -> 'Type[uint16]':
         """Any: Corresponding Python type annotation."""
         return ctypes.c_uint16
 
     @property
-    def zeek_type(self) -> str:
+    def zeek_type(self) -> 'Literal["port"]':
         """str: Corresponding Zeek type name."""
         return 'port'
 
+    @overload
+    def parse(self, data: 'AnyStr') -> 'Optional[uint16]': ...
+    @overload
+    def parse(self, data: 'uint16') -> 'uint16': ...
     def parse(self, data: 'Union[AnyStr, uint16]') -> 'Optional[uint16]':
         """Parse ``data`` from string.
 
@@ -1060,6 +1018,10 @@ class PortType(_SimpleType):
             return None
         return ctypes.c_uint16(int(data))
 
+    @overload
+    def tojson(self, data: 'uint16') -> int: ...
+    @overload
+    def tojson(self, data: None) -> None: ...
     def tojson(self, data: 'Optional[uint16]') -> 'Optional[int]':
         """Serialize ``data`` as JSON log format.
 
@@ -1116,6 +1078,10 @@ class SubnetType(_SimpleType):
         """str: Corresponding Zeek type name."""
         return 'port'
 
+    @overload
+    def parse(self, data: 'AnyStr') -> 'Optional[IPNetwork]': ...
+    @overload
+    def parse(self, data: 'IPNetwork') -> 'IPNetwork': ...
     def parse(self, data: 'Union[AnyStr, IPNetwork]') -> 'Optional[IPNetwork]':
         """Parse ``data`` from string.
 
@@ -1136,6 +1102,10 @@ class SubnetType(_SimpleType):
             return None
         return ipaddress.ip_network(data.decode('ascii'))
 
+    @overload
+    def tojson(self, data: 'IPNetwork') -> str: ...
+    @overload
+    def tojson(self, data: None) -> None: ...
     def tojson(self, data: 'Optional[IPNetwork]') -> 'Optional[str]':
         """Serialize ``data`` as JSON log format.
 
@@ -1218,6 +1188,10 @@ class EnumType(_SimpleType):
         return (f'{self._name}(empty_field={self.str_empty_field}, unset_field={self.str_unset_field}, '
                 f'set_separator={self.str_set_separator}, enum_namespaces={self.enum_namespaces})')
 
+    @overload
+    def parse(self, data: 'AnyStr') -> 'Optional[Enum]': ...  # type: ignore[misc]
+    @overload
+    def parse(self, data: 'Enum') -> 'Enum': ...
     def parse(self, data: 'Union[AnyStr, Enum]') -> 'Optional[Enum]':
         """Parse ``data`` from string.
 
@@ -1250,6 +1224,10 @@ class EnumType(_SimpleType):
             item = unknown[data_str]
         return item
 
+    @overload
+    def tojson(self, data: 'Enum') -> str: ...
+    @overload
+    def tojson(self, data: None) -> None: ...
     def tojson(self, data: 'Optional[Enum]') -> 'Optional[str]':
         """Serialize ``data`` as JSON log format.
 
@@ -1277,11 +1255,6 @@ class EnumType(_SimpleType):
         if data is None:
             return self.str_unset_field
         return data.name
-
-
-_S = TypeVar('_S', AddrType, BoolType, CountType, DoubleType, EnumType, IntervalType,
-                    IntType, PortType, StringType, SubnetType, TimeType)
-"""type: A typing variable representing all valid data types for Bro/Zeek log framework."""
 
 
 class _GenericType(BaseType):  # pylint: disable=abstract-method
@@ -1354,22 +1327,26 @@ class SetType(_GenericType, Generic[_S]):
                  unset_field: 'Optional[AnyStr]' = None,
                  set_separator: 'Optional[AnyStr]' = None,
                  element_type: 'Optional[Union[_S, Type[_S]]]' = None,
-                 *args: 'Any', **kwargs: 'Any'):
+                 *args: 'Any', **kwargs: 'Any') -> None:
         super().__init__(empty_field=empty_field, unset_field=unset_field, set_separator=set_separator)
 
         if element_type is None:
             raise ZeekTypeError("__init__() missing 1 required positional argument: 'element_type'")
         if not isinstance(element_type, _SimpleType):
-            if isinstance(element_type, type) and issubclass(element_type, _SimpleType):  # type: ignore[unreachable]
+            if isinstance(element_type, type) and issubclass(element_type, _SimpleType):
                 element_type = element_type(empty_field=empty_field, unset_field=unset_field, set_separator=set_separator)  # pylint: disable=line-too-long
             else:
                 raise ZeekValueError('invalid element type: %s' % type(element_type).__name__)
-        self.element_type = cast('_SimpleType', element_type)
+        self.element_type = element_type
 
     def __repr__(self) -> str:
         return (f'{self._name}(empty_field={self.str_empty_field}, unset_field={self.str_unset_field}, '
                 f'set_separator={self.str_set_separator}, element_type={self.element_type})')
 
+    @overload
+    def parse(self, data: 'AnyStr') -> 'Optional[Set[_S]]': ...
+    @overload
+    def parse(self, data: 'Set[_S]') -> 'Set[_S]': ...
     def parse(self, data: 'Union[AnyStr, Set[_S]]') -> 'Optional[Set[_S]]':
         """Parse ``data`` from string.
 
@@ -1392,7 +1369,11 @@ class SetType(_GenericType, Generic[_S]):
             return set()
         return set(self.element_type(element) for element in data.split(self.set_separator))
 
-    def tojson(self, data: 'Optional[Set[_S]]') -> 'Optional[List[_S]]':
+    @overload
+    def tojson(self, data: 'Set[_S]') -> 'List[Optional[_T]]': ...
+    @overload
+    def tojson(self, data: None) -> None: ...
+    def tojson(self, data: 'Optional[Set[_S]]') -> 'Optional[List[Optional[_T]]]':
         """Serialize ``data`` as JSON log format.
 
         Args:
@@ -1490,16 +1471,20 @@ class VectorType(_GenericType, Generic[_S]):
         if element_type is None:
             raise ZeekTypeError('__init__() missing 1 required positional argument: %r' % element_type)
         if not isinstance(element_type, _SimpleType):
-            if isinstance(element_type, type) and issubclass(element_type, _SimpleType):  # type: ignore[unreachable]
+            if isinstance(element_type, type) and issubclass(element_type, _SimpleType):
                 element_type = element_type(empty_field=empty_field, unset_field=unset_field, set_separator=set_separator)  # pylint: disable=line-too-long
             else:
                 raise ZeekValueError('invalid element type: %s' % type(element_type).__name__)
-        self.element_type = cast('_SimpleType', element_type)
+        self.element_type = element_type
 
     def __repr__(self) -> str:
         return (f'{self._name}(empty_field={self.str_empty_field}, unset_field={self.str_unset_field}, '
                 f'set_separator={self.str_set_separator}, element_type={self.element_type})')
 
+    @overload
+    def parse(self, data: 'AnyStr') -> 'Optional[List[_S]]': ...
+    @overload
+    def parse(self, data: 'List[_S]') -> 'List[_S]': ...
     def parse(self, data: 'Union[AnyStr, List[_S]]') -> 'Optional[List[_S]]':
         """Parse ``data`` from string.
 
@@ -1522,7 +1507,11 @@ class VectorType(_GenericType, Generic[_S]):
             return list()
         return list(self.element_type(element) for element in data.split(self.set_separator))
 
-    def tojson(self, data: 'Optional[List[_S]]') -> 'Optional[List[_S]]':
+    @overload
+    def tojson(self, data: 'List[_S]') -> 'List[Optional[_T]]': ...
+    @overload
+    def tojson(self, data: None) -> None: ...
+    def tojson(self, data: 'Optional[List[_S]]') -> 'Optional[List[Optional[_T]]]':
         """Serialize ``data`` as JSON log format.
 
         Args:
@@ -1560,6 +1549,8 @@ class _VariadicType(BaseType):  # pylint: disable=abstract-method
     is also a *container* type.
 
     """
+
+    element_mapping: 'OrderedDict[str, Union[_SimpleType, _GenericType]]'
 
     def parse(self, data: 'Any') -> 'NoReturn':
         """Not supported for a variadic data type.
@@ -1643,7 +1634,7 @@ class RecordType(_VariadicType):
         return TypedDict('record', dict_entries)  # type: ignore[operator]
 
     @property
-    def zeek_type(self) -> str:
+    def zeek_type(self) -> 'Literal["record"]':
         """str: Corresponding Zeek type name."""
         return 'record'
 
@@ -1651,7 +1642,7 @@ class RecordType(_VariadicType):
                  empty_field: 'Optional[AnyStr]' = None,
                  unset_field: 'Optional[AnyStr]' = None,
                  set_separator: 'Optional[AnyStr]' = None,
-                 *args: 'Any', **element_mapping: 'BaseType'):
+                 *args: 'Any', **element_mapping: 'Union[Type[_SimpleType], _SimpleType, _GenericType]') -> None:
         super().__init__(empty_field=empty_field, unset_field=unset_field, set_separator=set_separator)
 
         expanded = expand_typing(self, ZeekValueError)
@@ -1662,19 +1653,19 @@ class RecordType(_VariadicType):
         if self.set_separator != expanded['set_separator']:
             raise ZeekValueError("inconsistent value of 'set_separator': %r and %r" % (self.set_separator, expanded['set_separator']))  # pylint: disable=line-too-long
 
-        fields = expanded['fields']  # type: OrderedDict[str, BaseType]
-        for field, element_type in fields.items():
-            if isinstance(element_type, (_SimpleType, _GenericType)):
+        fields = expanded['fields']
+        for field, expanded_type in fields.items():
+            if isinstance(expanded_type, (_SimpleType, _GenericType)):
                 continue
-            raise ZeekValueError('invalid element type of field %r: %s' % (field, type(element_type).__name__))
+            raise ZeekValueError('invalid element type of field %r: %s' % (field, type(expanded_type).__name__))
         for field, element_type in element_mapping.items():
-            if not isinstance(element_type, _SimpleType):
-                if isinstance(element_type, type) and issubclass(element_type, _SimpleType):  # type: ignore[unreachable]  # pylint: disable=line-too-long
-                    element_type = element_type(empty_field=empty_field, unset_field=unset_field, set_separator=set_separator)  # type: ignore[unreachable] # pylint: disable=line-too-long
+            if not isinstance(element_type, (_SimpleType, _GenericType)):
+                if isinstance(element_type, type) and issubclass(element_type, _SimpleType):  # type: ignore[unreachable] # pylint: disable=line-too-long
+                    element_type = element_type(empty_field=empty_field, unset_field=unset_field, set_separator=set_separator)  # pylint: disable=line-too-long
                 else:
                     raise ZeekValueError('invalid element type of field %r: %s' % (field, type(element_type).__name__))
-            fields[field] = cast('BaseType', element_type)
-        self.element_mapping = fields  # type: OrderedDict[str, BaseType]
+            fields[field] = element_type
+        self.element_mapping = fields
 
     def __repr__(self) -> str:
         return (f'{self._name}(empty_field={self.str_empty_field}, unset_field={self.str_unset_field}, '

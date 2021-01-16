@@ -1,15 +1,21 @@
 # -*- coding: utf-8 -*-
+# pylint: disable=ungrouped-imports
 """Data classes for parsed logs."""
 
 import abc
 import dataclasses
-
-import zlogging._typing as typing
-from zlogging.model import Model
+from typing import TYPE_CHECKING
 
 __all__ = [
     'ASCIIInfo', 'JSONInfo'
 ]
+
+if TYPE_CHECKING:
+    from datetime import datetime as DateTimeType
+    from os import PathLike
+    from typing import List, Literal
+
+    from .model import Model
 
 
 class Info(metaclass=abc.ABCMeta):
@@ -25,7 +31,7 @@ class Info(metaclass=abc.ABCMeta):
 
     @property
     @abc.abstractmethod
-    def format(self):
+    def format(self) -> str:
         """str: Log file format."""
 
 
@@ -54,26 +60,26 @@ class ASCIIInfo(Info):
     """
 
     @property
-    def format(self) -> str:
+    def format(self) -> 'Literal["ascii"]':
         """str: Log file format."""
         return 'ascii'
 
-    path: typing.PathLike
+    path: 'PathLike[str]'
     """:obj:`os.PathLike`: Log path.
 
     The value is specified in the ASCII log file under ``# path`` directive.
     """
-    open: typing.DateTime
+    open: 'DateTimeType'
     """:obj:`datetime.datetime`: Log open time.
 
     The value is specified in the ASCII log file under ``# open`` directive.
     """
-    close: typing.DateTime
+    close: 'DateTimeType'
     """:obj:`datetime.datetime`: Log close time.
 
     The value is specified in the ASCII log file under ``# close`` directive.
     """
-    data: typing.List[Model]
+    data: 'List[Model]'
     """:obj:`list` of :class:`~zlogging.model.Model`: Log records.
 
     The log records parsed as a :obj:`list` of :class:`~zlogging.model.Model` per line.
@@ -102,11 +108,11 @@ class JSONInfo(Info):
     """
 
     @property
-    def format(self) -> str:
+    def format(self) -> 'Literal["json"]':
         """str: Log file format."""
         return 'json'
 
-    data: typing.List[Model]
+    data: 'List[Model]'
     """:obj:`list` of :class:`~zlogging.model.Model`: Log records.
 
     The log records parsed as a :obj:`list` of :class:`~zlogging.model.Model` per line.

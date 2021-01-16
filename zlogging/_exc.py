@@ -2,8 +2,10 @@
 """Exceptions & warnings."""
 
 import json
+from typing import TYPE_CHECKING
 
-import zlogging._typing as typing
+if TYPE_CHECKING:
+    from typing import Optional, Tuple, Type
 
 
 class ZeekException(Exception):
@@ -29,26 +31,25 @@ class ParserError(ZeekException, ValueError):
 
     """
 
-    def __init__(self, msg: str,
-                 lineno: typing.Optional[int] = None,
-                 field: typing.Optional[str] = None):
+    def __init__(self, msg: str, lineno: 'Optional[int]' = None,
+                 field: 'Optional[str]' = None) -> None:
         if lineno is None:
             errmsg = msg
         elif field is None:
-            errmsg = '%s: line %d' % (msg, lineno)
+            errmsg = f'{msg}: line {lineno}'
         else:
-            errmsg = '%s: line %d (field %d)' % (msg, lineno, field)
+            errmsg = f'{msg}: line {lineno} (field {field!r})'
         super().__init__(self, errmsg)
 
         self.msg = msg
         self.field = field
         self.lineno = lineno
 
-    def __reduce__(self):
+    def __reduce__(self) -> 'Tuple[Type[ParserError], Tuple[str, Optional[int], Optional[str]]]':
         return self.__class__, (self.msg, self.lineno, self.field)
 
 
-class JSONParserError(ParserError, json.JSONDecodeError):
+class JSONParserError(ParserError, json.JSONDecodeError):  # type: ignore[misc]
     """Error when parsing JSON log.
 
     Args:
@@ -95,22 +96,21 @@ class WriterError(ZeekException, TypeError):
 
     """
 
-    def __init__(self, msg: str,
-                 lineno: typing.Optional[int] = None,
-                 field: typing.Optional[str] = None):
+    def __init__(self, msg: str, lineno: 'Optional[int]' = None,
+                 field: 'Optional[str]' = None) -> None:
         if lineno is None:
             errmsg = msg
         elif field is None:
-            errmsg = '%s: line %d' % (msg, lineno)
+            errmsg = f'{msg}: line {lineno}'
         else:
-            errmsg = '%s: line %d (field %d)' % (msg, lineno, field)
+            errmsg = f'{msg}: line {lineno} (field {field!r})'
         super().__init__(self, errmsg)
 
         self.msg = msg
         self.field = field
         self.lineno = lineno
 
-    def __reduce__(self):
+    def __reduce__(self) -> 'Tuple[Type[WriterError], Tuple[str, Optional[int], Optional[str]]]':
         return self.__class__, (self.msg, self.lineno, self.field)
 
 

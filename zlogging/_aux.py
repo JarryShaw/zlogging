@@ -8,19 +8,21 @@ import itertools
 import math
 import textwrap
 import warnings
-from typing import TYPE_CHECKING, TypeVar, overload
+from typing import TYPE_CHECKING, cast, overload
 
-from ._compat import GenericMeta
+from typing_inspect import get_args, get_origin, is_generic_type, is_typevar
+
 from ._exc import BroDeprecationWarning
 
 if TYPE_CHECKING:
     from collections import OrderedDict
     from decimal import Decimal
     from io import BufferedReader as BinaryFile
-    from typing import Any, Dict, List, Optional, Type, Union
+    from typing import List, Optional, Type, TypeVar, Union
 
     from typing_extensions import Literal
 
+    from ._typing import ExpandedTyping
     from .model import Model
     from .types import RecordType
 
@@ -28,15 +30,11 @@ __all__ = ['readline', 'decimal_toascii', 'float_toascii', 'unicode_escape', 'ex
 
 
 @overload
-def readline(file: 'BinaryFile', seperator: bytes, maxsplit: int, decode: 'Literal[True]') -> 'List[str]':  # pylint: disable=redefined-outer-name
-    ...  # pragma: no cover
-
-
+def readline(file: 'BinaryFile', seperator: bytes, maxsplit: int,
+             decode: 'Literal[True]') -> 'List[str]': ...  # pylint: disable=redefined-outer-name
 @overload
-def readline(file: 'BinaryFile', seperator: bytes, maxsplit: int, decode: 'Literal[False]') -> 'List[bytes]':  # pylint: disable=redefined-outer-name
-    ...  # pragma: no cover
-
-
+def readline(file: 'BinaryFile', seperator: bytes, maxsplit: int,
+             decode: 'Literal[False]') -> 'List[bytes]': ...  # pylint: disable=redefined-outer-name
 def readline(file: 'BinaryFile', separator: bytes = b'\x09',  # type: ignore[misc]
              maxsplit: int = -1, decode: bool = False) -> 'Union[List[str], List[bytes]]':  # pylint: disable=redefined-outer-name
     """Wrapper for :meth:`file.readline` function.
@@ -185,7 +183,7 @@ def unicode_escape(string: bytes) -> str:
 
 
 def expand_typing(cls: 'Union[Model, RecordType]',
-                  exc: 'Optional[Type[ValueError]]' = None) -> 'Dict[str, Any]':
+                  exc: 'Optional[Type[ValueError]]' = None) -> 'ExpandedTyping':
     """Expand typing annotations.
 
     Args:
@@ -271,66 +269,83 @@ def expand_typing(cls: 'Union[Model, RecordType]',
     empty_field = b'(empty)'
     set_separator = b','
 
-    def register(name: str, field: BaseType) -> None:
+    def register(name: str, field: 'Union[_SimpleType, _GenericType]') -> None:
         """Field registry."""
         existed = fields.get(name)
         if existed is not None and field.zeek_type != existed.zeek_type:
-            raise exc('inconsistent data type of %r field: %s and %s' % (name, field, existed))  # type: ignore[misc]
+            raise exc(f'inconsistent data type of {name!r} field: {field} and {existed}')  # type: ignore[misc]
         fields[name] = field
 
-    fields = collections.OrderedDict()  # type: OrderedDict[str, BaseType]
-    record_fields = collections.OrderedDict()
+    fields = collections.OrderedDict()  # type: OrderedDict[str, Union[_SimpleType, _GenericType]]
+    record_fields = collections.OrderedDict()  # type: OrderedDict[str, _VariadicType]
     for name, attr in itertools.chain(getattr(cls, '__annotations__', dict()).items(), cls.__dict__.items()):
+        # type instances
         if isinstance(attr, BaseType):
             if isinstance(attr, _VariadicType):
                 for elm_name, elm_field in attr.element_mapping.items():
-                    register('%s.%s' % (name, elm_name), elm_field)
+                    register(f'{name}.{elm_name}', elm_field)
                 record_fields[name] = attr
             else:
-                register(name, attr)
-        else:
-            if isinstance(attr, TypeVar):
-                type_name = attr.__name__
-                bound = attr.__bound__
+                register(name, attr)  # type: ignore[arg-type]
 
-                if isinstance(bound, _SimpleType):
-                    attr = bound
-                elif isinstance(bound, type) and issubclass(bound, _SimpleType):
-                    attr = bound()
-                else:
-                    continue
+        # uninitialised type classes
+        elif isinstance(attr, type) and issubclass(attr, BaseType):
+            attr = attr()
 
-                if type_name.startswith('bro'):
-                    warnings.warn("Use of 'bro_%(name)s' is deprecated. "
-                                  "Please use 'zeek_%(name)s' instead." % dict(name=attr), BroDeprecationWarning)  # pylint: disable=line-too-long
-            elif isinstance(attr, GenericMeta) and _GenericType in attr.mro():
-                origin = attr.__origin__
-                parameter = attr.__parameters__[0]
+        # simple typing types
+        elif is_typevar(attr):
+            if TYPE_CHECKING:
+                attr = cast('TypeVar', attr)
+            type_name = attr.__name__
 
-                if isinstance(parameter, TypeVar):
-                    bound = parameter.__bound__
-                    if issubclass(bound, _SimpleType):
-                        type_name = parameter.__name__
-                        element_type = bound()
-                        if type_name.startswith('bro'):
-                            warnings.warn("Use of 'bro_%(name)s' is deprecated. "
-                                          "Please use 'zeek_%(name)s' instead." % dict(name=element_type), BroDeprecationWarning)  # pylint: disable=line-too-long
-                    else:
-                        element_type = bound
-                elif isinstance(parameter, type) and issubclass(parameter, _SimpleType):
-                    element_type = parameter()
-                else:
-                    element_type = parameter
-
-                type_name = origin.__name__
-                attr = origin(element_type=element_type)
-                if type_name.startswith('bro'):
-                    warnings.warn("Use of 'bro_%(name)s' is deprecated. "
-                                  "Please use 'zeek_%(name)s' instead." % dict(name=attr), BroDeprecationWarning)  # pylint: disable=line-too-long
-            elif isinstance(attr, type) and issubclass(attr, BaseType):
-                attr = attr()
+            bound = attr.__bound__
+            if bound and issubclass(bound, _SimpleType):
+                attr = bound()
             else:
                 continue
+
+            if type_name.startswith('bro'):
+                raw_name = type_name[4:]
+                warnings.warn(f"Use of 'bro_{raw_name}' is deprecated. "
+                              f"Please use 'zeek_{raw_name}' instead.", BroDeprecationWarning)
+
+        # generic typing types
+        elif is_generic_type(attr) and issubclass(attr, _GenericType):
+            origin = get_origin(attr)
+            parameter = get_args(attr)[0]
+
+            # uninitialised type classes
+            if isinstance(parameter, type) and issubclass(parameter, _SimpleType):
+                element_type = parameter()
+
+            # simple typing types
+            elif is_typevar(parameter):
+                if TYPE_CHECKING:
+                    parameter = cast('TypeVar', parameter)
+                bound = parameter.__bound__
+
+                if bound and issubclass(bound, _SimpleType):
+                    type_name = parameter.__name__
+                    element_type = bound()
+                    if type_name.startswith('bro'):
+                        raw_name = type_name[4:]
+                        warnings.warn(f"Use of 'bro_{raw_name}' is deprecated. "
+                                      f"Please use 'zeek_{raw_name}' instead.", BroDeprecationWarning)
+                else:
+                    element_type = bound  # type: ignore[assignment]
+
+            else:
+                element_type = parameter  # type: ignore[assignment]
+
+            type_name = origin.__name__
+            attr = origin(element_type=element_type)
+            if type_name.startswith('bro'):
+                raw_name = type_name[4:]
+                warnings.warn(f"Use of 'bro_{raw_name}' is deprecated. "
+                              f"Please use 'zeek_{raw_name}' instead.", BroDeprecationWarning)
+
+        else:
+            continue
 
         if not inited:
             unset_field = attr.unset_field
@@ -340,16 +355,16 @@ def expand_typing(cls: 'Union[Model, RecordType]',
             continue
 
         if unset_field != attr.unset_field:
-            raise exc("inconsistent value of 'unset_field': %r and %r" % (unset_field, attr.unset_field))  # pylint: disable=line-too-long
+            raise exc(f"inconsistent value of 'unset_field': {unset_field!r} and {attr.unset_field!r}")
         if empty_field != attr.empty_field:
-            raise exc("inconsistent value of 'empty_field': %r and %r" % (empty_field, attr.empty_field))  # pylint: disable=line-too-long
+            raise exc(f"inconsistent value of 'empty_field': {empty_field!r} and {attr.empty_field!r}")
         if set_separator != attr.set_separator:
-            raise exc("inconsistent value of 'set_separator': %r and %r" % (set_separator, attr.set_separator))  # pylint: disable=line-too-long
+            raise exc("inconsistent value of 'set_separator': {set_separator!r} and {attr.set_separator!r}")
 
-    return dict(
-        fields=fields,
-        record_fields=record_fields,
-        unset_field=unset_field,
-        empty_field=empty_field,
-        set_separator=set_separator,
-    )
+    return {
+        'fields': fields,
+        'record_fields': record_fields,
+        'unset_field': unset_field,
+        'empty_field': empty_field,
+        'set_separator': set_separator,
+    }
