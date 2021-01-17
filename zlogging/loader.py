@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+# pylint: disable=ungrouped-imports,unsubscriptable-object
 """Bro/Zeek log loader."""
 
 import abc
@@ -8,16 +9,16 @@ import io
 import json
 import re
 import warnings
+from typing import TYPE_CHECKING, TypeVar, cast
 
-import zlogging._typing as typing
-from zlogging._aux import readline
-from zlogging._data import ASCIIInfo, Info, JSONInfo
-from zlogging._exc import (ASCIIParserWarning, ASCIIPaserError, JSONParserError, JSONParserWarning,
-                           ParserError)
-from zlogging.model import Model, new_model
-from zlogging.types import (AddrType, AnyType, BaseType, BoolType, CountType, DoubleType, EnumType,
-                            IntervalType, IntType, PortType, SetType, StringType, SubnetType,
-                            TimeType, VectorType, ZeekValueError)
+from ._aux import readline
+from ._data import ASCIIInfo, JSONInfo
+from ._exc import (ASCIIParserWarning, ASCIIPaserError, JSONParserError, JSONParserWarning,
+                   ParserError, ZeekValueError)
+from .model import new_model
+from .types import (AddrType, AnyType, BaseType, BoolType, CountType, DoubleType, EnumType,
+                    IntervalType, IntType, PortType, SetType, StringType, SubnetType, TimeType,
+                    VectorType)
 
 __all__ = [
     'parse', 'parse_ascii', 'parse_json',
@@ -25,6 +26,21 @@ __all__ = [
     'load', 'load_ascii', 'load_json',
     'ASCIIParser', 'JSONParser',
 ]
+
+_S = TypeVar('_S', bound='_SimpleType')
+if TYPE_CHECKING:
+    from collections import OrderedDict
+    from io import BufferedReader as BinaryFile
+    from os import PathLike
+    from typing import Any, Dict, List, Optional, Tuple, Type, Union
+
+    from typing_extensions import Literal
+
+    from ._data import Info
+    from .model import Model
+    from .types import _SimpleType
+
+    AnyStr = Union[str, bytes]
 
 
 class BaseParser(metaclass=abc.ABCMeta):
@@ -35,26 +51,28 @@ class BaseParser(metaclass=abc.ABCMeta):
     def format(self) -> str:
         """str: Log file format."""
 
-    def parse(self, filename: typing.PathLike) -> Info:
+    def parse(self, filename: 'PathLike[str]', model: 'Optional[Type[Model]]' = None) -> 'Info':
         """Parse log file.
 
         Args:
             filename: Log file name.
+            model: Field declrations of current log.
 
         Returns:
             The parsed log as an :class:`~zlogging._data.ASCIIInfo` or :class:`~zlogging._data.JSONInfo`.
 
         """
         with open(filename, 'rb') as file:
-            data = self.parse_file(file)
+            data = self.parse_file(file, model=model)  # type: ignore[arg-type]
         return data
 
     @abc.abstractmethod
-    def parse_file(self, file: typing.BinaryFile) -> Info:
+    def parse_file(self, file: 'BinaryFile', model: 'Optional[Type[Model]]' = None) -> 'Info':
         """Parse log file.
 
         Args:
             file: Log file object opened in binary mode.
+            model: Field declrations of current log.
 
         Returns:
             :class:`~zlogging._data.Info`: The parsed log as a :class:`~zlogging.model.Model` per line.
@@ -62,19 +80,21 @@ class BaseParser(metaclass=abc.ABCMeta):
         """
 
     @abc.abstractmethod
-    def parse_line(self, line: bytes, lineno: typing.Optional[int] = 0) -> typing.Dict[str, typing.Any]:
+    def parse_line(self, line: bytes, lineno: 'Optional[int]' = 0,
+                   model: 'Optional[Type[Model]]' = None) -> 'Model':
         """Parse log line as one-line record.
 
         Args:
             line: A simple line of log.
             lineno: Line number of current line.
+            model: Field declrations of current log.
 
         Returns:
-            The parsed log as a plain :obj:`dict`.
+            The parsed log as a plain :class:`~zlogging.model.Model`.
 
         """
 
-    def load(self, file: typing.BinaryFile) -> Info:
+    def load(self, file: 'BinaryFile') -> 'Info':
         """Parse log file.
 
         Args:
@@ -86,7 +106,7 @@ class BaseParser(metaclass=abc.ABCMeta):
         """
         return self.parse_file(file)
 
-    def loads(self, line: bytes, lineno: typing.Optional[int] = 0) -> typing.Dict[str, typing.Any]:
+    def loads(self, line: bytes, lineno: 'Optional[int]' = 0) -> 'Model':
         """Parse log line as one-line record.
 
         Args:
@@ -94,7 +114,7 @@ class BaseParser(metaclass=abc.ABCMeta):
             lineno: Line number of current line.
 
         Returns:
-            The parsed log as a plain :obj:`dict`.
+            The parsed log as a plain :class:`~zlogging.model.Model`.
 
         """
         return self.parse_line(line, lineno)
@@ -121,20 +141,25 @@ class JSONParser(BaseParser):
     """
 
     @property
-    def format(self) -> str:
+    def format(self) -> 'Literal["json"]':
         """str: Log file format."""
         return 'json'
 
-    def __init__(self, model: typing.Optional[typing.Type[Model]] = None):
+    def __init__(self, model: 'Optional[Type[Model]]' = None):
         if model is None:
             warnings.warn('missing log data model specification', JSONParserWarning)
         self.model = model
 
-    def parse_file(self, file: typing.BinaryFile) -> JSONInfo:
+    if TYPE_CHECKING:
+        def parse(self, filename: 'PathLike[str]', model: 'Optional[Type[Model]]' = None) -> 'JSONInfo':  # pylint: disable=signature-differs,line-too-long
+            ...
+
+    def parse_file(self, file: 'BinaryFile', model: 'Optional[Type[Model]]' = None) -> 'JSONInfo':
         """Parse log file.
 
         Args:
             file: Log file object opened in binary mode.
+            model: Field declrations of current log.
 
         Returns:
             :class:`~zlogging._data.JSONInfo`: The parsed log as a
@@ -143,33 +168,36 @@ class JSONParser(BaseParser):
         """
         data = list()
         for index, line in enumerate(file, start=1):
-            data.append(self.parse_line(line, lineno=index))
+            data.append(self.parse_line(line, lineno=index, model=model))
         return JSONInfo(
             data=data
         )
 
-    def parse_line(self, line: bytes, lineno: typing.Optional[int] = 0) -> typing.Dict[str, typing.Any]:
+    def parse_line(self, line: bytes, lineno: 'Optional[int]' = 0,
+                   model: 'Optional[Type[Model]]' = None) -> 'Model':
         """Parse log line as one-line record.
 
         Args:
             line: A simple line of log.
             lineno: Line number of current line.
+            model: Field declrations of current log.
 
         Returns:
-            The parsed log as a plain :obj:`dict`.
+            The parsed log as a plain :class:`~zlogging.model.Model`.
 
         Raises:
             :exc:`JSONParserError`: If failed to serialise the ``line`` from JSON.
 
         """
         try:
-            data: dict = json.loads(line)
+            data = json.loads(line)  # type: Dict[str, Any]
         except json.JSONDecodeError as error:
-            raise JSONParserError(error.msg, lineno)
-        if self.model is None:
-            model = new_model('<unknown>', **{field: AnyType() for field in data.keys()})
-            return model(**data)
-        return self.model(**data)
+            raise JSONParserError(error.msg, lineno) from error
+
+        model_cls = model or self.model
+        if model_cls is None:
+            model_cls = new_model('<unknown>', **{field: AnyType() for field in data.keys()})
+        return model_cls(**data)
 
 
 class ASCIIParser(BaseParser):
@@ -191,38 +219,46 @@ class ASCIIParser(BaseParser):
     """
 
     @property
-    def format(self) -> str:
+    def format(self) -> 'Literal["ascii"]':
         """str: Log file format."""
         return 'ascii'
 
-    def __init__(self, type_hook: typing.Optional[typing.Dict[str, typing.Type[BaseType]]] = None,
-                 enum_namespaces: typing.Optional[typing.List[str]] = None, bare: bool = False):
-        self.__type__: typing.Dict[str, typing.Type[BaseType]] = dict(
-            bool=BoolType,
-            count=CountType,
-            int=IntType,
-            double=DoubleType,
-            time=TimeType,
-            interval=IntervalType,
-            string=StringType,
-            addr=AddrType,
-            port=PortType,
-            subnet=SubnetType,
-            enum=EnumType,
-            set=SetType,
-            vector=VectorType,
-        )
+    def __init__(self, type_hook: 'Optional[Dict[str, Type[BaseType]]]' = None,
+                 enum_namespaces: 'Optional[List[str]]' = None, bare: bool = False) -> None:
+        self.__type__ = {
+            'bool': BoolType,
+            'count': CountType,
+            'int': IntType,
+            'double': DoubleType,
+            'time': TimeType,
+            'interval': IntervalType,
+            'string': StringType,
+            'addr': AddrType,
+            'port': PortType,
+            'subnet': SubnetType,
+            'enum': EnumType,
+            'set': SetType,
+            'vector': VectorType,
+          }  # type: Dict[str, Type[BaseType]]
         if type_hook is not None:
             self.__type__.update(type_hook)
 
         self.enum_namespaces = enum_namespaces
         self.bare = bare
 
-    def parse_file(self, file: typing.BinaryFile) -> ASCIIInfo:
+    if TYPE_CHECKING:
+        def parse(self, filename: 'PathLike[str]', model: 'Optional[Type[Model]]' = None) -> 'ASCIIInfo':  # pylint: disable=signature-differs,line-too-long
+            ...
+
+    def parse_file(self, file: 'BinaryFile', model: 'Optional[Type[Model]]' = None) -> 'ASCIIInfo':
         """Parse log file.
 
         Args:
             file: Log file object opened in binary mode.
+            model: Field declrations of current log. This parameter is
+                only kept for API compatibility with its base class
+                :class:`~zlogging.loader.BaseLoader`, and will **NOT**
+                be used at runtime.
 
         Returns:
             :class:`~zlogging._data.ASCIIInfo`: The parsed log as a
@@ -250,42 +286,48 @@ class ASCIIParser(BaseParser):
                                                r'%Y-%m-%d-%H-%M-%S')
 
         # log model
-        model = readline(file, separator, decode=True)[1:]
+        model_line = readline(file, separator, decode=True)[1:]
         # log filed types
-        types = readline(file, separator, decode=True)[1:]
+        types_line = readline(file, separator, decode=True)[1:]
 
-        field_parser = list()
+        field_parser = []  # type: List[Tuple[str, BaseType]]
         model_fields = collections.OrderedDict()
-        for (field, type_) in zip(model, types):
+        for (field, type_) in zip(model_line, types_line):
             match_set = re.match(r'set\[(?P<type>.+?)\]', type_)
             if match_set is not None:
                 set_type = match_set.group('type')
+                ele_type = cast('Type[_SimpleType]', self.__type__[set_type])
                 type_cls = SetType(empty_field, unset_field, set_separator,
-                                   element_type=self.__type__[set_type](empty_field, unset_field, set_separator))
+                                   element_type=ele_type(empty_field, unset_field, set_separator))
                 field_parser.append((field, type_cls))
                 model_fields[field] = type_cls
                 continue
 
             match_vector = re.match(r'^vector\[(?P<type>.+?)\]', type_)
             if match_vector is not None:
-                vector_type = match_vector.group('type')
+                vec_type = match_vector.group('type')
+                ele_type = cast('Type[_SimpleType]', self.__type__[vec_type])
                 type_cls = VectorType(empty_field, unset_field, set_separator,
-                                      element_type=self.__type__[vector_type](empty_field, unset_field, set_separator))
+                                      element_type=ele_type(empty_field, unset_field, set_separator))  # type: ignore[assignment] # pylint: disable=line-too-long
                 field_parser.append((field, type_cls))
                 model_fields[field] = type_cls
                 continue
 
             if type_ == 'enum':
                 type_cls = EnumType(empty_field, unset_field, set_separator,
-                                    namespaces=self.enum_namespaces, bare=self.bare)
+                                    namespaces=self.enum_namespaces, bare=self.bare)  # type: ignore[assignment]
                 field_parser.append((field, type_cls))
                 model_fields[field] = type_cls
                 continue
 
-            type_cls = self.__type__[type_](empty_field, unset_field, set_separator)
+            ele_type = cast('Type[_SimpleType]', self.__type__[type_])
+            type_cls = ele_type(empty_field, unset_field, set_separator)  # type: ignore[assignment]
             field_parser.append((field, type_cls))
             model_fields[field] = type_cls
         model_cls = new_model(path, **model_fields)
+
+        if TYPE_CHECKING:
+            close_time = datetime.datetime.now()
 
         exit_with_error = True
         data = list()
@@ -296,30 +338,30 @@ class ASCIIParser(BaseParser):
                                                         r'%Y-%m-%d-%H-%M-%S')
                 break
 
-            parsed = self.parse_line(line, lineno=index, parser=field_parser)
-            model = model_cls(**parsed)
-            data.append(model)
+            parsed = self.parse_line(line, lineno=index, model=model_cls, parser=field_parser)
+            data.append(parsed)
 
         if exit_with_error:
             warnings.warn('log file exited with error', ASCIIParserWarning)
             close_time = datetime.datetime.now()
 
         return ASCIIInfo(
-            path=path,
+            path=cast('PathLike[str]', path),
             open=open_time,
             close=close_time,
             data=data,
             exit_with_error=exit_with_error,
         )
 
-    def parse_line(self, line: bytes, lineno: typing.Optional[int] = 0,  # pylint: disable=arguments-differ
-                   separator: typing.Optional[bytes] = b'\x09',
-                   parser: typing.List[typing.Tuple[str, BaseType]] = None) -> typing.Dict[str, typing.Any]:
+    def parse_line(self, line: bytes, lineno: 'Optional[int]' = 0,  # pylint: disable=arguments-differ
+                   model: 'Optional[Type[Model]]' = None, separator: 'Optional[bytes]' = b'\x09',
+                   parser: 'Optional[List[Tuple[str, BaseType]]]' = None) -> 'Model':
         """Parse log line as one-line record.
 
         Args:
             line: A simple line of log.
             lineno: Line number of current line.
+            model: Field declrations of current log.
             separator: Data separator.
             parser (:obj:`List` of :class:`~zlogging.types.BaseType`, required): Field data type parsers.
 
@@ -334,20 +376,23 @@ class ASCIIParser(BaseParser):
         if parser is None:
             raise ASCIIPaserError("parse_line() missing 1 required positional argument: 'parser'")
 
-        data = dict()
+        data = collections.OrderedDict()  # type: OrderedDict[str, Any]
         for i, s in enumerate(line.strip().split(separator)):
             field_name, field_type = parser[i]
             try:
                 data[field_name] = field_type(s)
             except ZeekValueError as error:
-                raise ASCIIPaserError(str(error), lineno, field_name)
-        return data
+                raise ASCIIPaserError(str(error), lineno, field_name) from error
+
+        if model is None:
+            model = new_model('<unknown>', **{field: AnyType() for field in data.keys()})
+        return model(**data)
 
 
-def parse_json(filename: typing.PathLike,  # pylint: disable=unused-argument,keyword-arg-before-vararg
-               parser: typing.Optional[typing.Type[JSONParser]] = None,
-               model: typing.Optional[typing.Type[Model]] = None,
-               *args, **kwargs) -> JSONInfo:
+def parse_json(filename: 'PathLike[str]',  # pylint: disable=unused-argument,keyword-arg-before-vararg
+               parser: 'Optional[Type[JSONParser]]' = None,
+               model: 'Optional[Type[Model]]' = None,
+               *args: 'Any', **kwargs: 'Any') -> JSONInfo:
     """Parse JSON log file.
 
     Args:
@@ -370,10 +415,10 @@ def parse_json(filename: typing.PathLike,  # pylint: disable=unused-argument,key
     return json_parser.parse(filename)
 
 
-def load_json(file: typing.BinaryFile,  # pylint: disable=unused-argument,keyword-arg-before-vararg
-              parser: typing.Optional[typing.Type[JSONParser]] = None,
-              model: typing.Optional[typing.Type[Model]] = None,
-              *args, **kwargs) -> JSONInfo:
+def load_json(file: 'BinaryFile',  # pylint: disable=unused-argument,keyword-arg-before-vararg
+              parser: 'Optional[Type[JSONParser]]' = None,
+              model: 'Optional[Type[Model]]' = None,
+              *args: 'Any', **kwargs: 'Any') -> JSONInfo:
     """Parse JSON log file.
 
     Args:
@@ -396,10 +441,10 @@ def load_json(file: typing.BinaryFile,  # pylint: disable=unused-argument,keywor
     return json_parser.parse_file(file)
 
 
-def loads_json(data: typing.AnyStr,  # pylint: disable=unused-argument,keyword-arg-before-vararg
-               parser: typing.Optional[typing.Type[JSONParser]] = None,
-               model: typing.Optional[typing.Type[Model]] = None,
-               *args, **kwargs) -> JSONInfo:
+def loads_json(data: 'AnyStr',  # pylint: disable=unused-argument,keyword-arg-before-vararg
+               parser: 'Optional[Type[JSONParser]]' = None,
+               model: 'Optional[Type[Model]]' = None,
+               *args: 'Any', **kwargs: 'Any') -> JSONInfo:
     """Parse JSON log string.
 
     Args:
@@ -424,15 +469,15 @@ def loads_json(data: typing.AnyStr,  # pylint: disable=unused-argument,keyword-a
     json_parser = parser(model)
 
     with io.BytesIO(data) as file:
-        info = json_parser.parse_file(file)
+        info = json_parser.parse_file(file)  # type: ignore[arg-type]
     return info
 
 
-def parse_ascii(filename: typing.PathLike,  # pylint: disable=unused-argument,keyword-arg-before-vararg
-                parser: typing.Optional[typing.Type[ASCIIParser]] = None,
-                type_hook: typing.Optional[typing.Dict[str, typing.Type[BaseType]]] = None,
-                enum_namespaces: typing.Optional[typing.List[str]] = None, bare: bool = False,
-                *args, **kwargs) -> ASCIIInfo:
+def parse_ascii(filename: 'PathLike[str]',  # pylint: disable=unused-argument,keyword-arg-before-vararg
+                parser: 'Optional[Type[ASCIIParser]]' = None,
+                type_hook: 'Optional[Dict[str, Type[BaseType]]]' = None,
+                enum_namespaces: 'Optional[List[str]]' = None, bare: bool = False,
+                *args: 'Any', **kwargs: 'Any') -> 'ASCIIInfo':
     """Parse ASCII log file.
 
     Args:
@@ -456,11 +501,11 @@ def parse_ascii(filename: typing.PathLike,  # pylint: disable=unused-argument,ke
     return ascii_parser.parse(filename)
 
 
-def load_ascii(file: typing.BinaryFile,  # pylint: disable=unused-argument,keyword-arg-before-vararg
-               parser: typing.Optional[typing.Type[ASCIIParser]] = None,
-               type_hook: typing.Optional[typing.Dict[str, typing.Type[BaseType]]] = None,
-               enum_namespaces: typing.Optional[typing.List[str]] = None, bare: bool = False,
-               *args, **kwargs) -> ASCIIInfo:
+def load_ascii(file: 'BinaryFile',  # pylint: disable=unused-argument,keyword-arg-before-vararg
+               parser: 'Optional[Type[ASCIIParser]]' = None,
+               type_hook: 'Optional[Dict[str, Type[BaseType]]]' = None,
+               enum_namespaces: 'Optional[List[str]]' = None, bare: bool = False,
+               *args: 'Any', **kwargs: 'Any') -> 'ASCIIInfo':
     """Parse ASCII log file.
 
     Args:
@@ -484,11 +529,11 @@ def load_ascii(file: typing.BinaryFile,  # pylint: disable=unused-argument,keywo
     return ascii_parser.parse_file(file)
 
 
-def loads_ascii(data: typing.AnyStr,  # pylint: disable=unused-argument,keyword-arg-before-vararg
-                parser: typing.Optional[typing.Type[ASCIIParser]] = None,
-                type_hook: typing.Optional[typing.Dict[str, typing.Type[BaseType]]] = None,
-                enum_namespaces: typing.Optional[typing.List[str]] = None, bare: bool = False,
-                *args, **kwargs) -> ASCIIInfo:
+def loads_ascii(data: 'AnyStr',  # pylint: disable=unused-argument,keyword-arg-before-vararg
+                parser: 'Optional[Type[ASCIIParser]]' = None,
+                type_hook: 'Optional[Dict[str, Type[BaseType]]]' = None,
+                enum_namespaces: 'Optional[List[str]]' = None, bare: bool = False,
+                *args: 'Any', **kwargs: 'Any') -> 'ASCIIInfo':
     """Parse ASCII log string.
 
     Args:
@@ -514,11 +559,11 @@ def loads_ascii(data: typing.AnyStr,  # pylint: disable=unused-argument,keyword-
     ascii_parser = parser(type_hook, enum_namespaces, bare)
 
     with io.BytesIO(data) as file:
-        info = ascii_parser.parse_file(file)
+        info = ascii_parser.parse_file(file)  # type: ignore[arg-type]
     return info
 
 
-def parse(filename: typing.PathLike, *args, **kwargs) -> typing.Union[JSONInfo, ASCIIInfo]:
+def parse(filename: 'PathLike[str]', *args: 'Any', **kwargs: 'Any') -> 'Union[JSONInfo, ASCIIInfo]':
     """Parse Bro/Zeek log file.
 
     Args:
@@ -545,7 +590,7 @@ def parse(filename: typing.PathLike, *args, **kwargs) -> typing.Union[JSONInfo, 
     raise ParserError('unknown format')
 
 
-def load(file: typing.BinaryFile, *args, **kwargs) -> typing.Union[JSONInfo, ASCIIInfo]:
+def load(file: 'BinaryFile', *args: 'Any', **kwargs: 'Any') -> 'Union[JSONInfo, ASCIIInfo]':
     """Parse Bro/Zeek log file.
 
     Args:
@@ -573,8 +618,7 @@ def load(file: typing.BinaryFile, *args, **kwargs) -> typing.Union[JSONInfo, ASC
     raise ParserError('unknown format')
 
 
-def loads(data: typing.AnyStr,
-          *args, **kwargs) -> typing.Union[JSONInfo, ASCIIInfo]:
+def loads(data: 'AnyStr', *args: 'Any', **kwargs: 'Any') -> 'Union[JSONInfo, ASCIIInfo]':
     """Parse Bro/Zeek log string.
 
     Args:

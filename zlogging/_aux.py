@@ -7,12 +7,9 @@ import decimal
 import itertools
 import math
 import textwrap
-import warnings
 from typing import TYPE_CHECKING, cast, overload
 
 from typing_inspect import get_args, get_origin, is_generic_type, is_typevar
-
-from ._exc import BroDeprecationWarning
 
 if TYPE_CHECKING:
     from collections import OrderedDict
@@ -30,11 +27,17 @@ __all__ = ['readline', 'decimal_toascii', 'float_toascii', 'unicode_escape', 'ex
 
 
 @overload
-def readline(file: 'BinaryFile', seperator: bytes, maxsplit: int,
-             decode: 'Literal[True]') -> 'List[str]': ...  # pylint: disable=redefined-outer-name
+def readline(file: 'BinaryFile', seperator: bytes = b'\x09', maxsplit: int = -1) -> 'List[bytes]': ...  # pylint: disable=redefined-outer-name
+@overload
+def readline(file: 'BinaryFile', seperator: bytes, decode: 'Literal[False]') -> 'List[bytes]': ...  # pylint: disable=redefined-outer-name
+@overload
+def readline(file: 'BinaryFile', seperator: bytes, decode: 'Literal[True]') -> 'List[str]': ...  # pylint: disable=redefined-outer-name
 @overload
 def readline(file: 'BinaryFile', seperator: bytes, maxsplit: int,
              decode: 'Literal[False]') -> 'List[bytes]': ...  # pylint: disable=redefined-outer-name
+@overload
+def readline(file: 'BinaryFile', seperator: bytes, maxsplit: int,
+             decode: 'Literal[True]') -> 'List[str]': ...  # pylint: disable=redefined-outer-name
 def readline(file: 'BinaryFile', separator: bytes = b'\x09',  # type: ignore[misc]
              maxsplit: int = -1, decode: bool = False) -> 'Union[List[str], List[bytes]]':  # pylint: disable=redefined-outer-name
     """Wrapper for :meth:`file.readline` function.
@@ -182,7 +185,7 @@ def unicode_escape(string: bytes) -> str:
     return ''.join(map(lambda s: '\\x%s' % s, textwrap.wrap(string.hex(), 2)))
 
 
-def expand_typing(cls: 'Union[Model, RecordType]',
+def expand_typing(cls: 'Union[Type[Model], Type[RecordType]]',
                   exc: 'Optional[Type[ValueError]]' = None) -> 'ExpandedTyping':
     """Expand typing annotations.
 
@@ -296,18 +299,12 @@ def expand_typing(cls: 'Union[Model, RecordType]',
         elif is_typevar(attr):
             if TYPE_CHECKING:
                 attr = cast('TypeVar', attr)
-            type_name = attr.__name__
 
             bound = attr.__bound__
             if bound and issubclass(bound, _SimpleType):
                 attr = bound()
             else:
                 continue
-
-            if type_name.startswith('bro'):
-                raw_name = type_name[4:]
-                warnings.warn(f"Use of 'bro_{raw_name}' is deprecated. "
-                              f"Please use 'zeek_{raw_name}' instead.", BroDeprecationWarning)
 
         # generic typing types
         elif is_generic_type(attr) and issubclass(attr, _GenericType):
@@ -323,26 +320,14 @@ def expand_typing(cls: 'Union[Model, RecordType]',
                 if TYPE_CHECKING:
                     parameter = cast('TypeVar', parameter)
                 bound = parameter.__bound__
-
                 if bound and issubclass(bound, _SimpleType):
-                    type_name = parameter.__name__
                     element_type = bound()
-                    if type_name.startswith('bro'):
-                        raw_name = type_name[4:]
-                        warnings.warn(f"Use of 'bro_{raw_name}' is deprecated. "
-                                      f"Please use 'zeek_{raw_name}' instead.", BroDeprecationWarning)
                 else:
                     element_type = bound  # type: ignore[assignment]
 
             else:
                 element_type = parameter  # type: ignore[assignment]
-
-            type_name = origin.__name__
-            attr = origin(element_type=element_type)
-            if type_name.startswith('bro'):
-                raw_name = type_name[4:]
-                warnings.warn(f"Use of 'bro_{raw_name}' is deprecated. "
-                              f"Please use 'zeek_{raw_name}' instead.", BroDeprecationWarning)
+            attr = origin(element_type=element_type)\
 
         else:
             continue

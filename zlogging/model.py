@@ -1,18 +1,24 @@
 # -*- coding: utf-8 -*-
+# pylint: disable=ungrouped-imports
 """Bro/Zeek log data model."""
 
 import abc
 import collections
 import types
+from typing import TYPE_CHECKING
 
-import zlogging._typing as typing
-from zlogging._aux import expand_typing
-from zlogging._exc import ModelFormatError, ModelTypeError, ModelValueError
-from zlogging.types import BaseType
+from ._aux import expand_typing
+from ._exc import ModelFormatError, ModelTypeError, ModelValueError
 
 __all__ = [
     'Model', 'new_model',
 ]
+
+if TYPE_CHECKING:
+    from collections import OrderedDict, namedtuple
+    from typing import Any, Dict, List, Optional, Tuple, Type
+
+    from .types import BaseType
 
 
 class Model(metaclass=abc.ABCMeta):
@@ -72,9 +78,9 @@ class Model(metaclass=abc.ABCMeta):
     """
 
     @property
-    def fields(self) -> typing.OrderedDict[str, BaseType]:
+    def fields(self) -> 'OrderedDict[str, BaseType]':
         """:obj:`OrderedDict` mapping :obj:`str` and :class:`~zlogging.types.BaseType`: fields of the data model"""
-        return self.__fields__
+        return self.__fields__  # type: ignore[return-value]
 
     @property
     def unset_field(self) -> bytes:
@@ -91,7 +97,7 @@ class Model(metaclass=abc.ABCMeta):
         """bytes: separator for set/vector fields"""
         return self.__set_separator__
 
-    def __new__(cls, *args, **kwargs):  # pylint: disable=unused-argument
+    def __new__(cls, *args: 'Any', **kwargs: 'Any') -> 'Model':  # pylint: disable=unused-argument
         expanded = expand_typing(cls, ModelValueError)
 
         cls.__fields__ = expanded['fields']
@@ -104,7 +110,7 @@ class Model(metaclass=abc.ABCMeta):
 
         return super().__new__(cls)
 
-    def __init__(self, *args, **kwargs):
+    def __init__(self, *args: 'Any', **kwargs: 'Any') -> None:
         init_args = collections.OrderedDict()
 
         field_names = list(self.__fields__)
@@ -127,7 +133,7 @@ class Model(metaclass=abc.ABCMeta):
                 raise ModelTypeError('__init__() got an unexpected keyword argument %r' % arg)
             init_args[arg] = self.__fields__[arg](val)
 
-        diff = list()
+        diff = []  # type: List[str]
         for field in field_names:
             if field in init_args:
                 continue
@@ -139,31 +145,31 @@ class Model(metaclass=abc.ABCMeta):
             elif length == 2:
                 diff_args = '%r and %r' % tuple(diff)
             else:
-                diff_args = '%s, and %r' % (', '.join(map(repr, diff_args[:-1])), diff_args[-1])
+                diff_args = '%s, and %r' % (', '.join(map(repr, diff[:-1])), diff[-1])
             raise ModelTypeError('missing %d required positional arguments: %s' % (length, diff_args))
 
         for key, val in init_args.items():
             setattr(self, key, val)
         self.__post_init__()
 
-    def __post_init__(self):
+    def __post_init__(self) -> None:
         """Post-processing customisation."""
 
     def __str__(self) -> str:
-        fields = list()
+        fields = []  # type: List[str]
         for field in self.__fields__:
             value = getattr(self, field)
             fields.append('%s=%s' % (field, value))
         return '%s(%s)' % (type(self).__name__, ', '.join(fields))
 
     def __repr__(self) -> str:
-        fields = list()
+        fields = []  # type: List[str]
         for field in self.__fields__:
             value = getattr(self, field)
             fields.append('%s=%s' % (field, value))
         return '%s(%s)' % (type(self).__name__, ', '.join(fields))
 
-    def __call__(self, format: str) -> typing.Any:  # pylint: disable=redefined-builtin
+    def __call__(self, format: str) -> 'Any':  # pylint: disable=redefined-builtin
         """Serialise data model with given format.
 
         Args:
@@ -183,7 +189,7 @@ class Model(metaclass=abc.ABCMeta):
             return getattr(self, func)()
         raise ModelFormatError('unsupported format: %s' % format)
 
-    def tojson(self) -> typing.OrderedDict[str, typing.Any]:
+    def tojson(self) -> 'OrderedDict[str, Any]':
         """Serialise data model as JSON log format.
 
         Returns:
@@ -197,7 +203,7 @@ class Model(metaclass=abc.ABCMeta):
             fields[field] = type_cls.tojson(value)
         return fields
 
-    def toascii(self) -> typing.OrderedDict[str, str]:
+    def toascii(self) -> 'OrderedDict[str, str]':
         """Serialise data model as ASCII log format.
 
         Returns:
@@ -210,7 +216,7 @@ class Model(metaclass=abc.ABCMeta):
             fields[field] = type_cls.toascii(value)
         return fields
 
-    def asdict(self, dict_factory: typing.Optional[type] = None) -> typing.Dict[str, typing.Any]:
+    def asdict(self, dict_factory: 'Optional[Type[dict]]' = None) -> 'Dict[str, Any]':
         """Convert data model as a dictionary mapping field names to field values.
 
         Args:
@@ -230,28 +236,32 @@ class Model(metaclass=abc.ABCMeta):
             fields[field] = value
         return fields
 
-    def astuple(self, tuple_factory: typing.Optional[type] = None) -> typing.Tuple[typing.Any]:
+    def astuple(self, tuple_factory: 'Optional[Type[tuple]]' = None) -> 'Tuple[Any, ...]':
         """Convert data model as a tuple of field values.
 
         Args:
             tuple_factory: If given, ``tuple_factory`` will be used instead of
-                built-in :obj:`tuple`.
+                built-in :class:`~collections.namedtuple`.
 
         Returns:
             A tuple of field values.
 
         """
-        fields = list()
+        field_names = []  # type: List[str]
+        field_value = []  # type: List[Any]
         for field in self.__fields__:
             value = getattr(self, field)
-            fields.append(value)
+            field_names.append(field)
+            field_value.append(value)
 
         if tuple_factory is None:
-            tuple_factory = tuple
-        return tuple_factory(fields)
+            model_name = type(self).__name__
+            named_tuple = collections.namedtuple(model_name, field_names)  # type: ignore[misc]
+            return named_tuple(*field_value)
+        return tuple_factory(field_value)
 
 
-def new_model(name: str, **fields: typing.Kwargs) -> Model:
+def new_model(name: str, **fields: 'Any') -> 'Type[Model]':
     """Create a data model dynamically with the appropriate fields.
 
     Args:
@@ -275,7 +285,7 @@ def new_model(name: str, **fields: typing.Kwargs) -> Model:
             MyLog = new_model('MyLog', field_one=StringType(), field_two=SetType(element_type=PortType))
 
     """
-    def gen_body(ns: typing.Dict[str, typing.Any]) -> typing.Dict[str, typing.Any]:
+    def gen_body(ns: 'Dict[str, Any]') -> None:
         """Generate ``exec_body``."""
         for name, type_cls in fields.items():
             ns[name] = type_cls
