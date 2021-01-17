@@ -32,17 +32,23 @@
             
   <h1>Source code for zlogging._data</h1><div class="highlight"><pre>
 <span></span><span class="c1"># -*- coding: utf-8 -*-</span>
+<span class="c1"># pylint: disable=ungrouped-imports</span>
 <span class="sd">&quot;&quot;&quot;Data classes for parsed logs.&quot;&quot;&quot;</span>
 
 <span class="kn">import</span> <span class="nn">abc</span>
 <span class="kn">import</span> <span class="nn">dataclasses</span>
-
-<span class="kn">import</span> <span class="nn">zlogging._typing</span> <span class="k">as</span> <span class="nn">typing</span>
-<span class="kn">from</span> <span class="nn">zlogging.model</span> <span class="kn">import</span> <span class="n">Model</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">TYPE_CHECKING</span>
 
 <span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span>
     <span class="s1">&#39;ASCIIInfo&#39;</span><span class="p">,</span> <span class="s1">&#39;JSONInfo&#39;</span>
 <span class="p">]</span>
+
+<span class="k">if</span> <span class="n">TYPE_CHECKING</span><span class="p">:</span>
+    <span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span> <span class="k">as</span> <span class="n">DateTimeType</span>
+    <span class="kn">from</span> <span class="nn">os</span> <span class="kn">import</span> <span class="n">PathLike</span>
+    <span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">List</span><span class="p">,</span> <span class="n">Literal</span>
+
+    <span class="kn">from</span> <span class="nn">.model</span> <span class="kn">import</span> <span class="n">Model</span>
 
 
 <div class="viewcode-block" id="Info"><a class="viewcode-back" href="../../zlogging._data.html#zlogging._data.Info">[docs]</a><span class="k">class</span> <span class="nc">Info</span><span class="p">(</span><span class="n">metaclass</span><span class="o">=</span><span class="n">abc</span><span class="o">.</span><span class="n">ABCMeta</span><span class="p">):</span>
@@ -58,7 +64,7 @@
 
     <span class="nd">@property</span>
     <span class="nd">@abc</span><span class="o">.</span><span class="n">abstractmethod</span>
-    <span class="k">def</span> <span class="nf">format</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">format</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;str: Log file format.&quot;&quot;&quot;</span></div>
 
 
@@ -87,26 +93,26 @@
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="nd">@property</span>
-    <span class="k">def</span> <span class="nf">format</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">format</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;Literal[&quot;ascii&quot;]&#39;</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;str: Log file format.&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="s1">&#39;ascii&#39;</span>
 
-    <span class="n">path</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">PathLike</span>
+    <span class="n">path</span><span class="p">:</span> <span class="s1">&#39;PathLike[str]&#39;</span>
     <span class="sd">&quot;&quot;&quot;:obj:`os.PathLike`: Log path.</span>
 
 <span class="sd">    The value is specified in the ASCII log file under ``# path`` directive.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="nb">open</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">DateTime</span>
+    <span class="nb">open</span><span class="p">:</span> <span class="s1">&#39;DateTimeType&#39;</span>
     <span class="sd">&quot;&quot;&quot;:obj:`datetime.datetime`: Log open time.</span>
 
 <span class="sd">    The value is specified in the ASCII log file under ``# open`` directive.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">close</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">DateTime</span>
+    <span class="n">close</span><span class="p">:</span> <span class="s1">&#39;DateTimeType&#39;</span>
     <span class="sd">&quot;&quot;&quot;:obj:`datetime.datetime`: Log close time.</span>
 
 <span class="sd">    The value is specified in the ASCII log file under ``# close`` directive.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">data</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">List</span><span class="p">[</span><span class="n">Model</span><span class="p">]</span>
+    <span class="n">data</span><span class="p">:</span> <span class="s1">&#39;List[Model]&#39;</span>
     <span class="sd">&quot;&quot;&quot;:obj:`list` of :class:`~zlogging.model.Model`: Log records.</span>
 
 <span class="sd">    The log records parsed as a :obj:`list` of :class:`~zlogging.model.Model` per line.</span>
@@ -135,11 +141,11 @@
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="nd">@property</span>
-    <span class="k">def</span> <span class="nf">format</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">format</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;Literal[&quot;json&quot;]&#39;</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;str: Log file format.&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="s1">&#39;json&#39;</span>
 
-    <span class="n">data</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">List</span><span class="p">[</span><span class="n">Model</span><span class="p">]</span>
+    <span class="n">data</span><span class="p">:</span> <span class="s1">&#39;List[Model]&#39;</span>
     <span class="sd">&quot;&quot;&quot;:obj:`list` of :class:`~zlogging.model.Model`: Log records.</span>
 
 <span class="sd">    The log records parsed as a :obj:`list` of :class:`~zlogging.model.Model` per line.</span>

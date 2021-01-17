@@ -178,7 +178,7 @@ representation of the number itself, i.e.:</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>cls</strong> (<a class="reference internal" href="zlogging.model.html#zlogging.model.Model" title="zlogging.model.Model"><code class="xref py py-class docutils literal notranslate"><span class="pre">Model</span></code></a> or <a class="reference internal" href="zlogging.types.html#zlogging.types.RecordType" title="zlogging.types.RecordType"><code class="xref py py-class docutils literal notranslate"><span class="pre">RecordType</span></code></a> object) – a variadic class which supports <a class="reference external" href="https://www.python.org/dev/peps/pep-0484/">PEP 484</a> style attribute typing
+<li><p><strong>cls</strong> (<a class="reference internal" href="zlogging.model.html#zlogging.model.Model" title="zlogging.model.Model"><code class="xref py py-class docutils literal notranslate"><span class="pre">Model</span></code></a> or <code class="xref py py-class docutils literal notranslate"><span class="pre">RecordType</span></code> object) – a variadic class which supports <a class="reference external" href="https://www.python.org/dev/peps/pep-0484/">PEP 484</a> style attribute typing
 annotations</p></li>
 <li><p><strong>exc</strong> (<em>Optional</em><em>[</em><em>Type</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#ValueError" title="(in Python v3.9)"><em>ValueError</em></a><em>]</em><em>]</em>) – (<a class="reference external" href="https://docs.python.org/3/library/exceptions.html#ValueError" title="(in Python v3.9)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ValueError</span></code></a>, optional): exception to be used in case of
 inconsistent values for <code class="docutils literal notranslate"><span class="pre">unset_field</span></code>, <code class="docutils literal notranslate"><span class="pre">empty_field</span></code>
@@ -190,15 +190,15 @@ and <code class="docutils literal notranslate"><span class="pre">set_separator</
 <blockquote>
 <div><ul class="simple">
 <li><dl class="simple">
-<dt><code class="docutils literal notranslate"><span class="pre">fields</span></code> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">OrderedDict</span></code> mapping <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a> and <a class="reference internal" href="zlogging.types.html#zlogging.types.BaseType" title="zlogging.types.BaseType"><code class="xref py py-class docutils literal notranslate"><span class="pre">BaseType</span></code></a>):</dt><dd><p>a mapping proxy of field names and their corresponding data
-types, i.e. an instance of a <a class="reference internal" href="zlogging.types.html#zlogging.types.BaseType" title="zlogging.types.BaseType"><code class="xref py py-class docutils literal notranslate"><span class="pre">BaseType</span></code></a>
+<dt><code class="docutils literal notranslate"><span class="pre">fields</span></code> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">OrderedDict</span></code> mapping <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a> and <code class="xref py py-class docutils literal notranslate"><span class="pre">BaseType</span></code>):</dt><dd><p>a mapping proxy of field names and their corresponding data
+types, i.e. an instance of a <code class="xref py py-class docutils literal notranslate"><span class="pre">BaseType</span></code>
 subclass</p>
 </dd>
 </dl>
 </li>
 <li><dl class="simple">
-<dt><code class="docutils literal notranslate"><span class="pre">record_fields</span></code> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">OrderedDict</span></code> mapping <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a> and <a class="reference internal" href="zlogging.types.html#zlogging.types.RecordType" title="zlogging.types.RecordType"><code class="xref py py-class docutils literal notranslate"><span class="pre">RecordType</span></code></a>):</dt><dd><p>a mapping proxy for fields of <code class="docutils literal notranslate"><span class="pre">record</span></code> data type, i.e. an
-instance of <a class="reference internal" href="zlogging.types.html#zlogging.types.RecordType" title="zlogging.types.RecordType"><code class="xref py py-class docutils literal notranslate"><span class="pre">RecordType</span></code></a></p>
+<dt><code class="docutils literal notranslate"><span class="pre">record_fields</span></code> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">OrderedDict</span></code> mapping <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a> and <code class="xref py py-class docutils literal notranslate"><span class="pre">RecordType</span></code>):</dt><dd><p>a mapping proxy for fields of <code class="docutils literal notranslate"><span class="pre">record</span></code> data type, i.e. an
+instance of <code class="xref py py-class docutils literal notranslate"><span class="pre">RecordType</span></code></p>
 </dd>
 </dl>
 </li>
@@ -224,7 +224,7 @@ instance of <a class="reference internal" href="zlogging.types.html#zlogging.typ
 <p class="admonition-title">Example</p>
 <p>Define a custom log data model from <a class="reference internal" href="zlogging.model.html#zlogging.model.Model" title="zlogging.model.Model"><code class="xref py py-class docutils literal notranslate"><span class="pre">Model</span></code></a> using
 the prefines Bro/Zeek data types, or subclasses of
-<a class="reference internal" href="zlogging.types.html#zlogging.types.BaseType" title="zlogging.types.BaseType"><code class="xref py py-class docutils literal notranslate"><span class="pre">BaseType</span></code></a>:</p>
+<code class="xref py py-class docutils literal notranslate"><span class="pre">BaseType</span></code>:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">MyLog</span><span class="p">(</span><span class="n">Model</span><span class="p">):</span>
     <span class="n">field_one</span> <span class="o">=</span> <span class="n">StringType</span><span class="p">()</span>
     <span class="n">field_two</span> <span class="o">=</span> <span class="n">SetType</span><span class="p">(</span><span class="n">element_type</span><span class="o">=</span><span class="n">PortType</span><span class="p">)</span>
@@ -245,7 +245,7 @@ conflicts, the <code class="docutils literal notranslate"><span class="pre">exc<
 </div>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>Fields of <a class="reference internal" href="zlogging.types.html#zlogging.types.RecordType" title="zlogging.types.RecordType"><code class="xref py py-class docutils literal notranslate"><span class="pre">zlogging.types.RecordType</span></code></a> type will be expanded as
+<p>Fields of <code class="xref py py-class docutils literal notranslate"><span class="pre">zlogging.types.RecordType</span></code> type will be expanded as
 plain fields of the <code class="docutils literal notranslate"><span class="pre">cls</span></code>, i.e. for the variadic class as below:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">MyLog</span><span class="p">(</span><span class="n">Model</span><span class="p">):</span>
     <span class="n">record</span> <span class="o">=</span> <span class="n">RecrodType</span><span class="p">(</span><span class="n">one</span><span class="o">=</span><span class="n">StringType</span><span class="p">(),</span>

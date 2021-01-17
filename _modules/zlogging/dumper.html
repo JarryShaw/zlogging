@@ -32,17 +32,18 @@
             
   <h1>Source code for zlogging.dumper</h1><div class="highlight"><pre>
 <span></span><span class="c1"># -*- coding: utf-8 -*-</span>
+<span class="c1"># pylint: disable=ungrouped-imports,unsubscriptable-object</span>
 <span class="sd">&quot;&quot;&quot;Bro/Zeek log dumper.&quot;&quot;&quot;</span>
 
 <span class="kn">import</span> <span class="nn">abc</span>
 <span class="kn">import</span> <span class="nn">json</span>
 <span class="kn">import</span> <span class="nn">os</span>
 <span class="kn">import</span> <span class="nn">time</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">TYPE_CHECKING</span>
 
-<span class="kn">import</span> <span class="nn">zlogging._typing</span> <span class="k">as</span> <span class="nn">typing</span>
-<span class="kn">from</span> <span class="nn">zlogging._aux</span> <span class="kn">import</span> <span class="n">unicode_escape</span>
-<span class="kn">from</span> <span class="nn">zlogging._exc</span> <span class="kn">import</span> <span class="n">ASCIIWriterError</span><span class="p">,</span> <span class="n">JSONWriterError</span><span class="p">,</span> <span class="n">WriterFormatError</span>
-<span class="kn">from</span> <span class="nn">zlogging.model</span> <span class="kn">import</span> <span class="n">Model</span>
+<span class="kn">from</span> <span class="nn">._aux</span> <span class="kn">import</span> <span class="n">unicode_escape</span>
+<span class="kn">from</span> <span class="nn">._exc</span> <span class="kn">import</span> <span class="n">ASCIIWriterError</span><span class="p">,</span> <span class="n">JSONWriterError</span><span class="p">,</span> <span class="n">WriterFormatError</span>
+<span class="kn">from</span> <span class="nn">.model</span> <span class="kn">import</span> <span class="n">Model</span>
 
 <span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span>
     <span class="s1">&#39;write&#39;</span><span class="p">,</span> <span class="s1">&#39;write_ascii&#39;</span><span class="p">,</span> <span class="s1">&#39;write_json&#39;</span><span class="p">,</span>
@@ -51,8 +52,15 @@
     <span class="s1">&#39;ASCIIWriter&#39;</span><span class="p">,</span> <span class="s1">&#39;JSONWriter&#39;</span><span class="p">,</span>
 <span class="p">]</span>
 
+<span class="k">if</span> <span class="n">TYPE_CHECKING</span><span class="p">:</span>
+    <span class="kn">from</span> <span class="nn">io</span> <span class="kn">import</span> <span class="n">TextIOWrapper</span> <span class="k">as</span> <span class="n">TextFile</span>
+    <span class="kn">from</span> <span class="nn">os</span> <span class="kn">import</span> <span class="n">PathLike</span>
+    <span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Iterable</span><span class="p">,</span> <span class="n">Literal</span><span class="p">,</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">Type</span><span class="p">,</span> <span class="n">Union</span>
 
-<div class="viewcode-block" id="BaseWriter"><a class="viewcode-back" href="../../zlogging.dumper.html#zlogging.BaseWriter">[docs]</a><span class="k">class</span> <span class="nc">BaseWriter</span><span class="p">(</span><span class="n">metaclass</span><span class="o">=</span><span class="n">abc</span><span class="o">.</span><span class="n">ABCMeta</span><span class="p">):</span>
+    <span class="n">AnyStr</span> <span class="o">=</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">bytes</span><span class="p">]</span>
+
+
+<div class="viewcode-block" id="BaseWriter"><a class="viewcode-back" href="../../zlogging.dumper.html#zlogging.dumper.BaseWriter">[docs]</a><span class="k">class</span> <span class="nc">BaseWriter</span><span class="p">(</span><span class="n">metaclass</span><span class="o">=</span><span class="n">abc</span><span class="o">.</span><span class="n">ABCMeta</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Basic log writer.&quot;&quot;&quot;</span>
 
     <span class="nd">@property</span>
@@ -60,7 +68,7 @@
     <span class="k">def</span> <span class="nf">format</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;str: Log file format.&quot;&quot;&quot;</span>
 
-<div class="viewcode-block" id="BaseWriter.write"><a class="viewcode-back" href="../../zlogging.dumper.html#zlogging.BaseWriter.write">[docs]</a>    <span class="k">def</span> <span class="nf">write</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filename</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">PathLike</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">Iterable</span><span class="p">[</span><span class="n">Model</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+<div class="viewcode-block" id="BaseWriter.write"><a class="viewcode-back" href="../../zlogging.dumper.html#zlogging.dumper.BaseWriter.write">[docs]</a>    <span class="k">def</span> <span class="nf">write</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filename</span><span class="p">:</span> <span class="s1">&#39;PathLike[str]&#39;</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="s1">&#39;Iterable[Model]&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;Write log file.</span>
 
 <span class="sd">        Args:</span>
@@ -73,11 +81,11 @@
 
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">file</span><span class="p">:</span>
-            <span class="n">offset</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">write_file</span><span class="p">(</span><span class="n">file</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span>
+            <span class="n">offset</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">write_file</span><span class="p">(</span><span class="n">file</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span>  <span class="c1"># type: ignore[arg-type]</span>
         <span class="k">return</span> <span class="n">offset</span></div>
 
-<div class="viewcode-block" id="BaseWriter.write_file"><a class="viewcode-back" href="../../zlogging.dumper.html#zlogging.BaseWriter.write_file">[docs]</a>    <span class="nd">@abc</span><span class="o">.</span><span class="n">abstractmethod</span>
-    <span class="k">def</span> <span class="nf">write_file</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">file</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">TextFile</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">Iterable</span><span class="p">[</span><span class="n">Model</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+<div class="viewcode-block" id="BaseWriter.write_file"><a class="viewcode-back" href="../../zlogging.dumper.html#zlogging.dumper.BaseWriter.write_file">[docs]</a>    <span class="nd">@abc</span><span class="o">.</span><span class="n">abstractmethod</span>
+    <span class="k">def</span> <span class="nf">write_file</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">file</span><span class="p">:</span> <span class="s1">&#39;TextFile&#39;</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="s1">&#39;Iterable[Model]&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;Write log file.</span>
 
 <span class="sd">        Args:</span>
@@ -90,9 +98,9 @@
 
 <span class="sd">        &quot;&quot;&quot;</span></div>
 
-<div class="viewcode-block" id="BaseWriter.write_line"><a class="viewcode-back" href="../../zlogging.dumper.html#zlogging.BaseWriter.write_line">[docs]</a>    <span class="nd">@abc</span><span class="o">.</span><span class="n">abstractmethod</span>
-    <span class="k">def</span> <span class="nf">write_line</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">file</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">TextFile</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="n">Model</span><span class="p">,</span>
-                   <span class="n">lineno</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+<div class="viewcode-block" id="BaseWriter.write_line"><a class="viewcode-back" href="../../zlogging.dumper.html#zlogging.dumper.BaseWriter.write_line">[docs]</a>    <span class="nd">@abc</span><span class="o">.</span><span class="n">abstractmethod</span>
+    <span class="k">def</span> <span class="nf">write_line</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">file</span><span class="p">:</span> <span class="s1">&#39;TextFile&#39;</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="s1">&#39;Model&#39;</span><span class="p">,</span>
+                   <span class="n">lineno</span><span class="p">:</span> <span class="s1">&#39;Optional[int]&#39;</span> <span class="o">=</span> <span class="mi">0</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;Write log line as one-line record.</span>
 
 <span class="sd">        Args:</span>
@@ -105,8 +113,8 @@
 
 <span class="sd">        &quot;&quot;&quot;</span></div>
 
-<div class="viewcode-block" id="BaseWriter.dump_file"><a class="viewcode-back" href="../../zlogging.dumper.html#zlogging.BaseWriter.dump_file">[docs]</a>    <span class="nd">@abc</span><span class="o">.</span><span class="n">abstractmethod</span>
-    <span class="k">def</span> <span class="nf">dump_file</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">Iterable</span><span class="p">[</span><span class="n">Model</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<div class="viewcode-block" id="BaseWriter.dump_file"><a class="viewcode-back" href="../../zlogging.dumper.html#zlogging.dumper.BaseWriter.dump_file">[docs]</a>    <span class="nd">@abc</span><span class="o">.</span><span class="n">abstractmethod</span>
+    <span class="k">def</span> <span class="nf">dump_file</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="s1">&#39;Iterable[Model]&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;Serialise records to a log line.</span>
 
 <span class="sd">        Args:</span>
@@ -118,8 +126,8 @@
 
 <span class="sd">        &quot;&quot;&quot;</span></div>
 
-<div class="viewcode-block" id="BaseWriter.dump_line"><a class="viewcode-back" href="../../zlogging.dumper.html#zlogging.BaseWriter.dump_line">[docs]</a>    <span class="nd">@abc</span><span class="o">.</span><span class="n">abstractmethod</span>
-    <span class="k">def</span> <span class="nf">dump_line</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="n">Model</span><span class="p">,</span> <span class="n">lineno</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<div class="viewcode-block" id="BaseWriter.dump_line"><a class="viewcode-back" href="../../zlogging.dumper.html#zlogging.dumper.BaseWriter.dump_line">[docs]</a>    <span class="nd">@abc</span><span class="o">.</span><span class="n">abstractmethod</span>
+    <span class="k">def</span> <span class="nf">dump_line</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="s1">&#39;Model&#39;</span><span class="p">,</span> <span class="n">lineno</span><span class="p">:</span> <span class="s1">&#39;Optional[int]&#39;</span> <span class="o">=</span> <span class="mi">0</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;Serialise one-line record to a log line.</span>
 
 <span class="sd">        Args:</span>
@@ -131,7 +139,7 @@
 
 <span class="sd">        &quot;&quot;&quot;</span></div>
 
-<div class="viewcode-block" id="BaseWriter.dump"><a class="viewcode-back" href="../../zlogging.dumper.html#zlogging.BaseWriter.dump">[docs]</a>    <span class="k">def</span> <span class="nf">dump</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">Iterable</span><span class="p">[</span><span class="n">Model</span><span class="p">],</span> <span class="n">file</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">TextFile</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+<div class="viewcode-block" id="BaseWriter.dump"><a class="viewcode-back" href="../../zlogging.dumper.html#zlogging.dumper.BaseWriter.dump">[docs]</a>    <span class="k">def</span> <span class="nf">dump</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="s1">&#39;Iterable[Model]&#39;</span><span class="p">,</span> <span class="n">file</span><span class="p">:</span> <span class="s1">&#39;TextFile&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;Write log file.</span>
 
 <span class="sd">        Args:</span>
@@ -145,7 +153,7 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">write_file</span><span class="p">(</span><span class="n">file</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="BaseWriter.dumps"><a class="viewcode-back" href="../../zlogging.dumper.html#zlogging.BaseWriter.dumps">[docs]</a>    <span class="k">def</span> <span class="nf">dumps</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">Iterable</span><span class="p">[</span><span class="n">Model</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<div class="viewcode-block" id="BaseWriter.dumps"><a class="viewcode-back" href="../../zlogging.dumper.html#zlogging.dumper.BaseWriter.dumps">[docs]</a>    <span class="k">def</span> <span class="nf">dumps</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="s1">&#39;Iterable[Model]&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;Serialise records to a log line.</span>
 
 <span class="sd">        Args:</span>
@@ -159,15 +167,15 @@
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">dump_file</span><span class="p">(</span><span class="n">data</span><span class="p">)</span></div></div>
 
 
-<div class="viewcode-block" id="JSONWriter"><a class="viewcode-back" href="../../zlogging.dumper.html#zlogging.JSONWriter">[docs]</a><span class="k">class</span> <span class="nc">JSONWriter</span><span class="p">(</span><span class="n">BaseWriter</span><span class="p">):</span>
+<div class="viewcode-block" id="JSONWriter"><a class="viewcode-back" href="../../zlogging.dumper.html#zlogging.dumper.JSONWriter">[docs]</a><span class="k">class</span> <span class="nc">JSONWriter</span><span class="p">(</span><span class="n">BaseWriter</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;JSON log writer.&quot;&quot;&quot;</span>
 
     <span class="nd">@property</span>
-    <span class="k">def</span> <span class="nf">format</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">format</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;Literal[&quot;json&quot;]&#39;</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;str: Log file format.&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="s1">&#39;json&#39;</span>
 
-<div class="viewcode-block" id="JSONWriter.write_file"><a class="viewcode-back" href="../../zlogging.dumper.html#zlogging.JSONWriter.write_file">[docs]</a>    <span class="k">def</span> <span class="nf">write_file</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">file</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">TextFile</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">Iterable</span><span class="p">[</span><span class="n">Model</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+<div class="viewcode-block" id="JSONWriter.write_file"><a class="viewcode-back" href="../../zlogging.dumper.html#zlogging.dumper.JSONWriter.write_file">[docs]</a>    <span class="k">def</span> <span class="nf">write_file</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">file</span><span class="p">:</span> <span class="s1">&#39;TextFile&#39;</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="s1">&#39;Iterable[Model]&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;Write log file.</span>
 
 <span class="sd">        Args:</span>
@@ -179,12 +187,13 @@
 <span class="sd">            The file offset after writing.</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">offset</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
         <span class="k">for</span> <span class="n">index</span><span class="p">,</span> <span class="n">line</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">start</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
             <span class="n">offset</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">write_line</span><span class="p">(</span><span class="n">file</span><span class="p">,</span> <span class="n">line</span><span class="p">,</span> <span class="n">lineno</span><span class="o">=</span><span class="n">index</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">offset</span></div>
 
-<div class="viewcode-block" id="JSONWriter.write_line"><a class="viewcode-back" href="../../zlogging.dumper.html#zlogging.JSONWriter.write_line">[docs]</a>    <span class="k">def</span> <span class="nf">write_line</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">file</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">TextFile</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="n">Model</span><span class="p">,</span>
-                   <span class="n">lineno</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+<div class="viewcode-block" id="JSONWriter.write_line"><a class="viewcode-back" href="../../zlogging.dumper.html#zlogging.dumper.JSONWriter.write_line">[docs]</a>    <span class="k">def</span> <span class="nf">write_line</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">file</span><span class="p">:</span> <span class="s1">&#39;TextFile&#39;</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="n">Model</span><span class="p">,</span>
+                   <span class="n">lineno</span><span class="p">:</span> <span class="s1">&#39;Optional[int]&#39;</span> <span class="o">=</span> <span class="mi">0</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;Write log line as one-line record.</span>
 
 <span class="sd">        Args:</span>
@@ -202,9 +211,9 @@
         <span class="k">try</span><span class="p">:</span>
             <span class="k">return</span> <span class="n">file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%s</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">tojson</span><span class="p">()))</span>
         <span class="k">except</span> <span class="ne">TypeError</span> <span class="k">as</span> <span class="n">error</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="n">JSONWriterError</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">error</span><span class="p">),</span> <span class="n">lineno</span><span class="o">=</span><span class="n">lineno</span><span class="p">)</span></div>
+            <span class="k">raise</span> <span class="n">JSONWriterError</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">error</span><span class="p">),</span> <span class="n">lineno</span><span class="o">=</span><span class="n">lineno</span><span class="p">)</span> <span class="kn">from</span> <span class="nn">error</span></div>
 
-<div class="viewcode-block" id="JSONWriter.dump_file"><a class="viewcode-back" href="../../zlogging.dumper.html#zlogging.JSONWriter.dump_file">[docs]</a>    <span class="k">def</span> <span class="nf">dump_file</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">Iterable</span><span class="p">[</span><span class="n">Model</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<div class="viewcode-block" id="JSONWriter.dump_file"><a class="viewcode-back" href="../../zlogging.dumper.html#zlogging.dumper.JSONWriter.dump_file">[docs]</a>    <span class="k">def</span> <span class="nf">dump_file</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="s1">&#39;Optional[Iterable[Model]]&#39;</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;Serialise records to a log line.</span>
 
 <span class="sd">        Args:</span>
@@ -215,9 +224,11 @@
 <span class="sd">            The converted log string.</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">data</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="s1">&#39;&#39;</span>
         <span class="k">return</span> <span class="s1">&#39;&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">dump_line</span><span class="p">(</span><span class="n">line</span><span class="p">,</span> <span class="n">lineno</span><span class="o">=</span><span class="n">index</span><span class="p">)</span> <span class="k">for</span> <span class="n">index</span><span class="p">,</span> <span class="n">line</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">start</span><span class="o">=</span><span class="mi">1</span><span class="p">))</span></div>
 
-<div class="viewcode-block" id="JSONWriter.dump_line"><a class="viewcode-back" href="../../zlogging.dumper.html#zlogging.JSONWriter.dump_line">[docs]</a>    <span class="k">def</span> <span class="nf">dump_line</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="n">Model</span><span class="p">,</span> <span class="n">lineno</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<div class="viewcode-block" id="JSONWriter.dump_line"><a class="viewcode-back" href="../../zlogging.dumper.html#zlogging.dumper.JSONWriter.dump_line">[docs]</a>    <span class="k">def</span> <span class="nf">dump_line</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="s1">&#39;Model&#39;</span><span class="p">,</span> <span class="n">lineno</span><span class="p">:</span> <span class="s1">&#39;Optional[int]&#39;</span> <span class="o">=</span> <span class="mi">0</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;Serialise one-line record to a log line.</span>
 
 <span class="sd">        Args:</span>
@@ -234,10 +245,10 @@
         <span class="k">try</span><span class="p">:</span>
             <span class="k">return</span> <span class="s1">&#39;</span><span class="si">%s</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">tojson</span><span class="p">())</span>
         <span class="k">except</span> <span class="ne">TypeError</span> <span class="k">as</span> <span class="n">error</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="n">JSONWriterError</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">error</span><span class="p">),</span> <span class="n">lineno</span><span class="o">=</span><span class="n">lineno</span><span class="p">)</span></div></div>
+            <span class="k">raise</span> <span class="n">JSONWriterError</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">error</span><span class="p">),</span> <span class="n">lineno</span><span class="o">=</span><span class="n">lineno</span><span class="p">)</span> <span class="kn">from</span> <span class="nn">error</span></div></div>
 
 
-<div class="viewcode-block" id="ASCIIWriter"><a class="viewcode-back" href="../../zlogging.dumper.html#zlogging.ASCIIWriter">[docs]</a><span class="k">class</span> <span class="nc">ASCIIWriter</span><span class="p">(</span><span class="n">BaseWriter</span><span class="p">):</span>
+<div class="viewcode-block" id="ASCIIWriter"><a class="viewcode-back" href="../../zlogging.dumper.html#zlogging.dumper.ASCIIWriter">[docs]</a><span class="k">class</span> <span class="nc">ASCIIWriter</span><span class="p">(</span><span class="n">BaseWriter</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;ASCII log writer.</span>
 
 <span class="sd">    Args:</span>
@@ -264,48 +275,51 @@
         <span class="k">return</span> <span class="s1">&#39;ascii&#39;</span>
 
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
-                 <span class="n">separator</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">Optional</span><span class="p">[</span><span class="n">typing</span><span class="o">.</span><span class="n">AnyStr</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-                 <span class="n">empty_field</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">Optional</span><span class="p">[</span><span class="n">typing</span><span class="o">.</span><span class="n">AnyStr</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-                 <span class="n">unset_field</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">Optional</span><span class="p">[</span><span class="n">typing</span><span class="o">.</span><span class="n">AnyStr</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-                 <span class="n">set_separator</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">Optional</span><span class="p">[</span><span class="n">typing</span><span class="o">.</span><span class="n">AnyStr</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+                 <span class="n">separator</span><span class="p">:</span> <span class="s1">&#39;Optional[AnyStr]&#39;</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+                 <span class="n">empty_field</span><span class="p">:</span> <span class="s1">&#39;Optional[AnyStr]&#39;</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+                 <span class="n">unset_field</span><span class="p">:</span> <span class="s1">&#39;Optional[AnyStr]&#39;</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+                 <span class="n">set_separator</span><span class="p">:</span> <span class="s1">&#39;Optional[AnyStr]&#39;</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
         <span class="k">if</span> <span class="n">separator</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="n">separator</span> <span class="o">=</span> <span class="sa">b</span><span class="s1">&#39;</span><span class="se">\x09</span><span class="s1">&#39;</span>
-        <span class="k">if</span> <span class="n">empty_field</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="n">empty_field</span> <span class="o">=</span> <span class="sa">b</span><span class="s1">&#39;(empty)&#39;</span>
-        <span class="k">if</span> <span class="n">unset_field</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="n">unset_field</span> <span class="o">=</span> <span class="sa">b</span><span class="s1">&#39;-&#39;</span>
-        <span class="k">if</span> <span class="n">set_separator</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="n">set_separator</span> <span class="o">=</span> <span class="sa">b</span><span class="s1">&#39;,&#39;</span>
-
-        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">separator</span><span class="p">,</span> <span class="nb">bytes</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">separator</span> <span class="o">=</span> <span class="sa">b</span><span class="s1">&#39;</span><span class="se">\x09</span><span class="s1">&#39;</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">str_separator</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="se">\x09</span><span class="s1">&#39;</span>
+        <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">separator</span><span class="p">,</span> <span class="nb">bytes</span><span class="p">):</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">separator</span> <span class="o">=</span> <span class="n">separator</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">str_separator</span> <span class="o">=</span> <span class="n">separator</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s1">&#39;ascii&#39;</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">separator</span> <span class="o">=</span> <span class="n">separator</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s1">&#39;ascii&#39;</span><span class="p">)</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">str_separator</span> <span class="o">=</span> <span class="n">separator</span>
 
-        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">empty_field</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">empty_field</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">empty_field</span> <span class="o">=</span> <span class="sa">b</span><span class="s1">&#39;(empty)&#39;</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">str_empty_field</span> <span class="o">=</span> <span class="s1">&#39;(empty)&#39;</span>
+        <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">empty_field</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">empty_field</span> <span class="o">=</span> <span class="n">empty_field</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s1">&#39;ascii&#39;</span><span class="p">)</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">str_empty_field</span> <span class="o">=</span> <span class="n">empty_field</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">empty_field</span> <span class="o">=</span> <span class="n">empty_field</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">str_empty_field</span> <span class="o">=</span> <span class="n">empty_field</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s1">&#39;ascii&#39;</span><span class="p">)</span>
 
-        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">unset_field</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">unset_field</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">unset_field</span> <span class="o">=</span> <span class="sa">b</span><span class="s1">&#39;-&#39;</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">str_unset_field</span> <span class="o">=</span> <span class="s1">&#39;-&#39;</span>
+        <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">unset_field</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">unset_field</span> <span class="o">=</span> <span class="n">unset_field</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s1">&#39;ascii&#39;</span><span class="p">)</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">str_unset_field</span> <span class="o">=</span> <span class="n">unset_field</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">unset_field</span> <span class="o">=</span> <span class="n">unset_field</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">str_unset_field</span> <span class="o">=</span> <span class="n">unset_field</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s1">&#39;ascii&#39;</span><span class="p">)</span>
 
-        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">set_separator</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">set_separator</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">set_separator</span> <span class="o">=</span> <span class="sa">b</span><span class="s1">&#39;,&#39;</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">str_set_separator</span> <span class="o">=</span> <span class="s1">&#39;,&#39;</span>
+        <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">set_separator</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">set_separator</span> <span class="o">=</span> <span class="n">set_separator</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s1">&#39;ascii&#39;</span><span class="p">)</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">str_set_separator</span> <span class="o">=</span> <span class="n">set_separator</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">set_separator</span> <span class="o">=</span> <span class="n">set_separator</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">str_set_separator</span> <span class="o">=</span> <span class="n">set_separator</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s1">&#39;ascii&#39;</span><span class="p">)</span>
 
-<div class="viewcode-block" id="ASCIIWriter.write_file"><a class="viewcode-back" href="../../zlogging.dumper.html#zlogging.ASCIIWriter.write_file">[docs]</a>    <span class="k">def</span> <span class="nf">write_file</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">file</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">TextFile</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">Iterable</span><span class="p">[</span><span class="n">Model</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+<div class="viewcode-block" id="ASCIIWriter.write_file"><a class="viewcode-back" href="../../zlogging.dumper.html#zlogging.dumper.ASCIIWriter.write_file">[docs]</a>    <span class="k">def</span> <span class="nf">write_file</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">file</span><span class="p">:</span> <span class="s1">&#39;TextFile&#39;</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="s1">&#39;Iterable[Model]&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;Write log file.</span>
 
 <span class="sd">        Args:</span>
@@ -318,7 +332,7 @@
 
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="n">data</span><span class="p">:</span>
-            <span class="n">line</span> <span class="o">=</span> <span class="nb">next</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+            <span class="n">line</span> <span class="o">=</span> <span class="nb">next</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>  <span class="c1"># type: ignore[call-overload]</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">write_head</span><span class="p">(</span><span class="n">file</span><span class="p">,</span> <span class="n">line</span><span class="p">)</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">write_line</span><span class="p">(</span><span class="n">file</span><span class="p">,</span> <span class="n">line</span><span class="p">,</span> <span class="n">lineno</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
             <span class="n">lineno_start</span> <span class="o">=</span> <span class="mi">2</span>
@@ -330,8 +344,8 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">write_line</span><span class="p">(</span><span class="n">file</span><span class="p">,</span> <span class="n">line</span><span class="p">,</span> <span class="n">lineno</span><span class="o">=</span><span class="n">index</span><span class="p">)</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">write_tail</span><span class="p">(</span><span class="n">file</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="ASCIIWriter.write_line"><a class="viewcode-back" href="../../zlogging.dumper.html#zlogging.ASCIIWriter.write_line">[docs]</a>    <span class="k">def</span> <span class="nf">write_line</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">file</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">TextFile</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="n">Model</span><span class="p">,</span>
-                   <span class="n">lineno</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+<div class="viewcode-block" id="ASCIIWriter.write_line"><a class="viewcode-back" href="../../zlogging.dumper.html#zlogging.dumper.ASCIIWriter.write_line">[docs]</a>    <span class="k">def</span> <span class="nf">write_line</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">file</span><span class="p">:</span> <span class="s1">&#39;TextFile&#39;</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="s1">&#39;Model&#39;</span><span class="p">,</span>
+                   <span class="n">lineno</span><span class="p">:</span> <span class="s1">&#39;Optional[int]&#39;</span> <span class="o">=</span> <span class="mi">0</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;Write log line as one-line record.</span>
 
 <span class="sd">        Args:</span>
@@ -344,14 +358,14 @@
 
 <span class="sd">        Raises:</span>
 <span class="sd">            :exc:`ASCIIWriterError`: If failed to serialise ``data`` as ASCII.</span>
-
+<span class="sd">w</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">try</span><span class="p">:</span>
-            <span class="k">return</span> <span class="n">file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%s</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">separator</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">toascii</span><span class="p">()</span><span class="o">.</span><span class="n">values</span><span class="p">()))</span>
+            <span class="k">return</span> <span class="n">file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%s</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">str_separator</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">toascii</span><span class="p">()</span><span class="o">.</span><span class="n">values</span><span class="p">()))</span>
         <span class="k">except</span> <span class="ne">TypeError</span> <span class="k">as</span> <span class="n">error</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="n">ASCIIWriterError</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">error</span><span class="p">),</span> <span class="n">lineno</span><span class="o">=</span><span class="n">lineno</span><span class="p">)</span></div>
+            <span class="k">raise</span> <span class="n">ASCIIWriterError</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">error</span><span class="p">),</span> <span class="n">lineno</span><span class="o">=</span><span class="n">lineno</span><span class="p">)</span> <span class="kn">from</span> <span class="nn">error</span></div>
 
-<div class="viewcode-block" id="ASCIIWriter.write_head"><a class="viewcode-back" href="../../zlogging.dumper.html#zlogging.ASCIIWriter.write_head">[docs]</a>    <span class="k">def</span> <span class="nf">write_head</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">file</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">TextFile</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">Optional</span><span class="p">[</span><span class="n">Model</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+<div class="viewcode-block" id="ASCIIWriter.write_head"><a class="viewcode-back" href="../../zlogging.dumper.html#zlogging.dumper.ASCIIWriter.write_head">[docs]</a>    <span class="k">def</span> <span class="nf">write_head</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">file</span><span class="p">:</span> <span class="s1">&#39;TextFile&#39;</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="s1">&#39;Optional[Model]&#39;</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;Write header fields of ASCII log file.</span>
 
 <span class="sd">        Args:</span>
@@ -377,7 +391,7 @@
 
             <span class="n">line_fields</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">fields</span>
             <span class="n">fields</span> <span class="o">=</span> <span class="n">separator</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">line_fields</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
-            <span class="n">types</span> <span class="o">=</span> <span class="n">separator</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">line_fields</span><span class="o">.</span><span class="n">values</span><span class="p">())</span>
+            <span class="n">types</span> <span class="o">=</span> <span class="n">separator</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">field</span><span class="o">.</span><span class="n">zeek_type</span> <span class="k">for</span> <span class="n">field</span> <span class="ow">in</span> <span class="n">line_fields</span><span class="o">.</span><span class="n">values</span><span class="p">())</span>
 
         <span class="n">file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;#separator </span><span class="si">%s</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">unicode_escape</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">separator</span><span class="p">))</span>
         <span class="n">file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;#set_separator</span><span class="si">%s%s</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">separator</span><span class="p">,</span> <span class="n">set_separator</span><span class="p">))</span>
@@ -388,7 +402,7 @@
         <span class="n">file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;#fields</span><span class="si">%s%s</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">separator</span><span class="p">,</span> <span class="n">fields</span><span class="p">))</span>
         <span class="k">return</span> <span class="n">file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;#types</span><span class="si">%s%s</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">separator</span><span class="p">,</span> <span class="n">types</span><span class="p">))</span></div>
 
-<div class="viewcode-block" id="ASCIIWriter.write_tail"><a class="viewcode-back" href="../../zlogging.dumper.html#zlogging.ASCIIWriter.write_tail">[docs]</a>    <span class="k">def</span> <span class="nf">write_tail</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">file</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">TextFile</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+<div class="viewcode-block" id="ASCIIWriter.write_tail"><a class="viewcode-back" href="../../zlogging.dumper.html#zlogging.dumper.ASCIIWriter.write_tail">[docs]</a>    <span class="k">def</span> <span class="nf">write_tail</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">file</span><span class="p">:</span> <span class="s1">&#39;TextFile&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;Write trailing fields of ASCII log file.</span>
 
 <span class="sd">        Args:</span>
@@ -400,7 +414,7 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="n">file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;#close</span><span class="si">%s%s</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">str_separator</span><span class="p">,</span> <span class="n">time</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;%Y-%m-</span><span class="si">%d</span><span class="s1">-%H-%M-%S&#39;</span><span class="p">)))</span></div>
 
-<div class="viewcode-block" id="ASCIIWriter.dump_file"><a class="viewcode-back" href="../../zlogging.dumper.html#zlogging.ASCIIWriter.dump_file">[docs]</a>    <span class="k">def</span> <span class="nf">dump_file</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">Iterable</span><span class="p">[</span><span class="n">Model</span><span class="p">],</span> <span class="n">name</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>  <span class="c1"># pylint: disable=arguments-differ</span>
+<div class="viewcode-block" id="ASCIIWriter.dump_file"><a class="viewcode-back" href="../../zlogging.dumper.html#zlogging.dumper.ASCIIWriter.dump_file">[docs]</a>    <span class="k">def</span> <span class="nf">dump_file</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="s1">&#39;Optional[Iterable[Model]]&#39;</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="s1">&#39;Optional[str]&#39;</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>  <span class="c1"># pylint: disable=arguments-differ</span>
         <span class="sd">&quot;&quot;&quot;Serialise records to a log line.</span>
 
 <span class="sd">        Args:</span>
@@ -413,18 +427,21 @@
 
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="n">data</span><span class="p">:</span>
-            <span class="n">line</span> <span class="o">=</span> <span class="nb">next</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
-            <span class="n">buffer</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">dump_head</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">)</span>
+            <span class="n">data_iter</span> <span class="o">=</span> <span class="nb">iter</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+            <span class="n">line</span> <span class="o">=</span> <span class="nb">next</span><span class="p">(</span><span class="n">data_iter</span><span class="p">)</span>
+
+            <span class="n">buffer</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">dump_head</span><span class="p">(</span><span class="n">line</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">)</span>
             <span class="n">buffer</span> <span class="o">+=</span> <span class="bp">self</span><span class="o">.</span><span class="n">dump_line</span><span class="p">(</span><span class="n">line</span><span class="p">,</span> <span class="n">lineno</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
-            <span class="n">lineno_start</span> <span class="o">=</span> <span class="mi">2</span>
+
+            <span class="n">buffer</span> <span class="o">+=</span> <span class="s1">&#39;&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">dump_line</span><span class="p">(</span><span class="n">line</span><span class="p">,</span> <span class="n">lineno</span><span class="o">=</span><span class="n">index</span><span class="p">)</span>
+                              <span class="k">for</span> <span class="n">index</span><span class="p">,</span> <span class="n">line</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">data_iter</span><span class="p">,</span> <span class="n">start</span><span class="o">=</span><span class="mi">2</span><span class="p">))</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="n">buffer</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">dump_head</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">)</span>
-            <span class="n">lineno_start</span> <span class="o">=</span> <span class="mi">1</span>
 
-        <span class="n">buffer</span> <span class="o">+=</span> <span class="s1">&#39;&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">dump_line</span><span class="p">(</span><span class="n">line</span><span class="p">,</span> <span class="n">lineno</span><span class="o">=</span><span class="n">index</span><span class="p">)</span> <span class="k">for</span> <span class="n">index</span><span class="p">,</span> <span class="n">line</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">start</span><span class="o">=</span><span class="n">lineno_start</span><span class="p">))</span>
-        <span class="n">buffer</span> <span class="o">+=</span> <span class="bp">self</span><span class="o">.</span><span class="n">dump_tail</span><span class="p">()</span></div>
+        <span class="n">buffer</span> <span class="o">+=</span> <span class="bp">self</span><span class="o">.</span><span class="n">dump_tail</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">buffer</span></div>
 
-<div class="viewcode-block" id="ASCIIWriter.dump_line"><a class="viewcode-back" href="../../zlogging.dumper.html#zlogging.ASCIIWriter.dump_line">[docs]</a>    <span class="k">def</span> <span class="nf">dump_line</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="n">Model</span><span class="p">,</span> <span class="n">lineno</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<div class="viewcode-block" id="ASCIIWriter.dump_line"><a class="viewcode-back" href="../../zlogging.dumper.html#zlogging.dumper.ASCIIWriter.dump_line">[docs]</a>    <span class="k">def</span> <span class="nf">dump_line</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="n">Model</span><span class="p">,</span> <span class="n">lineno</span><span class="p">:</span> <span class="s1">&#39;Optional[int]&#39;</span> <span class="o">=</span> <span class="mi">0</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;Serialise one-line record to a log line.</span>
 
 <span class="sd">        Args:</span>
@@ -439,11 +456,11 @@
 
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">try</span><span class="p">:</span>
-            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">str_separator</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">toascii</span><span class="p">()</span><span class="o">.</span><span class="n">values</span><span class="p">())</span>
+            <span class="k">return</span> <span class="s1">&#39;</span><span class="si">%s</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">str_separator</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">toascii</span><span class="p">()</span><span class="o">.</span><span class="n">values</span><span class="p">())</span>
         <span class="k">except</span> <span class="ne">TypeError</span> <span class="k">as</span> <span class="n">error</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="n">ASCIIWriterError</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">error</span><span class="p">),</span> <span class="n">lineno</span><span class="o">=</span><span class="n">lineno</span><span class="p">)</span></div>
+            <span class="k">raise</span> <span class="n">ASCIIWriterError</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">error</span><span class="p">),</span> <span class="n">lineno</span><span class="o">=</span><span class="n">lineno</span><span class="p">)</span> <span class="kn">from</span> <span class="nn">error</span></div>
 
-<div class="viewcode-block" id="ASCIIWriter.dump_head"><a class="viewcode-back" href="../../zlogging.dumper.html#zlogging.ASCIIWriter.dump_head">[docs]</a>    <span class="k">def</span> <span class="nf">dump_head</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">Optional</span><span class="p">[</span><span class="n">Model</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<div class="viewcode-block" id="ASCIIWriter.dump_head"><a class="viewcode-back" href="../../zlogging.dumper.html#zlogging.dumper.ASCIIWriter.dump_head">[docs]</a>    <span class="k">def</span> <span class="nf">dump_head</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="s1">&#39;Optional[Model]&#39;</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="s1">&#39;Optional[str]&#39;</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;Serialise header fields of ASCII log file.</span>
 
 <span class="sd">        Args:</span>
@@ -472,7 +489,7 @@
 
             <span class="n">line_fields</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">fields</span>
             <span class="n">fields</span> <span class="o">=</span> <span class="n">separator</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">line_fields</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
-            <span class="n">types</span> <span class="o">=</span> <span class="n">separator</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">line_fields</span><span class="o">.</span><span class="n">values</span><span class="p">())</span>
+            <span class="n">types</span> <span class="o">=</span> <span class="n">separator</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">field</span><span class="o">.</span><span class="n">zeek_type</span> <span class="k">for</span> <span class="n">field</span> <span class="ow">in</span> <span class="n">line_fields</span><span class="o">.</span><span class="n">values</span><span class="p">())</span>
 
         <span class="n">buffer</span> <span class="o">=</span> <span class="s1">&#39;#separator </span><span class="si">%s</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">unicode_escape</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">separator</span><span class="p">)</span>
         <span class="n">buffer</span> <span class="o">+=</span> <span class="s1">&#39;#set_separator</span><span class="si">%s%s</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">separator</span><span class="p">,</span> <span class="n">set_separator</span><span class="p">)</span>
@@ -484,7 +501,7 @@
         <span class="n">buffer</span> <span class="o">+=</span> <span class="s1">&#39;#types</span><span class="si">%s%s</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">separator</span><span class="p">,</span> <span class="n">types</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">buffer</span></div>
 
-<div class="viewcode-block" id="ASCIIWriter.dump_tail"><a class="viewcode-back" href="../../zlogging.dumper.html#zlogging.ASCIIWriter.dump_tail">[docs]</a>    <span class="k">def</span> <span class="nf">dump_tail</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<div class="viewcode-block" id="ASCIIWriter.dump_tail"><a class="viewcode-back" href="../../zlogging.dumper.html#zlogging.dumper.ASCIIWriter.dump_tail">[docs]</a>    <span class="k">def</span> <span class="nf">dump_tail</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;Serialise trailing fields of ASCII log file.</span>
 
 <span class="sd">        Returns:</span>
@@ -494,9 +511,9 @@
         <span class="k">return</span> <span class="s1">&#39;#close</span><span class="si">%s%s</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">str_separator</span><span class="p">,</span> <span class="n">time</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;%Y-%m-</span><span class="si">%d</span><span class="s1">-%H-%M-%S&#39;</span><span class="p">))</span></div></div>
 
 
-<div class="viewcode-block" id="write_json"><a class="viewcode-back" href="../../zlogging.dumper.html#zlogging.write_json">[docs]</a><span class="k">def</span> <span class="nf">write_json</span><span class="p">(</span><span class="n">data</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">Iterable</span><span class="p">[</span><span class="n">Model</span><span class="p">],</span> <span class="n">filename</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">PathLike</span><span class="p">,</span>  <span class="c1"># pylint: disable=unused-argument,keyword-arg-before-vararg</span>
-               <span class="n">writer</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">Optional</span><span class="p">[</span><span class="n">typing</span><span class="o">.</span><span class="n">Type</span><span class="p">[</span><span class="n">JSONWriter</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-               <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<div class="viewcode-block" id="write_json"><a class="viewcode-back" href="../../zlogging.dumper.html#zlogging.dumper.write_json">[docs]</a><span class="k">def</span> <span class="nf">write_json</span><span class="p">(</span><span class="n">data</span><span class="p">:</span> <span class="s1">&#39;Iterable[Model]&#39;</span><span class="p">,</span> <span class="n">filename</span><span class="p">:</span> <span class="s1">&#39;PathLike[str]&#39;</span><span class="p">,</span>  <span class="c1"># pylint: disable=unused-argument,keyword-arg-before-vararg</span>
+               <span class="n">writer</span><span class="p">:</span> <span class="s1">&#39;Optional[Type[JSONWriter]]&#39;</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+               <span class="o">*</span><span class="n">args</span><span class="p">:</span> <span class="s1">&#39;Any&#39;</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">:</span> <span class="s1">&#39;Any&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
     <span class="sd">&quot;&quot;&quot;Write JSON log file.</span>
 
 <span class="sd">    Args:</span>
@@ -505,6 +522,8 @@
 <span class="sd">        filename: Log file name.</span>
 <span class="sd">        writer (:class:`~zlogging.dumper.JSONWriter`, optional): Writer class.</span>
 <span class="sd">        *args: Variable length argument list.</span>
+
+<span class="sd">    Keyword Args:</span>
 <span class="sd">        **kwargs: Arbitrary keyword arguments.</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
@@ -514,9 +533,9 @@
     <span class="n">json_writer</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span></div>
 
 
-<div class="viewcode-block" id="dump_json"><a class="viewcode-back" href="../../zlogging.dumper.html#zlogging.dump_json">[docs]</a><span class="k">def</span> <span class="nf">dump_json</span><span class="p">(</span><span class="n">data</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">Iterable</span><span class="p">[</span><span class="n">Model</span><span class="p">],</span> <span class="n">file</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">TextFile</span><span class="p">,</span>  <span class="c1"># pylint: disable=unused-argument,keyword-arg-before-vararg</span>
-              <span class="n">writer</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">Optional</span><span class="p">[</span><span class="n">typing</span><span class="o">.</span><span class="n">Type</span><span class="p">[</span><span class="n">JSONWriter</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-              <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<div class="viewcode-block" id="dump_json"><a class="viewcode-back" href="../../zlogging.dumper.html#zlogging.dumper.dump_json">[docs]</a><span class="k">def</span> <span class="nf">dump_json</span><span class="p">(</span><span class="n">data</span><span class="p">:</span> <span class="s1">&#39;Iterable[Model]&#39;</span><span class="p">,</span> <span class="n">file</span><span class="p">:</span> <span class="s1">&#39;TextFile&#39;</span><span class="p">,</span>  <span class="c1"># pylint: disable=unused-argument,keyword-arg-before-vararg</span>
+              <span class="n">writer</span><span class="p">:</span> <span class="s1">&#39;Optional[Type[JSONWriter]]&#39;</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+              <span class="o">*</span><span class="n">args</span><span class="p">:</span> <span class="s1">&#39;Any&#39;</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">:</span> <span class="s1">&#39;Any&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
     <span class="sd">&quot;&quot;&quot;Write JSON log file.</span>
 
 <span class="sd">    Args:</span>
@@ -525,6 +544,8 @@
 <span class="sd">        file: Log file object opened in text mode.</span>
 <span class="sd">        writer (:class:`~zlogging.dumper.JSONWriter`, optional): Writer class.</span>
 <span class="sd">        *args: Variable length argument list.</span>
+
+<span class="sd">    Keyword Args:</span>
 <span class="sd">        **kwargs: Arbitrary keyword arguments.</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
@@ -534,9 +555,9 @@
     <span class="n">json_writer</span><span class="o">.</span><span class="n">write_file</span><span class="p">(</span><span class="n">file</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span></div>
 
 
-<div class="viewcode-block" id="dumps_json"><a class="viewcode-back" href="../../zlogging.dumper.html#zlogging.dumps_json">[docs]</a><span class="k">def</span> <span class="nf">dumps_json</span><span class="p">(</span><span class="n">data</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">Iterable</span><span class="p">[</span><span class="n">Model</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>  <span class="c1"># pylint: disable=unused-argument,keyword-arg-before-vararg</span>
-               <span class="n">writer</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">Optional</span><span class="p">[</span><span class="n">typing</span><span class="o">.</span><span class="n">Type</span><span class="p">[</span><span class="n">JSONWriter</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-               <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<div class="viewcode-block" id="dumps_json"><a class="viewcode-back" href="../../zlogging.dumper.html#zlogging.dumper.dumps_json">[docs]</a><span class="k">def</span> <span class="nf">dumps_json</span><span class="p">(</span><span class="n">data</span><span class="p">:</span> <span class="s1">&#39;Optional[Iterable[Model]]&#39;</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>  <span class="c1"># pylint: disable=unused-argument,keyword-arg-before-vararg</span>
+               <span class="n">writer</span><span class="p">:</span> <span class="s1">&#39;Optional[Type[JSONWriter]]&#39;</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+               <span class="o">*</span><span class="n">args</span><span class="p">:</span> <span class="s1">&#39;Any&#39;</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">:</span> <span class="s1">&#39;Any&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
     <span class="sd">&quot;&quot;&quot;Write JSON log string.</span>
 
 <span class="sd">    Args:</span>
@@ -544,6 +565,8 @@
 <span class="sd">            records as an :obj:`Iterable` of :class:`~zlogging.model.Model` per line.</span>
 <span class="sd">        writer (:class:`~zlogging.dumper.JSONWriter`, optional): Writer class.</span>
 <span class="sd">        *args: Variable length argument list.</span>
+
+<span class="sd">    Keyword Args:</span>
 <span class="sd">        **kwargs: Arbitrary keyword arguments.</span>
 
 <span class="sd">    Returns:</span>
@@ -556,13 +579,13 @@
     <span class="k">return</span> <span class="n">json_writer</span><span class="o">.</span><span class="n">dump_file</span><span class="p">(</span><span class="n">data</span><span class="p">)</span></div>
 
 
-<div class="viewcode-block" id="write_ascii"><a class="viewcode-back" href="../../zlogging.dumper.html#zlogging.write_ascii">[docs]</a><span class="k">def</span> <span class="nf">write_ascii</span><span class="p">(</span><span class="n">data</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">Iterable</span><span class="p">[</span><span class="n">Model</span><span class="p">],</span> <span class="n">filename</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">PathLike</span><span class="p">,</span>  <span class="c1"># pylint: disable=unused-argument,keyword-arg-before-vararg</span>
-                <span class="n">writer</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">Optional</span><span class="p">[</span><span class="n">typing</span><span class="o">.</span><span class="n">Type</span><span class="p">[</span><span class="n">ASCIIWriter</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-                <span class="n">separator</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">Optional</span><span class="p">[</span><span class="n">typing</span><span class="o">.</span><span class="n">AnyStr</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-                <span class="n">empty_field</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">Optional</span><span class="p">[</span><span class="n">typing</span><span class="o">.</span><span class="n">AnyStr</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-                <span class="n">unset_field</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">Optional</span><span class="p">[</span><span class="n">typing</span><span class="o">.</span><span class="n">AnyStr</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-                <span class="n">set_separator</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">Optional</span><span class="p">[</span><span class="n">typing</span><span class="o">.</span><span class="n">AnyStr</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-                <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<div class="viewcode-block" id="write_ascii"><a class="viewcode-back" href="../../zlogging.dumper.html#zlogging.dumper.write_ascii">[docs]</a><span class="k">def</span> <span class="nf">write_ascii</span><span class="p">(</span><span class="n">data</span><span class="p">:</span> <span class="s1">&#39;Iterable[Model]&#39;</span><span class="p">,</span> <span class="n">filename</span><span class="p">:</span> <span class="s1">&#39;PathLike[str]&#39;</span><span class="p">,</span>  <span class="c1"># pylint: disable=unused-argument,keyword-arg-before-vararg</span>
+                <span class="n">writer</span><span class="p">:</span> <span class="s1">&#39;Optional[Type[ASCIIWriter]]&#39;</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+                <span class="n">separator</span><span class="p">:</span> <span class="s1">&#39;Optional[AnyStr]&#39;</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+                <span class="n">empty_field</span><span class="p">:</span> <span class="s1">&#39;Optional[AnyStr]&#39;</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+                <span class="n">unset_field</span><span class="p">:</span> <span class="s1">&#39;Optional[AnyStr]&#39;</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+                <span class="n">set_separator</span><span class="p">:</span> <span class="s1">&#39;Optional[AnyStr]&#39;</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+                <span class="o">*</span><span class="n">args</span><span class="p">:</span> <span class="s1">&#39;Any&#39;</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">:</span> <span class="s1">&#39;Any&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
     <span class="sd">&quot;&quot;&quot;Write ASCII log file.</span>
 
 <span class="sd">    Args:</span>
@@ -575,6 +598,8 @@
 <span class="sd">        unset_field (:obj:`bytes` or :obj:`str`, optional): Placeholder for unset field.</span>
 <span class="sd">        set_separator (:obj:`bytes` or :obj:`str`, optional): Separator for ``set``/``vector`` fields.</span>
 <span class="sd">        *args: Variable length argument list.</span>
+
+<span class="sd">    Keyword Args:</span>
 <span class="sd">        **kwargs: Arbitrary keyword arguments.</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
@@ -585,13 +610,13 @@
     <span class="n">ascii_writer</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span></div>
 
 
-<div class="viewcode-block" id="dump_ascii"><a class="viewcode-back" href="../../zlogging.dumper.html#zlogging.dump_ascii">[docs]</a><span class="k">def</span> <span class="nf">dump_ascii</span><span class="p">(</span><span class="n">data</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">Iterable</span><span class="p">[</span><span class="n">Model</span><span class="p">],</span> <span class="n">file</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">TextFile</span><span class="p">,</span>  <span class="c1"># pylint: disable=unused-argument,keyword-arg-before-vararg</span>
-               <span class="n">writer</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">Optional</span><span class="p">[</span><span class="n">typing</span><span class="o">.</span><span class="n">Type</span><span class="p">[</span><span class="n">ASCIIWriter</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-               <span class="n">separator</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">Optional</span><span class="p">[</span><span class="n">typing</span><span class="o">.</span><span class="n">AnyStr</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-               <span class="n">empty_field</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">Optional</span><span class="p">[</span><span class="n">typing</span><span class="o">.</span><span class="n">AnyStr</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-               <span class="n">unset_field</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">Optional</span><span class="p">[</span><span class="n">typing</span><span class="o">.</span><span class="n">AnyStr</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-               <span class="n">set_separator</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">Optional</span><span class="p">[</span><span class="n">typing</span><span class="o">.</span><span class="n">AnyStr</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-               <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<div class="viewcode-block" id="dump_ascii"><a class="viewcode-back" href="../../zlogging.dumper.html#zlogging.dumper.dump_ascii">[docs]</a><span class="k">def</span> <span class="nf">dump_ascii</span><span class="p">(</span><span class="n">data</span><span class="p">:</span> <span class="s1">&#39;Iterable[Model]&#39;</span><span class="p">,</span> <span class="n">file</span><span class="p">:</span> <span class="s1">&#39;TextFile&#39;</span><span class="p">,</span>  <span class="c1"># pylint: disable=unused-argument,keyword-arg-before-vararg</span>
+               <span class="n">writer</span><span class="p">:</span> <span class="s1">&#39;Optional[Type[ASCIIWriter]]&#39;</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+               <span class="n">separator</span><span class="p">:</span> <span class="s1">&#39;Optional[AnyStr]&#39;</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+               <span class="n">empty_field</span><span class="p">:</span> <span class="s1">&#39;Optional[AnyStr]&#39;</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+               <span class="n">unset_field</span><span class="p">:</span> <span class="s1">&#39;Optional[AnyStr]&#39;</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+               <span class="n">set_separator</span><span class="p">:</span> <span class="s1">&#39;Optional[AnyStr]&#39;</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+               <span class="o">*</span><span class="n">args</span><span class="p">:</span> <span class="s1">&#39;Any&#39;</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">:</span> <span class="s1">&#39;Any&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
     <span class="sd">&quot;&quot;&quot;Write ASCII log file.</span>
 
 <span class="sd">    Args:</span>
@@ -604,6 +629,8 @@
 <span class="sd">        unset_field (:obj:`bytes` or :obj:`str`, optional): Placeholder for unset field.</span>
 <span class="sd">        set_separator (:obj:`bytes` or :obj:`str`, optional): Separator for ``set``/``vector`` fields.</span>
 <span class="sd">        *args: Variable length argument list.</span>
+
+<span class="sd">    Keyword Args:</span>
 <span class="sd">        **kwargs: Arbitrary keyword arguments.</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
@@ -614,13 +641,13 @@
     <span class="n">ascii_writer</span><span class="o">.</span><span class="n">write_file</span><span class="p">(</span><span class="n">file</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span></div>
 
 
-<div class="viewcode-block" id="dumps_ascii"><a class="viewcode-back" href="../../zlogging.dumper.html#zlogging.dumps_ascii">[docs]</a><span class="k">def</span> <span class="nf">dumps_ascii</span><span class="p">(</span><span class="n">data</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">Iterable</span><span class="p">[</span><span class="n">Model</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>  <span class="c1"># pylint: disable=unused-argument,keyword-arg-before-vararg</span>
-                <span class="n">writer</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">Optional</span><span class="p">[</span><span class="n">typing</span><span class="o">.</span><span class="n">Type</span><span class="p">[</span><span class="n">ASCIIWriter</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-                <span class="n">separator</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">Optional</span><span class="p">[</span><span class="n">typing</span><span class="o">.</span><span class="n">AnyStr</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-                <span class="n">empty_field</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">Optional</span><span class="p">[</span><span class="n">typing</span><span class="o">.</span><span class="n">AnyStr</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-                <span class="n">unset_field</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">Optional</span><span class="p">[</span><span class="n">typing</span><span class="o">.</span><span class="n">AnyStr</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-                <span class="n">set_separator</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">Optional</span><span class="p">[</span><span class="n">typing</span><span class="o">.</span><span class="n">AnyStr</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-                <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<div class="viewcode-block" id="dumps_ascii"><a class="viewcode-back" href="../../zlogging.dumper.html#zlogging.dumper.dumps_ascii">[docs]</a><span class="k">def</span> <span class="nf">dumps_ascii</span><span class="p">(</span><span class="n">data</span><span class="p">:</span> <span class="s1">&#39;Optional[Iterable[Model]]&#39;</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>  <span class="c1"># pylint: disable=unused-argument,keyword-arg-before-vararg</span>
+                <span class="n">writer</span><span class="p">:</span> <span class="s1">&#39;Optional[Type[ASCIIWriter]]&#39;</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+                <span class="n">separator</span><span class="p">:</span> <span class="s1">&#39;Optional[AnyStr]&#39;</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+                <span class="n">empty_field</span><span class="p">:</span> <span class="s1">&#39;Optional[AnyStr]&#39;</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+                <span class="n">unset_field</span><span class="p">:</span> <span class="s1">&#39;Optional[AnyStr]&#39;</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+                <span class="n">set_separator</span><span class="p">:</span> <span class="s1">&#39;Optional[AnyStr]&#39;</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+                <span class="o">*</span><span class="n">args</span><span class="p">:</span> <span class="s1">&#39;Any&#39;</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">:</span> <span class="s1">&#39;Any&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
     <span class="sd">&quot;&quot;&quot;Write ASCII log string.</span>
 
 <span class="sd">    Args:</span>
@@ -645,7 +672,7 @@
     <span class="k">return</span> <span class="n">ascii_writer</span><span class="o">.</span><span class="n">dump_file</span><span class="p">(</span><span class="n">data</span><span class="p">)</span></div>
 
 
-<div class="viewcode-block" id="write"><a class="viewcode-back" href="../../zlogging.dumper.html#zlogging.write">[docs]</a><span class="k">def</span> <span class="nf">write</span><span class="p">(</span><span class="n">data</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">Iterable</span><span class="p">[</span><span class="n">Model</span><span class="p">],</span> <span class="n">filename</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">PathLike</span><span class="p">,</span> <span class="nb">format</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>  <span class="c1"># pylint: disable=keyword-arg-before-vararg,redefined-builtin</span>
+<div class="viewcode-block" id="write"><a class="viewcode-back" href="../../zlogging.dumper.html#zlogging.dumper.write">[docs]</a><span class="k">def</span> <span class="nf">write</span><span class="p">(</span><span class="n">data</span><span class="p">:</span> <span class="s1">&#39;Iterable[Model]&#39;</span><span class="p">,</span> <span class="n">filename</span><span class="p">:</span> <span class="s1">&#39;PathLike[str]&#39;</span><span class="p">,</span> <span class="nb">format</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">:</span> <span class="s1">&#39;Any&#39;</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">:</span> <span class="s1">&#39;Any&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>  <span class="c1"># pylint: disable=keyword-arg-before-vararg,redefined-builtin</span>
     <span class="sd">&quot;&quot;&quot;Write Bro/Zeek log file.</span>
 
 <span class="sd">    Args:</span>
@@ -655,6 +682,8 @@
 <span class="sd">        format: Log format.</span>
 <span class="sd">        *args: See :func:`~zlogging.dumper.write_json` and</span>
 <span class="sd">            :func:`~zlogging.dumper.write_ascii` for more information.</span>
+
+<span class="sd">    Keyword Args:</span>
 <span class="sd">        **kwargs: See :func:`~zlogging.dumper.write_json` and</span>
 <span class="sd">            :func:`~zlogging.dumper.write_ascii` for more information.</span>
 
@@ -669,7 +698,7 @@
     <span class="k">raise</span> <span class="n">WriterFormatError</span><span class="p">(</span><span class="s1">&#39;unsupported format: </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="nb">format</span><span class="p">)</span></div>
 
 
-<div class="viewcode-block" id="dump"><a class="viewcode-back" href="../../zlogging.dumper.html#zlogging.dump">[docs]</a><span class="k">def</span> <span class="nf">dump</span><span class="p">(</span><span class="n">data</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">Iterable</span><span class="p">[</span><span class="n">Model</span><span class="p">],</span> <span class="n">file</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">TextFile</span><span class="p">,</span> <span class="nb">format</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>  <span class="c1"># pylint: disable=keyword-arg-before-vararg,redefined-builtin</span>
+<div class="viewcode-block" id="dump"><a class="viewcode-back" href="../../zlogging.dumper.html#zlogging.dumper.dump">[docs]</a><span class="k">def</span> <span class="nf">dump</span><span class="p">(</span><span class="n">data</span><span class="p">:</span> <span class="s1">&#39;Iterable[Model]&#39;</span><span class="p">,</span> <span class="n">file</span><span class="p">:</span> <span class="s1">&#39;TextFile&#39;</span><span class="p">,</span> <span class="nb">format</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">:</span> <span class="s1">&#39;Any&#39;</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">:</span> <span class="s1">&#39;Any&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>  <span class="c1"># pylint: disable=keyword-arg-before-vararg,redefined-builtin</span>
     <span class="sd">&quot;&quot;&quot;Write Bro/Zeek log file.</span>
 
 <span class="sd">    Args:</span>
@@ -679,6 +708,8 @@
 <span class="sd">        file: Log file object opened in text mode.</span>
 <span class="sd">        *args: See :func:`~zlogging.dumper.dump_json` and</span>
 <span class="sd">            :func:`~zlogging.dumper.dump_ascii` for more information.</span>
+
+<span class="sd">    Keyword Args:</span>
 <span class="sd">        **kwargs: See :func:`~zlogging.dumper.dump_json` and</span>
 <span class="sd">            :func:`~zlogging.dumper.dump_ascii` for more information.</span>
 
@@ -693,7 +724,7 @@
     <span class="k">raise</span> <span class="n">WriterFormatError</span><span class="p">(</span><span class="s1">&#39;unsupported format: </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="nb">format</span><span class="p">)</span></div>
 
 
-<div class="viewcode-block" id="dumps"><a class="viewcode-back" href="../../zlogging.dumper.html#zlogging.dumps">[docs]</a><span class="k">def</span> <span class="nf">dumps</span><span class="p">(</span><span class="n">data</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">Iterable</span><span class="p">[</span><span class="n">Model</span><span class="p">],</span> <span class="nb">format</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>  <span class="c1"># pylint: disable=keyword-arg-before-vararg,redefined-builtin</span>
+<div class="viewcode-block" id="dumps"><a class="viewcode-back" href="../../zlogging.dumper.html#zlogging.dumper.dumps">[docs]</a><span class="k">def</span> <span class="nf">dumps</span><span class="p">(</span><span class="n">data</span><span class="p">:</span> <span class="s1">&#39;Iterable[Model]&#39;</span><span class="p">,</span> <span class="nb">format</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">:</span> <span class="s1">&#39;Any&#39;</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">:</span> <span class="s1">&#39;Any&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>  <span class="c1"># pylint: disable=keyword-arg-before-vararg,redefined-builtin</span>
     <span class="sd">&quot;&quot;&quot;Write Bro/Zeek log string.</span>
 
 <span class="sd">    Args:</span>
@@ -702,6 +733,8 @@
 <span class="sd">        format: Log format.</span>
 <span class="sd">        *args: See :func:`~zlogging.dumper.dumps_json` and</span>
 <span class="sd">            :func:`~zlogging.dumper.dumps_ascii` for more information.</span>
+
+<span class="sd">    Keyword Args:</span>
 <span class="sd">        **kwargs: See :func:`~zlogging.dumper.dumps_json` and</span>
 <span class="sd">            :func:`~zlogging.dumper.dumps_ascii` for more information.</span>
 
