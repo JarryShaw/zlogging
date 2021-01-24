@@ -14,11 +14,11 @@ from typing import TYPE_CHECKING, Any, Generic, List, Set, TypeVar, Union, cast,
 from typing_extensions import TypedDict
 from typing_inspect import get_args, is_union_type
 
-from ._aux import decimal_toascii, expand_typing, float_toascii
-from ._compat import enum
-from ._exc import (BroDeprecationWarning, ZeekNotImplemented, ZeekTypeError, ZeekValueError,
+from zlogging._aux import decimal_toascii, expand_typing, float_toascii
+from zlogging._compat import enum
+from zlogging._exc import (BroDeprecationWarning, ZeekNotImplemented, ZeekTypeError, ZeekValueError,
                    ZeekValueWarning)
-from .enum import globals as enum_generator
+from zlogging.enum import globals as enum_generator
 
 _T = TypeVar("_T")
 _S = TypeVar('_S', bound='_SimpleType')
@@ -76,7 +76,7 @@ class BaseType(metaclass=abc.ABCMeta):
 
     @property
     @abc.abstractmethod
-    def python_type(self)-> 'Any':
+    def python_type(self) -> 'Any':
         """Any: Corresponding Python type annotation."""
 
     @property
@@ -1222,7 +1222,7 @@ class EnumType(_SimpleType):
                 data_str: enum.auto(),
             }, module='zlogging.enum', qualname='zlogging.enum.<unknown>')
             item = unknown[data_str]
-        return item
+        return item  # type: ignore[return-value]
 
     @overload
     def tojson(self, data: 'Enum') -> str: ...

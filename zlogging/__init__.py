@@ -4,9 +4,8 @@
 from zlogging.dumper import dump, dumps, write
 from zlogging.loader import load, loads, parse
 from zlogging.model import Model, new_model
-
-from .types import (AddrType, BoolType, CountType, DoubleType, EnumType, IntervalType, IntType,
-                    PortType, RecordType, SetType, StringType, SubnetType, TimeType, VectorType)
+from zlogging.types import (AddrType, BoolType, CountType, DoubleType, EnumType, IntervalType, IntType,
+                            PortType, RecordType, SetType, StringType, SubnetType, TimeType, VectorType)
 
 __all__ = [
     'write', 'dump', 'dumps',

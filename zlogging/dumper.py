@@ -8,9 +8,9 @@ import os
 import time
 from typing import TYPE_CHECKING
 
-from ._aux import unicode_escape
-from ._exc import ASCIIWriterError, JSONWriterError, WriterFormatError
-from .model import Model
+from zlogging._aux import unicode_escape
+from zlogging._exc import ASCIIWriterError, JSONWriterError, WriterFormatError
+from zlogging.model import Model
 
 __all__ = [
     'write', 'write_ascii', 'write_json',

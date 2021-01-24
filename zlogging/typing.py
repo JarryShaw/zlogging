@@ -5,8 +5,8 @@
 import warnings
 from typing import TYPE_CHECKING, Generic, TypeVar
 
-from ._exc import BroDeprecationWarning
-from .types import (AddrType, BoolType, CountType, DoubleType, EnumType, IntervalType, IntType,
+from zlogging._exc import BroDeprecationWarning
+from zlogging.types import (AddrType, BoolType, CountType, DoubleType, EnumType, IntervalType, IntType,
                     PortType, RecordType, SetType, StringType, SubnetType, TimeType, VectorType)
 
 __all__ = [
@@ -24,7 +24,7 @@ _S = TypeVar('_S', bound='_SimpleType')
 if TYPE_CHECKING:
     from typing import Any, Type
 
-    from .types import BaseType, _SimpleType
+    from zlogging.types import BaseType, _SimpleType
 
 
 def _deprecated(zeek_type: '_T') -> '_T':

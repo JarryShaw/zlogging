@@ -27,15 +27,16 @@ from zlogging._compat import enum
 '''
 TEMPLATE_INIT = '''\
 # -*- coding: utf-8 -*-
+# pylint: disable=ungrouped-imports
 """Bro/Zeek enum namespace."""
 
 import warnings
+from typing import TYPE_CHECKING
 
-import zlogging._typing as typing
 from zlogging._exc import BroDeprecationWarning
 '''
 TEMPLATE_FUNC = '''\
-def globals(*namespaces, bare: bool = False) -> typing.Dict[str, typing.Enum]:  # pylint: disable=redefined-builtin
+def globals(*namespaces, bare: bool = False) -> 'Dict[str, Enum]':  # pylint: disable=redefined-builtin
     """Generate Bro/Zeek ``enum`` namespace.
 
     Args:
@@ -188,6 +189,10 @@ with open(os.path.join(PATH, '__init__.py'), 'w') as file:
         enum_line[safe_namespace].append(f'    {safe_name!r}: {namespace}_{enum}[{enum_name!r}],')
     print('', file=file)
     print("__all__ = ['globals']", file=file)
+    print('', file=file)
+    print('if TYPE_CHECKING:', file=file)
+    print('    from enum import Enum', file=file)
+    print('    from typing import Dict', file=file)
     print('', file=file)
 
     for namespace in sorted(enum_line):

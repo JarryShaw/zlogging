@@ -76,6 +76,9 @@ class ErrorCode(enum.IntFlag):
     _ignore_ = 'ErrorCode _'
     ErrorCode = vars()
 
+    #: (present if base/bif/comm.bif.zeek is loaded)
+    ErrorCode['NO_ERROR'] = enum.auto()
+
     #: The unspecified default error code.
     ErrorCode['UNSPECIFIED'] = enum.auto()
 
@@ -87,6 +90,9 @@ class ErrorCode(enum.IntFlag):
 
     #: Remote peer not listening.
     ErrorCode['PEER_UNAVAILABLE'] = enum.auto()
+
+    #: (present if base/bif/comm.bif.zeek is loaded)
+    ErrorCode['PEER_DISCONNECT_DURING_HANDSHAKE'] = enum.auto()
 
     #: A peering request timed out.
     ErrorCode['PEER_TIMEOUT'] = enum.auto()
@@ -114,6 +120,24 @@ class ErrorCode(enum.IntFlag):
 
     #: The storage backend failed to execute the operation.
     ErrorCode['STALE_DATA'] = enum.auto()
+
+    #: (present if base/bif/comm.bif.zeek is loaded)
+    ErrorCode['CANNOT_OPEN_FILE'] = enum.auto()
+
+    #: (present if base/bif/comm.bif.zeek is loaded)
+    ErrorCode['CANNOT_WRITE_FILE'] = enum.auto()
+
+    #: (present if base/bif/comm.bif.zeek is loaded)
+    ErrorCode['INVALID_TOPIC_KEY'] = enum.auto()
+
+    #: (present if base/bif/comm.bif.zeek is loaded)
+    ErrorCode['END_OF_FILE'] = enum.auto()
+
+    #: (present if base/bif/comm.bif.zeek is loaded)
+    ErrorCode['INVALID_TAG'] = enum.auto()
+
+    #: (present if base/bif/comm.bif.zeek is loaded)
+    ErrorCode['INVALID_STATUS'] = enum.auto()
 
     #: Catch-all for a CAF-level problem.
     ErrorCode['CAF_ERROR'] = enum.auto()

@@ -1,9 +1,10 @@
 # -*- coding: utf-8 -*-
+# pylint: disable=ungrouped-imports
 """Bro/Zeek enum namespace."""
 
 import warnings
+from typing import TYPE_CHECKING
 
-import zlogging._typing as typing
 from zlogging._exc import BroDeprecationWarning
 from zlogging.enum.Broker import BackendType as Broker_BackendType
 from zlogging.enum.Broker import DataType as Broker_DataType
@@ -24,23 +25,24 @@ from zlogging.enum.JSON import TimestampFormat as JSON_TimestampFormat
 from zlogging.enum.Known import ModbusDeviceType as Known_ModbusDeviceType
 from zlogging.enum.LoadBalancing import Method as LoadBalancing_Method
 from zlogging.enum.Log import ID as Log_ID
+from zlogging.enum.Log import PrintLogType as Log_PrintLogType
 from zlogging.enum.Log import Writer as Log_Writer
 from zlogging.enum.MOUNT3 import auth_flavor_t as MOUNT3_auth_flavor_t
 from zlogging.enum.MOUNT3 import proc_t as MOUNT3_proc_t
 from zlogging.enum.MOUNT3 import status_t as MOUNT3_status_t
 from zlogging.enum.MQTT import SubUnsub as MQTT_SubUnsub
-from zlogging.enum.NetControl import CatchReleaseActions as NetControl_CatchReleaseActions
-from zlogging.enum.NetControl import EntityType as NetControl_EntityType
-from zlogging.enum.NetControl import InfoCategory as NetControl_InfoCategory
-from zlogging.enum.NetControl import InfoState as NetControl_InfoState
-from zlogging.enum.NetControl import RuleType as NetControl_RuleType
-from zlogging.enum.NetControl import TargetType as NetControl_TargetType
 from zlogging.enum.NFS3 import createmode_t as NFS3_createmode_t
 from zlogging.enum.NFS3 import file_type_t as NFS3_file_type_t
 from zlogging.enum.NFS3 import proc_t as NFS3_proc_t
 from zlogging.enum.NFS3 import stable_how_t as NFS3_stable_how_t
 from zlogging.enum.NFS3 import status_t as NFS3_status_t
 from zlogging.enum.NFS3 import time_how_t as NFS3_time_how_t
+from zlogging.enum.NetControl import CatchReleaseActions as NetControl_CatchReleaseActions
+from zlogging.enum.NetControl import EntityType as NetControl_EntityType
+from zlogging.enum.NetControl import InfoCategory as NetControl_InfoCategory
+from zlogging.enum.NetControl import InfoState as NetControl_InfoState
+from zlogging.enum.NetControl import RuleType as NetControl_RuleType
+from zlogging.enum.NetControl import TargetType as NetControl_TargetType
 from zlogging.enum.Notice import Action as Notice_Action
 from zlogging.enum.Notice import Type as Notice_Type
 from zlogging.enum.OpenFlow import Plugin as OpenFlow_Plugin
@@ -49,28 +51,34 @@ from zlogging.enum.OpenFlow import ofp_config_flags as OpenFlow_ofp_config_flags
 from zlogging.enum.OpenFlow import ofp_flow_mod_command as OpenFlow_ofp_flow_mod_command
 from zlogging.enum.ProtocolDetector import dir as ProtocolDetector_dir
 from zlogging.enum.Reporter import Level as Reporter_Level
-from zlogging.enum.Signatures import Action as Signatures_Action
 from zlogging.enum.SMB import Action as SMB_Action
 from zlogging.enum.SOCKS import RequestType as SOCKS_RequestType
-from zlogging.enum.Software import Type as Software_Type
 from zlogging.enum.SSL import SctSource as SSL_SctSource
+from zlogging.enum.Signatures import Action as Signatures_Action
+from zlogging.enum.Software import Type as Software_Type
 from zlogging.enum.SumStats import Calculation as SumStats_Calculation
+from zlogging.enum.Supervisor import ClusterRole as Supervisor_ClusterRole
 from zlogging.enum.Tunnel import Action as Tunnel_Action
 from zlogging.enum.Tunnel import Type as Tunnel_Type
 from zlogging.enum.Weird import Action as Weird_Action
+from zlogging.enum.ZeekygenExample import SimpleEnum as ZeekygenExample_SimpleEnum
 from zlogging.enum.zeek import Direction as zeek_Direction
 from zlogging.enum.zeek import Host as zeek_Host
 from zlogging.enum.zeek import IPAddrAnonymization as zeek_IPAddrAnonymization
 from zlogging.enum.zeek import IPAddrAnonymizationClass as zeek_IPAddrAnonymizationClass
 from zlogging.enum.zeek import PcapFilterID as zeek_PcapFilterID
+from zlogging.enum.zeek import TableChange as zeek_TableChange
 from zlogging.enum.zeek import layer3_proto as zeek_layer3_proto
 from zlogging.enum.zeek import link_encap as zeek_link_encap
 from zlogging.enum.zeek import pkt_profile_modes as zeek_pkt_profile_modes
 from zlogging.enum.zeek import rpc_status as zeek_rpc_status
 from zlogging.enum.zeek import transport_proto as zeek_transport_proto
-from zlogging.enum.ZeekygenExample import SimpleEnum as ZeekygenExample_SimpleEnum
 
 __all__ = ['globals']
+
+if TYPE_CHECKING:
+    from enum import Enum
+    from typing import Dict
 
 _enum_Barnyard2 = {
     'LOG': Log_ID['Barnyard2__LOG'],
@@ -82,12 +90,15 @@ _enum_Broker = {
     'BOOL': Broker_DataType['BOOL'],
     'BackendType': Broker_BackendType,
     'CAF_ERROR': Broker_ErrorCode['CAF_ERROR'],
+    'CANNOT_OPEN_FILE': Broker_ErrorCode['CANNOT_OPEN_FILE'],
+    'CANNOT_WRITE_FILE': Broker_ErrorCode['CANNOT_WRITE_FILE'],
     'CONNECTED': Broker_PeerStatus['CONNECTED'],
     'CONNECTING': Broker_PeerStatus['CONNECTING'],
     'COUNT': Broker_DataType['COUNT'],
     'DISCONNECTED': Broker_PeerStatus['DISCONNECTED'],
     'DOUBLE': Broker_DataType['DOUBLE'],
     'DataType': Broker_DataType,
+    'END_OF_FILE': Broker_ErrorCode['END_OF_FILE'],
     'ENUM': Broker_DataType['ENUM'],
     'ERROR': Broker_Type['ERROR'],
     'ErrorCode': Broker_ErrorCode,
@@ -96,13 +107,18 @@ _enum_Broker = {
     'INT': Broker_DataType['INT'],
     'INTERVAL': Broker_DataType['INTERVAL'],
     'INVALID_DATA': Broker_ErrorCode['INVALID_DATA'],
+    'INVALID_STATUS': Broker_ErrorCode['INVALID_STATUS'],
+    'INVALID_TAG': Broker_ErrorCode['INVALID_TAG'],
+    'INVALID_TOPIC_KEY': Broker_ErrorCode['INVALID_TOPIC_KEY'],
     'LOG': Log_ID['Broker__LOG'],
     'MASTER_EXISTS': Broker_ErrorCode['MASTER_EXISTS'],
     'MEMORY': Broker_BackendType['MEMORY'],
     'NONE': Broker_DataType['NONE'],
+    'NO_ERROR': Broker_ErrorCode['NO_ERROR'],
     'NO_SUCH_KEY': Broker_ErrorCode['NO_SUCH_KEY'],
     'NO_SUCH_MASTER': Broker_ErrorCode['NO_SUCH_MASTER'],
     'PEERED': Broker_PeerStatus['PEERED'],
+    'PEER_DISCONNECT_DURING_HANDSHAKE': Broker_ErrorCode['PEER_DISCONNECT_DURING_HANDSHAKE'],
     'PEER_INCOMPATIBLE': Broker_ErrorCode['PEER_INCOMPATIBLE'],
     'PEER_INVALID': Broker_ErrorCode['PEER_INVALID'],
     'PEER_TIMEOUT': Broker_ErrorCode['PEER_TIMEOUT'],
@@ -334,6 +350,11 @@ _enum_LoadedScripts = {
 
 _enum_Log = {
     'ID': Log_ID,
+    'PRINTLOG': Log_ID['PRINTLOG'],
+    'PrintLogType': Log_PrintLogType,
+    'REDIRECT_ALL': Log_PrintLogType['REDIRECT_ALL'],
+    'REDIRECT_NONE': Log_PrintLogType['REDIRECT_NONE'],
+    'REDIRECT_STDOUT': Log_PrintLogType['REDIRECT_STDOUT'],
     'UNKNOWN': Log_ID['UNKNOWN'],
     'WRITER_ASCII': Log_Writer['WRITER_ASCII'],
     'WRITER_NONE': Log_Writer['WRITER_NONE'],
@@ -757,6 +778,15 @@ _enum_SumStats = {
     'VARIANCE': SumStats_Calculation['VARIANCE'],
 }
 
+_enum_Supervisor = {
+    'ClusterRole': Supervisor_ClusterRole,
+    'LOGGER': Supervisor_ClusterRole['LOGGER'],
+    'MANAGER': Supervisor_ClusterRole['MANAGER'],
+    'NONE': Supervisor_ClusterRole['NONE'],
+    'PROXY': Supervisor_ClusterRole['PROXY'],
+    'WORKER': Supervisor_ClusterRole['WORKER'],
+}
+
 _enum_Syslog = {
     'LOG': Log_ID['Syslog__LOG'],
 }
@@ -878,6 +908,11 @@ _enum_zeek = {
     'RPC_UNKNOWN_ERROR': zeek_rpc_status['RPC_UNKNOWN_ERROR'],
     'RPC_VERS_MISMATCH': zeek_rpc_status['RPC_VERS_MISMATCH'],
     'SEQUENTIALLY_NUMBERED': zeek_IPAddrAnonymization['SEQUENTIALLY_NUMBERED'],
+    'TABLE_ELEMENT_CHANGED': zeek_TableChange['TABLE_ELEMENT_CHANGED'],
+    'TABLE_ELEMENT_EXPIRED': zeek_TableChange['TABLE_ELEMENT_EXPIRED'],
+    'TABLE_ELEMENT_NEW': zeek_TableChange['TABLE_ELEMENT_NEW'],
+    'TABLE_ELEMENT_REMOVED': zeek_TableChange['TABLE_ELEMENT_REMOVED'],
+    'TableChange': zeek_TableChange,
     'icmp': zeek_transport_proto['icmp'],
     'layer3_proto': zeek_layer3_proto,
     'link_encap': zeek_link_encap,
@@ -890,7 +925,7 @@ _enum_zeek = {
 }
 
 
-def globals(*namespaces, bare: bool = False) -> typing.Dict[str, typing.Enum]:  # pylint: disable=redefined-builtin
+def globals(*namespaces, bare: bool = False) -> 'Dict[str, Enum]':  # pylint: disable=redefined-builtin
     """Generate Bro/Zeek ``enum`` namespace.
 
     Args:

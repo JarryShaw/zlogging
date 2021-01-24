@@ -21,6 +21,9 @@ class ID(enum.IntFlag):
     #: Dummy place-holder.
     ID['UNKNOWN'] = enum.auto()
 
+    #: Print statements that have been redirected to a log stream.
+    ID['PRINTLOG'] = enum.auto()
+
     #: Broker::LOG
     #: (present if base/frameworks/broker/log.zeek is loaded)
     ID['Broker__LOG'] = enum.auto()
@@ -285,6 +288,28 @@ class ID(enum.IntFlag):
     #: ZeekygenExample::LOG
     #: (present if zeekygen/example.zeek is loaded)
     ID['ZeekygenExample__LOG'] = enum.auto()
+
+
+@enum.unique
+class PrintLogType(enum.IntFlag):
+    """Configurations for Log::print\_to\_log
+
+    c.f. `base/frameworks/logging/main.zeek <https://docs.zeek.org/en/stable/scripts/base/frameworks/logging/main.zeek.html#type-Log::PrintLogType>`__
+
+    """
+
+    _ignore_ = 'PrintLogType _'
+    PrintLogType = vars()
+
+    #: No redirection of print statements.
+    PrintLogType['REDIRECT_NONE'] = enum.auto()
+
+    #: Redirection of those print statements that were being logged to stdout,
+    #: leaving behind those set to go to other specific files.
+    PrintLogType['REDIRECT_STDOUT'] = enum.auto()
+
+    #: Redirection of all print statements.
+    PrintLogType['REDIRECT_ALL'] = enum.auto()
 
 
 @enum.unique

@@ -19,9 +19,9 @@ if TYPE_CHECKING:
 
     from typing_extensions import Literal
 
-    from ._typing import ExpandedTyping
-    from .model import Model
-    from .types import RecordType
+    from zlogging._typing import ExpandedTyping
+    from zlogging.model import Model
+    from zlogging.types import RecordType
 
 __all__ = ['readline', 'decimal_toascii', 'float_toascii', 'unicode_escape', 'expand_typing']
 
@@ -185,7 +185,7 @@ def unicode_escape(string: bytes) -> str:
     return ''.join(map(lambda s: '\\x%s' % s, textwrap.wrap(string.hex(), 2)))
 
 
-def expand_typing(cls: 'Union[Type[Model], Type[RecordType]]',
+def expand_typing(cls: 'Union[Model, Type[Model], RecordType, Type[RecordType]]',
                   exc: 'Optional[Type[ValueError]]' = None) -> 'ExpandedTyping':
     """Expand typing annotations.
 

@@ -9,7 +9,7 @@ import requests
 
 ROOT = os.path.dirname(os.path.abspath(__file__))
 # enable caching files
-CACHING = False
+CACHING = True
 
 link = 'https://docs.zeek.org/en/stable/script-reference/scripts.html'
 resp = requests.get(link)

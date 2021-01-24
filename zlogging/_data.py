@@ -15,7 +15,7 @@ if TYPE_CHECKING:
     from os import PathLike
     from typing import List, Literal
 
-    from .model import Model
+    from zlogging.model import Model
 
 
 class Info(metaclass=abc.ABCMeta):

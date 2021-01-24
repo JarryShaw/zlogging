@@ -11,12 +11,12 @@ import re
 import warnings
 from typing import TYPE_CHECKING, TypeVar, cast
 
-from ._aux import readline
-from ._data import ASCIIInfo, JSONInfo
-from ._exc import (ASCIIParserWarning, ASCIIPaserError, JSONParserError, JSONParserWarning,
+from zlogging._aux import readline
+from zlogging._data import ASCIIInfo, JSONInfo
+from zlogging._exc import (ASCIIParserWarning, ASCIIPaserError, JSONParserError, JSONParserWarning,
                    ParserError, ZeekValueError)
-from .model import new_model
-from .types import (AddrType, AnyType, BaseType, BoolType, CountType, DoubleType, EnumType,
+from zlogging.model import new_model
+from zlogging.types import (AddrType, AnyType, BaseType, BoolType, CountType, DoubleType, EnumType,
                     IntervalType, IntType, PortType, SetType, StringType, SubnetType, TimeType,
                     VectorType)
 

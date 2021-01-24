@@ -5,6 +5,22 @@ from zlogging._compat import enum
 
 
 @enum.unique
+class TableChange(enum.IntFlag):
+    """c.f. `base/bif/types.bif.zeek <https://docs.zeek.org/en/stable/scripts/base/bif/types.bif.zeek.html#type-TableChange>`__"""
+
+    _ignore_ = 'TableChange _'
+    TableChange = vars()
+
+    TableChange['TABLE_ELEMENT_NEW'] = enum.auto()
+
+    TableChange['TABLE_ELEMENT_CHANGED'] = enum.auto()
+
+    TableChange['TABLE_ELEMENT_REMOVED'] = enum.auto()
+
+    TableChange['TABLE_ELEMENT_EXPIRED'] = enum.auto()
+
+
+@enum.unique
 class layer3_proto(enum.IntFlag):
     """c.f. `base/bif/types.bif.zeek <https://docs.zeek.org/en/stable/scripts/base/bif/types.bif.zeek.html#type-layer3_proto>`__"""
 

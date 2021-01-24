@@ -7,8 +7,8 @@ import collections
 import types
 from typing import TYPE_CHECKING
 
-from ._aux import expand_typing
-from ._exc import ModelFormatError, ModelTypeError, ModelValueError
+from zlogging._aux import expand_typing
+from zlogging._exc import ModelFormatError, ModelTypeError, ModelValueError
 
 __all__ = [
     'Model', 'new_model',

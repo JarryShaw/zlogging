@@ -2,7 +2,7 @@
 """Bro/Zeek logging framework for Python."""
 
 # version string
-__version__ = '0.1.0.post1'
+__version__ = '0.1.1'
 
 with open('README.rst') as file:
     long_description = file.read()
