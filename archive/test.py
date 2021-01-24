@@ -4,7 +4,7 @@
 import os
 import unittest
 
-import zlogging
+import zlogging  # pylint: disable=import-error
 
 ROOT = os.path.dirname(os.path.realpath(__file__))
 
