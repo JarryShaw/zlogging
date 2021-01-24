@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>zlogging._aux &#8212; ZLogging 0.1.0.post1 documentation</title>
+    <title>zlogging._aux &#8212; ZLogging 0.1.1 documentation</title>
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/alabaster.css" type="text/css" />
     <script id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
@@ -52,9 +52,9 @@
 
     <span class="kn">from</span> <span class="nn">typing_extensions</span> <span class="kn">import</span> <span class="n">Literal</span>
 
-    <span class="kn">from</span> <span class="nn">._typing</span> <span class="kn">import</span> <span class="n">ExpandedTyping</span>
-    <span class="kn">from</span> <span class="nn">.model</span> <span class="kn">import</span> <span class="n">Model</span>
-    <span class="kn">from</span> <span class="nn">.types</span> <span class="kn">import</span> <span class="n">RecordType</span>
+    <span class="kn">from</span> <span class="nn">zlogging._typing</span> <span class="kn">import</span> <span class="n">ExpandedTyping</span>
+    <span class="kn">from</span> <span class="nn">zlogging.model</span> <span class="kn">import</span> <span class="n">Model</span>
+    <span class="kn">from</span> <span class="nn">zlogging.types</span> <span class="kn">import</span> <span class="n">RecordType</span>
 
 <span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;readline&#39;</span><span class="p">,</span> <span class="s1">&#39;decimal_toascii&#39;</span><span class="p">,</span> <span class="s1">&#39;float_toascii&#39;</span><span class="p">,</span> <span class="s1">&#39;unicode_escape&#39;</span><span class="p">,</span> <span class="s1">&#39;expand_typing&#39;</span><span class="p">]</span>
 
@@ -218,7 +218,7 @@
     <span class="k">return</span> <span class="s1">&#39;&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">s</span><span class="p">:</span> <span class="s1">&#39;</span><span class="se">\\</span><span class="s1">x</span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">s</span><span class="p">,</span> <span class="n">textwrap</span><span class="o">.</span><span class="n">wrap</span><span class="p">(</span><span class="n">string</span><span class="o">.</span><span class="n">hex</span><span class="p">(),</span> <span class="mi">2</span><span class="p">)))</span></div>
 
 
-<div class="viewcode-block" id="expand_typing"><a class="viewcode-back" href="../../zlogging._aux.html#zlogging._aux.expand_typing">[docs]</a><span class="k">def</span> <span class="nf">expand_typing</span><span class="p">(</span><span class="bp">cls</span><span class="p">:</span> <span class="s1">&#39;Union[Type[Model], Type[RecordType]]&#39;</span><span class="p">,</span>
+<div class="viewcode-block" id="expand_typing"><a class="viewcode-back" href="../../zlogging._aux.html#zlogging._aux.expand_typing">[docs]</a><span class="k">def</span> <span class="nf">expand_typing</span><span class="p">(</span><span class="bp">cls</span><span class="p">:</span> <span class="s1">&#39;Union[Model, Type[Model], RecordType, Type[RecordType]]&#39;</span><span class="p">,</span>
                   <span class="n">exc</span><span class="p">:</span> <span class="s1">&#39;Optional[Type[ValueError]]&#39;</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;ExpandedTyping&#39;</span><span class="p">:</span>
     <span class="sd">&quot;&quot;&quot;Expand typing annotations.</span>
 

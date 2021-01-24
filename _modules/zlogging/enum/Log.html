@@ -1,0 +1,435 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>zlogging.enum.Log &#8212; ZLogging 0.1.1 documentation</title>
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/alabaster.css" type="text/css" />
+    <script id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+    <script src="../../../_static/jquery.js"></script>
+    <script src="../../../_static/underscore.js"></script>
+    <script src="../../../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+   
+  <link rel="stylesheet" href="../../../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <h1>Source code for zlogging.enum.Log</h1><div class="highlight"><pre>
+<span></span><span class="c1"># -*- coding: utf-8 -*-</span>
+<span class="sd">&quot;&quot;&quot;Namespace: ``Log``.&quot;&quot;&quot;</span>
+
+<span class="kn">from</span> <span class="nn">zlogging._compat</span> <span class="kn">import</span> <span class="n">enum</span>
+
+
+<div class="viewcode-block" id="ID"><a class="viewcode-back" href="../../../zlogging.enum.html#zlogging.enum.Log.ID">[docs]</a><span class="nd">@enum</span><span class="o">.</span><span class="n">unique</span>
+<span class="k">class</span> <span class="nc">ID</span><span class="p">(</span><span class="n">enum</span><span class="o">.</span><span class="n">IntFlag</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Type that defines an ID unique to each log stream. Scripts creating new</span>
+<span class="sd">    log streams need to redef this enum to add their own specific log ID.</span>
+<span class="sd">    The log ID implicitly determines the default name of the generated log</span>
+<span class="sd">    file.</span>
+
+<span class="sd">    c.f. `base/frameworks/logging/main.zeek &lt;https://docs.zeek.org/en/stable/scripts/base/frameworks/logging/main.zeek.html#type-Log::ID&gt;`__</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">_ignore_</span> <span class="o">=</span> <span class="s1">&#39;ID _&#39;</span>
+    <span class="n">ID</span> <span class="o">=</span> <span class="nb">vars</span><span class="p">()</span>
+
+    <span class="c1">#: Dummy place-holder.</span>
+    <span class="n">ID</span><span class="p">[</span><span class="s1">&#39;UNKNOWN&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span>
+
+    <span class="c1">#: Print statements that have been redirected to a log stream.</span>
+    <span class="n">ID</span><span class="p">[</span><span class="s1">&#39;PRINTLOG&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span>
+
+    <span class="c1">#: Broker::LOG</span>
+    <span class="c1">#: (present if base/frameworks/broker/log.zeek is loaded)</span>
+    <span class="n">ID</span><span class="p">[</span><span class="s1">&#39;Broker__LOG&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span>
+
+    <span class="c1">#: Files::LOG</span>
+    <span class="c1">#: (present if base/frameworks/files/main.zeek is loaded)</span>
+    <span class="c1">#: Logging stream for file analysis.</span>
+    <span class="n">ID</span><span class="p">[</span><span class="s1">&#39;Files__LOG&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span>
+
+    <span class="c1">#: Reporter::LOG</span>
+    <span class="c1">#: (present if base/frameworks/reporter/main.zeek is loaded)</span>
+    <span class="n">ID</span><span class="p">[</span><span class="s1">&#39;Reporter__LOG&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span>
+
+    <span class="c1">#: Cluster::LOG</span>
+    <span class="c1">#: (present if base/frameworks/cluster/main.zeek is loaded)</span>
+    <span class="n">ID</span><span class="p">[</span><span class="s1">&#39;Cluster__LOG&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span>
+
+    <span class="c1">#: Notice::LOG</span>
+    <span class="c1">#: (present if base/frameworks/notice/main.zeek is loaded)</span>
+    <span class="c1">#: This is the primary logging stream for notices.</span>
+    <span class="n">ID</span><span class="p">[</span><span class="s1">&#39;Notice__LOG&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span>
+
+    <span class="c1">#: Notice::ALARM_LOG</span>
+    <span class="c1">#: (present if base/frameworks/notice/main.zeek is loaded)</span>
+    <span class="c1">#: This is the alarm stream.</span>
+    <span class="n">ID</span><span class="p">[</span><span class="s1">&#39;Notice__ALARM_LOG&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span>
+
+    <span class="c1">#: Weird::LOG</span>
+    <span class="c1">#: (present if base/frameworks/notice/weird.zeek is loaded)</span>
+    <span class="n">ID</span><span class="p">[</span><span class="s1">&#39;Weird__LOG&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span>
+
+    <span class="c1">#: DPD::LOG</span>
+    <span class="c1">#: (present if base/frameworks/dpd/main.zeek is loaded)</span>
+    <span class="n">ID</span><span class="p">[</span><span class="s1">&#39;DPD__LOG&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span>
+
+    <span class="c1">#: Signatures::LOG</span>
+    <span class="c1">#: (present if base/frameworks/signatures/main.zeek is loaded)</span>
+    <span class="n">ID</span><span class="p">[</span><span class="s1">&#39;Signatures__LOG&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span>
+
+    <span class="c1">#: PacketFilter::LOG</span>
+    <span class="c1">#: (present if base/frameworks/packet-filter/main.zeek is loaded)</span>
+    <span class="n">ID</span><span class="p">[</span><span class="s1">&#39;PacketFilter__LOG&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span>
+
+    <span class="c1">#: Software::LOG</span>
+    <span class="c1">#: (present if base/frameworks/software/main.zeek is loaded)</span>
+    <span class="n">ID</span><span class="p">[</span><span class="s1">&#39;Software__LOG&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span>
+
+    <span class="c1">#: Intel::LOG</span>
+    <span class="c1">#: (present if base/frameworks/intel/main.zeek is loaded)</span>
+    <span class="n">ID</span><span class="p">[</span><span class="s1">&#39;Intel__LOG&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span>
+
+    <span class="c1">#: Config::LOG</span>
+    <span class="c1">#: (present if base/frameworks/config/main.zeek is loaded)</span>
+    <span class="n">ID</span><span class="p">[</span><span class="s1">&#39;Config__LOG&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span>
+
+    <span class="c1">#: Tunnel::LOG</span>
+    <span class="c1">#: (present if base/frameworks/tunnels/main.zeek is loaded)</span>
+    <span class="n">ID</span><span class="p">[</span><span class="s1">&#39;Tunnel__LOG&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span>
+
+    <span class="c1">#: OpenFlow::LOG</span>
+    <span class="c1">#: (present if base/frameworks/openflow/plugins/log.zeek is loaded)</span>
+    <span class="n">ID</span><span class="p">[</span><span class="s1">&#39;OpenFlow__LOG&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span>
+
+    <span class="c1">#: NetControl::LOG</span>
+    <span class="c1">#: (present if base/frameworks/netcontrol/main.zeek is loaded)</span>
+    <span class="n">ID</span><span class="p">[</span><span class="s1">&#39;NetControl__LOG&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span>
+
+    <span class="c1">#: NetControl::DROP</span>
+    <span class="c1">#: (present if base/frameworks/netcontrol/types.zeek is loaded)</span>
+    <span class="c1">#: Stop forwarding all packets matching the entity.</span>
+    <span class="c1">#: No additional arguments.</span>
+    <span class="n">ID</span><span class="p">[</span><span class="s1">&#39;NetControl__DROP&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span>
+
+    <span class="c1">#: NetControl::SHUNT</span>
+    <span class="c1">#: (present if base/frameworks/netcontrol/shunt.zeek is loaded)</span>
+    <span class="n">ID</span><span class="p">[</span><span class="s1">&#39;NetControl__SHUNT&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span>
+
+    <span class="c1">#: Conn::LOG</span>
+    <span class="c1">#: (present if base/protocols/conn/main.zeek is loaded)</span>
+    <span class="n">ID</span><span class="p">[</span><span class="s1">&#39;Conn__LOG&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span>
+
+    <span class="c1">#: DCE_RPC::LOG</span>
+    <span class="c1">#: (present if base/protocols/dce-rpc/main.zeek is loaded)</span>
+    <span class="n">ID</span><span class="p">[</span><span class="s1">&#39;DCE_RPC__LOG&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span>
+
+    <span class="c1">#: DHCP::LOG</span>
+    <span class="c1">#: (present if base/protocols/dhcp/main.zeek is loaded)</span>
+    <span class="n">ID</span><span class="p">[</span><span class="s1">&#39;DHCP__LOG&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span>
+
+    <span class="c1">#: DNP3::LOG</span>
+    <span class="c1">#: (present if base/protocols/dnp3/main.zeek is loaded)</span>
+    <span class="n">ID</span><span class="p">[</span><span class="s1">&#39;DNP3__LOG&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span>
+
+    <span class="c1">#: DNS::LOG</span>
+    <span class="c1">#: (present if base/protocols/dns/main.zeek is loaded)</span>
+    <span class="n">ID</span><span class="p">[</span><span class="s1">&#39;DNS__LOG&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span>
+
+    <span class="c1">#: FTP::LOG</span>
+    <span class="c1">#: (present if base/protocols/ftp/main.zeek is loaded)</span>
+    <span class="n">ID</span><span class="p">[</span><span class="s1">&#39;FTP__LOG&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span>
+
+    <span class="c1">#: SSL::LOG</span>
+    <span class="c1">#: (present if base/protocols/ssl/main.zeek is loaded)</span>
+    <span class="n">ID</span><span class="p">[</span><span class="s1">&#39;SSL__LOG&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span>
+
+    <span class="c1">#: X509::LOG</span>
+    <span class="c1">#: (present if base/files/x509/main.zeek is loaded)</span>
+    <span class="n">ID</span><span class="p">[</span><span class="s1">&#39;X509__LOG&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span>
+
+    <span class="c1">#: HTTP::LOG</span>
+    <span class="c1">#: (present if base/protocols/http/main.zeek is loaded)</span>
+    <span class="n">ID</span><span class="p">[</span><span class="s1">&#39;HTTP__LOG&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span>
+
+    <span class="c1">#: IRC::LOG</span>
+    <span class="c1">#: (present if base/protocols/irc/main.zeek is loaded)</span>
+    <span class="n">ID</span><span class="p">[</span><span class="s1">&#39;IRC__LOG&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span>
+
+    <span class="c1">#: KRB::LOG</span>
+    <span class="c1">#: (present if base/protocols/krb/main.zeek is loaded)</span>
+    <span class="n">ID</span><span class="p">[</span><span class="s1">&#39;KRB__LOG&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span>
+
+    <span class="c1">#: Modbus::LOG</span>
+    <span class="c1">#: (present if base/protocols/modbus/main.zeek is loaded)</span>
+    <span class="n">ID</span><span class="p">[</span><span class="s1">&#39;Modbus__LOG&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span>
+
+    <span class="c1">#: mysql::LOG</span>
+    <span class="c1">#: (present if base/protocols/mysql/main.zeek is loaded)</span>
+    <span class="n">ID</span><span class="p">[</span><span class="s1">&#39;mysql__LOG&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span>
+
+    <span class="c1">#: NTLM::LOG</span>
+    <span class="c1">#: (present if base/protocols/ntlm/main.zeek is loaded)</span>
+    <span class="n">ID</span><span class="p">[</span><span class="s1">&#39;NTLM__LOG&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span>
+
+    <span class="c1">#: NTP::LOG</span>
+    <span class="c1">#: (present if base/protocols/ntp/main.zeek is loaded)</span>
+    <span class="n">ID</span><span class="p">[</span><span class="s1">&#39;NTP__LOG&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span>
+
+    <span class="c1">#: RADIUS::LOG</span>
+    <span class="c1">#: (present if base/protocols/radius/main.zeek is loaded)</span>
+    <span class="n">ID</span><span class="p">[</span><span class="s1">&#39;RADIUS__LOG&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span>
+
+    <span class="c1">#: RDP::LOG</span>
+    <span class="c1">#: (present if base/protocols/rdp/main.zeek is loaded)</span>
+    <span class="n">ID</span><span class="p">[</span><span class="s1">&#39;RDP__LOG&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span>
+
+    <span class="c1">#: RFB::LOG</span>
+    <span class="c1">#: (present if base/protocols/rfb/main.zeek is loaded)</span>
+    <span class="n">ID</span><span class="p">[</span><span class="s1">&#39;RFB__LOG&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span>
+
+    <span class="c1">#: SIP::LOG</span>
+    <span class="c1">#: (present if base/protocols/sip/main.zeek is loaded)</span>
+    <span class="n">ID</span><span class="p">[</span><span class="s1">&#39;SIP__LOG&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span>
+
+    <span class="c1">#: SNMP::LOG</span>
+    <span class="c1">#: (present if base/protocols/snmp/main.zeek is loaded)</span>
+    <span class="n">ID</span><span class="p">[</span><span class="s1">&#39;SNMP__LOG&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span>
+
+    <span class="c1">#: SMB::AUTH_LOG</span>
+    <span class="c1">#: (present if base/protocols/smb/main.zeek is loaded)</span>
+    <span class="n">ID</span><span class="p">[</span><span class="s1">&#39;SMB__AUTH_LOG&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span>
+
+    <span class="c1">#: SMB::MAPPING_LOG</span>
+    <span class="c1">#: (present if base/protocols/smb/main.zeek is loaded)</span>
+    <span class="n">ID</span><span class="p">[</span><span class="s1">&#39;SMB__MAPPING_LOG&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span>
+
+    <span class="c1">#: SMB::FILES_LOG</span>
+    <span class="c1">#: (present if base/protocols/smb/main.zeek is loaded)</span>
+    <span class="n">ID</span><span class="p">[</span><span class="s1">&#39;SMB__FILES_LOG&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span>
+
+    <span class="c1">#: SMTP::LOG</span>
+    <span class="c1">#: (present if base/protocols/smtp/main.zeek is loaded)</span>
+    <span class="n">ID</span><span class="p">[</span><span class="s1">&#39;SMTP__LOG&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span>
+
+    <span class="c1">#: SOCKS::LOG</span>
+    <span class="c1">#: (present if base/protocols/socks/main.zeek is loaded)</span>
+    <span class="n">ID</span><span class="p">[</span><span class="s1">&#39;SOCKS__LOG&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span>
+
+    <span class="c1">#: SSH::LOG</span>
+    <span class="c1">#: (present if base/protocols/ssh/main.zeek is loaded)</span>
+    <span class="n">ID</span><span class="p">[</span><span class="s1">&#39;SSH__LOG&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span>
+
+    <span class="c1">#: Syslog::LOG</span>
+    <span class="c1">#: (present if base/protocols/syslog/main.zeek is loaded)</span>
+    <span class="n">ID</span><span class="p">[</span><span class="s1">&#39;Syslog__LOG&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span>
+
+    <span class="c1">#: PE::LOG</span>
+    <span class="c1">#: (present if base/files/pe/main.zeek is loaded)</span>
+    <span class="n">ID</span><span class="p">[</span><span class="s1">&#39;PE__LOG&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span>
+
+    <span class="c1">#: NetControl::CATCH_RELEASE</span>
+    <span class="c1">#: (present if policy/frameworks/netcontrol/catch-and-release.zeek is loaded)</span>
+    <span class="n">ID</span><span class="p">[</span><span class="s1">&#39;NetControl__CATCH_RELEASE&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span>
+
+    <span class="c1">#: Unified2::LOG</span>
+    <span class="c1">#: (present if policy/files/unified2/main.zeek is loaded)</span>
+    <span class="n">ID</span><span class="p">[</span><span class="s1">&#39;Unified2__LOG&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span>
+
+    <span class="c1">#: OCSP::LOG</span>
+    <span class="c1">#: (present if policy/files/x509/log-ocsp.zeek is loaded)</span>
+    <span class="n">ID</span><span class="p">[</span><span class="s1">&#39;OCSP__LOG&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span>
+
+    <span class="c1">#: Barnyard2::LOG</span>
+    <span class="c1">#: (present if policy/integration/barnyard2/main.zeek is loaded)</span>
+    <span class="n">ID</span><span class="p">[</span><span class="s1">&#39;Barnyard2__LOG&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span>
+
+    <span class="c1">#: CaptureLoss::LOG</span>
+    <span class="c1">#: (present if policy/misc/capture-loss.zeek is loaded)</span>
+    <span class="n">ID</span><span class="p">[</span><span class="s1">&#39;CaptureLoss__LOG&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span>
+
+    <span class="c1">#: Traceroute::LOG</span>
+    <span class="c1">#: (present if policy/misc/detect-traceroute/main.zeek is loaded)</span>
+    <span class="n">ID</span><span class="p">[</span><span class="s1">&#39;Traceroute__LOG&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span>
+
+    <span class="c1">#: LoadedScripts::LOG</span>
+    <span class="c1">#: (present if policy/misc/loaded-scripts.zeek is loaded)</span>
+    <span class="n">ID</span><span class="p">[</span><span class="s1">&#39;LoadedScripts__LOG&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span>
+
+    <span class="c1">#: Stats::LOG</span>
+    <span class="c1">#: (present if policy/misc/stats.zeek is loaded)</span>
+    <span class="n">ID</span><span class="p">[</span><span class="s1">&#39;Stats__LOG&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span>
+
+    <span class="c1">#: WeirdStats::LOG</span>
+    <span class="c1">#: (present if policy/misc/weird-stats.zeek is loaded)</span>
+    <span class="n">ID</span><span class="p">[</span><span class="s1">&#39;WeirdStats__LOG&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span>
+
+    <span class="c1">#: Known::HOSTS_LOG</span>
+    <span class="c1">#: (present if policy/protocols/conn/known-hosts.zeek is loaded)</span>
+    <span class="n">ID</span><span class="p">[</span><span class="s1">&#39;Known__HOSTS_LOG&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span>
+
+    <span class="c1">#: Known::SERVICES_LOG</span>
+    <span class="c1">#: (present if policy/protocols/conn/known-services.zeek is loaded)</span>
+    <span class="n">ID</span><span class="p">[</span><span class="s1">&#39;Known__SERVICES_LOG&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span>
+
+    <span class="c1">#: Known::MODBUS_LOG</span>
+    <span class="c1">#: (present if policy/protocols/modbus/known-masters-slaves.zeek is loaded)</span>
+    <span class="n">ID</span><span class="p">[</span><span class="s1">&#39;Known__MODBUS_LOG&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span>
+
+    <span class="c1">#: Modbus::REGISTER_CHANGE_LOG</span>
+    <span class="c1">#: (present if policy/protocols/modbus/track-memmap.zeek is loaded)</span>
+    <span class="n">ID</span><span class="p">[</span><span class="s1">&#39;Modbus__REGISTER_CHANGE_LOG&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span>
+
+    <span class="c1">#: MQTT::CONNECT_LOG</span>
+    <span class="c1">#: (present if policy/protocols/mqtt/main.zeek is loaded)</span>
+    <span class="n">ID</span><span class="p">[</span><span class="s1">&#39;MQTT__CONNECT_LOG&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span>
+
+    <span class="c1">#: MQTT::SUBSCRIBE_LOG</span>
+    <span class="c1">#: (present if policy/protocols/mqtt/main.zeek is loaded)</span>
+    <span class="n">ID</span><span class="p">[</span><span class="s1">&#39;MQTT__SUBSCRIBE_LOG&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span>
+
+    <span class="c1">#: MQTT::PUBLISH_LOG</span>
+    <span class="c1">#: (present if policy/protocols/mqtt/main.zeek is loaded)</span>
+    <span class="n">ID</span><span class="p">[</span><span class="s1">&#39;MQTT__PUBLISH_LOG&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span>
+
+    <span class="c1">#: SMB::CMD_LOG</span>
+    <span class="c1">#: (present if policy/protocols/smb/log-cmds.zeek is loaded)</span>
+    <span class="n">ID</span><span class="p">[</span><span class="s1">&#39;SMB__CMD_LOG&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span>
+
+    <span class="c1">#: Known::CERTS_LOG</span>
+    <span class="c1">#: (present if policy/protocols/ssl/known-certs.zeek is loaded)</span>
+    <span class="n">ID</span><span class="p">[</span><span class="s1">&#39;Known__CERTS_LOG&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span>
+
+    <span class="c1">#: ZeekygenExample::LOG</span>
+    <span class="c1">#: (present if zeekygen/example.zeek is loaded)</span>
+    <span class="n">ID</span><span class="p">[</span><span class="s1">&#39;ZeekygenExample__LOG&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="PrintLogType"><a class="viewcode-back" href="../../../zlogging.enum.html#zlogging.enum.Log.PrintLogType">[docs]</a><span class="nd">@enum</span><span class="o">.</span><span class="n">unique</span>
+<span class="k">class</span> <span class="nc">PrintLogType</span><span class="p">(</span><span class="n">enum</span><span class="o">.</span><span class="n">IntFlag</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Configurations for Log::print\_to\_log</span>
+
+<span class="sd">    c.f. `base/frameworks/logging/main.zeek &lt;https://docs.zeek.org/en/stable/scripts/base/frameworks/logging/main.zeek.html#type-Log::PrintLogType&gt;`__</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">_ignore_</span> <span class="o">=</span> <span class="s1">&#39;PrintLogType _&#39;</span>
+    <span class="n">PrintLogType</span> <span class="o">=</span> <span class="nb">vars</span><span class="p">()</span>
+
+    <span class="c1">#: No redirection of print statements.</span>
+    <span class="n">PrintLogType</span><span class="p">[</span><span class="s1">&#39;REDIRECT_NONE&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span>
+
+    <span class="c1">#: Redirection of those print statements that were being logged to stdout,</span>
+    <span class="c1">#: leaving behind those set to go to other specific files.</span>
+    <span class="n">PrintLogType</span><span class="p">[</span><span class="s1">&#39;REDIRECT_STDOUT&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span>
+
+    <span class="c1">#: Redirection of all print statements.</span>
+    <span class="n">PrintLogType</span><span class="p">[</span><span class="s1">&#39;REDIRECT_ALL&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="Writer"><a class="viewcode-back" href="../../../zlogging.enum.html#zlogging.enum.Log.Writer">[docs]</a><span class="nd">@enum</span><span class="o">.</span><span class="n">unique</span>
+<span class="k">class</span> <span class="nc">Writer</span><span class="p">(</span><span class="n">enum</span><span class="o">.</span><span class="n">IntFlag</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;c.f. `base/frameworks/logging/main.zeek &lt;https://docs.zeek.org/en/stable/scripts/base/frameworks/logging/main.zeek.html#type-Log::Writer&gt;`__&quot;&quot;&quot;</span>
+
+    <span class="n">_ignore_</span> <span class="o">=</span> <span class="s1">&#39;Writer _&#39;</span>
+    <span class="n">Writer</span> <span class="o">=</span> <span class="nb">vars</span><span class="p">()</span>
+
+    <span class="n">Writer</span><span class="p">[</span><span class="s1">&#39;WRITER_ASCII&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span>
+
+    <span class="n">Writer</span><span class="p">[</span><span class="s1">&#39;WRITER_NONE&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span>
+
+    <span class="n">Writer</span><span class="p">[</span><span class="s1">&#39;WRITER_SQLITE&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span></div>
+</pre></div>
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../../../index.html">ZLogging</a></h1>
+
+
+
+
+
+
+<p>
+<iframe src="https://ghbtns.com/github-btn.html?user=JarryShaw&repo=zlogging&type=star&count=true&size=large&v=2"
+  allowtransparency="true" frameborder="0" scrolling="0" width="200px" height="35px"></iframe>
+</p>
+
+
+
+
+
+<h3>Navigation</h3>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../zlogging.html">Bro/Zeek Logging Framework for Python</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../../index.html">Documentation overview</a><ul>
+  <li><a href="../../index.html">Module code</a><ul>
+  <li><a href="../enum.html">zlogging.enum</a><ul>
+  </ul></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2020, Jarry Shaw.
+      
+    </div>
+
+    
+    <a href="https://github.com/JarryShaw/zlogging" class="github">
+        <img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub"  class="github"/>
+    </a>
+    
+
+    
+  </body>
+</html>

@@ -1,0 +1,282 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>zlogging.enum.NetControl &#8212; ZLogging 0.1.1 documentation</title>
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/alabaster.css" type="text/css" />
+    <script id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+    <script src="../../../_static/jquery.js"></script>
+    <script src="../../../_static/underscore.js"></script>
+    <script src="../../../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+   
+  <link rel="stylesheet" href="../../../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <h1>Source code for zlogging.enum.NetControl</h1><div class="highlight"><pre>
+<span></span><span class="c1"># -*- coding: utf-8 -*-</span>
+<span class="sd">&quot;&quot;&quot;Namespace: ``NetControl``.&quot;&quot;&quot;</span>
+
+<span class="kn">from</span> <span class="nn">zlogging._compat</span> <span class="kn">import</span> <span class="n">enum</span>
+
+
+<div class="viewcode-block" id="InfoCategory"><a class="viewcode-back" href="../../../zlogging.enum.html#zlogging.enum.NetControl.InfoCategory">[docs]</a><span class="nd">@enum</span><span class="o">.</span><span class="n">unique</span>
+<span class="k">class</span> <span class="nc">InfoCategory</span><span class="p">(</span><span class="n">enum</span><span class="o">.</span><span class="n">IntFlag</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Type of an entry in the NetControl log.</span>
+
+<span class="sd">    c.f. `base/frameworks/netcontrol/main.zeek &lt;https://docs.zeek.org/en/stable/scripts/base/frameworks/netcontrol/main.zeek.html#type-NetControl::InfoCategory&gt;`__</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">_ignore_</span> <span class="o">=</span> <span class="s1">&#39;InfoCategory _&#39;</span>
+    <span class="n">InfoCategory</span> <span class="o">=</span> <span class="nb">vars</span><span class="p">()</span>
+
+    <span class="c1">#: A log entry reflecting a framework message.</span>
+    <span class="n">InfoCategory</span><span class="p">[</span><span class="s1">&#39;MESSAGE&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span>
+
+    <span class="c1">#: A log entry reflecting a framework message.</span>
+    <span class="n">InfoCategory</span><span class="p">[</span><span class="s1">&#39;ERROR&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span>
+
+    <span class="c1">#: A log entry about a rule.</span>
+    <span class="n">InfoCategory</span><span class="p">[</span><span class="s1">&#39;RULE&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="InfoState"><a class="viewcode-back" href="../../../zlogging.enum.html#zlogging.enum.NetControl.InfoState">[docs]</a><span class="nd">@enum</span><span class="o">.</span><span class="n">unique</span>
+<span class="k">class</span> <span class="nc">InfoState</span><span class="p">(</span><span class="n">enum</span><span class="o">.</span><span class="n">IntFlag</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;State of an entry in the NetControl log.</span>
+
+<span class="sd">    c.f. `base/frameworks/netcontrol/main.zeek &lt;https://docs.zeek.org/en/stable/scripts/base/frameworks/netcontrol/main.zeek.html#type-NetControl::InfoState&gt;`__</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">_ignore_</span> <span class="o">=</span> <span class="s1">&#39;InfoState _&#39;</span>
+    <span class="n">InfoState</span> <span class="o">=</span> <span class="nb">vars</span><span class="p">()</span>
+
+    <span class="c1">#: The request to add/remove a rule was sent to the respective backend.</span>
+    <span class="n">InfoState</span><span class="p">[</span><span class="s1">&#39;REQUESTED&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span>
+
+    <span class="c1">#: A rule was successfully added by a backend.</span>
+    <span class="n">InfoState</span><span class="p">[</span><span class="s1">&#39;SUCCEEDED&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span>
+
+    <span class="c1">#: A backend reported that a rule was already existing.</span>
+    <span class="n">InfoState</span><span class="p">[</span><span class="s1">&#39;EXISTS&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span>
+
+    <span class="c1">#: A rule addition failed.</span>
+    <span class="n">InfoState</span><span class="p">[</span><span class="s1">&#39;FAILED&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span>
+
+    <span class="c1">#: A rule was successfully removed by a backend.</span>
+    <span class="n">InfoState</span><span class="p">[</span><span class="s1">&#39;REMOVED&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span>
+
+    <span class="c1">#: A rule timeout was triggered by the NetControl framework or a backend.</span>
+    <span class="n">InfoState</span><span class="p">[</span><span class="s1">&#39;TIMEOUT&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="EntityType"><a class="viewcode-back" href="../../../zlogging.enum.html#zlogging.enum.NetControl.EntityType">[docs]</a><span class="nd">@enum</span><span class="o">.</span><span class="n">unique</span>
+<span class="k">class</span> <span class="nc">EntityType</span><span class="p">(</span><span class="n">enum</span><span class="o">.</span><span class="n">IntFlag</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Type defining the entity that a rule applies to.</span>
+
+<span class="sd">    c.f. `base/frameworks/netcontrol/types.zeek &lt;https://docs.zeek.org/en/stable/scripts/base/frameworks/netcontrol/types.zeek.html#type-NetControl::EntityType&gt;`__</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">_ignore_</span> <span class="o">=</span> <span class="s1">&#39;EntityType _&#39;</span>
+    <span class="n">EntityType</span> <span class="o">=</span> <span class="nb">vars</span><span class="p">()</span>
+
+    <span class="c1">#: Activity involving a specific IP address.</span>
+    <span class="n">EntityType</span><span class="p">[</span><span class="s1">&#39;ADDRESS&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span>
+
+    <span class="c1">#: Activity involving all of a bi-directional connection’s activity.</span>
+    <span class="n">EntityType</span><span class="p">[</span><span class="s1">&#39;CONNECTION&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span>
+
+    <span class="c1">#: Activity involving a uni-directional flow’s activity. Can contain wildcards.</span>
+    <span class="n">EntityType</span><span class="p">[</span><span class="s1">&#39;FLOW&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span>
+
+    <span class="c1">#: Activity involving a MAC address.</span>
+    <span class="n">EntityType</span><span class="p">[</span><span class="s1">&#39;MAC&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="RuleType"><a class="viewcode-back" href="../../../zlogging.enum.html#zlogging.enum.NetControl.RuleType">[docs]</a><span class="nd">@enum</span><span class="o">.</span><span class="n">unique</span>
+<span class="k">class</span> <span class="nc">RuleType</span><span class="p">(</span><span class="n">enum</span><span class="o">.</span><span class="n">IntFlag</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Type of rules that the framework supports. Each type lists the extra</span>
+<span class="sd">    NetControl::Rule fields it uses, if any.</span>
+
+<span class="sd">    Plugins may extend this type to define their own.</span>
+
+<span class="sd">    c.f. `base/frameworks/netcontrol/types.zeek &lt;https://docs.zeek.org/en/stable/scripts/base/frameworks/netcontrol/types.zeek.html#type-NetControl::RuleType&gt;`__</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">_ignore_</span> <span class="o">=</span> <span class="s1">&#39;RuleType _&#39;</span>
+    <span class="n">RuleType</span> <span class="o">=</span> <span class="nb">vars</span><span class="p">()</span>
+
+    <span class="c1">#: Stop forwarding all packets matching the entity.</span>
+    <span class="c1">#: No additional arguments.</span>
+    <span class="n">RuleType</span><span class="p">[</span><span class="s1">&#39;DROP&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span>
+
+    <span class="c1">#: Modify all packets matching entity. The packets</span>
+    <span class="c1">#: will be modified according to the mod entry of</span>
+    <span class="c1">#: the rule.</span>
+    <span class="n">RuleType</span><span class="p">[</span><span class="s1">&#39;MODIFY&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span>
+
+    <span class="c1">#: Redirect all packets matching entity to a different switch port,</span>
+    <span class="c1">#: given in the out\_port argument of the rule.</span>
+    <span class="n">RuleType</span><span class="p">[</span><span class="s1">&#39;REDIRECT&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span>
+
+    <span class="c1">#: Whitelists all packets of an entity, meaning no restrictions will be applied.</span>
+    <span class="c1">#: While whitelisting is the default if no rule matches, this type can be</span>
+    <span class="c1">#: used to override lower-priority rules that would otherwise take effect for the</span>
+    <span class="c1">#: entity.</span>
+    <span class="n">RuleType</span><span class="p">[</span><span class="s1">&#39;WHITELIST&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="TargetType"><a class="viewcode-back" href="../../../zlogging.enum.html#zlogging.enum.NetControl.TargetType">[docs]</a><span class="nd">@enum</span><span class="o">.</span><span class="n">unique</span>
+<span class="k">class</span> <span class="nc">TargetType</span><span class="p">(</span><span class="n">enum</span><span class="o">.</span><span class="n">IntFlag</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Type defining the target of a rule.</span>
+
+<span class="sd">    Rules can either be applied to the forward path, affecting all network traffic, or</span>
+<span class="sd">    on the monitor path, only affecting the traffic that is sent to Zeek. The second</span>
+<span class="sd">    is mostly used for shunting, which allows Zeek to tell the networking hardware that</span>
+<span class="sd">    it wants to no longer see traffic that it identified as benign.</span>
+
+<span class="sd">    c.f. `base/frameworks/netcontrol/types.zeek &lt;https://docs.zeek.org/en/stable/scripts/base/frameworks/netcontrol/types.zeek.html#type-NetControl::TargetType&gt;`__</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">_ignore_</span> <span class="o">=</span> <span class="s1">&#39;TargetType _&#39;</span>
+    <span class="n">TargetType</span> <span class="o">=</span> <span class="nb">vars</span><span class="p">()</span>
+
+    <span class="n">TargetType</span><span class="p">[</span><span class="s1">&#39;FORWARD&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span>
+
+    <span class="n">TargetType</span><span class="p">[</span><span class="s1">&#39;MONITOR&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="CatchReleaseActions"><a class="viewcode-back" href="../../../zlogging.enum.html#zlogging.enum.NetControl.CatchReleaseActions">[docs]</a><span class="nd">@enum</span><span class="o">.</span><span class="n">unique</span>
+<span class="k">class</span> <span class="nc">CatchReleaseActions</span><span class="p">(</span><span class="n">enum</span><span class="o">.</span><span class="n">IntFlag</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;The enum that contains the different kinds of messages that are logged by</span>
+<span class="sd">    catch and release.</span>
+
+<span class="sd">    c.f. `policy/frameworks/netcontrol/catch-and-release.zeek &lt;https://docs.zeek.org/en/stable/scripts/policy/frameworks/netcontrol/catch-and-release.zeek.html#type-NetControl::CatchReleaseActions&gt;`__</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">_ignore_</span> <span class="o">=</span> <span class="s1">&#39;CatchReleaseActions _&#39;</span>
+    <span class="n">CatchReleaseActions</span> <span class="o">=</span> <span class="nb">vars</span><span class="p">()</span>
+
+    <span class="c1">#: Log lines marked with info are purely informational; no action was taken.</span>
+    <span class="n">CatchReleaseActions</span><span class="p">[</span><span class="s1">&#39;INFO&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span>
+
+    <span class="c1">#: A rule for the specified IP address already existed in NetControl (outside</span>
+    <span class="c1">#: of catch-and-release). Catch and release did not add a new rule, but is now</span>
+    <span class="c1">#: watching the IP address and will add a new rule after the current rule expires.</span>
+    <span class="n">CatchReleaseActions</span><span class="p">[</span><span class="s1">&#39;ADDED&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span>
+
+    <span class="c1">#: (present if base/frameworks/netcontrol/types.zeek is loaded)</span>
+    <span class="c1">#: Stop forwarding all packets matching the entity.</span>
+    <span class="c1">#: No additional arguments.</span>
+    <span class="n">CatchReleaseActions</span><span class="p">[</span><span class="s1">&#39;DROP&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span>
+
+    <span class="c1">#: A drop was requested by catch and release.</span>
+    <span class="c1">#: An address was successfully blocked by catch and release.</span>
+    <span class="n">CatchReleaseActions</span><span class="p">[</span><span class="s1">&#39;DROPPED&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span>
+
+    <span class="c1">#: An address was unblocked after the timeout expired.</span>
+    <span class="n">CatchReleaseActions</span><span class="p">[</span><span class="s1">&#39;UNBLOCK&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span>
+
+    <span class="c1">#: An address was forgotten because it did not reappear within the watch\_until interval.</span>
+    <span class="n">CatchReleaseActions</span><span class="p">[</span><span class="s1">&#39;FORGOTTEN&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span>
+
+    <span class="c1">#: A watched IP address was seen again; catch and release will re-block it.</span>
+    <span class="n">CatchReleaseActions</span><span class="p">[</span><span class="s1">&#39;SEEN_AGAIN&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span></div>
+</pre></div>
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../../../index.html">ZLogging</a></h1>
+
+
+
+
+
+
+<p>
+<iframe src="https://ghbtns.com/github-btn.html?user=JarryShaw&repo=zlogging&type=star&count=true&size=large&v=2"
+  allowtransparency="true" frameborder="0" scrolling="0" width="200px" height="35px"></iframe>
+</p>
+
+
+
+
+
+<h3>Navigation</h3>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../zlogging.html">Bro/Zeek Logging Framework for Python</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../../index.html">Documentation overview</a><ul>
+  <li><a href="../../index.html">Module code</a><ul>
+  <li><a href="../enum.html">zlogging.enum</a><ul>
+  </ul></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2020, Jarry Shaw.
+      
+    </div>
+
+    
+    <a href="https://github.com/JarryShaw/zlogging" class="github">
+        <img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub"  class="github"/>
+    </a>
+    
+
+    
+  </body>
+</html>
