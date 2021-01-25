@@ -25,6 +25,7 @@ codecov = "*"
 sphinx = "*"
 sphinx-autodoc-typehints = "*"
 rstcheck = "*"
+pytest = "*"
 tox = "*"
 beautifulsoup4 = {extras = ["html5lib"],version = "*"}
 requests = "*"
