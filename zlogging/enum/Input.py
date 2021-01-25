@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+# pylint: disable=line-too-long,import-error
 """Namespace: ``Input``."""
 
 from zlogging._compat import enum
@@ -6,9 +7,14 @@ from zlogging._compat import enum
 
 @enum.unique
 class Event(enum.IntFlag):
-    """Type that describes what kind of change occurred.
+    """Enum: ``Input::Event``.
 
-    c.f. `base/frameworks/input/main.zeek <https://docs.zeek.org/en/stable/scripts/base/frameworks/input/main.zeek.html#type-Input::Event>`__
+    Type that describes what kind of change occurred.
+
+    See Also:
+        `base/frameworks/input/main.zeek`_
+
+    .. _base/frameworks/input/main.zeek: https://docs.zeek.org/en/stable/scripts/base/frameworks/input/main.zeek.html#type-Input::Event
 
     """
 
@@ -27,9 +33,14 @@ class Event(enum.IntFlag):
 
 @enum.unique
 class Mode(enum.IntFlag):
-    """Type that defines the input stream read mode.
+    """Enum: ``Input::Mode``.
 
-    c.f. `base/frameworks/input/main.zeek <https://docs.zeek.org/en/stable/scripts/base/frameworks/input/main.zeek.html#type-Input::Mode>`__
+    Type that defines the input stream read mode.
+
+    See Also:
+        `base/frameworks/input/main.zeek`_
+
+    .. _base/frameworks/input/main.zeek: https://docs.zeek.org/en/stable/scripts/base/frameworks/input/main.zeek.html#type-Input::Mode
 
     """
 
@@ -48,7 +59,14 @@ class Mode(enum.IntFlag):
 
 @enum.unique
 class Reader(enum.IntFlag):
-    """c.f. `base/frameworks/input/main.zeek <https://docs.zeek.org/en/stable/scripts/base/frameworks/input/main.zeek.html#type-Input::Reader>`__"""
+    """Enum: ``Input::Reader``.
+
+    See Also:
+        `base/frameworks/input/main.zeek`_
+
+    .. _base/frameworks/input/main.zeek: https://docs.zeek.org/en/stable/scripts/base/frameworks/input/main.zeek.html#type-Input::Reader
+
+    """
 
     _ignore_ = 'Reader _'
     Reader = vars()

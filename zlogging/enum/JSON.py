@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+# pylint: disable=line-too-long,import-error
 """Namespace: ``JSON``."""
 
 from zlogging._compat import enum
@@ -6,7 +7,14 @@ from zlogging._compat import enum
 
 @enum.unique
 class TimestampFormat(enum.IntFlag):
-    """c.f. `base/init-bare.zeek <https://docs.zeek.org/en/stable/scripts/base/init-bare.zeek.html#type-JSON::TimestampFormat>`__"""
+    """Enum: ``JSON::TimestampFormat``.
+
+    See Also:
+        `base/init-bare.zeek`_
+
+    .. _base/init-bare.zeek: https://docs.zeek.org/en/stable/scripts/base/init-bare.zeek.html#type-JSON::TimestampFormat
+
+    """
 
     _ignore_ = 'TimestampFormat _'
     TimestampFormat = vars()

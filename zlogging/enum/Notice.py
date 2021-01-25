@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+# pylint: disable=line-too-long,import-error
 """Namespace: ``Notice``."""
 
 from zlogging._compat import enum
@@ -6,9 +7,14 @@ from zlogging._compat import enum
 
 @enum.unique
 class Action(enum.IntFlag):
-    """These are values representing actions that can be taken with notices.
+    """Enum: ``Notice::Action``.
 
-    c.f. `base/frameworks/notice/main.zeek <https://docs.zeek.org/en/stable/scripts/base/frameworks/notice/main.zeek.html#type-Notice::Action>`__
+    These are values representing actions that can be taken with notices.
+
+    See Also:
+        `base/frameworks/notice/main.zeek`_
+
+    .. _base/frameworks/notice/main.zeek: https://docs.zeek.org/en/stable/scripts/base/frameworks/notice/main.zeek.html#type-Notice::Action
 
     """
 
@@ -58,16 +64,18 @@ class Action(enum.IntFlag):
 
 @enum.unique
 class Type(enum.IntFlag):
-    """Scripts creating new notices need to redef this enum to add their
-    own specific notice types which would then get used when they call
-    the NOTICE function.  The convention is to give a general
-    category along with the specific notice separating words with
-    underscores and using leading capitals on each word except for
-    abbreviations which are kept in all capitals. For example,
-    SSH::Password\_Guessing is for hosts that have crossed a threshold of
-    failed SSH logins.
+    """Enum: ``Notice::Type``.
 
-    c.f. `base/frameworks/notice/main.zeek <https://docs.zeek.org/en/stable/scripts/base/frameworks/notice/main.zeek.html#type-Notice::Type>`__
+    Scripts creating new notices need to redef this enum to add their own specific notice types which
+    would then get used when they call the ``NOTICE`` function. The convention is to give a general
+    category along with the specific notice separating words with underscores and using leading capitals
+    on each word except for abbreviations which are kept in all capitals. For example,
+    SSH::Password_Guessing is for hosts that have crossed a threshold of failed SSH logins.
+
+    See Also:
+        `base/frameworks/notice/main.zeek`_
+
+    .. _base/frameworks/notice/main.zeek: https://docs.zeek.org/en/stable/scripts/base/frameworks/notice/main.zeek.html#type-Notice::Type
 
     """
 

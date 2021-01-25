@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+# pylint: disable=line-too-long,import-error
 """Namespace: ``Intel``."""
 
 from zlogging._compat import enum
@@ -6,9 +7,14 @@ from zlogging._compat import enum
 
 @enum.unique
 class Type(enum.IntFlag):
-    """Enum type to represent various types of intelligence data.
+    """Enum: ``Intel::Type``.
 
-    c.f. `base/frameworks/intel/main.zeek <https://docs.zeek.org/en/stable/scripts/base/frameworks/intel/main.zeek.html#type-Intel::Type>`__
+    Enum type to represent various types of intelligence data.
+
+    See Also:
+        `base/frameworks/intel/main.zeek`_
+
+    .. _base/frameworks/intel/main.zeek: https://docs.zeek.org/en/stable/scripts/base/frameworks/intel/main.zeek.html#type-Intel::Type
 
     """
 
@@ -55,10 +61,15 @@ class Type(enum.IntFlag):
 
 @enum.unique
 class Where(enum.IntFlag):
-    """Enum to represent where data came from when it was discovered.
-    The convention is to prefix the name with IN\_.
+    """Enum: ``Intel::Where``.
 
-    c.f. `base/frameworks/intel/main.zeek <https://docs.zeek.org/en/stable/scripts/base/frameworks/intel/main.zeek.html#type-Intel::Where>`__
+    Enum to represent where data came from when it was discovered. The convention is to prefix the name
+    with ``IN_``.
+
+    See Also:
+        `base/frameworks/intel/main.zeek`_
+
+    .. _base/frameworks/intel/main.zeek: https://docs.zeek.org/en/stable/scripts/base/frameworks/intel/main.zeek.html#type-Intel::Where
 
     """
 

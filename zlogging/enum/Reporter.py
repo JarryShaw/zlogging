@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+# pylint: disable=line-too-long,import-error
 """Namespace: ``Reporter``."""
 
 from zlogging._compat import enum
@@ -6,7 +7,14 @@ from zlogging._compat import enum
 
 @enum.unique
 class Level(enum.IntFlag):
-    """c.f. `base/bif/types.bif.zeek <https://docs.zeek.org/en/stable/scripts/base/bif/types.bif.zeek.html#type-Reporter::Level>`__"""
+    """Enum: ``Reporter::Level``.
+
+    See Also:
+        `base/bif/types.bif.zeek`_
+
+    .. _base/bif/types.bif.zeek: https://docs.zeek.org/en/stable/scripts/base/bif/types.bif.zeek.html#type-Reporter::Level
+
+    """
 
     _ignore_ = 'Level _'
     Level = vars()

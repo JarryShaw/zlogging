@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+# pylint: disable=line-too-long,import-error
 """Namespace: ``ProtocolDetector``."""
 
 from zlogging._compat import enum
@@ -6,7 +7,14 @@ from zlogging._compat import enum
 
 @enum.unique
 class dir(enum.IntFlag):
-    """c.f. `policy/frameworks/dpd/detect-protocols.zeek <https://docs.zeek.org/en/stable/scripts/policy/frameworks/dpd/detect-protocols.zeek.html#type-ProtocolDetector::dir>`__"""
+    """Enum: ``ProtocolDetector::dir``.
+
+    See Also:
+        `policy/frameworks/dpd/detect-protocols.zeek`_
+
+    .. _policy/frameworks/dpd/detect-protocols.zeek: https://docs.zeek.org/en/stable/scripts/policy/frameworks/dpd/detect-protocols.zeek.html#type-ProtocolDetector::dir
+
+    """
 
     _ignore_ = 'dir _'
     dir = vars()

@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+# pylint: disable=line-too-long,import-error
 """Namespace: ``NetControl``."""
 
 from zlogging._compat import enum
@@ -6,9 +7,14 @@ from zlogging._compat import enum
 
 @enum.unique
 class InfoCategory(enum.IntFlag):
-    """Type of an entry in the NetControl log.
+    """Enum: ``NetControl::InfoCategory``.
 
-    c.f. `base/frameworks/netcontrol/main.zeek <https://docs.zeek.org/en/stable/scripts/base/frameworks/netcontrol/main.zeek.html#type-NetControl::InfoCategory>`__
+    Type of an entry in the NetControl log.
+
+    See Also:
+        `base/frameworks/netcontrol/main.zeek`_
+
+    .. _base/frameworks/netcontrol/main.zeek: https://docs.zeek.org/en/stable/scripts/base/frameworks/netcontrol/main.zeek.html#type-NetControl::InfoCategory
 
     """
 
@@ -27,9 +33,14 @@ class InfoCategory(enum.IntFlag):
 
 @enum.unique
 class InfoState(enum.IntFlag):
-    """State of an entry in the NetControl log.
+    """Enum: ``NetControl::InfoState``.
 
-    c.f. `base/frameworks/netcontrol/main.zeek <https://docs.zeek.org/en/stable/scripts/base/frameworks/netcontrol/main.zeek.html#type-NetControl::InfoState>`__
+    State of an entry in the NetControl log.
+
+    See Also:
+        `base/frameworks/netcontrol/main.zeek`_
+
+    .. _base/frameworks/netcontrol/main.zeek: https://docs.zeek.org/en/stable/scripts/base/frameworks/netcontrol/main.zeek.html#type-NetControl::InfoState
 
     """
 
@@ -57,9 +68,14 @@ class InfoState(enum.IntFlag):
 
 @enum.unique
 class EntityType(enum.IntFlag):
-    """Type defining the entity that a rule applies to.
+    """Enum: ``NetControl::EntityType``.
 
-    c.f. `base/frameworks/netcontrol/types.zeek <https://docs.zeek.org/en/stable/scripts/base/frameworks/netcontrol/types.zeek.html#type-NetControl::EntityType>`__
+    Type defining the entity that a rule applies to.
+
+    See Also:
+        `base/frameworks/netcontrol/types.zeek`_
+
+    .. _base/frameworks/netcontrol/types.zeek: https://docs.zeek.org/en/stable/scripts/base/frameworks/netcontrol/types.zeek.html#type-NetControl::EntityType
 
     """
 
@@ -81,12 +97,17 @@ class EntityType(enum.IntFlag):
 
 @enum.unique
 class RuleType(enum.IntFlag):
-    """Type of rules that the framework supports. Each type lists the extra
-    NetControl::Rule fields it uses, if any.
+    """Enum: ``NetControl::RuleType``.
+
+    Type of rules that the framework supports. Each type lists the extra ``NetControl::Rule`` fields it
+    uses, if any.
 
     Plugins may extend this type to define their own.
 
-    c.f. `base/frameworks/netcontrol/types.zeek <https://docs.zeek.org/en/stable/scripts/base/frameworks/netcontrol/types.zeek.html#type-NetControl::RuleType>`__
+    See Also:
+        `base/frameworks/netcontrol/types.zeek`_
+
+    .. _base/frameworks/netcontrol/types.zeek: https://docs.zeek.org/en/stable/scripts/base/frameworks/netcontrol/types.zeek.html#type-NetControl::RuleType
 
     """
 
@@ -115,14 +136,19 @@ class RuleType(enum.IntFlag):
 
 @enum.unique
 class TargetType(enum.IntFlag):
-    """Type defining the target of a rule.
+    """Enum: ``NetControl::TargetType``.
 
-    Rules can either be applied to the forward path, affecting all network traffic, or
-    on the monitor path, only affecting the traffic that is sent to Zeek. The second
-    is mostly used for shunting, which allows Zeek to tell the networking hardware that
-    it wants to no longer see traffic that it identified as benign.
+    Type defining the target of a rule.
 
-    c.f. `base/frameworks/netcontrol/types.zeek <https://docs.zeek.org/en/stable/scripts/base/frameworks/netcontrol/types.zeek.html#type-NetControl::TargetType>`__
+    Rules can either be applied to the forward path, affecting all network traffic, or on the monitor
+    path, only affecting the traffic that is sent to Zeek. The second is mostly used for shunting, which
+    allows Zeek to tell the networking hardware that it wants to no longer see traffic that it
+    identified as benign.
+
+    See Also:
+        `base/frameworks/netcontrol/types.zeek`_
+
+    .. _base/frameworks/netcontrol/types.zeek: https://docs.zeek.org/en/stable/scripts/base/frameworks/netcontrol/types.zeek.html#type-NetControl::TargetType
 
     """
 
@@ -136,10 +162,14 @@ class TargetType(enum.IntFlag):
 
 @enum.unique
 class CatchReleaseActions(enum.IntFlag):
-    """The enum that contains the different kinds of messages that are logged by
-    catch and release.
+    """Enum: ``NetControl::CatchReleaseActions``.
 
-    c.f. `policy/frameworks/netcontrol/catch-and-release.zeek <https://docs.zeek.org/en/stable/scripts/policy/frameworks/netcontrol/catch-and-release.zeek.html#type-NetControl::CatchReleaseActions>`__
+    The enum that contains the different kinds of messages that are logged by catch and release.
+
+    See Also:
+        `policy/frameworks/netcontrol/catch-and-release.zeek`_
+
+    .. _policy/frameworks/netcontrol/catch-and-release.zeek: https://docs.zeek.org/en/stable/scripts/policy/frameworks/netcontrol/catch-and-release.zeek.html#type-NetControl::CatchReleaseActions
 
     """
 

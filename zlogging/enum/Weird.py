@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+# pylint: disable=line-too-long,import-error
 """Namespace: ``Weird``."""
 
 from zlogging._compat import enum
@@ -6,9 +7,14 @@ from zlogging._compat import enum
 
 @enum.unique
 class Action(enum.IntFlag):
-    """Types of actions that may be taken when handling weird activity events.
+    """Enum: ``Weird::Action``.
 
-    c.f. `base/frameworks/notice/weird.zeek <https://docs.zeek.org/en/stable/scripts/base/frameworks/notice/weird.zeek.html#type-Weird::Action>`__
+    Types of actions that may be taken when handling weird activity events.
+
+    See Also:
+        `base/frameworks/notice/weird.zeek`_
+
+    .. _base/frameworks/notice/weird.zeek: https://docs.zeek.org/en/stable/scripts/base/frameworks/notice/weird.zeek.html#type-Weird::Action
 
     """
 

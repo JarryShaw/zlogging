@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+# pylint: disable=line-too-long,import-error
 """Namespace: ``SOCKS``."""
 
 from zlogging._compat import enum
@@ -6,7 +7,14 @@ from zlogging._compat import enum
 
 @enum.unique
 class RequestType(enum.IntFlag):
-    """c.f. `base/protocols/socks/consts.zeek <https://docs.zeek.org/en/stable/scripts/base/protocols/socks/consts.zeek.html#type-SOCKS::RequestType>`__"""
+    """Enum: ``SOCKS::RequestType``.
+
+    See Also:
+        `base/protocols/socks/consts.zeek`_
+
+    .. _base/protocols/socks/consts.zeek: https://docs.zeek.org/en/stable/scripts/base/protocols/socks/consts.zeek.html#type-SOCKS::RequestType
+
+    """
 
     _ignore_ = 'RequestType _'
     RequestType = vars()

@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+# pylint: disable=line-too-long,import-error
 """Namespace: ``OpenFlow``."""
 
 from zlogging._compat import enum
@@ -6,13 +7,16 @@ from zlogging._compat import enum
 
 @enum.unique
 class ofp_action_type(enum.IntFlag):
-    """Openflow action\_type definitions.
+    """Enum: ``OpenFlow::ofp_action_type``.
 
-    The openflow action type defines
-    what actions openflow can take
-    to modify a packet
+    Openflow action_type definitions.
 
-    c.f. `base/frameworks/openflow/consts.zeek <https://docs.zeek.org/en/stable/scripts/base/frameworks/openflow/consts.zeek.html#type-OpenFlow::ofp_action_type>`__
+    The openflow action type defines what actions openflow can take to modify a packet.
+
+    See Also:
+        `base/frameworks/openflow/consts.zeek`_
+
+    .. _base/frameworks/openflow/consts.zeek: https://docs.zeek.org/en/stable/scripts/base/frameworks/openflow/consts.zeek.html#type-OpenFlow::ofp_action_type
 
     """
 
@@ -61,11 +65,16 @@ class ofp_action_type(enum.IntFlag):
 
 @enum.unique
 class ofp_config_flags(enum.IntFlag):
-    """Openflow config flag definitions.
+    """Enum: ``OpenFlow::ofp_config_flags``.
 
-    TODO: describe
+    Openflow config flag definitions.
 
-    c.f. `base/frameworks/openflow/consts.zeek <https://docs.zeek.org/en/stable/scripts/base/frameworks/openflow/consts.zeek.html#type-OpenFlow::ofp_config_flags>`__
+    TODO: describe.
+
+    See Also:
+        `base/frameworks/openflow/consts.zeek`_
+
+    .. _base/frameworks/openflow/consts.zeek: https://docs.zeek.org/en/stable/scripts/base/frameworks/openflow/consts.zeek.html#type-OpenFlow::ofp_config_flags
 
     """
 
@@ -86,12 +95,16 @@ class ofp_config_flags(enum.IntFlag):
 
 @enum.unique
 class ofp_flow_mod_command(enum.IntFlag):
-    """Openflow flow\_mod\_command definitions.
+    """Enum: ``OpenFlow::ofp_flow_mod_command``.
 
-    The openflow flow\_mod\_command describes
-    of what kind an action is.
+    Openflow flow_mod_command definitions.
 
-    c.f. `base/frameworks/openflow/consts.zeek <https://docs.zeek.org/en/stable/scripts/base/frameworks/openflow/consts.zeek.html#type-OpenFlow::ofp_flow_mod_command>`__
+    The openflow flow_mod_command describes of what kind an action is.
+
+    See Also:
+        `base/frameworks/openflow/consts.zeek`_
+
+    .. _base/frameworks/openflow/consts.zeek: https://docs.zeek.org/en/stable/scripts/base/frameworks/openflow/consts.zeek.html#type-OpenFlow::ofp_flow_mod_command
 
     """
 
@@ -116,9 +129,14 @@ class ofp_flow_mod_command(enum.IntFlag):
 
 @enum.unique
 class Plugin(enum.IntFlag):
-    """Available openflow plugins.
+    """Enum: ``OpenFlow::Plugin``.
 
-    c.f. `base/frameworks/openflow/types.zeek <https://docs.zeek.org/en/stable/scripts/base/frameworks/openflow/types.zeek.html#type-OpenFlow::Plugin>`__
+    Available openflow plugins.
+
+    See Also:
+        `base/frameworks/openflow/types.zeek`_
+
+    .. _base/frameworks/openflow/types.zeek: https://docs.zeek.org/en/stable/scripts/base/frameworks/openflow/types.zeek.html#type-OpenFlow::Plugin
 
     """
 

@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+# pylint: disable=line-too-long,import-error
 """Namespace: ``ZeekygenExample``."""
 
 from zlogging._compat import enum
@@ -6,10 +7,14 @@ from zlogging._compat import enum
 
 @enum.unique
 class SimpleEnum(enum.IntFlag):
-    """Documentation for the “SimpleEnum” type goes here.
-    It can span multiple lines.
+    """Enum: ``ZeekygenExample::SimpleEnum``.
 
-    c.f. `zeekygen/example.zeek <https://docs.zeek.org/en/stable/scripts/zeekygen/example.zeek.html#type-ZeekygenExample::SimpleEnum>`__
+    Documentation for the “SimpleEnum” type goes here. It can span multiple lines.
+
+    See Also:
+        `zeekygen/example.zeek`_
+
+    .. _zeekygen/example.zeek: https://docs.zeek.org/en/stable/scripts/zeekygen/example.zeek.html#type-ZeekygenExample::SimpleEnum
 
     """
 

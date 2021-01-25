@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+# pylint: disable=line-too-long,import-error
 """Namespace: ``zeek``."""
 
 from zlogging._compat import enum
@@ -6,7 +7,14 @@ from zlogging._compat import enum
 
 @enum.unique
 class TableChange(enum.IntFlag):
-    """c.f. `base/bif/types.bif.zeek <https://docs.zeek.org/en/stable/scripts/base/bif/types.bif.zeek.html#type-TableChange>`__"""
+    """Enum: ``TableChange``.
+
+    See Also:
+        `base/bif/types.bif.zeek`_
+
+    .. _base/bif/types.bif.zeek: https://docs.zeek.org/en/stable/scripts/base/bif/types.bif.zeek.html#type-TableChange
+
+    """
 
     _ignore_ = 'TableChange _'
     TableChange = vars()
@@ -22,7 +30,14 @@ class TableChange(enum.IntFlag):
 
 @enum.unique
 class layer3_proto(enum.IntFlag):
-    """c.f. `base/bif/types.bif.zeek <https://docs.zeek.org/en/stable/scripts/base/bif/types.bif.zeek.html#type-layer3_proto>`__"""
+    """Enum: ``layer3_proto``.
+
+    See Also:
+        `base/bif/types.bif.zeek`_
+
+    .. _base/bif/types.bif.zeek: https://docs.zeek.org/en/stable/scripts/base/bif/types.bif.zeek.html#type-layer3_proto
+
+    """
 
     _ignore_ = 'layer3_proto _'
     layer3_proto = vars()
@@ -38,7 +53,14 @@ class layer3_proto(enum.IntFlag):
 
 @enum.unique
 class link_encap(enum.IntFlag):
-    """c.f. `base/bif/types.bif.zeek <https://docs.zeek.org/en/stable/scripts/base/bif/types.bif.zeek.html#type-link_encap>`__"""
+    """Enum: ``link_encap``.
+
+    See Also:
+        `base/bif/types.bif.zeek`_
+
+    .. _base/bif/types.bif.zeek: https://docs.zeek.org/en/stable/scripts/base/bif/types.bif.zeek.html#type-link_encap
+
+    """
 
     _ignore_ = 'link_encap _'
     link_encap = vars()
@@ -50,7 +72,14 @@ class link_encap(enum.IntFlag):
 
 @enum.unique
 class rpc_status(enum.IntFlag):
-    """c.f. `base/bif/types.bif.zeek <https://docs.zeek.org/en/stable/scripts/base/bif/types.bif.zeek.html#type-rpc_status>`__"""
+    """Enum: ``rpc_status``.
+
+    See Also:
+        `base/bif/types.bif.zeek`_
+
+    .. _base/bif/types.bif.zeek: https://docs.zeek.org/en/stable/scripts/base/bif/types.bif.zeek.html#type-rpc_status
+
+    """
 
     _ignore_ = 'rpc_status _'
     rpc_status = vars()
@@ -78,9 +107,14 @@ class rpc_status(enum.IntFlag):
 
 @enum.unique
 class IPAddrAnonymization(enum.IntFlag):
-    """See also: anonymize\_addr
+    """Enum: ``IPAddrAnonymization``.
 
-    c.f. `base/init-bare.zeek <https://docs.zeek.org/en/stable/scripts/base/init-bare.zeek.html#type-IPAddrAnonymization>`__
+    See also: ``anonymize_addr``.
+
+    See Also:
+        `base/init-bare.zeek`_
+
+    .. _base/init-bare.zeek: https://docs.zeek.org/en/stable/scripts/base/init-bare.zeek.html#type-IPAddrAnonymization
 
     """
 
@@ -100,9 +134,14 @@ class IPAddrAnonymization(enum.IntFlag):
 
 @enum.unique
 class IPAddrAnonymizationClass(enum.IntFlag):
-    """See also: anonymize\_addr
+    """Enum: ``IPAddrAnonymizationClass``.
 
-    c.f. `base/init-bare.zeek <https://docs.zeek.org/en/stable/scripts/base/init-bare.zeek.html#type-IPAddrAnonymizationClass>`__
+    See also: ``anonymize_addr``.
+
+    See Also:
+        `base/init-bare.zeek`_
+
+    .. _base/init-bare.zeek: https://docs.zeek.org/en/stable/scripts/base/init-bare.zeek.html#type-IPAddrAnonymizationClass
 
     """
 
@@ -118,10 +157,15 @@ class IPAddrAnonymizationClass(enum.IntFlag):
 
 @enum.unique
 class PcapFilterID(enum.IntFlag):
-    """Enum type identifying dynamic BPF filters. These are used by
-    Pcap::precompile\_pcap\_filter and Pcap::precompile\_pcap\_filter.
+    """Enum: ``PcapFilterID``.
 
-    c.f. `base/init-bare.zeek <https://docs.zeek.org/en/stable/scripts/base/init-bare.zeek.html#type-PcapFilterID>`__
+    Enum type identifying dynamic BPF filters. These are used by ``Pcap::precompile_pcap_filter`` and
+    ``Pcap::precompile_pcap_filter``.
+
+    See Also:
+        `base/init-bare.zeek`_
+
+    .. _base/init-bare.zeek: https://docs.zeek.org/en/stable/scripts/base/init-bare.zeek.html#type-PcapFilterID
 
     """
 
@@ -141,11 +185,16 @@ class PcapFilterID(enum.IntFlag):
 
 @enum.unique
 class pkt_profile_modes(enum.IntFlag):
-    """Output modes for packet profiling information.
+    """Enum: ``pkt_profile_modes``.
 
-    See also: pkt\_profile\_mode, pkt\_profile\_freq, pkt\_profile\_file
+    Output modes for packet profiling information.
 
-    c.f. `base/init-bare.zeek <https://docs.zeek.org/en/stable/scripts/base/init-bare.zeek.html#type-pkt_profile_modes>`__
+    See also: ``pkt_profile_mode``, ``pkt_profile_freq``, ``pkt_profile_file``.
+
+    See Also:
+        `base/init-bare.zeek`_
+
+    .. _base/init-bare.zeek: https://docs.zeek.org/en/stable/scripts/base/init-bare.zeek.html#type-pkt_profile_modes
 
     """
 
@@ -167,10 +216,15 @@ class pkt_profile_modes(enum.IntFlag):
 
 @enum.unique
 class transport_proto(enum.IntFlag):
-    """A connection’s transport-layer protocol. Note that Zeek uses the term
-    “connection” broadly, using flow semantics for ICMP and UDP.
+    """Enum: ``transport_proto``.
 
-    c.f. `base/init-bare.zeek <https://docs.zeek.org/en/stable/scripts/base/init-bare.zeek.html#type-transport_proto>`__
+    A connection’s transport-layer protocol. Note that Zeek uses the term “connection” broadly, using
+    flow semantics for ICMP and UDP.
+
+    See Also:
+        `base/init-bare.zeek`_
+
+    .. _base/init-bare.zeek: https://docs.zeek.org/en/stable/scripts/base/init-bare.zeek.html#type-transport_proto
 
     """
 
@@ -192,7 +246,14 @@ class transport_proto(enum.IntFlag):
 
 @enum.unique
 class Direction(enum.IntFlag):
-    """c.f. `base/utils/directions-and-hosts.zeek <https://docs.zeek.org/en/stable/scripts/base/utils/directions-and-hosts.zeek.html#type-Direction>`__"""
+    """Enum: ``Direction``.
+
+    See Also:
+        `base/utils/directions-and-hosts.zeek`_
+
+    .. _base/utils/directions-and-hosts.zeek: https://docs.zeek.org/en/stable/scripts/base/utils/directions-and-hosts.zeek.html#type-Direction
+
+    """
 
     _ignore_ = 'Direction _'
     Direction = vars()
@@ -215,7 +276,14 @@ class Direction(enum.IntFlag):
 
 @enum.unique
 class Host(enum.IntFlag):
-    """c.f. `base/utils/directions-and-hosts.zeek <https://docs.zeek.org/en/stable/scripts/base/utils/directions-and-hosts.zeek.html#type-Host>`__"""
+    """Enum: ``Host``.
+
+    See Also:
+        `base/utils/directions-and-hosts.zeek`_
+
+    .. _base/utils/directions-and-hosts.zeek: https://docs.zeek.org/en/stable/scripts/base/utils/directions-and-hosts.zeek.html#type-Host
+
+    """
 
     _ignore_ = 'Host _'
     Host = vars()

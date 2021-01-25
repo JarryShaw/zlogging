@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+# pylint: disable=line-too-long,import-error
 """Namespace: ``Broker``."""
 
 from zlogging._compat import enum
@@ -6,10 +7,14 @@ from zlogging._compat import enum
 
 @enum.unique
 class DataType(enum.IntFlag):
-    """Enumerates the possible types that Broker::Data may be in
-    terms of Zeek data types.
+    """Enum: ``Broker::DataType``.
 
-    c.f. `base/bif/data.bif.zeek <https://docs.zeek.org/en/stable/scripts/base/bif/data.bif.zeek.html#type-Broker::DataType>`__
+    Enumerates the possible types that ``Broker::Data`` may be in terms of Zeek data types.
+
+    See Also:
+        `base/bif/data.bif.zeek`_
+
+    .. _base/bif/data.bif.zeek: https://docs.zeek.org/en/stable/scripts/base/bif/data.bif.zeek.html#type-Broker::DataType
 
     """
 
@@ -49,9 +54,14 @@ class DataType(enum.IntFlag):
 
 @enum.unique
 class Type(enum.IntFlag):
-    """The type of a Broker activity being logged.
+    """Enum: ``Broker::Type``.
 
-    c.f. `base/frameworks/broker/log.zeek <https://docs.zeek.org/en/stable/scripts/base/frameworks/broker/log.zeek.html#type-Broker::Type>`__
+    The type of a Broker activity being logged.
+
+    See Also:
+        `base/frameworks/broker/log.zeek`_
+
+    .. _base/frameworks/broker/log.zeek: https://docs.zeek.org/en/stable/scripts/base/frameworks/broker/log.zeek.html#type-Broker::Type
 
     """
 
@@ -67,9 +77,14 @@ class Type(enum.IntFlag):
 
 @enum.unique
 class ErrorCode(enum.IntFlag):
-    """Enumerates the possible error types.
+    """Enum: ``Broker::ErrorCode``.
 
-    c.f. `base/frameworks/broker/main.zeek <https://docs.zeek.org/en/stable/scripts/base/frameworks/broker/main.zeek.html#type-Broker::ErrorCode>`__
+    Enumerates the possible error types.
+
+    See Also:
+        `base/frameworks/broker/main.zeek`_
+
+    .. _base/frameworks/broker/main.zeek: https://docs.zeek.org/en/stable/scripts/base/frameworks/broker/main.zeek.html#type-Broker::ErrorCode
 
     """
 
@@ -145,9 +160,14 @@ class ErrorCode(enum.IntFlag):
 
 @enum.unique
 class PeerStatus(enum.IntFlag):
-    """The possible states of a peer endpoint.
+    """Enum: ``Broker::PeerStatus``.
 
-    c.f. `base/frameworks/broker/main.zeek <https://docs.zeek.org/en/stable/scripts/base/frameworks/broker/main.zeek.html#type-Broker::PeerStatus>`__
+    The possible states of a peer endpoint.
+
+    See Also:
+        `base/frameworks/broker/main.zeek`_
+
+    .. _base/frameworks/broker/main.zeek: https://docs.zeek.org/en/stable/scripts/base/frameworks/broker/main.zeek.html#type-Broker::PeerStatus
 
     """
 
@@ -175,9 +195,14 @@ class PeerStatus(enum.IntFlag):
 
 @enum.unique
 class BackendType(enum.IntFlag):
-    """Enumerates the possible storage backends.
+    """Enum: ``Broker::BackendType``.
 
-    c.f. `base/frameworks/broker/store.zeek <https://docs.zeek.org/en/stable/scripts/base/frameworks/broker/store.zeek.html#type-Broker::BackendType>`__
+    Enumerates the possible storage backends.
+
+    See Also:
+        `base/frameworks/broker/store.zeek`_
+
+    .. _base/frameworks/broker/store.zeek: https://docs.zeek.org/en/stable/scripts/base/frameworks/broker/store.zeek.html#type-Broker::BackendType
 
     """
 
@@ -193,9 +218,14 @@ class BackendType(enum.IntFlag):
 
 @enum.unique
 class QueryStatus(enum.IntFlag):
-    """Whether a data store query could be completed or not.
+    """Enum: ``Broker::QueryStatus``.
 
-    c.f. `base/frameworks/broker/store.zeek <https://docs.zeek.org/en/stable/scripts/base/frameworks/broker/store.zeek.html#type-Broker::QueryStatus>`__
+    Whether a data store query could be completed or not.
+
+    See Also:
+        `base/frameworks/broker/store.zeek`_
+
+    .. _base/frameworks/broker/store.zeek: https://docs.zeek.org/en/stable/scripts/base/frameworks/broker/store.zeek.html#type-Broker::QueryStatus
 
     """
 

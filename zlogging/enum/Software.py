@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+# pylint: disable=line-too-long,import-error
 """Namespace: ``Software``."""
 
 from zlogging._compat import enum
@@ -6,11 +7,15 @@ from zlogging._compat import enum
 
 @enum.unique
 class Type(enum.IntFlag):
-    """Scripts detecting new types of software need to redef this enum to add
-    their own specific software types which would then be used when they
-    create Software::Info records.
+    """Enum: ``Software::Type``.
 
-    c.f. `base/frameworks/software/main.zeek <https://docs.zeek.org/en/stable/scripts/base/frameworks/software/main.zeek.html#type-Software::Type>`__
+    Scripts detecting new types of software need to redef this enum to add their own specific software
+    types which would then be used when they create ``Software::Info`` records.
+
+    See Also:
+        `base/frameworks/software/main.zeek`_
+
+    .. _base/frameworks/software/main.zeek: https://docs.zeek.org/en/stable/scripts/base/frameworks/software/main.zeek.html#type-Software::Type
 
     """
 

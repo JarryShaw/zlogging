@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+# pylint: disable=line-too-long,import-error
 """Namespace: ``SSL``."""
 
 from zlogging._compat import enum
@@ -6,9 +7,14 @@ from zlogging._compat import enum
 
 @enum.unique
 class SctSource(enum.IntFlag):
-    """List of the different sources for Signed Certificate Timestamp
+    """Enum: ``SSL::SctSource``.
 
-    c.f. `policy/protocols/ssl/validate-sct.zeek <https://docs.zeek.org/en/stable/scripts/policy/protocols/ssl/validate-sct.zeek.html#type-SSL::SctSource>`__
+    List of the different sources for Signed Certificate Timestamp.
+
+    See Also:
+        `policy/protocols/ssl/validate-sct.zeek`_
+
+    .. _policy/protocols/ssl/validate-sct.zeek: https://docs.zeek.org/en/stable/scripts/policy/protocols/ssl/validate-sct.zeek.html#type-SSL::SctSource
 
     """
 

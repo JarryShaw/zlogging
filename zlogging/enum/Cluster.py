@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+# pylint: disable=line-too-long,import-error
 """Namespace: ``Cluster``."""
 
 from zlogging._compat import enum
@@ -6,10 +7,14 @@ from zlogging._compat import enum
 
 @enum.unique
 class NodeType(enum.IntFlag):
-    """Types of nodes that are allowed to participate in the cluster
-    configuration.
+    """Enum: ``Cluster::NodeType``.
 
-    c.f. `base/frameworks/cluster/main.zeek <https://docs.zeek.org/en/stable/scripts/base/frameworks/cluster/main.zeek.html#type-Cluster::NodeType>`__
+    Types of nodes that are allowed to participate in the cluster configuration.
+
+    See Also:
+        `base/frameworks/cluster/main.zeek`_
+
+    .. _base/frameworks/cluster/main.zeek: https://docs.zeek.org/en/stable/scripts/base/frameworks/cluster/main.zeek.html#type-Cluster::NodeType
 
     """
 

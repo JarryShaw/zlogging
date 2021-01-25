@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+# pylint: disable=line-too-long,import-error
 """Namespace: ``SMB``."""
 
 from zlogging._compat import enum
@@ -6,9 +7,14 @@ from zlogging._compat import enum
 
 @enum.unique
 class Action(enum.IntFlag):
-    """Abstracted actions for SMB file actions.
+    """Enum: ``SMB::Action``.
 
-    c.f. `base/protocols/smb/main.zeek <https://docs.zeek.org/en/stable/scripts/base/protocols/smb/main.zeek.html#type-SMB::Action>`__
+    Abstracted actions for SMB file actions.
+
+    See Also:
+        `base/protocols/smb/main.zeek`_
+
+    .. _base/protocols/smb/main.zeek: https://docs.zeek.org/en/stable/scripts/base/protocols/smb/main.zeek.html#type-SMB::Action
 
     """
 
