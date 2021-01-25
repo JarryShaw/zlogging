@@ -18,7 +18,7 @@
 # -- Project information -----------------------------------------------------
 
 project = 'ZLogging'
-copyright = '2020, Jarry Shaw'
+copyright = '2020-2021, Jarry Shaw'
 author = 'Jarry Shaw'
 
 # The full version, including alpha/beta/rc tags
@@ -35,7 +35,7 @@ extensions = [
     'sphinx.ext.intersphinx',
     'sphinx.ext.autodoc', 'sphinx.ext.autodoc.typehints',
     'sphinx.ext.napoleon',
-    'sphinx_autodoc_typehints'
+    'sphinx_autodoc_typehints',
 ]
 
 intersphinx_mapping = {

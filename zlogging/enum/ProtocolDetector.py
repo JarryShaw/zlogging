@@ -10,9 +10,7 @@ class dir(enum.IntFlag):
     """Enum: ``ProtocolDetector::dir``.
 
     See Also:
-        `policy/frameworks/dpd/detect-protocols.zeek`_
-
-    .. _policy/frameworks/dpd/detect-protocols.zeek: https://docs.zeek.org/en/stable/scripts/policy/frameworks/dpd/detect-protocols.zeek.html#type-ProtocolDetector::dir
+        `policy/frameworks/dpd/detect-protocols.zeek <https://docs.zeek.org/en/stable/scripts/policy/frameworks/dpd/detect-protocols.zeek.html#type-ProtocolDetector::dir>`__
 
     """
 

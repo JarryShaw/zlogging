@@ -31,8 +31,3 @@ Abstract Base Types
    :members:
    :undoc-members:
    :show-inheritance:
-
-Internal Data
--------------
-
-.. autodata:: zlogging.types._data

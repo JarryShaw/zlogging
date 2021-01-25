@@ -12,9 +12,7 @@ class DataType(enum.IntFlag):
     Enumerates the possible types that ``Broker::Data`` may be in terms of Zeek data types.
 
     See Also:
-        `base/bif/data.bif.zeek`_
-
-    .. _base/bif/data.bif.zeek: https://docs.zeek.org/en/stable/scripts/base/bif/data.bif.zeek.html#type-Broker::DataType
+        `base/bif/data.bif.zeek <https://docs.zeek.org/en/stable/scripts/base/bif/data.bif.zeek.html#type-Broker::DataType>`__
 
     """
 
@@ -59,9 +57,7 @@ class Type(enum.IntFlag):
     The type of a Broker activity being logged.
 
     See Also:
-        `base/frameworks/broker/log.zeek`_
-
-    .. _base/frameworks/broker/log.zeek: https://docs.zeek.org/en/stable/scripts/base/frameworks/broker/log.zeek.html#type-Broker::Type
+        `base/frameworks/broker/log.zeek <https://docs.zeek.org/en/stable/scripts/base/frameworks/broker/log.zeek.html#type-Broker::Type>`__
 
     """
 
@@ -82,9 +78,7 @@ class ErrorCode(enum.IntFlag):
     Enumerates the possible error types.
 
     See Also:
-        `base/frameworks/broker/main.zeek`_
-
-    .. _base/frameworks/broker/main.zeek: https://docs.zeek.org/en/stable/scripts/base/frameworks/broker/main.zeek.html#type-Broker::ErrorCode
+        `base/frameworks/broker/main.zeek <https://docs.zeek.org/en/stable/scripts/base/frameworks/broker/main.zeek.html#type-Broker::ErrorCode>`__
 
     """
 
@@ -165,9 +159,7 @@ class PeerStatus(enum.IntFlag):
     The possible states of a peer endpoint.
 
     See Also:
-        `base/frameworks/broker/main.zeek`_
-
-    .. _base/frameworks/broker/main.zeek: https://docs.zeek.org/en/stable/scripts/base/frameworks/broker/main.zeek.html#type-Broker::PeerStatus
+        `base/frameworks/broker/main.zeek <https://docs.zeek.org/en/stable/scripts/base/frameworks/broker/main.zeek.html#type-Broker::PeerStatus>`__
 
     """
 
@@ -200,9 +192,7 @@ class BackendType(enum.IntFlag):
     Enumerates the possible storage backends.
 
     See Also:
-        `base/frameworks/broker/store.zeek`_
-
-    .. _base/frameworks/broker/store.zeek: https://docs.zeek.org/en/stable/scripts/base/frameworks/broker/store.zeek.html#type-Broker::BackendType
+        `base/frameworks/broker/store.zeek <https://docs.zeek.org/en/stable/scripts/base/frameworks/broker/store.zeek.html#type-Broker::BackendType>`__
 
     """
 
@@ -223,9 +213,7 @@ class QueryStatus(enum.IntFlag):
     Whether a data store query could be completed or not.
 
     See Also:
-        `base/frameworks/broker/store.zeek`_
-
-    .. _base/frameworks/broker/store.zeek: https://docs.zeek.org/en/stable/scripts/base/frameworks/broker/store.zeek.html#type-Broker::QueryStatus
+        `base/frameworks/broker/store.zeek <https://docs.zeek.org/en/stable/scripts/base/frameworks/broker/store.zeek.html#type-Broker::QueryStatus>`__
 
     """
 

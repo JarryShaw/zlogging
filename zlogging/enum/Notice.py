@@ -12,9 +12,7 @@ class Action(enum.IntFlag):
     These are values representing actions that can be taken with notices.
 
     See Also:
-        `base/frameworks/notice/main.zeek`_
-
-    .. _base/frameworks/notice/main.zeek: https://docs.zeek.org/en/stable/scripts/base/frameworks/notice/main.zeek.html#type-Notice::Action
+        `base/frameworks/notice/main.zeek <https://docs.zeek.org/en/stable/scripts/base/frameworks/notice/main.zeek.html#type-Notice::Action>`__
 
     """
 
@@ -73,9 +71,7 @@ class Type(enum.IntFlag):
     SSH::Password_Guessing is for hosts that have crossed a threshold of failed SSH logins.
 
     See Also:
-        `base/frameworks/notice/main.zeek`_
-
-    .. _base/frameworks/notice/main.zeek: https://docs.zeek.org/en/stable/scripts/base/frameworks/notice/main.zeek.html#type-Notice::Type
+        `base/frameworks/notice/main.zeek <https://docs.zeek.org/en/stable/scripts/base/frameworks/notice/main.zeek.html#type-Notice::Type>`__
 
     """
 

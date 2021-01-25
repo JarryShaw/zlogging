@@ -10,9 +10,7 @@ class Method(enum.IntFlag):
     """Enum: ``LoadBalancing::Method``.
 
     See Also:
-        `policy/misc/load-balancing.zeek`_
-
-    .. _policy/misc/load-balancing.zeek: https://docs.zeek.org/en/stable/scripts/policy/misc/load-balancing.zeek.html#type-LoadBalancing::Method
+        `policy/misc/load-balancing.zeek <https://docs.zeek.org/en/stable/scripts/policy/misc/load-balancing.zeek.html#type-LoadBalancing::Method>`__
 
     """
 

@@ -12,9 +12,7 @@ class SctSource(enum.IntFlag):
     List of the different sources for Signed Certificate Timestamp.
 
     See Also:
-        `policy/protocols/ssl/validate-sct.zeek`_
-
-    .. _policy/protocols/ssl/validate-sct.zeek: https://docs.zeek.org/en/stable/scripts/policy/protocols/ssl/validate-sct.zeek.html#type-SSL::SctSource
+        `policy/protocols/ssl/validate-sct.zeek <https://docs.zeek.org/en/stable/scripts/policy/protocols/ssl/validate-sct.zeek.html#type-SSL::SctSource>`__
 
     """
 

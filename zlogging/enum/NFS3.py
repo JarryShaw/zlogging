@@ -10,9 +10,7 @@ class createmode_t(enum.IntFlag):
     """Enum: ``NFS3::createmode_t``.
 
     See Also:
-        `base/bif/types.bif.zeek`_
-
-    .. _base/bif/types.bif.zeek: https://docs.zeek.org/en/stable/scripts/base/bif/types.bif.zeek.html#type-NFS3::createmode_t
+        `base/bif/types.bif.zeek <https://docs.zeek.org/en/stable/scripts/base/bif/types.bif.zeek.html#type-NFS3::createmode_t>`__
 
     """
 
@@ -31,9 +29,7 @@ class file_type_t(enum.IntFlag):
     """Enum: ``NFS3::file_type_t``.
 
     See Also:
-        `base/bif/types.bif.zeek`_
-
-    .. _base/bif/types.bif.zeek: https://docs.zeek.org/en/stable/scripts/base/bif/types.bif.zeek.html#type-NFS3::file_type_t
+        `base/bif/types.bif.zeek <https://docs.zeek.org/en/stable/scripts/base/bif/types.bif.zeek.html#type-NFS3::file_type_t>`__
 
     """
 
@@ -60,9 +56,7 @@ class proc_t(enum.IntFlag):
     """Enum: ``NFS3::proc_t``.
 
     See Also:
-        `base/bif/types.bif.zeek`_
-
-    .. _base/bif/types.bif.zeek: https://docs.zeek.org/en/stable/scripts/base/bif/types.bif.zeek.html#type-NFS3::proc_t
+        `base/bif/types.bif.zeek <https://docs.zeek.org/en/stable/scripts/base/bif/types.bif.zeek.html#type-NFS3::proc_t>`__
 
     """
 
@@ -121,9 +115,7 @@ class stable_how_t(enum.IntFlag):
     """Enum: ``NFS3::stable_how_t``.
 
     See Also:
-        `base/bif/types.bif.zeek`_
-
-    .. _base/bif/types.bif.zeek: https://docs.zeek.org/en/stable/scripts/base/bif/types.bif.zeek.html#type-NFS3::stable_how_t
+        `base/bif/types.bif.zeek <https://docs.zeek.org/en/stable/scripts/base/bif/types.bif.zeek.html#type-NFS3::stable_how_t>`__
 
     """
 
@@ -142,9 +134,7 @@ class status_t(enum.IntFlag):
     """Enum: ``NFS3::status_t``.
 
     See Also:
-        `base/bif/types.bif.zeek`_
-
-    .. _base/bif/types.bif.zeek: https://docs.zeek.org/en/stable/scripts/base/bif/types.bif.zeek.html#type-NFS3::status_t
+        `base/bif/types.bif.zeek <https://docs.zeek.org/en/stable/scripts/base/bif/types.bif.zeek.html#type-NFS3::status_t>`__
 
     """
 
@@ -217,9 +207,7 @@ class time_how_t(enum.IntFlag):
     """Enum: ``NFS3::time_how_t``.
 
     See Also:
-        `base/bif/types.bif.zeek`_
-
-    .. _base/bif/types.bif.zeek: https://docs.zeek.org/en/stable/scripts/base/bif/types.bif.zeek.html#type-NFS3::time_how_t
+        `base/bif/types.bif.zeek <https://docs.zeek.org/en/stable/scripts/base/bif/types.bif.zeek.html#type-NFS3::time_how_t>`__
 
     """
 

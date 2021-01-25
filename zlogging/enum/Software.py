@@ -13,9 +13,7 @@ class Type(enum.IntFlag):
     types which would then be used when they create ``Software::Info`` records.
 
     See Also:
-        `base/frameworks/software/main.zeek`_
-
-    .. _base/frameworks/software/main.zeek: https://docs.zeek.org/en/stable/scripts/base/frameworks/software/main.zeek.html#type-Software::Type
+        `base/frameworks/software/main.zeek <https://docs.zeek.org/en/stable/scripts/base/frameworks/software/main.zeek.html#type-Software::Type>`__
 
     """
 

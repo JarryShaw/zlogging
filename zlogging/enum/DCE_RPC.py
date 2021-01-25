@@ -10,9 +10,7 @@ class IfID(enum.IntFlag):
     """Enum: ``DCE_RPC::IfID``.
 
     See Also:
-        `base/bif/plugins/Zeek_DCE_RPC.types.bif.zeek`_
-
-    .. _base/bif/plugins/Zeek_DCE_RPC.types.bif.zeek: https://docs.zeek.org/en/stable/scripts/base/bif/plugins/Zeek_DCE_RPC.types.bif.zeek.html#type-DCE_RPC::IfID
+        `base/bif/plugins/Zeek_DCE_RPC.types.bif.zeek <https://docs.zeek.org/en/stable/scripts/base/bif/plugins/Zeek_DCE_RPC.types.bif.zeek.html#type-DCE_RPC::IfID>`__
 
     """
 
@@ -53,9 +51,7 @@ class PType(enum.IntFlag):
     """Enum: ``DCE_RPC::PType``.
 
     See Also:
-        `base/bif/plugins/Zeek_DCE_RPC.types.bif.zeek`_
-
-    .. _base/bif/plugins/Zeek_DCE_RPC.types.bif.zeek: https://docs.zeek.org/en/stable/scripts/base/bif/plugins/Zeek_DCE_RPC.types.bif.zeek.html#type-DCE_RPC::PType
+        `base/bif/plugins/Zeek_DCE_RPC.types.bif.zeek <https://docs.zeek.org/en/stable/scripts/base/bif/plugins/Zeek_DCE_RPC.types.bif.zeek.html#type-DCE_RPC::PType>`__
 
     """
 

@@ -12,9 +12,7 @@ class Action(enum.IntFlag):
     Abstracted actions for SMB file actions.
 
     See Also:
-        `base/protocols/smb/main.zeek`_
-
-    .. _base/protocols/smb/main.zeek: https://docs.zeek.org/en/stable/scripts/base/protocols/smb/main.zeek.html#type-SMB::Action
+        `base/protocols/smb/main.zeek <https://docs.zeek.org/en/stable/scripts/base/protocols/smb/main.zeek.html#type-SMB::Action>`__
 
     """
 

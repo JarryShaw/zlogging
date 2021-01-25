@@ -10,9 +10,7 @@ class TimestampFormat(enum.IntFlag):
     """Enum: ``JSON::TimestampFormat``.
 
     See Also:
-        `base/init-bare.zeek`_
-
-    .. _base/init-bare.zeek: https://docs.zeek.org/en/stable/scripts/base/init-bare.zeek.html#type-JSON::TimestampFormat
+        `base/init-bare.zeek <https://docs.zeek.org/en/stable/scripts/base/init-bare.zeek.html#type-JSON::TimestampFormat>`__
 
     """
 

@@ -29,7 +29,7 @@ if TYPE_CHECKING:
 
 
 def _deprecated(zeek_type: '_T') -> '_T':
-    """Use of 'bro' is deprecated, please use 'zeek' instead."""
+    """Use of ``'bro'`` is deprecated, please use ``'zeek'`` instead."""
     class DeprecatedType(zeek_type):  # type: ignore[misc,valid-type]
         def __init__(self, *args: 'Any', **kwargs: 'Any') -> None:
             warnings.warn("Use of 'bro_%(name)s' is deprecated. "
@@ -68,15 +68,75 @@ zeek_time = TypeVar('zeek_time', bound='TimeType')
 
 
 class zeek_set(SetType, Generic[_S]):
-    """Zeek ``set`` data type."""
+    """Zeek ``set`` data type.
+
+    Notes:
+        As a *generic* data type, the class supports the typing proxy as introduced
+        :pep:`484`:
+
+        .. code-block:: python
+
+            class MyLog(zeek_record):
+                field_one: zeek_set[zeek_str]
+
+        which is the same **at runtime** as following:
+
+        .. code-block:: python
+
+            class MyLog(zeek_record):
+                field_one = SetType(element_type=StringType())
+
+    """
 
 
 class zeek_vector(VectorType, Generic[_S]):
-    """Zeek ``vector`` data type."""
+    """Zeek ``vector`` data type.
+
+    Notes:
+        As a *generic* data type, the class supports the typing proxy as introduced
+        :pep:`484`:
+
+        .. code-block:: python
+
+            class MyLog(zeek_record):
+                field_one: zeek_vector[zeek_str]
+
+        which is the same **at runtime** as following:
+
+        .. code-block:: python
+
+            class MyLog(zeek_record):
+                field_one = VectorType(element_type=StringType())
+
+    """
 
 
 class zeek_record(RecordType):
-    """Zeek ``record`` data type."""
+    """Zeek ``record`` data type.
+
+    Notes:
+        As a *variadic* data type, it supports the typing proxy as :class:`~typing.TypedDict`,
+        introduced in :pep:`589`:
+
+        .. code-block:: python
+
+            class MyLog(zeek_record):
+                field_one: zeek_int
+                field_two: zeek_set[zeek_port]
+
+        which is the same **at runtime** as following:
+
+        .. code-block:: python
+
+            RecordType(field_one=IntType,
+                       field_two=SetType(element_type=PortType))
+
+
+    See Also:
+        See :func:`~zlogging._aux.expand_typing` for more information about the
+        processing of typing proxy.
+
+    """
 
 
 ###########################################################
@@ -164,14 +224,29 @@ bro_time = TypeVar('bro_time', bound='_BroTimeType')
 
 @_deprecated
 class bro_set(SetType, Generic[_S]):
-    """Bro ``set`` data type."""
+    """Bro ``set`` data type.
+
+    See Also:
+        See :attr:`~zlogging.typing.zeek_set` for more information.
+
+    """
 
 
 @_deprecated
 class bro_vector(VectorType, Generic[_S]):
-    """Bro ``vector`` data type."""
+    """Bro ``vector`` data type.
+
+    See Also:
+        See :attr:`~zlogging.typing.zeek_vector` for more information.
+
+    """
 
 
 @_deprecated
 class bro_record(RecordType):
-    """Bro ``record`` data type."""
+    """Bro ``record`` data type.
+
+    See Also:
+        See :attr:`~zlogging.typing.zeek_record` for more information.
+
+    """

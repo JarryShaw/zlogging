@@ -12,9 +12,7 @@ class Calculation(enum.IntFlag):
     Type to represent the calculations that are available. The calculations are all defined as plugins.
 
     See Also:
-        `base/frameworks/sumstats/main.zeek`_
-
-    .. _base/frameworks/sumstats/main.zeek: https://docs.zeek.org/en/stable/scripts/base/frameworks/sumstats/main.zeek.html#type-SumStats::Calculation
+        `base/frameworks/sumstats/main.zeek <https://docs.zeek.org/en/stable/scripts/base/frameworks/sumstats/main.zeek.html#type-SumStats::Calculation>`__
 
     """
 

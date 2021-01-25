@@ -14,9 +14,7 @@ class ID(enum.IntFlag):
     generated log file.
 
     See Also:
-        `base/frameworks/logging/main.zeek`_
-
-    .. _base/frameworks/logging/main.zeek: https://docs.zeek.org/en/stable/scripts/base/frameworks/logging/main.zeek.html#type-Log::ID
+        `base/frameworks/logging/main.zeek <https://docs.zeek.org/en/stable/scripts/base/frameworks/logging/main.zeek.html#type-Log::ID>`__
 
     """
 
@@ -302,9 +300,7 @@ class PrintLogType(enum.IntFlag):
     Configurations for ``Log::print_to_log``.
 
     See Also:
-        `base/frameworks/logging/main.zeek`_
-
-    .. _base/frameworks/logging/main.zeek: https://docs.zeek.org/en/stable/scripts/base/frameworks/logging/main.zeek.html#type-Log::PrintLogType
+        `base/frameworks/logging/main.zeek <https://docs.zeek.org/en/stable/scripts/base/frameworks/logging/main.zeek.html#type-Log::PrintLogType>`__
 
     """
 
@@ -327,9 +323,7 @@ class Writer(enum.IntFlag):
     """Enum: ``Log::Writer``.
 
     See Also:
-        `base/frameworks/logging/main.zeek`_
-
-    .. _base/frameworks/logging/main.zeek: https://docs.zeek.org/en/stable/scripts/base/frameworks/logging/main.zeek.html#type-Log::Writer
+        `base/frameworks/logging/main.zeek <https://docs.zeek.org/en/stable/scripts/base/frameworks/logging/main.zeek.html#type-Log::Writer>`__
 
     """
 

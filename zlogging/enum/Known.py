@@ -10,9 +10,7 @@ class ModbusDeviceType(enum.IntFlag):
     """Enum: ``Known::ModbusDeviceType``.
 
     See Also:
-        `policy/protocols/modbus/known-masters-slaves.zeek`_
-
-    .. _policy/protocols/modbus/known-masters-slaves.zeek: https://docs.zeek.org/en/stable/scripts/policy/protocols/modbus/known-masters-slaves.zeek.html#type-Known::ModbusDeviceType
+        `policy/protocols/modbus/known-masters-slaves.zeek <https://docs.zeek.org/en/stable/scripts/policy/protocols/modbus/known-masters-slaves.zeek.html#type-Known::ModbusDeviceType>`__
 
     """
 

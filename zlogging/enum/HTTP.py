@@ -12,9 +12,7 @@ class Tags(enum.IntFlag):
     Indicate a type of attack or compromise in the record to be logged.
 
     See Also:
-        `base/protocols/http/main.zeek`_
-
-    .. _base/protocols/http/main.zeek: https://docs.zeek.org/en/stable/scripts/base/protocols/http/main.zeek.html#type-HTTP::Tags
+        `base/protocols/http/main.zeek <https://docs.zeek.org/en/stable/scripts/base/protocols/http/main.zeek.html#type-HTTP::Tags>`__
 
     """
 

@@ -10,9 +10,7 @@ class SubUnsub(enum.IntFlag):
     """Enum: ``MQTT::SubUnsub``.
 
     See Also:
-        `policy/protocols/mqtt/main.zeek`_
-
-    .. _policy/protocols/mqtt/main.zeek: https://docs.zeek.org/en/stable/scripts/policy/protocols/mqtt/main.zeek.html#type-MQTT::SubUnsub
+        `policy/protocols/mqtt/main.zeek <https://docs.zeek.org/en/stable/scripts/policy/protocols/mqtt/main.zeek.html#type-MQTT::SubUnsub>`__
 
     """
 

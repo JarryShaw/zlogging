@@ -10,9 +10,7 @@ class TableChange(enum.IntFlag):
     """Enum: ``TableChange``.
 
     See Also:
-        `base/bif/types.bif.zeek`_
-
-    .. _base/bif/types.bif.zeek: https://docs.zeek.org/en/stable/scripts/base/bif/types.bif.zeek.html#type-TableChange
+        `base/bif/types.bif.zeek <https://docs.zeek.org/en/stable/scripts/base/bif/types.bif.zeek.html#type-TableChange>`__
 
     """
 
@@ -33,9 +31,7 @@ class layer3_proto(enum.IntFlag):
     """Enum: ``layer3_proto``.
 
     See Also:
-        `base/bif/types.bif.zeek`_
-
-    .. _base/bif/types.bif.zeek: https://docs.zeek.org/en/stable/scripts/base/bif/types.bif.zeek.html#type-layer3_proto
+        `base/bif/types.bif.zeek <https://docs.zeek.org/en/stable/scripts/base/bif/types.bif.zeek.html#type-layer3_proto>`__
 
     """
 
@@ -56,9 +52,7 @@ class link_encap(enum.IntFlag):
     """Enum: ``link_encap``.
 
     See Also:
-        `base/bif/types.bif.zeek`_
-
-    .. _base/bif/types.bif.zeek: https://docs.zeek.org/en/stable/scripts/base/bif/types.bif.zeek.html#type-link_encap
+        `base/bif/types.bif.zeek <https://docs.zeek.org/en/stable/scripts/base/bif/types.bif.zeek.html#type-link_encap>`__
 
     """
 
@@ -75,9 +69,7 @@ class rpc_status(enum.IntFlag):
     """Enum: ``rpc_status``.
 
     See Also:
-        `base/bif/types.bif.zeek`_
-
-    .. _base/bif/types.bif.zeek: https://docs.zeek.org/en/stable/scripts/base/bif/types.bif.zeek.html#type-rpc_status
+        `base/bif/types.bif.zeek <https://docs.zeek.org/en/stable/scripts/base/bif/types.bif.zeek.html#type-rpc_status>`__
 
     """
 
@@ -112,9 +104,7 @@ class IPAddrAnonymization(enum.IntFlag):
     See also: ``anonymize_addr``.
 
     See Also:
-        `base/init-bare.zeek`_
-
-    .. _base/init-bare.zeek: https://docs.zeek.org/en/stable/scripts/base/init-bare.zeek.html#type-IPAddrAnonymization
+        `base/init-bare.zeek <https://docs.zeek.org/en/stable/scripts/base/init-bare.zeek.html#type-IPAddrAnonymization>`__
 
     """
 
@@ -139,9 +129,7 @@ class IPAddrAnonymizationClass(enum.IntFlag):
     See also: ``anonymize_addr``.
 
     See Also:
-        `base/init-bare.zeek`_
-
-    .. _base/init-bare.zeek: https://docs.zeek.org/en/stable/scripts/base/init-bare.zeek.html#type-IPAddrAnonymizationClass
+        `base/init-bare.zeek <https://docs.zeek.org/en/stable/scripts/base/init-bare.zeek.html#type-IPAddrAnonymizationClass>`__
 
     """
 
@@ -163,9 +151,7 @@ class PcapFilterID(enum.IntFlag):
     ``Pcap::precompile_pcap_filter``.
 
     See Also:
-        `base/init-bare.zeek`_
-
-    .. _base/init-bare.zeek: https://docs.zeek.org/en/stable/scripts/base/init-bare.zeek.html#type-PcapFilterID
+        `base/init-bare.zeek <https://docs.zeek.org/en/stable/scripts/base/init-bare.zeek.html#type-PcapFilterID>`__
 
     """
 
@@ -192,9 +178,7 @@ class pkt_profile_modes(enum.IntFlag):
     See also: ``pkt_profile_mode``, ``pkt_profile_freq``, ``pkt_profile_file``.
 
     See Also:
-        `base/init-bare.zeek`_
-
-    .. _base/init-bare.zeek: https://docs.zeek.org/en/stable/scripts/base/init-bare.zeek.html#type-pkt_profile_modes
+        `base/init-bare.zeek <https://docs.zeek.org/en/stable/scripts/base/init-bare.zeek.html#type-pkt_profile_modes>`__
 
     """
 
@@ -222,9 +206,7 @@ class transport_proto(enum.IntFlag):
     flow semantics for ICMP and UDP.
 
     See Also:
-        `base/init-bare.zeek`_
-
-    .. _base/init-bare.zeek: https://docs.zeek.org/en/stable/scripts/base/init-bare.zeek.html#type-transport_proto
+        `base/init-bare.zeek <https://docs.zeek.org/en/stable/scripts/base/init-bare.zeek.html#type-transport_proto>`__
 
     """
 
@@ -249,9 +231,7 @@ class Direction(enum.IntFlag):
     """Enum: ``Direction``.
 
     See Also:
-        `base/utils/directions-and-hosts.zeek`_
-
-    .. _base/utils/directions-and-hosts.zeek: https://docs.zeek.org/en/stable/scripts/base/utils/directions-and-hosts.zeek.html#type-Direction
+        `base/utils/directions-and-hosts.zeek <https://docs.zeek.org/en/stable/scripts/base/utils/directions-and-hosts.zeek.html#type-Direction>`__
 
     """
 
@@ -279,9 +259,7 @@ class Host(enum.IntFlag):
     """Enum: ``Host``.
 
     See Also:
-        `base/utils/directions-and-hosts.zeek`_
-
-    .. _base/utils/directions-and-hosts.zeek: https://docs.zeek.org/en/stable/scripts/base/utils/directions-and-hosts.zeek.html#type-Host
+        `base/utils/directions-and-hosts.zeek <https://docs.zeek.org/en/stable/scripts/base/utils/directions-and-hosts.zeek.html#type-Host>`__
 
     """
 

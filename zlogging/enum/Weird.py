@@ -12,9 +12,7 @@ class Action(enum.IntFlag):
     Types of actions that may be taken when handling weird activity events.
 
     See Also:
-        `base/frameworks/notice/weird.zeek`_
-
-    .. _base/frameworks/notice/weird.zeek: https://docs.zeek.org/en/stable/scripts/base/frameworks/notice/weird.zeek.html#type-Weird::Action
+        `base/frameworks/notice/weird.zeek <https://docs.zeek.org/en/stable/scripts/base/frameworks/notice/weird.zeek.html#type-Weird::Action>`__
 
     """
 

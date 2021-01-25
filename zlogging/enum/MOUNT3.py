@@ -10,9 +10,7 @@ class auth_flavor_t(enum.IntFlag):
     """Enum: ``MOUNT3::auth_flavor_t``.
 
     See Also:
-        `base/bif/types.bif.zeek`_
-
-    .. _base/bif/types.bif.zeek: https://docs.zeek.org/en/stable/scripts/base/bif/types.bif.zeek.html#type-MOUNT3::auth_flavor_t
+        `base/bif/types.bif.zeek <https://docs.zeek.org/en/stable/scripts/base/bif/types.bif.zeek.html#type-MOUNT3::auth_flavor_t>`__
 
     """
 
@@ -33,9 +31,7 @@ class proc_t(enum.IntFlag):
     """Enum: ``MOUNT3::proc_t``.
 
     See Also:
-        `base/bif/types.bif.zeek`_
-
-    .. _base/bif/types.bif.zeek: https://docs.zeek.org/en/stable/scripts/base/bif/types.bif.zeek.html#type-MOUNT3::proc_t
+        `base/bif/types.bif.zeek <https://docs.zeek.org/en/stable/scripts/base/bif/types.bif.zeek.html#type-MOUNT3::proc_t>`__
 
     """
 
@@ -62,9 +58,7 @@ class status_t(enum.IntFlag):
     """Enum: ``MOUNT3::status_t``.
 
     See Also:
-        `base/bif/types.bif.zeek`_
-
-    .. _base/bif/types.bif.zeek: https://docs.zeek.org/en/stable/scripts/base/bif/types.bif.zeek.html#type-MOUNT3::status_t
+        `base/bif/types.bif.zeek <https://docs.zeek.org/en/stable/scripts/base/bif/types.bif.zeek.html#type-MOUNT3::status_t>`__
 
     """
 

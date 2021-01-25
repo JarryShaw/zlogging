@@ -12,9 +12,7 @@ class SimpleEnum(enum.IntFlag):
     Documentation for the “SimpleEnum” type goes here. It can span multiple lines.
 
     See Also:
-        `zeekygen/example.zeek`_
-
-    .. _zeekygen/example.zeek: https://docs.zeek.org/en/stable/scripts/zeekygen/example.zeek.html#type-ZeekygenExample::SimpleEnum
+        `zeekygen/example.zeek <https://docs.zeek.org/en/stable/scripts/zeekygen/example.zeek.html#type-ZeekygenExample::SimpleEnum>`__
 
     """
 

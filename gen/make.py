@@ -157,7 +157,7 @@ for html_file in sorted(file_list):
         docs_list.insert(0, f'Enum: ``{name}``.')
 
         html_path = os.path.splitext(os.path.relpath(html_file, os.path.join(ROOT, 'sources')))[0]
-        docs_list.append(f'See Also:\n        `{html_path}`_\n\n    .. _{html_path}: https://docs.zeek.org/en/stable/scripts/{html_path}.html#type-{name}\n\n    ')  # pylint: disable=line-too-long
+        docs_list.append(f'See Also:\n        `{html_path} <https://docs.zeek.org/en/stable/scripts/{html_path}.html#type-{name}>`__\n\n    ')  # pylint: disable=line-too-long
 
         enum_docs = '\n\n    '.join(docs_list)
         with open(dest, 'a') as file:

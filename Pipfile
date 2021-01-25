@@ -26,6 +26,7 @@ sphinx = "*"
 sphinx-autodoc-typehints = "*"
 rstcheck = "*"
 pytest = "*"
+pytest-cov = "*"
 tox = "*"
 beautifulsoup4 = {extras = ["html5lib"],version = "*"}
 html2text = "*"

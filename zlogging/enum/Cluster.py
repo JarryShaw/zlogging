@@ -12,9 +12,7 @@ class NodeType(enum.IntFlag):
     Types of nodes that are allowed to participate in the cluster configuration.
 
     See Also:
-        `base/frameworks/cluster/main.zeek`_
-
-    .. _base/frameworks/cluster/main.zeek: https://docs.zeek.org/en/stable/scripts/base/frameworks/cluster/main.zeek.html#type-Cluster::NodeType
+        `base/frameworks/cluster/main.zeek <https://docs.zeek.org/en/stable/scripts/base/frameworks/cluster/main.zeek.html#type-Cluster::NodeType>`__
 
     """
 

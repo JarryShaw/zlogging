@@ -12,9 +12,7 @@ class Event(enum.IntFlag):
     Type that describes what kind of change occurred.
 
     See Also:
-        `base/frameworks/input/main.zeek`_
-
-    .. _base/frameworks/input/main.zeek: https://docs.zeek.org/en/stable/scripts/base/frameworks/input/main.zeek.html#type-Input::Event
+        `base/frameworks/input/main.zeek <https://docs.zeek.org/en/stable/scripts/base/frameworks/input/main.zeek.html#type-Input::Event>`__
 
     """
 
@@ -38,9 +36,7 @@ class Mode(enum.IntFlag):
     Type that defines the input stream read mode.
 
     See Also:
-        `base/frameworks/input/main.zeek`_
-
-    .. _base/frameworks/input/main.zeek: https://docs.zeek.org/en/stable/scripts/base/frameworks/input/main.zeek.html#type-Input::Mode
+        `base/frameworks/input/main.zeek <https://docs.zeek.org/en/stable/scripts/base/frameworks/input/main.zeek.html#type-Input::Mode>`__
 
     """
 
@@ -62,9 +58,7 @@ class Reader(enum.IntFlag):
     """Enum: ``Input::Reader``.
 
     See Also:
-        `base/frameworks/input/main.zeek`_
-
-    .. _base/frameworks/input/main.zeek: https://docs.zeek.org/en/stable/scripts/base/frameworks/input/main.zeek.html#type-Input::Reader
+        `base/frameworks/input/main.zeek <https://docs.zeek.org/en/stable/scripts/base/frameworks/input/main.zeek.html#type-Input::Reader>`__
 
     """
 

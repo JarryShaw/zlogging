@@ -7,9 +7,17 @@ ZLogging - Bro/Zeek logging framework for Python
 ================================================
 
 .. toctree::
-   :maxdepth: 3
+   :maxdepth: 2
 
-   zlogging
+   dumper
+   loader
+   model
+   types
+   typing
+   _data
+   _exc
+   _aux
+   enum
 
 The ``ZLogging`` module provides an easy-to-use bridge between the logging
 framework of the well-known Bro/Zeek Network Security Monitor (IDS).

@@ -12,9 +12,7 @@ class Type(enum.IntFlag):
     Enum type to represent various types of intelligence data.
 
     See Also:
-        `base/frameworks/intel/main.zeek`_
-
-    .. _base/frameworks/intel/main.zeek: https://docs.zeek.org/en/stable/scripts/base/frameworks/intel/main.zeek.html#type-Intel::Type
+        `base/frameworks/intel/main.zeek <https://docs.zeek.org/en/stable/scripts/base/frameworks/intel/main.zeek.html#type-Intel::Type>`__
 
     """
 
@@ -67,9 +65,7 @@ class Where(enum.IntFlag):
     with ``IN_``.
 
     See Also:
-        `base/frameworks/intel/main.zeek`_
-
-    .. _base/frameworks/intel/main.zeek: https://docs.zeek.org/en/stable/scripts/base/frameworks/intel/main.zeek.html#type-Intel::Where
+        `base/frameworks/intel/main.zeek <https://docs.zeek.org/en/stable/scripts/base/frameworks/intel/main.zeek.html#type-Intel::Where>`__
 
     """
 

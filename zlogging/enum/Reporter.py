@@ -10,9 +10,7 @@ class Level(enum.IntFlag):
     """Enum: ``Reporter::Level``.
 
     See Also:
-        `base/bif/types.bif.zeek`_
-
-    .. _base/bif/types.bif.zeek: https://docs.zeek.org/en/stable/scripts/base/bif/types.bif.zeek.html#type-Reporter::Level
+        `base/bif/types.bif.zeek <https://docs.zeek.org/en/stable/scripts/base/bif/types.bif.zeek.html#type-Reporter::Level>`__
 
     """
 

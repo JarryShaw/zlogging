@@ -13,9 +13,7 @@ class Action(enum.IntFlag):
     record to the logging stream unless declared otherwise.
 
     See Also:
-        `base/frameworks/signatures/main.zeek`_
-
-    .. _base/frameworks/signatures/main.zeek: https://docs.zeek.org/en/stable/scripts/base/frameworks/signatures/main.zeek.html#type-Signatures::Action
+        `base/frameworks/signatures/main.zeek <https://docs.zeek.org/en/stable/scripts/base/frameworks/signatures/main.zeek.html#type-Signatures::Action>`__
 
     """
 

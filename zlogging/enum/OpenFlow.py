@@ -14,9 +14,7 @@ class ofp_action_type(enum.IntFlag):
     The openflow action type defines what actions openflow can take to modify a packet.
 
     See Also:
-        `base/frameworks/openflow/consts.zeek`_
-
-    .. _base/frameworks/openflow/consts.zeek: https://docs.zeek.org/en/stable/scripts/base/frameworks/openflow/consts.zeek.html#type-OpenFlow::ofp_action_type
+        `base/frameworks/openflow/consts.zeek <https://docs.zeek.org/en/stable/scripts/base/frameworks/openflow/consts.zeek.html#type-OpenFlow::ofp_action_type>`__
 
     """
 
@@ -72,9 +70,7 @@ class ofp_config_flags(enum.IntFlag):
     TODO: describe.
 
     See Also:
-        `base/frameworks/openflow/consts.zeek`_
-
-    .. _base/frameworks/openflow/consts.zeek: https://docs.zeek.org/en/stable/scripts/base/frameworks/openflow/consts.zeek.html#type-OpenFlow::ofp_config_flags
+        `base/frameworks/openflow/consts.zeek <https://docs.zeek.org/en/stable/scripts/base/frameworks/openflow/consts.zeek.html#type-OpenFlow::ofp_config_flags>`__
 
     """
 
@@ -102,9 +98,7 @@ class ofp_flow_mod_command(enum.IntFlag):
     The openflow flow_mod_command describes of what kind an action is.
 
     See Also:
-        `base/frameworks/openflow/consts.zeek`_
-
-    .. _base/frameworks/openflow/consts.zeek: https://docs.zeek.org/en/stable/scripts/base/frameworks/openflow/consts.zeek.html#type-OpenFlow::ofp_flow_mod_command
+        `base/frameworks/openflow/consts.zeek <https://docs.zeek.org/en/stable/scripts/base/frameworks/openflow/consts.zeek.html#type-OpenFlow::ofp_flow_mod_command>`__
 
     """
 
@@ -134,9 +128,7 @@ class Plugin(enum.IntFlag):
     Available openflow plugins.
 
     See Also:
-        `base/frameworks/openflow/types.zeek`_
-
-    .. _base/frameworks/openflow/types.zeek: https://docs.zeek.org/en/stable/scripts/base/frameworks/openflow/types.zeek.html#type-OpenFlow::Plugin
+        `base/frameworks/openflow/types.zeek <https://docs.zeek.org/en/stable/scripts/base/frameworks/openflow/types.zeek.html#type-OpenFlow::Plugin>`__
 
     """
 

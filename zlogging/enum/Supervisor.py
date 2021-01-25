@@ -12,9 +12,7 @@ class ClusterRole(enum.IntFlag):
     The role a supervised-node will play in Zeek’s Cluster Framework.
 
     See Also:
-        `base/frameworks/supervisor/api.zeek`_
-
-    .. _base/frameworks/supervisor/api.zeek: https://docs.zeek.org/en/stable/scripts/base/frameworks/supervisor/api.zeek.html#type-Supervisor::ClusterRole
+        `base/frameworks/supervisor/api.zeek <https://docs.zeek.org/en/stable/scripts/base/frameworks/supervisor/api.zeek.html#type-Supervisor::ClusterRole>`__
 
     """
 

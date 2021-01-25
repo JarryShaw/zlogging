@@ -10,9 +10,7 @@ class Type(enum.IntFlag):
     """Enum: ``Tunnel::Type``.
 
     See Also:
-        `base/bif/types.bif.zeek`_
-
-    .. _base/bif/types.bif.zeek: https://docs.zeek.org/en/stable/scripts/base/bif/types.bif.zeek.html#type-Tunnel::Type
+        `base/bif/types.bif.zeek <https://docs.zeek.org/en/stable/scripts/base/bif/types.bif.zeek.html#type-Tunnel::Type>`__
 
     """
 
@@ -45,9 +43,7 @@ class Action(enum.IntFlag):
     Types of interesting activity that can occur with a tunnel.
 
     See Also:
-        `base/frameworks/tunnels/main.zeek`_
-
-    .. _base/frameworks/tunnels/main.zeek: https://docs.zeek.org/en/stable/scripts/base/frameworks/tunnels/main.zeek.html#type-Tunnel::Action
+        `base/frameworks/tunnels/main.zeek <https://docs.zeek.org/en/stable/scripts/base/frameworks/tunnels/main.zeek.html#type-Tunnel::Action>`__
 
     """
 

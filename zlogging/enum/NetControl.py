@@ -12,9 +12,7 @@ class InfoCategory(enum.IntFlag):
     Type of an entry in the NetControl log.
 
     See Also:
-        `base/frameworks/netcontrol/main.zeek`_
-
-    .. _base/frameworks/netcontrol/main.zeek: https://docs.zeek.org/en/stable/scripts/base/frameworks/netcontrol/main.zeek.html#type-NetControl::InfoCategory
+        `base/frameworks/netcontrol/main.zeek <https://docs.zeek.org/en/stable/scripts/base/frameworks/netcontrol/main.zeek.html#type-NetControl::InfoCategory>`__
 
     """
 
@@ -38,9 +36,7 @@ class InfoState(enum.IntFlag):
     State of an entry in the NetControl log.
 
     See Also:
-        `base/frameworks/netcontrol/main.zeek`_
-
-    .. _base/frameworks/netcontrol/main.zeek: https://docs.zeek.org/en/stable/scripts/base/frameworks/netcontrol/main.zeek.html#type-NetControl::InfoState
+        `base/frameworks/netcontrol/main.zeek <https://docs.zeek.org/en/stable/scripts/base/frameworks/netcontrol/main.zeek.html#type-NetControl::InfoState>`__
 
     """
 
@@ -73,9 +69,7 @@ class EntityType(enum.IntFlag):
     Type defining the entity that a rule applies to.
 
     See Also:
-        `base/frameworks/netcontrol/types.zeek`_
-
-    .. _base/frameworks/netcontrol/types.zeek: https://docs.zeek.org/en/stable/scripts/base/frameworks/netcontrol/types.zeek.html#type-NetControl::EntityType
+        `base/frameworks/netcontrol/types.zeek <https://docs.zeek.org/en/stable/scripts/base/frameworks/netcontrol/types.zeek.html#type-NetControl::EntityType>`__
 
     """
 
@@ -105,9 +99,7 @@ class RuleType(enum.IntFlag):
     Plugins may extend this type to define their own.
 
     See Also:
-        `base/frameworks/netcontrol/types.zeek`_
-
-    .. _base/frameworks/netcontrol/types.zeek: https://docs.zeek.org/en/stable/scripts/base/frameworks/netcontrol/types.zeek.html#type-NetControl::RuleType
+        `base/frameworks/netcontrol/types.zeek <https://docs.zeek.org/en/stable/scripts/base/frameworks/netcontrol/types.zeek.html#type-NetControl::RuleType>`__
 
     """
 
@@ -146,9 +138,7 @@ class TargetType(enum.IntFlag):
     identified as benign.
 
     See Also:
-        `base/frameworks/netcontrol/types.zeek`_
-
-    .. _base/frameworks/netcontrol/types.zeek: https://docs.zeek.org/en/stable/scripts/base/frameworks/netcontrol/types.zeek.html#type-NetControl::TargetType
+        `base/frameworks/netcontrol/types.zeek <https://docs.zeek.org/en/stable/scripts/base/frameworks/netcontrol/types.zeek.html#type-NetControl::TargetType>`__
 
     """
 
@@ -167,9 +157,7 @@ class CatchReleaseActions(enum.IntFlag):
     The enum that contains the different kinds of messages that are logged by catch and release.
 
     See Also:
-        `policy/frameworks/netcontrol/catch-and-release.zeek`_
-
-    .. _policy/frameworks/netcontrol/catch-and-release.zeek: https://docs.zeek.org/en/stable/scripts/policy/frameworks/netcontrol/catch-and-release.zeek.html#type-NetControl::CatchReleaseActions
+        `policy/frameworks/netcontrol/catch-and-release.zeek <https://docs.zeek.org/en/stable/scripts/policy/frameworks/netcontrol/catch-and-release.zeek.html#type-NetControl::CatchReleaseActions>`__
 
     """
 

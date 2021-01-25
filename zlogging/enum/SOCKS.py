@@ -10,9 +10,7 @@ class RequestType(enum.IntFlag):
     """Enum: ``SOCKS::RequestType``.
 
     See Also:
-        `base/protocols/socks/consts.zeek`_
-
-    .. _base/protocols/socks/consts.zeek: https://docs.zeek.org/en/stable/scripts/base/protocols/socks/consts.zeek.html#type-SOCKS::RequestType
+        `base/protocols/socks/consts.zeek <https://docs.zeek.org/en/stable/scripts/base/protocols/socks/consts.zeek.html#type-SOCKS::RequestType>`__
 
     """
 
