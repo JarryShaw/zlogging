@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+# pylint: disable=line-too-long,import-error
 """Namespace: ``SumStats``."""
 
 from zlogging._compat import enum
@@ -6,10 +7,14 @@ from zlogging._compat import enum
 
 @enum.unique
 class Calculation(enum.IntFlag):
-    """Type to represent the calculations that are available.  The calculations
-    are all defined as plugins.
+    """Enum: ``SumStats::Calculation``.
 
-    c.f. `base/frameworks/sumstats/main.zeek <https://docs.zeek.org/en/stable/scripts/base/frameworks/sumstats/main.zeek.html#type-SumStats::Calculation>`__
+    Type to represent the calculations that are available. The calculations are all defined as plugins.
+
+    See Also:
+        `base/frameworks/sumstats/main.zeek`_
+
+    .. _base/frameworks/sumstats/main.zeek: https://docs.zeek.org/en/stable/scripts/base/frameworks/sumstats/main.zeek.html#type-SumStats::Calculation
 
     """
 

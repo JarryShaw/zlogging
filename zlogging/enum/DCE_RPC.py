@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+# pylint: disable=line-too-long,import-error
 """Namespace: ``DCE_RPC``."""
 
 from zlogging._compat import enum
@@ -6,7 +7,14 @@ from zlogging._compat import enum
 
 @enum.unique
 class IfID(enum.IntFlag):
-    """c.f. `base/bif/plugins/Zeek_DCE_RPC.types.bif.zeek <https://docs.zeek.org/en/stable/scripts/base/bif/plugins/Zeek_DCE_RPC.types.bif.zeek.html#type-DCE_RPC::IfID>`__"""
+    """Enum: ``DCE_RPC::IfID``.
+
+    See Also:
+        `base/bif/plugins/Zeek_DCE_RPC.types.bif.zeek`_
+
+    .. _base/bif/plugins/Zeek_DCE_RPC.types.bif.zeek: https://docs.zeek.org/en/stable/scripts/base/bif/plugins/Zeek_DCE_RPC.types.bif.zeek.html#type-DCE_RPC::IfID
+
+    """
 
     _ignore_ = 'IfID _'
     IfID = vars()
@@ -42,7 +50,14 @@ class IfID(enum.IntFlag):
 
 @enum.unique
 class PType(enum.IntFlag):
-    """c.f. `base/bif/plugins/Zeek_DCE_RPC.types.bif.zeek <https://docs.zeek.org/en/stable/scripts/base/bif/plugins/Zeek_DCE_RPC.types.bif.zeek.html#type-DCE_RPC::PType>`__"""
+    """Enum: ``DCE_RPC::PType``.
+
+    See Also:
+        `base/bif/plugins/Zeek_DCE_RPC.types.bif.zeek`_
+
+    .. _base/bif/plugins/Zeek_DCE_RPC.types.bif.zeek: https://docs.zeek.org/en/stable/scripts/base/bif/plugins/Zeek_DCE_RPC.types.bif.zeek.html#type-DCE_RPC::PType
+
+    """
 
     _ignore_ = 'PType _'
     PType = vars()

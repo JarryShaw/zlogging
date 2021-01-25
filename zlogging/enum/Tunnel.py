@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+# pylint: disable=line-too-long,import-error
 """Namespace: ``Tunnel``."""
 
 from zlogging._compat import enum
@@ -6,7 +7,14 @@ from zlogging._compat import enum
 
 @enum.unique
 class Type(enum.IntFlag):
-    """c.f. `base/bif/types.bif.zeek <https://docs.zeek.org/en/stable/scripts/base/bif/types.bif.zeek.html#type-Tunnel::Type>`__"""
+    """Enum: ``Tunnel::Type``.
+
+    See Also:
+        `base/bif/types.bif.zeek`_
+
+    .. _base/bif/types.bif.zeek: https://docs.zeek.org/en/stable/scripts/base/bif/types.bif.zeek.html#type-Tunnel::Type
+
+    """
 
     _ignore_ = 'Type _'
     Type = vars()
@@ -32,9 +40,14 @@ class Type(enum.IntFlag):
 
 @enum.unique
 class Action(enum.IntFlag):
-    """Types of interesting activity that can occur with a tunnel.
+    """Enum: ``Tunnel::Action``.
 
-    c.f. `base/frameworks/tunnels/main.zeek <https://docs.zeek.org/en/stable/scripts/base/frameworks/tunnels/main.zeek.html#type-Tunnel::Action>`__
+    Types of interesting activity that can occur with a tunnel.
+
+    See Also:
+        `base/frameworks/tunnels/main.zeek`_
+
+    .. _base/frameworks/tunnels/main.zeek: https://docs.zeek.org/en/stable/scripts/base/frameworks/tunnels/main.zeek.html#type-Tunnel::Action
 
     """
 

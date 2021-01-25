@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+# pylint: disable=line-too-long,import-error
 """Namespace: ``LoadBalancing``."""
 
 from zlogging._compat import enum
@@ -6,7 +7,14 @@ from zlogging._compat import enum
 
 @enum.unique
 class Method(enum.IntFlag):
-    """c.f. `policy/misc/load-balancing.zeek <https://docs.zeek.org/en/stable/scripts/policy/misc/load-balancing.zeek.html#type-LoadBalancing::Method>`__"""
+    """Enum: ``LoadBalancing::Method``.
+
+    See Also:
+        `policy/misc/load-balancing.zeek`_
+
+    .. _policy/misc/load-balancing.zeek: https://docs.zeek.org/en/stable/scripts/policy/misc/load-balancing.zeek.html#type-LoadBalancing::Method
+
+    """
 
     _ignore_ = 'Method _'
     Method = vars()

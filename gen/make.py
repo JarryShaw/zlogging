@@ -6,8 +6,14 @@ import re
 import shutil
 import subprocess
 import sys
+import textwrap
+from typing import TYPE_CHECKING
 
 import bs4
+import html2text
+
+if TYPE_CHECKING:
+    from typing import List, Tuple
 
 ROOT = os.path.dirname(os.path.abspath(__file__))
 PATH = os.path.abspath(os.path.join(ROOT, '..', 'zlogging', 'enum'))
@@ -17,17 +23,20 @@ os.makedirs(PATH, exist_ok=True)
 
 # regular expression
 REGEX_ENUM = re.compile(r'((?P<namespace>[_a-z]+[_a-z0-9]*)::)?(?P<enum>[_a-z]+[_a-z0-9]*)', re.IGNORECASE)
+REGEX_LINK = re.compile(r'\[(?P<name>.*?)\]\(.*?\)', re.IGNORECASE)
 
 # file template
 TEMPLATE_ENUM = '''\
 # -*- coding: utf-8 -*-
+# pylint: disable=line-too-long,import-error
 """Namespace: ``{namespace}``."""
 
 from zlogging._compat import enum
 '''
 TEMPLATE_INIT = '''\
 # -*- coding: utf-8 -*-
-# pylint: disable=ungrouped-imports
+# pylint: disable=ungrouped-imports,duplicate-key
+# type: ignore[misc]
 """Bro/Zeek enum namespace."""
 
 import warnings
@@ -61,7 +70,7 @@ def globals(*namespaces, bare: bool = False) -> 'Dict[str, Enum]':  # pylint: di
 
     """
     if bare:
-        enum_data = dict()
+        enum_data = {}  # type: Dict[str, Enum]
     else:
         enum_data = _enum_zeek.copy()
     for namespace in namespaces:
@@ -78,7 +87,7 @@ def globals(*namespaces, bare: bool = False) -> 'Dict[str, Enum]':  # pylint: di
 '''
 
 
-file_list = list()
+file_list = []  # type: List[str]
 for dirpath, _, filenames in os.walk(os.path.join(ROOT, 'sources')):
     file_list.extend(map(
         lambda name: os.path.join(ROOT, 'sources', dirpath, name),  # pylint: disable=cell-var-from-loop
@@ -86,10 +95,10 @@ for dirpath, _, filenames in os.walk(os.path.join(ROOT, 'sources')):
     ))
 
 # namespace, enum, name
-enum_records = list()
+enum_records = []  # type: List[Tuple[str, str, str, str]]
 
 # postpone checks
-dest_list = list()
+dest_list = []
 for html_file in sorted(file_list):
     print(f'+ {html_file}')
     with open(html_file) as file:
@@ -107,17 +116,29 @@ for html_file in sorted(file_list):
         if type != 'enum':
             continue
 
-        enum_list = list()
+        enum_list = []
         for dl in tag.select('dd td dl.enum'):
             enum_name = dl.select('dt code.descname')[0].text.strip()
             enum_docs = dl.select('dd')[0].text.strip()
             enum_list.append((enum_name, enum_docs))
 
-        docs_list = list()
+        docs_list = []
         for p in tag.select('dd')[0].children:
             if p.name != 'p':
                 continue
-            docs = p.text.strip().replace('\n', '\n    ').replace('_', r'\_')
+            docs = '\n    '.join(
+                textwrap.wrap(
+                    REGEX_LINK.sub(
+                        r'\g<name>',
+                        html2text.html2text(
+                            str(p).replace('\n', ' ')
+                        ).replace('\n', ' ')
+                    ).replace('`', '``').strip(),
+                    100, break_on_hyphens=False,
+                )
+            )
+            if not docs.endswith('.'):
+                docs += '.'
             docs_list.append(docs)
 
         match = REGEX_ENUM.fullmatch(name)
@@ -126,19 +147,18 @@ for html_file in sorted(file_list):
 
         namespace = match.group('namespace')
         if namespace is None:
-            namespace = 'zeek'
+            namespace = 'zeek'  # type: ignore[unreachable]
         enum_name = match.group('enum')
 
         dest = os.path.join(PATH, f'{namespace}.py')
         if not os.path.isfile(dest):
             with open(dest, 'w') as file:
                 file.write(TEMPLATE_ENUM.format(namespace=namespace))
+        docs_list.insert(0, f'Enum: ``{name}``.')
 
         html_path = os.path.splitext(os.path.relpath(html_file, os.path.join(ROOT, 'sources')))[0]
-        if docs_list:
-            docs_list.append(f'c.f. `{html_path} <https://docs.zeek.org/en/stable/scripts/{html_path}.html#type-{name}>`__\n\n    ')  # pylint: disable=line-too-long
-        else:
-            docs_list.append(f'c.f. `{html_path} <https://docs.zeek.org/en/stable/scripts/{html_path}.html#type-{name}>`__')  # pylint: disable=line-too-long
+        docs_list.append(f'See Also:\n        `{html_path}`_\n\n    .. _{html_path}: https://docs.zeek.org/en/stable/scripts/{html_path}.html#type-{name}\n\n    ')  # pylint: disable=line-too-long
+
         enum_docs = '\n\n    '.join(docs_list)
         with open(dest, 'a') as file:
             print('', file=file)
@@ -168,7 +188,7 @@ for html_file in sorted(file_list):
 
         dest_list.append(dest)
 
-imported = list()
+imported = []
 enum_line = collections.defaultdict(list)
 with open(os.path.join(PATH, '__init__.py'), 'w') as file:
     file.write(TEMPLATE_INIT)
@@ -184,7 +204,7 @@ with open(os.path.join(PATH, '__init__.py'), 'w') as file:
             raise ValueError(name)
         safe_namespace = match.group('namespace')
         if safe_namespace is None:
-            safe_namespace = namespace
+            safe_namespace = namespace  # type: ignore[unreachable]
         safe_name = match.group('enum')
         enum_line[safe_namespace].append(f'    {safe_name!r}: {namespace}_{enum}[{enum_name!r}],')
     print('', file=file)

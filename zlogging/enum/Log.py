@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+# pylint: disable=line-too-long,import-error
 """Namespace: ``Log``."""
 
 from zlogging._compat import enum
@@ -6,12 +7,16 @@ from zlogging._compat import enum
 
 @enum.unique
 class ID(enum.IntFlag):
-    """Type that defines an ID unique to each log stream. Scripts creating new
-    log streams need to redef this enum to add their own specific log ID.
-    The log ID implicitly determines the default name of the generated log
-    file.
+    """Enum: ``Log::ID``.
 
-    c.f. `base/frameworks/logging/main.zeek <https://docs.zeek.org/en/stable/scripts/base/frameworks/logging/main.zeek.html#type-Log::ID>`__
+    Type that defines an ID unique to each log stream. Scripts creating new log streams need to redef
+    this enum to add their own specific log ID. The log ID implicitly determines the default name of the
+    generated log file.
+
+    See Also:
+        `base/frameworks/logging/main.zeek`_
+
+    .. _base/frameworks/logging/main.zeek: https://docs.zeek.org/en/stable/scripts/base/frameworks/logging/main.zeek.html#type-Log::ID
 
     """
 
@@ -292,9 +297,14 @@ class ID(enum.IntFlag):
 
 @enum.unique
 class PrintLogType(enum.IntFlag):
-    """Configurations for Log::print\_to\_log
+    """Enum: ``Log::PrintLogType``.
 
-    c.f. `base/frameworks/logging/main.zeek <https://docs.zeek.org/en/stable/scripts/base/frameworks/logging/main.zeek.html#type-Log::PrintLogType>`__
+    Configurations for ``Log::print_to_log``.
+
+    See Also:
+        `base/frameworks/logging/main.zeek`_
+
+    .. _base/frameworks/logging/main.zeek: https://docs.zeek.org/en/stable/scripts/base/frameworks/logging/main.zeek.html#type-Log::PrintLogType
 
     """
 
@@ -314,7 +324,14 @@ class PrintLogType(enum.IntFlag):
 
 @enum.unique
 class Writer(enum.IntFlag):
-    """c.f. `base/frameworks/logging/main.zeek <https://docs.zeek.org/en/stable/scripts/base/frameworks/logging/main.zeek.html#type-Log::Writer>`__"""
+    """Enum: ``Log::Writer``.
+
+    See Also:
+        `base/frameworks/logging/main.zeek`_
+
+    .. _base/frameworks/logging/main.zeek: https://docs.zeek.org/en/stable/scripts/base/frameworks/logging/main.zeek.html#type-Log::Writer
+
+    """
 
     _ignore_ = 'Writer _'
     Writer = vars()

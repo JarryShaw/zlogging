@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+# pylint: disable=line-too-long,import-error
 """Namespace: ``MOUNT3``."""
 
 from zlogging._compat import enum
@@ -6,7 +7,14 @@ from zlogging._compat import enum
 
 @enum.unique
 class auth_flavor_t(enum.IntFlag):
-    """c.f. `base/bif/types.bif.zeek <https://docs.zeek.org/en/stable/scripts/base/bif/types.bif.zeek.html#type-MOUNT3::auth_flavor_t>`__"""
+    """Enum: ``MOUNT3::auth_flavor_t``.
+
+    See Also:
+        `base/bif/types.bif.zeek`_
+
+    .. _base/bif/types.bif.zeek: https://docs.zeek.org/en/stable/scripts/base/bif/types.bif.zeek.html#type-MOUNT3::auth_flavor_t
+
+    """
 
     _ignore_ = 'auth_flavor_t _'
     auth_flavor_t = vars()
@@ -22,7 +30,14 @@ class auth_flavor_t(enum.IntFlag):
 
 @enum.unique
 class proc_t(enum.IntFlag):
-    """c.f. `base/bif/types.bif.zeek <https://docs.zeek.org/en/stable/scripts/base/bif/types.bif.zeek.html#type-MOUNT3::proc_t>`__"""
+    """Enum: ``MOUNT3::proc_t``.
+
+    See Also:
+        `base/bif/types.bif.zeek`_
+
+    .. _base/bif/types.bif.zeek: https://docs.zeek.org/en/stable/scripts/base/bif/types.bif.zeek.html#type-MOUNT3::proc_t
+
+    """
 
     _ignore_ = 'proc_t _'
     proc_t = vars()
@@ -44,7 +59,14 @@ class proc_t(enum.IntFlag):
 
 @enum.unique
 class status_t(enum.IntFlag):
-    """c.f. `base/bif/types.bif.zeek <https://docs.zeek.org/en/stable/scripts/base/bif/types.bif.zeek.html#type-MOUNT3::status_t>`__"""
+    """Enum: ``MOUNT3::status_t``.
+
+    See Also:
+        `base/bif/types.bif.zeek`_
+
+    .. _base/bif/types.bif.zeek: https://docs.zeek.org/en/stable/scripts/base/bif/types.bif.zeek.html#type-MOUNT3::status_t
+
+    """
 
     _ignore_ = 'status_t _'
     status_t = vars()

@@ -11,14 +11,14 @@ import json
 import warnings
 from typing import TYPE_CHECKING, Any, Generic, List, Set, TypeVar, Union, cast, overload
 
-from typing_extensions import TypedDict
+from mypy_extensions import TypedDict
 from typing_inspect import get_args, is_union_type
 
 from zlogging._aux import decimal_toascii, expand_typing, float_toascii
 from zlogging._compat import enum
 from zlogging._exc import (BroDeprecationWarning, ZeekNotImplemented, ZeekTypeError, ZeekValueError,
-                   ZeekValueWarning)
-from zlogging.enum import globals as enum_generator
+                           ZeekValueWarning)
+from zlogging.enum import globals as enum_generator  # type: ignore[attr-defined]
 
 _T = TypeVar("_T")
 _S = TypeVar('_S', bound='_SimpleType')
@@ -34,6 +34,7 @@ if TYPE_CHECKING:
     from decimal import Decimal
     from enum import Enum as _Enum
     from ipaddress import IPv4Address, IPv4Network, IPv6Address, IPv6Network
+    from json import JSONEncoder
     from typing import Dict, NoReturn, Optional, Tuple, Type
 
     from aenum import Enum as _AEnum
@@ -142,8 +143,8 @@ class BaseType(metaclass=abc.ABCMeta):
         return self.zeek_type
 
     def __repr__(self) -> str:
-        return (f'{self._name}(empty_field={self.str_empty_field}, '
-                f'unset_field={self.str_unset_field}, set_separator={self.str_set_separator})')
+        return (f'{self._name}(empty_field={self.str_empty_field!r}, '
+                f'unset_field={self.str_unset_field!r}, set_separator={self.str_set_separator!r})')
 
     @abc.abstractmethod
     def parse(self, data: 'Any') -> 'Any':
@@ -178,6 +179,8 @@ class AnyType(_SimpleType):
         empty_field (:obj:`bytes` or :obj:`str`, optional): Placeholder for empty field.
         unset_field (:obj:`bytes` or :obj:`str`, optional): Placeholder for unset field.
         set_separator (:obj:`bytes` or :obj:`str`, optional): Separator for ``set``/``vector`` fields.
+        json_encoder (:class:`json.JSONEncoder` object, optional): JSON encoder class for
+            :meth:`~zlogging.types.AnyType.tojson` method calls.
         *args: Variable length argument list.
         **kwargs: Arbitrary keyword arguments.
 
@@ -202,6 +205,16 @@ class AnyType(_SimpleType):
     def zeek_type(self) -> 'Literal["any"]':
         """str: Corresponding Zeek type name."""
         return 'any'
+
+    def __init__(self,   # pylint: disable=unused-argument,keyword-arg-before-vararg
+                 empty_field: 'Optional[AnyStr]' = None, unset_field: 'Optional[AnyStr]' = None,
+                 set_separator: 'Optional[AnyStr]' = None, json_encoder: 'Optional[Type[JSONEncoder]]' = None,
+                 *args: 'Any', **kwargs: 'Any') -> None:
+        if json_encoder is None:
+            json_encoder = json.JSONEncoder
+        self.json_encoder = json_encoder
+
+        super().__init__(empty_field=empty_field, unset_field=unset_field, set_separator=set_separator)
 
     def parse(self, data: '_T') -> 'Optional[_T]':
         """Parse ``data`` from string.
@@ -236,7 +249,7 @@ class AnyType(_SimpleType):
 
         """
         try:
-            json.dumps(data)
+            json.dumps(data, cls=self.json_encoder)
         except TypeError as error:
             return {
                 'data': str(data),
@@ -748,10 +761,15 @@ class IntervalType(_SimpleType):
 
         if data == self.unset_field:
             return None
-        int_part, flt_part = data.split(b'.')
+
+        if b'.' in data:
+            int_part, flt_part = data.split(b'.', maxsplit=1)
+        else:
+            int_part, flt_part = data, b'000000'
+        flt_part = flt_part.ljust(6, b'0')[:6]
         return datetime.timedelta(seconds=int(int_part),
-                                  microseconds=int(flt_part[:3]),
-                                  milliseconds=int(flt_part[3:]))
+                                  milliseconds=int(flt_part[:3]),
+                                  microseconds=int(flt_part[3:]))
 
     @overload
     def tojson(self, data: 'TimeDeltaType') -> float: ...
@@ -1074,9 +1092,9 @@ class SubnetType(_SimpleType):
         return Union[ipaddress.IPv4Network, ipaddress.IPv6Network]
 
     @property
-    def zeek_type(self) -> str:
+    def zeek_type(self) -> 'Literal["subnet"]':
         """str: Corresponding Zeek type name."""
-        return 'port'
+        return 'subnet'
 
     @overload
     def parse(self, data: 'AnyStr') -> 'Optional[IPNetwork]': ...
@@ -1185,8 +1203,8 @@ class EnumType(_SimpleType):
             self.enum_namespaces.update(enum_hook)
 
     def __repr__(self) -> str:
-        return (f'{self._name}(empty_field={self.str_empty_field}, unset_field={self.str_unset_field}, '
-                f'set_separator={self.str_set_separator}, enum_namespaces={self.enum_namespaces})')
+        return (f'{self._name}(empty_field={self.str_empty_field!r}, unset_field={self.str_unset_field!r}, '
+                f'set_separator={self.str_set_separator!r}, enum_namespaces={self.enum_namespaces!r})')
 
     @overload
     def parse(self, data: 'AnyStr') -> 'Optional[Enum]': ...  # type: ignore[misc]
@@ -1222,7 +1240,7 @@ class EnumType(_SimpleType):
                 data_str: enum.auto(),
             }, module='zlogging.enum', qualname='zlogging.enum.<unknown>')
             item = unknown[data_str]
-        return item  # type: ignore[return-value]
+        return item
 
     @overload
     def tojson(self, data: 'Enum') -> str: ...
@@ -1385,7 +1403,7 @@ class SetType(_GenericType, Generic[_S]):
         """
         if data is None:
             return None
-        return list(self.element_type.tojson(element) for element in data)
+        return sorted(self.element_type.tojson(element) for element in data)
 
     def toascii(self, data: 'Optional[Set[_S]]') -> str:
         """Serialize ``data`` as ASCII log format.
@@ -1401,7 +1419,7 @@ class SetType(_GenericType, Generic[_S]):
             return self.str_unset_field
         if not data:
             return self.str_empty_field
-        return self.str_set_separator.join(self.element_type.toascii(element) for element in data)
+        return self.str_set_separator.join(sorted(self.element_type.toascii(element) for element in data))
 
 
 class VectorType(_GenericType, Generic[_S]):
@@ -1497,7 +1515,7 @@ class VectorType(_GenericType, Generic[_S]):
 
         """
         if isinstance(data, list):
-            return data
+            return [self.element_type(element) for element in data]
         if isinstance(data, str):
             data = data.encode('ascii')
 
@@ -1631,12 +1649,16 @@ class RecordType(_VariadicType):
             field: element_type.python_type
             for field, element_type in self.element_mapping.items()
         }  # type: Dict[str, Any]
-        return TypedDict('record', dict_entries)  # type: ignore[operator]
+        return TypedDict('record', dict_entries)
 
     @property
     def zeek_type(self) -> 'Literal["record"]':
         """str: Corresponding Zeek type name."""
         return 'record'
+
+    def __new__(cls, *args: 'Any', **kwargs: 'Any') -> 'RecordType':  # pylint: disable=unused-argument
+        cls._expanded = expand_typing(cls, ZeekValueError)
+        return super().__new__(cls)
 
     def __init__(self,  # pylint: disable=unused-argument,keyword-arg-before-vararg
                  empty_field: 'Optional[AnyStr]' = None,
@@ -1645,28 +1667,41 @@ class RecordType(_VariadicType):
                  *args: 'Any', **element_mapping: 'Union[Type[_SimpleType], _SimpleType, _GenericType]') -> None:
         super().__init__(empty_field=empty_field, unset_field=unset_field, set_separator=set_separator)
 
-        expanded = expand_typing(self, ZeekValueError)
-        if self.empty_field != expanded['empty_field']:
-            raise ZeekValueError("inconsistent value of 'empty_field': %r and %r" % (self.empty_field, expanded['empty_field']))  # pylint: disable=line-too-long
-        if self.unset_field != expanded['unset_field']:
-            raise ZeekValueError("inconsistent value of 'unset_field': %r and %r" % (self.unset_field, expanded['unset_field']))  # pylint: disable=line-too-long
-        if self.set_separator != expanded['set_separator']:
-            raise ZeekValueError("inconsistent value of 'set_separator': %r and %r" % (self.set_separator, expanded['set_separator']))  # pylint: disable=line-too-long
+        expanded = self._expanded
+        if expanded['_inited']:
+            if self.empty_field != expanded['empty_field']:
+                raise ZeekValueError("inconsistent value of 'empty_field': %r and %r" % (self.empty_field, expanded['empty_field']))  # pylint: disable=line-too-long
+            if self.unset_field != expanded['unset_field']:
+                raise ZeekValueError("inconsistent value of 'unset_field': %r and %r" % (self.unset_field, expanded['unset_field']))  # pylint: disable=line-too-long
+            if self.set_separator != expanded['set_separator']:
+                raise ZeekValueError("inconsistent value of 'set_separator': %r and %r" % (self.set_separator, expanded['set_separator']))  # pylint: disable=line-too-long
 
         fields = expanded['fields']
         for field, expanded_type in fields.items():
             if isinstance(expanded_type, (_SimpleType, _GenericType)):
-                continue
-            raise ZeekValueError('invalid element type of field %r: %s' % (field, type(expanded_type).__name__))
+                fields[field] = expanded_type
+            else:
+                raise ZeekValueError('invalid element type of field %r: %s' % (field, type(expanded_type).__name__))
         for field, element_type in element_mapping.items():
             if not isinstance(element_type, (_SimpleType, _GenericType)):
                 if isinstance(element_type, type) and issubclass(element_type, _SimpleType):  # type: ignore[unreachable] # pylint: disable=line-too-long
                     element_type = element_type(empty_field=empty_field, unset_field=unset_field, set_separator=set_separator)  # pylint: disable=line-too-long
                 else:
                     raise ZeekValueError('invalid element type of field %r: %s' % (field, type(element_type).__name__))
+            else:
+                if self.empty_field != element_type.empty_field:
+                    raise ZeekValueError("inconsistent value of 'empty_field': %r and %r" % (self.empty_field, element_type.empty_field))  # pylint: disable=line-too-long
+                if self.unset_field != element_type.unset_field:
+                    raise ZeekValueError("inconsistent value of 'unset_field': %r and %r" % (self.unset_field, element_type.unset_field))  # pylint: disable=line-too-long
+                if self.set_separator != element_type.set_separator:
+                    raise ZeekValueError("inconsistent value of 'set_separator': %r and %r" % (self.set_separator, element_type.set_separator))  # pylint: disable=line-too-long
+
+            existed = fields.get(field)
+            if existed is not None and element_type.zeek_type != existed.zeek_type:
+                raise ZeekValueError(f'inconsistent data type of {field!r} field: {element_type!r} and {existed!r}')
             fields[field] = element_type
         self.element_mapping = fields
 
     def __repr__(self) -> str:
-        return (f'{self._name}(empty_field={self.str_empty_field}, unset_field={self.str_unset_field}, '
-                f'set_separator={self.str_set_separator}, element_mapping={self.element_mapping})')
+        return (f'{self._name}(empty_field={self.str_empty_field!r}, unset_field={self.str_unset_field!r}, '
+                f'set_separator={self.str_set_separator!r}, element_mapping={self.element_mapping!r})')

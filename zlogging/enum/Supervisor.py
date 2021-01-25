@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+# pylint: disable=line-too-long,import-error
 """Namespace: ``Supervisor``."""
 
 from zlogging._compat import enum
@@ -6,9 +7,14 @@ from zlogging._compat import enum
 
 @enum.unique
 class ClusterRole(enum.IntFlag):
-    """The role a supervised-node will play in Zeek’s Cluster Framework.
+    """Enum: ``Supervisor::ClusterRole``.
 
-    c.f. `base/frameworks/supervisor/api.zeek <https://docs.zeek.org/en/stable/scripts/base/frameworks/supervisor/api.zeek.html#type-Supervisor::ClusterRole>`__
+    The role a supervised-node will play in Zeek’s Cluster Framework.
+
+    See Also:
+        `base/frameworks/supervisor/api.zeek`_
+
+    .. _base/frameworks/supervisor/api.zeek: https://docs.zeek.org/en/stable/scripts/base/frameworks/supervisor/api.zeek.html#type-Supervisor::ClusterRole
 
     """
 

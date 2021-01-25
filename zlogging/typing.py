@@ -6,8 +6,9 @@ import warnings
 from typing import TYPE_CHECKING, Generic, TypeVar
 
 from zlogging._exc import BroDeprecationWarning
-from zlogging.types import (AddrType, BoolType, CountType, DoubleType, EnumType, IntervalType, IntType,
-                    PortType, RecordType, SetType, StringType, SubnetType, TimeType, VectorType)
+from zlogging.types import (AddrType, BoolType, CountType, DoubleType, EnumType, IntervalType,
+                            IntType, PortType, RecordType, SetType, StringType, SubnetType,
+                            TimeType, VectorType)
 
 __all__ = [
     'zeek_addr', 'zeek_bool', 'zeek_count', 'zeek_double', 'zeek_enum',

@@ -14,11 +14,11 @@ from typing import TYPE_CHECKING, TypeVar, cast
 from zlogging._aux import readline
 from zlogging._data import ASCIIInfo, JSONInfo
 from zlogging._exc import (ASCIIParserWarning, ASCIIPaserError, JSONParserError, JSONParserWarning,
-                   ParserError, ZeekValueError)
+                           ParserError, ZeekValueError)
 from zlogging.model import new_model
 from zlogging.types import (AddrType, AnyType, BaseType, BoolType, CountType, DoubleType, EnumType,
-                    IntervalType, IntType, PortType, SetType, StringType, SubnetType, TimeType,
-                    VectorType)
+                            IntervalType, IntType, PortType, SetType, StringType, SubnetType,
+                            TimeType, VectorType)
 
 __all__ = [
     'parse', 'parse_ascii', 'parse_json',

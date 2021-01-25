@@ -15,7 +15,7 @@ __all__ = [
 ]
 
 if TYPE_CHECKING:
-    from collections import OrderedDict, namedtuple
+    from collections import OrderedDict
     from typing import Any, Dict, List, Optional, Tuple, Type
 
     from .types import BaseType

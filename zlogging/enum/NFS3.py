@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+# pylint: disable=line-too-long,import-error
 """Namespace: ``NFS3``."""
 
 from zlogging._compat import enum
@@ -6,7 +7,14 @@ from zlogging._compat import enum
 
 @enum.unique
 class createmode_t(enum.IntFlag):
-    """c.f. `base/bif/types.bif.zeek <https://docs.zeek.org/en/stable/scripts/base/bif/types.bif.zeek.html#type-NFS3::createmode_t>`__"""
+    """Enum: ``NFS3::createmode_t``.
+
+    See Also:
+        `base/bif/types.bif.zeek`_
+
+    .. _base/bif/types.bif.zeek: https://docs.zeek.org/en/stable/scripts/base/bif/types.bif.zeek.html#type-NFS3::createmode_t
+
+    """
 
     _ignore_ = 'createmode_t _'
     createmode_t = vars()
@@ -20,7 +28,14 @@ class createmode_t(enum.IntFlag):
 
 @enum.unique
 class file_type_t(enum.IntFlag):
-    """c.f. `base/bif/types.bif.zeek <https://docs.zeek.org/en/stable/scripts/base/bif/types.bif.zeek.html#type-NFS3::file_type_t>`__"""
+    """Enum: ``NFS3::file_type_t``.
+
+    See Also:
+        `base/bif/types.bif.zeek`_
+
+    .. _base/bif/types.bif.zeek: https://docs.zeek.org/en/stable/scripts/base/bif/types.bif.zeek.html#type-NFS3::file_type_t
+
+    """
 
     _ignore_ = 'file_type_t _'
     file_type_t = vars()
@@ -42,7 +57,14 @@ class file_type_t(enum.IntFlag):
 
 @enum.unique
 class proc_t(enum.IntFlag):
-    """c.f. `base/bif/types.bif.zeek <https://docs.zeek.org/en/stable/scripts/base/bif/types.bif.zeek.html#type-NFS3::proc_t>`__"""
+    """Enum: ``NFS3::proc_t``.
+
+    See Also:
+        `base/bif/types.bif.zeek`_
+
+    .. _base/bif/types.bif.zeek: https://docs.zeek.org/en/stable/scripts/base/bif/types.bif.zeek.html#type-NFS3::proc_t
+
+    """
 
     _ignore_ = 'proc_t _'
     proc_t = vars()
@@ -96,7 +118,14 @@ class proc_t(enum.IntFlag):
 
 @enum.unique
 class stable_how_t(enum.IntFlag):
-    """c.f. `base/bif/types.bif.zeek <https://docs.zeek.org/en/stable/scripts/base/bif/types.bif.zeek.html#type-NFS3::stable_how_t>`__"""
+    """Enum: ``NFS3::stable_how_t``.
+
+    See Also:
+        `base/bif/types.bif.zeek`_
+
+    .. _base/bif/types.bif.zeek: https://docs.zeek.org/en/stable/scripts/base/bif/types.bif.zeek.html#type-NFS3::stable_how_t
+
+    """
 
     _ignore_ = 'stable_how_t _'
     stable_how_t = vars()
@@ -110,7 +139,14 @@ class stable_how_t(enum.IntFlag):
 
 @enum.unique
 class status_t(enum.IntFlag):
-    """c.f. `base/bif/types.bif.zeek <https://docs.zeek.org/en/stable/scripts/base/bif/types.bif.zeek.html#type-NFS3::status_t>`__"""
+    """Enum: ``NFS3::status_t``.
+
+    See Also:
+        `base/bif/types.bif.zeek`_
+
+    .. _base/bif/types.bif.zeek: https://docs.zeek.org/en/stable/scripts/base/bif/types.bif.zeek.html#type-NFS3::status_t
+
+    """
 
     _ignore_ = 'status_t _'
     status_t = vars()
@@ -178,7 +214,14 @@ class status_t(enum.IntFlag):
 
 @enum.unique
 class time_how_t(enum.IntFlag):
-    """c.f. `base/bif/types.bif.zeek <https://docs.zeek.org/en/stable/scripts/base/bif/types.bif.zeek.html#type-NFS3::time_how_t>`__"""
+    """Enum: ``NFS3::time_how_t``.
+
+    See Also:
+        `base/bif/types.bif.zeek`_
+
+    .. _base/bif/types.bif.zeek: https://docs.zeek.org/en/stable/scripts/base/bif/types.bif.zeek.html#type-NFS3::time_how_t
+
+    """
 
     _ignore_ = 'time_how_t _'
     time_how_t = vars()

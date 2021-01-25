@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+# pylint: disable=line-too-long,import-error
 """Namespace: ``Signatures``."""
 
 from zlogging._compat import enum
@@ -6,11 +7,15 @@ from zlogging._compat import enum
 
 @enum.unique
 class Action(enum.IntFlag):
-    """These are the default actions you can apply to signature matches.
-    All of them write the signature record to the logging stream unless
-    declared otherwise.
+    """Enum: ``Signatures::Action``.
 
-    c.f. `base/frameworks/signatures/main.zeek <https://docs.zeek.org/en/stable/scripts/base/frameworks/signatures/main.zeek.html#type-Signatures::Action>`__
+    These are the default actions you can apply to signature matches. All of them write the signature
+    record to the logging stream unless declared otherwise.
+
+    See Also:
+        `base/frameworks/signatures/main.zeek`_
+
+    .. _base/frameworks/signatures/main.zeek: https://docs.zeek.org/en/stable/scripts/base/frameworks/signatures/main.zeek.html#type-Signatures::Action
 
     """
 

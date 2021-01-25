@@ -28,6 +28,7 @@ rstcheck = "*"
 pytest = "*"
 tox = "*"
 beautifulsoup4 = {extras = ["html5lib"],version = "*"}
+html2text = "*"
 requests = "*"
 
 [packages]
