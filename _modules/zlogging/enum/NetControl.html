@@ -32,6 +32,7 @@
             
   <h1>Source code for zlogging.enum.NetControl</h1><div class="highlight"><pre>
 <span></span><span class="c1"># -*- coding: utf-8 -*-</span>
+<span class="c1"># pylint: disable=line-too-long,import-error</span>
 <span class="sd">&quot;&quot;&quot;Namespace: ``NetControl``.&quot;&quot;&quot;</span>
 
 <span class="kn">from</span> <span class="nn">zlogging._compat</span> <span class="kn">import</span> <span class="n">enum</span>
@@ -39,9 +40,14 @@
 
 <div class="viewcode-block" id="InfoCategory"><a class="viewcode-back" href="../../../zlogging.enum.html#zlogging.enum.NetControl.InfoCategory">[docs]</a><span class="nd">@enum</span><span class="o">.</span><span class="n">unique</span>
 <span class="k">class</span> <span class="nc">InfoCategory</span><span class="p">(</span><span class="n">enum</span><span class="o">.</span><span class="n">IntFlag</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Type of an entry in the NetControl log.</span>
+    <span class="sd">&quot;&quot;&quot;Enum: ``NetControl::InfoCategory``.</span>
 
-<span class="sd">    c.f. `base/frameworks/netcontrol/main.zeek &lt;https://docs.zeek.org/en/stable/scripts/base/frameworks/netcontrol/main.zeek.html#type-NetControl::InfoCategory&gt;`__</span>
+<span class="sd">    Type of an entry in the NetControl log.</span>
+
+<span class="sd">    See Also:</span>
+<span class="sd">        `base/frameworks/netcontrol/main.zeek`_</span>
+
+<span class="sd">    .. _base/frameworks/netcontrol/main.zeek: https://docs.zeek.org/en/stable/scripts/base/frameworks/netcontrol/main.zeek.html#type-NetControl::InfoCategory</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
 
@@ -60,9 +66,14 @@
 
 <div class="viewcode-block" id="InfoState"><a class="viewcode-back" href="../../../zlogging.enum.html#zlogging.enum.NetControl.InfoState">[docs]</a><span class="nd">@enum</span><span class="o">.</span><span class="n">unique</span>
 <span class="k">class</span> <span class="nc">InfoState</span><span class="p">(</span><span class="n">enum</span><span class="o">.</span><span class="n">IntFlag</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;State of an entry in the NetControl log.</span>
+    <span class="sd">&quot;&quot;&quot;Enum: ``NetControl::InfoState``.</span>
 
-<span class="sd">    c.f. `base/frameworks/netcontrol/main.zeek &lt;https://docs.zeek.org/en/stable/scripts/base/frameworks/netcontrol/main.zeek.html#type-NetControl::InfoState&gt;`__</span>
+<span class="sd">    State of an entry in the NetControl log.</span>
+
+<span class="sd">    See Also:</span>
+<span class="sd">        `base/frameworks/netcontrol/main.zeek`_</span>
+
+<span class="sd">    .. _base/frameworks/netcontrol/main.zeek: https://docs.zeek.org/en/stable/scripts/base/frameworks/netcontrol/main.zeek.html#type-NetControl::InfoState</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
 
@@ -90,9 +101,14 @@
 
 <div class="viewcode-block" id="EntityType"><a class="viewcode-back" href="../../../zlogging.enum.html#zlogging.enum.NetControl.EntityType">[docs]</a><span class="nd">@enum</span><span class="o">.</span><span class="n">unique</span>
 <span class="k">class</span> <span class="nc">EntityType</span><span class="p">(</span><span class="n">enum</span><span class="o">.</span><span class="n">IntFlag</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Type defining the entity that a rule applies to.</span>
+    <span class="sd">&quot;&quot;&quot;Enum: ``NetControl::EntityType``.</span>
 
-<span class="sd">    c.f. `base/frameworks/netcontrol/types.zeek &lt;https://docs.zeek.org/en/stable/scripts/base/frameworks/netcontrol/types.zeek.html#type-NetControl::EntityType&gt;`__</span>
+<span class="sd">    Type defining the entity that a rule applies to.</span>
+
+<span class="sd">    See Also:</span>
+<span class="sd">        `base/frameworks/netcontrol/types.zeek`_</span>
+
+<span class="sd">    .. _base/frameworks/netcontrol/types.zeek: https://docs.zeek.org/en/stable/scripts/base/frameworks/netcontrol/types.zeek.html#type-NetControl::EntityType</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
 
@@ -114,12 +130,17 @@
 
 <div class="viewcode-block" id="RuleType"><a class="viewcode-back" href="../../../zlogging.enum.html#zlogging.enum.NetControl.RuleType">[docs]</a><span class="nd">@enum</span><span class="o">.</span><span class="n">unique</span>
 <span class="k">class</span> <span class="nc">RuleType</span><span class="p">(</span><span class="n">enum</span><span class="o">.</span><span class="n">IntFlag</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Type of rules that the framework supports. Each type lists the extra</span>
-<span class="sd">    NetControl::Rule fields it uses, if any.</span>
+    <span class="sd">&quot;&quot;&quot;Enum: ``NetControl::RuleType``.</span>
+
+<span class="sd">    Type of rules that the framework supports. Each type lists the extra ``NetControl::Rule`` fields it</span>
+<span class="sd">    uses, if any.</span>
 
 <span class="sd">    Plugins may extend this type to define their own.</span>
 
-<span class="sd">    c.f. `base/frameworks/netcontrol/types.zeek &lt;https://docs.zeek.org/en/stable/scripts/base/frameworks/netcontrol/types.zeek.html#type-NetControl::RuleType&gt;`__</span>
+<span class="sd">    See Also:</span>
+<span class="sd">        `base/frameworks/netcontrol/types.zeek`_</span>
+
+<span class="sd">    .. _base/frameworks/netcontrol/types.zeek: https://docs.zeek.org/en/stable/scripts/base/frameworks/netcontrol/types.zeek.html#type-NetControl::RuleType</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
 
@@ -148,14 +169,19 @@
 
 <div class="viewcode-block" id="TargetType"><a class="viewcode-back" href="../../../zlogging.enum.html#zlogging.enum.NetControl.TargetType">[docs]</a><span class="nd">@enum</span><span class="o">.</span><span class="n">unique</span>
 <span class="k">class</span> <span class="nc">TargetType</span><span class="p">(</span><span class="n">enum</span><span class="o">.</span><span class="n">IntFlag</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Type defining the target of a rule.</span>
+    <span class="sd">&quot;&quot;&quot;Enum: ``NetControl::TargetType``.</span>
 
-<span class="sd">    Rules can either be applied to the forward path, affecting all network traffic, or</span>
-<span class="sd">    on the monitor path, only affecting the traffic that is sent to Zeek. The second</span>
-<span class="sd">    is mostly used for shunting, which allows Zeek to tell the networking hardware that</span>
-<span class="sd">    it wants to no longer see traffic that it identified as benign.</span>
+<span class="sd">    Type defining the target of a rule.</span>
 
-<span class="sd">    c.f. `base/frameworks/netcontrol/types.zeek &lt;https://docs.zeek.org/en/stable/scripts/base/frameworks/netcontrol/types.zeek.html#type-NetControl::TargetType&gt;`__</span>
+<span class="sd">    Rules can either be applied to the forward path, affecting all network traffic, or on the monitor</span>
+<span class="sd">    path, only affecting the traffic that is sent to Zeek. The second is mostly used for shunting, which</span>
+<span class="sd">    allows Zeek to tell the networking hardware that it wants to no longer see traffic that it</span>
+<span class="sd">    identified as benign.</span>
+
+<span class="sd">    See Also:</span>
+<span class="sd">        `base/frameworks/netcontrol/types.zeek`_</span>
+
+<span class="sd">    .. _base/frameworks/netcontrol/types.zeek: https://docs.zeek.org/en/stable/scripts/base/frameworks/netcontrol/types.zeek.html#type-NetControl::TargetType</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
 
@@ -169,10 +195,14 @@
 
 <div class="viewcode-block" id="CatchReleaseActions"><a class="viewcode-back" href="../../../zlogging.enum.html#zlogging.enum.NetControl.CatchReleaseActions">[docs]</a><span class="nd">@enum</span><span class="o">.</span><span class="n">unique</span>
 <span class="k">class</span> <span class="nc">CatchReleaseActions</span><span class="p">(</span><span class="n">enum</span><span class="o">.</span><span class="n">IntFlag</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;The enum that contains the different kinds of messages that are logged by</span>
-<span class="sd">    catch and release.</span>
+    <span class="sd">&quot;&quot;&quot;Enum: ``NetControl::CatchReleaseActions``.</span>
 
-<span class="sd">    c.f. `policy/frameworks/netcontrol/catch-and-release.zeek &lt;https://docs.zeek.org/en/stable/scripts/policy/frameworks/netcontrol/catch-and-release.zeek.html#type-NetControl::CatchReleaseActions&gt;`__</span>
+<span class="sd">    The enum that contains the different kinds of messages that are logged by catch and release.</span>
+
+<span class="sd">    See Also:</span>
+<span class="sd">        `policy/frameworks/netcontrol/catch-and-release.zeek`_</span>
+
+<span class="sd">    .. _policy/frameworks/netcontrol/catch-and-release.zeek: https://docs.zeek.org/en/stable/scripts/policy/frameworks/netcontrol/catch-and-release.zeek.html#type-NetControl::CatchReleaseActions</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
 

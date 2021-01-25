@@ -32,6 +32,7 @@
             
   <h1>Source code for zlogging.enum.Input</h1><div class="highlight"><pre>
 <span></span><span class="c1"># -*- coding: utf-8 -*-</span>
+<span class="c1"># pylint: disable=line-too-long,import-error</span>
 <span class="sd">&quot;&quot;&quot;Namespace: ``Input``.&quot;&quot;&quot;</span>
 
 <span class="kn">from</span> <span class="nn">zlogging._compat</span> <span class="kn">import</span> <span class="n">enum</span>
@@ -39,9 +40,14 @@
 
 <div class="viewcode-block" id="Event"><a class="viewcode-back" href="../../../zlogging.enum.html#zlogging.enum.Input.Event">[docs]</a><span class="nd">@enum</span><span class="o">.</span><span class="n">unique</span>
 <span class="k">class</span> <span class="nc">Event</span><span class="p">(</span><span class="n">enum</span><span class="o">.</span><span class="n">IntFlag</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Type that describes what kind of change occurred.</span>
+    <span class="sd">&quot;&quot;&quot;Enum: ``Input::Event``.</span>
 
-<span class="sd">    c.f. `base/frameworks/input/main.zeek &lt;https://docs.zeek.org/en/stable/scripts/base/frameworks/input/main.zeek.html#type-Input::Event&gt;`__</span>
+<span class="sd">    Type that describes what kind of change occurred.</span>
+
+<span class="sd">    See Also:</span>
+<span class="sd">        `base/frameworks/input/main.zeek`_</span>
+
+<span class="sd">    .. _base/frameworks/input/main.zeek: https://docs.zeek.org/en/stable/scripts/base/frameworks/input/main.zeek.html#type-Input::Event</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
 
@@ -60,9 +66,14 @@
 
 <div class="viewcode-block" id="Mode"><a class="viewcode-back" href="../../../zlogging.enum.html#zlogging.enum.Input.Mode">[docs]</a><span class="nd">@enum</span><span class="o">.</span><span class="n">unique</span>
 <span class="k">class</span> <span class="nc">Mode</span><span class="p">(</span><span class="n">enum</span><span class="o">.</span><span class="n">IntFlag</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Type that defines the input stream read mode.</span>
+    <span class="sd">&quot;&quot;&quot;Enum: ``Input::Mode``.</span>
 
-<span class="sd">    c.f. `base/frameworks/input/main.zeek &lt;https://docs.zeek.org/en/stable/scripts/base/frameworks/input/main.zeek.html#type-Input::Mode&gt;`__</span>
+<span class="sd">    Type that defines the input stream read mode.</span>
+
+<span class="sd">    See Also:</span>
+<span class="sd">        `base/frameworks/input/main.zeek`_</span>
+
+<span class="sd">    .. _base/frameworks/input/main.zeek: https://docs.zeek.org/en/stable/scripts/base/frameworks/input/main.zeek.html#type-Input::Mode</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
 
@@ -81,7 +92,14 @@
 
 <div class="viewcode-block" id="Reader"><a class="viewcode-back" href="../../../zlogging.enum.html#zlogging.enum.Input.Reader">[docs]</a><span class="nd">@enum</span><span class="o">.</span><span class="n">unique</span>
 <span class="k">class</span> <span class="nc">Reader</span><span class="p">(</span><span class="n">enum</span><span class="o">.</span><span class="n">IntFlag</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;c.f. `base/frameworks/input/main.zeek &lt;https://docs.zeek.org/en/stable/scripts/base/frameworks/input/main.zeek.html#type-Input::Reader&gt;`__&quot;&quot;&quot;</span>
+    <span class="sd">&quot;&quot;&quot;Enum: ``Input::Reader``.</span>
+
+<span class="sd">    See Also:</span>
+<span class="sd">        `base/frameworks/input/main.zeek`_</span>
+
+<span class="sd">    .. _base/frameworks/input/main.zeek: https://docs.zeek.org/en/stable/scripts/base/frameworks/input/main.zeek.html#type-Input::Reader</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="n">_ignore_</span> <span class="o">=</span> <span class="s1">&#39;Reader _&#39;</span>
     <span class="n">Reader</span> <span class="o">=</span> <span class="nb">vars</span><span class="p">()</span>

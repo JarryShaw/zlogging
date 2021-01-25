@@ -54,6 +54,7 @@
 
 <span class="k">if</span> <span class="n">TYPE_CHECKING</span><span class="p">:</span>
     <span class="kn">from</span> <span class="nn">io</span> <span class="kn">import</span> <span class="n">TextIOWrapper</span> <span class="k">as</span> <span class="n">TextFile</span>
+    <span class="kn">from</span> <span class="nn">json</span> <span class="kn">import</span> <span class="n">JSONEncoder</span>
     <span class="kn">from</span> <span class="nn">os</span> <span class="kn">import</span> <span class="n">PathLike</span>
     <span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Iterable</span><span class="p">,</span> <span class="n">Literal</span><span class="p">,</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">Type</span><span class="p">,</span> <span class="n">Union</span>
 
@@ -168,12 +169,25 @@
 
 
 <div class="viewcode-block" id="JSONWriter"><a class="viewcode-back" href="../../zlogging.dumper.html#zlogging.JSONWriter">[docs]</a><span class="k">class</span> <span class="nc">JSONWriter</span><span class="p">(</span><span class="n">BaseWriter</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;JSON log writer.&quot;&quot;&quot;</span>
+    <span class="sd">&quot;&quot;&quot;JSON log writer.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        encoder (:class:`json.JSONEncoder` object, optional): JSON encoder class.</span>
+
+<span class="sd">    Attributes:</span>
+<span class="sd">        encoder (:class:`json.JSONEncoder` object): JSON encoder class.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">format</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;Literal[&quot;json&quot;]&#39;</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;str: Log file format.&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="s1">&#39;json&#39;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">encoder</span><span class="p">:</span> <span class="s1">&#39;Optional[Type[JSONEncoder]]&#39;</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">encoder</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">encoder</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">JSONEncoder</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">encoder</span> <span class="o">=</span> <span class="n">encoder</span>
 
 <div class="viewcode-block" id="JSONWriter.write_file"><a class="viewcode-back" href="../../zlogging.dumper.html#zlogging.JSONWriter.write_file">[docs]</a>    <span class="k">def</span> <span class="nf">write_file</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">file</span><span class="p">:</span> <span class="s1">&#39;TextFile&#39;</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="s1">&#39;Iterable[Model]&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;Write log file.</span>
@@ -209,7 +223,7 @@
 
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">try</span><span class="p">:</span>
-            <span class="k">return</span> <span class="n">file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%s</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">tojson</span><span class="p">()))</span>
+            <span class="k">return</span> <span class="n">file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%s</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">tojson</span><span class="p">(),</span> <span class="bp">cls</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">encoder</span><span class="p">))</span>
         <span class="k">except</span> <span class="ne">TypeError</span> <span class="k">as</span> <span class="n">error</span><span class="p">:</span>
             <span class="k">raise</span> <span class="n">JSONWriterError</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">error</span><span class="p">),</span> <span class="n">lineno</span><span class="o">=</span><span class="n">lineno</span><span class="p">)</span> <span class="kn">from</span> <span class="nn">error</span></div>
 
@@ -243,7 +257,7 @@
 
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">try</span><span class="p">:</span>
-            <span class="k">return</span> <span class="s1">&#39;</span><span class="si">%s</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">tojson</span><span class="p">())</span>
+            <span class="k">return</span> <span class="s1">&#39;</span><span class="si">%s</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">tojson</span><span class="p">(),</span> <span class="bp">cls</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">encoder</span><span class="p">)</span>
         <span class="k">except</span> <span class="ne">TypeError</span> <span class="k">as</span> <span class="n">error</span><span class="p">:</span>
             <span class="k">raise</span> <span class="n">JSONWriterError</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">error</span><span class="p">),</span> <span class="n">lineno</span><span class="o">=</span><span class="n">lineno</span><span class="p">)</span> <span class="kn">from</span> <span class="nn">error</span></div></div>
 
@@ -358,7 +372,7 @@
 
 <span class="sd">        Raises:</span>
 <span class="sd">            :exc:`ASCIIWriterError`: If failed to serialise ``data`` as ASCII.</span>
-<span class="sd">w</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">try</span><span class="p">:</span>
             <span class="k">return</span> <span class="n">file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%s</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">str_separator</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">toascii</span><span class="p">()</span><span class="o">.</span><span class="n">values</span><span class="p">()))</span>
@@ -513,6 +527,7 @@
 
 <div class="viewcode-block" id="write_json"><a class="viewcode-back" href="../../zlogging.dumper.html#zlogging.write_json">[docs]</a><span class="k">def</span> <span class="nf">write_json</span><span class="p">(</span><span class="n">data</span><span class="p">:</span> <span class="s1">&#39;Iterable[Model]&#39;</span><span class="p">,</span> <span class="n">filename</span><span class="p">:</span> <span class="s1">&#39;PathLike[str]&#39;</span><span class="p">,</span>  <span class="c1"># pylint: disable=unused-argument,keyword-arg-before-vararg</span>
                <span class="n">writer</span><span class="p">:</span> <span class="s1">&#39;Optional[Type[JSONWriter]]&#39;</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+               <span class="n">encoder</span><span class="p">:</span> <span class="s1">&#39;Optional[Type[JSONEncoder]]&#39;</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
                <span class="o">*</span><span class="n">args</span><span class="p">:</span> <span class="s1">&#39;Any&#39;</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">:</span> <span class="s1">&#39;Any&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
     <span class="sd">&quot;&quot;&quot;Write JSON log file.</span>
 
@@ -521,6 +536,7 @@
 <span class="sd">            records as an :obj:`Iterable` of :class:`~zlogging.model.Model` per line.</span>
 <span class="sd">        filename: Log file name.</span>
 <span class="sd">        writer (:class:`~zlogging.dumper.JSONWriter`, optional): Writer class.</span>
+<span class="sd">        encoder (:class:`json.JSONEncoder` object, optional): JSON encoder class.</span>
 <span class="sd">        *args: Variable length argument list.</span>
 
 <span class="sd">    Keyword Args:</span>
@@ -529,12 +545,13 @@
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="n">writer</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
         <span class="n">writer</span> <span class="o">=</span> <span class="n">JSONWriter</span>
-    <span class="n">json_writer</span> <span class="o">=</span> <span class="n">writer</span><span class="p">()</span>
+    <span class="n">json_writer</span> <span class="o">=</span> <span class="n">writer</span><span class="p">(</span><span class="n">encoder</span><span class="o">=</span><span class="n">encoder</span><span class="p">)</span>
     <span class="n">json_writer</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span></div>
 
 
 <div class="viewcode-block" id="dump_json"><a class="viewcode-back" href="../../zlogging.dumper.html#zlogging.dump_json">[docs]</a><span class="k">def</span> <span class="nf">dump_json</span><span class="p">(</span><span class="n">data</span><span class="p">:</span> <span class="s1">&#39;Iterable[Model]&#39;</span><span class="p">,</span> <span class="n">file</span><span class="p">:</span> <span class="s1">&#39;TextFile&#39;</span><span class="p">,</span>  <span class="c1"># pylint: disable=unused-argument,keyword-arg-before-vararg</span>
               <span class="n">writer</span><span class="p">:</span> <span class="s1">&#39;Optional[Type[JSONWriter]]&#39;</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+              <span class="n">encoder</span><span class="p">:</span> <span class="s1">&#39;Optional[Type[JSONEncoder]]&#39;</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
               <span class="o">*</span><span class="n">args</span><span class="p">:</span> <span class="s1">&#39;Any&#39;</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">:</span> <span class="s1">&#39;Any&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
     <span class="sd">&quot;&quot;&quot;Write JSON log file.</span>
 
@@ -543,6 +560,7 @@
 <span class="sd">            records as an :obj:`Iterable` of :class:`~zlogging.model.Model` per line.</span>
 <span class="sd">        file: Log file object opened in text mode.</span>
 <span class="sd">        writer (:class:`~zlogging.dumper.JSONWriter`, optional): Writer class.</span>
+<span class="sd">        encoder (:class:`json.JSONEncoder` object, optional): JSON encoder class.</span>
 <span class="sd">        *args: Variable length argument list.</span>
 
 <span class="sd">    Keyword Args:</span>
@@ -551,12 +569,13 @@
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="n">writer</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
         <span class="n">writer</span> <span class="o">=</span> <span class="n">JSONWriter</span>
-    <span class="n">json_writer</span> <span class="o">=</span> <span class="n">writer</span><span class="p">()</span>
+    <span class="n">json_writer</span> <span class="o">=</span> <span class="n">writer</span><span class="p">(</span><span class="n">encoder</span><span class="o">=</span><span class="n">encoder</span><span class="p">)</span>
     <span class="n">json_writer</span><span class="o">.</span><span class="n">write_file</span><span class="p">(</span><span class="n">file</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span></div>
 
 
 <div class="viewcode-block" id="dumps_json"><a class="viewcode-back" href="../../zlogging.dumper.html#zlogging.dumps_json">[docs]</a><span class="k">def</span> <span class="nf">dumps_json</span><span class="p">(</span><span class="n">data</span><span class="p">:</span> <span class="s1">&#39;Optional[Iterable[Model]]&#39;</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>  <span class="c1"># pylint: disable=unused-argument,keyword-arg-before-vararg</span>
                <span class="n">writer</span><span class="p">:</span> <span class="s1">&#39;Optional[Type[JSONWriter]]&#39;</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+               <span class="n">encoder</span><span class="p">:</span> <span class="s1">&#39;Optional[Type[JSONEncoder]]&#39;</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
                <span class="o">*</span><span class="n">args</span><span class="p">:</span> <span class="s1">&#39;Any&#39;</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">:</span> <span class="s1">&#39;Any&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
     <span class="sd">&quot;&quot;&quot;Write JSON log string.</span>
 
@@ -564,6 +583,7 @@
 <span class="sd">        data (:obj:`Iterable` of :class:`~zlogging.model.Model`): Log</span>
 <span class="sd">            records as an :obj:`Iterable` of :class:`~zlogging.model.Model` per line.</span>
 <span class="sd">        writer (:class:`~zlogging.dumper.JSONWriter`, optional): Writer class.</span>
+<span class="sd">        encoder (:class:`json.JSONEncoder` object, optional): JSON encoder class.</span>
 <span class="sd">        *args: Variable length argument list.</span>
 
 <span class="sd">    Keyword Args:</span>
@@ -575,7 +595,7 @@
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="n">writer</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
         <span class="n">writer</span> <span class="o">=</span> <span class="n">JSONWriter</span>
-    <span class="n">json_writer</span> <span class="o">=</span> <span class="n">writer</span><span class="p">()</span>
+    <span class="n">json_writer</span> <span class="o">=</span> <span class="n">writer</span><span class="p">(</span><span class="n">encoder</span><span class="o">=</span><span class="n">encoder</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">json_writer</span><span class="o">.</span><span class="n">dump_file</span><span class="p">(</span><span class="n">data</span><span class="p">)</span></div>
 
 

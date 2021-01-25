@@ -32,6 +32,7 @@
             
   <h1>Source code for zlogging.enum.Log</h1><div class="highlight"><pre>
 <span></span><span class="c1"># -*- coding: utf-8 -*-</span>
+<span class="c1"># pylint: disable=line-too-long,import-error</span>
 <span class="sd">&quot;&quot;&quot;Namespace: ``Log``.&quot;&quot;&quot;</span>
 
 <span class="kn">from</span> <span class="nn">zlogging._compat</span> <span class="kn">import</span> <span class="n">enum</span>
@@ -39,12 +40,16 @@
 
 <div class="viewcode-block" id="ID"><a class="viewcode-back" href="../../../zlogging.enum.html#zlogging.enum.Log.ID">[docs]</a><span class="nd">@enum</span><span class="o">.</span><span class="n">unique</span>
 <span class="k">class</span> <span class="nc">ID</span><span class="p">(</span><span class="n">enum</span><span class="o">.</span><span class="n">IntFlag</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Type that defines an ID unique to each log stream. Scripts creating new</span>
-<span class="sd">    log streams need to redef this enum to add their own specific log ID.</span>
-<span class="sd">    The log ID implicitly determines the default name of the generated log</span>
-<span class="sd">    file.</span>
+    <span class="sd">&quot;&quot;&quot;Enum: ``Log::ID``.</span>
 
-<span class="sd">    c.f. `base/frameworks/logging/main.zeek &lt;https://docs.zeek.org/en/stable/scripts/base/frameworks/logging/main.zeek.html#type-Log::ID&gt;`__</span>
+<span class="sd">    Type that defines an ID unique to each log stream. Scripts creating new log streams need to redef</span>
+<span class="sd">    this enum to add their own specific log ID. The log ID implicitly determines the default name of the</span>
+<span class="sd">    generated log file.</span>
+
+<span class="sd">    See Also:</span>
+<span class="sd">        `base/frameworks/logging/main.zeek`_</span>
+
+<span class="sd">    .. _base/frameworks/logging/main.zeek: https://docs.zeek.org/en/stable/scripts/base/frameworks/logging/main.zeek.html#type-Log::ID</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
 
@@ -325,9 +330,14 @@
 
 <div class="viewcode-block" id="PrintLogType"><a class="viewcode-back" href="../../../zlogging.enum.html#zlogging.enum.Log.PrintLogType">[docs]</a><span class="nd">@enum</span><span class="o">.</span><span class="n">unique</span>
 <span class="k">class</span> <span class="nc">PrintLogType</span><span class="p">(</span><span class="n">enum</span><span class="o">.</span><span class="n">IntFlag</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Configurations for Log::print\_to\_log</span>
+    <span class="sd">&quot;&quot;&quot;Enum: ``Log::PrintLogType``.</span>
 
-<span class="sd">    c.f. `base/frameworks/logging/main.zeek &lt;https://docs.zeek.org/en/stable/scripts/base/frameworks/logging/main.zeek.html#type-Log::PrintLogType&gt;`__</span>
+<span class="sd">    Configurations for ``Log::print_to_log``.</span>
+
+<span class="sd">    See Also:</span>
+<span class="sd">        `base/frameworks/logging/main.zeek`_</span>
+
+<span class="sd">    .. _base/frameworks/logging/main.zeek: https://docs.zeek.org/en/stable/scripts/base/frameworks/logging/main.zeek.html#type-Log::PrintLogType</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
 
@@ -347,7 +357,14 @@
 
 <div class="viewcode-block" id="Writer"><a class="viewcode-back" href="../../../zlogging.enum.html#zlogging.enum.Log.Writer">[docs]</a><span class="nd">@enum</span><span class="o">.</span><span class="n">unique</span>
 <span class="k">class</span> <span class="nc">Writer</span><span class="p">(</span><span class="n">enum</span><span class="o">.</span><span class="n">IntFlag</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;c.f. `base/frameworks/logging/main.zeek &lt;https://docs.zeek.org/en/stable/scripts/base/frameworks/logging/main.zeek.html#type-Log::Writer&gt;`__&quot;&quot;&quot;</span>
+    <span class="sd">&quot;&quot;&quot;Enum: ``Log::Writer``.</span>
+
+<span class="sd">    See Also:</span>
+<span class="sd">        `base/frameworks/logging/main.zeek`_</span>
+
+<span class="sd">    .. _base/frameworks/logging/main.zeek: https://docs.zeek.org/en/stable/scripts/base/frameworks/logging/main.zeek.html#type-Log::Writer</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="n">_ignore_</span> <span class="o">=</span> <span class="s1">&#39;Writer _&#39;</span>
     <span class="n">Writer</span> <span class="o">=</span> <span class="nb">vars</span><span class="p">()</span>

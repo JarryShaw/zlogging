@@ -32,6 +32,7 @@
             
   <h1>Source code for zlogging.enum.Broker</h1><div class="highlight"><pre>
 <span></span><span class="c1"># -*- coding: utf-8 -*-</span>
+<span class="c1"># pylint: disable=line-too-long,import-error</span>
 <span class="sd">&quot;&quot;&quot;Namespace: ``Broker``.&quot;&quot;&quot;</span>
 
 <span class="kn">from</span> <span class="nn">zlogging._compat</span> <span class="kn">import</span> <span class="n">enum</span>
@@ -39,10 +40,14 @@
 
 <div class="viewcode-block" id="DataType"><a class="viewcode-back" href="../../../zlogging.enum.html#zlogging.enum.Broker.DataType">[docs]</a><span class="nd">@enum</span><span class="o">.</span><span class="n">unique</span>
 <span class="k">class</span> <span class="nc">DataType</span><span class="p">(</span><span class="n">enum</span><span class="o">.</span><span class="n">IntFlag</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Enumerates the possible types that Broker::Data may be in</span>
-<span class="sd">    terms of Zeek data types.</span>
+    <span class="sd">&quot;&quot;&quot;Enum: ``Broker::DataType``.</span>
 
-<span class="sd">    c.f. `base/bif/data.bif.zeek &lt;https://docs.zeek.org/en/stable/scripts/base/bif/data.bif.zeek.html#type-Broker::DataType&gt;`__</span>
+<span class="sd">    Enumerates the possible types that ``Broker::Data`` may be in terms of Zeek data types.</span>
+
+<span class="sd">    See Also:</span>
+<span class="sd">        `base/bif/data.bif.zeek`_</span>
+
+<span class="sd">    .. _base/bif/data.bif.zeek: https://docs.zeek.org/en/stable/scripts/base/bif/data.bif.zeek.html#type-Broker::DataType</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
 
@@ -82,9 +87,14 @@
 
 <div class="viewcode-block" id="Type"><a class="viewcode-back" href="../../../zlogging.enum.html#zlogging.enum.Broker.Type">[docs]</a><span class="nd">@enum</span><span class="o">.</span><span class="n">unique</span>
 <span class="k">class</span> <span class="nc">Type</span><span class="p">(</span><span class="n">enum</span><span class="o">.</span><span class="n">IntFlag</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;The type of a Broker activity being logged.</span>
+    <span class="sd">&quot;&quot;&quot;Enum: ``Broker::Type``.</span>
 
-<span class="sd">    c.f. `base/frameworks/broker/log.zeek &lt;https://docs.zeek.org/en/stable/scripts/base/frameworks/broker/log.zeek.html#type-Broker::Type&gt;`__</span>
+<span class="sd">    The type of a Broker activity being logged.</span>
+
+<span class="sd">    See Also:</span>
+<span class="sd">        `base/frameworks/broker/log.zeek`_</span>
+
+<span class="sd">    .. _base/frameworks/broker/log.zeek: https://docs.zeek.org/en/stable/scripts/base/frameworks/broker/log.zeek.html#type-Broker::Type</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
 
@@ -100,9 +110,14 @@
 
 <div class="viewcode-block" id="ErrorCode"><a class="viewcode-back" href="../../../zlogging.enum.html#zlogging.enum.Broker.ErrorCode">[docs]</a><span class="nd">@enum</span><span class="o">.</span><span class="n">unique</span>
 <span class="k">class</span> <span class="nc">ErrorCode</span><span class="p">(</span><span class="n">enum</span><span class="o">.</span><span class="n">IntFlag</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Enumerates the possible error types.</span>
+    <span class="sd">&quot;&quot;&quot;Enum: ``Broker::ErrorCode``.</span>
 
-<span class="sd">    c.f. `base/frameworks/broker/main.zeek &lt;https://docs.zeek.org/en/stable/scripts/base/frameworks/broker/main.zeek.html#type-Broker::ErrorCode&gt;`__</span>
+<span class="sd">    Enumerates the possible error types.</span>
+
+<span class="sd">    See Also:</span>
+<span class="sd">        `base/frameworks/broker/main.zeek`_</span>
+
+<span class="sd">    .. _base/frameworks/broker/main.zeek: https://docs.zeek.org/en/stable/scripts/base/frameworks/broker/main.zeek.html#type-Broker::ErrorCode</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
 
@@ -178,9 +193,14 @@
 
 <div class="viewcode-block" id="PeerStatus"><a class="viewcode-back" href="../../../zlogging.enum.html#zlogging.enum.Broker.PeerStatus">[docs]</a><span class="nd">@enum</span><span class="o">.</span><span class="n">unique</span>
 <span class="k">class</span> <span class="nc">PeerStatus</span><span class="p">(</span><span class="n">enum</span><span class="o">.</span><span class="n">IntFlag</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;The possible states of a peer endpoint.</span>
+    <span class="sd">&quot;&quot;&quot;Enum: ``Broker::PeerStatus``.</span>
 
-<span class="sd">    c.f. `base/frameworks/broker/main.zeek &lt;https://docs.zeek.org/en/stable/scripts/base/frameworks/broker/main.zeek.html#type-Broker::PeerStatus&gt;`__</span>
+<span class="sd">    The possible states of a peer endpoint.</span>
+
+<span class="sd">    See Also:</span>
+<span class="sd">        `base/frameworks/broker/main.zeek`_</span>
+
+<span class="sd">    .. _base/frameworks/broker/main.zeek: https://docs.zeek.org/en/stable/scripts/base/frameworks/broker/main.zeek.html#type-Broker::PeerStatus</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
 
@@ -208,9 +228,14 @@
 
 <div class="viewcode-block" id="BackendType"><a class="viewcode-back" href="../../../zlogging.enum.html#zlogging.enum.Broker.BackendType">[docs]</a><span class="nd">@enum</span><span class="o">.</span><span class="n">unique</span>
 <span class="k">class</span> <span class="nc">BackendType</span><span class="p">(</span><span class="n">enum</span><span class="o">.</span><span class="n">IntFlag</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Enumerates the possible storage backends.</span>
+    <span class="sd">&quot;&quot;&quot;Enum: ``Broker::BackendType``.</span>
 
-<span class="sd">    c.f. `base/frameworks/broker/store.zeek &lt;https://docs.zeek.org/en/stable/scripts/base/frameworks/broker/store.zeek.html#type-Broker::BackendType&gt;`__</span>
+<span class="sd">    Enumerates the possible storage backends.</span>
+
+<span class="sd">    See Also:</span>
+<span class="sd">        `base/frameworks/broker/store.zeek`_</span>
+
+<span class="sd">    .. _base/frameworks/broker/store.zeek: https://docs.zeek.org/en/stable/scripts/base/frameworks/broker/store.zeek.html#type-Broker::BackendType</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
 
@@ -226,9 +251,14 @@
 
 <div class="viewcode-block" id="QueryStatus"><a class="viewcode-back" href="../../../zlogging.enum.html#zlogging.enum.Broker.QueryStatus">[docs]</a><span class="nd">@enum</span><span class="o">.</span><span class="n">unique</span>
 <span class="k">class</span> <span class="nc">QueryStatus</span><span class="p">(</span><span class="n">enum</span><span class="o">.</span><span class="n">IntFlag</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Whether a data store query could be completed or not.</span>
+    <span class="sd">&quot;&quot;&quot;Enum: ``Broker::QueryStatus``.</span>
 
-<span class="sd">    c.f. `base/frameworks/broker/store.zeek &lt;https://docs.zeek.org/en/stable/scripts/base/frameworks/broker/store.zeek.html#type-Broker::QueryStatus&gt;`__</span>
+<span class="sd">    Whether a data store query could be completed or not.</span>
+
+<span class="sd">    See Also:</span>
+<span class="sd">        `base/frameworks/broker/store.zeek`_</span>
+
+<span class="sd">    .. _base/frameworks/broker/store.zeek: https://docs.zeek.org/en/stable/scripts/base/frameworks/broker/store.zeek.html#type-Broker::QueryStatus</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
 

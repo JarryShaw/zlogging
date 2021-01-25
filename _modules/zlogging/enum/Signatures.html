@@ -32,6 +32,7 @@
             
   <h1>Source code for zlogging.enum.Signatures</h1><div class="highlight"><pre>
 <span></span><span class="c1"># -*- coding: utf-8 -*-</span>
+<span class="c1"># pylint: disable=line-too-long,import-error</span>
 <span class="sd">&quot;&quot;&quot;Namespace: ``Signatures``.&quot;&quot;&quot;</span>
 
 <span class="kn">from</span> <span class="nn">zlogging._compat</span> <span class="kn">import</span> <span class="n">enum</span>
@@ -39,11 +40,15 @@
 
 <div class="viewcode-block" id="Action"><a class="viewcode-back" href="../../../zlogging.enum.html#zlogging.enum.Signatures.Action">[docs]</a><span class="nd">@enum</span><span class="o">.</span><span class="n">unique</span>
 <span class="k">class</span> <span class="nc">Action</span><span class="p">(</span><span class="n">enum</span><span class="o">.</span><span class="n">IntFlag</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;These are the default actions you can apply to signature matches.</span>
-<span class="sd">    All of them write the signature record to the logging stream unless</span>
-<span class="sd">    declared otherwise.</span>
+    <span class="sd">&quot;&quot;&quot;Enum: ``Signatures::Action``.</span>
 
-<span class="sd">    c.f. `base/frameworks/signatures/main.zeek &lt;https://docs.zeek.org/en/stable/scripts/base/frameworks/signatures/main.zeek.html#type-Signatures::Action&gt;`__</span>
+<span class="sd">    These are the default actions you can apply to signature matches. All of them write the signature</span>
+<span class="sd">    record to the logging stream unless declared otherwise.</span>
+
+<span class="sd">    See Also:</span>
+<span class="sd">        `base/frameworks/signatures/main.zeek`_</span>
+
+<span class="sd">    .. _base/frameworks/signatures/main.zeek: https://docs.zeek.org/en/stable/scripts/base/frameworks/signatures/main.zeek.html#type-Signatures::Action</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
 

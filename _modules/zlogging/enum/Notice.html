@@ -32,6 +32,7 @@
             
   <h1>Source code for zlogging.enum.Notice</h1><div class="highlight"><pre>
 <span></span><span class="c1"># -*- coding: utf-8 -*-</span>
+<span class="c1"># pylint: disable=line-too-long,import-error</span>
 <span class="sd">&quot;&quot;&quot;Namespace: ``Notice``.&quot;&quot;&quot;</span>
 
 <span class="kn">from</span> <span class="nn">zlogging._compat</span> <span class="kn">import</span> <span class="n">enum</span>
@@ -39,9 +40,14 @@
 
 <div class="viewcode-block" id="Action"><a class="viewcode-back" href="../../../zlogging.enum.html#zlogging.enum.Notice.Action">[docs]</a><span class="nd">@enum</span><span class="o">.</span><span class="n">unique</span>
 <span class="k">class</span> <span class="nc">Action</span><span class="p">(</span><span class="n">enum</span><span class="o">.</span><span class="n">IntFlag</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;These are values representing actions that can be taken with notices.</span>
+    <span class="sd">&quot;&quot;&quot;Enum: ``Notice::Action``.</span>
 
-<span class="sd">    c.f. `base/frameworks/notice/main.zeek &lt;https://docs.zeek.org/en/stable/scripts/base/frameworks/notice/main.zeek.html#type-Notice::Action&gt;`__</span>
+<span class="sd">    These are values representing actions that can be taken with notices.</span>
+
+<span class="sd">    See Also:</span>
+<span class="sd">        `base/frameworks/notice/main.zeek`_</span>
+
+<span class="sd">    .. _base/frameworks/notice/main.zeek: https://docs.zeek.org/en/stable/scripts/base/frameworks/notice/main.zeek.html#type-Notice::Action</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
 
@@ -91,16 +97,18 @@
 
 <div class="viewcode-block" id="Type"><a class="viewcode-back" href="../../../zlogging.enum.html#zlogging.enum.Notice.Type">[docs]</a><span class="nd">@enum</span><span class="o">.</span><span class="n">unique</span>
 <span class="k">class</span> <span class="nc">Type</span><span class="p">(</span><span class="n">enum</span><span class="o">.</span><span class="n">IntFlag</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Scripts creating new notices need to redef this enum to add their</span>
-<span class="sd">    own specific notice types which would then get used when they call</span>
-<span class="sd">    the NOTICE function.  The convention is to give a general</span>
-<span class="sd">    category along with the specific notice separating words with</span>
-<span class="sd">    underscores and using leading capitals on each word except for</span>
-<span class="sd">    abbreviations which are kept in all capitals. For example,</span>
-<span class="sd">    SSH::Password\_Guessing is for hosts that have crossed a threshold of</span>
-<span class="sd">    failed SSH logins.</span>
+    <span class="sd">&quot;&quot;&quot;Enum: ``Notice::Type``.</span>
 
-<span class="sd">    c.f. `base/frameworks/notice/main.zeek &lt;https://docs.zeek.org/en/stable/scripts/base/frameworks/notice/main.zeek.html#type-Notice::Type&gt;`__</span>
+<span class="sd">    Scripts creating new notices need to redef this enum to add their own specific notice types which</span>
+<span class="sd">    would then get used when they call the ``NOTICE`` function. The convention is to give a general</span>
+<span class="sd">    category along with the specific notice separating words with underscores and using leading capitals</span>
+<span class="sd">    on each word except for abbreviations which are kept in all capitals. For example,</span>
+<span class="sd">    SSH::Password_Guessing is for hosts that have crossed a threshold of failed SSH logins.</span>
+
+<span class="sd">    See Also:</span>
+<span class="sd">        `base/frameworks/notice/main.zeek`_</span>
+
+<span class="sd">    .. _base/frameworks/notice/main.zeek: https://docs.zeek.org/en/stable/scripts/base/frameworks/notice/main.zeek.html#type-Notice::Type</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
 

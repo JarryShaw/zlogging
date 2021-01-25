@@ -32,6 +32,7 @@
             
   <h1>Source code for zlogging.enum.LoadBalancing</h1><div class="highlight"><pre>
 <span></span><span class="c1"># -*- coding: utf-8 -*-</span>
+<span class="c1"># pylint: disable=line-too-long,import-error</span>
 <span class="sd">&quot;&quot;&quot;Namespace: ``LoadBalancing``.&quot;&quot;&quot;</span>
 
 <span class="kn">from</span> <span class="nn">zlogging._compat</span> <span class="kn">import</span> <span class="n">enum</span>
@@ -39,7 +40,14 @@
 
 <div class="viewcode-block" id="Method"><a class="viewcode-back" href="../../../zlogging.enum.html#zlogging.enum.LoadBalancing.Method">[docs]</a><span class="nd">@enum</span><span class="o">.</span><span class="n">unique</span>
 <span class="k">class</span> <span class="nc">Method</span><span class="p">(</span><span class="n">enum</span><span class="o">.</span><span class="n">IntFlag</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;c.f. `policy/misc/load-balancing.zeek &lt;https://docs.zeek.org/en/stable/scripts/policy/misc/load-balancing.zeek.html#type-LoadBalancing::Method&gt;`__&quot;&quot;&quot;</span>
+    <span class="sd">&quot;&quot;&quot;Enum: ``LoadBalancing::Method``.</span>
+
+<span class="sd">    See Also:</span>
+<span class="sd">        `policy/misc/load-balancing.zeek`_</span>
+
+<span class="sd">    .. _policy/misc/load-balancing.zeek: https://docs.zeek.org/en/stable/scripts/policy/misc/load-balancing.zeek.html#type-LoadBalancing::Method</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="n">_ignore_</span> <span class="o">=</span> <span class="s1">&#39;Method _&#39;</span>
     <span class="n">Method</span> <span class="o">=</span> <span class="nb">vars</span><span class="p">()</span>
