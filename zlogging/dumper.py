@@ -21,6 +21,7 @@ __all__ = [
 
 if TYPE_CHECKING:
     from io import TextIOWrapper as TextFile
+    from json import JSONEncoder
     from os import PathLike
     from typing import Any, Iterable, Literal, Optional, Type, Union
 
@@ -135,12 +136,25 @@ class BaseWriter(metaclass=abc.ABCMeta):
 
 
 class JSONWriter(BaseWriter):
-    """JSON log writer."""
+    """JSON log writer.
+
+    Args:
+        encoder (:class:`json.JSONEncoder` object, optional): JSON encoder class.
+
+    Attributes:
+        encoder (:class:`json.JSONEncoder` object): JSON encoder class.
+
+    """
 
     @property
     def format(self) -> 'Literal["json"]':
         """str: Log file format."""
         return 'json'
+
+    def __init__(self, encoder: 'Optional[Type[JSONEncoder]]' = None) -> None:
+        if encoder is None:
+            encoder = json.JSONEncoder
+        self.encoder = encoder
 
     def write_file(self, file: 'TextFile', data: 'Iterable[Model]') -> int:
         """Write log file.
@@ -176,7 +190,7 @@ class JSONWriter(BaseWriter):
 
         """
         try:
-            return file.write('%s\n' % json.dumps(data.tojson()))
+            return file.write('%s\n' % json.dumps(data.tojson(), cls=self.encoder))
         except TypeError as error:
             raise JSONWriterError(str(error), lineno=lineno) from error
 
@@ -210,7 +224,7 @@ class JSONWriter(BaseWriter):
 
         """
         try:
-            return '%s\n' % json.dumps(data.tojson())
+            return '%s\n' % json.dumps(data.tojson(), cls=self.encoder)
         except TypeError as error:
             raise JSONWriterError(str(error), lineno=lineno) from error
 
@@ -325,7 +339,7 @@ class ASCIIWriter(BaseWriter):
 
         Raises:
             :exc:`ASCIIWriterError`: If failed to serialise ``data`` as ASCII.
-w
+
         """
         try:
             return file.write('%s\n' % self.str_separator.join(data.toascii().values()))
@@ -480,6 +494,7 @@ w
 
 def write_json(data: 'Iterable[Model]', filename: 'PathLike[str]',  # pylint: disable=unused-argument,keyword-arg-before-vararg
                writer: 'Optional[Type[JSONWriter]]' = None,
+               encoder: 'Optional[Type[JSONEncoder]]' = None,
                *args: 'Any', **kwargs: 'Any') -> None:
     """Write JSON log file.
 
@@ -488,6 +503,7 @@ def write_json(data: 'Iterable[Model]', filename: 'PathLike[str]',  # pylint: di
             records as an :obj:`Iterable` of :class:`~zlogging.model.Model` per line.
         filename: Log file name.
         writer (:class:`~zlogging.dumper.JSONWriter`, optional): Writer class.
+        encoder (:class:`json.JSONEncoder` object, optional): JSON encoder class.
         *args: Variable length argument list.
 
     Keyword Args:
@@ -496,12 +512,13 @@ def write_json(data: 'Iterable[Model]', filename: 'PathLike[str]',  # pylint: di
     """
     if writer is None:
         writer = JSONWriter
-    json_writer = writer()
+    json_writer = writer(encoder=encoder)
     json_writer.write(filename, data)
 
 
 def dump_json(data: 'Iterable[Model]', file: 'TextFile',  # pylint: disable=unused-argument,keyword-arg-before-vararg
               writer: 'Optional[Type[JSONWriter]]' = None,
+              encoder: 'Optional[Type[JSONEncoder]]' = None,
               *args: 'Any', **kwargs: 'Any') -> None:
     """Write JSON log file.
 
@@ -510,6 +527,7 @@ def dump_json(data: 'Iterable[Model]', file: 'TextFile',  # pylint: disable=unus
             records as an :obj:`Iterable` of :class:`~zlogging.model.Model` per line.
         file: Log file object opened in text mode.
         writer (:class:`~zlogging.dumper.JSONWriter`, optional): Writer class.
+        encoder (:class:`json.JSONEncoder` object, optional): JSON encoder class.
         *args: Variable length argument list.
 
     Keyword Args:
@@ -518,12 +536,13 @@ def dump_json(data: 'Iterable[Model]', file: 'TextFile',  # pylint: disable=unus
     """
     if writer is None:
         writer = JSONWriter
-    json_writer = writer()
+    json_writer = writer(encoder=encoder)
     json_writer.write_file(file, data)
 
 
 def dumps_json(data: 'Optional[Iterable[Model]]' = None,  # pylint: disable=unused-argument,keyword-arg-before-vararg
                writer: 'Optional[Type[JSONWriter]]' = None,
+               encoder: 'Optional[Type[JSONEncoder]]' = None,
                *args: 'Any', **kwargs: 'Any') -> str:
     """Write JSON log string.
 
@@ -531,6 +550,7 @@ def dumps_json(data: 'Optional[Iterable[Model]]' = None,  # pylint: disable=unus
         data (:obj:`Iterable` of :class:`~zlogging.model.Model`): Log
             records as an :obj:`Iterable` of :class:`~zlogging.model.Model` per line.
         writer (:class:`~zlogging.dumper.JSONWriter`, optional): Writer class.
+        encoder (:class:`json.JSONEncoder` object, optional): JSON encoder class.
         *args: Variable length argument list.
 
     Keyword Args:
@@ -542,7 +562,7 @@ def dumps_json(data: 'Optional[Iterable[Model]]' = None,  # pylint: disable=unus
     """
     if writer is None:
         writer = JSONWriter
-    json_writer = writer()
+    json_writer = writer(encoder=encoder)
     return json_writer.dump_file(data)
 
 

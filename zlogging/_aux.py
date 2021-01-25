@@ -276,7 +276,7 @@ def expand_typing(cls: 'Union[Model, Type[Model], RecordType, Type[RecordType]]'
         """Field registry."""
         existed = fields.get(name)
         if existed is not None and field.zeek_type != existed.zeek_type:
-            raise exc(f'inconsistent data type of {name!r} field: {field} and {existed}')  # type: ignore[misc]
+            raise exc(f'inconsistent data type of {name!r} field: {field!r} and {existed!r}')  # type: ignore[misc]
         fields[name] = field
 
     fields = collections.OrderedDict()  # type: OrderedDict[str, Union[_SimpleType, _GenericType]]
@@ -347,6 +347,7 @@ def expand_typing(cls: 'Union[Model, Type[Model], RecordType, Type[RecordType]]'
             raise exc("inconsistent value of 'set_separator': {set_separator!r} and {attr.set_separator!r}")
 
     return {
+        '_inited': inited,
         'fields': fields,
         'record_fields': record_fields,
         'unset_field': unset_field,
