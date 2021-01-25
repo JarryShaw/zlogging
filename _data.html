@@ -14,8 +14,8 @@
     <script src="_static/doctools.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Exceptions &amp; Warnings" href="zlogging._exc.html" />
-    <link rel="prev" title="Typing Annotations" href="zlogging.typing.html" />
+    <link rel="next" title="Exceptions &amp; Warnings" href="_exc.html" />
+    <link rel="prev" title="Typing Annotations" href="typing.html" />
    
   <link rel="stylesheet" href="_static/custom.css" type="text/css" />
   
@@ -53,8 +53,8 @@ under <code class="docutils literal notranslate"><span class="pre">#</span> <spa
 log file under <code class="docutils literal notranslate"><span class="pre">#</span> <span class="pre">open</span></code> directive.</p></li>
 <li><p><strong>close</strong> (<a class="reference external" href="https://docs.python.org/3/library/datetime.html#datetime.datetime" title="(in Python v3.9)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">datetime.datetime</span></code></a>) – The value is specified in the ASCII
 log file under <code class="docutils literal notranslate"><span class="pre">#</span> <span class="pre">close</span></code> directive.</p></li>
-<li><p><strong>data</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.9)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code></a> or <a class="reference internal" href="zlogging.model.html#zlogging.model.Model" title="zlogging.model.Model"><code class="xref py py-class docutils literal notranslate"><span class="pre">Model</span></code></a>) – The log records
-parsed as a <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.9)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code></a> of <a class="reference internal" href="zlogging.model.html#zlogging.model.Model" title="zlogging.model.Model"><code class="xref py py-class docutils literal notranslate"><span class="pre">Model</span></code></a> per line.</p></li>
+<li><p><strong>data</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.9)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code></a> or <a class="reference internal" href="model.html#zlogging.model.Model" title="zlogging.model.Model"><code class="xref py py-class docutils literal notranslate"><span class="pre">Model</span></code></a>) – The log records
+parsed as a <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.9)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code></a> of <a class="reference internal" href="model.html#zlogging.model.Model" title="zlogging.model.Model"><code class="xref py py-class docutils literal notranslate"><span class="pre">Model</span></code></a> per line.</p></li>
 <li><p><strong>exit_with_error</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">bool</span></code></a>) – When exit with error, the ASCII log
 file doesn’t has a <code class="docutils literal notranslate"><span class="pre">#</span> <span class="pre">close</span></code> directive.</p></li>
 </ul>
@@ -114,10 +114,10 @@ file doesn’t has a <code class="docutils literal notranslate"><span class="pre
 <dt id="zlogging._data.ASCIIInfo.data">
 <code class="sig-name descname">data</code><em class="property">: List<span class="p">[</span>Model<span class="p">]</span></em><a class="headerlink" href="#zlogging._data.ASCIIInfo.data" title="Permalink to this definition">¶</a></dt>
 <dd><p>Log records.</p>
-<p>The log records parsed as a <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.9)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code></a> of <a class="reference internal" href="zlogging.model.html#zlogging.model.Model" title="zlogging.model.Model"><code class="xref py py-class docutils literal notranslate"><span class="pre">Model</span></code></a> per line.</p>
+<p>The log records parsed as a <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.9)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code></a> of <a class="reference internal" href="model.html#zlogging.model.Model" title="zlogging.model.Model"><code class="xref py py-class docutils literal notranslate"><span class="pre">Model</span></code></a> per line.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.9)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code></a> of <a class="reference internal" href="zlogging.model.html#zlogging.model.Model" title="zlogging.model.Model"><code class="xref py py-class docutils literal notranslate"><span class="pre">Model</span></code></a></p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.9)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code></a> of <a class="reference internal" href="model.html#zlogging.model.Model" title="zlogging.model.Model"><code class="xref py py-class docutils literal notranslate"><span class="pre">Model</span></code></a></p>
 </dd>
 </dl>
 </dd></dl>
@@ -145,8 +145,8 @@ file doesn’t has a <code class="docutils literal notranslate"><span class="pre
 <a class="reference external" href="https://www.python.org/dev/peps/pep-557/">PEP 557</a>.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>data</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.9)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code></a> of <a class="reference internal" href="zlogging.model.html#zlogging.model.Model" title="zlogging.model.Model"><code class="xref py py-class docutils literal notranslate"><span class="pre">Model</span></code></a>) – The log records
-parsed as a <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.9)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code></a> of <a class="reference internal" href="zlogging.model.html#zlogging.model.Model" title="zlogging.model.Model"><code class="xref py py-class docutils literal notranslate"><span class="pre">Model</span></code></a> per line.</p>
+<dd class="field-odd"><p><strong>data</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.9)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code></a> of <a class="reference internal" href="model.html#zlogging.model.Model" title="zlogging.model.Model"><code class="xref py py-class docutils literal notranslate"><span class="pre">Model</span></code></a>) – The log records
+parsed as a <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.9)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code></a> of <a class="reference internal" href="model.html#zlogging.model.Model" title="zlogging.model.Model"><code class="xref py py-class docutils literal notranslate"><span class="pre">Model</span></code></a> per line.</p>
 </dd>
 </dl>
 <dl class="py method">
@@ -167,10 +167,10 @@ parsed as a <a class="reference external" href="https://docs.python.org/3/librar
 <dt id="zlogging._data.JSONInfo.data">
 <code class="sig-name descname">data</code><em class="property">: List<span class="p">[</span>Model<span class="p">]</span></em><a class="headerlink" href="#zlogging._data.JSONInfo.data" title="Permalink to this definition">¶</a></dt>
 <dd><p>Log records.</p>
-<p>The log records parsed as a <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.9)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code></a> of <a class="reference internal" href="zlogging.model.html#zlogging.model.Model" title="zlogging.model.Model"><code class="xref py py-class docutils literal notranslate"><span class="pre">Model</span></code></a> per line.</p>
+<p>The log records parsed as a <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.9)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code></a> of <a class="reference internal" href="model.html#zlogging.model.Model" title="zlogging.model.Model"><code class="xref py py-class docutils literal notranslate"><span class="pre">Model</span></code></a> per line.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.9)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code></a> of <a class="reference internal" href="zlogging.model.html#zlogging.model.Model" title="zlogging.model.Model"><code class="xref py py-class docutils literal notranslate"><span class="pre">Model</span></code></a></p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.9)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code></a> of <a class="reference internal" href="model.html#zlogging.model.Model" title="zlogging.model.Model"><code class="xref py py-class docutils literal notranslate"><span class="pre">Model</span></code></a></p>
 </dd>
 </dl>
 </dd></dl>
@@ -231,32 +231,27 @@ parsed as a <a class="reference external" href="https://docs.python.org/3/librar
 
 <h3>Navigation</h3>
 <ul class="current">
-<li class="toctree-l1 current"><a class="reference internal" href="zlogging.html">Bro/Zeek Logging Framework for Python</a><ul class="current">
-<li class="toctree-l2 current"><a class="reference internal" href="zlogging.html#table-of-contents">Table of Contents</a><ul class="current">
-<li class="toctree-l3"><a class="reference internal" href="zlogging.dumper.html">Dumpers</a></li>
-<li class="toctree-l3"><a class="reference internal" href="zlogging.loader.html">Loaders</a></li>
-<li class="toctree-l3"><a class="reference internal" href="zlogging.model.html">Data Model</a></li>
-<li class="toctree-l3"><a class="reference internal" href="zlogging.types.html">Data Types</a></li>
-<li class="toctree-l3"><a class="reference internal" href="zlogging.typing.html">Typing Annotations</a></li>
-<li class="toctree-l3 current"><a class="current reference internal" href="#">Data Classes</a></li>
-<li class="toctree-l3"><a class="reference internal" href="zlogging._exc.html">Exceptions &amp; Warnings</a></li>
-<li class="toctree-l3"><a class="reference internal" href="zlogging._aux.html">Internal Auxiliary Functions</a></li>
-<li class="toctree-l3"><a class="reference internal" href="zlogging.enum.html">Enum Namespace</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dumper.html">Dumpers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="loader.html">Loaders</a></li>
+<li class="toctree-l1"><a class="reference internal" href="model.html">Data Model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="types.html">Data Types</a></li>
+<li class="toctree-l1"><a class="reference internal" href="typing.html">Typing Annotations</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Data Classes</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#module-zlogging._data">Predefined Data Classes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#abstract-base-data-classes">Abstract Base Data Classes</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="zlogging.html#module-contents">Module Contents</a></li>
-</ul>
-</li>
+<li class="toctree-l1"><a class="reference internal" href="_exc.html">Exceptions &amp; Warnings</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_aux.html">Internal Auxiliary Functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="enum.html">Enum Namespace</a></li>
 </ul>
 
 <div class="relations">
 <h3>Related Topics</h3>
 <ul>
   <li><a href="index.html">Documentation overview</a><ul>
-  <li><a href="zlogging.html">Bro/Zeek Logging Framework for Python</a><ul>
-      <li>Previous: <a href="zlogging.typing.html" title="previous chapter">Typing Annotations</a></li>
-      <li>Next: <a href="zlogging._exc.html" title="next chapter">Exceptions &amp; Warnings</a></li>
-  </ul></li>
+      <li>Previous: <a href="typing.html" title="previous chapter">Typing Annotations</a></li>
+      <li>Next: <a href="_exc.html" title="next chapter">Exceptions &amp; Warnings</a></li>
   </ul></li>
 </ul>
 </div>
@@ -283,10 +278,10 @@ parsed as a <a class="reference external" href="https://docs.python.org/3/librar
       <div class="clearer"></div>
     </div>
     <div class="footer">
-      &copy;2020, Jarry Shaw.
+      &copy;2020-2021, Jarry Shaw.
       
       |
-      <a href="_sources/zlogging._data.rst.txt"
+      <a href="_sources/_data.rst.txt"
           rel="nofollow">Page source</a>
     </div>
 

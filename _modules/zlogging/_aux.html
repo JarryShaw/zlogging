@@ -71,7 +71,7 @@
 <span class="nd">@overload</span>
 <span class="k">def</span> <span class="nf">readline</span><span class="p">(</span><span class="n">file</span><span class="p">:</span> <span class="s1">&#39;BinaryFile&#39;</span><span class="p">,</span> <span class="n">seperator</span><span class="p">:</span> <span class="nb">bytes</span><span class="p">,</span> <span class="n">maxsplit</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
              <span class="n">decode</span><span class="p">:</span> <span class="s1">&#39;Literal[True]&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;List[str]&#39;</span><span class="p">:</span> <span class="o">...</span>  <span class="c1"># pylint: disable=redefined-outer-name</span>
-<div class="viewcode-block" id="readline"><a class="viewcode-back" href="../../zlogging._aux.html#zlogging._aux.readline">[docs]</a><span class="k">def</span> <span class="nf">readline</span><span class="p">(</span><span class="n">file</span><span class="p">:</span> <span class="s1">&#39;BinaryFile&#39;</span><span class="p">,</span> <span class="n">separator</span><span class="p">:</span> <span class="nb">bytes</span> <span class="o">=</span> <span class="sa">b</span><span class="s1">&#39;</span><span class="se">\x09</span><span class="s1">&#39;</span><span class="p">,</span>  <span class="c1"># type: ignore[misc]</span>
+<div class="viewcode-block" id="readline"><a class="viewcode-back" href="../../_aux.html#zlogging._aux.readline">[docs]</a><span class="k">def</span> <span class="nf">readline</span><span class="p">(</span><span class="n">file</span><span class="p">:</span> <span class="s1">&#39;BinaryFile&#39;</span><span class="p">,</span> <span class="n">separator</span><span class="p">:</span> <span class="nb">bytes</span> <span class="o">=</span> <span class="sa">b</span><span class="s1">&#39;</span><span class="se">\x09</span><span class="s1">&#39;</span><span class="p">,</span>  <span class="c1"># type: ignore[misc]</span>
              <span class="n">maxsplit</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">decode</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;Union[List[str], List[bytes]]&#39;</span><span class="p">:</span>  <span class="c1"># pylint: disable=redefined-outer-name</span>
     <span class="sd">&quot;&quot;&quot;Wrapper for :meth:`file.readline` function.</span>
 
@@ -93,7 +93,7 @@
     <span class="k">return</span> <span class="n">line</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">separator</span><span class="p">,</span> <span class="n">maxsplit</span><span class="p">)</span></div>
 
 
-<div class="viewcode-block" id="decimal_toascii"><a class="viewcode-back" href="../../zlogging._aux.html#zlogging._aux.decimal_toascii">[docs]</a><span class="k">def</span> <span class="nf">decimal_toascii</span><span class="p">(</span><span class="n">data</span><span class="p">:</span> <span class="s1">&#39;Decimal&#39;</span><span class="p">,</span> <span class="n">infinite</span><span class="p">:</span> <span class="s1">&#39;Optional[str]&#39;</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<div class="viewcode-block" id="decimal_toascii"><a class="viewcode-back" href="../../_aux.html#zlogging._aux.decimal_toascii">[docs]</a><span class="k">def</span> <span class="nf">decimal_toascii</span><span class="p">(</span><span class="n">data</span><span class="p">:</span> <span class="s1">&#39;Decimal&#39;</span><span class="p">,</span> <span class="n">infinite</span><span class="p">:</span> <span class="s1">&#39;Optional[str]&#39;</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
     <span class="sd">&quot;&quot;&quot;Convert :obj:`decimal.Decimal` to ASCII.</span>
 
 <span class="sd">    Args:</span>
@@ -158,7 +158,7 @@
                           <span class="s1">&#39;0&#39;</span> <span class="o">*</span> <span class="p">(</span><span class="mi">6</span> <span class="o">-</span> <span class="nb">len</span><span class="p">(</span><span class="n">buf_flt</span><span class="p">)))</span></div>
 
 
-<div class="viewcode-block" id="float_toascii"><a class="viewcode-back" href="../../zlogging._aux.html#zlogging._aux.float_toascii">[docs]</a><span class="k">def</span> <span class="nf">float_toascii</span><span class="p">(</span><span class="n">data</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">infinite</span><span class="p">:</span> <span class="s1">&#39;Optional[str]&#39;</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<div class="viewcode-block" id="float_toascii"><a class="viewcode-back" href="../../_aux.html#zlogging._aux.float_toascii">[docs]</a><span class="k">def</span> <span class="nf">float_toascii</span><span class="p">(</span><span class="n">data</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">infinite</span><span class="p">:</span> <span class="s1">&#39;Optional[str]&#39;</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
     <span class="sd">&quot;&quot;&quot;Convert :obj:`float` to ASCII.</span>
 
 <span class="sd">    Args:</span>
@@ -198,7 +198,7 @@
                         <span class="s1">&#39;0&#39;</span> <span class="o">*</span> <span class="p">(</span><span class="mi">6</span> <span class="o">-</span> <span class="nb">len</span><span class="p">(</span><span class="n">flt_part</span><span class="p">)))</span></div>
 
 
-<div class="viewcode-block" id="unicode_escape"><a class="viewcode-back" href="../../zlogging._aux.html#zlogging._aux.unicode_escape">[docs]</a><span class="k">def</span> <span class="nf">unicode_escape</span><span class="p">(</span><span class="n">string</span><span class="p">:</span> <span class="nb">bytes</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<div class="viewcode-block" id="unicode_escape"><a class="viewcode-back" href="../../_aux.html#zlogging._aux.unicode_escape">[docs]</a><span class="k">def</span> <span class="nf">unicode_escape</span><span class="p">(</span><span class="n">string</span><span class="p">:</span> <span class="nb">bytes</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
     <span class="sd">&quot;&quot;&quot;Conterprocess of :meth:`bytes.decode(&#39;unicode_escape&#39;)`.</span>
 
 <span class="sd">    Args:</span>
@@ -218,7 +218,7 @@
     <span class="k">return</span> <span class="s1">&#39;&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">s</span><span class="p">:</span> <span class="s1">&#39;</span><span class="se">\\</span><span class="s1">x</span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">s</span><span class="p">,</span> <span class="n">textwrap</span><span class="o">.</span><span class="n">wrap</span><span class="p">(</span><span class="n">string</span><span class="o">.</span><span class="n">hex</span><span class="p">(),</span> <span class="mi">2</span><span class="p">)))</span></div>
 
 
-<div class="viewcode-block" id="expand_typing"><a class="viewcode-back" href="../../zlogging._aux.html#zlogging._aux.expand_typing">[docs]</a><span class="k">def</span> <span class="nf">expand_typing</span><span class="p">(</span><span class="bp">cls</span><span class="p">:</span> <span class="s1">&#39;Union[Model, Type[Model], RecordType, Type[RecordType]]&#39;</span><span class="p">,</span>
+<div class="viewcode-block" id="expand_typing"><a class="viewcode-back" href="../../_aux.html#zlogging._aux.expand_typing">[docs]</a><span class="k">def</span> <span class="nf">expand_typing</span><span class="p">(</span><span class="bp">cls</span><span class="p">:</span> <span class="s1">&#39;Union[Model, Type[Model], RecordType, Type[RecordType]]&#39;</span><span class="p">,</span>
                   <span class="n">exc</span><span class="p">:</span> <span class="s1">&#39;Optional[Type[ValueError]]&#39;</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;ExpandedTyping&#39;</span><span class="p">:</span>
     <span class="sd">&quot;&quot;&quot;Expand typing annotations.</span>
 
@@ -413,7 +413,15 @@
 
 <h3>Navigation</h3>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../../zlogging.html">Bro/Zeek Logging Framework for Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../dumper.html">Dumpers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../loader.html">Loaders</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../model.html">Data Model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../types.html">Data Types</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../typing.html">Typing Annotations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../_data.html">Data Classes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../_exc.html">Exceptions &amp; Warnings</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../_aux.html">Internal Auxiliary Functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../enum.html">Enum Namespace</a></li>
 </ul>
 
 <div class="relations">
@@ -448,7 +456,7 @@
       <div class="clearer"></div>
     </div>
     <div class="footer">
-      &copy;2020, Jarry Shaw.
+      &copy;2020-2021, Jarry Shaw.
       
     </div>
 

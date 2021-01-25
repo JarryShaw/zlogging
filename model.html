@@ -14,8 +14,8 @@
     <script src="_static/doctools.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Data Types" href="zlogging.types.html" />
-    <link rel="prev" title="Loaders" href="zlogging.loader.html" />
+    <link rel="next" title="Data Types" href="types.html" />
+    <link rel="prev" title="Loaders" href="loader.html" />
    
   <link rel="stylesheet" href="_static/custom.css" type="text/css" />
   
@@ -43,7 +43,7 @@
 <dl class="field-list simple">
 <dt class="field-odd">Variables</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>__fields__</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">OrderedDict</span></code> mapping <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a> and <a class="reference internal" href="zlogging.types.html#zlogging.types.BaseType" title="zlogging.types.BaseType"><code class="xref py py-class docutils literal notranslate"><span class="pre">BaseType</span></code></a>) – Fields of the data model.</p></li>
+<li><p><strong>__fields__</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">OrderedDict</span></code> mapping <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a> and <a class="reference internal" href="types.html#zlogging.types.BaseType" title="zlogging.types.BaseType"><code class="xref py py-class docutils literal notranslate"><span class="pre">BaseType</span></code></a>) – Fields of the data model.</p></li>
 <li><p><strong>__record_fields__</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">OrderedDict</span></code> mapping <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a> and <code class="xref py py-class docutils literal notranslate"><span class="pre">RecordType</span></code>) – Fields of <code class="docutils literal notranslate"><span class="pre">record</span></code> data type in the data model.</p></li>
 <li><p><strong>__empty_field__</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(in Python v3.9)"><em>bytes</em></a>) – Placeholder for empty field.</p></li>
 <li><p><strong>__unset_field__</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(in Python v3.9)"><em>bytes</em></a>) – Placeholder for unset field.</p></li>
@@ -55,10 +55,10 @@
 </dd>
 <dt class="field-odd">Raises</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><a class="reference internal" href="zlogging._exc.html#zlogging._exc.ModelValueError" title="zlogging._exc.ModelValueError"><strong>ModelValueError</strong></a> – In case of inconsistency between field
+<li><p><a class="reference internal" href="_exc.html#zlogging._exc.ModelValueError" title="zlogging._exc.ModelValueError"><strong>ModelValueError</strong></a> – In case of inconsistency between field
     data types, or values of <code class="docutils literal notranslate"><span class="pre">unset_field</span></code>, <code class="docutils literal notranslate"><span class="pre">empty_field</span></code> and
     <code class="docutils literal notranslate"><span class="pre">set_separator</span></code>.</p></li>
-<li><p><a class="reference internal" href="zlogging._exc.html#zlogging._exc.ModelTypeError" title="zlogging._exc.ModelTypeError"><strong>ModelTypeError</strong></a> – Wrong parameters when initialisation.</p></li>
+<li><p><a class="reference internal" href="_exc.html#zlogging._exc.ModelTypeError" title="zlogging._exc.ModelTypeError"><strong>ModelTypeError</strong></a> – Wrong parameters when initialisation.</p></li>
 </ul>
 </dd>
 </dl>
@@ -70,7 +70,7 @@ in your subclassed data model to implement your own ideas.</p>
 <div class="admonition-example admonition">
 <p class="admonition-title">Example</p>
 <p>Define a custom log data model using the prefines Bro/Zeek data types,
-or subclasses of <a class="reference internal" href="zlogging.types.html#zlogging.types.BaseType" title="zlogging.types.BaseType"><code class="xref py py-class docutils literal notranslate"><span class="pre">BaseType</span></code></a>:</p>
+or subclasses of <a class="reference internal" href="types.html#zlogging.types.BaseType" title="zlogging.types.BaseType"><code class="xref py py-class docutils literal notranslate"><span class="pre">BaseType</span></code></a>:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">MyLog</span><span class="p">(</span><span class="n">Model</span><span class="p">):</span>
     <span class="n">field_one</span> <span class="o">=</span> <span class="n">StringType</span><span class="p">()</span>
     <span class="n">field_two</span> <span class="o">=</span> <span class="n">SetType</span><span class="p">(</span><span class="n">element_type</span><span class="o">=</span><span class="n">PortType</span><span class="p">)</span>
@@ -91,7 +91,7 @@ annotations then assignments. Should there be any conflicts,
 </div>
 <div class="admonition seealso">
 <p class="admonition-title">See also</p>
-<p>See <a class="reference internal" href="zlogging._aux.html#zlogging._aux.expand_typing" title="zlogging._aux.expand_typing"><code class="xref py py-func docutils literal notranslate"><span class="pre">expand_typing()</span></code></a> for more information about
+<p>See <a class="reference internal" href="_aux.html#zlogging._aux.expand_typing" title="zlogging._aux.expand_typing"><code class="xref py py-func docutils literal notranslate"><span class="pre">expand_typing()</span></code></a> for more information about
 processing the fields.</p>
 </div>
 <dl class="py method">
@@ -100,10 +100,10 @@ processing the fields.</p>
 <dd><p>fields of the data model</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
-<dd class="field-odd"><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">OrderedDict</span></code> mapping <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a> and <a class="reference internal" href="zlogging.types.html#zlogging.types.BaseType" title="zlogging.types.BaseType"><code class="xref py py-class docutils literal notranslate"><span class="pre">BaseType</span></code></a></p>
+<dd class="field-odd"><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">OrderedDict</span></code> mapping <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a> and <a class="reference internal" href="types.html#zlogging.types.BaseType" title="zlogging.types.BaseType"><code class="xref py py-class docutils literal notranslate"><span class="pre">BaseType</span></code></a></p>
 </dd>
 <dt class="field-even">Return type</dt>
-<dd class="field-even"><p>OrderedDict[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)">str</a>, <a class="reference internal" href="zlogging.types.html#zlogging.types.BaseType" title="zlogging.types.BaseType">BaseType</a>]</p>
+<dd class="field-even"><p>OrderedDict[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)">str</a>, <a class="reference internal" href="types.html#zlogging.types.BaseType" title="zlogging.types.BaseType">BaseType</a>]</p>
 </dd>
 </dl>
 </dd></dl>
@@ -176,7 +176,7 @@ processing the fields.</p>
 <dd class="field-odd"><p>The serialised data.</p>
 </dd>
 <dt class="field-even">Raises</dt>
-<dd class="field-even"><p><a class="reference internal" href="zlogging._exc.html#zlogging._exc.ModelFormatError" title="zlogging._exc.ModelFormatError"><strong>ModelFormatError</strong></a> – If <code class="docutils literal notranslate"><span class="pre">format</span></code> is not
+<dd class="field-even"><p><a class="reference internal" href="_exc.html#zlogging._exc.ModelFormatError" title="zlogging._exc.ModelFormatError"><strong>ModelFormatError</strong></a> – If <code class="docutils literal notranslate"><span class="pre">format</span></code> is not
     supproted, i.e. <code class="xref py py-meth docutils literal notranslate"><span class="pre">Mode.to{format}()</span></code> does not
     exist.</p>
 </dd>
@@ -313,32 +313,23 @@ can be rewrote to:</p>
 
 <h3>Navigation</h3>
 <ul class="current">
-<li class="toctree-l1 current"><a class="reference internal" href="zlogging.html">Bro/Zeek Logging Framework for Python</a><ul class="current">
-<li class="toctree-l2 current"><a class="reference internal" href="zlogging.html#table-of-contents">Table of Contents</a><ul class="current">
-<li class="toctree-l3"><a class="reference internal" href="zlogging.dumper.html">Dumpers</a></li>
-<li class="toctree-l3"><a class="reference internal" href="zlogging.loader.html">Loaders</a></li>
-<li class="toctree-l3 current"><a class="current reference internal" href="#">Data Model</a></li>
-<li class="toctree-l3"><a class="reference internal" href="zlogging.types.html">Data Types</a></li>
-<li class="toctree-l3"><a class="reference internal" href="zlogging.typing.html">Typing Annotations</a></li>
-<li class="toctree-l3"><a class="reference internal" href="zlogging._data.html">Data Classes</a></li>
-<li class="toctree-l3"><a class="reference internal" href="zlogging._exc.html">Exceptions &amp; Warnings</a></li>
-<li class="toctree-l3"><a class="reference internal" href="zlogging._aux.html">Internal Auxiliary Functions</a></li>
-<li class="toctree-l3"><a class="reference internal" href="zlogging.enum.html">Enum Namespace</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="zlogging.html#module-contents">Module Contents</a></li>
-</ul>
-</li>
+<li class="toctree-l1"><a class="reference internal" href="dumper.html">Dumpers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="loader.html">Loaders</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Data Model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="types.html">Data Types</a></li>
+<li class="toctree-l1"><a class="reference internal" href="typing.html">Typing Annotations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_data.html">Data Classes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_exc.html">Exceptions &amp; Warnings</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_aux.html">Internal Auxiliary Functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="enum.html">Enum Namespace</a></li>
 </ul>
 
 <div class="relations">
 <h3>Related Topics</h3>
 <ul>
   <li><a href="index.html">Documentation overview</a><ul>
-  <li><a href="zlogging.html">Bro/Zeek Logging Framework for Python</a><ul>
-      <li>Previous: <a href="zlogging.loader.html" title="previous chapter">Loaders</a></li>
-      <li>Next: <a href="zlogging.types.html" title="next chapter">Data Types</a></li>
-  </ul></li>
+      <li>Previous: <a href="loader.html" title="previous chapter">Loaders</a></li>
+      <li>Next: <a href="types.html" title="next chapter">Data Types</a></li>
   </ul></li>
 </ul>
 </div>
@@ -365,10 +356,10 @@ can be rewrote to:</p>
       <div class="clearer"></div>
     </div>
     <div class="footer">
-      &copy;2020, Jarry Shaw.
+      &copy;2020-2021, Jarry Shaw.
       
       |
-      <a href="_sources/zlogging.model.rst.txt"
+      <a href="_sources/model.rst.txt"
           rel="nofollow">Page source</a>
     </div>
 

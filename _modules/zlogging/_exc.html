@@ -41,15 +41,15 @@
     <span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">Tuple</span><span class="p">,</span> <span class="n">Type</span>
 
 
-<div class="viewcode-block" id="ZeekException"><a class="viewcode-back" href="../../zlogging._exc.html#zlogging._exc.ZeekException">[docs]</a><span class="k">class</span> <span class="nc">ZeekException</span><span class="p">(</span><span class="ne">Exception</span><span class="p">):</span>
+<div class="viewcode-block" id="ZeekException"><a class="viewcode-back" href="../../_exc.html#zlogging._exc.ZeekException">[docs]</a><span class="k">class</span> <span class="nc">ZeekException</span><span class="p">(</span><span class="ne">Exception</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Base exception.&quot;&quot;&quot;</span></div>
 
 
-<div class="viewcode-block" id="ZeekWarning"><a class="viewcode-back" href="../../zlogging._exc.html#zlogging._exc.ZeekWarning">[docs]</a><span class="k">class</span> <span class="nc">ZeekWarning</span><span class="p">(</span><span class="ne">Warning</span><span class="p">):</span>
+<div class="viewcode-block" id="ZeekWarning"><a class="viewcode-back" href="../../_exc.html#zlogging._exc.ZeekWarning">[docs]</a><span class="k">class</span> <span class="nc">ZeekWarning</span><span class="p">(</span><span class="ne">Warning</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Base warning.&quot;&quot;&quot;</span></div>
 
 
-<div class="viewcode-block" id="ParserError"><a class="viewcode-back" href="../../zlogging._exc.html#zlogging._exc.ParserError">[docs]</a><span class="k">class</span> <span class="nc">ParserError</span><span class="p">(</span><span class="n">ZeekException</span><span class="p">,</span> <span class="ne">ValueError</span><span class="p">):</span>
+<div class="viewcode-block" id="ParserError"><a class="viewcode-back" href="../../_exc.html#zlogging._exc.ParserError">[docs]</a><span class="k">class</span> <span class="nc">ParserError</span><span class="p">(</span><span class="n">ZeekException</span><span class="p">,</span> <span class="ne">ValueError</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Error when parsing logs.</span>
 
 <span class="sd">    Args:</span>
@@ -82,7 +82,7 @@
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="p">,</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">msg</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">lineno</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">field</span><span class="p">)</span></div>
 
 
-<div class="viewcode-block" id="JSONParserError"><a class="viewcode-back" href="../../zlogging._exc.html#zlogging._exc.JSONParserError">[docs]</a><span class="k">class</span> <span class="nc">JSONParserError</span><span class="p">(</span><span class="n">ParserError</span><span class="p">,</span> <span class="n">json</span><span class="o">.</span><span class="n">JSONDecodeError</span><span class="p">):</span>  <span class="c1"># type: ignore[misc]</span>
+<div class="viewcode-block" id="JSONParserError"><a class="viewcode-back" href="../../_exc.html#zlogging._exc.JSONParserError">[docs]</a><span class="k">class</span> <span class="nc">JSONParserError</span><span class="p">(</span><span class="n">ParserError</span><span class="p">,</span> <span class="n">json</span><span class="o">.</span><span class="n">JSONDecodeError</span><span class="p">):</span>  <span class="c1"># type: ignore[misc]</span>
     <span class="sd">&quot;&quot;&quot;Error when parsing JSON log.</span>
 
 <span class="sd">    Args:</span>
@@ -98,7 +98,7 @@
 <span class="sd">    &quot;&quot;&quot;</span></div>
 
 
-<div class="viewcode-block" id="ASCIIPaserError"><a class="viewcode-back" href="../../zlogging._exc.html#zlogging._exc.ASCIIPaserError">[docs]</a><span class="k">class</span> <span class="nc">ASCIIPaserError</span><span class="p">(</span><span class="n">ParserError</span><span class="p">):</span>
+<div class="viewcode-block" id="ASCIIPaserError"><a class="viewcode-back" href="../../_exc.html#zlogging._exc.ASCIIPaserError">[docs]</a><span class="k">class</span> <span class="nc">ASCIIPaserError</span><span class="p">(</span><span class="n">ParserError</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Error when parsing ASCII log.</span>
 
 <span class="sd">    Args:</span>
@@ -114,7 +114,7 @@
 <span class="sd">    &quot;&quot;&quot;</span></div>
 
 
-<div class="viewcode-block" id="WriterError"><a class="viewcode-back" href="../../zlogging._exc.html#zlogging._exc.WriterError">[docs]</a><span class="k">class</span> <span class="nc">WriterError</span><span class="p">(</span><span class="n">ZeekException</span><span class="p">,</span> <span class="ne">TypeError</span><span class="p">):</span>
+<div class="viewcode-block" id="WriterError"><a class="viewcode-back" href="../../_exc.html#zlogging._exc.WriterError">[docs]</a><span class="k">class</span> <span class="nc">WriterError</span><span class="p">(</span><span class="n">ZeekException</span><span class="p">,</span> <span class="ne">TypeError</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Error when writing logs.</span>
 
 <span class="sd">    Args:</span>
@@ -147,7 +147,7 @@
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="p">,</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">msg</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">lineno</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">field</span><span class="p">)</span></div>
 
 
-<div class="viewcode-block" id="JSONWriterError"><a class="viewcode-back" href="../../zlogging._exc.html#zlogging._exc.JSONWriterError">[docs]</a><span class="k">class</span> <span class="nc">JSONWriterError</span><span class="p">(</span><span class="n">WriterError</span><span class="p">):</span>
+<div class="viewcode-block" id="JSONWriterError"><a class="viewcode-back" href="../../_exc.html#zlogging._exc.JSONWriterError">[docs]</a><span class="k">class</span> <span class="nc">JSONWriterError</span><span class="p">(</span><span class="n">WriterError</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Error when writing JSON logs.</span>
 
 <span class="sd">    Args:</span>
@@ -163,7 +163,7 @@
 <span class="sd">    &quot;&quot;&quot;</span></div>
 
 
-<div class="viewcode-block" id="ASCIIWriterError"><a class="viewcode-back" href="../../zlogging._exc.html#zlogging._exc.ASCIIWriterError">[docs]</a><span class="k">class</span> <span class="nc">ASCIIWriterError</span><span class="p">(</span><span class="n">WriterError</span><span class="p">):</span>
+<div class="viewcode-block" id="ASCIIWriterError"><a class="viewcode-back" href="../../_exc.html#zlogging._exc.ASCIIWriterError">[docs]</a><span class="k">class</span> <span class="nc">ASCIIWriterError</span><span class="p">(</span><span class="n">WriterError</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Error when writing ASCII logs.</span>
 
 <span class="sd">    Args:</span>
@@ -179,7 +179,7 @@
 <span class="sd">    &quot;&quot;&quot;</span></div>
 
 
-<div class="viewcode-block" id="WriterFormatError"><a class="viewcode-back" href="../../zlogging._exc.html#zlogging._exc.WriterFormatError">[docs]</a><span class="k">class</span> <span class="nc">WriterFormatError</span><span class="p">(</span><span class="n">WriterError</span><span class="p">,</span> <span class="ne">ValueError</span><span class="p">):</span>
+<div class="viewcode-block" id="WriterFormatError"><a class="viewcode-back" href="../../_exc.html#zlogging._exc.WriterFormatError">[docs]</a><span class="k">class</span> <span class="nc">WriterFormatError</span><span class="p">(</span><span class="n">WriterError</span><span class="p">,</span> <span class="ne">ValueError</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Unsupported format.</span>
 
 <span class="sd">    Args:</span>
@@ -195,51 +195,51 @@
 <span class="sd">    &quot;&quot;&quot;</span></div>
 
 
-<div class="viewcode-block" id="ParserWarning"><a class="viewcode-back" href="../../zlogging._exc.html#zlogging._exc.ParserWarning">[docs]</a><span class="k">class</span> <span class="nc">ParserWarning</span><span class="p">(</span><span class="n">ZeekWarning</span><span class="p">,</span> <span class="ne">UserWarning</span><span class="p">):</span>
+<div class="viewcode-block" id="ParserWarning"><a class="viewcode-back" href="../../_exc.html#zlogging._exc.ParserWarning">[docs]</a><span class="k">class</span> <span class="nc">ParserWarning</span><span class="p">(</span><span class="n">ZeekWarning</span><span class="p">,</span> <span class="ne">UserWarning</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Warning when parsing logs.&quot;&quot;&quot;</span></div>
 
 
-<div class="viewcode-block" id="JSONParserWarning"><a class="viewcode-back" href="../../zlogging._exc.html#zlogging._exc.JSONParserWarning">[docs]</a><span class="k">class</span> <span class="nc">JSONParserWarning</span><span class="p">(</span><span class="n">ParserWarning</span><span class="p">):</span>
+<div class="viewcode-block" id="JSONParserWarning"><a class="viewcode-back" href="../../_exc.html#zlogging._exc.JSONParserWarning">[docs]</a><span class="k">class</span> <span class="nc">JSONParserWarning</span><span class="p">(</span><span class="n">ParserWarning</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Warning when parsing logs in JSON format.&quot;&quot;&quot;</span></div>
 
 
-<div class="viewcode-block" id="ASCIIParserWarning"><a class="viewcode-back" href="../../zlogging._exc.html#zlogging._exc.ASCIIParserWarning">[docs]</a><span class="k">class</span> <span class="nc">ASCIIParserWarning</span><span class="p">(</span><span class="n">ParserWarning</span><span class="p">):</span>
+<div class="viewcode-block" id="ASCIIParserWarning"><a class="viewcode-back" href="../../_exc.html#zlogging._exc.ASCIIParserWarning">[docs]</a><span class="k">class</span> <span class="nc">ASCIIParserWarning</span><span class="p">(</span><span class="n">ParserWarning</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Warning when parsing logs in ASCII format.&quot;&quot;&quot;</span></div>
 
 
-<div class="viewcode-block" id="ZeekTypeError"><a class="viewcode-back" href="../../zlogging._exc.html#zlogging._exc.ZeekTypeError">[docs]</a><span class="k">class</span> <span class="nc">ZeekTypeError</span><span class="p">(</span><span class="n">ZeekException</span><span class="p">,</span> <span class="ne">TypeError</span><span class="p">):</span>
+<div class="viewcode-block" id="ZeekTypeError"><a class="viewcode-back" href="../../_exc.html#zlogging._exc.ZeekTypeError">[docs]</a><span class="k">class</span> <span class="nc">ZeekTypeError</span><span class="p">(</span><span class="n">ZeekException</span><span class="p">,</span> <span class="ne">TypeError</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Invalid Bro/Zeek data type.&quot;&quot;&quot;</span></div>
 
 
-<div class="viewcode-block" id="ZeekValueError"><a class="viewcode-back" href="../../zlogging._exc.html#zlogging._exc.ZeekValueError">[docs]</a><span class="k">class</span> <span class="nc">ZeekValueError</span><span class="p">(</span><span class="n">ZeekException</span><span class="p">,</span> <span class="ne">ValueError</span><span class="p">):</span>
+<div class="viewcode-block" id="ZeekValueError"><a class="viewcode-back" href="../../_exc.html#zlogging._exc.ZeekValueError">[docs]</a><span class="k">class</span> <span class="nc">ZeekValueError</span><span class="p">(</span><span class="n">ZeekException</span><span class="p">,</span> <span class="ne">ValueError</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Invalid Bro/Zeek data value.&quot;&quot;&quot;</span></div>
 
 
-<div class="viewcode-block" id="ZeekNotImplemented"><a class="viewcode-back" href="../../zlogging._exc.html#zlogging._exc.ZeekNotImplemented">[docs]</a><span class="k">class</span> <span class="nc">ZeekNotImplemented</span><span class="p">(</span><span class="n">ZeekException</span><span class="p">,</span> <span class="ne">NotImplementedError</span><span class="p">):</span>
+<div class="viewcode-block" id="ZeekNotImplemented"><a class="viewcode-back" href="../../_exc.html#zlogging._exc.ZeekNotImplemented">[docs]</a><span class="k">class</span> <span class="nc">ZeekNotImplemented</span><span class="p">(</span><span class="n">ZeekException</span><span class="p">,</span> <span class="ne">NotImplementedError</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Method not implemented.&quot;&quot;&quot;</span></div>
 
 
-<div class="viewcode-block" id="ModelError"><a class="viewcode-back" href="../../zlogging._exc.html#zlogging._exc.ModelError">[docs]</a><span class="k">class</span> <span class="nc">ModelError</span><span class="p">(</span><span class="n">ZeekException</span><span class="p">):</span>
+<div class="viewcode-block" id="ModelError"><a class="viewcode-back" href="../../_exc.html#zlogging._exc.ModelError">[docs]</a><span class="k">class</span> <span class="nc">ModelError</span><span class="p">(</span><span class="n">ZeekException</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Invalid model data.&quot;&quot;&quot;</span></div>
 
 
-<div class="viewcode-block" id="ModelTypeError"><a class="viewcode-back" href="../../zlogging._exc.html#zlogging._exc.ModelTypeError">[docs]</a><span class="k">class</span> <span class="nc">ModelTypeError</span><span class="p">(</span><span class="n">ModelError</span><span class="p">,</span> <span class="ne">TypeError</span><span class="p">):</span>
+<div class="viewcode-block" id="ModelTypeError"><a class="viewcode-back" href="../../_exc.html#zlogging._exc.ModelTypeError">[docs]</a><span class="k">class</span> <span class="nc">ModelTypeError</span><span class="p">(</span><span class="n">ModelError</span><span class="p">,</span> <span class="ne">TypeError</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Invalid model data type.&quot;&quot;&quot;</span></div>
 
 
-<div class="viewcode-block" id="ModelValueError"><a class="viewcode-back" href="../../zlogging._exc.html#zlogging._exc.ModelValueError">[docs]</a><span class="k">class</span> <span class="nc">ModelValueError</span><span class="p">(</span><span class="n">ModelError</span><span class="p">,</span> <span class="ne">ValueError</span><span class="p">):</span>
+<div class="viewcode-block" id="ModelValueError"><a class="viewcode-back" href="../../_exc.html#zlogging._exc.ModelValueError">[docs]</a><span class="k">class</span> <span class="nc">ModelValueError</span><span class="p">(</span><span class="n">ModelError</span><span class="p">,</span> <span class="ne">ValueError</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Invalid model data value.&quot;&quot;&quot;</span></div>
 
 
-<div class="viewcode-block" id="ModelFormatError"><a class="viewcode-back" href="../../zlogging._exc.html#zlogging._exc.ModelFormatError">[docs]</a><span class="k">class</span> <span class="nc">ModelFormatError</span><span class="p">(</span><span class="n">ModelError</span><span class="p">,</span> <span class="ne">ValueError</span><span class="p">):</span>
+<div class="viewcode-block" id="ModelFormatError"><a class="viewcode-back" href="../../_exc.html#zlogging._exc.ModelFormatError">[docs]</a><span class="k">class</span> <span class="nc">ModelFormatError</span><span class="p">(</span><span class="n">ModelError</span><span class="p">,</span> <span class="ne">ValueError</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Unsupported format.&quot;&quot;&quot;</span></div>
 
 
-<div class="viewcode-block" id="ZeekValueWarning"><a class="viewcode-back" href="../../zlogging._exc.html#zlogging._exc.ZeekValueWarning">[docs]</a><span class="k">class</span> <span class="nc">ZeekValueWarning</span><span class="p">(</span><span class="n">ZeekWarning</span><span class="p">,</span> <span class="ne">UserWarning</span><span class="p">):</span>
+<div class="viewcode-block" id="ZeekValueWarning"><a class="viewcode-back" href="../../_exc.html#zlogging._exc.ZeekValueWarning">[docs]</a><span class="k">class</span> <span class="nc">ZeekValueWarning</span><span class="p">(</span><span class="n">ZeekWarning</span><span class="p">,</span> <span class="ne">UserWarning</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Dubious Bro/Zeek data value.&quot;&quot;&quot;</span></div>
 
 
-<div class="viewcode-block" id="BroDeprecationWarning"><a class="viewcode-back" href="../../zlogging._exc.html#zlogging._exc.BroDeprecationWarning">[docs]</a><span class="k">class</span> <span class="nc">BroDeprecationWarning</span><span class="p">(</span><span class="n">ZeekWarning</span><span class="p">,</span> <span class="ne">DeprecationWarning</span><span class="p">):</span>
+<div class="viewcode-block" id="BroDeprecationWarning"><a class="viewcode-back" href="../../_exc.html#zlogging._exc.BroDeprecationWarning">[docs]</a><span class="k">class</span> <span class="nc">BroDeprecationWarning</span><span class="p">(</span><span class="n">ZeekWarning</span><span class="p">,</span> <span class="ne">DeprecationWarning</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Bro is now deprecated, use Zeek instead.&quot;&quot;&quot;</span></div>
 </pre></div>
 
@@ -267,7 +267,15 @@
 
 <h3>Navigation</h3>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../../zlogging.html">Bro/Zeek Logging Framework for Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../dumper.html">Dumpers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../loader.html">Loaders</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../model.html">Data Model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../types.html">Data Types</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../typing.html">Typing Annotations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../_data.html">Data Classes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../_exc.html">Exceptions &amp; Warnings</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../_aux.html">Internal Auxiliary Functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../enum.html">Enum Namespace</a></li>
 </ul>
 
 <div class="relations">
@@ -302,7 +310,7 @@
       <div class="clearer"></div>
     </div>
     <div class="footer">
-      &copy;2020, Jarry Shaw.
+      &copy;2020-2021, Jarry Shaw.
       
     </div>
 

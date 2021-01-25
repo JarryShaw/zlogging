@@ -62,7 +62,7 @@
 
 
 <span class="k">def</span> <span class="nf">_deprecated</span><span class="p">(</span><span class="n">zeek_type</span><span class="p">:</span> <span class="s1">&#39;_T&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;_T&#39;</span><span class="p">:</span>
-    <span class="sd">&quot;&quot;&quot;Use of &#39;bro&#39; is deprecated, please use &#39;zeek&#39; instead.&quot;&quot;&quot;</span>
+    <span class="sd">&quot;&quot;&quot;Use of ``&#39;bro&#39;`` is deprecated, please use ``&#39;zeek&#39;`` instead.&quot;&quot;&quot;</span>
     <span class="k">class</span> <span class="nc">DeprecatedType</span><span class="p">(</span><span class="n">zeek_type</span><span class="p">):</span>  <span class="c1"># type: ignore[misc,valid-type]</span>
         <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">:</span> <span class="s1">&#39;Any&#39;</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">:</span> <span class="s1">&#39;Any&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s2">&quot;Use of &#39;bro_</span><span class="si">%(name)s</span><span class="s2">&#39; is deprecated. &quot;</span>
@@ -100,16 +100,76 @@
 <span class="n">zeek_time</span> <span class="o">=</span> <span class="n">TypeVar</span><span class="p">(</span><span class="s1">&#39;zeek_time&#39;</span><span class="p">,</span> <span class="n">bound</span><span class="o">=</span><span class="s1">&#39;TimeType&#39;</span><span class="p">)</span>
 
 
-<span class="k">class</span> <span class="nc">zeek_set</span><span class="p">(</span><span class="n">SetType</span><span class="p">,</span> <span class="n">Generic</span><span class="p">[</span><span class="n">_S</span><span class="p">]):</span>
-    <span class="sd">&quot;&quot;&quot;Zeek ``set`` data type.&quot;&quot;&quot;</span>
+<div class="viewcode-block" id="zeek_set"><a class="viewcode-back" href="../../typing.html#zlogging.typing.zeek_set">[docs]</a><span class="k">class</span> <span class="nc">zeek_set</span><span class="p">(</span><span class="n">SetType</span><span class="p">,</span> <span class="n">Generic</span><span class="p">[</span><span class="n">_S</span><span class="p">]):</span>
+    <span class="sd">&quot;&quot;&quot;Zeek ``set`` data type.</span>
+
+<span class="sd">    Notes:</span>
+<span class="sd">        As a *generic* data type, the class supports the typing proxy as introduced</span>
+<span class="sd">        :pep:`484`:</span>
+
+<span class="sd">        .. code-block:: python</span>
+
+<span class="sd">            class MyLog(zeek_record):</span>
+<span class="sd">                field_one: zeek_set[zeek_str]</span>
+
+<span class="sd">        which is the same **at runtime** as following:</span>
+
+<span class="sd">        .. code-block:: python</span>
+
+<span class="sd">            class MyLog(zeek_record):</span>
+<span class="sd">                field_one = SetType(element_type=StringType())</span>
+
+<span class="sd">    &quot;&quot;&quot;</span></div>
 
 
-<span class="k">class</span> <span class="nc">zeek_vector</span><span class="p">(</span><span class="n">VectorType</span><span class="p">,</span> <span class="n">Generic</span><span class="p">[</span><span class="n">_S</span><span class="p">]):</span>
-    <span class="sd">&quot;&quot;&quot;Zeek ``vector`` data type.&quot;&quot;&quot;</span>
+<div class="viewcode-block" id="zeek_vector"><a class="viewcode-back" href="../../typing.html#zlogging.typing.zeek_vector">[docs]</a><span class="k">class</span> <span class="nc">zeek_vector</span><span class="p">(</span><span class="n">VectorType</span><span class="p">,</span> <span class="n">Generic</span><span class="p">[</span><span class="n">_S</span><span class="p">]):</span>
+    <span class="sd">&quot;&quot;&quot;Zeek ``vector`` data type.</span>
+
+<span class="sd">    Notes:</span>
+<span class="sd">        As a *generic* data type, the class supports the typing proxy as introduced</span>
+<span class="sd">        :pep:`484`:</span>
+
+<span class="sd">        .. code-block:: python</span>
+
+<span class="sd">            class MyLog(zeek_record):</span>
+<span class="sd">                field_one: zeek_vector[zeek_str]</span>
+
+<span class="sd">        which is the same **at runtime** as following:</span>
+
+<span class="sd">        .. code-block:: python</span>
+
+<span class="sd">            class MyLog(zeek_record):</span>
+<span class="sd">                field_one = VectorType(element_type=StringType())</span>
+
+<span class="sd">    &quot;&quot;&quot;</span></div>
 
 
-<span class="k">class</span> <span class="nc">zeek_record</span><span class="p">(</span><span class="n">RecordType</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Zeek ``record`` data type.&quot;&quot;&quot;</span>
+<div class="viewcode-block" id="zeek_record"><a class="viewcode-back" href="../../typing.html#zlogging.typing.zeek_record">[docs]</a><span class="k">class</span> <span class="nc">zeek_record</span><span class="p">(</span><span class="n">RecordType</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Zeek ``record`` data type.</span>
+
+<span class="sd">    Notes:</span>
+<span class="sd">        As a *variadic* data type, it supports the typing proxy as :class:`~typing.TypedDict`,</span>
+<span class="sd">        introduced in :pep:`589`:</span>
+
+<span class="sd">        .. code-block:: python</span>
+
+<span class="sd">            class MyLog(zeek_record):</span>
+<span class="sd">                field_one: zeek_int</span>
+<span class="sd">                field_two: zeek_set[zeek_port]</span>
+
+<span class="sd">        which is the same **at runtime** as following:</span>
+
+<span class="sd">        .. code-block:: python</span>
+
+<span class="sd">            RecordType(field_one=IntType,</span>
+<span class="sd">                       field_two=SetType(element_type=PortType))</span>
+
+
+<span class="sd">    See Also:</span>
+<span class="sd">        See :func:`~zlogging._aux.expand_typing` for more information about the</span>
+<span class="sd">        processing of typing proxy.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span></div>
 
 
 <span class="c1">###########################################################</span>
@@ -195,19 +255,34 @@
 <span class="n">bro_time</span> <span class="o">=</span> <span class="n">TypeVar</span><span class="p">(</span><span class="s1">&#39;bro_time&#39;</span><span class="p">,</span> <span class="n">bound</span><span class="o">=</span><span class="s1">&#39;_BroTimeType&#39;</span><span class="p">)</span>
 
 
-<span class="nd">@_deprecated</span>
+<div class="viewcode-block" id="bro_set"><a class="viewcode-back" href="../../typing.html#zlogging.typing.bro_set">[docs]</a><span class="nd">@_deprecated</span>
 <span class="k">class</span> <span class="nc">bro_set</span><span class="p">(</span><span class="n">SetType</span><span class="p">,</span> <span class="n">Generic</span><span class="p">[</span><span class="n">_S</span><span class="p">]):</span>
-    <span class="sd">&quot;&quot;&quot;Bro ``set`` data type.&quot;&quot;&quot;</span>
+    <span class="sd">&quot;&quot;&quot;Bro ``set`` data type.</span>
+
+<span class="sd">    See Also:</span>
+<span class="sd">        See :attr:`~zlogging.typing.zeek_set` for more information.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span></div>
 
 
-<span class="nd">@_deprecated</span>
+<div class="viewcode-block" id="bro_vector"><a class="viewcode-back" href="../../typing.html#zlogging.typing.bro_vector">[docs]</a><span class="nd">@_deprecated</span>
 <span class="k">class</span> <span class="nc">bro_vector</span><span class="p">(</span><span class="n">VectorType</span><span class="p">,</span> <span class="n">Generic</span><span class="p">[</span><span class="n">_S</span><span class="p">]):</span>
-    <span class="sd">&quot;&quot;&quot;Bro ``vector`` data type.&quot;&quot;&quot;</span>
+    <span class="sd">&quot;&quot;&quot;Bro ``vector`` data type.</span>
+
+<span class="sd">    See Also:</span>
+<span class="sd">        See :attr:`~zlogging.typing.zeek_vector` for more information.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span></div>
 
 
-<span class="nd">@_deprecated</span>
+<div class="viewcode-block" id="bro_record"><a class="viewcode-back" href="../../typing.html#zlogging.typing.bro_record">[docs]</a><span class="nd">@_deprecated</span>
 <span class="k">class</span> <span class="nc">bro_record</span><span class="p">(</span><span class="n">RecordType</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Bro ``record`` data type.&quot;&quot;&quot;</span>
+    <span class="sd">&quot;&quot;&quot;Bro ``record`` data type.</span>
+
+<span class="sd">    See Also:</span>
+<span class="sd">        See :attr:`~zlogging.typing.zeek_record` for more information.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span></div>
 </pre></div>
 
           </div>
@@ -234,7 +309,15 @@
 
 <h3>Navigation</h3>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../../zlogging.html">Bro/Zeek Logging Framework for Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../dumper.html">Dumpers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../loader.html">Loaders</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../model.html">Data Model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../types.html">Data Types</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../typing.html">Typing Annotations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../_data.html">Data Classes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../_exc.html">Exceptions &amp; Warnings</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../_aux.html">Internal Auxiliary Functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../enum.html">Enum Namespace</a></li>
 </ul>
 
 <div class="relations">
@@ -269,7 +352,7 @@
       <div class="clearer"></div>
     </div>
     <div class="footer">
-      &copy;2020, Jarry Shaw.
+      &copy;2020-2021, Jarry Shaw.
       
     </div>
 

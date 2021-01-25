@@ -38,16 +38,14 @@
 <span class="kn">from</span> <span class="nn">zlogging._compat</span> <span class="kn">import</span> <span class="n">enum</span>
 
 
-<div class="viewcode-block" id="InfoCategory"><a class="viewcode-back" href="../../../zlogging.enum.html#zlogging.enum.NetControl.InfoCategory">[docs]</a><span class="nd">@enum</span><span class="o">.</span><span class="n">unique</span>
+<div class="viewcode-block" id="InfoCategory"><a class="viewcode-back" href="../../../enum.html#zlogging.enum.NetControl.InfoCategory">[docs]</a><span class="nd">@enum</span><span class="o">.</span><span class="n">unique</span>
 <span class="k">class</span> <span class="nc">InfoCategory</span><span class="p">(</span><span class="n">enum</span><span class="o">.</span><span class="n">IntFlag</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Enum: ``NetControl::InfoCategory``.</span>
 
 <span class="sd">    Type of an entry in the NetControl log.</span>
 
 <span class="sd">    See Also:</span>
-<span class="sd">        `base/frameworks/netcontrol/main.zeek`_</span>
-
-<span class="sd">    .. _base/frameworks/netcontrol/main.zeek: https://docs.zeek.org/en/stable/scripts/base/frameworks/netcontrol/main.zeek.html#type-NetControl::InfoCategory</span>
+<span class="sd">        `base/frameworks/netcontrol/main.zeek &lt;https://docs.zeek.org/en/stable/scripts/base/frameworks/netcontrol/main.zeek.html#type-NetControl::InfoCategory&gt;`__</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
 
@@ -64,16 +62,14 @@
     <span class="n">InfoCategory</span><span class="p">[</span><span class="s1">&#39;RULE&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span></div>
 
 
-<div class="viewcode-block" id="InfoState"><a class="viewcode-back" href="../../../zlogging.enum.html#zlogging.enum.NetControl.InfoState">[docs]</a><span class="nd">@enum</span><span class="o">.</span><span class="n">unique</span>
+<div class="viewcode-block" id="InfoState"><a class="viewcode-back" href="../../../enum.html#zlogging.enum.NetControl.InfoState">[docs]</a><span class="nd">@enum</span><span class="o">.</span><span class="n">unique</span>
 <span class="k">class</span> <span class="nc">InfoState</span><span class="p">(</span><span class="n">enum</span><span class="o">.</span><span class="n">IntFlag</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Enum: ``NetControl::InfoState``.</span>
 
 <span class="sd">    State of an entry in the NetControl log.</span>
 
 <span class="sd">    See Also:</span>
-<span class="sd">        `base/frameworks/netcontrol/main.zeek`_</span>
-
-<span class="sd">    .. _base/frameworks/netcontrol/main.zeek: https://docs.zeek.org/en/stable/scripts/base/frameworks/netcontrol/main.zeek.html#type-NetControl::InfoState</span>
+<span class="sd">        `base/frameworks/netcontrol/main.zeek &lt;https://docs.zeek.org/en/stable/scripts/base/frameworks/netcontrol/main.zeek.html#type-NetControl::InfoState&gt;`__</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
 
@@ -99,16 +95,14 @@
     <span class="n">InfoState</span><span class="p">[</span><span class="s1">&#39;TIMEOUT&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span></div>
 
 
-<div class="viewcode-block" id="EntityType"><a class="viewcode-back" href="../../../zlogging.enum.html#zlogging.enum.NetControl.EntityType">[docs]</a><span class="nd">@enum</span><span class="o">.</span><span class="n">unique</span>
+<div class="viewcode-block" id="EntityType"><a class="viewcode-back" href="../../../enum.html#zlogging.enum.NetControl.EntityType">[docs]</a><span class="nd">@enum</span><span class="o">.</span><span class="n">unique</span>
 <span class="k">class</span> <span class="nc">EntityType</span><span class="p">(</span><span class="n">enum</span><span class="o">.</span><span class="n">IntFlag</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Enum: ``NetControl::EntityType``.</span>
 
 <span class="sd">    Type defining the entity that a rule applies to.</span>
 
 <span class="sd">    See Also:</span>
-<span class="sd">        `base/frameworks/netcontrol/types.zeek`_</span>
-
-<span class="sd">    .. _base/frameworks/netcontrol/types.zeek: https://docs.zeek.org/en/stable/scripts/base/frameworks/netcontrol/types.zeek.html#type-NetControl::EntityType</span>
+<span class="sd">        `base/frameworks/netcontrol/types.zeek &lt;https://docs.zeek.org/en/stable/scripts/base/frameworks/netcontrol/types.zeek.html#type-NetControl::EntityType&gt;`__</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
 
@@ -128,7 +122,7 @@
     <span class="n">EntityType</span><span class="p">[</span><span class="s1">&#39;MAC&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span></div>
 
 
-<div class="viewcode-block" id="RuleType"><a class="viewcode-back" href="../../../zlogging.enum.html#zlogging.enum.NetControl.RuleType">[docs]</a><span class="nd">@enum</span><span class="o">.</span><span class="n">unique</span>
+<div class="viewcode-block" id="RuleType"><a class="viewcode-back" href="../../../enum.html#zlogging.enum.NetControl.RuleType">[docs]</a><span class="nd">@enum</span><span class="o">.</span><span class="n">unique</span>
 <span class="k">class</span> <span class="nc">RuleType</span><span class="p">(</span><span class="n">enum</span><span class="o">.</span><span class="n">IntFlag</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Enum: ``NetControl::RuleType``.</span>
 
@@ -138,9 +132,7 @@
 <span class="sd">    Plugins may extend this type to define their own.</span>
 
 <span class="sd">    See Also:</span>
-<span class="sd">        `base/frameworks/netcontrol/types.zeek`_</span>
-
-<span class="sd">    .. _base/frameworks/netcontrol/types.zeek: https://docs.zeek.org/en/stable/scripts/base/frameworks/netcontrol/types.zeek.html#type-NetControl::RuleType</span>
+<span class="sd">        `base/frameworks/netcontrol/types.zeek &lt;https://docs.zeek.org/en/stable/scripts/base/frameworks/netcontrol/types.zeek.html#type-NetControl::RuleType&gt;`__</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
 
@@ -167,7 +159,7 @@
     <span class="n">RuleType</span><span class="p">[</span><span class="s1">&#39;WHITELIST&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span></div>
 
 
-<div class="viewcode-block" id="TargetType"><a class="viewcode-back" href="../../../zlogging.enum.html#zlogging.enum.NetControl.TargetType">[docs]</a><span class="nd">@enum</span><span class="o">.</span><span class="n">unique</span>
+<div class="viewcode-block" id="TargetType"><a class="viewcode-back" href="../../../enum.html#zlogging.enum.NetControl.TargetType">[docs]</a><span class="nd">@enum</span><span class="o">.</span><span class="n">unique</span>
 <span class="k">class</span> <span class="nc">TargetType</span><span class="p">(</span><span class="n">enum</span><span class="o">.</span><span class="n">IntFlag</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Enum: ``NetControl::TargetType``.</span>
 
@@ -179,9 +171,7 @@
 <span class="sd">    identified as benign.</span>
 
 <span class="sd">    See Also:</span>
-<span class="sd">        `base/frameworks/netcontrol/types.zeek`_</span>
-
-<span class="sd">    .. _base/frameworks/netcontrol/types.zeek: https://docs.zeek.org/en/stable/scripts/base/frameworks/netcontrol/types.zeek.html#type-NetControl::TargetType</span>
+<span class="sd">        `base/frameworks/netcontrol/types.zeek &lt;https://docs.zeek.org/en/stable/scripts/base/frameworks/netcontrol/types.zeek.html#type-NetControl::TargetType&gt;`__</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
 
@@ -193,16 +183,14 @@
     <span class="n">TargetType</span><span class="p">[</span><span class="s1">&#39;MONITOR&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span></div>
 
 
-<div class="viewcode-block" id="CatchReleaseActions"><a class="viewcode-back" href="../../../zlogging.enum.html#zlogging.enum.NetControl.CatchReleaseActions">[docs]</a><span class="nd">@enum</span><span class="o">.</span><span class="n">unique</span>
+<div class="viewcode-block" id="CatchReleaseActions"><a class="viewcode-back" href="../../../enum.html#zlogging.enum.NetControl.CatchReleaseActions">[docs]</a><span class="nd">@enum</span><span class="o">.</span><span class="n">unique</span>
 <span class="k">class</span> <span class="nc">CatchReleaseActions</span><span class="p">(</span><span class="n">enum</span><span class="o">.</span><span class="n">IntFlag</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Enum: ``NetControl::CatchReleaseActions``.</span>
 
 <span class="sd">    The enum that contains the different kinds of messages that are logged by catch and release.</span>
 
 <span class="sd">    See Also:</span>
-<span class="sd">        `policy/frameworks/netcontrol/catch-and-release.zeek`_</span>
-
-<span class="sd">    .. _policy/frameworks/netcontrol/catch-and-release.zeek: https://docs.zeek.org/en/stable/scripts/policy/frameworks/netcontrol/catch-and-release.zeek.html#type-NetControl::CatchReleaseActions</span>
+<span class="sd">        `policy/frameworks/netcontrol/catch-and-release.zeek &lt;https://docs.zeek.org/en/stable/scripts/policy/frameworks/netcontrol/catch-and-release.zeek.html#type-NetControl::CatchReleaseActions&gt;`__</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
 
@@ -260,7 +248,15 @@
 
 <h3>Navigation</h3>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../../../zlogging.html">Bro/Zeek Logging Framework for Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../dumper.html">Dumpers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../loader.html">Loaders</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../model.html">Data Model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../types.html">Data Types</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../typing.html">Typing Annotations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../_data.html">Data Classes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../_exc.html">Exceptions &amp; Warnings</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../_aux.html">Internal Auxiliary Functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../enum.html">Enum Namespace</a></li>
 </ul>
 
 <div class="relations">
@@ -297,7 +293,7 @@
       <div class="clearer"></div>
     </div>
     <div class="footer">
-      &copy;2020, Jarry Shaw.
+      &copy;2020-2021, Jarry Shaw.
       
     </div>
 

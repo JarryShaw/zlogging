@@ -51,7 +51,7 @@
     <span class="kn">from</span> <span class="nn">zlogging.model</span> <span class="kn">import</span> <span class="n">Model</span>
 
 
-<div class="viewcode-block" id="Info"><a class="viewcode-back" href="../../zlogging._data.html#zlogging._data.Info">[docs]</a><span class="k">class</span> <span class="nc">Info</span><span class="p">(</span><span class="n">metaclass</span><span class="o">=</span><span class="n">abc</span><span class="o">.</span><span class="n">ABCMeta</span><span class="p">):</span>
+<div class="viewcode-block" id="Info"><a class="viewcode-back" href="../../_data.html#zlogging._data.Info">[docs]</a><span class="k">class</span> <span class="nc">Info</span><span class="p">(</span><span class="n">metaclass</span><span class="o">=</span><span class="n">abc</span><span class="o">.</span><span class="n">ABCMeta</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Parsed log info.</span>
 
 <span class="sd">    The parsed log will be stored as in this :obj:`dataclass`, as introduced in</span>
@@ -68,7 +68,7 @@
         <span class="sd">&quot;&quot;&quot;str: Log file format.&quot;&quot;&quot;</span></div>
 
 
-<div class="viewcode-block" id="ASCIIInfo"><a class="viewcode-back" href="../../zlogging._data.html#zlogging._data.ASCIIInfo">[docs]</a><span class="nd">@dataclasses</span><span class="o">.</span><span class="n">dataclass</span><span class="p">(</span><span class="n">frozen</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<div class="viewcode-block" id="ASCIIInfo"><a class="viewcode-back" href="../../_data.html#zlogging._data.ASCIIInfo">[docs]</a><span class="nd">@dataclasses</span><span class="o">.</span><span class="n">dataclass</span><span class="p">(</span><span class="n">frozen</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="k">class</span> <span class="nc">ASCIIInfo</span><span class="p">(</span><span class="n">Info</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Parsed log info for ASCII logs.</span>
 
@@ -124,7 +124,7 @@
 <span class="sd">    &quot;&quot;&quot;</span></div>
 
 
-<div class="viewcode-block" id="JSONInfo"><a class="viewcode-back" href="../../zlogging._data.html#zlogging._data.JSONInfo">[docs]</a><span class="nd">@dataclasses</span><span class="o">.</span><span class="n">dataclass</span><span class="p">(</span><span class="n">frozen</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<div class="viewcode-block" id="JSONInfo"><a class="viewcode-back" href="../../_data.html#zlogging._data.JSONInfo">[docs]</a><span class="nd">@dataclasses</span><span class="o">.</span><span class="n">dataclass</span><span class="p">(</span><span class="n">frozen</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="k">class</span> <span class="nc">JSONInfo</span><span class="p">(</span><span class="n">Info</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Parsed log info for JSON logs.</span>
 
@@ -176,7 +176,15 @@
 
 <h3>Navigation</h3>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../../zlogging.html">Bro/Zeek Logging Framework for Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../dumper.html">Dumpers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../loader.html">Loaders</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../model.html">Data Model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../types.html">Data Types</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../typing.html">Typing Annotations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../_data.html">Data Classes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../_exc.html">Exceptions &amp; Warnings</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../_aux.html">Internal Auxiliary Functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../enum.html">Enum Namespace</a></li>
 </ul>
 
 <div class="relations">
@@ -211,7 +219,7 @@
       <div class="clearer"></div>
     </div>
     <div class="footer">
-      &copy;2020, Jarry Shaw.
+      &copy;2020-2021, Jarry Shaw.
       
     </div>
 

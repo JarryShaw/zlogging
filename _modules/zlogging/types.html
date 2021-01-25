@@ -91,7 +91,7 @@
 <span class="p">]</span>
 
 
-<div class="viewcode-block" id="BaseType"><a class="viewcode-back" href="../../zlogging.types.html#zlogging.BaseType">[docs]</a><span class="k">class</span> <span class="nc">BaseType</span><span class="p">(</span><span class="n">metaclass</span><span class="o">=</span><span class="n">abc</span><span class="o">.</span><span class="n">ABCMeta</span><span class="p">):</span>
+<div class="viewcode-block" id="BaseType"><a class="viewcode-back" href="../../types.html#zlogging.types.BaseType">[docs]</a><span class="k">class</span> <span class="nc">BaseType</span><span class="p">(</span><span class="n">metaclass</span><span class="o">=</span><span class="n">abc</span><span class="o">.</span><span class="n">ABCMeta</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Base Bro/Zeek data type.</span>
 
 <span class="sd">    Args:</span>
@@ -160,7 +160,7 @@
 
         <span class="bp">self</span><span class="o">.</span><span class="n">_name</span> <span class="o">=</span> <span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span>
 
-<div class="viewcode-block" id="BaseType.__call__"><a class="viewcode-back" href="../../zlogging.types.html#zlogging.BaseType.__call__">[docs]</a>    <span class="k">def</span> <span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="s1">&#39;Any&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;Any&#39;</span><span class="p">:</span>
+<div class="viewcode-block" id="BaseType.__call__"><a class="viewcode-back" href="../../types.html#zlogging.types.BaseType.__call__">[docs]</a>    <span class="k">def</span> <span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="s1">&#39;Any&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;Any&#39;</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;Parse ``data`` from string.</span>
 
 <span class="sd">        This is a proxy method which calls to :meth:`~zlogging.types.BaseType.parse`</span>
@@ -171,7 +171,7 @@
             <span class="k">return</span> <span class="n">data</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="n">data</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="BaseType.__str__"><a class="viewcode-back" href="../../zlogging.types.html#zlogging.BaseType.__str__">[docs]</a>    <span class="k">def</span> <span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<div class="viewcode-block" id="BaseType.__str__"><a class="viewcode-back" href="../../types.html#zlogging.types.BaseType.__str__">[docs]</a>    <span class="k">def</span> <span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;Returns the corresponding Zeek type name.&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">zeek_type</span></div>
 
@@ -179,20 +179,20 @@
         <span class="k">return</span> <span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_name</span><span class="si">}</span><span class="s1">(empty_field=</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">str_empty_field</span><span class="si">!r}</span><span class="s1">, &#39;</span>
                 <span class="sa">f</span><span class="s1">&#39;unset_field=</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">str_unset_field</span><span class="si">!r}</span><span class="s1">, set_separator=</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">str_set_separator</span><span class="si">!r}</span><span class="s1">)&#39;</span><span class="p">)</span>
 
-<div class="viewcode-block" id="BaseType.parse"><a class="viewcode-back" href="../../zlogging.types.html#zlogging.BaseType.parse">[docs]</a>    <span class="nd">@abc</span><span class="o">.</span><span class="n">abstractmethod</span>
+<div class="viewcode-block" id="BaseType.parse"><a class="viewcode-back" href="../../types.html#zlogging.types.BaseType.parse">[docs]</a>    <span class="nd">@abc</span><span class="o">.</span><span class="n">abstractmethod</span>
     <span class="k">def</span> <span class="nf">parse</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="s1">&#39;Any&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;Any&#39;</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;Parse ``data`` from string.&quot;&quot;&quot;</span></div>
 
-<div class="viewcode-block" id="BaseType.tojson"><a class="viewcode-back" href="../../zlogging.types.html#zlogging.BaseType.tojson">[docs]</a>    <span class="nd">@abc</span><span class="o">.</span><span class="n">abstractmethod</span>
+<div class="viewcode-block" id="BaseType.tojson"><a class="viewcode-back" href="../../types.html#zlogging.types.BaseType.tojson">[docs]</a>    <span class="nd">@abc</span><span class="o">.</span><span class="n">abstractmethod</span>
     <span class="k">def</span> <span class="nf">tojson</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="s1">&#39;Any&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;Any&#39;</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;Serialize ``data`` as JSON log format.&quot;&quot;&quot;</span></div>
 
-<div class="viewcode-block" id="BaseType.toascii"><a class="viewcode-back" href="../../zlogging.types.html#zlogging.BaseType.toascii">[docs]</a>    <span class="nd">@abc</span><span class="o">.</span><span class="n">abstractmethod</span>
+<div class="viewcode-block" id="BaseType.toascii"><a class="viewcode-back" href="../../types.html#zlogging.types.BaseType.toascii">[docs]</a>    <span class="nd">@abc</span><span class="o">.</span><span class="n">abstractmethod</span>
     <span class="k">def</span> <span class="nf">toascii</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="s1">&#39;Any&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;Serialize ``data`` as ASCII log format.&quot;&quot;&quot;</span></div></div>
 
 
-<div class="viewcode-block" id="_SimpleType"><a class="viewcode-back" href="../../zlogging.types.html#zlogging._SimpleType">[docs]</a><span class="k">class</span> <span class="nc">_SimpleType</span><span class="p">(</span><span class="n">BaseType</span><span class="p">):</span>  <span class="c1"># pylint: disable=abstract-method</span>
+<div class="viewcode-block" id="_SimpleType"><a class="viewcode-back" href="../../types.html#zlogging.types._SimpleType">[docs]</a><span class="k">class</span> <span class="nc">_SimpleType</span><span class="p">(</span><span class="n">BaseType</span><span class="p">):</span>  <span class="c1"># pylint: disable=abstract-method</span>
     <span class="sd">&quot;&quot;&quot;Simple data type.</span>
 
 <span class="sd">    In Bro/Zeek script language, such simple type includes ``bool``, ``count``,</span>
@@ -305,7 +305,7 @@
         <span class="k">return</span> <span class="nb">str</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
 
 
-<div class="viewcode-block" id="BoolType"><a class="viewcode-back" href="../../zlogging.types.html#zlogging.BoolType">[docs]</a><span class="k">class</span> <span class="nc">BoolType</span><span class="p">(</span><span class="n">_SimpleType</span><span class="p">):</span>
+<div class="viewcode-block" id="BoolType"><a class="viewcode-back" href="../../types.html#zlogging.types.BoolType">[docs]</a><span class="k">class</span> <span class="nc">BoolType</span><span class="p">(</span><span class="n">_SimpleType</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Bro/Zeek ``bool`` data type.</span>
 
 <span class="sd">    Args:</span>
@@ -338,7 +338,7 @@
     <span class="k">def</span> <span class="nf">parse</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="s1">&#39;Literal[&quot;F&quot;, b&quot;F&quot;]&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;Literal[False]&#39;</span><span class="p">:</span> <span class="o">...</span>
     <span class="nd">@overload</span>
     <span class="k">def</span> <span class="nf">parse</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="s1">&#39;_Str&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;Optional[bool]&#39;</span><span class="p">:</span> <span class="o">...</span>
-<div class="viewcode-block" id="BoolType.parse"><a class="viewcode-back" href="../../zlogging.types.html#zlogging.BoolType.parse">[docs]</a>    <span class="k">def</span> <span class="nf">parse</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="s1">&#39;Union[AnyStr, bool]&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;Optional[bool]&#39;</span><span class="p">:</span>
+<div class="viewcode-block" id="BoolType.parse"><a class="viewcode-back" href="../../types.html#zlogging.types.BoolType.parse">[docs]</a>    <span class="k">def</span> <span class="nf">parse</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="s1">&#39;Union[AnyStr, bool]&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;Optional[bool]&#39;</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;Parse ``data`` from string.</span>
 
 <span class="sd">        Args:</span>
@@ -370,7 +370,7 @@
     <span class="k">def</span> <span class="nf">tojson</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="n">_Bool</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">_Bool</span><span class="p">:</span> <span class="o">...</span>
     <span class="nd">@overload</span>
     <span class="k">def</span> <span class="nf">tojson</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span> <span class="o">...</span>
-<div class="viewcode-block" id="BoolType.tojson"><a class="viewcode-back" href="../../zlogging.types.html#zlogging.BoolType.tojson">[docs]</a>    <span class="k">def</span> <span class="nf">tojson</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="s1">&#39;Optional[bool]&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;Optional[bool]&#39;</span><span class="p">:</span>
+<div class="viewcode-block" id="BoolType.tojson"><a class="viewcode-back" href="../../types.html#zlogging.types.BoolType.tojson">[docs]</a>    <span class="k">def</span> <span class="nf">tojson</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="s1">&#39;Optional[bool]&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;Optional[bool]&#39;</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;Serialize ``data`` as JSON log format.</span>
 
 <span class="sd">        Args:</span>
@@ -388,7 +388,7 @@
     <span class="k">def</span> <span class="nf">toascii</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="s1">&#39;Literal[False]&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;Literal[&quot;F&quot;]&#39;</span><span class="p">:</span> <span class="o">...</span>
     <span class="nd">@overload</span>
     <span class="k">def</span> <span class="nf">toascii</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span> <span class="o">...</span>
-<div class="viewcode-block" id="BoolType.toascii"><a class="viewcode-back" href="../../zlogging.types.html#zlogging.BoolType.toascii">[docs]</a>    <span class="k">def</span> <span class="nf">toascii</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="s1">&#39;Optional[bool]&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<div class="viewcode-block" id="BoolType.toascii"><a class="viewcode-back" href="../../types.html#zlogging.types.BoolType.toascii">[docs]</a>    <span class="k">def</span> <span class="nf">toascii</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="s1">&#39;Optional[bool]&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;Serialize ``data`` as ASCII log format.</span>
 
 <span class="sd">        Args:</span>
@@ -403,7 +403,7 @@
         <span class="k">return</span> <span class="s1">&#39;T&#39;</span> <span class="k">if</span> <span class="n">data</span> <span class="k">else</span> <span class="s1">&#39;F&#39;</span></div></div>
 
 
-<div class="viewcode-block" id="CountType"><a class="viewcode-back" href="../../zlogging.types.html#zlogging.CountType">[docs]</a><span class="k">class</span> <span class="nc">CountType</span><span class="p">(</span><span class="n">_SimpleType</span><span class="p">):</span>
+<div class="viewcode-block" id="CountType"><a class="viewcode-back" href="../../types.html#zlogging.types.CountType">[docs]</a><span class="k">class</span> <span class="nc">CountType</span><span class="p">(</span><span class="n">_SimpleType</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Bro/Zeek ``count`` data type.</span>
 
 <span class="sd">    Args:</span>
@@ -434,7 +434,7 @@
     <span class="k">def</span> <span class="nf">parse</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="s1">&#39;AnyStr&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;Optional[uint64]&#39;</span><span class="p">:</span> <span class="o">...</span>
     <span class="nd">@overload</span>
     <span class="k">def</span> <span class="nf">parse</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="s1">&#39;uint64&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;uint64&#39;</span><span class="p">:</span> <span class="o">...</span>
-<div class="viewcode-block" id="CountType.parse"><a class="viewcode-back" href="../../zlogging.types.html#zlogging.CountType.parse">[docs]</a>    <span class="k">def</span> <span class="nf">parse</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="s1">&#39;Union[AnyStr, uint64]&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;Optional[uint64]&#39;</span><span class="p">:</span>
+<div class="viewcode-block" id="CountType.parse"><a class="viewcode-back" href="../../types.html#zlogging.types.CountType.parse">[docs]</a>    <span class="k">def</span> <span class="nf">parse</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="s1">&#39;Union[AnyStr, uint64]&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;Optional[uint64]&#39;</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;Parse ``data`` from string.</span>
 
 <span class="sd">        Args:</span>
@@ -458,7 +458,7 @@
     <span class="k">def</span> <span class="nf">tojson</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="s1">&#39;uint64&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span> <span class="o">...</span>
     <span class="nd">@overload</span>
     <span class="k">def</span> <span class="nf">tojson</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span> <span class="o">...</span>
-<div class="viewcode-block" id="CountType.tojson"><a class="viewcode-back" href="../../zlogging.types.html#zlogging.CountType.tojson">[docs]</a>    <span class="k">def</span> <span class="nf">tojson</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="s1">&#39;Optional[uint64]&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;Optional[int]&#39;</span><span class="p">:</span>
+<div class="viewcode-block" id="CountType.tojson"><a class="viewcode-back" href="../../types.html#zlogging.types.CountType.tojson">[docs]</a>    <span class="k">def</span> <span class="nf">tojson</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="s1">&#39;Optional[uint64]&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;Optional[int]&#39;</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;Serialize ``data`` as JSON log format.</span>
 
 <span class="sd">        Args:</span>
@@ -472,7 +472,7 @@
             <span class="k">return</span> <span class="kc">None</span>
         <span class="k">return</span> <span class="n">data</span><span class="o">.</span><span class="n">value</span></div>
 
-<div class="viewcode-block" id="CountType.toascii"><a class="viewcode-back" href="../../zlogging.types.html#zlogging.CountType.toascii">[docs]</a>    <span class="k">def</span> <span class="nf">toascii</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="s1">&#39;Optional[uint64]&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<div class="viewcode-block" id="CountType.toascii"><a class="viewcode-back" href="../../types.html#zlogging.types.CountType.toascii">[docs]</a>    <span class="k">def</span> <span class="nf">toascii</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="s1">&#39;Optional[uint64]&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;Serialize ``data`` as ASCII log format.</span>
 
 <span class="sd">        Args:</span>
@@ -487,7 +487,7 @@
         <span class="k">return</span> <span class="nb">str</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">value</span><span class="p">)</span></div></div>
 
 
-<div class="viewcode-block" id="IntType"><a class="viewcode-back" href="../../zlogging.types.html#zlogging.IntType">[docs]</a><span class="k">class</span> <span class="nc">IntType</span><span class="p">(</span><span class="n">_SimpleType</span><span class="p">):</span>
+<div class="viewcode-block" id="IntType"><a class="viewcode-back" href="../../types.html#zlogging.types.IntType">[docs]</a><span class="k">class</span> <span class="nc">IntType</span><span class="p">(</span><span class="n">_SimpleType</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Bro/Zeek ``int`` data type.</span>
 
 <span class="sd">    Args:</span>
@@ -518,7 +518,7 @@
     <span class="k">def</span> <span class="nf">parse</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="s1">&#39;AnyStr&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;Optional[int64]&#39;</span><span class="p">:</span> <span class="o">...</span>
     <span class="nd">@overload</span>
     <span class="k">def</span> <span class="nf">parse</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="s1">&#39;int64&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;int64&#39;</span><span class="p">:</span> <span class="o">...</span>
-<div class="viewcode-block" id="IntType.parse"><a class="viewcode-back" href="../../zlogging.types.html#zlogging.IntType.parse">[docs]</a>    <span class="k">def</span> <span class="nf">parse</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="s1">&#39;Union[AnyStr, int64]&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;Optional[int64]&#39;</span><span class="p">:</span>
+<div class="viewcode-block" id="IntType.parse"><a class="viewcode-back" href="../../types.html#zlogging.types.IntType.parse">[docs]</a>    <span class="k">def</span> <span class="nf">parse</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="s1">&#39;Union[AnyStr, int64]&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;Optional[int64]&#39;</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;Parse ``data`` from string.</span>
 
 <span class="sd">        Args:</span>
@@ -542,7 +542,7 @@
     <span class="k">def</span> <span class="nf">tojson</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="s1">&#39;int64&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span> <span class="o">...</span>
     <span class="nd">@overload</span>
     <span class="k">def</span> <span class="nf">tojson</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span> <span class="o">...</span>
-<div class="viewcode-block" id="IntType.tojson"><a class="viewcode-back" href="../../zlogging.types.html#zlogging.IntType.tojson">[docs]</a>    <span class="k">def</span> <span class="nf">tojson</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="s1">&#39;Optional[int64]&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;Optional[int]&#39;</span><span class="p">:</span>
+<div class="viewcode-block" id="IntType.tojson"><a class="viewcode-back" href="../../types.html#zlogging.types.IntType.tojson">[docs]</a>    <span class="k">def</span> <span class="nf">tojson</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="s1">&#39;Optional[int64]&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;Optional[int]&#39;</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;Serialize ``data`` as JSON log format.</span>
 
 <span class="sd">        Args:</span>
@@ -556,7 +556,7 @@
             <span class="k">return</span> <span class="kc">None</span>
         <span class="k">return</span> <span class="n">data</span><span class="o">.</span><span class="n">value</span></div>
 
-<div class="viewcode-block" id="IntType.toascii"><a class="viewcode-back" href="../../zlogging.types.html#zlogging.IntType.toascii">[docs]</a>    <span class="k">def</span> <span class="nf">toascii</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="s1">&#39;Optional[int64]&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<div class="viewcode-block" id="IntType.toascii"><a class="viewcode-back" href="../../types.html#zlogging.types.IntType.toascii">[docs]</a>    <span class="k">def</span> <span class="nf">toascii</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="s1">&#39;Optional[int64]&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;Serialize ``data`` as ASCII log format.</span>
 
 <span class="sd">        Args:</span>
@@ -571,7 +571,7 @@
         <span class="k">return</span> <span class="nb">str</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">value</span><span class="p">)</span></div></div>
 
 
-<div class="viewcode-block" id="DoubleType"><a class="viewcode-back" href="../../zlogging.types.html#zlogging.DoubleType">[docs]</a><span class="k">class</span> <span class="nc">DoubleType</span><span class="p">(</span><span class="n">_SimpleType</span><span class="p">):</span>
+<div class="viewcode-block" id="DoubleType"><a class="viewcode-back" href="../../types.html#zlogging.types.DoubleType">[docs]</a><span class="k">class</span> <span class="nc">DoubleType</span><span class="p">(</span><span class="n">_SimpleType</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Bro/Zeek ``double`` data type.</span>
 
 <span class="sd">    Args:</span>
@@ -602,7 +602,7 @@
     <span class="k">def</span> <span class="nf">parse</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="s1">&#39;AnyStr&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;Optional[Decimal]&#39;</span><span class="p">:</span> <span class="o">...</span>
     <span class="nd">@overload</span>
     <span class="k">def</span> <span class="nf">parse</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="s1">&#39;Decimal&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;Decimal&#39;</span><span class="p">:</span> <span class="o">...</span>
-<div class="viewcode-block" id="DoubleType.parse"><a class="viewcode-back" href="../../zlogging.types.html#zlogging.DoubleType.parse">[docs]</a>    <span class="k">def</span> <span class="nf">parse</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="s1">&#39;Union[AnyStr, Decimal]&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;Optional[Decimal]&#39;</span><span class="p">:</span>
+<div class="viewcode-block" id="DoubleType.parse"><a class="viewcode-back" href="../../types.html#zlogging.types.DoubleType.parse">[docs]</a>    <span class="k">def</span> <span class="nf">parse</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="s1">&#39;Union[AnyStr, Decimal]&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;Optional[Decimal]&#39;</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;Parse ``data`` from string.</span>
 
 <span class="sd">        Args:</span>
@@ -629,7 +629,7 @@
     <span class="k">def</span> <span class="nf">tojson</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="s1">&#39;Decimal&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span> <span class="o">...</span>
     <span class="nd">@overload</span>
     <span class="k">def</span> <span class="nf">tojson</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span> <span class="o">...</span>
-<div class="viewcode-block" id="DoubleType.tojson"><a class="viewcode-back" href="../../zlogging.types.html#zlogging.DoubleType.tojson">[docs]</a>    <span class="k">def</span> <span class="nf">tojson</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="s1">&#39;Optional[Decimal]&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;Optional[float]&#39;</span><span class="p">:</span>
+<div class="viewcode-block" id="DoubleType.tojson"><a class="viewcode-back" href="../../types.html#zlogging.types.DoubleType.tojson">[docs]</a>    <span class="k">def</span> <span class="nf">tojson</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="s1">&#39;Optional[Decimal]&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;Optional[float]&#39;</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;Serialize ``data`` as JSON log format.</span>
 
 <span class="sd">        Args:</span>
@@ -643,7 +643,7 @@
             <span class="k">return</span> <span class="kc">None</span>
         <span class="k">return</span> <span class="nb">float</span><span class="p">(</span><span class="n">data</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="DoubleType.toascii"><a class="viewcode-back" href="../../zlogging.types.html#zlogging.DoubleType.toascii">[docs]</a>    <span class="k">def</span> <span class="nf">toascii</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="s1">&#39;Optional[Decimal]&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<div class="viewcode-block" id="DoubleType.toascii"><a class="viewcode-back" href="../../types.html#zlogging.types.DoubleType.toascii">[docs]</a>    <span class="k">def</span> <span class="nf">toascii</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="s1">&#39;Optional[Decimal]&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;Serialize ``data`` as ASCII log format.</span>
 
 <span class="sd">        Args:</span>
@@ -658,7 +658,7 @@
         <span class="k">return</span> <span class="n">decimal_toascii</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">str_unset_field</span><span class="p">)</span></div></div>
 
 
-<div class="viewcode-block" id="TimeType"><a class="viewcode-back" href="../../zlogging.types.html#zlogging.TimeType">[docs]</a><span class="k">class</span> <span class="nc">TimeType</span><span class="p">(</span><span class="n">_SimpleType</span><span class="p">):</span>
+<div class="viewcode-block" id="TimeType"><a class="viewcode-back" href="../../types.html#zlogging.types.TimeType">[docs]</a><span class="k">class</span> <span class="nc">TimeType</span><span class="p">(</span><span class="n">_SimpleType</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Bro/Zeek ``time`` data type.</span>
 
 <span class="sd">    Args:</span>
@@ -689,7 +689,7 @@
     <span class="k">def</span> <span class="nf">parse</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="s1">&#39;AnyStr&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;Optional[DateTimeType]&#39;</span><span class="p">:</span> <span class="o">...</span>
     <span class="nd">@overload</span>
     <span class="k">def</span> <span class="nf">parse</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="s1">&#39;DateTimeType&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;DateTimeType&#39;</span><span class="p">:</span> <span class="o">...</span>
-<div class="viewcode-block" id="TimeType.parse"><a class="viewcode-back" href="../../zlogging.types.html#zlogging.TimeType.parse">[docs]</a>    <span class="k">def</span> <span class="nf">parse</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="s1">&#39;Union[AnyStr, DateTimeType]&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;Optional[DateTimeType]&#39;</span><span class="p">:</span>
+<div class="viewcode-block" id="TimeType.parse"><a class="viewcode-back" href="../../types.html#zlogging.types.TimeType.parse">[docs]</a>    <span class="k">def</span> <span class="nf">parse</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="s1">&#39;Union[AnyStr, DateTimeType]&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;Optional[DateTimeType]&#39;</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;Parse ``data`` from string.</span>
 
 <span class="sd">        Args:</span>
@@ -716,7 +716,7 @@
     <span class="k">def</span> <span class="nf">tojson</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="s1">&#39;DateTimeType&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span> <span class="o">...</span>
     <span class="nd">@overload</span>
     <span class="k">def</span> <span class="nf">tojson</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span> <span class="o">...</span>
-<div class="viewcode-block" id="TimeType.tojson"><a class="viewcode-back" href="../../zlogging.types.html#zlogging.TimeType.tojson">[docs]</a>    <span class="k">def</span> <span class="nf">tojson</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="s1">&#39;Optional[DateTimeType]&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;Optional[float]&#39;</span><span class="p">:</span>
+<div class="viewcode-block" id="TimeType.tojson"><a class="viewcode-back" href="../../types.html#zlogging.types.TimeType.tojson">[docs]</a>    <span class="k">def</span> <span class="nf">tojson</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="s1">&#39;Optional[DateTimeType]&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;Optional[float]&#39;</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;Serialize ``data`` as JSON log format.</span>
 
 <span class="sd">        Args:</span>
@@ -730,7 +730,7 @@
             <span class="k">return</span> <span class="kc">None</span>
         <span class="k">return</span> <span class="n">data</span><span class="o">.</span><span class="n">timestamp</span><span class="p">()</span></div>
 
-<div class="viewcode-block" id="TimeType.toascii"><a class="viewcode-back" href="../../zlogging.types.html#zlogging.TimeType.toascii">[docs]</a>    <span class="k">def</span> <span class="nf">toascii</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="s1">&#39;Optional[DateTimeType]&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<div class="viewcode-block" id="TimeType.toascii"><a class="viewcode-back" href="../../types.html#zlogging.types.TimeType.toascii">[docs]</a>    <span class="k">def</span> <span class="nf">toascii</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="s1">&#39;Optional[DateTimeType]&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;Serialize ``data`` as ASCII log format.</span>
 
 <span class="sd">        Args:</span>
@@ -745,7 +745,7 @@
         <span class="k">return</span> <span class="n">float_toascii</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">timestamp</span><span class="p">(),</span> <span class="bp">self</span><span class="o">.</span><span class="n">str_unset_field</span><span class="p">)</span></div></div>
 
 
-<div class="viewcode-block" id="IntervalType"><a class="viewcode-back" href="../../zlogging.types.html#zlogging.IntervalType">[docs]</a><span class="k">class</span> <span class="nc">IntervalType</span><span class="p">(</span><span class="n">_SimpleType</span><span class="p">):</span>
+<div class="viewcode-block" id="IntervalType"><a class="viewcode-back" href="../../types.html#zlogging.types.IntervalType">[docs]</a><span class="k">class</span> <span class="nc">IntervalType</span><span class="p">(</span><span class="n">_SimpleType</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Bro/Zeek ``interval`` data type.</span>
 
 <span class="sd">    Args:</span>
@@ -776,7 +776,7 @@
     <span class="k">def</span> <span class="nf">parse</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="s1">&#39;AnyStr&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;Optional[TimeDeltaType]&#39;</span><span class="p">:</span> <span class="o">...</span>
     <span class="nd">@overload</span>
     <span class="k">def</span> <span class="nf">parse</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="s1">&#39;TimeDeltaType&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;TimeDeltaType&#39;</span><span class="p">:</span> <span class="o">...</span>
-<div class="viewcode-block" id="IntervalType.parse"><a class="viewcode-back" href="../../zlogging.types.html#zlogging.IntervalType.parse">[docs]</a>    <span class="k">def</span> <span class="nf">parse</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="s1">&#39;Union[AnyStr, TimeDeltaType]&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;Optional[TimeDeltaType]&#39;</span><span class="p">:</span>
+<div class="viewcode-block" id="IntervalType.parse"><a class="viewcode-back" href="../../types.html#zlogging.types.IntervalType.parse">[docs]</a>    <span class="k">def</span> <span class="nf">parse</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="s1">&#39;Union[AnyStr, TimeDeltaType]&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;Optional[TimeDeltaType]&#39;</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;Parse ``data`` from string.</span>
 
 <span class="sd">        Args:</span>
@@ -808,7 +808,7 @@
     <span class="k">def</span> <span class="nf">tojson</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="s1">&#39;TimeDeltaType&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span> <span class="o">...</span>
     <span class="nd">@overload</span>
     <span class="k">def</span> <span class="nf">tojson</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span> <span class="o">...</span>
-<div class="viewcode-block" id="IntervalType.tojson"><a class="viewcode-back" href="../../zlogging.types.html#zlogging.IntervalType.tojson">[docs]</a>    <span class="k">def</span> <span class="nf">tojson</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="s1">&#39;Optional[TimeDeltaType]&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;Optional[float]&#39;</span><span class="p">:</span>
+<div class="viewcode-block" id="IntervalType.tojson"><a class="viewcode-back" href="../../types.html#zlogging.types.IntervalType.tojson">[docs]</a>    <span class="k">def</span> <span class="nf">tojson</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="s1">&#39;Optional[TimeDeltaType]&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;Optional[float]&#39;</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;Serialize ``data`` as JSON log format.</span>
 
 <span class="sd">        Args:</span>
@@ -822,7 +822,7 @@
             <span class="k">return</span> <span class="kc">None</span>
         <span class="k">return</span> <span class="n">data</span><span class="o">.</span><span class="n">total_seconds</span><span class="p">()</span></div>
 
-<div class="viewcode-block" id="IntervalType.toascii"><a class="viewcode-back" href="../../zlogging.types.html#zlogging.IntervalType.toascii">[docs]</a>    <span class="k">def</span> <span class="nf">toascii</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="s1">&#39;Optional[TimeDeltaType]&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<div class="viewcode-block" id="IntervalType.toascii"><a class="viewcode-back" href="../../types.html#zlogging.types.IntervalType.toascii">[docs]</a>    <span class="k">def</span> <span class="nf">toascii</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="s1">&#39;Optional[TimeDeltaType]&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;Serialize ``data`` as ASCII log format.</span>
 
 <span class="sd">        Args:</span>
@@ -837,7 +837,7 @@
         <span class="k">return</span> <span class="n">float_toascii</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">total_seconds</span><span class="p">(),</span> <span class="bp">self</span><span class="o">.</span><span class="n">str_unset_field</span><span class="p">)</span></div></div>
 
 
-<div class="viewcode-block" id="StringType"><a class="viewcode-back" href="../../zlogging.types.html#zlogging.StringType">[docs]</a><span class="k">class</span> <span class="nc">StringType</span><span class="p">(</span><span class="n">_SimpleType</span><span class="p">):</span>
+<div class="viewcode-block" id="StringType"><a class="viewcode-back" href="../../types.html#zlogging.types.StringType">[docs]</a><span class="k">class</span> <span class="nc">StringType</span><span class="p">(</span><span class="n">_SimpleType</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Bro/Zeek ``string`` data type.</span>
 
 <span class="sd">    Args:</span>
@@ -864,7 +864,7 @@
         <span class="sd">&quot;&quot;&quot;str: Corresponding Zeek type name.&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="s1">&#39;string&#39;</span>
 
-<div class="viewcode-block" id="StringType.parse"><a class="viewcode-back" href="../../zlogging.types.html#zlogging.StringType.parse">[docs]</a>    <span class="k">def</span> <span class="nf">parse</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="s1">&#39;Union[AnyStr, ByteString]&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;Optional[bytes]&#39;</span><span class="p">:</span>
+<div class="viewcode-block" id="StringType.parse"><a class="viewcode-back" href="../../types.html#zlogging.types.StringType.parse">[docs]</a>    <span class="k">def</span> <span class="nf">parse</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="s1">&#39;Union[AnyStr, ByteString]&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;Optional[bytes]&#39;</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;Parse ``data`` from string.</span>
 
 <span class="sd">        Args:</span>
@@ -892,7 +892,7 @@
     <span class="k">def</span> <span class="nf">tojson</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="s1">&#39;ByteString&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span> <span class="o">...</span>
     <span class="nd">@overload</span>
     <span class="k">def</span> <span class="nf">tojson</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span> <span class="o">...</span>
-<div class="viewcode-block" id="StringType.tojson"><a class="viewcode-back" href="../../zlogging.types.html#zlogging.StringType.tojson">[docs]</a>    <span class="k">def</span> <span class="nf">tojson</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="s1">&#39;Optional[ByteString]&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;Optional[str]&#39;</span><span class="p">:</span>
+<div class="viewcode-block" id="StringType.tojson"><a class="viewcode-back" href="../../types.html#zlogging.types.StringType.tojson">[docs]</a>    <span class="k">def</span> <span class="nf">tojson</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="s1">&#39;Optional[ByteString]&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;Optional[str]&#39;</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;Serialize ``data`` as JSON log format.</span>
 
 <span class="sd">        Args:</span>
@@ -911,7 +911,7 @@
             <span class="n">data</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">tobytes</span><span class="p">()</span>
         <span class="k">return</span> <span class="n">data</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s1">&#39;ascii&#39;</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="StringType.toascii"><a class="viewcode-back" href="../../zlogging.types.html#zlogging.StringType.toascii">[docs]</a>    <span class="k">def</span> <span class="nf">toascii</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="s1">&#39;Optional[ByteString]&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<div class="viewcode-block" id="StringType.toascii"><a class="viewcode-back" href="../../types.html#zlogging.types.StringType.toascii">[docs]</a>    <span class="k">def</span> <span class="nf">toascii</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="s1">&#39;Optional[ByteString]&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;Serialize ``data`` as ASCII log format.</span>
 
 <span class="sd">        Args:</span>
@@ -934,7 +934,7 @@
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">str_empty_field</span></div></div>
 
 
-<div class="viewcode-block" id="AddrType"><a class="viewcode-back" href="../../zlogging.types.html#zlogging.AddrType">[docs]</a><span class="k">class</span> <span class="nc">AddrType</span><span class="p">(</span><span class="n">_SimpleType</span><span class="p">):</span>
+<div class="viewcode-block" id="AddrType"><a class="viewcode-back" href="../../types.html#zlogging.types.AddrType">[docs]</a><span class="k">class</span> <span class="nc">AddrType</span><span class="p">(</span><span class="n">_SimpleType</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Bro/Zeek ``addr`` data type.</span>
 
 <span class="sd">    Args:</span>
@@ -965,7 +965,7 @@
     <span class="k">def</span> <span class="nf">parse</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="s1">&#39;AnyStr&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;Optional[IPAddress]&#39;</span><span class="p">:</span> <span class="o">...</span>
     <span class="nd">@overload</span>
     <span class="k">def</span> <span class="nf">parse</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="s1">&#39;IPAddress&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;IPAddress&#39;</span><span class="p">:</span> <span class="o">...</span>
-<div class="viewcode-block" id="AddrType.parse"><a class="viewcode-back" href="../../zlogging.types.html#zlogging.AddrType.parse">[docs]</a>    <span class="k">def</span> <span class="nf">parse</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="s1">&#39;Union[AnyStr, IPAddress]&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;Optional[IPAddress]&#39;</span><span class="p">:</span>
+<div class="viewcode-block" id="AddrType.parse"><a class="viewcode-back" href="../../types.html#zlogging.types.AddrType.parse">[docs]</a>    <span class="k">def</span> <span class="nf">parse</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="s1">&#39;Union[AnyStr, IPAddress]&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;Optional[IPAddress]&#39;</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;Parse ``data`` from string.</span>
 
 <span class="sd">        Args:</span>
@@ -989,7 +989,7 @@
     <span class="k">def</span> <span class="nf">tojson</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="s1">&#39;IPAddress&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span> <span class="o">...</span>
     <span class="nd">@overload</span>
     <span class="k">def</span> <span class="nf">tojson</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span> <span class="o">...</span>
-<div class="viewcode-block" id="AddrType.tojson"><a class="viewcode-back" href="../../zlogging.types.html#zlogging.AddrType.tojson">[docs]</a>    <span class="k">def</span> <span class="nf">tojson</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="s1">&#39;Optional[IPAddress]&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;Optional[str]&#39;</span><span class="p">:</span>
+<div class="viewcode-block" id="AddrType.tojson"><a class="viewcode-back" href="../../types.html#zlogging.types.AddrType.tojson">[docs]</a>    <span class="k">def</span> <span class="nf">tojson</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="s1">&#39;Optional[IPAddress]&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;Optional[str]&#39;</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;Serialize ``data`` as JSON log format.</span>
 
 <span class="sd">        Args:</span>
@@ -1003,7 +1003,7 @@
             <span class="k">return</span> <span class="kc">None</span>
         <span class="k">return</span> <span class="nb">str</span><span class="p">(</span><span class="n">data</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="AddrType.toascii"><a class="viewcode-back" href="../../zlogging.types.html#zlogging.AddrType.toascii">[docs]</a>    <span class="k">def</span> <span class="nf">toascii</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="s1">&#39;Optional[IPAddress]&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<div class="viewcode-block" id="AddrType.toascii"><a class="viewcode-back" href="../../types.html#zlogging.types.AddrType.toascii">[docs]</a>    <span class="k">def</span> <span class="nf">toascii</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="s1">&#39;Optional[IPAddress]&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;Serialize ``data`` as ASCII log format.</span>
 
 <span class="sd">        Args:</span>
@@ -1018,7 +1018,7 @@
         <span class="k">return</span> <span class="nb">str</span><span class="p">(</span><span class="n">data</span><span class="p">)</span></div></div>
 
 
-<div class="viewcode-block" id="PortType"><a class="viewcode-back" href="../../zlogging.types.html#zlogging.PortType">[docs]</a><span class="k">class</span> <span class="nc">PortType</span><span class="p">(</span><span class="n">_SimpleType</span><span class="p">):</span>
+<div class="viewcode-block" id="PortType"><a class="viewcode-back" href="../../types.html#zlogging.types.PortType">[docs]</a><span class="k">class</span> <span class="nc">PortType</span><span class="p">(</span><span class="n">_SimpleType</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Bro/Zeek ``port`` data type.</span>
 
 <span class="sd">    Args:</span>
@@ -1049,7 +1049,7 @@
     <span class="k">def</span> <span class="nf">parse</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="s1">&#39;AnyStr&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;Optional[uint16]&#39;</span><span class="p">:</span> <span class="o">...</span>
     <span class="nd">@overload</span>
     <span class="k">def</span> <span class="nf">parse</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="s1">&#39;uint16&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;uint16&#39;</span><span class="p">:</span> <span class="o">...</span>
-<div class="viewcode-block" id="PortType.parse"><a class="viewcode-back" href="../../zlogging.types.html#zlogging.PortType.parse">[docs]</a>    <span class="k">def</span> <span class="nf">parse</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="s1">&#39;Union[AnyStr, uint16]&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;Optional[uint16]&#39;</span><span class="p">:</span>
+<div class="viewcode-block" id="PortType.parse"><a class="viewcode-back" href="../../types.html#zlogging.types.PortType.parse">[docs]</a>    <span class="k">def</span> <span class="nf">parse</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="s1">&#39;Union[AnyStr, uint16]&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;Optional[uint16]&#39;</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;Parse ``data`` from string.</span>
 
 <span class="sd">        Args:</span>
@@ -1073,7 +1073,7 @@
     <span class="k">def</span> <span class="nf">tojson</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="s1">&#39;uint16&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span> <span class="o">...</span>
     <span class="nd">@overload</span>
     <span class="k">def</span> <span class="nf">tojson</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span> <span class="o">...</span>
-<div class="viewcode-block" id="PortType.tojson"><a class="viewcode-back" href="../../zlogging.types.html#zlogging.PortType.tojson">[docs]</a>    <span class="k">def</span> <span class="nf">tojson</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="s1">&#39;Optional[uint16]&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;Optional[int]&#39;</span><span class="p">:</span>
+<div class="viewcode-block" id="PortType.tojson"><a class="viewcode-back" href="../../types.html#zlogging.types.PortType.tojson">[docs]</a>    <span class="k">def</span> <span class="nf">tojson</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="s1">&#39;Optional[uint16]&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;Optional[int]&#39;</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;Serialize ``data`` as JSON log format.</span>
 
 <span class="sd">        Args:</span>
@@ -1087,7 +1087,7 @@
             <span class="k">return</span> <span class="kc">None</span>
         <span class="k">return</span> <span class="n">data</span><span class="o">.</span><span class="n">value</span></div>
 
-<div class="viewcode-block" id="PortType.toascii"><a class="viewcode-back" href="../../zlogging.types.html#zlogging.PortType.toascii">[docs]</a>    <span class="k">def</span> <span class="nf">toascii</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="s1">&#39;Optional[uint16]&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<div class="viewcode-block" id="PortType.toascii"><a class="viewcode-back" href="../../types.html#zlogging.types.PortType.toascii">[docs]</a>    <span class="k">def</span> <span class="nf">toascii</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="s1">&#39;Optional[uint16]&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;Serialize ``data`` as ASCII log format.</span>
 
 <span class="sd">        Args:</span>
@@ -1102,7 +1102,7 @@
         <span class="k">return</span> <span class="nb">str</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">value</span><span class="p">)</span></div></div>
 
 
-<div class="viewcode-block" id="SubnetType"><a class="viewcode-back" href="../../zlogging.types.html#zlogging.SubnetType">[docs]</a><span class="k">class</span> <span class="nc">SubnetType</span><span class="p">(</span><span class="n">_SimpleType</span><span class="p">):</span>
+<div class="viewcode-block" id="SubnetType"><a class="viewcode-back" href="../../types.html#zlogging.types.SubnetType">[docs]</a><span class="k">class</span> <span class="nc">SubnetType</span><span class="p">(</span><span class="n">_SimpleType</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Bro/Zeek ``subnet`` data type.</span>
 
 <span class="sd">    Args:</span>
@@ -1133,7 +1133,7 @@
     <span class="k">def</span> <span class="nf">parse</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="s1">&#39;AnyStr&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;Optional[IPNetwork]&#39;</span><span class="p">:</span> <span class="o">...</span>
     <span class="nd">@overload</span>
     <span class="k">def</span> <span class="nf">parse</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="s1">&#39;IPNetwork&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;IPNetwork&#39;</span><span class="p">:</span> <span class="o">...</span>
-<div class="viewcode-block" id="SubnetType.parse"><a class="viewcode-back" href="../../zlogging.types.html#zlogging.SubnetType.parse">[docs]</a>    <span class="k">def</span> <span class="nf">parse</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="s1">&#39;Union[AnyStr, IPNetwork]&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;Optional[IPNetwork]&#39;</span><span class="p">:</span>
+<div class="viewcode-block" id="SubnetType.parse"><a class="viewcode-back" href="../../types.html#zlogging.types.SubnetType.parse">[docs]</a>    <span class="k">def</span> <span class="nf">parse</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="s1">&#39;Union[AnyStr, IPNetwork]&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;Optional[IPNetwork]&#39;</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;Parse ``data`` from string.</span>
 
 <span class="sd">        Args:</span>
@@ -1157,7 +1157,7 @@
     <span class="k">def</span> <span class="nf">tojson</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="s1">&#39;IPNetwork&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span> <span class="o">...</span>
     <span class="nd">@overload</span>
     <span class="k">def</span> <span class="nf">tojson</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span> <span class="o">...</span>
-<div class="viewcode-block" id="SubnetType.tojson"><a class="viewcode-back" href="../../zlogging.types.html#zlogging.SubnetType.tojson">[docs]</a>    <span class="k">def</span> <span class="nf">tojson</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="s1">&#39;Optional[IPNetwork]&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;Optional[str]&#39;</span><span class="p">:</span>
+<div class="viewcode-block" id="SubnetType.tojson"><a class="viewcode-back" href="../../types.html#zlogging.types.SubnetType.tojson">[docs]</a>    <span class="k">def</span> <span class="nf">tojson</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="s1">&#39;Optional[IPNetwork]&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;Optional[str]&#39;</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;Serialize ``data`` as JSON log format.</span>
 
 <span class="sd">        Args:</span>
@@ -1171,7 +1171,7 @@
             <span class="k">return</span> <span class="kc">None</span>
         <span class="k">return</span> <span class="nb">str</span><span class="p">(</span><span class="n">data</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="SubnetType.toascii"><a class="viewcode-back" href="../../zlogging.types.html#zlogging.SubnetType.toascii">[docs]</a>    <span class="k">def</span> <span class="nf">toascii</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="s1">&#39;Optional[IPNetwork]&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<div class="viewcode-block" id="SubnetType.toascii"><a class="viewcode-back" href="../../types.html#zlogging.types.SubnetType.toascii">[docs]</a>    <span class="k">def</span> <span class="nf">toascii</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="s1">&#39;Optional[IPNetwork]&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;Serialize ``data`` as ASCII log format.</span>
 
 <span class="sd">        Args:</span>
@@ -1186,7 +1186,7 @@
         <span class="k">return</span> <span class="nb">str</span><span class="p">(</span><span class="n">data</span><span class="p">)</span></div></div>
 
 
-<div class="viewcode-block" id="EnumType"><a class="viewcode-back" href="../../zlogging.types.html#zlogging.EnumType">[docs]</a><span class="k">class</span> <span class="nc">EnumType</span><span class="p">(</span><span class="n">_SimpleType</span><span class="p">):</span>
+<div class="viewcode-block" id="EnumType"><a class="viewcode-back" href="../../types.html#zlogging.types.EnumType">[docs]</a><span class="k">class</span> <span class="nc">EnumType</span><span class="p">(</span><span class="n">_SimpleType</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Bro/Zeek ``enum`` data type.</span>
 
 <span class="sd">    Args:</span>
@@ -1243,7 +1243,7 @@
     <span class="k">def</span> <span class="nf">parse</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="s1">&#39;AnyStr&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;Optional[Enum]&#39;</span><span class="p">:</span> <span class="o">...</span>  <span class="c1"># type: ignore[misc]</span>
     <span class="nd">@overload</span>
     <span class="k">def</span> <span class="nf">parse</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="s1">&#39;Enum&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;Enum&#39;</span><span class="p">:</span> <span class="o">...</span>
-<div class="viewcode-block" id="EnumType.parse"><a class="viewcode-back" href="../../zlogging.types.html#zlogging.EnumType.parse">[docs]</a>    <span class="k">def</span> <span class="nf">parse</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="s1">&#39;Union[AnyStr, Enum]&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;Optional[Enum]&#39;</span><span class="p">:</span>
+<div class="viewcode-block" id="EnumType.parse"><a class="viewcode-back" href="../../types.html#zlogging.types.EnumType.parse">[docs]</a>    <span class="k">def</span> <span class="nf">parse</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="s1">&#39;Union[AnyStr, Enum]&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;Optional[Enum]&#39;</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;Parse ``data`` from string.</span>
 
 <span class="sd">        Args:</span>
@@ -1279,7 +1279,7 @@
     <span class="k">def</span> <span class="nf">tojson</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="s1">&#39;Enum&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span> <span class="o">...</span>
     <span class="nd">@overload</span>
     <span class="k">def</span> <span class="nf">tojson</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span> <span class="o">...</span>
-<div class="viewcode-block" id="EnumType.tojson"><a class="viewcode-back" href="../../zlogging.types.html#zlogging.EnumType.tojson">[docs]</a>    <span class="k">def</span> <span class="nf">tojson</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="s1">&#39;Optional[Enum]&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;Optional[str]&#39;</span><span class="p">:</span>
+<div class="viewcode-block" id="EnumType.tojson"><a class="viewcode-back" href="../../types.html#zlogging.types.EnumType.tojson">[docs]</a>    <span class="k">def</span> <span class="nf">tojson</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="s1">&#39;Optional[Enum]&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;Optional[str]&#39;</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;Serialize ``data`` as JSON log format.</span>
 
 <span class="sd">        Args:</span>
@@ -1293,7 +1293,7 @@
             <span class="k">return</span> <span class="kc">None</span>
         <span class="k">return</span> <span class="n">data</span><span class="o">.</span><span class="n">name</span></div>
 
-<div class="viewcode-block" id="EnumType.toascii"><a class="viewcode-back" href="../../zlogging.types.html#zlogging.EnumType.toascii">[docs]</a>    <span class="k">def</span> <span class="nf">toascii</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="s1">&#39;Optional[Enum]&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<div class="viewcode-block" id="EnumType.toascii"><a class="viewcode-back" href="../../types.html#zlogging.types.EnumType.toascii">[docs]</a>    <span class="k">def</span> <span class="nf">toascii</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="s1">&#39;Optional[Enum]&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;Serialize ``data`` as ASCII log format.</span>
 
 <span class="sd">        Args:</span>
@@ -1308,7 +1308,7 @@
         <span class="k">return</span> <span class="n">data</span><span class="o">.</span><span class="n">name</span></div></div>
 
 
-<div class="viewcode-block" id="_GenericType"><a class="viewcode-back" href="../../zlogging.types.html#zlogging._GenericType">[docs]</a><span class="k">class</span> <span class="nc">_GenericType</span><span class="p">(</span><span class="n">BaseType</span><span class="p">):</span>  <span class="c1"># pylint: disable=abstract-method</span>
+<div class="viewcode-block" id="_GenericType"><a class="viewcode-back" href="../../types.html#zlogging.types._GenericType">[docs]</a><span class="k">class</span> <span class="nc">_GenericType</span><span class="p">(</span><span class="n">BaseType</span><span class="p">):</span>  <span class="c1"># pylint: disable=abstract-method</span>
     <span class="sd">&quot;&quot;&quot;Generic data type.</span>
 
 <span class="sd">    In Bro/Zeek script language, such generic type includes ``set`` and</span>
@@ -1317,7 +1317,7 @@
 <span class="sd">    &quot;&quot;&quot;</span></div>
 
 
-<div class="viewcode-block" id="SetType"><a class="viewcode-back" href="../../zlogging.types.html#zlogging.SetType">[docs]</a><span class="k">class</span> <span class="nc">SetType</span><span class="p">(</span><span class="n">_GenericType</span><span class="p">,</span> <span class="n">Generic</span><span class="p">[</span><span class="n">_S</span><span class="p">]):</span>
+<div class="viewcode-block" id="SetType"><a class="viewcode-back" href="../../types.html#zlogging.types.SetType">[docs]</a><span class="k">class</span> <span class="nc">SetType</span><span class="p">(</span><span class="n">_GenericType</span><span class="p">,</span> <span class="n">Generic</span><span class="p">[</span><span class="n">_S</span><span class="p">]):</span>
     <span class="sd">&quot;&quot;&quot;Bro/Zeek ``set`` data type.</span>
 
 <span class="sd">    Args:</span>
@@ -1398,7 +1398,7 @@
     <span class="k">def</span> <span class="nf">parse</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="s1">&#39;AnyStr&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;Optional[Set[_S]]&#39;</span><span class="p">:</span> <span class="o">...</span>
     <span class="nd">@overload</span>
     <span class="k">def</span> <span class="nf">parse</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="s1">&#39;Set[_S]&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;Set[_S]&#39;</span><span class="p">:</span> <span class="o">...</span>
-<div class="viewcode-block" id="SetType.parse"><a class="viewcode-back" href="../../zlogging.types.html#zlogging.SetType.parse">[docs]</a>    <span class="k">def</span> <span class="nf">parse</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="s1">&#39;Union[AnyStr, Set[_S]]&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;Optional[Set[_S]]&#39;</span><span class="p">:</span>
+<div class="viewcode-block" id="SetType.parse"><a class="viewcode-back" href="../../types.html#zlogging.types.SetType.parse">[docs]</a>    <span class="k">def</span> <span class="nf">parse</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="s1">&#39;Union[AnyStr, Set[_S]]&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;Optional[Set[_S]]&#39;</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;Parse ``data`` from string.</span>
 
 <span class="sd">        Args:</span>
@@ -1424,7 +1424,7 @@
     <span class="k">def</span> <span class="nf">tojson</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="s1">&#39;Set[_S]&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;List[Optional[_T]]&#39;</span><span class="p">:</span> <span class="o">...</span>
     <span class="nd">@overload</span>
     <span class="k">def</span> <span class="nf">tojson</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span> <span class="o">...</span>
-<div class="viewcode-block" id="SetType.tojson"><a class="viewcode-back" href="../../zlogging.types.html#zlogging.SetType.tojson">[docs]</a>    <span class="k">def</span> <span class="nf">tojson</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="s1">&#39;Optional[Set[_S]]&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;Optional[List[Optional[_T]]]&#39;</span><span class="p">:</span>
+<div class="viewcode-block" id="SetType.tojson"><a class="viewcode-back" href="../../types.html#zlogging.types.SetType.tojson">[docs]</a>    <span class="k">def</span> <span class="nf">tojson</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="s1">&#39;Optional[Set[_S]]&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;Optional[List[Optional[_T]]]&#39;</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;Serialize ``data`` as JSON log format.</span>
 
 <span class="sd">        Args:</span>
@@ -1438,7 +1438,7 @@
             <span class="k">return</span> <span class="kc">None</span>
         <span class="k">return</span> <span class="nb">sorted</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">element_type</span><span class="o">.</span><span class="n">tojson</span><span class="p">(</span><span class="n">element</span><span class="p">)</span> <span class="k">for</span> <span class="n">element</span> <span class="ow">in</span> <span class="n">data</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="SetType.toascii"><a class="viewcode-back" href="../../zlogging.types.html#zlogging.SetType.toascii">[docs]</a>    <span class="k">def</span> <span class="nf">toascii</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="s1">&#39;Optional[Set[_S]]&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<div class="viewcode-block" id="SetType.toascii"><a class="viewcode-back" href="../../types.html#zlogging.types.SetType.toascii">[docs]</a>    <span class="k">def</span> <span class="nf">toascii</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="s1">&#39;Optional[Set[_S]]&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;Serialize ``data`` as ASCII log format.</span>
 
 <span class="sd">        Args:</span>
@@ -1455,7 +1455,7 @@
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">str_set_separator</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="nb">sorted</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">element_type</span><span class="o">.</span><span class="n">toascii</span><span class="p">(</span><span class="n">element</span><span class="p">)</span> <span class="k">for</span> <span class="n">element</span> <span class="ow">in</span> <span class="n">data</span><span class="p">))</span></div></div>
 
 
-<div class="viewcode-block" id="VectorType"><a class="viewcode-back" href="../../zlogging.types.html#zlogging.VectorType">[docs]</a><span class="k">class</span> <span class="nc">VectorType</span><span class="p">(</span><span class="n">_GenericType</span><span class="p">,</span> <span class="n">Generic</span><span class="p">[</span><span class="n">_S</span><span class="p">]):</span>
+<div class="viewcode-block" id="VectorType"><a class="viewcode-back" href="../../types.html#zlogging.types.VectorType">[docs]</a><span class="k">class</span> <span class="nc">VectorType</span><span class="p">(</span><span class="n">_GenericType</span><span class="p">,</span> <span class="n">Generic</span><span class="p">[</span><span class="n">_S</span><span class="p">]):</span>
     <span class="sd">&quot;&quot;&quot;Bro/Zeek ``vector`` data type.</span>
 
 <span class="sd">    Args:</span>
@@ -1536,7 +1536,7 @@
     <span class="k">def</span> <span class="nf">parse</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="s1">&#39;AnyStr&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;Optional[List[_S]]&#39;</span><span class="p">:</span> <span class="o">...</span>
     <span class="nd">@overload</span>
     <span class="k">def</span> <span class="nf">parse</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="s1">&#39;List[_S]&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;List[_S]&#39;</span><span class="p">:</span> <span class="o">...</span>
-<div class="viewcode-block" id="VectorType.parse"><a class="viewcode-back" href="../../zlogging.types.html#zlogging.VectorType.parse">[docs]</a>    <span class="k">def</span> <span class="nf">parse</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="s1">&#39;Union[AnyStr, List[_S]]&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;Optional[List[_S]]&#39;</span><span class="p">:</span>
+<div class="viewcode-block" id="VectorType.parse"><a class="viewcode-back" href="../../types.html#zlogging.types.VectorType.parse">[docs]</a>    <span class="k">def</span> <span class="nf">parse</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="s1">&#39;Union[AnyStr, List[_S]]&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;Optional[List[_S]]&#39;</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;Parse ``data`` from string.</span>
 
 <span class="sd">        Args:</span>
@@ -1562,7 +1562,7 @@
     <span class="k">def</span> <span class="nf">tojson</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="s1">&#39;List[_S]&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;List[Optional[_T]]&#39;</span><span class="p">:</span> <span class="o">...</span>
     <span class="nd">@overload</span>
     <span class="k">def</span> <span class="nf">tojson</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span> <span class="o">...</span>
-<div class="viewcode-block" id="VectorType.tojson"><a class="viewcode-back" href="../../zlogging.types.html#zlogging.VectorType.tojson">[docs]</a>    <span class="k">def</span> <span class="nf">tojson</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="s1">&#39;Optional[List[_S]]&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;Optional[List[Optional[_T]]]&#39;</span><span class="p">:</span>
+<div class="viewcode-block" id="VectorType.tojson"><a class="viewcode-back" href="../../types.html#zlogging.types.VectorType.tojson">[docs]</a>    <span class="k">def</span> <span class="nf">tojson</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="s1">&#39;Optional[List[_S]]&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;Optional[List[Optional[_T]]]&#39;</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;Serialize ``data`` as JSON log format.</span>
 
 <span class="sd">        Args:</span>
@@ -1576,7 +1576,7 @@
             <span class="k">return</span> <span class="kc">None</span>
         <span class="k">return</span> <span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">element_type</span><span class="o">.</span><span class="n">tojson</span><span class="p">(</span><span class="n">element</span><span class="p">)</span> <span class="k">for</span> <span class="n">element</span> <span class="ow">in</span> <span class="n">data</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="VectorType.toascii"><a class="viewcode-back" href="../../zlogging.types.html#zlogging.VectorType.toascii">[docs]</a>    <span class="k">def</span> <span class="nf">toascii</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="s1">&#39;Optional[List[_S]]&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<div class="viewcode-block" id="VectorType.toascii"><a class="viewcode-back" href="../../types.html#zlogging.types.VectorType.toascii">[docs]</a>    <span class="k">def</span> <span class="nf">toascii</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="s1">&#39;Optional[List[_S]]&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;Serialize ``data`` as ASCII log format.</span>
 
 <span class="sd">        Args:</span>
@@ -1593,7 +1593,7 @@
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">str_set_separator</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">element_type</span><span class="o">.</span><span class="n">toascii</span><span class="p">(</span><span class="n">element</span><span class="p">)</span> <span class="k">for</span> <span class="n">element</span> <span class="ow">in</span> <span class="n">data</span><span class="p">)</span></div></div>
 
 
-<div class="viewcode-block" id="_VariadicType"><a class="viewcode-back" href="../../zlogging.types.html#zlogging._VariadicType">[docs]</a><span class="k">class</span> <span class="nc">_VariadicType</span><span class="p">(</span><span class="n">BaseType</span><span class="p">):</span>  <span class="c1"># pylint: disable=abstract-method</span>
+<div class="viewcode-block" id="_VariadicType"><a class="viewcode-back" href="../../types.html#zlogging.types._VariadicType">[docs]</a><span class="k">class</span> <span class="nc">_VariadicType</span><span class="p">(</span><span class="n">BaseType</span><span class="p">):</span>  <span class="c1"># pylint: disable=abstract-method</span>
     <span class="sd">&quot;&quot;&quot;Variadic data type.</span>
 
 <span class="sd">    In Bro/Zeek script language, such variadic type refers to ``record``, which</span>
@@ -1603,7 +1603,7 @@
 
     <span class="n">element_mapping</span><span class="p">:</span> <span class="s1">&#39;OrderedDict[str, Union[_SimpleType, _GenericType]]&#39;</span>
 
-<div class="viewcode-block" id="_VariadicType.parse"><a class="viewcode-back" href="../../zlogging.types.html#zlogging._VariadicType.parse">[docs]</a>    <span class="k">def</span> <span class="nf">parse</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="s1">&#39;Any&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;NoReturn&#39;</span><span class="p">:</span>
+<div class="viewcode-block" id="_VariadicType.parse"><a class="viewcode-back" href="../../types.html#zlogging.types._VariadicType.parse">[docs]</a>    <span class="k">def</span> <span class="nf">parse</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="s1">&#39;Any&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;NoReturn&#39;</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;Not supported for a variadic data type.</span>
 
 <span class="sd">        Args:</span>
@@ -1615,7 +1615,7 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">raise</span> <span class="n">ZeekNotImplemented</span></div>
 
-<div class="viewcode-block" id="_VariadicType.tojson"><a class="viewcode-back" href="../../zlogging.types.html#zlogging._VariadicType.tojson">[docs]</a>    <span class="k">def</span> <span class="nf">tojson</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="s1">&#39;Any&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;NoReturn&#39;</span><span class="p">:</span>
+<div class="viewcode-block" id="_VariadicType.tojson"><a class="viewcode-back" href="../../types.html#zlogging.types._VariadicType.tojson">[docs]</a>    <span class="k">def</span> <span class="nf">tojson</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="s1">&#39;Any&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;NoReturn&#39;</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;Not supported for a variadic data type.</span>
 
 <span class="sd">        Args:</span>
@@ -1627,7 +1627,7 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">raise</span> <span class="n">ZeekNotImplemented</span></div>
 
-<div class="viewcode-block" id="_VariadicType.toascii"><a class="viewcode-back" href="../../zlogging.types.html#zlogging._VariadicType.toascii">[docs]</a>    <span class="k">def</span> <span class="nf">toascii</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="s1">&#39;Any&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;NoReturn&#39;</span><span class="p">:</span>
+<div class="viewcode-block" id="_VariadicType.toascii"><a class="viewcode-back" href="../../types.html#zlogging.types._VariadicType.toascii">[docs]</a>    <span class="k">def</span> <span class="nf">toascii</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="s1">&#39;Any&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;NoReturn&#39;</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;Not supported for a variadic data type.</span>
 
 <span class="sd">        Args:</span>
@@ -1640,7 +1640,7 @@
         <span class="k">raise</span> <span class="n">ZeekNotImplemented</span></div></div>
 
 
-<div class="viewcode-block" id="RecordType"><a class="viewcode-back" href="../../zlogging.types.html#zlogging.RecordType">[docs]</a><span class="k">class</span> <span class="nc">RecordType</span><span class="p">(</span><span class="n">_VariadicType</span><span class="p">):</span>
+<div class="viewcode-block" id="RecordType"><a class="viewcode-back" href="../../types.html#zlogging.types.RecordType">[docs]</a><span class="k">class</span> <span class="nc">RecordType</span><span class="p">(</span><span class="n">_VariadicType</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Bro/Zeek ``record`` data type.</span>
 
 <span class="sd">    Args:</span>
@@ -1764,7 +1764,15 @@
 
 <h3>Navigation</h3>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../../zlogging.html">Bro/Zeek Logging Framework for Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../dumper.html">Dumpers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../loader.html">Loaders</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../model.html">Data Model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../types.html">Data Types</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../typing.html">Typing Annotations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../_data.html">Data Classes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../_exc.html">Exceptions &amp; Warnings</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../_aux.html">Internal Auxiliary Functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../enum.html">Enum Namespace</a></li>
 </ul>
 
 <div class="relations">
@@ -1799,7 +1807,7 @@
       <div class="clearer"></div>
     </div>
     <div class="footer">
-      &copy;2020, Jarry Shaw.
+      &copy;2020-2021, Jarry Shaw.
       
     </div>
 
