@@ -71,6 +71,7 @@ templates_path = ['_templates']
 # This pattern also affects html_static_path and html_extra_path.
 exclude_patterns = []
 
+#set_type_checking_flag = True
 
 # -- Options for HTML output -------------------------------------------------
 

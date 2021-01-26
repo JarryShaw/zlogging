@@ -18,7 +18,7 @@ if TYPE_CHECKING:
     from collections import OrderedDict
     from typing import Any, Dict, List, Optional, Tuple, Type
 
-    from .types import BaseType
+    from zlogging.types import BaseType
 
 
 class Model(metaclass=abc.ABCMeta):

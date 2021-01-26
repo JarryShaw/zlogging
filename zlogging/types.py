@@ -1684,7 +1684,7 @@ class RecordType(_VariadicType):
                 raise ZeekValueError('invalid element type of field %r: %s' % (field, type(expanded_type).__name__))
         for field, element_type in element_mapping.items():
             if not isinstance(element_type, (_SimpleType, _GenericType)):
-                if isinstance(element_type, type) and issubclass(element_type, _SimpleType):  # type: ignore[unreachable] # pylint: disable=line-too-long
+                if isinstance(element_type, type) and issubclass(element_type, _SimpleType):  # pylint: disable=line-too-long
                     element_type = element_type(empty_field=empty_field, unset_field=unset_field, set_separator=set_separator)  # pylint: disable=line-too-long
                 else:
                     raise ZeekValueError('invalid element type of field %r: %s' % (field, type(element_type).__name__))

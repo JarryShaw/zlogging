@@ -28,15 +28,17 @@ if TYPE_CHECKING:
     from zlogging.types import BaseType, _SimpleType
 
 
-def _deprecated(zeek_type: '_T') -> '_T':
+def _deprecated(bro_type: '_T') -> '_T':
     """Use of ``'bro'`` is deprecated, please use ``'zeek'`` instead."""
-    class DeprecatedType(zeek_type):  # type: ignore[misc,valid-type]
+    name = bro_type.__name__
+
+    class DeprecatedType(bro_type):  # type: ignore[misc,valid-type]
         def __init__(self, *args: 'Any', **kwargs: 'Any') -> None:
-            warnings.warn("Use of 'bro_%(name)s' is deprecated. "
-                          "Please use 'zeek_%(name)s' instead." % dict(name=zeek_type), BroDeprecationWarning)
+            warnings.warn(f"Use of 'bro_{name}' is deprecated. "
+                          f"Please use 'zeek_{name}' instead.", BroDeprecationWarning)
             super().__init__(*args, **kwargs)
 
-    DeprecatedType.__doc__ = zeek_type.__doc__
+    DeprecatedType.__doc__ = bro_type.__doc__
     return DeprecatedType  # type: ignore[return-value]
 
 

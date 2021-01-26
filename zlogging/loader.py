@@ -36,9 +36,9 @@ if TYPE_CHECKING:
 
     from typing_extensions import Literal
 
-    from ._data import Info
-    from .model import Model
-    from .types import _SimpleType
+    from zlogging._data import Info
+    from zlogging.model import Model
+    from zlogging.types import _SimpleType
 
     AnyStr = Union[str, bytes]
 
