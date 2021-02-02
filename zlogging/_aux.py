@@ -27,17 +27,11 @@ __all__ = ['readline', 'decimal_toascii', 'float_toascii', 'unicode_escape', 'ex
 
 
 @overload
-def readline(file: 'BinaryFile', seperator: bytes = b'\x09', maxsplit: int = -1) -> 'List[bytes]': ...  # pylint: disable=redefined-outer-name
+def readline(file: 'BinaryFile', seperator: bytes = ..., maxsplit: int = ...,  # type: ignore[misc]
+             decode: 'Literal[False]' = ...) -> 'List[bytes]': ...  # pylint: disable=redefined-outer-name
 @overload
-def readline(file: 'BinaryFile', seperator: bytes, decode: 'Literal[False]') -> 'List[bytes]': ...  # pylint: disable=redefined-outer-name
-@overload
-def readline(file: 'BinaryFile', seperator: bytes, decode: 'Literal[True]') -> 'List[str]': ...  # pylint: disable=redefined-outer-name
-@overload
-def readline(file: 'BinaryFile', seperator: bytes, maxsplit: int,
-             decode: 'Literal[False]') -> 'List[bytes]': ...  # pylint: disable=redefined-outer-name
-@overload
-def readline(file: 'BinaryFile', seperator: bytes, maxsplit: int,
-             decode: 'Literal[True]') -> 'List[str]': ...  # pylint: disable=redefined-outer-name
+def readline(file: 'BinaryFile', seperator: bytes = ..., maxsplit: int = ...,
+             decode: 'Literal[True]' = ...) -> 'List[str]': ...  # pylint: disable=redefined-outer-name
 def readline(file: 'BinaryFile', separator: bytes = b'\x09',  # type: ignore[misc]
              maxsplit: int = -1, decode: bool = False) -> 'Union[List[str], List[bytes]]':  # pylint: disable=redefined-outer-name
     """Wrapper for :meth:`file.readline` function.
