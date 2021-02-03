@@ -4,6 +4,19 @@
 # list see the documentation:
 # https://www.sphinx-doc.org/en/master/usage/configuration.html
 
+import importlib
+import logging
+import sys
+import typing
+from typing import TYPE_CHECKING
+
+if TYPE_CHECKING:
+    from typing import List
+    from sphinx.application import Sphinx
+
+logger = logging.getLogger(__name__)
+#logging.basicConfig(level=logging.DEBUG)
+
 # -- Path setup --------------------------------------------------------------
 
 # If extensions (or modules to document with autodoc) are in another directory,
@@ -69,7 +82,7 @@ templates_path = ['_templates']
 # List of patterns, relative to source directory, that match files and
 # directories to ignore when looking for source files.
 # This pattern also affects html_static_path and html_extra_path.
-exclude_patterns = []
+exclude_patterns = []  # type: List[str]
 
 #set_type_checking_flag = True
 
@@ -99,3 +112,14 @@ html_theme_options = {
     #'travis_button': True,
     #'codecov_button': True,
 }
+
+
+def setup(app: 'Sphinx') -> None:  # pylint: disable=unused-argument
+    typing.TYPE_CHECKING = True
+    for name, module in sys.modules.copy().items():
+        if 'tekid' not in name:
+            continue
+
+        logger.info('reloading module: %(name)s', name=name)
+        importlib.reload(module)
+        logger.info('reloaded module: %(name)s', name=name)
