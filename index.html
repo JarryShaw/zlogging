@@ -36,18 +36,18 @@
 <div class="toctree-wrapper compound">
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="dumper.html">Dumpers</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="dumper.html#predefined-dumpers">Predefined Dumpers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dumper.html#module-zlogging.dumper">Predefined Dumpers</a></li>
 <li class="toctree-l2"><a class="reference internal" href="dumper.html#abstract-base-dumpers">Abstract Base Dumpers</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="loader.html">Loaders</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="loader.html#predefined-loaders">Predefined Loaders</a></li>
+<li class="toctree-l2"><a class="reference internal" href="loader.html#module-zlogging.loader">Predefined Loaders</a></li>
 <li class="toctree-l2"><a class="reference internal" href="loader.html#abstract-base-loaders">Abstract Base Loaders</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="model.html">Data Model</a></li>
 <li class="toctree-l1"><a class="reference internal" href="types.html">Data Types</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="types.html#bro-zeek-types">Bro/Zeek Types</a></li>
+<li class="toctree-l2"><a class="reference internal" href="types.html#module-zlogging.types">Bro/Zeek Types</a></li>
 <li class="toctree-l2"><a class="reference internal" href="types.html#abstract-base-types">Abstract Base Types</a></li>
 </ul>
 </li>
@@ -57,15 +57,41 @@
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="_data.html">Data Classes</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="_data.html#predefined-data-classes">Predefined Data Classes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_data.html#module-zlogging._data">Predefined Data Classes</a></li>
 <li class="toctree-l2"><a class="reference internal" href="_data.html#abstract-base-data-classes">Abstract Base Data Classes</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="_exc.html">Exceptions &amp; Warnings</a></li>
 <li class="toctree-l1"><a class="reference internal" href="_aux.html">Internal Auxiliary Functions</a></li>
-<li class="toctree-l1"><a class="reference internal" href="enum.html">Enum Namespace</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="enum.html#module-contents">Module Contents</a></li>
-<li class="toctree-l2"><a class="reference internal" href="enum.html#namespaces">Namespaces</a></li>
+<li class="toctree-l1"><a class="reference internal" href="enum/index.html">Enum Namespace</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="enum/zeek.html"><code class="docutils literal notranslate"><span class="pre">zeek</span></code> Namespace</a></li>
+<li class="toctree-l2"><a class="reference internal" href="enum/Broker.html"><code class="docutils literal notranslate"><span class="pre">Broker</span></code> Namespace</a></li>
+<li class="toctree-l2"><a class="reference internal" href="enum/Cluster.html"><code class="docutils literal notranslate"><span class="pre">Cluster</span></code> Namespace</a></li>
+<li class="toctree-l2"><a class="reference internal" href="enum/DCE_RPC.html"><code class="docutils literal notranslate"><span class="pre">DCE_RPC</span></code> Namespace</a></li>
+<li class="toctree-l2"><a class="reference internal" href="enum/HTTP.html"><code class="docutils literal notranslate"><span class="pre">HTTP</span></code> Namespace</a></li>
+<li class="toctree-l2"><a class="reference internal" href="enum/Input.html"><code class="docutils literal notranslate"><span class="pre">Input</span></code> Namespace</a></li>
+<li class="toctree-l2"><a class="reference internal" href="enum/Intel.html"><code class="docutils literal notranslate"><span class="pre">Intel</span></code> Namespace</a></li>
+<li class="toctree-l2"><a class="reference internal" href="enum/JSON.html"><code class="docutils literal notranslate"><span class="pre">JSON</span></code> Namespace</a></li>
+<li class="toctree-l2"><a class="reference internal" href="enum/Known.html"><code class="docutils literal notranslate"><span class="pre">Known</span></code> Namespace</a></li>
+<li class="toctree-l2"><a class="reference internal" href="enum/LoadBalancing.html"><code class="docutils literal notranslate"><span class="pre">LoadBalancing</span></code> Namespace</a></li>
+<li class="toctree-l2"><a class="reference internal" href="enum/Log.html"><code class="docutils literal notranslate"><span class="pre">Log</span></code> Namespace</a></li>
+<li class="toctree-l2"><a class="reference internal" href="enum/MOUNT3.html"><code class="docutils literal notranslate"><span class="pre">MOUNT3</span></code> Namespace</a></li>
+<li class="toctree-l2"><a class="reference internal" href="enum/MQTT.html"><code class="docutils literal notranslate"><span class="pre">MQTT</span></code> Namespace</a></li>
+<li class="toctree-l2"><a class="reference internal" href="enum/NFS3.html"><code class="docutils literal notranslate"><span class="pre">NFS3</span></code> Namespace</a></li>
+<li class="toctree-l2"><a class="reference internal" href="enum/Notice.html"><code class="docutils literal notranslate"><span class="pre">Notice</span></code> Namespace</a></li>
+<li class="toctree-l2"><a class="reference internal" href="enum/OpenFlow.html"><code class="docutils literal notranslate"><span class="pre">OpenFlow</span></code> Namespace</a></li>
+<li class="toctree-l2"><a class="reference internal" href="enum/NetControl.html"><code class="docutils literal notranslate"><span class="pre">NetControl</span></code> Namespace</a></li>
+<li class="toctree-l2"><a class="reference internal" href="enum/ProtocolDetector.html"><code class="docutils literal notranslate"><span class="pre">ProtocolDetector</span></code> Namespace</a></li>
+<li class="toctree-l2"><a class="reference internal" href="enum/Reporter.html"><code class="docutils literal notranslate"><span class="pre">Reporter</span></code> Namespace</a></li>
+<li class="toctree-l2"><a class="reference internal" href="enum/SMB.html"><code class="docutils literal notranslate"><span class="pre">SMB</span></code> Namespace</a></li>
+<li class="toctree-l2"><a class="reference internal" href="enum/SOCKS.html"><code class="docutils literal notranslate"><span class="pre">SOCKS</span></code> Namespace</a></li>
+<li class="toctree-l2"><a class="reference internal" href="enum/SSL.html"><code class="docutils literal notranslate"><span class="pre">SSL</span></code> Namespace</a></li>
+<li class="toctree-l2"><a class="reference internal" href="enum/Signatures.html"><code class="docutils literal notranslate"><span class="pre">Signatures</span></code> Namespace</a></li>
+<li class="toctree-l2"><a class="reference internal" href="enum/Software.html"><code class="docutils literal notranslate"><span class="pre">Software</span></code> Namespace</a></li>
+<li class="toctree-l2"><a class="reference internal" href="enum/SumStats.html"><code class="docutils literal notranslate"><span class="pre">SumStats</span></code> Namespace</a></li>
+<li class="toctree-l2"><a class="reference internal" href="enum/Tunnel.html"><code class="docutils literal notranslate"><span class="pre">Tunnel</span></code> Namespace</a></li>
+<li class="toctree-l2"><a class="reference internal" href="enum/Weird.html"><code class="docutils literal notranslate"><span class="pre">Weird</span></code> Namespace</a></li>
+<li class="toctree-l2"><a class="reference internal" href="enum/ZeekygenExample.html"><code class="docutils literal notranslate"><span class="pre">ZeekygenExample</span></code> Namespace</a></li>
 </ul>
 </li>
 </ul>
@@ -127,8 +153,8 @@ Bro/Zeek logging framework, i.e. ASCII and JSON.</p>
 <div class="section" id="how-to-load-parse-a-log-file">
 <h3>How to Load/Parse a Log File?<a class="headerlink" href="#how-to-load-parse-a-log-file" title="Permalink to this headline">¶</a></h3>
 <p>To load (parse) a log file generically, i.e. when you don’t know what format
-the log file is, you can simple call the <code class="xref py py-func docutils literal notranslate"><span class="pre">parse()</span></code>,
-<code class="xref py py-func docutils literal notranslate"><span class="pre">load()</span></code>, or <code class="xref py py-func docutils literal notranslate"><span class="pre">loads()</span></code> functions:</p>
+the log file is, you can simple call the <a class="reference internal" href="loader.html#zlogging.loader.parse" title="zlogging.loader.parse"><code class="xref py py-func docutils literal notranslate"><span class="pre">parse()</span></code></a>,
+<a class="reference internal" href="loader.html#zlogging.loader.load" title="zlogging.loader.load"><code class="xref py py-func docutils literal notranslate"><span class="pre">load()</span></code></a>, or <a class="reference internal" href="loader.html#zlogging.loader.loads" title="zlogging.loader.loads"><code class="xref py py-func docutils literal notranslate"><span class="pre">loads()</span></code></a> functions:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># to parse log at filename</span>
 <span class="o">&gt;&gt;&gt;</span> <span class="n">parse</span><span class="p">(</span><span class="s1">&#39;path/to/log&#39;</span><span class="p">)</span>
 <span class="c1"># to load log from a file object</span>
@@ -141,28 +167,28 @@ the log file is, you can simple call the <code class="xref py py-func docutils l
 </div>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>When calling <code class="xref py py-func docutils literal notranslate"><span class="pre">load()</span></code>, the file object must be opened
+<p>When calling <a class="reference internal" href="loader.html#zlogging.loader.load" title="zlogging.loader.load"><code class="xref py py-func docutils literal notranslate"><span class="pre">load()</span></code></a>, the file object must be opened
 in binary mode.</p>
-<p>When calling <code class="xref py py-func docutils literal notranslate"><span class="pre">loads()</span></code>, if the <code class="docutils literal notranslate"><span class="pre">data</span></code> suplied is an
+<p>When calling <a class="reference internal" href="loader.html#zlogging.loader.loads" title="zlogging.loader.loads"><code class="xref py py-func docutils literal notranslate"><span class="pre">loads()</span></code></a>, if the <code class="docutils literal notranslate"><span class="pre">data</span></code> suplied is an
 encoded string (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a>), the function will first try to decode it as a
 bytestring (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(in Python v3.9)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">bytes</span></code></a>) with <code class="docutils literal notranslate"><span class="pre">'ascii'</span></code> encoding.</p>
 </div>
 <p>If you do know the format, you may call the specified functions for each
-format, e.g. <code class="xref py py-func docutils literal notranslate"><span class="pre">parse_ascii()</span></code> and
-<code class="xref py py-func docutils literal notranslate"><span class="pre">parse_json()</span></code>, etc.</p>
+format, e.g. <a class="reference internal" href="loader.html#zlogging.loader.parse_ascii" title="zlogging.loader.parse_ascii"><code class="xref py py-func docutils literal notranslate"><span class="pre">parse_ascii()</span></code></a> and
+<a class="reference internal" href="loader.html#zlogging.loader.parse_json" title="zlogging.loader.parse_json"><code class="xref py py-func docutils literal notranslate"><span class="pre">parse_json()</span></code></a>, etc.</p>
 <div class="admonition seealso">
 <p class="admonition-title">See also</p>
 <ul class="simple">
-<li><p><code class="xref py py-func docutils literal notranslate"><span class="pre">parse_ascii()</span></code></p></li>
-<li><p><code class="xref py py-func docutils literal notranslate"><span class="pre">parse_json()</span></code></p></li>
-<li><p><code class="xref py py-func docutils literal notranslate"><span class="pre">load_ascii()</span></code></p></li>
-<li><p><code class="xref py py-func docutils literal notranslate"><span class="pre">load_json()</span></code></p></li>
-<li><p><code class="xref py py-func docutils literal notranslate"><span class="pre">loads_ascii()</span></code></p></li>
-<li><p><code class="xref py py-func docutils literal notranslate"><span class="pre">loads_json()</span></code></p></li>
+<li><p><a class="reference internal" href="loader.html#zlogging.loader.parse_ascii" title="zlogging.loader.parse_ascii"><code class="xref py py-func docutils literal notranslate"><span class="pre">parse_ascii()</span></code></a></p></li>
+<li><p><a class="reference internal" href="loader.html#zlogging.loader.parse_json" title="zlogging.loader.parse_json"><code class="xref py py-func docutils literal notranslate"><span class="pre">parse_json()</span></code></a></p></li>
+<li><p><a class="reference internal" href="loader.html#zlogging.loader.load_ascii" title="zlogging.loader.load_ascii"><code class="xref py py-func docutils literal notranslate"><span class="pre">load_ascii()</span></code></a></p></li>
+<li><p><a class="reference internal" href="loader.html#zlogging.loader.load_json" title="zlogging.loader.load_json"><code class="xref py py-func docutils literal notranslate"><span class="pre">load_json()</span></code></a></p></li>
+<li><p><a class="reference internal" href="loader.html#zlogging.loader.loads_ascii" title="zlogging.loader.loads_ascii"><code class="xref py py-func docutils literal notranslate"><span class="pre">loads_ascii()</span></code></a></p></li>
+<li><p><a class="reference internal" href="loader.html#zlogging.loader.loads_json" title="zlogging.loader.loads_json"><code class="xref py py-func docutils literal notranslate"><span class="pre">loads_json()</span></code></a></p></li>
 </ul>
 </div>
 <p>If you would like to customise your own parser, just subclass
-<code class="xref py py-class docutils literal notranslate"><span class="pre">BaseParser</span></code> and implement your own ideas.</p>
+<a class="reference internal" href="loader.html#zlogging.loader.BaseParser" title="zlogging.loader.BaseParser"><code class="xref py py-class docutils literal notranslate"><span class="pre">BaseParser</span></code></a> and implement your own ideas.</p>
 </div>
 <div class="section" id="how-to-dump-write-a-log-file">
 <h3>How to Dump/Write a Log File?<a class="headerlink" href="#how-to-dump-write-a-log-file" title="Permalink to this headline">¶</a></h3>
@@ -170,16 +196,16 @@ format, e.g. <code class="xref py py-func docutils literal notranslate"><span cl
 first. Just like in the Bro/Zeek script language, when customise logging, you
 need to notify the logging framework with a new log stream. Here, in
 <code class="docutils literal notranslate"><span class="pre">ZLogging</span></code>, we introduced <strong>data model</strong> for the same purpose.</p>
-<p>A <strong>data model</strong> is a subclass of <code class="xref py py-class docutils literal notranslate"><span class="pre">Model</span></code> with fields
+<p>A <strong>data model</strong> is a subclass of <a class="reference internal" href="model.html#zlogging.model.Model" title="zlogging.model.Model"><code class="xref py py-class docutils literal notranslate"><span class="pre">Model</span></code></a> with fields
 and data types declared. A typical <strong>data model</strong> can be as following:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">MyLog</span><span class="p">(</span><span class="n">Model</span><span class="p">):</span>
     <span class="n">field_one</span> <span class="o">=</span> <span class="n">StringType</span><span class="p">()</span>
     <span class="n">field_two</span> <span class="o">=</span> <span class="n">SetType</span><span class="p">(</span><span class="n">element_type</span><span class="o">=</span><span class="n">PortType</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>where <code class="docutils literal notranslate"><span class="pre">field_one</span></code> is <code class="docutils literal notranslate"><span class="pre">string</span></code> type, i.e. <code class="xref py py-class docutils literal notranslate"><span class="pre">StringType</span></code>;
-and <code class="docutils literal notranslate"><span class="pre">field_two</span></code> is <code class="docutils literal notranslate"><span class="pre">set[port]</span></code> types, i.e. <code class="xref py py-class docutils literal notranslate"><span class="pre">SetType</span></code>
-of <code class="xref py py-class docutils literal notranslate"><span class="pre">PortType</span></code>.</p>
+<p>where <code class="docutils literal notranslate"><span class="pre">field_one</span></code> is <code class="docutils literal notranslate"><span class="pre">string</span></code> type, i.e. <a class="reference internal" href="types.html#zlogging.types.StringType" title="zlogging.types.StringType"><code class="xref py py-class docutils literal notranslate"><span class="pre">StringType</span></code></a>;
+and <code class="docutils literal notranslate"><span class="pre">field_two</span></code> is <code class="docutils literal notranslate"><span class="pre">set[port]</span></code> types, i.e. <a class="reference internal" href="types.html#zlogging.types.SetType" title="zlogging.types.SetType"><code class="xref py py-class docutils literal notranslate"><span class="pre">SetType</span></code></a>
+of <a class="reference internal" href="types.html#zlogging.types.PortType" title="zlogging.types.PortType"><code class="xref py py-class docutils literal notranslate"><span class="pre">PortType</span></code></a>.</p>
 <p>Or you may use type annotations as <span class="target" id="index-0"></span><a class="pep reference external" href="https://www.python.org/dev/peps/pep-0484"><strong>PEP 484</strong></a> introduced when declaring <strong>data models</strong>.
 All available type hints can be found in <code class="xref py py-mod docutils literal notranslate"><span class="pre">zlogging.typing</span></code>:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">MyLog</span><span class="p">(</span><span class="n">Model</span><span class="p">):</span>
@@ -189,7 +215,7 @@ All available type hints can be found in <code class="xref py py-mod docutils li
 </div>
 <div class="admonition seealso">
 <p class="admonition-title">See also</p>
-<p>See <code class="xref py py-class docutils literal notranslate"><span class="pre">BaseType</span></code> and <code class="xref py py-class docutils literal notranslate"><span class="pre">Model</span></code>
+<p>See <a class="reference internal" href="types.html#zlogging.types.BaseType" title="zlogging.types.BaseType"><code class="xref py py-class docutils literal notranslate"><span class="pre">BaseType</span></code></a> and <a class="reference internal" href="model.html#zlogging.model.Model" title="zlogging.model.Model"><code class="xref py py-class docutils literal notranslate"><span class="pre">Model</span></code></a>
 for more information about the data types and data model.</p>
 </div>
 <p>After declaration of your <strong>data model</strong>, you can know dump (write) your log
@@ -197,12 +223,12 @@ file with the corresponding functions.</p>
 <div class="admonition seealso">
 <p class="admonition-title">See also</p>
 <ul class="simple">
-<li><p><code class="xref py py-func docutils literal notranslate"><span class="pre">write_ascii()</span></code></p></li>
-<li><p><code class="xref py py-func docutils literal notranslate"><span class="pre">write_json()</span></code></p></li>
-<li><p><code class="xref py py-func docutils literal notranslate"><span class="pre">dump_ascii()</span></code></p></li>
-<li><p><code class="xref py py-func docutils literal notranslate"><span class="pre">dump_json()</span></code></p></li>
-<li><p><code class="xref py py-func docutils literal notranslate"><span class="pre">dumps_ascii()</span></code></p></li>
-<li><p><code class="xref py py-func docutils literal notranslate"><span class="pre">dumps_json()</span></code></p></li>
+<li><p><a class="reference internal" href="dumper.html#zlogging.dumper.write_ascii" title="zlogging.dumper.write_ascii"><code class="xref py py-func docutils literal notranslate"><span class="pre">write_ascii()</span></code></a></p></li>
+<li><p><a class="reference internal" href="dumper.html#zlogging.dumper.write_json" title="zlogging.dumper.write_json"><code class="xref py py-func docutils literal notranslate"><span class="pre">write_json()</span></code></a></p></li>
+<li><p><a class="reference internal" href="dumper.html#zlogging.dumper.dump_ascii" title="zlogging.dumper.dump_ascii"><code class="xref py py-func docutils literal notranslate"><span class="pre">dump_ascii()</span></code></a></p></li>
+<li><p><a class="reference internal" href="dumper.html#zlogging.dumper.dump_json" title="zlogging.dumper.dump_json"><code class="xref py py-func docutils literal notranslate"><span class="pre">dump_json()</span></code></a></p></li>
+<li><p><a class="reference internal" href="dumper.html#zlogging.dumper.dumps_ascii" title="zlogging.dumper.dumps_ascii"><code class="xref py py-func docutils literal notranslate"><span class="pre">dumps_ascii()</span></code></a></p></li>
+<li><p><a class="reference internal" href="dumper.html#zlogging.dumper.dumps_json" title="zlogging.dumper.dumps_json"><code class="xref py py-func docutils literal notranslate"><span class="pre">dumps_json()</span></code></a></p></li>
 </ul>
 </div>
 <p>If you would like to customise your own writer, just subclass
@@ -257,7 +283,7 @@ file with the corresponding functions.</p>
 <li class="toctree-l1"><a class="reference internal" href="_data.html">Data Classes</a></li>
 <li class="toctree-l1"><a class="reference internal" href="_exc.html">Exceptions &amp; Warnings</a></li>
 <li class="toctree-l1"><a class="reference internal" href="_aux.html">Internal Auxiliary Functions</a></li>
-<li class="toctree-l1"><a class="reference internal" href="enum.html">Enum Namespace</a></li>
+<li class="toctree-l1"><a class="reference internal" href="enum/index.html">Enum Namespace</a></li>
 </ul>
 
 <div class="relations">

@@ -1,0 +1,557 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Log Namespace &#8212; ZLogging 0.1.1 documentation</title>
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="MOUNT3 Namespace" href="MOUNT3.html" />
+    <link rel="prev" title="LoadBalancing Namespace" href="LoadBalancing.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="log-namespace">
+<h1><code class="docutils literal notranslate"><span class="pre">Log</span></code> Namespace<a class="headerlink" href="#log-namespace" title="Permalink to this headline">¶</a></h1>
+<p>Namespace: <code class="docutils literal notranslate"><span class="pre">Log</span></code>.</p>
+<dl class="py class">
+<dt>
+<em class="property">class </em><code class="sig-prename descclassname">zlogging.enum.Log.</code><code class="sig-name descname">ID</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">value</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/zlogging/enum/Log.html#ID"><span class="viewcode-link">[source]</span></a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/enum.html#enum.IntFlag" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">enum.IntFlag</span></code></a></p>
+<p>Enum: <code class="docutils literal notranslate"><span class="pre">Log::ID</span></code>.</p>
+<p>Type that defines an ID unique to each log stream. Scripts creating new log streams need to redef
+this enum to add their own specific log ID. The log ID implicitly determines the default name of the
+generated log file.</p>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><a class="reference external" href="https://docs.zeek.org/en/stable/scripts/base/frameworks/logging/main.zeek.html#type-Log::ID">base/frameworks/logging/main.zeek</a></p>
+</div>
+<dl class="py attribute">
+<dt>
+<code class="sig-name descname">UNKNOWN</code><em class="property"> = 1</em></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt>
+<code class="sig-name descname">PRINTLOG</code><em class="property"> = 2</em></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt>
+<code class="sig-name descname">Broker__LOG</code><em class="property"> = 4</em></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt>
+<code class="sig-name descname">Files__LOG</code><em class="property"> = 8</em></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt>
+<code class="sig-name descname">Reporter__LOG</code><em class="property"> = 16</em></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt>
+<code class="sig-name descname">Cluster__LOG</code><em class="property"> = 32</em></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt>
+<code class="sig-name descname">Notice__LOG</code><em class="property"> = 64</em></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt>
+<code class="sig-name descname">Notice__ALARM_LOG</code><em class="property"> = 128</em></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt>
+<code class="sig-name descname">Weird__LOG</code><em class="property"> = 256</em></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt>
+<code class="sig-name descname">DPD__LOG</code><em class="property"> = 512</em></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt>
+<code class="sig-name descname">Signatures__LOG</code><em class="property"> = 1024</em></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt>
+<code class="sig-name descname">PacketFilter__LOG</code><em class="property"> = 2048</em></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt>
+<code class="sig-name descname">Software__LOG</code><em class="property"> = 4096</em></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt>
+<code class="sig-name descname">Intel__LOG</code><em class="property"> = 8192</em></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt>
+<code class="sig-name descname">Config__LOG</code><em class="property"> = 16384</em></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt>
+<code class="sig-name descname">Tunnel__LOG</code><em class="property"> = 32768</em></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt>
+<code class="sig-name descname">OpenFlow__LOG</code><em class="property"> = 65536</em></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt>
+<code class="sig-name descname">NetControl__LOG</code><em class="property"> = 131072</em></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt>
+<code class="sig-name descname">NetControl__DROP</code><em class="property"> = 262144</em></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt>
+<code class="sig-name descname">NetControl__SHUNT</code><em class="property"> = 524288</em></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt>
+<code class="sig-name descname">Conn__LOG</code><em class="property"> = 1048576</em></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt>
+<code class="sig-name descname">DCE_RPC__LOG</code><em class="property"> = 2097152</em></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt>
+<code class="sig-name descname">DHCP__LOG</code><em class="property"> = 4194304</em></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt>
+<code class="sig-name descname">DNP3__LOG</code><em class="property"> = 8388608</em></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt>
+<code class="sig-name descname">DNS__LOG</code><em class="property"> = 16777216</em></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt>
+<code class="sig-name descname">FTP__LOG</code><em class="property"> = 33554432</em></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt>
+<code class="sig-name descname">SSL__LOG</code><em class="property"> = 67108864</em></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt>
+<code class="sig-name descname">X509__LOG</code><em class="property"> = 134217728</em></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt>
+<code class="sig-name descname">HTTP__LOG</code><em class="property"> = 268435456</em></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt>
+<code class="sig-name descname">IRC__LOG</code><em class="property"> = 536870912</em></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt>
+<code class="sig-name descname">KRB__LOG</code><em class="property"> = 1073741824</em></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt>
+<code class="sig-name descname">Modbus__LOG</code><em class="property"> = 2147483648</em></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt>
+<code class="sig-name descname">mysql__LOG</code><em class="property"> = 4294967296</em></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt>
+<code class="sig-name descname">NTLM__LOG</code><em class="property"> = 8589934592</em></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt>
+<code class="sig-name descname">NTP__LOG</code><em class="property"> = 17179869184</em></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt>
+<code class="sig-name descname">RADIUS__LOG</code><em class="property"> = 34359738368</em></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt>
+<code class="sig-name descname">RDP__LOG</code><em class="property"> = 68719476736</em></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt>
+<code class="sig-name descname">RFB__LOG</code><em class="property"> = 137438953472</em></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt>
+<code class="sig-name descname">SIP__LOG</code><em class="property"> = 274877906944</em></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt>
+<code class="sig-name descname">SNMP__LOG</code><em class="property"> = 549755813888</em></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt>
+<code class="sig-name descname">SMB__AUTH_LOG</code><em class="property"> = 1099511627776</em></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt>
+<code class="sig-name descname">SMB__MAPPING_LOG</code><em class="property"> = 2199023255552</em></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt>
+<code class="sig-name descname">SMB__FILES_LOG</code><em class="property"> = 4398046511104</em></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt>
+<code class="sig-name descname">SMTP__LOG</code><em class="property"> = 8796093022208</em></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt>
+<code class="sig-name descname">SOCKS__LOG</code><em class="property"> = 17592186044416</em></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt>
+<code class="sig-name descname">SSH__LOG</code><em class="property"> = 35184372088832</em></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt>
+<code class="sig-name descname">Syslog__LOG</code><em class="property"> = 70368744177664</em></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt>
+<code class="sig-name descname">PE__LOG</code><em class="property"> = 140737488355328</em></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt>
+<code class="sig-name descname">NetControl__CATCH_RELEASE</code><em class="property"> = 281474976710656</em></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt>
+<code class="sig-name descname">Unified2__LOG</code><em class="property"> = 562949953421312</em></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt>
+<code class="sig-name descname">OCSP__LOG</code><em class="property"> = 1125899906842624</em></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt>
+<code class="sig-name descname">Barnyard2__LOG</code><em class="property"> = 2251799813685248</em></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt>
+<code class="sig-name descname">CaptureLoss__LOG</code><em class="property"> = 4503599627370496</em></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt>
+<code class="sig-name descname">Traceroute__LOG</code><em class="property"> = 9007199254740992</em></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt>
+<code class="sig-name descname">LoadedScripts__LOG</code><em class="property"> = 18014398509481984</em></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt>
+<code class="sig-name descname">Stats__LOG</code><em class="property"> = 36028797018963968</em></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt>
+<code class="sig-name descname">WeirdStats__LOG</code><em class="property"> = 72057594037927936</em></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt>
+<code class="sig-name descname">Known__HOSTS_LOG</code><em class="property"> = 144115188075855872</em></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt>
+<code class="sig-name descname">Known__SERVICES_LOG</code><em class="property"> = 288230376151711744</em></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt>
+<code class="sig-name descname">Known__MODBUS_LOG</code><em class="property"> = 576460752303423488</em></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt>
+<code class="sig-name descname">Modbus__REGISTER_CHANGE_LOG</code><em class="property"> = 1152921504606846976</em></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt>
+<code class="sig-name descname">MQTT__CONNECT_LOG</code><em class="property"> = 2305843009213693952</em></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt>
+<code class="sig-name descname">MQTT__SUBSCRIBE_LOG</code><em class="property"> = 4611686018427387904</em></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt>
+<code class="sig-name descname">MQTT__PUBLISH_LOG</code><em class="property"> = 9223372036854775808</em></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt>
+<code class="sig-name descname">SMB__CMD_LOG</code><em class="property"> = 18446744073709551616</em></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt>
+<code class="sig-name descname">Known__CERTS_LOG</code><em class="property"> = 36893488147419103232</em></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt>
+<code class="sig-name descname">ZeekygenExample__LOG</code><em class="property"> = 73786976294838206464</em></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt>
+<em class="property">class </em><code class="sig-prename descclassname">zlogging.enum.Log.</code><code class="sig-name descname">PrintLogType</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">value</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/zlogging/enum/Log.html#PrintLogType"><span class="viewcode-link">[source]</span></a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/enum.html#enum.IntFlag" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">enum.IntFlag</span></code></a></p>
+<p>Enum: <code class="docutils literal notranslate"><span class="pre">Log::PrintLogType</span></code>.</p>
+<p>Configurations for <code class="docutils literal notranslate"><span class="pre">Log::print_to_log</span></code>.</p>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><a class="reference external" href="https://docs.zeek.org/en/stable/scripts/base/frameworks/logging/main.zeek.html#type-Log::PrintLogType">base/frameworks/logging/main.zeek</a></p>
+</div>
+<dl class="py attribute">
+<dt>
+<code class="sig-name descname">REDIRECT_NONE</code><em class="property"> = 1</em></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt>
+<code class="sig-name descname">REDIRECT_STDOUT</code><em class="property"> = 2</em></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt>
+<code class="sig-name descname">REDIRECT_ALL</code><em class="property"> = 4</em></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt>
+<em class="property">class </em><code class="sig-prename descclassname">zlogging.enum.Log.</code><code class="sig-name descname">Writer</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">value</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/zlogging/enum/Log.html#Writer"><span class="viewcode-link">[source]</span></a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/enum.html#enum.IntFlag" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">enum.IntFlag</span></code></a></p>
+<p>Enum: <code class="docutils literal notranslate"><span class="pre">Log::Writer</span></code>.</p>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><a class="reference external" href="https://docs.zeek.org/en/stable/scripts/base/frameworks/logging/main.zeek.html#type-Log::Writer">base/frameworks/logging/main.zeek</a></p>
+</div>
+<dl class="py attribute">
+<dt>
+<code class="sig-name descname">WRITER_ASCII</code><em class="property"> = 1</em></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt>
+<code class="sig-name descname">WRITER_NONE</code><em class="property"> = 2</em></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt>
+<code class="sig-name descname">WRITER_SQLITE</code><em class="property"> = 4</em></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../index.html">ZLogging</a></h1>
+
+
+
+
+
+
+<p>
+<iframe src="https://ghbtns.com/github-btn.html?user=JarryShaw&repo=zlogging&type=star&count=true&size=large&v=2"
+  allowtransparency="true" frameborder="0" scrolling="0" width="200px" height="35px"></iframe>
+</p>
+
+
+
+
+
+<h3>Navigation</h3>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../dumper.html">Dumpers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../loader.html">Loaders</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../model.html">Data Model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../types.html">Data Types</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../typing.html">Typing Annotations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../_data.html">Data Classes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../_exc.html">Exceptions &amp; Warnings</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../_aux.html">Internal Auxiliary Functions</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Enum Namespace</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="zeek.html"><code class="docutils literal notranslate"><span class="pre">zeek</span></code> Namespace</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Broker.html"><code class="docutils literal notranslate"><span class="pre">Broker</span></code> Namespace</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Cluster.html"><code class="docutils literal notranslate"><span class="pre">Cluster</span></code> Namespace</a></li>
+<li class="toctree-l2"><a class="reference internal" href="DCE_RPC.html"><code class="docutils literal notranslate"><span class="pre">DCE_RPC</span></code> Namespace</a></li>
+<li class="toctree-l2"><a class="reference internal" href="HTTP.html"><code class="docutils literal notranslate"><span class="pre">HTTP</span></code> Namespace</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Input.html"><code class="docutils literal notranslate"><span class="pre">Input</span></code> Namespace</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Intel.html"><code class="docutils literal notranslate"><span class="pre">Intel</span></code> Namespace</a></li>
+<li class="toctree-l2"><a class="reference internal" href="JSON.html"><code class="docutils literal notranslate"><span class="pre">JSON</span></code> Namespace</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Known.html"><code class="docutils literal notranslate"><span class="pre">Known</span></code> Namespace</a></li>
+<li class="toctree-l2"><a class="reference internal" href="LoadBalancing.html"><code class="docutils literal notranslate"><span class="pre">LoadBalancing</span></code> Namespace</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#"><code class="docutils literal notranslate"><span class="pre">Log</span></code> Namespace</a></li>
+<li class="toctree-l2"><a class="reference internal" href="MOUNT3.html"><code class="docutils literal notranslate"><span class="pre">MOUNT3</span></code> Namespace</a></li>
+<li class="toctree-l2"><a class="reference internal" href="MQTT.html"><code class="docutils literal notranslate"><span class="pre">MQTT</span></code> Namespace</a></li>
+<li class="toctree-l2"><a class="reference internal" href="NFS3.html"><code class="docutils literal notranslate"><span class="pre">NFS3</span></code> Namespace</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Notice.html"><code class="docutils literal notranslate"><span class="pre">Notice</span></code> Namespace</a></li>
+<li class="toctree-l2"><a class="reference internal" href="OpenFlow.html"><code class="docutils literal notranslate"><span class="pre">OpenFlow</span></code> Namespace</a></li>
+<li class="toctree-l2"><a class="reference internal" href="NetControl.html"><code class="docutils literal notranslate"><span class="pre">NetControl</span></code> Namespace</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ProtocolDetector.html"><code class="docutils literal notranslate"><span class="pre">ProtocolDetector</span></code> Namespace</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Reporter.html"><code class="docutils literal notranslate"><span class="pre">Reporter</span></code> Namespace</a></li>
+<li class="toctree-l2"><a class="reference internal" href="SMB.html"><code class="docutils literal notranslate"><span class="pre">SMB</span></code> Namespace</a></li>
+<li class="toctree-l2"><a class="reference internal" href="SOCKS.html"><code class="docutils literal notranslate"><span class="pre">SOCKS</span></code> Namespace</a></li>
+<li class="toctree-l2"><a class="reference internal" href="SSL.html"><code class="docutils literal notranslate"><span class="pre">SSL</span></code> Namespace</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Signatures.html"><code class="docutils literal notranslate"><span class="pre">Signatures</span></code> Namespace</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Software.html"><code class="docutils literal notranslate"><span class="pre">Software</span></code> Namespace</a></li>
+<li class="toctree-l2"><a class="reference internal" href="SumStats.html"><code class="docutils literal notranslate"><span class="pre">SumStats</span></code> Namespace</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Tunnel.html"><code class="docutils literal notranslate"><span class="pre">Tunnel</span></code> Namespace</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Weird.html"><code class="docutils literal notranslate"><span class="pre">Weird</span></code> Namespace</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ZeekygenExample.html"><code class="docutils literal notranslate"><span class="pre">ZeekygenExample</span></code> Namespace</a></li>
+</ul>
+</li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+  <li><a href="index.html">Enum Namespace</a><ul>
+      <li>Previous: <a href="LoadBalancing.html" title="previous chapter"><code class="docutils literal notranslate"><span class="pre">LoadBalancing</span></code> Namespace</a></li>
+      <li>Next: <a href="MOUNT3.html" title="next chapter"><code class="docutils literal notranslate"><span class="pre">MOUNT3</span></code> Namespace</a></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2020-2021, Jarry Shaw.
+      
+      |
+      <a href="../_sources/enum/Log.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+    <a href="https://github.com/JarryShaw/zlogging" class="github">
+        <img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub"  class="github"/>
+    </a>
+    
+
+    
+  </body>
+</html>

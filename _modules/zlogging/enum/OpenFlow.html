@@ -1,0 +1,265 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>zlogging.enum.OpenFlow &#8212; ZLogging 0.1.1 documentation</title>
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/alabaster.css" type="text/css" />
+    <script id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+    <script src="../../../_static/jquery.js"></script>
+    <script src="../../../_static/underscore.js"></script>
+    <script src="../../../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+   
+  <link rel="stylesheet" href="../../../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <h1>Source code for zlogging.enum.OpenFlow</h1><div class="highlight"><pre>
+<span></span><span class="c1"># -*- coding: utf-8 -*-</span>
+<span class="c1"># pylint: disable=line-too-long,import-error</span>
+<span class="sd">&quot;&quot;&quot;Namespace: ``OpenFlow``.&quot;&quot;&quot;</span>
+
+<span class="kn">from</span> <span class="nn">zlogging._compat</span> <span class="kn">import</span> <span class="n">enum</span>
+
+
+<div class="viewcode-block" id="ofp_action_type"><a class="viewcode-back" href="../../../enum/OpenFlow.html#zlogging.enum.OpenFlow.ofp_action_type">[docs]</a><span class="nd">@enum</span><span class="o">.</span><span class="n">unique</span>
+<span class="k">class</span> <span class="nc">ofp_action_type</span><span class="p">(</span><span class="n">enum</span><span class="o">.</span><span class="n">IntFlag</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Enum: ``OpenFlow::ofp_action_type``.</span>
+
+<span class="sd">    Openflow action_type definitions.</span>
+
+<span class="sd">    The openflow action type defines what actions openflow can take to modify a packet.</span>
+
+<span class="sd">    See Also:</span>
+<span class="sd">        `base/frameworks/openflow/consts.zeek &lt;https://docs.zeek.org/en/stable/scripts/base/frameworks/openflow/consts.zeek.html#type-OpenFlow::ofp_action_type&gt;`__</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">_ignore_</span> <span class="o">=</span> <span class="s1">&#39;ofp_action_type _&#39;</span>
+    <span class="n">ofp_action_type</span> <span class="o">=</span> <span class="nb">vars</span><span class="p">()</span>
+
+    <span class="c1">#: Output to switch port.</span>
+    <span class="n">ofp_action_type</span><span class="p">[</span><span class="s1">&#39;OFPAT_OUTPUT&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span>
+
+    <span class="c1">#: Set the 802.1q VLAN id.</span>
+    <span class="n">ofp_action_type</span><span class="p">[</span><span class="s1">&#39;OFPAT_SET_VLAN_VID&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span>
+
+    <span class="c1">#: Set the 802.1q priority.</span>
+    <span class="n">ofp_action_type</span><span class="p">[</span><span class="s1">&#39;OFPAT_SET_VLAN_PCP&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span>
+
+    <span class="c1">#: Strip the 802.1q header.</span>
+    <span class="n">ofp_action_type</span><span class="p">[</span><span class="s1">&#39;OFPAT_STRIP_VLAN&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span>
+
+    <span class="c1">#: Ethernet source address.</span>
+    <span class="n">ofp_action_type</span><span class="p">[</span><span class="s1">&#39;OFPAT_SET_DL_SRC&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span>
+
+    <span class="c1">#: Ethernet destination address.</span>
+    <span class="n">ofp_action_type</span><span class="p">[</span><span class="s1">&#39;OFPAT_SET_DL_DST&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span>
+
+    <span class="c1">#: IP source address.</span>
+    <span class="n">ofp_action_type</span><span class="p">[</span><span class="s1">&#39;OFPAT_SET_NW_SRC&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span>
+
+    <span class="c1">#: IP destination address.</span>
+    <span class="n">ofp_action_type</span><span class="p">[</span><span class="s1">&#39;OFPAT_SET_NW_DST&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span>
+
+    <span class="c1">#: IP ToS (DSCP field, 6 bits).</span>
+    <span class="n">ofp_action_type</span><span class="p">[</span><span class="s1">&#39;OFPAT_SET_NW_TOS&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span>
+
+    <span class="c1">#: TCP/UDP source port.</span>
+    <span class="n">ofp_action_type</span><span class="p">[</span><span class="s1">&#39;OFPAT_SET_TP_SRC&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span>
+
+    <span class="c1">#: TCP/UDP destination port.</span>
+    <span class="n">ofp_action_type</span><span class="p">[</span><span class="s1">&#39;OFPAT_SET_TP_DST&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span>
+
+    <span class="c1">#: Output to queue.</span>
+    <span class="n">ofp_action_type</span><span class="p">[</span><span class="s1">&#39;OFPAT_ENQUEUE&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span>
+
+    <span class="c1">#: Vendor specific.</span>
+    <span class="n">ofp_action_type</span><span class="p">[</span><span class="s1">&#39;OFPAT_VENDOR&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="ofp_config_flags"><a class="viewcode-back" href="../../../enum/OpenFlow.html#zlogging.enum.OpenFlow.ofp_config_flags">[docs]</a><span class="nd">@enum</span><span class="o">.</span><span class="n">unique</span>
+<span class="k">class</span> <span class="nc">ofp_config_flags</span><span class="p">(</span><span class="n">enum</span><span class="o">.</span><span class="n">IntFlag</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Enum: ``OpenFlow::ofp_config_flags``.</span>
+
+<span class="sd">    Openflow config flag definitions.</span>
+
+<span class="sd">    TODO: describe.</span>
+
+<span class="sd">    See Also:</span>
+<span class="sd">        `base/frameworks/openflow/consts.zeek &lt;https://docs.zeek.org/en/stable/scripts/base/frameworks/openflow/consts.zeek.html#type-OpenFlow::ofp_config_flags&gt;`__</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">_ignore_</span> <span class="o">=</span> <span class="s1">&#39;ofp_config_flags _&#39;</span>
+    <span class="n">ofp_config_flags</span> <span class="o">=</span> <span class="nb">vars</span><span class="p">()</span>
+
+    <span class="c1">#: No special handling for fragments.</span>
+    <span class="n">ofp_config_flags</span><span class="p">[</span><span class="s1">&#39;OFPC_FRAG_NORMAL&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span>
+
+    <span class="c1">#: Drop fragments.</span>
+    <span class="n">ofp_config_flags</span><span class="p">[</span><span class="s1">&#39;OFPC_FRAG_DROP&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span>
+
+    <span class="c1">#: Reassemble (only if OFPC\_IP\_REASM set).</span>
+    <span class="n">ofp_config_flags</span><span class="p">[</span><span class="s1">&#39;OFPC_FRAG_REASM&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span>
+
+    <span class="n">ofp_config_flags</span><span class="p">[</span><span class="s1">&#39;OFPC_FRAG_MASK&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="ofp_flow_mod_command"><a class="viewcode-back" href="../../../enum/OpenFlow.html#zlogging.enum.OpenFlow.ofp_flow_mod_command">[docs]</a><span class="nd">@enum</span><span class="o">.</span><span class="n">unique</span>
+<span class="k">class</span> <span class="nc">ofp_flow_mod_command</span><span class="p">(</span><span class="n">enum</span><span class="o">.</span><span class="n">IntFlag</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Enum: ``OpenFlow::ofp_flow_mod_command``.</span>
+
+<span class="sd">    Openflow flow_mod_command definitions.</span>
+
+<span class="sd">    The openflow flow_mod_command describes of what kind an action is.</span>
+
+<span class="sd">    See Also:</span>
+<span class="sd">        `base/frameworks/openflow/consts.zeek &lt;https://docs.zeek.org/en/stable/scripts/base/frameworks/openflow/consts.zeek.html#type-OpenFlow::ofp_flow_mod_command&gt;`__</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">_ignore_</span> <span class="o">=</span> <span class="s1">&#39;ofp_flow_mod_command _&#39;</span>
+    <span class="n">ofp_flow_mod_command</span> <span class="o">=</span> <span class="nb">vars</span><span class="p">()</span>
+
+    <span class="c1">#: New flow.</span>
+    <span class="n">ofp_flow_mod_command</span><span class="p">[</span><span class="s1">&#39;OFPFC_ADD&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span>
+
+    <span class="c1">#: Modify all matching flows.</span>
+    <span class="n">ofp_flow_mod_command</span><span class="p">[</span><span class="s1">&#39;OFPFC_MODIFY&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span>
+
+    <span class="c1">#: Modify entry strictly matching wildcards.</span>
+    <span class="n">ofp_flow_mod_command</span><span class="p">[</span><span class="s1">&#39;OFPFC_MODIFY_STRICT&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span>
+
+    <span class="c1">#: Delete all matching flows.</span>
+    <span class="n">ofp_flow_mod_command</span><span class="p">[</span><span class="s1">&#39;OFPFC_DELETE&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span>
+
+    <span class="c1">#: Strictly matching wildcards and priority.</span>
+    <span class="n">ofp_flow_mod_command</span><span class="p">[</span><span class="s1">&#39;OFPFC_DELETE_STRICT&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="Plugin"><a class="viewcode-back" href="../../../enum/OpenFlow.html#zlogging.enum.OpenFlow.Plugin">[docs]</a><span class="nd">@enum</span><span class="o">.</span><span class="n">unique</span>
+<span class="k">class</span> <span class="nc">Plugin</span><span class="p">(</span><span class="n">enum</span><span class="o">.</span><span class="n">IntFlag</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Enum: ``OpenFlow::Plugin``.</span>
+
+<span class="sd">    Available openflow plugins.</span>
+
+<span class="sd">    See Also:</span>
+<span class="sd">        `base/frameworks/openflow/types.zeek &lt;https://docs.zeek.org/en/stable/scripts/base/frameworks/openflow/types.zeek.html#type-OpenFlow::Plugin&gt;`__</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">_ignore_</span> <span class="o">=</span> <span class="s1">&#39;Plugin _&#39;</span>
+    <span class="n">Plugin</span> <span class="o">=</span> <span class="nb">vars</span><span class="p">()</span>
+
+    <span class="c1">#: Internal placeholder plugin.</span>
+    <span class="n">Plugin</span><span class="p">[</span><span class="s1">&#39;INVALID&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span>
+
+    <span class="c1">#: (present if base/frameworks/openflow/plugins/ryu.zeek is loaded)</span>
+    <span class="n">Plugin</span><span class="p">[</span><span class="s1">&#39;RYU&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span>
+
+    <span class="c1">#: (present if base/frameworks/openflow/plugins/log.zeek is loaded)</span>
+    <span class="n">Plugin</span><span class="p">[</span><span class="s1">&#39;OFLOG&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span>
+
+    <span class="c1">#: (present if base/frameworks/openflow/plugins/broker.zeek is loaded)</span>
+    <span class="n">Plugin</span><span class="p">[</span><span class="s1">&#39;BROKER&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span></div>
+</pre></div>
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../../../index.html">ZLogging</a></h1>
+
+
+
+
+
+
+<p>
+<iframe src="https://ghbtns.com/github-btn.html?user=JarryShaw&repo=zlogging&type=star&count=true&size=large&v=2"
+  allowtransparency="true" frameborder="0" scrolling="0" width="200px" height="35px"></iframe>
+</p>
+
+
+
+
+
+<h3>Navigation</h3>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../dumper.html">Dumpers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../loader.html">Loaders</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../model.html">Data Model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../types.html">Data Types</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../typing.html">Typing Annotations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../_data.html">Data Classes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../_exc.html">Exceptions &amp; Warnings</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../_aux.html">Internal Auxiliary Functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../enum/index.html">Enum Namespace</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../../index.html">Documentation overview</a><ul>
+  <li><a href="../../index.html">Module code</a><ul>
+  <li><a href="../enum.html">zlogging.enum</a><ul>
+  </ul></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2020-2021, Jarry Shaw.
+      
+    </div>
+
+    
+    <a href="https://github.com/JarryShaw/zlogging" class="github">
+        <img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub"  class="github"/>
+    </a>
+    
+
+    
+  </body>
+</html>

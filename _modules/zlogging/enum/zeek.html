@@ -1,0 +1,396 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>zlogging.enum.zeek &#8212; ZLogging 0.1.1 documentation</title>
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/alabaster.css" type="text/css" />
+    <script id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+    <script src="../../../_static/jquery.js"></script>
+    <script src="../../../_static/underscore.js"></script>
+    <script src="../../../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+   
+  <link rel="stylesheet" href="../../../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <h1>Source code for zlogging.enum.zeek</h1><div class="highlight"><pre>
+<span></span><span class="c1"># -*- coding: utf-8 -*-</span>
+<span class="c1"># pylint: disable=line-too-long,import-error</span>
+<span class="sd">&quot;&quot;&quot;Namespace: ``zeek``.&quot;&quot;&quot;</span>
+
+<span class="kn">from</span> <span class="nn">zlogging._compat</span> <span class="kn">import</span> <span class="n">enum</span>
+
+
+<div class="viewcode-block" id="TableChange"><a class="viewcode-back" href="../../../enum/zeek.html#zlogging.enum.zeek.TableChange">[docs]</a><span class="nd">@enum</span><span class="o">.</span><span class="n">unique</span>
+<span class="k">class</span> <span class="nc">TableChange</span><span class="p">(</span><span class="n">enum</span><span class="o">.</span><span class="n">IntFlag</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Enum: ``TableChange``.</span>
+
+<span class="sd">    See Also:</span>
+<span class="sd">        `base/bif/types.bif.zeek &lt;https://docs.zeek.org/en/stable/scripts/base/bif/types.bif.zeek.html#type-TableChange&gt;`__</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">_ignore_</span> <span class="o">=</span> <span class="s1">&#39;TableChange _&#39;</span>
+    <span class="n">TableChange</span> <span class="o">=</span> <span class="nb">vars</span><span class="p">()</span>
+
+    <span class="n">TableChange</span><span class="p">[</span><span class="s1">&#39;TABLE_ELEMENT_NEW&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span>
+
+    <span class="n">TableChange</span><span class="p">[</span><span class="s1">&#39;TABLE_ELEMENT_CHANGED&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span>
+
+    <span class="n">TableChange</span><span class="p">[</span><span class="s1">&#39;TABLE_ELEMENT_REMOVED&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span>
+
+    <span class="n">TableChange</span><span class="p">[</span><span class="s1">&#39;TABLE_ELEMENT_EXPIRED&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="layer3_proto"><a class="viewcode-back" href="../../../enum/zeek.html#zlogging.enum.zeek.layer3_proto">[docs]</a><span class="nd">@enum</span><span class="o">.</span><span class="n">unique</span>
+<span class="k">class</span> <span class="nc">layer3_proto</span><span class="p">(</span><span class="n">enum</span><span class="o">.</span><span class="n">IntFlag</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Enum: ``layer3_proto``.</span>
+
+<span class="sd">    See Also:</span>
+<span class="sd">        `base/bif/types.bif.zeek &lt;https://docs.zeek.org/en/stable/scripts/base/bif/types.bif.zeek.html#type-layer3_proto&gt;`__</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">_ignore_</span> <span class="o">=</span> <span class="s1">&#39;layer3_proto _&#39;</span>
+    <span class="n">layer3_proto</span> <span class="o">=</span> <span class="nb">vars</span><span class="p">()</span>
+
+    <span class="n">layer3_proto</span><span class="p">[</span><span class="s1">&#39;L3_IPV4&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span>
+
+    <span class="n">layer3_proto</span><span class="p">[</span><span class="s1">&#39;L3_IPV6&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span>
+
+    <span class="n">layer3_proto</span><span class="p">[</span><span class="s1">&#39;L3_ARP&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span>
+
+    <span class="n">layer3_proto</span><span class="p">[</span><span class="s1">&#39;L3_UNKNOWN&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="link_encap"><a class="viewcode-back" href="../../../enum/zeek.html#zlogging.enum.zeek.link_encap">[docs]</a><span class="nd">@enum</span><span class="o">.</span><span class="n">unique</span>
+<span class="k">class</span> <span class="nc">link_encap</span><span class="p">(</span><span class="n">enum</span><span class="o">.</span><span class="n">IntFlag</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Enum: ``link_encap``.</span>
+
+<span class="sd">    See Also:</span>
+<span class="sd">        `base/bif/types.bif.zeek &lt;https://docs.zeek.org/en/stable/scripts/base/bif/types.bif.zeek.html#type-link_encap&gt;`__</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">_ignore_</span> <span class="o">=</span> <span class="s1">&#39;link_encap _&#39;</span>
+    <span class="n">link_encap</span> <span class="o">=</span> <span class="nb">vars</span><span class="p">()</span>
+
+    <span class="n">link_encap</span><span class="p">[</span><span class="s1">&#39;LINK_ETHERNET&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span>
+
+    <span class="n">link_encap</span><span class="p">[</span><span class="s1">&#39;LINK_UNKNOWN&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="rpc_status"><a class="viewcode-back" href="../../../enum/zeek.html#zlogging.enum.zeek.rpc_status">[docs]</a><span class="nd">@enum</span><span class="o">.</span><span class="n">unique</span>
+<span class="k">class</span> <span class="nc">rpc_status</span><span class="p">(</span><span class="n">enum</span><span class="o">.</span><span class="n">IntFlag</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Enum: ``rpc_status``.</span>
+
+<span class="sd">    See Also:</span>
+<span class="sd">        `base/bif/types.bif.zeek &lt;https://docs.zeek.org/en/stable/scripts/base/bif/types.bif.zeek.html#type-rpc_status&gt;`__</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">_ignore_</span> <span class="o">=</span> <span class="s1">&#39;rpc_status _&#39;</span>
+    <span class="n">rpc_status</span> <span class="o">=</span> <span class="nb">vars</span><span class="p">()</span>
+
+    <span class="n">rpc_status</span><span class="p">[</span><span class="s1">&#39;RPC_SUCCESS&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span>
+
+    <span class="n">rpc_status</span><span class="p">[</span><span class="s1">&#39;RPC_PROG_UNAVAIL&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span>
+
+    <span class="n">rpc_status</span><span class="p">[</span><span class="s1">&#39;RPC_PROG_MISMATCH&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span>
+
+    <span class="n">rpc_status</span><span class="p">[</span><span class="s1">&#39;RPC_PROC_UNAVAIL&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span>
+
+    <span class="n">rpc_status</span><span class="p">[</span><span class="s1">&#39;RPC_GARBAGE_ARGS&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span>
+
+    <span class="n">rpc_status</span><span class="p">[</span><span class="s1">&#39;RPC_SYSTEM_ERR&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span>
+
+    <span class="n">rpc_status</span><span class="p">[</span><span class="s1">&#39;RPC_TIMEOUT&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span>
+
+    <span class="n">rpc_status</span><span class="p">[</span><span class="s1">&#39;RPC_VERS_MISMATCH&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span>
+
+    <span class="n">rpc_status</span><span class="p">[</span><span class="s1">&#39;RPC_AUTH_ERROR&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span>
+
+    <span class="n">rpc_status</span><span class="p">[</span><span class="s1">&#39;RPC_UNKNOWN_ERROR&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="IPAddrAnonymization"><a class="viewcode-back" href="../../../enum/zeek.html#zlogging.enum.zeek.IPAddrAnonymization">[docs]</a><span class="nd">@enum</span><span class="o">.</span><span class="n">unique</span>
+<span class="k">class</span> <span class="nc">IPAddrAnonymization</span><span class="p">(</span><span class="n">enum</span><span class="o">.</span><span class="n">IntFlag</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Enum: ``IPAddrAnonymization``.</span>
+
+<span class="sd">    See also: ``anonymize_addr``.</span>
+
+<span class="sd">    See Also:</span>
+<span class="sd">        `base/init-bare.zeek &lt;https://docs.zeek.org/en/stable/scripts/base/init-bare.zeek.html#type-IPAddrAnonymization&gt;`__</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">_ignore_</span> <span class="o">=</span> <span class="s1">&#39;IPAddrAnonymization _&#39;</span>
+    <span class="n">IPAddrAnonymization</span> <span class="o">=</span> <span class="nb">vars</span><span class="p">()</span>
+
+    <span class="n">IPAddrAnonymization</span><span class="p">[</span><span class="s1">&#39;KEEP_ORIG_ADDR&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span>
+
+    <span class="n">IPAddrAnonymization</span><span class="p">[</span><span class="s1">&#39;SEQUENTIALLY_NUMBERED&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span>
+
+    <span class="n">IPAddrAnonymization</span><span class="p">[</span><span class="s1">&#39;RANDOM_MD5&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span>
+
+    <span class="n">IPAddrAnonymization</span><span class="p">[</span><span class="s1">&#39;PREFIX_PRESERVING_A50&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span>
+
+    <span class="n">IPAddrAnonymization</span><span class="p">[</span><span class="s1">&#39;PREFIX_PRESERVING_MD5&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="IPAddrAnonymizationClass"><a class="viewcode-back" href="../../../enum/zeek.html#zlogging.enum.zeek.IPAddrAnonymizationClass">[docs]</a><span class="nd">@enum</span><span class="o">.</span><span class="n">unique</span>
+<span class="k">class</span> <span class="nc">IPAddrAnonymizationClass</span><span class="p">(</span><span class="n">enum</span><span class="o">.</span><span class="n">IntFlag</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Enum: ``IPAddrAnonymizationClass``.</span>
+
+<span class="sd">    See also: ``anonymize_addr``.</span>
+
+<span class="sd">    See Also:</span>
+<span class="sd">        `base/init-bare.zeek &lt;https://docs.zeek.org/en/stable/scripts/base/init-bare.zeek.html#type-IPAddrAnonymizationClass&gt;`__</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">_ignore_</span> <span class="o">=</span> <span class="s1">&#39;IPAddrAnonymizationClass _&#39;</span>
+    <span class="n">IPAddrAnonymizationClass</span> <span class="o">=</span> <span class="nb">vars</span><span class="p">()</span>
+
+    <span class="n">IPAddrAnonymizationClass</span><span class="p">[</span><span class="s1">&#39;ORIG_ADDR&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span>
+
+    <span class="n">IPAddrAnonymizationClass</span><span class="p">[</span><span class="s1">&#39;RESP_ADDR&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span>
+
+    <span class="n">IPAddrAnonymizationClass</span><span class="p">[</span><span class="s1">&#39;OTHER_ADDR&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="PcapFilterID"><a class="viewcode-back" href="../../../enum/zeek.html#zlogging.enum.zeek.PcapFilterID">[docs]</a><span class="nd">@enum</span><span class="o">.</span><span class="n">unique</span>
+<span class="k">class</span> <span class="nc">PcapFilterID</span><span class="p">(</span><span class="n">enum</span><span class="o">.</span><span class="n">IntFlag</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Enum: ``PcapFilterID``.</span>
+
+<span class="sd">    Enum type identifying dynamic BPF filters. These are used by ``Pcap::precompile_pcap_filter`` and</span>
+<span class="sd">    ``Pcap::precompile_pcap_filter``.</span>
+
+<span class="sd">    See Also:</span>
+<span class="sd">        `base/init-bare.zeek &lt;https://docs.zeek.org/en/stable/scripts/base/init-bare.zeek.html#type-PcapFilterID&gt;`__</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">_ignore_</span> <span class="o">=</span> <span class="s1">&#39;PcapFilterID _&#39;</span>
+    <span class="n">PcapFilterID</span> <span class="o">=</span> <span class="nb">vars</span><span class="p">()</span>
+
+    <span class="n">PcapFilterID</span><span class="p">[</span><span class="s1">&#39;None&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span>
+
+    <span class="c1">#: PacketFilter::DefaultPcapFilter</span>
+    <span class="c1">#: (present if base/frameworks/packet-filter/main.zeek is loaded)</span>
+    <span class="n">PcapFilterID</span><span class="p">[</span><span class="s1">&#39;PacketFilter__DefaultPcapFilter&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span>
+
+    <span class="c1">#: PacketFilter::FilterTester</span>
+    <span class="c1">#: (present if base/frameworks/packet-filter/main.zeek is loaded)</span>
+    <span class="n">PcapFilterID</span><span class="p">[</span><span class="s1">&#39;PacketFilter__FilterTester&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="pkt_profile_modes"><a class="viewcode-back" href="../../../enum/zeek.html#zlogging.enum.zeek.pkt_profile_modes">[docs]</a><span class="nd">@enum</span><span class="o">.</span><span class="n">unique</span>
+<span class="k">class</span> <span class="nc">pkt_profile_modes</span><span class="p">(</span><span class="n">enum</span><span class="o">.</span><span class="n">IntFlag</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Enum: ``pkt_profile_modes``.</span>
+
+<span class="sd">    Output modes for packet profiling information.</span>
+
+<span class="sd">    See also: ``pkt_profile_mode``, ``pkt_profile_freq``, ``pkt_profile_file``.</span>
+
+<span class="sd">    See Also:</span>
+<span class="sd">        `base/init-bare.zeek &lt;https://docs.zeek.org/en/stable/scripts/base/init-bare.zeek.html#type-pkt_profile_modes&gt;`__</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">_ignore_</span> <span class="o">=</span> <span class="s1">&#39;pkt_profile_modes _&#39;</span>
+    <span class="n">pkt_profile_modes</span> <span class="o">=</span> <span class="nb">vars</span><span class="p">()</span>
+
+    <span class="c1">#: No output.</span>
+    <span class="n">pkt_profile_modes</span><span class="p">[</span><span class="s1">&#39;PKT_PROFILE_MODE_NONE&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span>
+
+    <span class="c1">#: Output every pkt\_profile\_freq seconds.</span>
+    <span class="n">pkt_profile_modes</span><span class="p">[</span><span class="s1">&#39;PKT_PROFILE_MODE_SECS&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span>
+
+    <span class="c1">#: Output every pkt\_profile\_freq packets.</span>
+    <span class="n">pkt_profile_modes</span><span class="p">[</span><span class="s1">&#39;PKT_PROFILE_MODE_PKTS&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span>
+
+    <span class="c1">#: Output every pkt\_profile\_freq bytes.</span>
+    <span class="n">pkt_profile_modes</span><span class="p">[</span><span class="s1">&#39;PKT_PROFILE_MODE_BYTES&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="transport_proto"><a class="viewcode-back" href="../../../enum/zeek.html#zlogging.enum.zeek.transport_proto">[docs]</a><span class="nd">@enum</span><span class="o">.</span><span class="n">unique</span>
+<span class="k">class</span> <span class="nc">transport_proto</span><span class="p">(</span><span class="n">enum</span><span class="o">.</span><span class="n">IntFlag</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Enum: ``transport_proto``.</span>
+
+<span class="sd">    A connection’s transport-layer protocol. Note that Zeek uses the term “connection” broadly, using</span>
+<span class="sd">    flow semantics for ICMP and UDP.</span>
+
+<span class="sd">    See Also:</span>
+<span class="sd">        `base/init-bare.zeek &lt;https://docs.zeek.org/en/stable/scripts/base/init-bare.zeek.html#type-transport_proto&gt;`__</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">_ignore_</span> <span class="o">=</span> <span class="s1">&#39;transport_proto _&#39;</span>
+    <span class="n">transport_proto</span> <span class="o">=</span> <span class="nb">vars</span><span class="p">()</span>
+
+    <span class="c1">#: An unknown transport-layer protocol.</span>
+    <span class="n">transport_proto</span><span class="p">[</span><span class="s1">&#39;unknown_transport&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span>
+
+    <span class="c1">#: TCP.</span>
+    <span class="n">transport_proto</span><span class="p">[</span><span class="s1">&#39;tcp&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span>
+
+    <span class="c1">#: UDP.</span>
+    <span class="n">transport_proto</span><span class="p">[</span><span class="s1">&#39;udp&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span>
+
+    <span class="c1">#: ICMP.</span>
+    <span class="n">transport_proto</span><span class="p">[</span><span class="s1">&#39;icmp&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="Direction"><a class="viewcode-back" href="../../../enum/zeek.html#zlogging.enum.zeek.Direction">[docs]</a><span class="nd">@enum</span><span class="o">.</span><span class="n">unique</span>
+<span class="k">class</span> <span class="nc">Direction</span><span class="p">(</span><span class="n">enum</span><span class="o">.</span><span class="n">IntFlag</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Enum: ``Direction``.</span>
+
+<span class="sd">    See Also:</span>
+<span class="sd">        `base/utils/directions-and-hosts.zeek &lt;https://docs.zeek.org/en/stable/scripts/base/utils/directions-and-hosts.zeek.html#type-Direction&gt;`__</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">_ignore_</span> <span class="o">=</span> <span class="s1">&#39;Direction _&#39;</span>
+    <span class="n">Direction</span> <span class="o">=</span> <span class="nb">vars</span><span class="p">()</span>
+
+    <span class="c1">#: The connection originator is not within the locally-monitored</span>
+    <span class="c1">#: network, but the other endpoint is.</span>
+    <span class="n">Direction</span><span class="p">[</span><span class="s1">&#39;INBOUND&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span>
+
+    <span class="c1">#: The connection originator is within the locally-monitored network,</span>
+    <span class="c1">#: but the other endpoint is not.</span>
+    <span class="n">Direction</span><span class="p">[</span><span class="s1">&#39;OUTBOUND&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span>
+
+    <span class="c1">#: Only one endpoint is within the locally-monitored network, meaning</span>
+    <span class="c1">#: the connection is either outbound or inbound.</span>
+    <span class="n">Direction</span><span class="p">[</span><span class="s1">&#39;BIDIRECTIONAL&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span>
+
+    <span class="c1">#: This value doesn’t match any connection.</span>
+    <span class="n">Direction</span><span class="p">[</span><span class="s1">&#39;NO_DIRECTION&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="Host"><a class="viewcode-back" href="../../../enum/zeek.html#zlogging.enum.zeek.Host">[docs]</a><span class="nd">@enum</span><span class="o">.</span><span class="n">unique</span>
+<span class="k">class</span> <span class="nc">Host</span><span class="p">(</span><span class="n">enum</span><span class="o">.</span><span class="n">IntFlag</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Enum: ``Host``.</span>
+
+<span class="sd">    See Also:</span>
+<span class="sd">        `base/utils/directions-and-hosts.zeek &lt;https://docs.zeek.org/en/stable/scripts/base/utils/directions-and-hosts.zeek.html#type-Host&gt;`__</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">_ignore_</span> <span class="o">=</span> <span class="s1">&#39;Host _&#39;</span>
+    <span class="n">Host</span> <span class="o">=</span> <span class="nb">vars</span><span class="p">()</span>
+
+    <span class="c1">#: A host within the locally-monitored network.</span>
+    <span class="n">Host</span><span class="p">[</span><span class="s1">&#39;LOCAL_HOSTS&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span>
+
+    <span class="c1">#: A host not within the locally-monitored network.</span>
+    <span class="n">Host</span><span class="p">[</span><span class="s1">&#39;REMOTE_HOSTS&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span>
+
+    <span class="c1">#: Any host.</span>
+    <span class="n">Host</span><span class="p">[</span><span class="s1">&#39;ALL_HOSTS&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span>
+
+    <span class="c1">#: This value doesn’t match any host.</span>
+    <span class="n">Host</span><span class="p">[</span><span class="s1">&#39;NO_HOSTS&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span></div>
+</pre></div>
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../../../index.html">ZLogging</a></h1>
+
+
+
+
+
+
+<p>
+<iframe src="https://ghbtns.com/github-btn.html?user=JarryShaw&repo=zlogging&type=star&count=true&size=large&v=2"
+  allowtransparency="true" frameborder="0" scrolling="0" width="200px" height="35px"></iframe>
+</p>
+
+
+
+
+
+<h3>Navigation</h3>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../dumper.html">Dumpers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../loader.html">Loaders</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../model.html">Data Model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../types.html">Data Types</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../typing.html">Typing Annotations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../_data.html">Data Classes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../_exc.html">Exceptions &amp; Warnings</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../_aux.html">Internal Auxiliary Functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../enum/index.html">Enum Namespace</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../../index.html">Documentation overview</a><ul>
+  <li><a href="../../index.html">Module code</a><ul>
+  <li><a href="../enum.html">zlogging.enum</a><ul>
+  </ul></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2020-2021, Jarry Shaw.
+      
+    </div>
+
+    
+    <a href="https://github.com/JarryShaw/zlogging" class="github">
+        <img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub"  class="github"/>
+    </a>
+    
+
+    
+  </body>
+</html>

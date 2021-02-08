@@ -1,0 +1,488 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Notice Namespace &#8212; ZLogging 0.1.1 documentation</title>
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="OpenFlow Namespace" href="OpenFlow.html" />
+    <link rel="prev" title="NFS3 Namespace" href="NFS3.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="notice-namespace">
+<h1><code class="docutils literal notranslate"><span class="pre">Notice</span></code> Namespace<a class="headerlink" href="#notice-namespace" title="Permalink to this headline">¶</a></h1>
+<p>Namespace: <code class="docutils literal notranslate"><span class="pre">Notice</span></code>.</p>
+<dl class="py class">
+<dt>
+<em class="property">class </em><code class="sig-prename descclassname">zlogging.enum.Notice.</code><code class="sig-name descname">Action</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">value</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/zlogging/enum/Notice.html#Action"><span class="viewcode-link">[source]</span></a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/enum.html#enum.IntFlag" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">enum.IntFlag</span></code></a></p>
+<p>Enum: <code class="docutils literal notranslate"><span class="pre">Notice::Action</span></code>.</p>
+<p>These are values representing actions that can be taken with notices.</p>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><a class="reference external" href="https://docs.zeek.org/en/stable/scripts/base/frameworks/notice/main.zeek.html#type-Notice::Action">base/frameworks/notice/main.zeek</a></p>
+</div>
+<dl class="py attribute">
+<dt>
+<code class="sig-name descname">ACTION_NONE</code><em class="property"> = 1</em></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt>
+<code class="sig-name descname">ACTION_LOG</code><em class="property"> = 2</em></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt>
+<code class="sig-name descname">ACTION_EMAIL</code><em class="property"> = 4</em></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt>
+<code class="sig-name descname">ACTION_ALARM</code><em class="property"> = 8</em></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt>
+<code class="sig-name descname">ACTION_EMAIL_ADMIN</code><em class="property"> = 16</em></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt>
+<code class="sig-name descname">ACTION_PAGE</code><em class="property"> = 32</em></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt>
+<code class="sig-name descname">ACTION_ADD_GEODATA</code><em class="property"> = 64</em></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt>
+<code class="sig-name descname">ACTION_DROP</code><em class="property"> = 128</em></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt>
+<em class="property">class </em><code class="sig-prename descclassname">zlogging.enum.Notice.</code><code class="sig-name descname">Type</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">value</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/zlogging/enum/Notice.html#Type"><span class="viewcode-link">[source]</span></a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/enum.html#enum.IntFlag" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">enum.IntFlag</span></code></a></p>
+<p>Enum: <code class="docutils literal notranslate"><span class="pre">Notice::Type</span></code>.</p>
+<p>Scripts creating new notices need to redef this enum to add their own specific notice types which
+would then get used when they call the <code class="docutils literal notranslate"><span class="pre">NOTICE</span></code> function. The convention is to give a general
+category along with the specific notice separating words with underscores and using leading capitals
+on each word except for abbreviations which are kept in all capitals. For example,
+<a class="reference external" href="SSH::Password_Guessing">SSH::Password_Guessing</a> is for hosts that have crossed a threshold of failed SSH logins.</p>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><a class="reference external" href="https://docs.zeek.org/en/stable/scripts/base/frameworks/notice/main.zeek.html#type-Notice::Type">base/frameworks/notice/main.zeek</a></p>
+</div>
+<dl class="py attribute">
+<dt>
+<code class="sig-name descname">Tally</code><em class="property"> = 1</em></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt>
+<code class="sig-name descname">Weird__Activity</code><em class="property"> = 2</em></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt>
+<code class="sig-name descname">Signatures__Sensitive_Signature</code><em class="property"> = 4</em></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt>
+<code class="sig-name descname">Signatures__Multiple_Signatures</code><em class="property"> = 8</em></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt>
+<code class="sig-name descname">Signatures__Multiple_Sig_Responders</code><em class="property"> = 16</em></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt>
+<code class="sig-name descname">Signatures__Count_Signature</code><em class="property"> = 32</em></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt>
+<code class="sig-name descname">Signatures__Signature_Summary</code><em class="property"> = 64</em></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt>
+<code class="sig-name descname">PacketFilter__Compile_Failure</code><em class="property"> = 128</em></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt>
+<code class="sig-name descname">PacketFilter__Install_Failure</code><em class="property"> = 256</em></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt>
+<code class="sig-name descname">PacketFilter__Too_Long_To_Compile_Filter</code><em class="property"> = 512</em></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt>
+<code class="sig-name descname">PacketFilter__Dropped_Packets</code><em class="property"> = 1024</em></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt>
+<code class="sig-name descname">ProtocolDetector__Protocol_Found</code><em class="property"> = 2048</em></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt>
+<code class="sig-name descname">ProtocolDetector__Server_Found</code><em class="property"> = 4096</em></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt>
+<code class="sig-name descname">Intel__Notice</code><em class="property"> = 8192</em></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt>
+<code class="sig-name descname">TeamCymruMalwareHashRegistry__Match</code><em class="property"> = 16384</em></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt>
+<code class="sig-name descname">PacketFilter__No_More_Conn_Shunts_Available</code><em class="property"> = 32768</em></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt>
+<code class="sig-name descname">PacketFilter__Cannot_BPF_Shunt_Conn</code><em class="property"> = 65536</em></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt>
+<code class="sig-name descname">Software__Software_Version_Change</code><em class="property"> = 131072</em></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt>
+<code class="sig-name descname">Software__Vulnerable_Version</code><em class="property"> = 262144</em></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt>
+<code class="sig-name descname">CaptureLoss__Too_Much_Loss</code><em class="property"> = 524288</em></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt>
+<code class="sig-name descname">Traceroute__Detected</code><em class="property"> = 1048576</em></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt>
+<code class="sig-name descname">Scan__Address_Scan</code><em class="property"> = 2097152</em></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt>
+<code class="sig-name descname">Scan__Port_Scan</code><em class="property"> = 4194304</em></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt>
+<code class="sig-name descname">Conn__Retransmission_Inconsistency</code><em class="property"> = 8388608</em></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt>
+<code class="sig-name descname">Conn__Content_Gap</code><em class="property"> = 16777216</em></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt>
+<code class="sig-name descname">DNS__External_Name</code><em class="property"> = 33554432</em></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt>
+<code class="sig-name descname">FTP__Bruteforcing</code><em class="property"> = 67108864</em></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt>
+<code class="sig-name descname">FTP__Site_Exec_Success</code><em class="property"> = 134217728</em></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt>
+<code class="sig-name descname">HTTP__SQL_Injection_Attacker</code><em class="property"> = 268435456</em></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt>
+<code class="sig-name descname">HTTP__SQL_Injection_Victim</code><em class="property"> = 536870912</em></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt>
+<code class="sig-name descname">SMTP__Blocklist_Error_Message</code><em class="property"> = 1073741824</em></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt>
+<code class="sig-name descname">SMTP__Blocklist_Blocked_Host</code><em class="property"> = 2147483648</em></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt>
+<code class="sig-name descname">SMTP__Suspicious_Origination</code><em class="property"> = 4294967296</em></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt>
+<code class="sig-name descname">SSH__Password_Guessing</code><em class="property"> = 8589934592</em></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt>
+<code class="sig-name descname">SSH__Login_By_Password_Guesser</code><em class="property"> = 17179869184</em></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt>
+<code class="sig-name descname">SSH__Watched_Country_Login</code><em class="property"> = 34359738368</em></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt>
+<code class="sig-name descname">SSH__Interesting_Hostname_Login</code><em class="property"> = 68719476736</em></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt>
+<code class="sig-name descname">SSL__Certificate_Expired</code><em class="property"> = 137438953472</em></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt>
+<code class="sig-name descname">SSL__Certificate_Expires_Soon</code><em class="property"> = 274877906944</em></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt>
+<code class="sig-name descname">SSL__Certificate_Not_Valid_Yet</code><em class="property"> = 549755813888</em></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt>
+<code class="sig-name descname">Heartbleed__SSL_Heartbeat_Attack</code><em class="property"> = 1099511627776</em></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt>
+<code class="sig-name descname">Heartbleed__SSL_Heartbeat_Attack_Success</code><em class="property"> = 2199023255552</em></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt>
+<code class="sig-name descname">Heartbleed__SSL_Heartbeat_Odd_Length</code><em class="property"> = 4398046511104</em></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt>
+<code class="sig-name descname">Heartbleed__SSL_Heartbeat_Many_Requests</code><em class="property"> = 8796093022208</em></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt>
+<code class="sig-name descname">SSL__Invalid_Server_Cert</code><em class="property"> = 17592186044416</em></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt>
+<code class="sig-name descname">SSL__Invalid_Ocsp_Response</code><em class="property"> = 35184372088832</em></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt>
+<code class="sig-name descname">SSL__Weak_Key</code><em class="property"> = 70368744177664</em></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt>
+<code class="sig-name descname">SSL__Old_Version</code><em class="property"> = 140737488355328</em></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt>
+<code class="sig-name descname">SSL__Weak_Cipher</code><em class="property"> = 281474976710656</em></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt>
+<code class="sig-name descname">ZeekygenExample__Zeekygen_One</code><em class="property"> = 562949953421312</em></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt>
+<code class="sig-name descname">ZeekygenExample__Zeekygen_Two</code><em class="property"> = 1125899906842624</em></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt>
+<code class="sig-name descname">ZeekygenExample__Zeekygen_Three</code><em class="property"> = 2251799813685248</em></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt>
+<code class="sig-name descname">ZeekygenExample__Zeekygen_Four</code><em class="property"> = 4503599627370496</em></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../index.html">ZLogging</a></h1>
+
+
+
+
+
+
+<p>
+<iframe src="https://ghbtns.com/github-btn.html?user=JarryShaw&repo=zlogging&type=star&count=true&size=large&v=2"
+  allowtransparency="true" frameborder="0" scrolling="0" width="200px" height="35px"></iframe>
+</p>
+
+
+
+
+
+<h3>Navigation</h3>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../dumper.html">Dumpers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../loader.html">Loaders</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../model.html">Data Model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../types.html">Data Types</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../typing.html">Typing Annotations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../_data.html">Data Classes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../_exc.html">Exceptions &amp; Warnings</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../_aux.html">Internal Auxiliary Functions</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Enum Namespace</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="zeek.html"><code class="docutils literal notranslate"><span class="pre">zeek</span></code> Namespace</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Broker.html"><code class="docutils literal notranslate"><span class="pre">Broker</span></code> Namespace</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Cluster.html"><code class="docutils literal notranslate"><span class="pre">Cluster</span></code> Namespace</a></li>
+<li class="toctree-l2"><a class="reference internal" href="DCE_RPC.html"><code class="docutils literal notranslate"><span class="pre">DCE_RPC</span></code> Namespace</a></li>
+<li class="toctree-l2"><a class="reference internal" href="HTTP.html"><code class="docutils literal notranslate"><span class="pre">HTTP</span></code> Namespace</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Input.html"><code class="docutils literal notranslate"><span class="pre">Input</span></code> Namespace</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Intel.html"><code class="docutils literal notranslate"><span class="pre">Intel</span></code> Namespace</a></li>
+<li class="toctree-l2"><a class="reference internal" href="JSON.html"><code class="docutils literal notranslate"><span class="pre">JSON</span></code> Namespace</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Known.html"><code class="docutils literal notranslate"><span class="pre">Known</span></code> Namespace</a></li>
+<li class="toctree-l2"><a class="reference internal" href="LoadBalancing.html"><code class="docutils literal notranslate"><span class="pre">LoadBalancing</span></code> Namespace</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Log.html"><code class="docutils literal notranslate"><span class="pre">Log</span></code> Namespace</a></li>
+<li class="toctree-l2"><a class="reference internal" href="MOUNT3.html"><code class="docutils literal notranslate"><span class="pre">MOUNT3</span></code> Namespace</a></li>
+<li class="toctree-l2"><a class="reference internal" href="MQTT.html"><code class="docutils literal notranslate"><span class="pre">MQTT</span></code> Namespace</a></li>
+<li class="toctree-l2"><a class="reference internal" href="NFS3.html"><code class="docutils literal notranslate"><span class="pre">NFS3</span></code> Namespace</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#"><code class="docutils literal notranslate"><span class="pre">Notice</span></code> Namespace</a></li>
+<li class="toctree-l2"><a class="reference internal" href="OpenFlow.html"><code class="docutils literal notranslate"><span class="pre">OpenFlow</span></code> Namespace</a></li>
+<li class="toctree-l2"><a class="reference internal" href="NetControl.html"><code class="docutils literal notranslate"><span class="pre">NetControl</span></code> Namespace</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ProtocolDetector.html"><code class="docutils literal notranslate"><span class="pre">ProtocolDetector</span></code> Namespace</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Reporter.html"><code class="docutils literal notranslate"><span class="pre">Reporter</span></code> Namespace</a></li>
+<li class="toctree-l2"><a class="reference internal" href="SMB.html"><code class="docutils literal notranslate"><span class="pre">SMB</span></code> Namespace</a></li>
+<li class="toctree-l2"><a class="reference internal" href="SOCKS.html"><code class="docutils literal notranslate"><span class="pre">SOCKS</span></code> Namespace</a></li>
+<li class="toctree-l2"><a class="reference internal" href="SSL.html"><code class="docutils literal notranslate"><span class="pre">SSL</span></code> Namespace</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Signatures.html"><code class="docutils literal notranslate"><span class="pre">Signatures</span></code> Namespace</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Software.html"><code class="docutils literal notranslate"><span class="pre">Software</span></code> Namespace</a></li>
+<li class="toctree-l2"><a class="reference internal" href="SumStats.html"><code class="docutils literal notranslate"><span class="pre">SumStats</span></code> Namespace</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Tunnel.html"><code class="docutils literal notranslate"><span class="pre">Tunnel</span></code> Namespace</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Weird.html"><code class="docutils literal notranslate"><span class="pre">Weird</span></code> Namespace</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ZeekygenExample.html"><code class="docutils literal notranslate"><span class="pre">ZeekygenExample</span></code> Namespace</a></li>
+</ul>
+</li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+  <li><a href="index.html">Enum Namespace</a><ul>
+      <li>Previous: <a href="NFS3.html" title="previous chapter"><code class="docutils literal notranslate"><span class="pre">NFS3</span></code> Namespace</a></li>
+      <li>Next: <a href="OpenFlow.html" title="next chapter"><code class="docutils literal notranslate"><span class="pre">OpenFlow</span></code> Namespace</a></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2020-2021, Jarry Shaw.
+      
+      |
+      <a href="../_sources/enum/Notice.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+    <a href="https://github.com/JarryShaw/zlogging" class="github">
+        <img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub"  class="github"/>
+    </a>
+    
+
+    
+  </body>
+</html>

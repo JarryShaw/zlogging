@@ -1,0 +1,1079 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>zlogging.enum &#8212; ZLogging 0.1.1 documentation</title>
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/alabaster.css" type="text/css" />
+    <script id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+   
+  <link rel="stylesheet" href="../../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <h1>Source code for zlogging.enum</h1><div class="highlight"><pre>
+<span></span><span class="c1"># -*- coding: utf-8 -*-</span>
+<span class="c1"># pylint: disable=ungrouped-imports,duplicate-key</span>
+<span class="c1"># type: ignore[misc]</span>
+<span class="sd">&quot;&quot;&quot;Bro/Zeek enum namespace.&quot;&quot;&quot;</span>
+
+<span class="kn">import</span> <span class="nn">warnings</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">TYPE_CHECKING</span>
+
+<span class="kn">from</span> <span class="nn">zlogging._exc</span> <span class="kn">import</span> <span class="n">BroDeprecationWarning</span>
+<span class="kn">from</span> <span class="nn">zlogging.enum.Broker</span> <span class="kn">import</span> <span class="n">BackendType</span> <span class="k">as</span> <span class="n">Broker_BackendType</span>
+<span class="kn">from</span> <span class="nn">zlogging.enum.Broker</span> <span class="kn">import</span> <span class="n">DataType</span> <span class="k">as</span> <span class="n">Broker_DataType</span>
+<span class="kn">from</span> <span class="nn">zlogging.enum.Broker</span> <span class="kn">import</span> <span class="n">ErrorCode</span> <span class="k">as</span> <span class="n">Broker_ErrorCode</span>
+<span class="kn">from</span> <span class="nn">zlogging.enum.Broker</span> <span class="kn">import</span> <span class="n">PeerStatus</span> <span class="k">as</span> <span class="n">Broker_PeerStatus</span>
+<span class="kn">from</span> <span class="nn">zlogging.enum.Broker</span> <span class="kn">import</span> <span class="n">QueryStatus</span> <span class="k">as</span> <span class="n">Broker_QueryStatus</span>
+<span class="kn">from</span> <span class="nn">zlogging.enum.Broker</span> <span class="kn">import</span> <span class="n">Type</span> <span class="k">as</span> <span class="n">Broker_Type</span>
+<span class="kn">from</span> <span class="nn">zlogging.enum.Cluster</span> <span class="kn">import</span> <span class="n">NodeType</span> <span class="k">as</span> <span class="n">Cluster_NodeType</span>
+<span class="kn">from</span> <span class="nn">zlogging.enum.DCE_RPC</span> <span class="kn">import</span> <span class="n">IfID</span> <span class="k">as</span> <span class="n">DCE_RPC_IfID</span>
+<span class="kn">from</span> <span class="nn">zlogging.enum.DCE_RPC</span> <span class="kn">import</span> <span class="n">PType</span> <span class="k">as</span> <span class="n">DCE_RPC_PType</span>
+<span class="kn">from</span> <span class="nn">zlogging.enum.HTTP</span> <span class="kn">import</span> <span class="n">Tags</span> <span class="k">as</span> <span class="n">HTTP_Tags</span>
+<span class="kn">from</span> <span class="nn">zlogging.enum.Input</span> <span class="kn">import</span> <span class="n">Event</span> <span class="k">as</span> <span class="n">Input_Event</span>
+<span class="kn">from</span> <span class="nn">zlogging.enum.Input</span> <span class="kn">import</span> <span class="n">Mode</span> <span class="k">as</span> <span class="n">Input_Mode</span>
+<span class="kn">from</span> <span class="nn">zlogging.enum.Input</span> <span class="kn">import</span> <span class="n">Reader</span> <span class="k">as</span> <span class="n">Input_Reader</span>
+<span class="kn">from</span> <span class="nn">zlogging.enum.Intel</span> <span class="kn">import</span> <span class="n">Type</span> <span class="k">as</span> <span class="n">Intel_Type</span>
+<span class="kn">from</span> <span class="nn">zlogging.enum.Intel</span> <span class="kn">import</span> <span class="n">Where</span> <span class="k">as</span> <span class="n">Intel_Where</span>
+<span class="kn">from</span> <span class="nn">zlogging.enum.JSON</span> <span class="kn">import</span> <span class="n">TimestampFormat</span> <span class="k">as</span> <span class="n">JSON_TimestampFormat</span>
+<span class="kn">from</span> <span class="nn">zlogging.enum.Known</span> <span class="kn">import</span> <span class="n">ModbusDeviceType</span> <span class="k">as</span> <span class="n">Known_ModbusDeviceType</span>
+<span class="kn">from</span> <span class="nn">zlogging.enum.LoadBalancing</span> <span class="kn">import</span> <span class="n">Method</span> <span class="k">as</span> <span class="n">LoadBalancing_Method</span>
+<span class="kn">from</span> <span class="nn">zlogging.enum.Log</span> <span class="kn">import</span> <span class="n">ID</span> <span class="k">as</span> <span class="n">Log_ID</span>
+<span class="kn">from</span> <span class="nn">zlogging.enum.Log</span> <span class="kn">import</span> <span class="n">PrintLogType</span> <span class="k">as</span> <span class="n">Log_PrintLogType</span>
+<span class="kn">from</span> <span class="nn">zlogging.enum.Log</span> <span class="kn">import</span> <span class="n">Writer</span> <span class="k">as</span> <span class="n">Log_Writer</span>
+<span class="kn">from</span> <span class="nn">zlogging.enum.MOUNT3</span> <span class="kn">import</span> <span class="n">auth_flavor_t</span> <span class="k">as</span> <span class="n">MOUNT3_auth_flavor_t</span>
+<span class="kn">from</span> <span class="nn">zlogging.enum.MOUNT3</span> <span class="kn">import</span> <span class="n">proc_t</span> <span class="k">as</span> <span class="n">MOUNT3_proc_t</span>
+<span class="kn">from</span> <span class="nn">zlogging.enum.MOUNT3</span> <span class="kn">import</span> <span class="n">status_t</span> <span class="k">as</span> <span class="n">MOUNT3_status_t</span>
+<span class="kn">from</span> <span class="nn">zlogging.enum.MQTT</span> <span class="kn">import</span> <span class="n">SubUnsub</span> <span class="k">as</span> <span class="n">MQTT_SubUnsub</span>
+<span class="kn">from</span> <span class="nn">zlogging.enum.NFS3</span> <span class="kn">import</span> <span class="n">createmode_t</span> <span class="k">as</span> <span class="n">NFS3_createmode_t</span>
+<span class="kn">from</span> <span class="nn">zlogging.enum.NFS3</span> <span class="kn">import</span> <span class="n">file_type_t</span> <span class="k">as</span> <span class="n">NFS3_file_type_t</span>
+<span class="kn">from</span> <span class="nn">zlogging.enum.NFS3</span> <span class="kn">import</span> <span class="n">proc_t</span> <span class="k">as</span> <span class="n">NFS3_proc_t</span>
+<span class="kn">from</span> <span class="nn">zlogging.enum.NFS3</span> <span class="kn">import</span> <span class="n">stable_how_t</span> <span class="k">as</span> <span class="n">NFS3_stable_how_t</span>
+<span class="kn">from</span> <span class="nn">zlogging.enum.NFS3</span> <span class="kn">import</span> <span class="n">status_t</span> <span class="k">as</span> <span class="n">NFS3_status_t</span>
+<span class="kn">from</span> <span class="nn">zlogging.enum.NFS3</span> <span class="kn">import</span> <span class="n">time_how_t</span> <span class="k">as</span> <span class="n">NFS3_time_how_t</span>
+<span class="kn">from</span> <span class="nn">zlogging.enum.NetControl</span> <span class="kn">import</span> <span class="n">CatchReleaseActions</span> <span class="k">as</span> <span class="n">NetControl_CatchReleaseActions</span>
+<span class="kn">from</span> <span class="nn">zlogging.enum.NetControl</span> <span class="kn">import</span> <span class="n">EntityType</span> <span class="k">as</span> <span class="n">NetControl_EntityType</span>
+<span class="kn">from</span> <span class="nn">zlogging.enum.NetControl</span> <span class="kn">import</span> <span class="n">InfoCategory</span> <span class="k">as</span> <span class="n">NetControl_InfoCategory</span>
+<span class="kn">from</span> <span class="nn">zlogging.enum.NetControl</span> <span class="kn">import</span> <span class="n">InfoState</span> <span class="k">as</span> <span class="n">NetControl_InfoState</span>
+<span class="kn">from</span> <span class="nn">zlogging.enum.NetControl</span> <span class="kn">import</span> <span class="n">RuleType</span> <span class="k">as</span> <span class="n">NetControl_RuleType</span>
+<span class="kn">from</span> <span class="nn">zlogging.enum.NetControl</span> <span class="kn">import</span> <span class="n">TargetType</span> <span class="k">as</span> <span class="n">NetControl_TargetType</span>
+<span class="kn">from</span> <span class="nn">zlogging.enum.Notice</span> <span class="kn">import</span> <span class="n">Action</span> <span class="k">as</span> <span class="n">Notice_Action</span>
+<span class="kn">from</span> <span class="nn">zlogging.enum.Notice</span> <span class="kn">import</span> <span class="n">Type</span> <span class="k">as</span> <span class="n">Notice_Type</span>
+<span class="kn">from</span> <span class="nn">zlogging.enum.OpenFlow</span> <span class="kn">import</span> <span class="n">Plugin</span> <span class="k">as</span> <span class="n">OpenFlow_Plugin</span>
+<span class="kn">from</span> <span class="nn">zlogging.enum.OpenFlow</span> <span class="kn">import</span> <span class="n">ofp_action_type</span> <span class="k">as</span> <span class="n">OpenFlow_ofp_action_type</span>
+<span class="kn">from</span> <span class="nn">zlogging.enum.OpenFlow</span> <span class="kn">import</span> <span class="n">ofp_config_flags</span> <span class="k">as</span> <span class="n">OpenFlow_ofp_config_flags</span>
+<span class="kn">from</span> <span class="nn">zlogging.enum.OpenFlow</span> <span class="kn">import</span> <span class="n">ofp_flow_mod_command</span> <span class="k">as</span> <span class="n">OpenFlow_ofp_flow_mod_command</span>
+<span class="kn">from</span> <span class="nn">zlogging.enum.ProtocolDetector</span> <span class="kn">import</span> <span class="nb">dir</span> <span class="k">as</span> <span class="n">ProtocolDetector_dir</span>
+<span class="kn">from</span> <span class="nn">zlogging.enum.Reporter</span> <span class="kn">import</span> <span class="n">Level</span> <span class="k">as</span> <span class="n">Reporter_Level</span>
+<span class="kn">from</span> <span class="nn">zlogging.enum.SMB</span> <span class="kn">import</span> <span class="n">Action</span> <span class="k">as</span> <span class="n">SMB_Action</span>
+<span class="kn">from</span> <span class="nn">zlogging.enum.SOCKS</span> <span class="kn">import</span> <span class="n">RequestType</span> <span class="k">as</span> <span class="n">SOCKS_RequestType</span>
+<span class="kn">from</span> <span class="nn">zlogging.enum.SSL</span> <span class="kn">import</span> <span class="n">SctSource</span> <span class="k">as</span> <span class="n">SSL_SctSource</span>
+<span class="kn">from</span> <span class="nn">zlogging.enum.Signatures</span> <span class="kn">import</span> <span class="n">Action</span> <span class="k">as</span> <span class="n">Signatures_Action</span>
+<span class="kn">from</span> <span class="nn">zlogging.enum.Software</span> <span class="kn">import</span> <span class="n">Type</span> <span class="k">as</span> <span class="n">Software_Type</span>
+<span class="kn">from</span> <span class="nn">zlogging.enum.SumStats</span> <span class="kn">import</span> <span class="n">Calculation</span> <span class="k">as</span> <span class="n">SumStats_Calculation</span>
+<span class="kn">from</span> <span class="nn">zlogging.enum.Supervisor</span> <span class="kn">import</span> <span class="n">ClusterRole</span> <span class="k">as</span> <span class="n">Supervisor_ClusterRole</span>
+<span class="kn">from</span> <span class="nn">zlogging.enum.Tunnel</span> <span class="kn">import</span> <span class="n">Action</span> <span class="k">as</span> <span class="n">Tunnel_Action</span>
+<span class="kn">from</span> <span class="nn">zlogging.enum.Tunnel</span> <span class="kn">import</span> <span class="n">Type</span> <span class="k">as</span> <span class="n">Tunnel_Type</span>
+<span class="kn">from</span> <span class="nn">zlogging.enum.Weird</span> <span class="kn">import</span> <span class="n">Action</span> <span class="k">as</span> <span class="n">Weird_Action</span>
+<span class="kn">from</span> <span class="nn">zlogging.enum.ZeekygenExample</span> <span class="kn">import</span> <span class="n">SimpleEnum</span> <span class="k">as</span> <span class="n">ZeekygenExample_SimpleEnum</span>
+<span class="kn">from</span> <span class="nn">zlogging.enum.zeek</span> <span class="kn">import</span> <span class="n">Direction</span> <span class="k">as</span> <span class="n">zeek_Direction</span>
+<span class="kn">from</span> <span class="nn">zlogging.enum.zeek</span> <span class="kn">import</span> <span class="n">Host</span> <span class="k">as</span> <span class="n">zeek_Host</span>
+<span class="kn">from</span> <span class="nn">zlogging.enum.zeek</span> <span class="kn">import</span> <span class="n">IPAddrAnonymization</span> <span class="k">as</span> <span class="n">zeek_IPAddrAnonymization</span>
+<span class="kn">from</span> <span class="nn">zlogging.enum.zeek</span> <span class="kn">import</span> <span class="n">IPAddrAnonymizationClass</span> <span class="k">as</span> <span class="n">zeek_IPAddrAnonymizationClass</span>
+<span class="kn">from</span> <span class="nn">zlogging.enum.zeek</span> <span class="kn">import</span> <span class="n">PcapFilterID</span> <span class="k">as</span> <span class="n">zeek_PcapFilterID</span>
+<span class="kn">from</span> <span class="nn">zlogging.enum.zeek</span> <span class="kn">import</span> <span class="n">TableChange</span> <span class="k">as</span> <span class="n">zeek_TableChange</span>
+<span class="kn">from</span> <span class="nn">zlogging.enum.zeek</span> <span class="kn">import</span> <span class="n">layer3_proto</span> <span class="k">as</span> <span class="n">zeek_layer3_proto</span>
+<span class="kn">from</span> <span class="nn">zlogging.enum.zeek</span> <span class="kn">import</span> <span class="n">link_encap</span> <span class="k">as</span> <span class="n">zeek_link_encap</span>
+<span class="kn">from</span> <span class="nn">zlogging.enum.zeek</span> <span class="kn">import</span> <span class="n">pkt_profile_modes</span> <span class="k">as</span> <span class="n">zeek_pkt_profile_modes</span>
+<span class="kn">from</span> <span class="nn">zlogging.enum.zeek</span> <span class="kn">import</span> <span class="n">rpc_status</span> <span class="k">as</span> <span class="n">zeek_rpc_status</span>
+<span class="kn">from</span> <span class="nn">zlogging.enum.zeek</span> <span class="kn">import</span> <span class="n">transport_proto</span> <span class="k">as</span> <span class="n">zeek_transport_proto</span>
+
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;globals&#39;</span><span class="p">]</span>
+
+<span class="k">if</span> <span class="n">TYPE_CHECKING</span><span class="p">:</span>
+    <span class="kn">from</span> <span class="nn">enum</span> <span class="kn">import</span> <span class="n">Enum</span>
+    <span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Dict</span>
+
+<span class="n">_enum_Barnyard2</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;LOG&#39;</span><span class="p">:</span> <span class="n">Log_ID</span><span class="p">[</span><span class="s1">&#39;Barnyard2__LOG&#39;</span><span class="p">],</span>
+<span class="p">}</span>
+
+<span class="n">_enum_Broker</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;ADDR&#39;</span><span class="p">:</span> <span class="n">Broker_DataType</span><span class="p">[</span><span class="s1">&#39;ADDR&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;BACKEND_FAILURE&#39;</span><span class="p">:</span> <span class="n">Broker_ErrorCode</span><span class="p">[</span><span class="s1">&#39;BACKEND_FAILURE&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;BOOL&#39;</span><span class="p">:</span> <span class="n">Broker_DataType</span><span class="p">[</span><span class="s1">&#39;BOOL&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;BackendType&#39;</span><span class="p">:</span> <span class="n">Broker_BackendType</span><span class="p">,</span>
+    <span class="s1">&#39;CAF_ERROR&#39;</span><span class="p">:</span> <span class="n">Broker_ErrorCode</span><span class="p">[</span><span class="s1">&#39;CAF_ERROR&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;CANNOT_OPEN_FILE&#39;</span><span class="p">:</span> <span class="n">Broker_ErrorCode</span><span class="p">[</span><span class="s1">&#39;CANNOT_OPEN_FILE&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;CANNOT_WRITE_FILE&#39;</span><span class="p">:</span> <span class="n">Broker_ErrorCode</span><span class="p">[</span><span class="s1">&#39;CANNOT_WRITE_FILE&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;CONNECTED&#39;</span><span class="p">:</span> <span class="n">Broker_PeerStatus</span><span class="p">[</span><span class="s1">&#39;CONNECTED&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;CONNECTING&#39;</span><span class="p">:</span> <span class="n">Broker_PeerStatus</span><span class="p">[</span><span class="s1">&#39;CONNECTING&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;COUNT&#39;</span><span class="p">:</span> <span class="n">Broker_DataType</span><span class="p">[</span><span class="s1">&#39;COUNT&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;DISCONNECTED&#39;</span><span class="p">:</span> <span class="n">Broker_PeerStatus</span><span class="p">[</span><span class="s1">&#39;DISCONNECTED&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;DOUBLE&#39;</span><span class="p">:</span> <span class="n">Broker_DataType</span><span class="p">[</span><span class="s1">&#39;DOUBLE&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;DataType&#39;</span><span class="p">:</span> <span class="n">Broker_DataType</span><span class="p">,</span>
+    <span class="s1">&#39;END_OF_FILE&#39;</span><span class="p">:</span> <span class="n">Broker_ErrorCode</span><span class="p">[</span><span class="s1">&#39;END_OF_FILE&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;ENUM&#39;</span><span class="p">:</span> <span class="n">Broker_DataType</span><span class="p">[</span><span class="s1">&#39;ENUM&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;ERROR&#39;</span><span class="p">:</span> <span class="n">Broker_Type</span><span class="p">[</span><span class="s1">&#39;ERROR&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;ErrorCode&#39;</span><span class="p">:</span> <span class="n">Broker_ErrorCode</span><span class="p">,</span>
+    <span class="s1">&#39;FAILURE&#39;</span><span class="p">:</span> <span class="n">Broker_QueryStatus</span><span class="p">[</span><span class="s1">&#39;FAILURE&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;INITIALIZING&#39;</span><span class="p">:</span> <span class="n">Broker_PeerStatus</span><span class="p">[</span><span class="s1">&#39;INITIALIZING&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;INT&#39;</span><span class="p">:</span> <span class="n">Broker_DataType</span><span class="p">[</span><span class="s1">&#39;INT&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;INTERVAL&#39;</span><span class="p">:</span> <span class="n">Broker_DataType</span><span class="p">[</span><span class="s1">&#39;INTERVAL&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;INVALID_DATA&#39;</span><span class="p">:</span> <span class="n">Broker_ErrorCode</span><span class="p">[</span><span class="s1">&#39;INVALID_DATA&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;INVALID_STATUS&#39;</span><span class="p">:</span> <span class="n">Broker_ErrorCode</span><span class="p">[</span><span class="s1">&#39;INVALID_STATUS&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;INVALID_TAG&#39;</span><span class="p">:</span> <span class="n">Broker_ErrorCode</span><span class="p">[</span><span class="s1">&#39;INVALID_TAG&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;INVALID_TOPIC_KEY&#39;</span><span class="p">:</span> <span class="n">Broker_ErrorCode</span><span class="p">[</span><span class="s1">&#39;INVALID_TOPIC_KEY&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;LOG&#39;</span><span class="p">:</span> <span class="n">Log_ID</span><span class="p">[</span><span class="s1">&#39;Broker__LOG&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;MASTER_EXISTS&#39;</span><span class="p">:</span> <span class="n">Broker_ErrorCode</span><span class="p">[</span><span class="s1">&#39;MASTER_EXISTS&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;MEMORY&#39;</span><span class="p">:</span> <span class="n">Broker_BackendType</span><span class="p">[</span><span class="s1">&#39;MEMORY&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;NONE&#39;</span><span class="p">:</span> <span class="n">Broker_DataType</span><span class="p">[</span><span class="s1">&#39;NONE&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;NO_ERROR&#39;</span><span class="p">:</span> <span class="n">Broker_ErrorCode</span><span class="p">[</span><span class="s1">&#39;NO_ERROR&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;NO_SUCH_KEY&#39;</span><span class="p">:</span> <span class="n">Broker_ErrorCode</span><span class="p">[</span><span class="s1">&#39;NO_SUCH_KEY&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;NO_SUCH_MASTER&#39;</span><span class="p">:</span> <span class="n">Broker_ErrorCode</span><span class="p">[</span><span class="s1">&#39;NO_SUCH_MASTER&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;PEERED&#39;</span><span class="p">:</span> <span class="n">Broker_PeerStatus</span><span class="p">[</span><span class="s1">&#39;PEERED&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;PEER_DISCONNECT_DURING_HANDSHAKE&#39;</span><span class="p">:</span> <span class="n">Broker_ErrorCode</span><span class="p">[</span><span class="s1">&#39;PEER_DISCONNECT_DURING_HANDSHAKE&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;PEER_INCOMPATIBLE&#39;</span><span class="p">:</span> <span class="n">Broker_ErrorCode</span><span class="p">[</span><span class="s1">&#39;PEER_INCOMPATIBLE&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;PEER_INVALID&#39;</span><span class="p">:</span> <span class="n">Broker_ErrorCode</span><span class="p">[</span><span class="s1">&#39;PEER_INVALID&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;PEER_TIMEOUT&#39;</span><span class="p">:</span> <span class="n">Broker_ErrorCode</span><span class="p">[</span><span class="s1">&#39;PEER_TIMEOUT&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;PEER_UNAVAILABLE&#39;</span><span class="p">:</span> <span class="n">Broker_ErrorCode</span><span class="p">[</span><span class="s1">&#39;PEER_UNAVAILABLE&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;PORT&#39;</span><span class="p">:</span> <span class="n">Broker_DataType</span><span class="p">[</span><span class="s1">&#39;PORT&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;PeerStatus&#39;</span><span class="p">:</span> <span class="n">Broker_PeerStatus</span><span class="p">,</span>
+    <span class="s1">&#39;QueryStatus&#39;</span><span class="p">:</span> <span class="n">Broker_QueryStatus</span><span class="p">,</span>
+    <span class="s1">&#39;RECONNECTING&#39;</span><span class="p">:</span> <span class="n">Broker_PeerStatus</span><span class="p">[</span><span class="s1">&#39;RECONNECTING&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;REQUEST_TIMEOUT&#39;</span><span class="p">:</span> <span class="n">Broker_ErrorCode</span><span class="p">[</span><span class="s1">&#39;REQUEST_TIMEOUT&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;ROCKSDB&#39;</span><span class="p">:</span> <span class="n">Broker_BackendType</span><span class="p">[</span><span class="s1">&#39;ROCKSDB&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;SET&#39;</span><span class="p">:</span> <span class="n">Broker_DataType</span><span class="p">[</span><span class="s1">&#39;SET&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;SQLITE&#39;</span><span class="p">:</span> <span class="n">Broker_BackendType</span><span class="p">[</span><span class="s1">&#39;SQLITE&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;STALE_DATA&#39;</span><span class="p">:</span> <span class="n">Broker_ErrorCode</span><span class="p">[</span><span class="s1">&#39;STALE_DATA&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;STATUS&#39;</span><span class="p">:</span> <span class="n">Broker_Type</span><span class="p">[</span><span class="s1">&#39;STATUS&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;STRING&#39;</span><span class="p">:</span> <span class="n">Broker_DataType</span><span class="p">[</span><span class="s1">&#39;STRING&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;SUBNET&#39;</span><span class="p">:</span> <span class="n">Broker_DataType</span><span class="p">[</span><span class="s1">&#39;SUBNET&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;SUCCESS&#39;</span><span class="p">:</span> <span class="n">Broker_QueryStatus</span><span class="p">[</span><span class="s1">&#39;SUCCESS&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;TABLE&#39;</span><span class="p">:</span> <span class="n">Broker_DataType</span><span class="p">[</span><span class="s1">&#39;TABLE&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;TIME&#39;</span><span class="p">:</span> <span class="n">Broker_DataType</span><span class="p">[</span><span class="s1">&#39;TIME&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;TYPE_CLASH&#39;</span><span class="p">:</span> <span class="n">Broker_ErrorCode</span><span class="p">[</span><span class="s1">&#39;TYPE_CLASH&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;Type&#39;</span><span class="p">:</span> <span class="n">Broker_Type</span><span class="p">,</span>
+    <span class="s1">&#39;UNSPECIFIED&#39;</span><span class="p">:</span> <span class="n">Broker_ErrorCode</span><span class="p">[</span><span class="s1">&#39;UNSPECIFIED&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;VECTOR&#39;</span><span class="p">:</span> <span class="n">Broker_DataType</span><span class="p">[</span><span class="s1">&#39;VECTOR&#39;</span><span class="p">],</span>
+<span class="p">}</span>
+
+<span class="n">_enum_CaptureLoss</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;LOG&#39;</span><span class="p">:</span> <span class="n">Log_ID</span><span class="p">[</span><span class="s1">&#39;CaptureLoss__LOG&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;Too_Much_Loss&#39;</span><span class="p">:</span> <span class="n">Notice_Type</span><span class="p">[</span><span class="s1">&#39;CaptureLoss__Too_Much_Loss&#39;</span><span class="p">],</span>
+<span class="p">}</span>
+
+<span class="n">_enum_Cluster</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;CONTROL&#39;</span><span class="p">:</span> <span class="n">Cluster_NodeType</span><span class="p">[</span><span class="s1">&#39;CONTROL&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;LOG&#39;</span><span class="p">:</span> <span class="n">Log_ID</span><span class="p">[</span><span class="s1">&#39;Cluster__LOG&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;LOGGER&#39;</span><span class="p">:</span> <span class="n">Cluster_NodeType</span><span class="p">[</span><span class="s1">&#39;LOGGER&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;MANAGER&#39;</span><span class="p">:</span> <span class="n">Cluster_NodeType</span><span class="p">[</span><span class="s1">&#39;MANAGER&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;NONE&#39;</span><span class="p">:</span> <span class="n">Cluster_NodeType</span><span class="p">[</span><span class="s1">&#39;NONE&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;NodeType&#39;</span><span class="p">:</span> <span class="n">Cluster_NodeType</span><span class="p">,</span>
+    <span class="s1">&#39;PROXY&#39;</span><span class="p">:</span> <span class="n">Cluster_NodeType</span><span class="p">[</span><span class="s1">&#39;PROXY&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;TIME_MACHINE&#39;</span><span class="p">:</span> <span class="n">Cluster_NodeType</span><span class="p">[</span><span class="s1">&#39;TIME_MACHINE&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;WORKER&#39;</span><span class="p">:</span> <span class="n">Cluster_NodeType</span><span class="p">[</span><span class="s1">&#39;WORKER&#39;</span><span class="p">],</span>
+<span class="p">}</span>
+
+<span class="n">_enum_Config</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;LOG&#39;</span><span class="p">:</span> <span class="n">Log_ID</span><span class="p">[</span><span class="s1">&#39;Config__LOG&#39;</span><span class="p">],</span>
+<span class="p">}</span>
+
+<span class="n">_enum_Conn</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;Content_Gap&#39;</span><span class="p">:</span> <span class="n">Notice_Type</span><span class="p">[</span><span class="s1">&#39;Conn__Content_Gap&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;IN_ORIG&#39;</span><span class="p">:</span> <span class="n">Intel_Where</span><span class="p">[</span><span class="s1">&#39;Conn__IN_ORIG&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;IN_RESP&#39;</span><span class="p">:</span> <span class="n">Intel_Where</span><span class="p">[</span><span class="s1">&#39;Conn__IN_RESP&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;LOG&#39;</span><span class="p">:</span> <span class="n">Log_ID</span><span class="p">[</span><span class="s1">&#39;Conn__LOG&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;Retransmission_Inconsistency&#39;</span><span class="p">:</span> <span class="n">Notice_Type</span><span class="p">[</span><span class="s1">&#39;Conn__Retransmission_Inconsistency&#39;</span><span class="p">],</span>
+<span class="p">}</span>
+
+<span class="n">_enum_DCE_RPC</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;ACK&#39;</span><span class="p">:</span> <span class="n">DCE_RPC_PType</span><span class="p">[</span><span class="s1">&#39;ACK&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;ALTER_CONTEXT&#39;</span><span class="p">:</span> <span class="n">DCE_RPC_PType</span><span class="p">[</span><span class="s1">&#39;ALTER_CONTEXT&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;ALTER_CONTEXT_RESP&#39;</span><span class="p">:</span> <span class="n">DCE_RPC_PType</span><span class="p">[</span><span class="s1">&#39;ALTER_CONTEXT_RESP&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;AUTH3&#39;</span><span class="p">:</span> <span class="n">DCE_RPC_PType</span><span class="p">[</span><span class="s1">&#39;AUTH3&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;BIND&#39;</span><span class="p">:</span> <span class="n">DCE_RPC_PType</span><span class="p">[</span><span class="s1">&#39;BIND&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;BIND_ACK&#39;</span><span class="p">:</span> <span class="n">DCE_RPC_PType</span><span class="p">[</span><span class="s1">&#39;BIND_ACK&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;BIND_NAK&#39;</span><span class="p">:</span> <span class="n">DCE_RPC_PType</span><span class="p">[</span><span class="s1">&#39;BIND_NAK&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;CANCEL_ACK&#39;</span><span class="p">:</span> <span class="n">DCE_RPC_PType</span><span class="p">[</span><span class="s1">&#39;CANCEL_ACK&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;CL_CANCEL&#39;</span><span class="p">:</span> <span class="n">DCE_RPC_PType</span><span class="p">[</span><span class="s1">&#39;CL_CANCEL&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;CO_CANCEL&#39;</span><span class="p">:</span> <span class="n">DCE_RPC_PType</span><span class="p">[</span><span class="s1">&#39;CO_CANCEL&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;FACK&#39;</span><span class="p">:</span> <span class="n">DCE_RPC_PType</span><span class="p">[</span><span class="s1">&#39;FACK&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;FAULT&#39;</span><span class="p">:</span> <span class="n">DCE_RPC_PType</span><span class="p">[</span><span class="s1">&#39;FAULT&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;ISCMActivator&#39;</span><span class="p">:</span> <span class="n">DCE_RPC_IfID</span><span class="p">[</span><span class="s1">&#39;ISCMActivator&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;IfID&#39;</span><span class="p">:</span> <span class="n">DCE_RPC_IfID</span><span class="p">,</span>
+    <span class="s1">&#39;LOG&#39;</span><span class="p">:</span> <span class="n">Log_ID</span><span class="p">[</span><span class="s1">&#39;DCE_RPC__LOG&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;NOCALL&#39;</span><span class="p">:</span> <span class="n">DCE_RPC_PType</span><span class="p">[</span><span class="s1">&#39;NOCALL&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;ORPHANED&#39;</span><span class="p">:</span> <span class="n">DCE_RPC_PType</span><span class="p">[</span><span class="s1">&#39;ORPHANED&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;PING&#39;</span><span class="p">:</span> <span class="n">DCE_RPC_PType</span><span class="p">[</span><span class="s1">&#39;PING&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;PType&#39;</span><span class="p">:</span> <span class="n">DCE_RPC_PType</span><span class="p">,</span>
+    <span class="s1">&#39;REJECT&#39;</span><span class="p">:</span> <span class="n">DCE_RPC_PType</span><span class="p">[</span><span class="s1">&#39;REJECT&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;REQUEST&#39;</span><span class="p">:</span> <span class="n">DCE_RPC_PType</span><span class="p">[</span><span class="s1">&#39;REQUEST&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;RESPONSE&#39;</span><span class="p">:</span> <span class="n">DCE_RPC_PType</span><span class="p">[</span><span class="s1">&#39;RESPONSE&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;RTS&#39;</span><span class="p">:</span> <span class="n">DCE_RPC_PType</span><span class="p">[</span><span class="s1">&#39;RTS&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;SHUTDOWN&#39;</span><span class="p">:</span> <span class="n">DCE_RPC_PType</span><span class="p">[</span><span class="s1">&#39;SHUTDOWN&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;WORKING&#39;</span><span class="p">:</span> <span class="n">DCE_RPC_PType</span><span class="p">[</span><span class="s1">&#39;WORKING&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;drs&#39;</span><span class="p">:</span> <span class="n">DCE_RPC_IfID</span><span class="p">[</span><span class="s1">&#39;drs&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;epmapper&#39;</span><span class="p">:</span> <span class="n">DCE_RPC_IfID</span><span class="p">[</span><span class="s1">&#39;epmapper&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;lsa_ds&#39;</span><span class="p">:</span> <span class="n">DCE_RPC_IfID</span><span class="p">[</span><span class="s1">&#39;lsa_ds&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;lsarpc&#39;</span><span class="p">:</span> <span class="n">DCE_RPC_IfID</span><span class="p">[</span><span class="s1">&#39;lsarpc&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;mgmt&#39;</span><span class="p">:</span> <span class="n">DCE_RPC_IfID</span><span class="p">[</span><span class="s1">&#39;mgmt&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;netlogon&#39;</span><span class="p">:</span> <span class="n">DCE_RPC_IfID</span><span class="p">[</span><span class="s1">&#39;netlogon&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;oxid&#39;</span><span class="p">:</span> <span class="n">DCE_RPC_IfID</span><span class="p">[</span><span class="s1">&#39;oxid&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;samr&#39;</span><span class="p">:</span> <span class="n">DCE_RPC_IfID</span><span class="p">[</span><span class="s1">&#39;samr&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;spoolss&#39;</span><span class="p">:</span> <span class="n">DCE_RPC_IfID</span><span class="p">[</span><span class="s1">&#39;spoolss&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;srvsvc&#39;</span><span class="p">:</span> <span class="n">DCE_RPC_IfID</span><span class="p">[</span><span class="s1">&#39;srvsvc&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;unknown_if&#39;</span><span class="p">:</span> <span class="n">DCE_RPC_IfID</span><span class="p">[</span><span class="s1">&#39;unknown_if&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;winspipe&#39;</span><span class="p">:</span> <span class="n">DCE_RPC_IfID</span><span class="p">[</span><span class="s1">&#39;winspipe&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;wkssvc&#39;</span><span class="p">:</span> <span class="n">DCE_RPC_IfID</span><span class="p">[</span><span class="s1">&#39;wkssvc&#39;</span><span class="p">],</span>
+<span class="p">}</span>
+
+<span class="n">_enum_DHCP</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;CLIENT&#39;</span><span class="p">:</span> <span class="n">Software_Type</span><span class="p">[</span><span class="s1">&#39;DHCP__CLIENT&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;LOG&#39;</span><span class="p">:</span> <span class="n">Log_ID</span><span class="p">[</span><span class="s1">&#39;DHCP__LOG&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;SERVER&#39;</span><span class="p">:</span> <span class="n">Software_Type</span><span class="p">[</span><span class="s1">&#39;DHCP__SERVER&#39;</span><span class="p">],</span>
+<span class="p">}</span>
+
+<span class="n">_enum_DNP3</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;LOG&#39;</span><span class="p">:</span> <span class="n">Log_ID</span><span class="p">[</span><span class="s1">&#39;DNP3__LOG&#39;</span><span class="p">],</span>
+<span class="p">}</span>
+
+<span class="n">_enum_DNS</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;External_Name&#39;</span><span class="p">:</span> <span class="n">Notice_Type</span><span class="p">[</span><span class="s1">&#39;DNS__External_Name&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;IN_REQUEST&#39;</span><span class="p">:</span> <span class="n">Intel_Where</span><span class="p">[</span><span class="s1">&#39;DNS__IN_REQUEST&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;IN_RESPONSE&#39;</span><span class="p">:</span> <span class="n">Intel_Where</span><span class="p">[</span><span class="s1">&#39;DNS__IN_RESPONSE&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;LOG&#39;</span><span class="p">:</span> <span class="n">Log_ID</span><span class="p">[</span><span class="s1">&#39;DNS__LOG&#39;</span><span class="p">],</span>
+<span class="p">}</span>
+
+<span class="n">_enum_DPD</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;LOG&#39;</span><span class="p">:</span> <span class="n">Log_ID</span><span class="p">[</span><span class="s1">&#39;DPD__LOG&#39;</span><span class="p">],</span>
+<span class="p">}</span>
+
+<span class="n">_enum_FTP</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;Bruteforcing&#39;</span><span class="p">:</span> <span class="n">Notice_Type</span><span class="p">[</span><span class="s1">&#39;FTP__Bruteforcing&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;CLIENT&#39;</span><span class="p">:</span> <span class="n">Software_Type</span><span class="p">[</span><span class="s1">&#39;FTP__CLIENT&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;LOG&#39;</span><span class="p">:</span> <span class="n">Log_ID</span><span class="p">[</span><span class="s1">&#39;FTP__LOG&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;SERVER&#39;</span><span class="p">:</span> <span class="n">Software_Type</span><span class="p">[</span><span class="s1">&#39;FTP__SERVER&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;Site_Exec_Success&#39;</span><span class="p">:</span> <span class="n">Notice_Type</span><span class="p">[</span><span class="s1">&#39;FTP__Site_Exec_Success&#39;</span><span class="p">],</span>
+<span class="p">}</span>
+
+<span class="n">_enum_Files</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;IN_HASH&#39;</span><span class="p">:</span> <span class="n">Intel_Where</span><span class="p">[</span><span class="s1">&#39;Files__IN_HASH&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;IN_NAME&#39;</span><span class="p">:</span> <span class="n">Intel_Where</span><span class="p">[</span><span class="s1">&#39;Files__IN_NAME&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;LOG&#39;</span><span class="p">:</span> <span class="n">Log_ID</span><span class="p">[</span><span class="s1">&#39;Files__LOG&#39;</span><span class="p">],</span>
+<span class="p">}</span>
+
+<span class="n">_enum_HTTP</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;APPSERVER&#39;</span><span class="p">:</span> <span class="n">Software_Type</span><span class="p">[</span><span class="s1">&#39;HTTP__APPSERVER&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;BROWSER&#39;</span><span class="p">:</span> <span class="n">Software_Type</span><span class="p">[</span><span class="s1">&#39;HTTP__BROWSER&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;BROWSER_PLUGIN&#39;</span><span class="p">:</span> <span class="n">Software_Type</span><span class="p">[</span><span class="s1">&#39;HTTP__BROWSER_PLUGIN&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;COOKIE_SQLI&#39;</span><span class="p">:</span> <span class="n">HTTP_Tags</span><span class="p">[</span><span class="s1">&#39;COOKIE_SQLI&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;EMPTY&#39;</span><span class="p">:</span> <span class="n">HTTP_Tags</span><span class="p">[</span><span class="s1">&#39;EMPTY&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;IN_HOST_HEADER&#39;</span><span class="p">:</span> <span class="n">Intel_Where</span><span class="p">[</span><span class="s1">&#39;HTTP__IN_HOST_HEADER&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;IN_REFERRER_HEADER&#39;</span><span class="p">:</span> <span class="n">Intel_Where</span><span class="p">[</span><span class="s1">&#39;HTTP__IN_REFERRER_HEADER&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;IN_URL&#39;</span><span class="p">:</span> <span class="n">Intel_Where</span><span class="p">[</span><span class="s1">&#39;HTTP__IN_URL&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;IN_USER_AGENT_HEADER&#39;</span><span class="p">:</span> <span class="n">Intel_Where</span><span class="p">[</span><span class="s1">&#39;HTTP__IN_USER_AGENT_HEADER&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;IN_X_FORWARDED_FOR_HEADER&#39;</span><span class="p">:</span> <span class="n">Intel_Where</span><span class="p">[</span><span class="s1">&#39;HTTP__IN_X_FORWARDED_FOR_HEADER&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;LOG&#39;</span><span class="p">:</span> <span class="n">Log_ID</span><span class="p">[</span><span class="s1">&#39;HTTP__LOG&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;POST_SQLI&#39;</span><span class="p">:</span> <span class="n">HTTP_Tags</span><span class="p">[</span><span class="s1">&#39;POST_SQLI&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;SERVER&#39;</span><span class="p">:</span> <span class="n">Software_Type</span><span class="p">[</span><span class="s1">&#39;HTTP__SERVER&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;SQL_Injection_Attacker&#39;</span><span class="p">:</span> <span class="n">Notice_Type</span><span class="p">[</span><span class="s1">&#39;HTTP__SQL_Injection_Attacker&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;SQL_Injection_Victim&#39;</span><span class="p">:</span> <span class="n">Notice_Type</span><span class="p">[</span><span class="s1">&#39;HTTP__SQL_Injection_Victim&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;Tags&#39;</span><span class="p">:</span> <span class="n">HTTP_Tags</span><span class="p">,</span>
+    <span class="s1">&#39;URI_SQLI&#39;</span><span class="p">:</span> <span class="n">HTTP_Tags</span><span class="p">[</span><span class="s1">&#39;URI_SQLI&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;WEB_APPLICATION&#39;</span><span class="p">:</span> <span class="n">Software_Type</span><span class="p">[</span><span class="s1">&#39;HTTP__WEB_APPLICATION&#39;</span><span class="p">],</span>
+<span class="p">}</span>
+
+<span class="n">_enum_Heartbleed</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;SSL_Heartbeat_Attack&#39;</span><span class="p">:</span> <span class="n">Notice_Type</span><span class="p">[</span><span class="s1">&#39;Heartbleed__SSL_Heartbeat_Attack&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;SSL_Heartbeat_Attack_Success&#39;</span><span class="p">:</span> <span class="n">Notice_Type</span><span class="p">[</span><span class="s1">&#39;Heartbleed__SSL_Heartbeat_Attack_Success&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;SSL_Heartbeat_Many_Requests&#39;</span><span class="p">:</span> <span class="n">Notice_Type</span><span class="p">[</span><span class="s1">&#39;Heartbleed__SSL_Heartbeat_Many_Requests&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;SSL_Heartbeat_Odd_Length&#39;</span><span class="p">:</span> <span class="n">Notice_Type</span><span class="p">[</span><span class="s1">&#39;Heartbleed__SSL_Heartbeat_Odd_Length&#39;</span><span class="p">],</span>
+<span class="p">}</span>
+
+<span class="n">_enum_IRC</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;LOG&#39;</span><span class="p">:</span> <span class="n">Log_ID</span><span class="p">[</span><span class="s1">&#39;IRC__LOG&#39;</span><span class="p">],</span>
+<span class="p">}</span>
+
+<span class="n">_enum_Input</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;EVENT_CHANGED&#39;</span><span class="p">:</span> <span class="n">Input_Event</span><span class="p">[</span><span class="s1">&#39;EVENT_CHANGED&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;EVENT_NEW&#39;</span><span class="p">:</span> <span class="n">Input_Event</span><span class="p">[</span><span class="s1">&#39;EVENT_NEW&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;EVENT_REMOVED&#39;</span><span class="p">:</span> <span class="n">Input_Event</span><span class="p">[</span><span class="s1">&#39;EVENT_REMOVED&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;Event&#39;</span><span class="p">:</span> <span class="n">Input_Event</span><span class="p">,</span>
+    <span class="s1">&#39;MANUAL&#39;</span><span class="p">:</span> <span class="n">Input_Mode</span><span class="p">[</span><span class="s1">&#39;MANUAL&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;Mode&#39;</span><span class="p">:</span> <span class="n">Input_Mode</span><span class="p">,</span>
+    <span class="s1">&#39;READER_ASCII&#39;</span><span class="p">:</span> <span class="n">Input_Reader</span><span class="p">[</span><span class="s1">&#39;READER_ASCII&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;READER_BENCHMARK&#39;</span><span class="p">:</span> <span class="n">Input_Reader</span><span class="p">[</span><span class="s1">&#39;READER_BENCHMARK&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;READER_BINARY&#39;</span><span class="p">:</span> <span class="n">Input_Reader</span><span class="p">[</span><span class="s1">&#39;READER_BINARY&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;READER_CONFIG&#39;</span><span class="p">:</span> <span class="n">Input_Reader</span><span class="p">[</span><span class="s1">&#39;READER_CONFIG&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;READER_RAW&#39;</span><span class="p">:</span> <span class="n">Input_Reader</span><span class="p">[</span><span class="s1">&#39;READER_RAW&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;READER_SQLITE&#39;</span><span class="p">:</span> <span class="n">Input_Reader</span><span class="p">[</span><span class="s1">&#39;READER_SQLITE&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;REREAD&#39;</span><span class="p">:</span> <span class="n">Input_Mode</span><span class="p">[</span><span class="s1">&#39;REREAD&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;Reader&#39;</span><span class="p">:</span> <span class="n">Input_Reader</span><span class="p">,</span>
+    <span class="s1">&#39;STREAM&#39;</span><span class="p">:</span> <span class="n">Input_Mode</span><span class="p">[</span><span class="s1">&#39;STREAM&#39;</span><span class="p">],</span>
+<span class="p">}</span>
+
+<span class="n">_enum_Intel</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;ADDR&#39;</span><span class="p">:</span> <span class="n">Intel_Type</span><span class="p">[</span><span class="s1">&#39;ADDR&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;CERT_HASH&#39;</span><span class="p">:</span> <span class="n">Intel_Type</span><span class="p">[</span><span class="s1">&#39;CERT_HASH&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;DOMAIN&#39;</span><span class="p">:</span> <span class="n">Intel_Type</span><span class="p">[</span><span class="s1">&#39;DOMAIN&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;EMAIL&#39;</span><span class="p">:</span> <span class="n">Intel_Type</span><span class="p">[</span><span class="s1">&#39;EMAIL&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;FILE_HASH&#39;</span><span class="p">:</span> <span class="n">Intel_Type</span><span class="p">[</span><span class="s1">&#39;FILE_HASH&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;FILE_NAME&#39;</span><span class="p">:</span> <span class="n">Intel_Type</span><span class="p">[</span><span class="s1">&#39;FILE_NAME&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;IN_ANYWHERE&#39;</span><span class="p">:</span> <span class="n">Intel_Where</span><span class="p">[</span><span class="s1">&#39;IN_ANYWHERE&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;LOG&#39;</span><span class="p">:</span> <span class="n">Log_ID</span><span class="p">[</span><span class="s1">&#39;Intel__LOG&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;Notice&#39;</span><span class="p">:</span> <span class="n">Notice_Type</span><span class="p">[</span><span class="s1">&#39;Intel__Notice&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;PUBKEY_HASH&#39;</span><span class="p">:</span> <span class="n">Intel_Type</span><span class="p">[</span><span class="s1">&#39;PUBKEY_HASH&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;SOFTWARE&#39;</span><span class="p">:</span> <span class="n">Intel_Type</span><span class="p">[</span><span class="s1">&#39;SOFTWARE&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;SUBNET&#39;</span><span class="p">:</span> <span class="n">Intel_Type</span><span class="p">[</span><span class="s1">&#39;SUBNET&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;Type&#39;</span><span class="p">:</span> <span class="n">Intel_Type</span><span class="p">,</span>
+    <span class="s1">&#39;URL&#39;</span><span class="p">:</span> <span class="n">Intel_Type</span><span class="p">[</span><span class="s1">&#39;URL&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;USER_NAME&#39;</span><span class="p">:</span> <span class="n">Intel_Type</span><span class="p">[</span><span class="s1">&#39;USER_NAME&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;Where&#39;</span><span class="p">:</span> <span class="n">Intel_Where</span><span class="p">,</span>
+<span class="p">}</span>
+
+<span class="n">_enum_JSON</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;TS_EPOCH&#39;</span><span class="p">:</span> <span class="n">JSON_TimestampFormat</span><span class="p">[</span><span class="s1">&#39;TS_EPOCH&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;TS_ISO8601&#39;</span><span class="p">:</span> <span class="n">JSON_TimestampFormat</span><span class="p">[</span><span class="s1">&#39;TS_ISO8601&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;TS_MILLIS&#39;</span><span class="p">:</span> <span class="n">JSON_TimestampFormat</span><span class="p">[</span><span class="s1">&#39;TS_MILLIS&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;TimestampFormat&#39;</span><span class="p">:</span> <span class="n">JSON_TimestampFormat</span><span class="p">,</span>
+<span class="p">}</span>
+
+<span class="n">_enum_KRB</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;LOG&#39;</span><span class="p">:</span> <span class="n">Log_ID</span><span class="p">[</span><span class="s1">&#39;KRB__LOG&#39;</span><span class="p">],</span>
+<span class="p">}</span>
+
+<span class="n">_enum_Known</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;CERTS_LOG&#39;</span><span class="p">:</span> <span class="n">Log_ID</span><span class="p">[</span><span class="s1">&#39;Known__CERTS_LOG&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;HOSTS_LOG&#39;</span><span class="p">:</span> <span class="n">Log_ID</span><span class="p">[</span><span class="s1">&#39;Known__HOSTS_LOG&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;MODBUS_LOG&#39;</span><span class="p">:</span> <span class="n">Log_ID</span><span class="p">[</span><span class="s1">&#39;Known__MODBUS_LOG&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;MODBUS_MASTER&#39;</span><span class="p">:</span> <span class="n">Known_ModbusDeviceType</span><span class="p">[</span><span class="s1">&#39;MODBUS_MASTER&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;MODBUS_SLAVE&#39;</span><span class="p">:</span> <span class="n">Known_ModbusDeviceType</span><span class="p">[</span><span class="s1">&#39;MODBUS_SLAVE&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;ModbusDeviceType&#39;</span><span class="p">:</span> <span class="n">Known_ModbusDeviceType</span><span class="p">,</span>
+    <span class="s1">&#39;SERVICES_LOG&#39;</span><span class="p">:</span> <span class="n">Log_ID</span><span class="p">[</span><span class="s1">&#39;Known__SERVICES_LOG&#39;</span><span class="p">],</span>
+<span class="p">}</span>
+
+<span class="n">_enum_LoadBalancing</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;AUTO_BPF&#39;</span><span class="p">:</span> <span class="n">LoadBalancing_Method</span><span class="p">[</span><span class="s1">&#39;AUTO_BPF&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;Method&#39;</span><span class="p">:</span> <span class="n">LoadBalancing_Method</span><span class="p">,</span>
+<span class="p">}</span>
+
+<span class="n">_enum_LoadedScripts</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;LOG&#39;</span><span class="p">:</span> <span class="n">Log_ID</span><span class="p">[</span><span class="s1">&#39;LoadedScripts__LOG&#39;</span><span class="p">],</span>
+<span class="p">}</span>
+
+<span class="n">_enum_Log</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;ID&#39;</span><span class="p">:</span> <span class="n">Log_ID</span><span class="p">,</span>
+    <span class="s1">&#39;PRINTLOG&#39;</span><span class="p">:</span> <span class="n">Log_ID</span><span class="p">[</span><span class="s1">&#39;PRINTLOG&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;PrintLogType&#39;</span><span class="p">:</span> <span class="n">Log_PrintLogType</span><span class="p">,</span>
+    <span class="s1">&#39;REDIRECT_ALL&#39;</span><span class="p">:</span> <span class="n">Log_PrintLogType</span><span class="p">[</span><span class="s1">&#39;REDIRECT_ALL&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;REDIRECT_NONE&#39;</span><span class="p">:</span> <span class="n">Log_PrintLogType</span><span class="p">[</span><span class="s1">&#39;REDIRECT_NONE&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;REDIRECT_STDOUT&#39;</span><span class="p">:</span> <span class="n">Log_PrintLogType</span><span class="p">[</span><span class="s1">&#39;REDIRECT_STDOUT&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;UNKNOWN&#39;</span><span class="p">:</span> <span class="n">Log_ID</span><span class="p">[</span><span class="s1">&#39;UNKNOWN&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;WRITER_ASCII&#39;</span><span class="p">:</span> <span class="n">Log_Writer</span><span class="p">[</span><span class="s1">&#39;WRITER_ASCII&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;WRITER_NONE&#39;</span><span class="p">:</span> <span class="n">Log_Writer</span><span class="p">[</span><span class="s1">&#39;WRITER_NONE&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;WRITER_SQLITE&#39;</span><span class="p">:</span> <span class="n">Log_Writer</span><span class="p">[</span><span class="s1">&#39;WRITER_SQLITE&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;Writer&#39;</span><span class="p">:</span> <span class="n">Log_Writer</span><span class="p">,</span>
+<span class="p">}</span>
+
+<span class="n">_enum_MOUNT3</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;AUTH_DES&#39;</span><span class="p">:</span> <span class="n">MOUNT3_auth_flavor_t</span><span class="p">[</span><span class="s1">&#39;AUTH_DES&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;AUTH_NULL&#39;</span><span class="p">:</span> <span class="n">MOUNT3_auth_flavor_t</span><span class="p">[</span><span class="s1">&#39;AUTH_NULL&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;AUTH_SHORT&#39;</span><span class="p">:</span> <span class="n">MOUNT3_auth_flavor_t</span><span class="p">[</span><span class="s1">&#39;AUTH_SHORT&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;AUTH_UNIX&#39;</span><span class="p">:</span> <span class="n">MOUNT3_auth_flavor_t</span><span class="p">[</span><span class="s1">&#39;AUTH_UNIX&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;MNT3ERR_ACCES&#39;</span><span class="p">:</span> <span class="n">MOUNT3_status_t</span><span class="p">[</span><span class="s1">&#39;MNT3ERR_ACCES&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;MNT3ERR_INVAL&#39;</span><span class="p">:</span> <span class="n">MOUNT3_status_t</span><span class="p">[</span><span class="s1">&#39;MNT3ERR_INVAL&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;MNT3ERR_IO&#39;</span><span class="p">:</span> <span class="n">MOUNT3_status_t</span><span class="p">[</span><span class="s1">&#39;MNT3ERR_IO&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;MNT3ERR_NAMETOOLONG&#39;</span><span class="p">:</span> <span class="n">MOUNT3_status_t</span><span class="p">[</span><span class="s1">&#39;MNT3ERR_NAMETOOLONG&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;MNT3ERR_NOENT&#39;</span><span class="p">:</span> <span class="n">MOUNT3_status_t</span><span class="p">[</span><span class="s1">&#39;MNT3ERR_NOENT&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;MNT3ERR_NOTDIR&#39;</span><span class="p">:</span> <span class="n">MOUNT3_status_t</span><span class="p">[</span><span class="s1">&#39;MNT3ERR_NOTDIR&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;MNT3ERR_NOTSUPP&#39;</span><span class="p">:</span> <span class="n">MOUNT3_status_t</span><span class="p">[</span><span class="s1">&#39;MNT3ERR_NOTSUPP&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;MNT3ERR_PERM&#39;</span><span class="p">:</span> <span class="n">MOUNT3_status_t</span><span class="p">[</span><span class="s1">&#39;MNT3ERR_PERM&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;MNT3ERR_SERVERFAULT&#39;</span><span class="p">:</span> <span class="n">MOUNT3_status_t</span><span class="p">[</span><span class="s1">&#39;MNT3ERR_SERVERFAULT&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;MNT3_OK&#39;</span><span class="p">:</span> <span class="n">MOUNT3_status_t</span><span class="p">[</span><span class="s1">&#39;MNT3_OK&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;MOUNT3ERR_UNKNOWN&#39;</span><span class="p">:</span> <span class="n">MOUNT3_status_t</span><span class="p">[</span><span class="s1">&#39;MOUNT3ERR_UNKNOWN&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;PROC_DUMP&#39;</span><span class="p">:</span> <span class="n">MOUNT3_proc_t</span><span class="p">[</span><span class="s1">&#39;PROC_DUMP&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;PROC_END_OF_PROCS&#39;</span><span class="p">:</span> <span class="n">MOUNT3_proc_t</span><span class="p">[</span><span class="s1">&#39;PROC_END_OF_PROCS&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;PROC_EXPORT&#39;</span><span class="p">:</span> <span class="n">MOUNT3_proc_t</span><span class="p">[</span><span class="s1">&#39;PROC_EXPORT&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;PROC_MNT&#39;</span><span class="p">:</span> <span class="n">MOUNT3_proc_t</span><span class="p">[</span><span class="s1">&#39;PROC_MNT&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;PROC_NULL&#39;</span><span class="p">:</span> <span class="n">MOUNT3_proc_t</span><span class="p">[</span><span class="s1">&#39;PROC_NULL&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;PROC_UMNT&#39;</span><span class="p">:</span> <span class="n">MOUNT3_proc_t</span><span class="p">[</span><span class="s1">&#39;PROC_UMNT&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;PROC_UMNT_ALL&#39;</span><span class="p">:</span> <span class="n">MOUNT3_proc_t</span><span class="p">[</span><span class="s1">&#39;PROC_UMNT_ALL&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;auth_flavor_t&#39;</span><span class="p">:</span> <span class="n">MOUNT3_auth_flavor_t</span><span class="p">,</span>
+    <span class="s1">&#39;proc_t&#39;</span><span class="p">:</span> <span class="n">MOUNT3_proc_t</span><span class="p">,</span>
+    <span class="s1">&#39;status_t&#39;</span><span class="p">:</span> <span class="n">MOUNT3_status_t</span><span class="p">,</span>
+<span class="p">}</span>
+
+<span class="n">_enum_MQTT</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;CONNECT_LOG&#39;</span><span class="p">:</span> <span class="n">Log_ID</span><span class="p">[</span><span class="s1">&#39;MQTT__CONNECT_LOG&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;PUBLISH_LOG&#39;</span><span class="p">:</span> <span class="n">Log_ID</span><span class="p">[</span><span class="s1">&#39;MQTT__PUBLISH_LOG&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;SUBSCRIBE&#39;</span><span class="p">:</span> <span class="n">MQTT_SubUnsub</span><span class="p">[</span><span class="s1">&#39;SUBSCRIBE&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;SUBSCRIBE_LOG&#39;</span><span class="p">:</span> <span class="n">Log_ID</span><span class="p">[</span><span class="s1">&#39;MQTT__SUBSCRIBE_LOG&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;SubUnsub&#39;</span><span class="p">:</span> <span class="n">MQTT_SubUnsub</span><span class="p">,</span>
+    <span class="s1">&#39;UNSUBSCRIBE&#39;</span><span class="p">:</span> <span class="n">MQTT_SubUnsub</span><span class="p">[</span><span class="s1">&#39;UNSUBSCRIBE&#39;</span><span class="p">],</span>
+<span class="p">}</span>
+
+<span class="n">_enum_Modbus</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;LOG&#39;</span><span class="p">:</span> <span class="n">Log_ID</span><span class="p">[</span><span class="s1">&#39;Modbus__LOG&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;REGISTER_CHANGE_LOG&#39;</span><span class="p">:</span> <span class="n">Log_ID</span><span class="p">[</span><span class="s1">&#39;Modbus__REGISTER_CHANGE_LOG&#39;</span><span class="p">],</span>
+<span class="p">}</span>
+
+<span class="n">_enum_MySQL</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;SERVER&#39;</span><span class="p">:</span> <span class="n">Software_Type</span><span class="p">[</span><span class="s1">&#39;MySQL__SERVER&#39;</span><span class="p">],</span>
+<span class="p">}</span>
+
+<span class="n">_enum_NFS3</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;DATA_SYNC&#39;</span><span class="p">:</span> <span class="n">NFS3_stable_how_t</span><span class="p">[</span><span class="s1">&#39;DATA_SYNC&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;DONT_CHANGE&#39;</span><span class="p">:</span> <span class="n">NFS3_time_how_t</span><span class="p">[</span><span class="s1">&#39;DONT_CHANGE&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;EXCLUSIVE&#39;</span><span class="p">:</span> <span class="n">NFS3_createmode_t</span><span class="p">[</span><span class="s1">&#39;EXCLUSIVE&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;FILE_SYNC&#39;</span><span class="p">:</span> <span class="n">NFS3_stable_how_t</span><span class="p">[</span><span class="s1">&#39;FILE_SYNC&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;FTYPE_BLK&#39;</span><span class="p">:</span> <span class="n">NFS3_file_type_t</span><span class="p">[</span><span class="s1">&#39;FTYPE_BLK&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;FTYPE_CHR&#39;</span><span class="p">:</span> <span class="n">NFS3_file_type_t</span><span class="p">[</span><span class="s1">&#39;FTYPE_CHR&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;FTYPE_DIR&#39;</span><span class="p">:</span> <span class="n">NFS3_file_type_t</span><span class="p">[</span><span class="s1">&#39;FTYPE_DIR&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;FTYPE_FIFO&#39;</span><span class="p">:</span> <span class="n">NFS3_file_type_t</span><span class="p">[</span><span class="s1">&#39;FTYPE_FIFO&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;FTYPE_LNK&#39;</span><span class="p">:</span> <span class="n">NFS3_file_type_t</span><span class="p">[</span><span class="s1">&#39;FTYPE_LNK&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;FTYPE_REG&#39;</span><span class="p">:</span> <span class="n">NFS3_file_type_t</span><span class="p">[</span><span class="s1">&#39;FTYPE_REG&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;FTYPE_SOCK&#39;</span><span class="p">:</span> <span class="n">NFS3_file_type_t</span><span class="p">[</span><span class="s1">&#39;FTYPE_SOCK&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;GUARDED&#39;</span><span class="p">:</span> <span class="n">NFS3_createmode_t</span><span class="p">[</span><span class="s1">&#39;GUARDED&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;NFS3ERR_ACCES&#39;</span><span class="p">:</span> <span class="n">NFS3_status_t</span><span class="p">[</span><span class="s1">&#39;NFS3ERR_ACCES&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;NFS3ERR_BADHANDLE&#39;</span><span class="p">:</span> <span class="n">NFS3_status_t</span><span class="p">[</span><span class="s1">&#39;NFS3ERR_BADHANDLE&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;NFS3ERR_BADTYPE&#39;</span><span class="p">:</span> <span class="n">NFS3_status_t</span><span class="p">[</span><span class="s1">&#39;NFS3ERR_BADTYPE&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;NFS3ERR_BAD_COOKIE&#39;</span><span class="p">:</span> <span class="n">NFS3_status_t</span><span class="p">[</span><span class="s1">&#39;NFS3ERR_BAD_COOKIE&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;NFS3ERR_DQUOT&#39;</span><span class="p">:</span> <span class="n">NFS3_status_t</span><span class="p">[</span><span class="s1">&#39;NFS3ERR_DQUOT&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;NFS3ERR_EXIST&#39;</span><span class="p">:</span> <span class="n">NFS3_status_t</span><span class="p">[</span><span class="s1">&#39;NFS3ERR_EXIST&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;NFS3ERR_FBIG&#39;</span><span class="p">:</span> <span class="n">NFS3_status_t</span><span class="p">[</span><span class="s1">&#39;NFS3ERR_FBIG&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;NFS3ERR_INVAL&#39;</span><span class="p">:</span> <span class="n">NFS3_status_t</span><span class="p">[</span><span class="s1">&#39;NFS3ERR_INVAL&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;NFS3ERR_IO&#39;</span><span class="p">:</span> <span class="n">NFS3_status_t</span><span class="p">[</span><span class="s1">&#39;NFS3ERR_IO&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;NFS3ERR_ISDIR&#39;</span><span class="p">:</span> <span class="n">NFS3_status_t</span><span class="p">[</span><span class="s1">&#39;NFS3ERR_ISDIR&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;NFS3ERR_JUKEBOX&#39;</span><span class="p">:</span> <span class="n">NFS3_status_t</span><span class="p">[</span><span class="s1">&#39;NFS3ERR_JUKEBOX&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;NFS3ERR_MLINK&#39;</span><span class="p">:</span> <span class="n">NFS3_status_t</span><span class="p">[</span><span class="s1">&#39;NFS3ERR_MLINK&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;NFS3ERR_NAMETOOLONG&#39;</span><span class="p">:</span> <span class="n">NFS3_status_t</span><span class="p">[</span><span class="s1">&#39;NFS3ERR_NAMETOOLONG&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;NFS3ERR_NODEV&#39;</span><span class="p">:</span> <span class="n">NFS3_status_t</span><span class="p">[</span><span class="s1">&#39;NFS3ERR_NODEV&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;NFS3ERR_NOENT&#39;</span><span class="p">:</span> <span class="n">NFS3_status_t</span><span class="p">[</span><span class="s1">&#39;NFS3ERR_NOENT&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;NFS3ERR_NOSPC&#39;</span><span class="p">:</span> <span class="n">NFS3_status_t</span><span class="p">[</span><span class="s1">&#39;NFS3ERR_NOSPC&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;NFS3ERR_NOTDIR&#39;</span><span class="p">:</span> <span class="n">NFS3_status_t</span><span class="p">[</span><span class="s1">&#39;NFS3ERR_NOTDIR&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;NFS3ERR_NOTEMPTY&#39;</span><span class="p">:</span> <span class="n">NFS3_status_t</span><span class="p">[</span><span class="s1">&#39;NFS3ERR_NOTEMPTY&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;NFS3ERR_NOTSUPP&#39;</span><span class="p">:</span> <span class="n">NFS3_status_t</span><span class="p">[</span><span class="s1">&#39;NFS3ERR_NOTSUPP&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;NFS3ERR_NOT_SYNC&#39;</span><span class="p">:</span> <span class="n">NFS3_status_t</span><span class="p">[</span><span class="s1">&#39;NFS3ERR_NOT_SYNC&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;NFS3ERR_NXIO&#39;</span><span class="p">:</span> <span class="n">NFS3_status_t</span><span class="p">[</span><span class="s1">&#39;NFS3ERR_NXIO&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;NFS3ERR_OK&#39;</span><span class="p">:</span> <span class="n">NFS3_status_t</span><span class="p">[</span><span class="s1">&#39;NFS3ERR_OK&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;NFS3ERR_PERM&#39;</span><span class="p">:</span> <span class="n">NFS3_status_t</span><span class="p">[</span><span class="s1">&#39;NFS3ERR_PERM&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;NFS3ERR_REMOTE&#39;</span><span class="p">:</span> <span class="n">NFS3_status_t</span><span class="p">[</span><span class="s1">&#39;NFS3ERR_REMOTE&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;NFS3ERR_ROFS&#39;</span><span class="p">:</span> <span class="n">NFS3_status_t</span><span class="p">[</span><span class="s1">&#39;NFS3ERR_ROFS&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;NFS3ERR_SERVERFAULT&#39;</span><span class="p">:</span> <span class="n">NFS3_status_t</span><span class="p">[</span><span class="s1">&#39;NFS3ERR_SERVERFAULT&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;NFS3ERR_STALE&#39;</span><span class="p">:</span> <span class="n">NFS3_status_t</span><span class="p">[</span><span class="s1">&#39;NFS3ERR_STALE&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;NFS3ERR_TOOSMALL&#39;</span><span class="p">:</span> <span class="n">NFS3_status_t</span><span class="p">[</span><span class="s1">&#39;NFS3ERR_TOOSMALL&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;NFS3ERR_UNKNOWN&#39;</span><span class="p">:</span> <span class="n">NFS3_status_t</span><span class="p">[</span><span class="s1">&#39;NFS3ERR_UNKNOWN&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;NFS3ERR_XDEV&#39;</span><span class="p">:</span> <span class="n">NFS3_status_t</span><span class="p">[</span><span class="s1">&#39;NFS3ERR_XDEV&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;PROC_ACCESS&#39;</span><span class="p">:</span> <span class="n">NFS3_proc_t</span><span class="p">[</span><span class="s1">&#39;PROC_ACCESS&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;PROC_COMMIT&#39;</span><span class="p">:</span> <span class="n">NFS3_proc_t</span><span class="p">[</span><span class="s1">&#39;PROC_COMMIT&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;PROC_CREATE&#39;</span><span class="p">:</span> <span class="n">NFS3_proc_t</span><span class="p">[</span><span class="s1">&#39;PROC_CREATE&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;PROC_END_OF_PROCS&#39;</span><span class="p">:</span> <span class="n">NFS3_proc_t</span><span class="p">[</span><span class="s1">&#39;PROC_END_OF_PROCS&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;PROC_FSINFO&#39;</span><span class="p">:</span> <span class="n">NFS3_proc_t</span><span class="p">[</span><span class="s1">&#39;PROC_FSINFO&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;PROC_FSSTAT&#39;</span><span class="p">:</span> <span class="n">NFS3_proc_t</span><span class="p">[</span><span class="s1">&#39;PROC_FSSTAT&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;PROC_GETATTR&#39;</span><span class="p">:</span> <span class="n">NFS3_proc_t</span><span class="p">[</span><span class="s1">&#39;PROC_GETATTR&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;PROC_LINK&#39;</span><span class="p">:</span> <span class="n">NFS3_proc_t</span><span class="p">[</span><span class="s1">&#39;PROC_LINK&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;PROC_LOOKUP&#39;</span><span class="p">:</span> <span class="n">NFS3_proc_t</span><span class="p">[</span><span class="s1">&#39;PROC_LOOKUP&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;PROC_MKDIR&#39;</span><span class="p">:</span> <span class="n">NFS3_proc_t</span><span class="p">[</span><span class="s1">&#39;PROC_MKDIR&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;PROC_MKNOD&#39;</span><span class="p">:</span> <span class="n">NFS3_proc_t</span><span class="p">[</span><span class="s1">&#39;PROC_MKNOD&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;PROC_NULL&#39;</span><span class="p">:</span> <span class="n">NFS3_proc_t</span><span class="p">[</span><span class="s1">&#39;PROC_NULL&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;PROC_PATHCONF&#39;</span><span class="p">:</span> <span class="n">NFS3_proc_t</span><span class="p">[</span><span class="s1">&#39;PROC_PATHCONF&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;PROC_READ&#39;</span><span class="p">:</span> <span class="n">NFS3_proc_t</span><span class="p">[</span><span class="s1">&#39;PROC_READ&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;PROC_READDIR&#39;</span><span class="p">:</span> <span class="n">NFS3_proc_t</span><span class="p">[</span><span class="s1">&#39;PROC_READDIR&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;PROC_READDIRPLUS&#39;</span><span class="p">:</span> <span class="n">NFS3_proc_t</span><span class="p">[</span><span class="s1">&#39;PROC_READDIRPLUS&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;PROC_READLINK&#39;</span><span class="p">:</span> <span class="n">NFS3_proc_t</span><span class="p">[</span><span class="s1">&#39;PROC_READLINK&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;PROC_REMOVE&#39;</span><span class="p">:</span> <span class="n">NFS3_proc_t</span><span class="p">[</span><span class="s1">&#39;PROC_REMOVE&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;PROC_RENAME&#39;</span><span class="p">:</span> <span class="n">NFS3_proc_t</span><span class="p">[</span><span class="s1">&#39;PROC_RENAME&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;PROC_RMDIR&#39;</span><span class="p">:</span> <span class="n">NFS3_proc_t</span><span class="p">[</span><span class="s1">&#39;PROC_RMDIR&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;PROC_SETATTR&#39;</span><span class="p">:</span> <span class="n">NFS3_proc_t</span><span class="p">[</span><span class="s1">&#39;PROC_SETATTR&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;PROC_SYMLINK&#39;</span><span class="p">:</span> <span class="n">NFS3_proc_t</span><span class="p">[</span><span class="s1">&#39;PROC_SYMLINK&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;PROC_WRITE&#39;</span><span class="p">:</span> <span class="n">NFS3_proc_t</span><span class="p">[</span><span class="s1">&#39;PROC_WRITE&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;SET_TO_CLIENT_TIME&#39;</span><span class="p">:</span> <span class="n">NFS3_time_how_t</span><span class="p">[</span><span class="s1">&#39;SET_TO_CLIENT_TIME&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;SET_TO_SERVER_TIME&#39;</span><span class="p">:</span> <span class="n">NFS3_time_how_t</span><span class="p">[</span><span class="s1">&#39;SET_TO_SERVER_TIME&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;UNCHECKED&#39;</span><span class="p">:</span> <span class="n">NFS3_createmode_t</span><span class="p">[</span><span class="s1">&#39;UNCHECKED&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;UNSTABLE&#39;</span><span class="p">:</span> <span class="n">NFS3_stable_how_t</span><span class="p">[</span><span class="s1">&#39;UNSTABLE&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;createmode_t&#39;</span><span class="p">:</span> <span class="n">NFS3_createmode_t</span><span class="p">,</span>
+    <span class="s1">&#39;file_type_t&#39;</span><span class="p">:</span> <span class="n">NFS3_file_type_t</span><span class="p">,</span>
+    <span class="s1">&#39;proc_t&#39;</span><span class="p">:</span> <span class="n">NFS3_proc_t</span><span class="p">,</span>
+    <span class="s1">&#39;stable_how_t&#39;</span><span class="p">:</span> <span class="n">NFS3_stable_how_t</span><span class="p">,</span>
+    <span class="s1">&#39;status_t&#39;</span><span class="p">:</span> <span class="n">NFS3_status_t</span><span class="p">,</span>
+    <span class="s1">&#39;time_how_t&#39;</span><span class="p">:</span> <span class="n">NFS3_time_how_t</span><span class="p">,</span>
+<span class="p">}</span>
+
+<span class="n">_enum_NTLM</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;LOG&#39;</span><span class="p">:</span> <span class="n">Log_ID</span><span class="p">[</span><span class="s1">&#39;NTLM__LOG&#39;</span><span class="p">],</span>
+<span class="p">}</span>
+
+<span class="n">_enum_NTP</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;LOG&#39;</span><span class="p">:</span> <span class="n">Log_ID</span><span class="p">[</span><span class="s1">&#39;NTP__LOG&#39;</span><span class="p">],</span>
+<span class="p">}</span>
+
+<span class="n">_enum_NetControl</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;ADDED&#39;</span><span class="p">:</span> <span class="n">NetControl_CatchReleaseActions</span><span class="p">[</span><span class="s1">&#39;ADDED&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;ADDRESS&#39;</span><span class="p">:</span> <span class="n">NetControl_EntityType</span><span class="p">[</span><span class="s1">&#39;ADDRESS&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;CATCH_RELEASE&#39;</span><span class="p">:</span> <span class="n">Log_ID</span><span class="p">[</span><span class="s1">&#39;NetControl__CATCH_RELEASE&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;CONNECTION&#39;</span><span class="p">:</span> <span class="n">NetControl_EntityType</span><span class="p">[</span><span class="s1">&#39;CONNECTION&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;CatchReleaseActions&#39;</span><span class="p">:</span> <span class="n">NetControl_CatchReleaseActions</span><span class="p">,</span>
+    <span class="s1">&#39;DROP&#39;</span><span class="p">:</span> <span class="n">Log_ID</span><span class="p">[</span><span class="s1">&#39;NetControl__DROP&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;DROP&#39;</span><span class="p">:</span> <span class="n">NetControl_CatchReleaseActions</span><span class="p">[</span><span class="s1">&#39;DROP&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;DROP&#39;</span><span class="p">:</span> <span class="n">NetControl_RuleType</span><span class="p">[</span><span class="s1">&#39;DROP&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;DROPPED&#39;</span><span class="p">:</span> <span class="n">NetControl_CatchReleaseActions</span><span class="p">[</span><span class="s1">&#39;DROPPED&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;ERROR&#39;</span><span class="p">:</span> <span class="n">NetControl_InfoCategory</span><span class="p">[</span><span class="s1">&#39;ERROR&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;EXISTS&#39;</span><span class="p">:</span> <span class="n">NetControl_InfoState</span><span class="p">[</span><span class="s1">&#39;EXISTS&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;EntityType&#39;</span><span class="p">:</span> <span class="n">NetControl_EntityType</span><span class="p">,</span>
+    <span class="s1">&#39;FAILED&#39;</span><span class="p">:</span> <span class="n">NetControl_InfoState</span><span class="p">[</span><span class="s1">&#39;FAILED&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;FLOW&#39;</span><span class="p">:</span> <span class="n">NetControl_EntityType</span><span class="p">[</span><span class="s1">&#39;FLOW&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;FORGOTTEN&#39;</span><span class="p">:</span> <span class="n">NetControl_CatchReleaseActions</span><span class="p">[</span><span class="s1">&#39;FORGOTTEN&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;FORWARD&#39;</span><span class="p">:</span> <span class="n">NetControl_TargetType</span><span class="p">[</span><span class="s1">&#39;FORWARD&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;INFO&#39;</span><span class="p">:</span> <span class="n">NetControl_CatchReleaseActions</span><span class="p">[</span><span class="s1">&#39;INFO&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;InfoCategory&#39;</span><span class="p">:</span> <span class="n">NetControl_InfoCategory</span><span class="p">,</span>
+    <span class="s1">&#39;InfoState&#39;</span><span class="p">:</span> <span class="n">NetControl_InfoState</span><span class="p">,</span>
+    <span class="s1">&#39;LOG&#39;</span><span class="p">:</span> <span class="n">Log_ID</span><span class="p">[</span><span class="s1">&#39;NetControl__LOG&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;MAC&#39;</span><span class="p">:</span> <span class="n">NetControl_EntityType</span><span class="p">[</span><span class="s1">&#39;MAC&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;MESSAGE&#39;</span><span class="p">:</span> <span class="n">NetControl_InfoCategory</span><span class="p">[</span><span class="s1">&#39;MESSAGE&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;MODIFY&#39;</span><span class="p">:</span> <span class="n">NetControl_RuleType</span><span class="p">[</span><span class="s1">&#39;MODIFY&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;MONITOR&#39;</span><span class="p">:</span> <span class="n">NetControl_TargetType</span><span class="p">[</span><span class="s1">&#39;MONITOR&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;REDIRECT&#39;</span><span class="p">:</span> <span class="n">NetControl_RuleType</span><span class="p">[</span><span class="s1">&#39;REDIRECT&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;REMOVED&#39;</span><span class="p">:</span> <span class="n">NetControl_InfoState</span><span class="p">[</span><span class="s1">&#39;REMOVED&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;REQUESTED&#39;</span><span class="p">:</span> <span class="n">NetControl_InfoState</span><span class="p">[</span><span class="s1">&#39;REQUESTED&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;RULE&#39;</span><span class="p">:</span> <span class="n">NetControl_InfoCategory</span><span class="p">[</span><span class="s1">&#39;RULE&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;RuleType&#39;</span><span class="p">:</span> <span class="n">NetControl_RuleType</span><span class="p">,</span>
+    <span class="s1">&#39;SEEN_AGAIN&#39;</span><span class="p">:</span> <span class="n">NetControl_CatchReleaseActions</span><span class="p">[</span><span class="s1">&#39;SEEN_AGAIN&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;SHUNT&#39;</span><span class="p">:</span> <span class="n">Log_ID</span><span class="p">[</span><span class="s1">&#39;NetControl__SHUNT&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;SUCCEEDED&#39;</span><span class="p">:</span> <span class="n">NetControl_InfoState</span><span class="p">[</span><span class="s1">&#39;SUCCEEDED&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;TIMEOUT&#39;</span><span class="p">:</span> <span class="n">NetControl_InfoState</span><span class="p">[</span><span class="s1">&#39;TIMEOUT&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;TargetType&#39;</span><span class="p">:</span> <span class="n">NetControl_TargetType</span><span class="p">,</span>
+    <span class="s1">&#39;UNBLOCK&#39;</span><span class="p">:</span> <span class="n">NetControl_CatchReleaseActions</span><span class="p">[</span><span class="s1">&#39;UNBLOCK&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;WHITELIST&#39;</span><span class="p">:</span> <span class="n">NetControl_RuleType</span><span class="p">[</span><span class="s1">&#39;WHITELIST&#39;</span><span class="p">],</span>
+<span class="p">}</span>
+
+<span class="n">_enum_Notice</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;ACTION_ADD_GEODATA&#39;</span><span class="p">:</span> <span class="n">Notice_Action</span><span class="p">[</span><span class="s1">&#39;ACTION_ADD_GEODATA&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;ACTION_ALARM&#39;</span><span class="p">:</span> <span class="n">Notice_Action</span><span class="p">[</span><span class="s1">&#39;ACTION_ALARM&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;ACTION_DROP&#39;</span><span class="p">:</span> <span class="n">Notice_Action</span><span class="p">[</span><span class="s1">&#39;ACTION_DROP&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;ACTION_EMAIL&#39;</span><span class="p">:</span> <span class="n">Notice_Action</span><span class="p">[</span><span class="s1">&#39;ACTION_EMAIL&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;ACTION_EMAIL_ADMIN&#39;</span><span class="p">:</span> <span class="n">Notice_Action</span><span class="p">[</span><span class="s1">&#39;ACTION_EMAIL_ADMIN&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;ACTION_LOG&#39;</span><span class="p">:</span> <span class="n">Notice_Action</span><span class="p">[</span><span class="s1">&#39;ACTION_LOG&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;ACTION_NONE&#39;</span><span class="p">:</span> <span class="n">Notice_Action</span><span class="p">[</span><span class="s1">&#39;ACTION_NONE&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;ACTION_PAGE&#39;</span><span class="p">:</span> <span class="n">Notice_Action</span><span class="p">[</span><span class="s1">&#39;ACTION_PAGE&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;ALARM_LOG&#39;</span><span class="p">:</span> <span class="n">Log_ID</span><span class="p">[</span><span class="s1">&#39;Notice__ALARM_LOG&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;Action&#39;</span><span class="p">:</span> <span class="n">Notice_Action</span><span class="p">,</span>
+    <span class="s1">&#39;LOG&#39;</span><span class="p">:</span> <span class="n">Log_ID</span><span class="p">[</span><span class="s1">&#39;Notice__LOG&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;Tally&#39;</span><span class="p">:</span> <span class="n">Notice_Type</span><span class="p">[</span><span class="s1">&#39;Tally&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;Type&#39;</span><span class="p">:</span> <span class="n">Notice_Type</span><span class="p">,</span>
+<span class="p">}</span>
+
+<span class="n">_enum_OCSP</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;LOG&#39;</span><span class="p">:</span> <span class="n">Log_ID</span><span class="p">[</span><span class="s1">&#39;OCSP__LOG&#39;</span><span class="p">],</span>
+<span class="p">}</span>
+
+<span class="n">_enum_OS</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;WINDOWS&#39;</span><span class="p">:</span> <span class="n">Software_Type</span><span class="p">[</span><span class="s1">&#39;OS__WINDOWS&#39;</span><span class="p">],</span>
+<span class="p">}</span>
+
+<span class="n">_enum_OpenFlow</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;BROKER&#39;</span><span class="p">:</span> <span class="n">OpenFlow_Plugin</span><span class="p">[</span><span class="s1">&#39;BROKER&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;INVALID&#39;</span><span class="p">:</span> <span class="n">OpenFlow_Plugin</span><span class="p">[</span><span class="s1">&#39;INVALID&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;LOG&#39;</span><span class="p">:</span> <span class="n">Log_ID</span><span class="p">[</span><span class="s1">&#39;OpenFlow__LOG&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;OFLOG&#39;</span><span class="p">:</span> <span class="n">OpenFlow_Plugin</span><span class="p">[</span><span class="s1">&#39;OFLOG&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;OFPAT_ENQUEUE&#39;</span><span class="p">:</span> <span class="n">OpenFlow_ofp_action_type</span><span class="p">[</span><span class="s1">&#39;OFPAT_ENQUEUE&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;OFPAT_OUTPUT&#39;</span><span class="p">:</span> <span class="n">OpenFlow_ofp_action_type</span><span class="p">[</span><span class="s1">&#39;OFPAT_OUTPUT&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;OFPAT_SET_DL_DST&#39;</span><span class="p">:</span> <span class="n">OpenFlow_ofp_action_type</span><span class="p">[</span><span class="s1">&#39;OFPAT_SET_DL_DST&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;OFPAT_SET_DL_SRC&#39;</span><span class="p">:</span> <span class="n">OpenFlow_ofp_action_type</span><span class="p">[</span><span class="s1">&#39;OFPAT_SET_DL_SRC&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;OFPAT_SET_NW_DST&#39;</span><span class="p">:</span> <span class="n">OpenFlow_ofp_action_type</span><span class="p">[</span><span class="s1">&#39;OFPAT_SET_NW_DST&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;OFPAT_SET_NW_SRC&#39;</span><span class="p">:</span> <span class="n">OpenFlow_ofp_action_type</span><span class="p">[</span><span class="s1">&#39;OFPAT_SET_NW_SRC&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;OFPAT_SET_NW_TOS&#39;</span><span class="p">:</span> <span class="n">OpenFlow_ofp_action_type</span><span class="p">[</span><span class="s1">&#39;OFPAT_SET_NW_TOS&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;OFPAT_SET_TP_DST&#39;</span><span class="p">:</span> <span class="n">OpenFlow_ofp_action_type</span><span class="p">[</span><span class="s1">&#39;OFPAT_SET_TP_DST&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;OFPAT_SET_TP_SRC&#39;</span><span class="p">:</span> <span class="n">OpenFlow_ofp_action_type</span><span class="p">[</span><span class="s1">&#39;OFPAT_SET_TP_SRC&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;OFPAT_SET_VLAN_PCP&#39;</span><span class="p">:</span> <span class="n">OpenFlow_ofp_action_type</span><span class="p">[</span><span class="s1">&#39;OFPAT_SET_VLAN_PCP&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;OFPAT_SET_VLAN_VID&#39;</span><span class="p">:</span> <span class="n">OpenFlow_ofp_action_type</span><span class="p">[</span><span class="s1">&#39;OFPAT_SET_VLAN_VID&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;OFPAT_STRIP_VLAN&#39;</span><span class="p">:</span> <span class="n">OpenFlow_ofp_action_type</span><span class="p">[</span><span class="s1">&#39;OFPAT_STRIP_VLAN&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;OFPAT_VENDOR&#39;</span><span class="p">:</span> <span class="n">OpenFlow_ofp_action_type</span><span class="p">[</span><span class="s1">&#39;OFPAT_VENDOR&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;OFPC_FRAG_DROP&#39;</span><span class="p">:</span> <span class="n">OpenFlow_ofp_config_flags</span><span class="p">[</span><span class="s1">&#39;OFPC_FRAG_DROP&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;OFPC_FRAG_MASK&#39;</span><span class="p">:</span> <span class="n">OpenFlow_ofp_config_flags</span><span class="p">[</span><span class="s1">&#39;OFPC_FRAG_MASK&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;OFPC_FRAG_NORMAL&#39;</span><span class="p">:</span> <span class="n">OpenFlow_ofp_config_flags</span><span class="p">[</span><span class="s1">&#39;OFPC_FRAG_NORMAL&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;OFPC_FRAG_REASM&#39;</span><span class="p">:</span> <span class="n">OpenFlow_ofp_config_flags</span><span class="p">[</span><span class="s1">&#39;OFPC_FRAG_REASM&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;OFPFC_ADD&#39;</span><span class="p">:</span> <span class="n">OpenFlow_ofp_flow_mod_command</span><span class="p">[</span><span class="s1">&#39;OFPFC_ADD&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;OFPFC_DELETE&#39;</span><span class="p">:</span> <span class="n">OpenFlow_ofp_flow_mod_command</span><span class="p">[</span><span class="s1">&#39;OFPFC_DELETE&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;OFPFC_DELETE_STRICT&#39;</span><span class="p">:</span> <span class="n">OpenFlow_ofp_flow_mod_command</span><span class="p">[</span><span class="s1">&#39;OFPFC_DELETE_STRICT&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;OFPFC_MODIFY&#39;</span><span class="p">:</span> <span class="n">OpenFlow_ofp_flow_mod_command</span><span class="p">[</span><span class="s1">&#39;OFPFC_MODIFY&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;OFPFC_MODIFY_STRICT&#39;</span><span class="p">:</span> <span class="n">OpenFlow_ofp_flow_mod_command</span><span class="p">[</span><span class="s1">&#39;OFPFC_MODIFY_STRICT&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;Plugin&#39;</span><span class="p">:</span> <span class="n">OpenFlow_Plugin</span><span class="p">,</span>
+    <span class="s1">&#39;RYU&#39;</span><span class="p">:</span> <span class="n">OpenFlow_Plugin</span><span class="p">[</span><span class="s1">&#39;RYU&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;ofp_action_type&#39;</span><span class="p">:</span> <span class="n">OpenFlow_ofp_action_type</span><span class="p">,</span>
+    <span class="s1">&#39;ofp_config_flags&#39;</span><span class="p">:</span> <span class="n">OpenFlow_ofp_config_flags</span><span class="p">,</span>
+    <span class="s1">&#39;ofp_flow_mod_command&#39;</span><span class="p">:</span> <span class="n">OpenFlow_ofp_flow_mod_command</span><span class="p">,</span>
+<span class="p">}</span>
+
+<span class="n">_enum_PE</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;LOG&#39;</span><span class="p">:</span> <span class="n">Log_ID</span><span class="p">[</span><span class="s1">&#39;PE__LOG&#39;</span><span class="p">],</span>
+<span class="p">}</span>
+
+<span class="n">_enum_PacketFilter</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;Cannot_BPF_Shunt_Conn&#39;</span><span class="p">:</span> <span class="n">Notice_Type</span><span class="p">[</span><span class="s1">&#39;PacketFilter__Cannot_BPF_Shunt_Conn&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;Compile_Failure&#39;</span><span class="p">:</span> <span class="n">Notice_Type</span><span class="p">[</span><span class="s1">&#39;PacketFilter__Compile_Failure&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;DefaultPcapFilter&#39;</span><span class="p">:</span> <span class="n">zeek_PcapFilterID</span><span class="p">[</span><span class="s1">&#39;PacketFilter__DefaultPcapFilter&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;Dropped_Packets&#39;</span><span class="p">:</span> <span class="n">Notice_Type</span><span class="p">[</span><span class="s1">&#39;PacketFilter__Dropped_Packets&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;FilterTester&#39;</span><span class="p">:</span> <span class="n">zeek_PcapFilterID</span><span class="p">[</span><span class="s1">&#39;PacketFilter__FilterTester&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;Install_Failure&#39;</span><span class="p">:</span> <span class="n">Notice_Type</span><span class="p">[</span><span class="s1">&#39;PacketFilter__Install_Failure&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;LOG&#39;</span><span class="p">:</span> <span class="n">Log_ID</span><span class="p">[</span><span class="s1">&#39;PacketFilter__LOG&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;No_More_Conn_Shunts_Available&#39;</span><span class="p">:</span> <span class="n">Notice_Type</span><span class="p">[</span><span class="s1">&#39;PacketFilter__No_More_Conn_Shunts_Available&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;Too_Long_To_Compile_Filter&#39;</span><span class="p">:</span> <span class="n">Notice_Type</span><span class="p">[</span><span class="s1">&#39;PacketFilter__Too_Long_To_Compile_Filter&#39;</span><span class="p">],</span>
+<span class="p">}</span>
+
+<span class="n">_enum_ProtocolDetector</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;BOTH&#39;</span><span class="p">:</span> <span class="n">ProtocolDetector_dir</span><span class="p">[</span><span class="s1">&#39;BOTH&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;INCOMING&#39;</span><span class="p">:</span> <span class="n">ProtocolDetector_dir</span><span class="p">[</span><span class="s1">&#39;INCOMING&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;NONE&#39;</span><span class="p">:</span> <span class="n">ProtocolDetector_dir</span><span class="p">[</span><span class="s1">&#39;NONE&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;OUTGOING&#39;</span><span class="p">:</span> <span class="n">ProtocolDetector_dir</span><span class="p">[</span><span class="s1">&#39;OUTGOING&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;Protocol_Found&#39;</span><span class="p">:</span> <span class="n">Notice_Type</span><span class="p">[</span><span class="s1">&#39;ProtocolDetector__Protocol_Found&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;Server_Found&#39;</span><span class="p">:</span> <span class="n">Notice_Type</span><span class="p">[</span><span class="s1">&#39;ProtocolDetector__Server_Found&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;dir&#39;</span><span class="p">:</span> <span class="n">ProtocolDetector_dir</span><span class="p">,</span>
+<span class="p">}</span>
+
+<span class="n">_enum_RADIUS</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;LOG&#39;</span><span class="p">:</span> <span class="n">Log_ID</span><span class="p">[</span><span class="s1">&#39;RADIUS__LOG&#39;</span><span class="p">],</span>
+<span class="p">}</span>
+
+<span class="n">_enum_RDP</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;LOG&#39;</span><span class="p">:</span> <span class="n">Log_ID</span><span class="p">[</span><span class="s1">&#39;RDP__LOG&#39;</span><span class="p">],</span>
+<span class="p">}</span>
+
+<span class="n">_enum_RFB</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;LOG&#39;</span><span class="p">:</span> <span class="n">Log_ID</span><span class="p">[</span><span class="s1">&#39;RFB__LOG&#39;</span><span class="p">],</span>
+<span class="p">}</span>
+
+<span class="n">_enum_Reporter</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;ERROR&#39;</span><span class="p">:</span> <span class="n">Reporter_Level</span><span class="p">[</span><span class="s1">&#39;ERROR&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;INFO&#39;</span><span class="p">:</span> <span class="n">Reporter_Level</span><span class="p">[</span><span class="s1">&#39;INFO&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;LOG&#39;</span><span class="p">:</span> <span class="n">Log_ID</span><span class="p">[</span><span class="s1">&#39;Reporter__LOG&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;Level&#39;</span><span class="p">:</span> <span class="n">Reporter_Level</span><span class="p">,</span>
+    <span class="s1">&#39;WARNING&#39;</span><span class="p">:</span> <span class="n">Reporter_Level</span><span class="p">[</span><span class="s1">&#39;WARNING&#39;</span><span class="p">],</span>
+<span class="p">}</span>
+
+<span class="n">_enum_SIP</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;LOG&#39;</span><span class="p">:</span> <span class="n">Log_ID</span><span class="p">[</span><span class="s1">&#39;SIP__LOG&#39;</span><span class="p">],</span>
+<span class="p">}</span>
+
+<span class="n">_enum_SMB</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;AUTH_LOG&#39;</span><span class="p">:</span> <span class="n">Log_ID</span><span class="p">[</span><span class="s1">&#39;SMB__AUTH_LOG&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;Action&#39;</span><span class="p">:</span> <span class="n">SMB_Action</span><span class="p">,</span>
+    <span class="s1">&#39;CMD_LOG&#39;</span><span class="p">:</span> <span class="n">Log_ID</span><span class="p">[</span><span class="s1">&#39;SMB__CMD_LOG&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;FILES_LOG&#39;</span><span class="p">:</span> <span class="n">Log_ID</span><span class="p">[</span><span class="s1">&#39;SMB__FILES_LOG&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;FILE_CLOSE&#39;</span><span class="p">:</span> <span class="n">SMB_Action</span><span class="p">[</span><span class="s1">&#39;FILE_CLOSE&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;FILE_DELETE&#39;</span><span class="p">:</span> <span class="n">SMB_Action</span><span class="p">[</span><span class="s1">&#39;FILE_DELETE&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;FILE_OPEN&#39;</span><span class="p">:</span> <span class="n">SMB_Action</span><span class="p">[</span><span class="s1">&#39;FILE_OPEN&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;FILE_READ&#39;</span><span class="p">:</span> <span class="n">SMB_Action</span><span class="p">[</span><span class="s1">&#39;FILE_READ&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;FILE_RENAME&#39;</span><span class="p">:</span> <span class="n">SMB_Action</span><span class="p">[</span><span class="s1">&#39;FILE_RENAME&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;FILE_SET_ATTRIBUTE&#39;</span><span class="p">:</span> <span class="n">SMB_Action</span><span class="p">[</span><span class="s1">&#39;FILE_SET_ATTRIBUTE&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;FILE_WRITE&#39;</span><span class="p">:</span> <span class="n">SMB_Action</span><span class="p">[</span><span class="s1">&#39;FILE_WRITE&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;IN_FILE_NAME&#39;</span><span class="p">:</span> <span class="n">Intel_Where</span><span class="p">[</span><span class="s1">&#39;SMB__IN_FILE_NAME&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;MAPPING_LOG&#39;</span><span class="p">:</span> <span class="n">Log_ID</span><span class="p">[</span><span class="s1">&#39;SMB__MAPPING_LOG&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;PIPE_CLOSE&#39;</span><span class="p">:</span> <span class="n">SMB_Action</span><span class="p">[</span><span class="s1">&#39;PIPE_CLOSE&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;PIPE_OPEN&#39;</span><span class="p">:</span> <span class="n">SMB_Action</span><span class="p">[</span><span class="s1">&#39;PIPE_OPEN&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;PIPE_READ&#39;</span><span class="p">:</span> <span class="n">SMB_Action</span><span class="p">[</span><span class="s1">&#39;PIPE_READ&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;PIPE_WRITE&#39;</span><span class="p">:</span> <span class="n">SMB_Action</span><span class="p">[</span><span class="s1">&#39;PIPE_WRITE&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;PRINT_CLOSE&#39;</span><span class="p">:</span> <span class="n">SMB_Action</span><span class="p">[</span><span class="s1">&#39;PRINT_CLOSE&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;PRINT_OPEN&#39;</span><span class="p">:</span> <span class="n">SMB_Action</span><span class="p">[</span><span class="s1">&#39;PRINT_OPEN&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;PRINT_READ&#39;</span><span class="p">:</span> <span class="n">SMB_Action</span><span class="p">[</span><span class="s1">&#39;PRINT_READ&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;PRINT_WRITE&#39;</span><span class="p">:</span> <span class="n">SMB_Action</span><span class="p">[</span><span class="s1">&#39;PRINT_WRITE&#39;</span><span class="p">],</span>
+<span class="p">}</span>
+
+<span class="n">_enum_SMTP</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;Blocklist_Blocked_Host&#39;</span><span class="p">:</span> <span class="n">Notice_Type</span><span class="p">[</span><span class="s1">&#39;SMTP__Blocklist_Blocked_Host&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;Blocklist_Error_Message&#39;</span><span class="p">:</span> <span class="n">Notice_Type</span><span class="p">[</span><span class="s1">&#39;SMTP__Blocklist_Error_Message&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;IN_CC&#39;</span><span class="p">:</span> <span class="n">Intel_Where</span><span class="p">[</span><span class="s1">&#39;SMTP__IN_CC&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;IN_FROM&#39;</span><span class="p">:</span> <span class="n">Intel_Where</span><span class="p">[</span><span class="s1">&#39;SMTP__IN_FROM&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;IN_HEADER&#39;</span><span class="p">:</span> <span class="n">Intel_Where</span><span class="p">[</span><span class="s1">&#39;SMTP__IN_HEADER&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;IN_MAIL_FROM&#39;</span><span class="p">:</span> <span class="n">Intel_Where</span><span class="p">[</span><span class="s1">&#39;SMTP__IN_MAIL_FROM&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;IN_MESSAGE&#39;</span><span class="p">:</span> <span class="n">Intel_Where</span><span class="p">[</span><span class="s1">&#39;SMTP__IN_MESSAGE&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;IN_RCPT_TO&#39;</span><span class="p">:</span> <span class="n">Intel_Where</span><span class="p">[</span><span class="s1">&#39;SMTP__IN_RCPT_TO&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;IN_RECEIVED_HEADER&#39;</span><span class="p">:</span> <span class="n">Intel_Where</span><span class="p">[</span><span class="s1">&#39;SMTP__IN_RECEIVED_HEADER&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;IN_REPLY_TO&#39;</span><span class="p">:</span> <span class="n">Intel_Where</span><span class="p">[</span><span class="s1">&#39;SMTP__IN_REPLY_TO&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;IN_TO&#39;</span><span class="p">:</span> <span class="n">Intel_Where</span><span class="p">[</span><span class="s1">&#39;SMTP__IN_TO&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;IN_X_ORIGINATING_IP_HEADER&#39;</span><span class="p">:</span> <span class="n">Intel_Where</span><span class="p">[</span><span class="s1">&#39;SMTP__IN_X_ORIGINATING_IP_HEADER&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;LOG&#39;</span><span class="p">:</span> <span class="n">Log_ID</span><span class="p">[</span><span class="s1">&#39;SMTP__LOG&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;MAIL_CLIENT&#39;</span><span class="p">:</span> <span class="n">Software_Type</span><span class="p">[</span><span class="s1">&#39;SMTP__MAIL_CLIENT&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;MAIL_SERVER&#39;</span><span class="p">:</span> <span class="n">Software_Type</span><span class="p">[</span><span class="s1">&#39;SMTP__MAIL_SERVER&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;Suspicious_Origination&#39;</span><span class="p">:</span> <span class="n">Notice_Type</span><span class="p">[</span><span class="s1">&#39;SMTP__Suspicious_Origination&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;WEBMAIL_SERVER&#39;</span><span class="p">:</span> <span class="n">Software_Type</span><span class="p">[</span><span class="s1">&#39;SMTP__WEBMAIL_SERVER&#39;</span><span class="p">],</span>
+<span class="p">}</span>
+
+<span class="n">_enum_SNMP</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;LOG&#39;</span><span class="p">:</span> <span class="n">Log_ID</span><span class="p">[</span><span class="s1">&#39;SNMP__LOG&#39;</span><span class="p">],</span>
+<span class="p">}</span>
+
+<span class="n">_enum_SOCKS</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;CONNECTION&#39;</span><span class="p">:</span> <span class="n">SOCKS_RequestType</span><span class="p">[</span><span class="s1">&#39;CONNECTION&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;LOG&#39;</span><span class="p">:</span> <span class="n">Log_ID</span><span class="p">[</span><span class="s1">&#39;SOCKS__LOG&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;PORT&#39;</span><span class="p">:</span> <span class="n">SOCKS_RequestType</span><span class="p">[</span><span class="s1">&#39;PORT&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;RequestType&#39;</span><span class="p">:</span> <span class="n">SOCKS_RequestType</span><span class="p">,</span>
+    <span class="s1">&#39;UDP_ASSOCIATE&#39;</span><span class="p">:</span> <span class="n">SOCKS_RequestType</span><span class="p">[</span><span class="s1">&#39;UDP_ASSOCIATE&#39;</span><span class="p">],</span>
+<span class="p">}</span>
+
+<span class="n">_enum_SSH</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;CLIENT&#39;</span><span class="p">:</span> <span class="n">Software_Type</span><span class="p">[</span><span class="s1">&#39;SSH__CLIENT&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;IN_SERVER_HOST_KEY&#39;</span><span class="p">:</span> <span class="n">Intel_Where</span><span class="p">[</span><span class="s1">&#39;SSH__IN_SERVER_HOST_KEY&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;Interesting_Hostname_Login&#39;</span><span class="p">:</span> <span class="n">Notice_Type</span><span class="p">[</span><span class="s1">&#39;SSH__Interesting_Hostname_Login&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;LOG&#39;</span><span class="p">:</span> <span class="n">Log_ID</span><span class="p">[</span><span class="s1">&#39;SSH__LOG&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;Login_By_Password_Guesser&#39;</span><span class="p">:</span> <span class="n">Notice_Type</span><span class="p">[</span><span class="s1">&#39;SSH__Login_By_Password_Guesser&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;Password_Guessing&#39;</span><span class="p">:</span> <span class="n">Notice_Type</span><span class="p">[</span><span class="s1">&#39;SSH__Password_Guessing&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;SERVER&#39;</span><span class="p">:</span> <span class="n">Software_Type</span><span class="p">[</span><span class="s1">&#39;SSH__SERVER&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;SUCCESSFUL_LOGIN&#39;</span><span class="p">:</span> <span class="n">Intel_Where</span><span class="p">[</span><span class="s1">&#39;SSH__SUCCESSFUL_LOGIN&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;Watched_Country_Login&#39;</span><span class="p">:</span> <span class="n">Notice_Type</span><span class="p">[</span><span class="s1">&#39;SSH__Watched_Country_Login&#39;</span><span class="p">],</span>
+<span class="p">}</span>
+
+<span class="n">_enum_SSL</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;Certificate_Expired&#39;</span><span class="p">:</span> <span class="n">Notice_Type</span><span class="p">[</span><span class="s1">&#39;SSL__Certificate_Expired&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;Certificate_Expires_Soon&#39;</span><span class="p">:</span> <span class="n">Notice_Type</span><span class="p">[</span><span class="s1">&#39;SSL__Certificate_Expires_Soon&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;Certificate_Not_Valid_Yet&#39;</span><span class="p">:</span> <span class="n">Notice_Type</span><span class="p">[</span><span class="s1">&#39;SSL__Certificate_Not_Valid_Yet&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;IN_SERVER_NAME&#39;</span><span class="p">:</span> <span class="n">Intel_Where</span><span class="p">[</span><span class="s1">&#39;SSL__IN_SERVER_NAME&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;Invalid_Ocsp_Response&#39;</span><span class="p">:</span> <span class="n">Notice_Type</span><span class="p">[</span><span class="s1">&#39;SSL__Invalid_Ocsp_Response&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;Invalid_Server_Cert&#39;</span><span class="p">:</span> <span class="n">Notice_Type</span><span class="p">[</span><span class="s1">&#39;SSL__Invalid_Server_Cert&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;LOG&#39;</span><span class="p">:</span> <span class="n">Log_ID</span><span class="p">[</span><span class="s1">&#39;SSL__LOG&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;Old_Version&#39;</span><span class="p">:</span> <span class="n">Notice_Type</span><span class="p">[</span><span class="s1">&#39;SSL__Old_Version&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;SCT_OCSP_EXT&#39;</span><span class="p">:</span> <span class="n">SSL_SctSource</span><span class="p">[</span><span class="s1">&#39;SCT_OCSP_EXT&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;SCT_TLS_EXT&#39;</span><span class="p">:</span> <span class="n">SSL_SctSource</span><span class="p">[</span><span class="s1">&#39;SCT_TLS_EXT&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;SCT_X509_EXT&#39;</span><span class="p">:</span> <span class="n">SSL_SctSource</span><span class="p">[</span><span class="s1">&#39;SCT_X509_EXT&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;SctSource&#39;</span><span class="p">:</span> <span class="n">SSL_SctSource</span><span class="p">,</span>
+    <span class="s1">&#39;Weak_Cipher&#39;</span><span class="p">:</span> <span class="n">Notice_Type</span><span class="p">[</span><span class="s1">&#39;SSL__Weak_Cipher&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;Weak_Key&#39;</span><span class="p">:</span> <span class="n">Notice_Type</span><span class="p">[</span><span class="s1">&#39;SSL__Weak_Key&#39;</span><span class="p">],</span>
+<span class="p">}</span>
+
+<span class="n">_enum_Scan</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;Address_Scan&#39;</span><span class="p">:</span> <span class="n">Notice_Type</span><span class="p">[</span><span class="s1">&#39;Scan__Address_Scan&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;Port_Scan&#39;</span><span class="p">:</span> <span class="n">Notice_Type</span><span class="p">[</span><span class="s1">&#39;Scan__Port_Scan&#39;</span><span class="p">],</span>
+<span class="p">}</span>
+
+<span class="n">_enum_Signatures</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;Action&#39;</span><span class="p">:</span> <span class="n">Signatures_Action</span><span class="p">,</span>
+    <span class="s1">&#39;Count_Signature&#39;</span><span class="p">:</span> <span class="n">Notice_Type</span><span class="p">[</span><span class="s1">&#39;Signatures__Count_Signature&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;LOG&#39;</span><span class="p">:</span> <span class="n">Log_ID</span><span class="p">[</span><span class="s1">&#39;Signatures__LOG&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;Multiple_Sig_Responders&#39;</span><span class="p">:</span> <span class="n">Notice_Type</span><span class="p">[</span><span class="s1">&#39;Signatures__Multiple_Sig_Responders&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;Multiple_Signatures&#39;</span><span class="p">:</span> <span class="n">Notice_Type</span><span class="p">[</span><span class="s1">&#39;Signatures__Multiple_Signatures&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;SIG_ALARM&#39;</span><span class="p">:</span> <span class="n">Signatures_Action</span><span class="p">[</span><span class="s1">&#39;SIG_ALARM&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;SIG_ALARM_ONCE&#39;</span><span class="p">:</span> <span class="n">Signatures_Action</span><span class="p">[</span><span class="s1">&#39;SIG_ALARM_ONCE&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;SIG_ALARM_PER_ORIG&#39;</span><span class="p">:</span> <span class="n">Signatures_Action</span><span class="p">[</span><span class="s1">&#39;SIG_ALARM_PER_ORIG&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;SIG_COUNT_PER_RESP&#39;</span><span class="p">:</span> <span class="n">Signatures_Action</span><span class="p">[</span><span class="s1">&#39;SIG_COUNT_PER_RESP&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;SIG_FILE_BUT_NO_SCAN&#39;</span><span class="p">:</span> <span class="n">Signatures_Action</span><span class="p">[</span><span class="s1">&#39;SIG_FILE_BUT_NO_SCAN&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;SIG_IGNORE&#39;</span><span class="p">:</span> <span class="n">Signatures_Action</span><span class="p">[</span><span class="s1">&#39;SIG_IGNORE&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;SIG_LOG&#39;</span><span class="p">:</span> <span class="n">Signatures_Action</span><span class="p">[</span><span class="s1">&#39;SIG_LOG&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;SIG_QUIET&#39;</span><span class="p">:</span> <span class="n">Signatures_Action</span><span class="p">[</span><span class="s1">&#39;SIG_QUIET&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;SIG_SUMMARY&#39;</span><span class="p">:</span> <span class="n">Signatures_Action</span><span class="p">[</span><span class="s1">&#39;SIG_SUMMARY&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;Sensitive_Signature&#39;</span><span class="p">:</span> <span class="n">Notice_Type</span><span class="p">[</span><span class="s1">&#39;Signatures__Sensitive_Signature&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;Signature_Summary&#39;</span><span class="p">:</span> <span class="n">Notice_Type</span><span class="p">[</span><span class="s1">&#39;Signatures__Signature_Summary&#39;</span><span class="p">],</span>
+<span class="p">}</span>
+
+<span class="n">_enum_Software</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;LOG&#39;</span><span class="p">:</span> <span class="n">Log_ID</span><span class="p">[</span><span class="s1">&#39;Software__LOG&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;Software_Version_Change&#39;</span><span class="p">:</span> <span class="n">Notice_Type</span><span class="p">[</span><span class="s1">&#39;Software__Software_Version_Change&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;Type&#39;</span><span class="p">:</span> <span class="n">Software_Type</span><span class="p">,</span>
+    <span class="s1">&#39;UNKNOWN&#39;</span><span class="p">:</span> <span class="n">Software_Type</span><span class="p">[</span><span class="s1">&#39;UNKNOWN&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;Vulnerable_Version&#39;</span><span class="p">:</span> <span class="n">Notice_Type</span><span class="p">[</span><span class="s1">&#39;Software__Vulnerable_Version&#39;</span><span class="p">],</span>
+<span class="p">}</span>
+
+<span class="n">_enum_Stats</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;LOG&#39;</span><span class="p">:</span> <span class="n">Log_ID</span><span class="p">[</span><span class="s1">&#39;Stats__LOG&#39;</span><span class="p">],</span>
+<span class="p">}</span>
+
+<span class="n">_enum_SumStats</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;AVERAGE&#39;</span><span class="p">:</span> <span class="n">SumStats_Calculation</span><span class="p">[</span><span class="s1">&#39;AVERAGE&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;Calculation&#39;</span><span class="p">:</span> <span class="n">SumStats_Calculation</span><span class="p">,</span>
+    <span class="s1">&#39;HLL_UNIQUE&#39;</span><span class="p">:</span> <span class="n">SumStats_Calculation</span><span class="p">[</span><span class="s1">&#39;HLL_UNIQUE&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;LAST&#39;</span><span class="p">:</span> <span class="n">SumStats_Calculation</span><span class="p">[</span><span class="s1">&#39;LAST&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;MAX&#39;</span><span class="p">:</span> <span class="n">SumStats_Calculation</span><span class="p">[</span><span class="s1">&#39;MAX&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;MIN&#39;</span><span class="p">:</span> <span class="n">SumStats_Calculation</span><span class="p">[</span><span class="s1">&#39;MIN&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;PLACEHOLDER&#39;</span><span class="p">:</span> <span class="n">SumStats_Calculation</span><span class="p">[</span><span class="s1">&#39;PLACEHOLDER&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;SAMPLE&#39;</span><span class="p">:</span> <span class="n">SumStats_Calculation</span><span class="p">[</span><span class="s1">&#39;SAMPLE&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;STD_DEV&#39;</span><span class="p">:</span> <span class="n">SumStats_Calculation</span><span class="p">[</span><span class="s1">&#39;STD_DEV&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;SUM&#39;</span><span class="p">:</span> <span class="n">SumStats_Calculation</span><span class="p">[</span><span class="s1">&#39;SUM&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;TOPK&#39;</span><span class="p">:</span> <span class="n">SumStats_Calculation</span><span class="p">[</span><span class="s1">&#39;TOPK&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;UNIQUE&#39;</span><span class="p">:</span> <span class="n">SumStats_Calculation</span><span class="p">[</span><span class="s1">&#39;UNIQUE&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;VARIANCE&#39;</span><span class="p">:</span> <span class="n">SumStats_Calculation</span><span class="p">[</span><span class="s1">&#39;VARIANCE&#39;</span><span class="p">],</span>
+<span class="p">}</span>
+
+<span class="n">_enum_Supervisor</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;ClusterRole&#39;</span><span class="p">:</span> <span class="n">Supervisor_ClusterRole</span><span class="p">,</span>
+    <span class="s1">&#39;LOGGER&#39;</span><span class="p">:</span> <span class="n">Supervisor_ClusterRole</span><span class="p">[</span><span class="s1">&#39;LOGGER&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;MANAGER&#39;</span><span class="p">:</span> <span class="n">Supervisor_ClusterRole</span><span class="p">[</span><span class="s1">&#39;MANAGER&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;NONE&#39;</span><span class="p">:</span> <span class="n">Supervisor_ClusterRole</span><span class="p">[</span><span class="s1">&#39;NONE&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;PROXY&#39;</span><span class="p">:</span> <span class="n">Supervisor_ClusterRole</span><span class="p">[</span><span class="s1">&#39;PROXY&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;WORKER&#39;</span><span class="p">:</span> <span class="n">Supervisor_ClusterRole</span><span class="p">[</span><span class="s1">&#39;WORKER&#39;</span><span class="p">],</span>
+<span class="p">}</span>
+
+<span class="n">_enum_Syslog</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;LOG&#39;</span><span class="p">:</span> <span class="n">Log_ID</span><span class="p">[</span><span class="s1">&#39;Syslog__LOG&#39;</span><span class="p">],</span>
+<span class="p">}</span>
+
+<span class="n">_enum_TeamCymruMalwareHashRegistry</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;Match&#39;</span><span class="p">:</span> <span class="n">Notice_Type</span><span class="p">[</span><span class="s1">&#39;TeamCymruMalwareHashRegistry__Match&#39;</span><span class="p">],</span>
+<span class="p">}</span>
+
+<span class="n">_enum_Traceroute</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;Detected&#39;</span><span class="p">:</span> <span class="n">Notice_Type</span><span class="p">[</span><span class="s1">&#39;Traceroute__Detected&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;LOG&#39;</span><span class="p">:</span> <span class="n">Log_ID</span><span class="p">[</span><span class="s1">&#39;Traceroute__LOG&#39;</span><span class="p">],</span>
+<span class="p">}</span>
+
+<span class="n">_enum_Tunnel</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;AYIYA&#39;</span><span class="p">:</span> <span class="n">Tunnel_Type</span><span class="p">[</span><span class="s1">&#39;AYIYA&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;Action&#39;</span><span class="p">:</span> <span class="n">Tunnel_Action</span><span class="p">,</span>
+    <span class="s1">&#39;CLOSE&#39;</span><span class="p">:</span> <span class="n">Tunnel_Action</span><span class="p">[</span><span class="s1">&#39;CLOSE&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;DISCOVER&#39;</span><span class="p">:</span> <span class="n">Tunnel_Action</span><span class="p">[</span><span class="s1">&#39;DISCOVER&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;EXPIRE&#39;</span><span class="p">:</span> <span class="n">Tunnel_Action</span><span class="p">[</span><span class="s1">&#39;EXPIRE&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;GRE&#39;</span><span class="p">:</span> <span class="n">Tunnel_Type</span><span class="p">[</span><span class="s1">&#39;GRE&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;GTPv1&#39;</span><span class="p">:</span> <span class="n">Tunnel_Type</span><span class="p">[</span><span class="s1">&#39;GTPv1&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;HTTP&#39;</span><span class="p">:</span> <span class="n">Tunnel_Type</span><span class="p">[</span><span class="s1">&#39;HTTP&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;IP&#39;</span><span class="p">:</span> <span class="n">Tunnel_Type</span><span class="p">[</span><span class="s1">&#39;IP&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;LOG&#39;</span><span class="p">:</span> <span class="n">Log_ID</span><span class="p">[</span><span class="s1">&#39;Tunnel__LOG&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;NONE&#39;</span><span class="p">:</span> <span class="n">Tunnel_Type</span><span class="p">[</span><span class="s1">&#39;NONE&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;SOCKS&#39;</span><span class="p">:</span> <span class="n">Tunnel_Type</span><span class="p">[</span><span class="s1">&#39;SOCKS&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;TEREDO&#39;</span><span class="p">:</span> <span class="n">Tunnel_Type</span><span class="p">[</span><span class="s1">&#39;TEREDO&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;Type&#39;</span><span class="p">:</span> <span class="n">Tunnel_Type</span><span class="p">,</span>
+    <span class="s1">&#39;VXLAN&#39;</span><span class="p">:</span> <span class="n">Tunnel_Type</span><span class="p">[</span><span class="s1">&#39;VXLAN&#39;</span><span class="p">],</span>
+<span class="p">}</span>
+
+<span class="n">_enum_Unified2</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;LOG&#39;</span><span class="p">:</span> <span class="n">Log_ID</span><span class="p">[</span><span class="s1">&#39;Unified2__LOG&#39;</span><span class="p">],</span>
+<span class="p">}</span>
+
+<span class="n">_enum_Weird</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;ACTION_IGNORE&#39;</span><span class="p">:</span> <span class="n">Weird_Action</span><span class="p">[</span><span class="s1">&#39;ACTION_IGNORE&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;ACTION_LOG&#39;</span><span class="p">:</span> <span class="n">Weird_Action</span><span class="p">[</span><span class="s1">&#39;ACTION_LOG&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;ACTION_LOG_ONCE&#39;</span><span class="p">:</span> <span class="n">Weird_Action</span><span class="p">[</span><span class="s1">&#39;ACTION_LOG_ONCE&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;ACTION_LOG_PER_CONN&#39;</span><span class="p">:</span> <span class="n">Weird_Action</span><span class="p">[</span><span class="s1">&#39;ACTION_LOG_PER_CONN&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;ACTION_LOG_PER_ORIG&#39;</span><span class="p">:</span> <span class="n">Weird_Action</span><span class="p">[</span><span class="s1">&#39;ACTION_LOG_PER_ORIG&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;ACTION_NOTICE&#39;</span><span class="p">:</span> <span class="n">Weird_Action</span><span class="p">[</span><span class="s1">&#39;ACTION_NOTICE&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;ACTION_NOTICE_ONCE&#39;</span><span class="p">:</span> <span class="n">Weird_Action</span><span class="p">[</span><span class="s1">&#39;ACTION_NOTICE_ONCE&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;ACTION_NOTICE_PER_CONN&#39;</span><span class="p">:</span> <span class="n">Weird_Action</span><span class="p">[</span><span class="s1">&#39;ACTION_NOTICE_PER_CONN&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;ACTION_NOTICE_PER_ORIG&#39;</span><span class="p">:</span> <span class="n">Weird_Action</span><span class="p">[</span><span class="s1">&#39;ACTION_NOTICE_PER_ORIG&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;ACTION_UNSPECIFIED&#39;</span><span class="p">:</span> <span class="n">Weird_Action</span><span class="p">[</span><span class="s1">&#39;ACTION_UNSPECIFIED&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;Action&#39;</span><span class="p">:</span> <span class="n">Weird_Action</span><span class="p">,</span>
+    <span class="s1">&#39;Activity&#39;</span><span class="p">:</span> <span class="n">Notice_Type</span><span class="p">[</span><span class="s1">&#39;Weird__Activity&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;LOG&#39;</span><span class="p">:</span> <span class="n">Log_ID</span><span class="p">[</span><span class="s1">&#39;Weird__LOG&#39;</span><span class="p">],</span>
+<span class="p">}</span>
+
+<span class="n">_enum_WeirdStats</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;LOG&#39;</span><span class="p">:</span> <span class="n">Log_ID</span><span class="p">[</span><span class="s1">&#39;WeirdStats__LOG&#39;</span><span class="p">],</span>
+<span class="p">}</span>
+
+<span class="n">_enum_X509</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;IN_CERT&#39;</span><span class="p">:</span> <span class="n">Intel_Where</span><span class="p">[</span><span class="s1">&#39;X509__IN_CERT&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;LOG&#39;</span><span class="p">:</span> <span class="n">Log_ID</span><span class="p">[</span><span class="s1">&#39;X509__LOG&#39;</span><span class="p">],</span>
+<span class="p">}</span>
+
+<span class="n">_enum_ZeekygenExample</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;FIVE&#39;</span><span class="p">:</span> <span class="n">ZeekygenExample_SimpleEnum</span><span class="p">[</span><span class="s1">&#39;FIVE&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;FOUR&#39;</span><span class="p">:</span> <span class="n">ZeekygenExample_SimpleEnum</span><span class="p">[</span><span class="s1">&#39;FOUR&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;LOG&#39;</span><span class="p">:</span> <span class="n">Log_ID</span><span class="p">[</span><span class="s1">&#39;ZeekygenExample__LOG&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;ONE&#39;</span><span class="p">:</span> <span class="n">ZeekygenExample_SimpleEnum</span><span class="p">[</span><span class="s1">&#39;ONE&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;SimpleEnum&#39;</span><span class="p">:</span> <span class="n">ZeekygenExample_SimpleEnum</span><span class="p">,</span>
+    <span class="s1">&#39;THREE&#39;</span><span class="p">:</span> <span class="n">ZeekygenExample_SimpleEnum</span><span class="p">[</span><span class="s1">&#39;THREE&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;TWO&#39;</span><span class="p">:</span> <span class="n">ZeekygenExample_SimpleEnum</span><span class="p">[</span><span class="s1">&#39;TWO&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;Zeekygen_Four&#39;</span><span class="p">:</span> <span class="n">Notice_Type</span><span class="p">[</span><span class="s1">&#39;ZeekygenExample__Zeekygen_Four&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;Zeekygen_One&#39;</span><span class="p">:</span> <span class="n">Notice_Type</span><span class="p">[</span><span class="s1">&#39;ZeekygenExample__Zeekygen_One&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;Zeekygen_Three&#39;</span><span class="p">:</span> <span class="n">Notice_Type</span><span class="p">[</span><span class="s1">&#39;ZeekygenExample__Zeekygen_Three&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;Zeekygen_Two&#39;</span><span class="p">:</span> <span class="n">Notice_Type</span><span class="p">[</span><span class="s1">&#39;ZeekygenExample__Zeekygen_Two&#39;</span><span class="p">],</span>
+<span class="p">}</span>
+
+<span class="n">_enum_mysql</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;LOG&#39;</span><span class="p">:</span> <span class="n">Log_ID</span><span class="p">[</span><span class="s1">&#39;mysql__LOG&#39;</span><span class="p">],</span>
+<span class="p">}</span>
+
+<span class="n">_enum_zeek</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;ALL_HOSTS&#39;</span><span class="p">:</span> <span class="n">zeek_Host</span><span class="p">[</span><span class="s1">&#39;ALL_HOSTS&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;BIDIRECTIONAL&#39;</span><span class="p">:</span> <span class="n">zeek_Direction</span><span class="p">[</span><span class="s1">&#39;BIDIRECTIONAL&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;Direction&#39;</span><span class="p">:</span> <span class="n">zeek_Direction</span><span class="p">,</span>
+    <span class="s1">&#39;Host&#39;</span><span class="p">:</span> <span class="n">zeek_Host</span><span class="p">,</span>
+    <span class="s1">&#39;INBOUND&#39;</span><span class="p">:</span> <span class="n">zeek_Direction</span><span class="p">[</span><span class="s1">&#39;INBOUND&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;IPAddrAnonymization&#39;</span><span class="p">:</span> <span class="n">zeek_IPAddrAnonymization</span><span class="p">,</span>
+    <span class="s1">&#39;IPAddrAnonymizationClass&#39;</span><span class="p">:</span> <span class="n">zeek_IPAddrAnonymizationClass</span><span class="p">,</span>
+    <span class="s1">&#39;KEEP_ORIG_ADDR&#39;</span><span class="p">:</span> <span class="n">zeek_IPAddrAnonymization</span><span class="p">[</span><span class="s1">&#39;KEEP_ORIG_ADDR&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;L3_ARP&#39;</span><span class="p">:</span> <span class="n">zeek_layer3_proto</span><span class="p">[</span><span class="s1">&#39;L3_ARP&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;L3_IPV4&#39;</span><span class="p">:</span> <span class="n">zeek_layer3_proto</span><span class="p">[</span><span class="s1">&#39;L3_IPV4&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;L3_IPV6&#39;</span><span class="p">:</span> <span class="n">zeek_layer3_proto</span><span class="p">[</span><span class="s1">&#39;L3_IPV6&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;L3_UNKNOWN&#39;</span><span class="p">:</span> <span class="n">zeek_layer3_proto</span><span class="p">[</span><span class="s1">&#39;L3_UNKNOWN&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;LINK_ETHERNET&#39;</span><span class="p">:</span> <span class="n">zeek_link_encap</span><span class="p">[</span><span class="s1">&#39;LINK_ETHERNET&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;LINK_UNKNOWN&#39;</span><span class="p">:</span> <span class="n">zeek_link_encap</span><span class="p">[</span><span class="s1">&#39;LINK_UNKNOWN&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;LOCAL_HOSTS&#39;</span><span class="p">:</span> <span class="n">zeek_Host</span><span class="p">[</span><span class="s1">&#39;LOCAL_HOSTS&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;NO_DIRECTION&#39;</span><span class="p">:</span> <span class="n">zeek_Direction</span><span class="p">[</span><span class="s1">&#39;NO_DIRECTION&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;NO_HOSTS&#39;</span><span class="p">:</span> <span class="n">zeek_Host</span><span class="p">[</span><span class="s1">&#39;NO_HOSTS&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;None&#39;</span><span class="p">:</span> <span class="n">zeek_PcapFilterID</span><span class="p">[</span><span class="s1">&#39;None&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;ORIG_ADDR&#39;</span><span class="p">:</span> <span class="n">zeek_IPAddrAnonymizationClass</span><span class="p">[</span><span class="s1">&#39;ORIG_ADDR&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;OTHER_ADDR&#39;</span><span class="p">:</span> <span class="n">zeek_IPAddrAnonymizationClass</span><span class="p">[</span><span class="s1">&#39;OTHER_ADDR&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;OUTBOUND&#39;</span><span class="p">:</span> <span class="n">zeek_Direction</span><span class="p">[</span><span class="s1">&#39;OUTBOUND&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;PKT_PROFILE_MODE_BYTES&#39;</span><span class="p">:</span> <span class="n">zeek_pkt_profile_modes</span><span class="p">[</span><span class="s1">&#39;PKT_PROFILE_MODE_BYTES&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;PKT_PROFILE_MODE_NONE&#39;</span><span class="p">:</span> <span class="n">zeek_pkt_profile_modes</span><span class="p">[</span><span class="s1">&#39;PKT_PROFILE_MODE_NONE&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;PKT_PROFILE_MODE_PKTS&#39;</span><span class="p">:</span> <span class="n">zeek_pkt_profile_modes</span><span class="p">[</span><span class="s1">&#39;PKT_PROFILE_MODE_PKTS&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;PKT_PROFILE_MODE_SECS&#39;</span><span class="p">:</span> <span class="n">zeek_pkt_profile_modes</span><span class="p">[</span><span class="s1">&#39;PKT_PROFILE_MODE_SECS&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;PREFIX_PRESERVING_A50&#39;</span><span class="p">:</span> <span class="n">zeek_IPAddrAnonymization</span><span class="p">[</span><span class="s1">&#39;PREFIX_PRESERVING_A50&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;PREFIX_PRESERVING_MD5&#39;</span><span class="p">:</span> <span class="n">zeek_IPAddrAnonymization</span><span class="p">[</span><span class="s1">&#39;PREFIX_PRESERVING_MD5&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;PcapFilterID&#39;</span><span class="p">:</span> <span class="n">zeek_PcapFilterID</span><span class="p">,</span>
+    <span class="s1">&#39;RANDOM_MD5&#39;</span><span class="p">:</span> <span class="n">zeek_IPAddrAnonymization</span><span class="p">[</span><span class="s1">&#39;RANDOM_MD5&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;REMOTE_HOSTS&#39;</span><span class="p">:</span> <span class="n">zeek_Host</span><span class="p">[</span><span class="s1">&#39;REMOTE_HOSTS&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;RESP_ADDR&#39;</span><span class="p">:</span> <span class="n">zeek_IPAddrAnonymizationClass</span><span class="p">[</span><span class="s1">&#39;RESP_ADDR&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;RPC_AUTH_ERROR&#39;</span><span class="p">:</span> <span class="n">zeek_rpc_status</span><span class="p">[</span><span class="s1">&#39;RPC_AUTH_ERROR&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;RPC_GARBAGE_ARGS&#39;</span><span class="p">:</span> <span class="n">zeek_rpc_status</span><span class="p">[</span><span class="s1">&#39;RPC_GARBAGE_ARGS&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;RPC_PROC_UNAVAIL&#39;</span><span class="p">:</span> <span class="n">zeek_rpc_status</span><span class="p">[</span><span class="s1">&#39;RPC_PROC_UNAVAIL&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;RPC_PROG_MISMATCH&#39;</span><span class="p">:</span> <span class="n">zeek_rpc_status</span><span class="p">[</span><span class="s1">&#39;RPC_PROG_MISMATCH&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;RPC_PROG_UNAVAIL&#39;</span><span class="p">:</span> <span class="n">zeek_rpc_status</span><span class="p">[</span><span class="s1">&#39;RPC_PROG_UNAVAIL&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;RPC_SUCCESS&#39;</span><span class="p">:</span> <span class="n">zeek_rpc_status</span><span class="p">[</span><span class="s1">&#39;RPC_SUCCESS&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;RPC_SYSTEM_ERR&#39;</span><span class="p">:</span> <span class="n">zeek_rpc_status</span><span class="p">[</span><span class="s1">&#39;RPC_SYSTEM_ERR&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;RPC_TIMEOUT&#39;</span><span class="p">:</span> <span class="n">zeek_rpc_status</span><span class="p">[</span><span class="s1">&#39;RPC_TIMEOUT&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;RPC_UNKNOWN_ERROR&#39;</span><span class="p">:</span> <span class="n">zeek_rpc_status</span><span class="p">[</span><span class="s1">&#39;RPC_UNKNOWN_ERROR&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;RPC_VERS_MISMATCH&#39;</span><span class="p">:</span> <span class="n">zeek_rpc_status</span><span class="p">[</span><span class="s1">&#39;RPC_VERS_MISMATCH&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;SEQUENTIALLY_NUMBERED&#39;</span><span class="p">:</span> <span class="n">zeek_IPAddrAnonymization</span><span class="p">[</span><span class="s1">&#39;SEQUENTIALLY_NUMBERED&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;TABLE_ELEMENT_CHANGED&#39;</span><span class="p">:</span> <span class="n">zeek_TableChange</span><span class="p">[</span><span class="s1">&#39;TABLE_ELEMENT_CHANGED&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;TABLE_ELEMENT_EXPIRED&#39;</span><span class="p">:</span> <span class="n">zeek_TableChange</span><span class="p">[</span><span class="s1">&#39;TABLE_ELEMENT_EXPIRED&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;TABLE_ELEMENT_NEW&#39;</span><span class="p">:</span> <span class="n">zeek_TableChange</span><span class="p">[</span><span class="s1">&#39;TABLE_ELEMENT_NEW&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;TABLE_ELEMENT_REMOVED&#39;</span><span class="p">:</span> <span class="n">zeek_TableChange</span><span class="p">[</span><span class="s1">&#39;TABLE_ELEMENT_REMOVED&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;TableChange&#39;</span><span class="p">:</span> <span class="n">zeek_TableChange</span><span class="p">,</span>
+    <span class="s1">&#39;icmp&#39;</span><span class="p">:</span> <span class="n">zeek_transport_proto</span><span class="p">[</span><span class="s1">&#39;icmp&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;layer3_proto&#39;</span><span class="p">:</span> <span class="n">zeek_layer3_proto</span><span class="p">,</span>
+    <span class="s1">&#39;link_encap&#39;</span><span class="p">:</span> <span class="n">zeek_link_encap</span><span class="p">,</span>
+    <span class="s1">&#39;pkt_profile_modes&#39;</span><span class="p">:</span> <span class="n">zeek_pkt_profile_modes</span><span class="p">,</span>
+    <span class="s1">&#39;rpc_status&#39;</span><span class="p">:</span> <span class="n">zeek_rpc_status</span><span class="p">,</span>
+    <span class="s1">&#39;tcp&#39;</span><span class="p">:</span> <span class="n">zeek_transport_proto</span><span class="p">[</span><span class="s1">&#39;tcp&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;transport_proto&#39;</span><span class="p">:</span> <span class="n">zeek_transport_proto</span><span class="p">,</span>
+    <span class="s1">&#39;udp&#39;</span><span class="p">:</span> <span class="n">zeek_transport_proto</span><span class="p">[</span><span class="s1">&#39;udp&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;unknown_transport&#39;</span><span class="p">:</span> <span class="n">zeek_transport_proto</span><span class="p">[</span><span class="s1">&#39;unknown_transport&#39;</span><span class="p">],</span>
+<span class="p">}</span>
+
+
+<div class="viewcode-block" id="globals"><a class="viewcode-back" href="../../enum/index.html#zlogging.enum.globals">[docs]</a><span class="k">def</span> <span class="nf">globals</span><span class="p">(</span><span class="o">*</span><span class="n">namespaces</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">bare</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;Dict[str, Enum]&#39;</span><span class="p">:</span>  <span class="c1"># pylint: disable=redefined-builtin</span>
+    <span class="sd">&quot;&quot;&quot;Generate Bro/Zeek ``enum`` namespace.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        *namespaces: Namespaces to be loaded.</span>
+<span class="sd">        bare: If ``True``, do not load ``zeek`` namespace by default.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        :obj:`dict` mapping of :obj:`str` and :obj:`Enum`: Global enum namespace.</span>
+
+<span class="sd">    Warns:</span>
+<span class="sd">        BroDeprecationWarning: If ``bro`` namespace used.</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        :exc:`ValueError`: If ``namespace`` is not defined.</span>
+
+<span class="sd">    Note:</span>
+<span class="sd">        For back-port compatibility, the ``bro`` namespace is an alias of the</span>
+<span class="sd">        ``zeek`` namespace.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">bare</span><span class="p">:</span>
+        <span class="n">enum_data</span> <span class="o">=</span> <span class="p">{}</span>  <span class="c1"># type: Dict[str, Enum]</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">enum_data</span> <span class="o">=</span> <span class="n">_enum_zeek</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+    <span class="k">for</span> <span class="n">namespace</span> <span class="ow">in</span> <span class="n">namespaces</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">namespace</span> <span class="o">==</span> <span class="s1">&#39;bro&#39;</span><span class="p">:</span>
+            <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s2">&quot;Use of &#39;bro&#39; is deprecated. &quot;</span>
+                          <span class="s2">&quot;Please use &#39;zeek&#39; instead.&quot;</span><span class="p">,</span> <span class="n">BroDeprecationWarning</span><span class="p">)</span>
+            <span class="n">namespace</span> <span class="o">=</span> <span class="s1">&#39;zeek&#39;</span>
+
+        <span class="n">enum_dict</span> <span class="o">=</span> <span class="nb">globals</span><span class="p">()</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;_enum_</span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">namespace</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">enum_dict</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;undefined namespace: </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">namespace</span><span class="p">)</span>
+        <span class="n">enum_data</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">enum_dict</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">enum_data</span></div>
+</pre></div>
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../../index.html">ZLogging</a></h1>
+
+
+
+
+
+
+<p>
+<iframe src="https://ghbtns.com/github-btn.html?user=JarryShaw&repo=zlogging&type=star&count=true&size=large&v=2"
+  allowtransparency="true" frameborder="0" scrolling="0" width="200px" height="35px"></iframe>
+</p>
+
+
+
+
+
+<h3>Navigation</h3>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../dumper.html">Dumpers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../loader.html">Loaders</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../model.html">Data Model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../types.html">Data Types</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../typing.html">Typing Annotations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../_data.html">Data Classes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../_exc.html">Exceptions &amp; Warnings</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../_aux.html">Internal Auxiliary Functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../enum/index.html">Enum Namespace</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../index.html">Documentation overview</a><ul>
+  <li><a href="../index.html">Module code</a><ul>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2020-2021, Jarry Shaw.
+      
+    </div>
+
+    
+    <a href="https://github.com/JarryShaw/zlogging" class="github">
+        <img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub"  class="github"/>
+    </a>
+    
+
+    
+  </body>
+</html>
