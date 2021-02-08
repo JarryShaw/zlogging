@@ -41,8 +41,8 @@ class BaseWriter(metaclass=abc.ABCMeta):
 
         Args:
             filename: Log file name.
-            data (:obj:`Iterable` of :class:`~zlogging.model.Model`): Log
-                records as an :obj:`Iterable` of :class:`~zlogging.model.Model` per line.
+            data (:class:`~typing.Iterable` of :class:`~zlogging.model.Model`): Log
+                records as an :class:`~typing.Iterable` of :class:`~zlogging.model.Model` per line.
 
         Returns:
             The file offset after writing.
@@ -58,8 +58,8 @@ class BaseWriter(metaclass=abc.ABCMeta):
 
         Args:
             file: Log file object opened in text mode.
-            data (:obj:`Iterable` of :class:`~zlogging.model.Model`): Log
-                records as an :obj:`Iterable` of :class:`~zlogging.model.Model` per line.
+            data (:class:`~typing.Iterable` of :class:`~zlogging.model.Model`): Log
+                records as an :class:`~typing.Iterable` of :class:`~zlogging.model.Model` per line.
 
         Returns:
             The file offset after writing.
@@ -86,8 +86,8 @@ class BaseWriter(metaclass=abc.ABCMeta):
         """Serialise records to a log line.
 
         Args:
-            data (:obj:`Iterable` of :class:`~zlogging.model.Model`): Log
-                records as an :obj:`Iterable` of :class:`~zlogging.model.Model` per line.
+            data (:class:`~typing.Iterable` of :class:`~zlogging.model.Model`): Log
+                records as an :class:`~typing.Iterable` of :class:`~zlogging.model.Model` per line.
 
         Returns:
             The converted log string.
@@ -111,8 +111,8 @@ class BaseWriter(metaclass=abc.ABCMeta):
         """Write log file.
 
         Args:
-            data (:obj:`Iterable` of :class:`~zlogging.model.Model`): Log
-                records as an :obj:`Iterable` of :class:`~zlogging.model.Model` per line.
+            data (:class:`~typing.Iterable` of :class:`~zlogging.model.Model`): Log
+                records as an :class:`~typing.Iterable` of :class:`~zlogging.model.Model` per line.
             file: Log file object opened in text mode.
 
         Returns:
@@ -125,8 +125,8 @@ class BaseWriter(metaclass=abc.ABCMeta):
         """Serialise records to a log line.
 
         Args:
-            data (:obj:`Iterable` of :class:`~zlogging.model.Model`): Log
-                records as an :obj:`Iterable` of :class:`~zlogging.model.Model` per line.
+            data (:class:`~typing.Iterable` of :class:`~zlogging.model.Model`): Log
+                records as an :class:`~typing.Iterable` of :class:`~zlogging.model.Model` per line.
 
         Returns:
             The converted log string.
@@ -161,8 +161,8 @@ class JSONWriter(BaseWriter):
 
         Args:
             file: Log file object opened in text mode.
-            data (:obj:`Iterable` of :class:`~zlogging.model.Model`): Log
-                records as an :obj:`Iterable` of :class:`~zlogging.model.Model` per line.
+            data (:class:`~typing.Iterable` of :class:`~zlogging.model.Model`): Log
+                records as an :class:`~typing.Iterable` of :class:`~zlogging.model.Model` per line.
 
         Returns:
             The file offset after writing.
@@ -198,8 +198,8 @@ class JSONWriter(BaseWriter):
         """Serialise records to a log line.
 
         Args:
-            data (:obj:`Iterable` of :class:`~zlogging.model.Model`): Log
-                records as an :obj:`Iterable` of :class:`~zlogging.model.Model` per line.
+            data (:class:`~typing.Iterable` of :class:`~zlogging.model.Model`): Log
+                records as an :class:`~typing.Iterable` of :class:`~zlogging.model.Model` per line.
 
         Returns:
             The converted log string.
@@ -305,8 +305,8 @@ class ASCIIWriter(BaseWriter):
 
         Args:
             file: Log file object opened in text mode.
-            data (:obj:`Iterable` of :class:`~zlogging.model.Model`): Log
-                records as an :obj:`Iterable` of :class:`~zlogging.model.Model` per line.
+            data (:class:`~typing.Iterable` of :class:`~zlogging.model.Model`): Log
+                records as an :class:`~typing.Iterable` of :class:`~zlogging.model.Model` per line.
 
         Returns:
             The file offset after writing.
@@ -399,8 +399,8 @@ class ASCIIWriter(BaseWriter):
         """Serialise records to a log line.
 
         Args:
-            data (:obj:`Iterable` of :class:`~zlogging.model.Model`): Log
-                records as an :obj:`Iterable` of :class:`~zlogging.model.Model` per line.
+            data (:class:`~typing.Iterable` of :class:`~zlogging.model.Model`): Log
+                records as an :class:`~typing.Iterable` of :class:`~zlogging.model.Model` per line.
             name: Log file name.
 
         Returns:
@@ -499,14 +499,12 @@ def write_json(data: 'Iterable[Model]', filename: 'PathLike[str]',  # pylint: di
     """Write JSON log file.
 
     Args:
-        data (:obj:`Iterable` of :class:`~zlogging.model.Model`): Log
-            records as an :obj:`Iterable` of :class:`~zlogging.model.Model` per line.
+        data (:class:`~typing.Iterable` of :class:`~zlogging.model.Model`): Log
+            records as an :class:`~typing.Iterable` of :class:`~zlogging.model.Model` per line.
         filename: Log file name.
         writer (:class:`~zlogging.dumper.JSONWriter`, optional): Writer class.
         encoder (:class:`json.JSONEncoder` object, optional): JSON encoder class.
         *args: Variable length argument list.
-
-    Keyword Args:
         **kwargs: Arbitrary keyword arguments.
 
     """
@@ -523,14 +521,12 @@ def dump_json(data: 'Iterable[Model]', file: 'TextFile',  # pylint: disable=unus
     """Write JSON log file.
 
     Args:
-        data (:obj:`Iterable` of :class:`~zlogging.model.Model`): Log
-            records as an :obj:`Iterable` of :class:`~zlogging.model.Model` per line.
+        data (:class:`~typing.Iterable` of :class:`~zlogging.model.Model`): Log
+            records as an :class:`~typing.Iterable` of :class:`~zlogging.model.Model` per line.
         file: Log file object opened in text mode.
         writer (:class:`~zlogging.dumper.JSONWriter`, optional): Writer class.
         encoder (:class:`json.JSONEncoder` object, optional): JSON encoder class.
         *args: Variable length argument list.
-
-    Keyword Args:
         **kwargs: Arbitrary keyword arguments.
 
     """
@@ -547,13 +543,11 @@ def dumps_json(data: 'Optional[Iterable[Model]]' = None,  # pylint: disable=unus
     """Write JSON log string.
 
     Args:
-        data (:obj:`Iterable` of :class:`~zlogging.model.Model`): Log
-            records as an :obj:`Iterable` of :class:`~zlogging.model.Model` per line.
+        data (:class:`~typing.Iterable` of :class:`~zlogging.model.Model`): Log
+            records as an :class:`~typing.Iterable` of :class:`~zlogging.model.Model` per line.
         writer (:class:`~zlogging.dumper.JSONWriter`, optional): Writer class.
         encoder (:class:`json.JSONEncoder` object, optional): JSON encoder class.
         *args: Variable length argument list.
-
-    Keyword Args:
         **kwargs: Arbitrary keyword arguments.
 
     Returns:
@@ -576,8 +570,8 @@ def write_ascii(data: 'Iterable[Model]', filename: 'PathLike[str]',  # pylint: d
     """Write ASCII log file.
 
     Args:
-        data (:obj:`Iterable` of :class:`~zlogging.model.Model`): Log
-            records as an :obj:`Iterable` of :class:`~zlogging.model.Model` per line.
+        data (:class:`~typing.Iterable` of :class:`~zlogging.model.Model`): Log
+            records as an :class:`~typing.Iterable` of :class:`~zlogging.model.Model` per line.
         filename: Log file name.
         writer (:class:`~zlogging.dumper.ASCIIWriter`, optional): Writer class.
         separator (:obj:`str` or :obj:`bytes`, optional): Field separator when writing log lines.
@@ -585,8 +579,6 @@ def write_ascii(data: 'Iterable[Model]', filename: 'PathLike[str]',  # pylint: d
         unset_field (:obj:`bytes` or :obj:`str`, optional): Placeholder for unset field.
         set_separator (:obj:`bytes` or :obj:`str`, optional): Separator for ``set``/``vector`` fields.
         *args: Variable length argument list.
-
-    Keyword Args:
         **kwargs: Arbitrary keyword arguments.
 
     """
@@ -607,8 +599,8 @@ def dump_ascii(data: 'Iterable[Model]', file: 'TextFile',  # pylint: disable=unu
     """Write ASCII log file.
 
     Args:
-        data (:obj:`Iterable` of :class:`~zlogging.model.Model`): Log
-            records as an :obj:`Iterable` of :class:`~zlogging.model.Model` per line.
+        data (:class:`~typing.Iterable` of :class:`~zlogging.model.Model`): Log
+            records as an :class:`~typing.Iterable` of :class:`~zlogging.model.Model` per line.
         file: Log file object opened in text mode.
         writer (:class:`~zlogging.dumper.ASCIIWriter`, optional): Writer class.
         separator (:obj:`str` or :obj:`bytes`, optional): Field separator when writing log lines.
@@ -616,8 +608,6 @@ def dump_ascii(data: 'Iterable[Model]', file: 'TextFile',  # pylint: disable=unu
         unset_field (:obj:`bytes` or :obj:`str`, optional): Placeholder for unset field.
         set_separator (:obj:`bytes` or :obj:`str`, optional): Separator for ``set``/``vector`` fields.
         *args: Variable length argument list.
-
-    Keyword Args:
         **kwargs: Arbitrary keyword arguments.
 
     """
@@ -638,8 +628,8 @@ def dumps_ascii(data: 'Optional[Iterable[Model]]' = None,  # pylint: disable=unu
     """Write ASCII log string.
 
     Args:
-        data (:obj:`Iterable` of :class:`~zlogging.model.Model`): Log
-            records as an :obj:`Iterable` of :class:`~zlogging.model.Model` per line.
+        data (:class:`~typing.Iterable` of :class:`~zlogging.model.Model`): Log
+            records as an :class:`~typing.Iterable` of :class:`~zlogging.model.Model` per line.
         writer (:class:`~zlogging.dumper.ASCIIWriter`, optional): Writer class.
         separator (:obj:`str` or :obj:`bytes`, optional): Field separator when writing log lines.
         empty_field (:obj:`bytes` or :obj:`str`, optional): Placeholder for empty field.
@@ -663,14 +653,12 @@ def write(data: 'Iterable[Model]', filename: 'PathLike[str]', format: str, *args
     """Write Bro/Zeek log file.
 
     Args:
-        data (:obj:`Iterable` of :class:`~zlogging.model.Model`): Log
-            records as an :obj:`Iterable` of :class:`~zlogging.model.Model` per line.
+        data (:class:`~typing.Iterable` of :class:`~zlogging.model.Model`): Log
+            records as an :class:`~typing.Iterable` of :class:`~zlogging.model.Model` per line.
         filename: Log file name.
         format: Log format.
         *args: See :func:`~zlogging.dumper.write_json` and
             :func:`~zlogging.dumper.write_ascii` for more information.
-
-    Keyword Args:
         **kwargs: See :func:`~zlogging.dumper.write_json` and
             :func:`~zlogging.dumper.write_ascii` for more information.
 
@@ -689,14 +677,12 @@ def dump(data: 'Iterable[Model]', file: 'TextFile', format: str, *args: 'Any', *
     """Write Bro/Zeek log file.
 
     Args:
-        data (:obj:`Iterable` of :class:`~zlogging.model.Model`): Log
-            records as an :obj:`Iterable` of :class:`~zlogging.model.Model` per line.
+        data (:class:`~typing.Iterable` of :class:`~zlogging.model.Model`): Log
+            records as an :class:`~typing.Iterable` of :class:`~zlogging.model.Model` per line.
         format: Log format.
         file: Log file object opened in text mode.
         *args: See :func:`~zlogging.dumper.dump_json` and
             :func:`~zlogging.dumper.dump_ascii` for more information.
-
-    Keyword Args:
         **kwargs: See :func:`~zlogging.dumper.dump_json` and
             :func:`~zlogging.dumper.dump_ascii` for more information.
 
@@ -715,13 +701,11 @@ def dumps(data: 'Iterable[Model]', format: str, *args: 'Any', **kwargs: 'Any') -
     """Write Bro/Zeek log string.
 
     Args:
-        data (:obj:`Iterable` of :class:`~zlogging.model.Model`): Log
-            records as an :obj:`Iterable` of :class:`~zlogging.model.Model` per line.
+        data (:class:`~typing.Iterable` of :class:`~zlogging.model.Model`): Log
+            records as an :class:`~typing.Iterable` of :class:`~zlogging.model.Model` per line.
         format: Log format.
         *args: See :func:`~zlogging.dumper.dumps_json` and
             :func:`~zlogging.dumper.dumps_ascii` for more information.
-
-    Keyword Args:
         **kwargs: See :func:`~zlogging.dumper.dumps_json` and
             :func:`~zlogging.dumper.dumps_ascii` for more information.
 

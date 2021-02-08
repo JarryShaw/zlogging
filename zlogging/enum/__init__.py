@@ -926,14 +926,11 @@ _enum_zeek = {
 }
 
 
-def globals(*namespaces, bare: bool = False) -> 'Dict[str, Enum]':  # pylint: disable=redefined-builtin
+def globals(*namespaces: str, bare: bool = False) -> 'Dict[str, Enum]':  # pylint: disable=redefined-builtin
     """Generate Bro/Zeek ``enum`` namespace.
 
     Args:
         *namespaces: Namespaces to be loaded.
-        bare: If ``True``, do not load ``zeek`` namespace by default.
-
-    Keyword Args:
         bare: If ``True``, do not load ``zeek`` namespace by default.
 
     Returns:

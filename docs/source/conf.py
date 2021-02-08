@@ -11,10 +11,11 @@ import typing
 from typing import TYPE_CHECKING
 
 if TYPE_CHECKING:
-    from typing import List
+    from typing import Any, Dict, List
     from sphinx.application import Sphinx
 
 logger = logging.getLogger(__name__)
+logger.setLevel(logging.DEBUG)
 #logging.basicConfig(level=logging.DEBUG)
 
 # -- Path setup --------------------------------------------------------------
@@ -31,7 +32,7 @@ logger = logging.getLogger(__name__)
 # -- Project information -----------------------------------------------------
 
 project = 'ZLogging'
-copyright = '2020-2021, Jarry Shaw'
+copyright = '2020-2021, Jarry Shaw'  # pylint: disable=redefined-builtin
 author = 'Jarry Shaw'
 
 # The full version, including alpha/beta/rc tags
@@ -114,12 +115,27 @@ html_theme_options = {
 }
 
 
-def setup(app: 'Sphinx') -> None:  # pylint: disable=unused-argument
-    typing.TYPE_CHECKING = True
-    for name, module in sys.modules.copy().items():
-        if 'tekid' not in name:
-            continue
+def reload_module(app: 'Sphinx', what: str, name: str,  # pylint: disable=unused-argument
+                  obj: 'Any', options: 'Dict[str, Any]', lines: 'List[str]') -> None:  # pylint: disable=unused-argument
+    if what == 'module' and 'zlogging' in name:
+        module = sys.modules.get(name)
+        if module is None:
+            return
 
-        logger.info('reloading module: %(name)s', name=name)
+        logger.info('reloading module: %s', name)
+        typing.TYPE_CHECKING = True
         importlib.reload(module)
-        logger.info('reloaded module: %(name)s', name=name)
+        logger.info('reloaded module: %s', name)
+
+
+def setup(app: 'Sphinx') -> None:  # pylint: disable=unused-argument
+    app.connect('autodoc-process-docstring', reload_module)
+
+    # typing.TYPE_CHECKING = True
+    # for name, module in sys.modules.copy().items():
+    #     if 'zlogging' not in name:
+    #         continue
+
+    #     logger.info('reloading module: %s', name)
+    #     importlib.reload(module)
+    #     logger.info('reloaded module: %s', name)

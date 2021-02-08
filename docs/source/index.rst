@@ -17,7 +17,7 @@ ZLogging - Bro/Zeek logging framework for Python
    _data
    _exc
    _aux
-   enum
+   enum/index
 
 The ``ZLogging`` module provides an easy-to-use bridge between the logging
 framework of the well-known Bro/Zeek Network Security Monitor (IDS).
