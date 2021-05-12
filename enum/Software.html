@@ -4,11 +4,12 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
     <title>Software Namespace &#8212; ZLogging 0.1.1 documentation</title>
-    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
-    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/alabaster.css" />
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
     <script src="../_static/underscore.js"></script>
     <script src="../_static/doctools.js"></script>
@@ -32,12 +33,12 @@
 
           <div class="body" role="main">
             
-  <div class="section" id="software-namespace">
+  <section id="software-namespace">
 <h1><code class="docutils literal notranslate"><span class="pre">Software</span></code> Namespace<a class="headerlink" href="#software-namespace" title="Permalink to this headline">¶</a></h1>
 <p>Namespace: <code class="docutils literal notranslate"><span class="pre">Software</span></code>.</p>
 <dl class="py class">
-<dt>
-<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">zlogging.enum.Software.</span></code><code class="sig-name descname"><span class="pre">Type</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/zlogging/enum/Software.html#Type"><span class="viewcode-link"><span class="pre">[source]</span></span></a></dt>
+<dt class="sig sig-object py">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">zlogging.enum.Software.</span></span><span class="sig-name descname"><span class="pre">Type</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/zlogging/enum/Software.html#Type"><span class="viewcode-link"><span class="pre">[source]</span></span></a></dt>
 <dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/enum.html#enum.IntFlag" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">enum.IntFlag</span></code></a></p>
 <p>Enum: <code class="docutils literal notranslate"><span class="pre">Software::Type</span></code>.</p>
 <p>Scripts detecting new types of software need to redef this enum to add their own specific software
@@ -47,93 +48,93 @@ types which would then be used when they create <code class="docutils literal no
 <p><a class="reference external" href="https://docs.zeek.org/en/stable/scripts/base/frameworks/software/main.zeek.html#type-Software::Type">base/frameworks/software/main.zeek</a></p>
 </div>
 <dl class="py attribute">
-<dt>
-<code class="sig-name descname"><span class="pre">UNKNOWN</span></code><em class="property"> <span class="pre">=</span> <span class="pre">1</span></em></dt>
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">UNKNOWN</span></span><em class="property"> <span class="pre">=</span> <span class="pre">1</span></em></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
-<dt>
-<code class="sig-name descname"><span class="pre">OS__WINDOWS</span></code><em class="property"> <span class="pre">=</span> <span class="pre">2</span></em></dt>
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">OS__WINDOWS</span></span><em class="property"> <span class="pre">=</span> <span class="pre">2</span></em></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
-<dt>
-<code class="sig-name descname"><span class="pre">DHCP__SERVER</span></code><em class="property"> <span class="pre">=</span> <span class="pre">4</span></em></dt>
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">DHCP__SERVER</span></span><em class="property"> <span class="pre">=</span> <span class="pre">4</span></em></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
-<dt>
-<code class="sig-name descname"><span class="pre">DHCP__CLIENT</span></code><em class="property"> <span class="pre">=</span> <span class="pre">8</span></em></dt>
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">DHCP__CLIENT</span></span><em class="property"> <span class="pre">=</span> <span class="pre">8</span></em></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
-<dt>
-<code class="sig-name descname"><span class="pre">FTP__CLIENT</span></code><em class="property"> <span class="pre">=</span> <span class="pre">16</span></em></dt>
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">FTP__CLIENT</span></span><em class="property"> <span class="pre">=</span> <span class="pre">16</span></em></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
-<dt>
-<code class="sig-name descname"><span class="pre">FTP__SERVER</span></code><em class="property"> <span class="pre">=</span> <span class="pre">32</span></em></dt>
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">FTP__SERVER</span></span><em class="property"> <span class="pre">=</span> <span class="pre">32</span></em></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
-<dt>
-<code class="sig-name descname"><span class="pre">HTTP__WEB_APPLICATION</span></code><em class="property"> <span class="pre">=</span> <span class="pre">64</span></em></dt>
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">HTTP__WEB_APPLICATION</span></span><em class="property"> <span class="pre">=</span> <span class="pre">64</span></em></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
-<dt>
-<code class="sig-name descname"><span class="pre">HTTP__BROWSER_PLUGIN</span></code><em class="property"> <span class="pre">=</span> <span class="pre">128</span></em></dt>
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">HTTP__BROWSER_PLUGIN</span></span><em class="property"> <span class="pre">=</span> <span class="pre">128</span></em></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
-<dt>
-<code class="sig-name descname"><span class="pre">HTTP__SERVER</span></code><em class="property"> <span class="pre">=</span> <span class="pre">256</span></em></dt>
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">HTTP__SERVER</span></span><em class="property"> <span class="pre">=</span> <span class="pre">256</span></em></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
-<dt>
-<code class="sig-name descname"><span class="pre">HTTP__APPSERVER</span></code><em class="property"> <span class="pre">=</span> <span class="pre">512</span></em></dt>
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">HTTP__APPSERVER</span></span><em class="property"> <span class="pre">=</span> <span class="pre">512</span></em></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
-<dt>
-<code class="sig-name descname"><span class="pre">HTTP__BROWSER</span></code><em class="property"> <span class="pre">=</span> <span class="pre">1024</span></em></dt>
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">HTTP__BROWSER</span></span><em class="property"> <span class="pre">=</span> <span class="pre">1024</span></em></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
-<dt>
-<code class="sig-name descname"><span class="pre">MySQL__SERVER</span></code><em class="property"> <span class="pre">=</span> <span class="pre">2048</span></em></dt>
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">MySQL__SERVER</span></span><em class="property"> <span class="pre">=</span> <span class="pre">2048</span></em></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
-<dt>
-<code class="sig-name descname"><span class="pre">SMTP__MAIL_CLIENT</span></code><em class="property"> <span class="pre">=</span> <span class="pre">4096</span></em></dt>
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">SMTP__MAIL_CLIENT</span></span><em class="property"> <span class="pre">=</span> <span class="pre">4096</span></em></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
-<dt>
-<code class="sig-name descname"><span class="pre">SMTP__MAIL_SERVER</span></code><em class="property"> <span class="pre">=</span> <span class="pre">8192</span></em></dt>
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">SMTP__MAIL_SERVER</span></span><em class="property"> <span class="pre">=</span> <span class="pre">8192</span></em></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
-<dt>
-<code class="sig-name descname"><span class="pre">SMTP__WEBMAIL_SERVER</span></code><em class="property"> <span class="pre">=</span> <span class="pre">16384</span></em></dt>
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">SMTP__WEBMAIL_SERVER</span></span><em class="property"> <span class="pre">=</span> <span class="pre">16384</span></em></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
-<dt>
-<code class="sig-name descname"><span class="pre">SSH__SERVER</span></code><em class="property"> <span class="pre">=</span> <span class="pre">32768</span></em></dt>
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">SSH__SERVER</span></span><em class="property"> <span class="pre">=</span> <span class="pre">32768</span></em></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
-<dt>
-<code class="sig-name descname"><span class="pre">SSH__CLIENT</span></code><em class="property"> <span class="pre">=</span> <span class="pre">65536</span></em></dt>
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">SSH__CLIENT</span></span><em class="property"> <span class="pre">=</span> <span class="pre">65536</span></em></dt>
 <dd></dd></dl>
 
 </dd></dl>
 
-</div>
+</section>
 
 
           </div>

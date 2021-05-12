@@ -4,11 +4,12 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
     <title>Loaders &#8212; ZLogging 0.1.1 documentation</title>
-    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
-    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/alabaster.css" />
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
     <script src="_static/jquery.js"></script>
     <script src="_static/underscore.js"></script>
     <script src="_static/doctools.js"></script>
@@ -32,14 +33,14 @@
 
           <div class="body" role="main">
             
-  <div class="section" id="loaders">
+  <section id="loaders">
 <h1>Loaders<a class="headerlink" href="#loaders" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="module-zlogging.loader">
+<section id="module-zlogging.loader">
 <span id="predefined-loaders"></span><h2>Predefined Loaders<a class="headerlink" href="#module-zlogging.loader" title="Permalink to this headline">¶</a></h2>
 <p>Bro/Zeek log loader.</p>
 <dl class="py function">
-<dt id="zlogging.loader.parse">
-<code class="sig-prename descclassname"><span class="pre">zlogging.loader.</span></code><code class="sig-name descname"><span class="pre">parse</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/zlogging/loader.html#parse"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#zlogging.loader.parse" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="zlogging.loader.parse">
+<span class="sig-prename descclassname"><span class="pre">zlogging.loader.</span></span><span class="sig-name descname"><span class="pre">parse</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/zlogging/loader.html#parse"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#zlogging.loader.parse" title="Permalink to this definition">¶</a></dt>
 <dd><p>Parse Bro/Zeek log file.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -66,8 +67,8 @@
 </dd></dl>
 
 <dl class="py function">
-<dt id="zlogging.loader.parse_ascii">
-<code class="sig-prename descclassname"><span class="pre">zlogging.loader.</span></code><code class="sig-name descname"><span class="pre">parse_ascii</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">parser</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">type_hook</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">enum_namespaces</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bare</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/zlogging/loader.html#parse_ascii"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#zlogging.loader.parse_ascii" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="zlogging.loader.parse_ascii">
+<span class="sig-prename descclassname"><span class="pre">zlogging.loader.</span></span><span class="sig-name descname"><span class="pre">parse_ascii</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">parser</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">type_hook</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">enum_namespaces</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bare</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/zlogging/loader.html#parse_ascii"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#zlogging.loader.parse_ascii" title="Permalink to this definition">¶</a></dt>
 <dd><p>Parse ASCII log file.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -94,8 +95,8 @@
 </dd></dl>
 
 <dl class="py function">
-<dt id="zlogging.loader.parse_json">
-<code class="sig-prename descclassname"><span class="pre">zlogging.loader.</span></code><code class="sig-name descname"><span class="pre">parse_json</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">parser</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">model</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/zlogging/loader.html#parse_json"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#zlogging.loader.parse_json" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="zlogging.loader.parse_json">
+<span class="sig-prename descclassname"><span class="pre">zlogging.loader.</span></span><span class="sig-name descname"><span class="pre">parse_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">parser</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">model</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/zlogging/loader.html#parse_json"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#zlogging.loader.parse_json" title="Permalink to this definition">¶</a></dt>
 <dd><p>Parse JSON log file.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -122,8 +123,8 @@ logging framework.</p></li>
 </dd></dl>
 
 <dl class="py function">
-<dt id="zlogging.loader.loads">
-<code class="sig-prename descclassname"><span class="pre">zlogging.loader.</span></code><code class="sig-name descname"><span class="pre">loads</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/zlogging/loader.html#loads"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#zlogging.loader.loads" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="zlogging.loader.loads">
+<span class="sig-prename descclassname"><span class="pre">zlogging.loader.</span></span><span class="sig-name descname"><span class="pre">loads</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/zlogging/loader.html#loads"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#zlogging.loader.loads" title="Permalink to this definition">¶</a></dt>
 <dd><p>Parse Bro/Zeek log string.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -150,8 +151,8 @@ logging framework.</p></li>
 </dd></dl>
 
 <dl class="py function">
-<dt id="zlogging.loader.loads_ascii">
-<code class="sig-prename descclassname"><span class="pre">zlogging.loader.</span></code><code class="sig-name descname"><span class="pre">loads_ascii</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">parser</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">type_hook</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">enum_namespaces</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bare</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/zlogging/loader.html#loads_ascii"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#zlogging.loader.loads_ascii" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="zlogging.loader.loads_ascii">
+<span class="sig-prename descclassname"><span class="pre">zlogging.loader.</span></span><span class="sig-name descname"><span class="pre">loads_ascii</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">parser</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">type_hook</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">enum_namespaces</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bare</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/zlogging/loader.html#loads_ascii"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#zlogging.loader.loads_ascii" title="Permalink to this definition">¶</a></dt>
 <dd><p>Parse ASCII log string.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -178,8 +179,8 @@ logging framework.</p></li>
 </dd></dl>
 
 <dl class="py function">
-<dt id="zlogging.loader.loads_json">
-<code class="sig-prename descclassname"><span class="pre">zlogging.loader.</span></code><code class="sig-name descname"><span class="pre">loads_json</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">parser</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">model</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/zlogging/loader.html#loads_json"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#zlogging.loader.loads_json" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="zlogging.loader.loads_json">
+<span class="sig-prename descclassname"><span class="pre">zlogging.loader.</span></span><span class="sig-name descname"><span class="pre">loads_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">parser</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">model</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/zlogging/loader.html#loads_json"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#zlogging.loader.loads_json" title="Permalink to this definition">¶</a></dt>
 <dd><p>Parse JSON log string.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -206,8 +207,8 @@ logging framework.</p></li>
 </dd></dl>
 
 <dl class="py function">
-<dt id="zlogging.loader.load">
-<code class="sig-prename descclassname"><span class="pre">zlogging.loader.</span></code><code class="sig-name descname"><span class="pre">load</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/zlogging/loader.html#load"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#zlogging.loader.load" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="zlogging.loader.load">
+<span class="sig-prename descclassname"><span class="pre">zlogging.loader.</span></span><span class="sig-name descname"><span class="pre">load</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/zlogging/loader.html#load"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#zlogging.loader.load" title="Permalink to this definition">¶</a></dt>
 <dd><p>Parse Bro/Zeek log file.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -234,8 +235,8 @@ logging framework.</p></li>
 </dd></dl>
 
 <dl class="py function">
-<dt id="zlogging.loader.load_ascii">
-<code class="sig-prename descclassname"><span class="pre">zlogging.loader.</span></code><code class="sig-name descname"><span class="pre">load_ascii</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">parser</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">type_hook</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">enum_namespaces</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bare</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/zlogging/loader.html#load_ascii"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#zlogging.loader.load_ascii" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="zlogging.loader.load_ascii">
+<span class="sig-prename descclassname"><span class="pre">zlogging.loader.</span></span><span class="sig-name descname"><span class="pre">load_ascii</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">parser</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">type_hook</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">enum_namespaces</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bare</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/zlogging/loader.html#load_ascii"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#zlogging.loader.load_ascii" title="Permalink to this definition">¶</a></dt>
 <dd><p>Parse ASCII log file.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -262,8 +263,8 @@ logging framework.</p></li>
 </dd></dl>
 
 <dl class="py function">
-<dt id="zlogging.loader.load_json">
-<code class="sig-prename descclassname"><span class="pre">zlogging.loader.</span></code><code class="sig-name descname"><span class="pre">load_json</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">parser</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">model</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/zlogging/loader.html#load_json"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#zlogging.loader.load_json" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="zlogging.loader.load_json">
+<span class="sig-prename descclassname"><span class="pre">zlogging.loader.</span></span><span class="sig-name descname"><span class="pre">load_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">parser</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">model</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/zlogging/loader.html#load_json"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#zlogging.loader.load_json" title="Permalink to this definition">¶</a></dt>
 <dd><p>Parse JSON log file.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -290,8 +291,8 @@ logging framework.</p></li>
 </dd></dl>
 
 <dl class="py class">
-<dt id="zlogging.loader.ASCIIParser">
-<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">zlogging.loader.</span></code><code class="sig-name descname"><span class="pre">ASCIIParser</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">type_hook</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">enum_namespaces</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bare</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/zlogging/loader.html#ASCIIParser"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#zlogging.loader.ASCIIParser" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="zlogging.loader.ASCIIParser">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">zlogging.loader.</span></span><span class="sig-name descname"><span class="pre">ASCIIParser</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">type_hook</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">enum_namespaces</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bare</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/zlogging/loader.html#ASCIIParser"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#zlogging.loader.ASCIIParser" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#zlogging.loader.BaseParser" title="zlogging.loader.BaseParser"><code class="xref py py-class docutils literal notranslate"><span class="pre">zlogging.loader.BaseParser</span></code></a></p>
 <p>ASCII log parser.</p>
 <dl class="field-list simple">
@@ -310,10 +311,13 @@ logging framework.</p></li>
 <li><p><strong>bare</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)"><em>bool</em></a>) – If <code class="docutils literal notranslate"><span class="pre">True</span></code>, do not load <code class="docutils literal notranslate"><span class="pre">zeek</span></code> namespace by default.</p></li>
 </ul>
 </dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)">None</a></p>
+</dd>
 </dl>
-<dl class="py method">
-<dt id="zlogging.loader.ASCIIParser.format">
-<em class="property"><span class="pre">property</span> </em><code class="sig-name descname"><span class="pre">format</span></code><a class="headerlink" href="#zlogging.loader.ASCIIParser.format" title="Permalink to this definition">¶</a></dt>
+<dl class="py property">
+<dt class="sig sig-object py" id="zlogging.loader.ASCIIParser.format">
+<em class="property"><span class="pre">property</span> </em><span class="sig-name descname"><span class="pre">format</span></span><em class="property"><span class="pre">:</span> <span class="pre">Literal[ascii]</span></em><a class="headerlink" href="#zlogging.loader.ASCIIParser.format" title="Permalink to this definition">¶</a></dt>
 <dd><p>Log file format.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
@@ -326,8 +330,8 @@ logging framework.</p></li>
 </dd></dl>
 
 <dl class="py method">
-<dt id="zlogging.loader.ASCIIParser.parse">
-<code class="sig-name descname"><span class="pre">parse</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">model</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/zlogging/loader.html#ASCIIParser.parse"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#zlogging.loader.ASCIIParser.parse" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="zlogging.loader.ASCIIParser.parse">
+<span class="sig-name descname"><span class="pre">parse</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">model</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/zlogging/loader.html#ASCIIParser.parse"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#zlogging.loader.ASCIIParser.parse" title="Permalink to this definition">¶</a></dt>
 <dd><p>Parse log file.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -346,8 +350,8 @@ logging framework.</p></li>
 </dd></dl>
 
 <dl class="py method">
-<dt id="zlogging.loader.ASCIIParser.parse_file">
-<code class="sig-name descname"><span class="pre">parse_file</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">model</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/zlogging/loader.html#ASCIIParser.parse_file"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#zlogging.loader.ASCIIParser.parse_file" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="zlogging.loader.ASCIIParser.parse_file">
+<span class="sig-name descname"><span class="pre">parse_file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">model</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/zlogging/loader.html#ASCIIParser.parse_file"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#zlogging.loader.ASCIIParser.parse_file" title="Permalink to this definition">¶</a></dt>
 <dd><p>Parse log file.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -378,8 +382,8 @@ for more information.</p>
 </dd></dl>
 
 <dl class="py method">
-<dt id="zlogging.loader.ASCIIParser.parse_line">
-<code class="sig-name descname"><span class="pre">parse_line</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">line</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lineno</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">model</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">separator</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">b'\\t'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">parser</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/zlogging/loader.html#ASCIIParser.parse_line"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#zlogging.loader.ASCIIParser.parse_line" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="zlogging.loader.ASCIIParser.parse_line">
+<span class="sig-name descname"><span class="pre">parse_line</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">line</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lineno</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">model</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">separator</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">b'\\t'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">parser</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/zlogging/loader.html#ASCIIParser.parse_line"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#zlogging.loader.ASCIIParser.parse_line" title="Permalink to this definition">¶</a></dt>
 <dd><p>Parse log line as one-line record.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -407,8 +411,8 @@ for more information.</p>
 </dd></dl>
 
 <dl class="py class">
-<dt id="zlogging.loader.JSONParser">
-<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">zlogging.loader.</span></code><code class="sig-name descname"><span class="pre">JSONParser</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">model</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/zlogging/loader.html#JSONParser"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#zlogging.loader.JSONParser" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="zlogging.loader.JSONParser">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">zlogging.loader.</span></span><span class="sig-name descname"><span class="pre">JSONParser</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">model</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/zlogging/loader.html#JSONParser"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#zlogging.loader.JSONParser" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#zlogging.loader.BaseParser" title="zlogging.loader.BaseParser"><code class="xref py py-class docutils literal notranslate"><span class="pre">zlogging.loader.BaseParser</span></code></a></p>
 <p>JSON log parser.</p>
 <dl class="field-list simple">
@@ -428,9 +432,9 @@ logging framework.</p>
 <dd class="field-odd"><p><strong>JSONParserWarning</strong> – If <code class="docutils literal notranslate"><span class="pre">model</span></code> is not specified.</p>
 </dd>
 </dl>
-<dl class="py method">
-<dt id="zlogging.loader.JSONParser.format">
-<em class="property"><span class="pre">property</span> </em><code class="sig-name descname"><span class="pre">format</span></code><a class="headerlink" href="#zlogging.loader.JSONParser.format" title="Permalink to this definition">¶</a></dt>
+<dl class="py property">
+<dt class="sig sig-object py" id="zlogging.loader.JSONParser.format">
+<em class="property"><span class="pre">property</span> </em><span class="sig-name descname"><span class="pre">format</span></span><em class="property"><span class="pre">:</span> <span class="pre">Literal[json]</span></em><a class="headerlink" href="#zlogging.loader.JSONParser.format" title="Permalink to this definition">¶</a></dt>
 <dd><p>Log file format.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
@@ -443,8 +447,8 @@ logging framework.</p>
 </dd></dl>
 
 <dl class="py method">
-<dt id="zlogging.loader.JSONParser.parse">
-<code class="sig-name descname"><span class="pre">parse</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">model</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/zlogging/loader.html#JSONParser.parse"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#zlogging.loader.JSONParser.parse" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="zlogging.loader.JSONParser.parse">
+<span class="sig-name descname"><span class="pre">parse</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">model</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/zlogging/loader.html#JSONParser.parse"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#zlogging.loader.JSONParser.parse" title="Permalink to this definition">¶</a></dt>
 <dd><p>Parse log file.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -463,8 +467,8 @@ logging framework.</p>
 </dd></dl>
 
 <dl class="py method">
-<dt id="zlogging.loader.JSONParser.parse_file">
-<code class="sig-name descname"><span class="pre">parse_file</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">model</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/zlogging/loader.html#JSONParser.parse_file"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#zlogging.loader.JSONParser.parse_file" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="zlogging.loader.JSONParser.parse_file">
+<span class="sig-name descname"><span class="pre">parse_file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">model</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/zlogging/loader.html#JSONParser.parse_file"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#zlogging.loader.JSONParser.parse_file" title="Permalink to this definition">¶</a></dt>
 <dd><p>Parse log file.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -487,8 +491,8 @@ logging framework.</p>
 </dd></dl>
 
 <dl class="py method">
-<dt id="zlogging.loader.JSONParser.parse_line">
-<code class="sig-name descname"><span class="pre">parse_line</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">line</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lineno</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">model</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/zlogging/loader.html#JSONParser.parse_line"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#zlogging.loader.JSONParser.parse_line" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="zlogging.loader.JSONParser.parse_line">
+<span class="sig-name descname"><span class="pre">parse_line</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">line</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lineno</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">model</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/zlogging/loader.html#JSONParser.parse_line"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#zlogging.loader.JSONParser.parse_line" title="Permalink to this definition">¶</a></dt>
 <dd><p>Parse log line as one-line record.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -513,8 +517,8 @@ logging framework.</p>
 </dd></dl>
 
 <dl class="py class">
-<dt id="zlogging.loader._SimpleType">
-<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">zlogging.loader.</span></code><code class="sig-name descname"><span class="pre">_SimpleType</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">empty_field</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">unset_field</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">set_separator</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/zlogging/types.html#_SimpleType"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#zlogging.loader._SimpleType" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="zlogging.loader._SimpleType">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">zlogging.loader.</span></span><span class="sig-name descname"><span class="pre">_SimpleType</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">empty_field</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">unset_field</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">set_separator</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/zlogging/types.html#_SimpleType"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#zlogging.loader._SimpleType" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="types.html#zlogging.types.BaseType" title="zlogging.types.BaseType"><code class="xref py py-class docutils literal notranslate"><span class="pre">zlogging.types.BaseType</span></code></a></p>
 <p>Simple data type.</p>
 <p>In Bro/Zeek script language, such simple type includes <code class="docutils literal notranslate"><span class="pre">bool</span></code>, <code class="docutils literal notranslate"><span class="pre">count</span></code>,
@@ -522,19 +526,33 @@ logging framework.</p>
 <code class="docutils literal notranslate"><span class="pre">port</span></code>, <code class="docutils literal notranslate"><span class="pre">subnet</span></code> and <code class="docutils literal notranslate"><span class="pre">enum</span></code>.</p>
 <p>To support arbitrary typing as required in <a class="reference internal" href="#zlogging.loader.JSONParser" title="zlogging.loader.JSONParser"><code class="xref py py-class docutils literal notranslate"><span class="pre">JSONParser</span></code></a>,
 <code class="docutils literal notranslate"><span class="pre">any</span></code>, the arbitrary date type is also included.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>empty_field</strong> (<em>Optional</em><em>[</em><em>AnyStr</em><em>]</em>) – </p></li>
+<li><p><strong>unset_field</strong> (<em>Optional</em><em>[</em><em>AnyStr</em><em>]</em>) – </p></li>
+<li><p><strong>set_separator</strong> (<em>Optional</em><em>[</em><em>AnyStr</em><em>]</em>) – </p></li>
+<li><p><strong>args</strong> (<em>Any</em>) – </p></li>
+<li><p><strong>kwargs</strong> (<em>Any</em>) – </p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)">None</a></p>
+</dd>
+</dl>
 </dd></dl>
 
-</div>
-<div class="section" id="abstract-base-loaders">
+</section>
+<section id="abstract-base-loaders">
 <h2>Abstract Base Loaders<a class="headerlink" href="#abstract-base-loaders" title="Permalink to this headline">¶</a></h2>
 <dl class="py class">
-<dt id="zlogging.loader.BaseParser">
-<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">zlogging.loader.</span></code><code class="sig-name descname"><span class="pre">BaseParser</span></code><a class="reference internal" href="_modules/zlogging/loader.html#BaseParser"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#zlogging.loader.BaseParser" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="zlogging.loader.BaseParser">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">zlogging.loader.</span></span><span class="sig-name descname"><span class="pre">BaseParser</span></span><a class="reference internal" href="_modules/zlogging/loader.html#BaseParser"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#zlogging.loader.BaseParser" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
 <p>Basic log parser.</p>
-<dl class="py method">
-<dt id="zlogging.loader.BaseParser.format">
-<em class="property"><span class="pre">abstract</span> <span class="pre">property</span> </em><code class="sig-name descname"><span class="pre">format</span></code><a class="headerlink" href="#zlogging.loader.BaseParser.format" title="Permalink to this definition">¶</a></dt>
+<dl class="py property">
+<dt class="sig sig-object py" id="zlogging.loader.BaseParser.format">
+<em class="property"><span class="pre">abstract</span> <span class="pre">property</span> </em><span class="sig-name descname"><span class="pre">format</span></span><em class="property"><span class="pre">:</span> <span class="pre">str</span></em><a class="headerlink" href="#zlogging.loader.BaseParser.format" title="Permalink to this definition">¶</a></dt>
 <dd><p>Log file format.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
@@ -547,8 +565,8 @@ logging framework.</p>
 </dd></dl>
 
 <dl class="py method">
-<dt id="zlogging.loader.BaseParser.parse">
-<code class="sig-name descname"><span class="pre">parse</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">model</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/zlogging/loader.html#BaseParser.parse"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#zlogging.loader.BaseParser.parse" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="zlogging.loader.BaseParser.parse">
+<span class="sig-name descname"><span class="pre">parse</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">model</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/zlogging/loader.html#BaseParser.parse"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#zlogging.loader.BaseParser.parse" title="Permalink to this definition">¶</a></dt>
 <dd><p>Parse log file.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -567,8 +585,8 @@ logging framework.</p>
 </dd></dl>
 
 <dl class="py method">
-<dt id="zlogging.loader.BaseParser.parse_file">
-<em class="property"><span class="pre">abstract</span> </em><code class="sig-name descname"><span class="pre">parse_file</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">model</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/zlogging/loader.html#BaseParser.parse_file"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#zlogging.loader.BaseParser.parse_file" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="zlogging.loader.BaseParser.parse_file">
+<em class="property"><span class="pre">abstract</span> </em><span class="sig-name descname"><span class="pre">parse_file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">model</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/zlogging/loader.html#BaseParser.parse_file"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#zlogging.loader.BaseParser.parse_file" title="Permalink to this definition">¶</a></dt>
 <dd><p>Parse log file.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -587,8 +605,8 @@ logging framework.</p>
 </dd></dl>
 
 <dl class="py method">
-<dt id="zlogging.loader.BaseParser.parse_line">
-<em class="property"><span class="pre">abstract</span> </em><code class="sig-name descname"><span class="pre">parse_line</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">line</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lineno</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">model</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/zlogging/loader.html#BaseParser.parse_line"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#zlogging.loader.BaseParser.parse_line" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="zlogging.loader.BaseParser.parse_line">
+<em class="property"><span class="pre">abstract</span> </em><span class="sig-name descname"><span class="pre">parse_line</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">line</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lineno</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">model</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/zlogging/loader.html#BaseParser.parse_line"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#zlogging.loader.BaseParser.parse_line" title="Permalink to this definition">¶</a></dt>
 <dd><p>Parse log line as one-line record.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -608,8 +626,8 @@ logging framework.</p>
 </dd></dl>
 
 <dl class="py method">
-<dt id="zlogging.loader.BaseParser.load">
-<code class="sig-name descname"><span class="pre">load</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/zlogging/loader.html#BaseParser.load"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#zlogging.loader.BaseParser.load" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="zlogging.loader.BaseParser.load">
+<span class="sig-name descname"><span class="pre">load</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/zlogging/loader.html#BaseParser.load"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#zlogging.loader.BaseParser.load" title="Permalink to this definition">¶</a></dt>
 <dd><p>Parse log file.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -625,8 +643,8 @@ logging framework.</p>
 </dd></dl>
 
 <dl class="py method">
-<dt id="zlogging.loader.BaseParser.loads">
-<code class="sig-name descname"><span class="pre">loads</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">line</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lineno</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/zlogging/loader.html#BaseParser.loads"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#zlogging.loader.BaseParser.loads" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="zlogging.loader.BaseParser.loads">
+<span class="sig-name descname"><span class="pre">loads</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">line</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lineno</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/zlogging/loader.html#BaseParser.loads"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#zlogging.loader.BaseParser.loads" title="Permalink to this definition">¶</a></dt>
 <dd><p>Parse log line as one-line record.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -646,8 +664,8 @@ logging framework.</p>
 
 </dd></dl>
 
-</div>
-</div>
+</section>
+</section>
 
 
           </div>

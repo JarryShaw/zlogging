@@ -4,11 +4,12 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
     <title>Internal Auxiliary Functions &#8212; ZLogging 0.1.1 documentation</title>
-    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
-    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/alabaster.css" />
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
     <script src="_static/jquery.js"></script>
     <script src="_static/underscore.js"></script>
     <script src="_static/doctools.js"></script>
@@ -32,12 +33,12 @@
 
           <div class="body" role="main">
             
-  <div class="section" id="module-zlogging._aux">
+  <section id="module-zlogging._aux">
 <span id="internal-auxiliary-functions"></span><h1>Internal Auxiliary Functions<a class="headerlink" href="#module-zlogging._aux" title="Permalink to this headline">¶</a></h1>
 <p>Auxiliary functions.</p>
 <dl class="py function">
-<dt id="zlogging._aux.readline">
-<code class="sig-prename descclassname"><span class="pre">zlogging._aux.</span></code><code class="sig-name descname"><span class="pre">readline</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">separator</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">b'\\t'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">maxsplit</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">-</span> <span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">decode</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/zlogging/_aux.html#readline"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#zlogging._aux.readline" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="zlogging._aux.readline">
+<span class="sig-prename descclassname"><span class="pre">zlogging._aux.</span></span><span class="sig-name descname"><span class="pre">readline</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">separator</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">b'\\t'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">maxsplit</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">-</span> <span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">decode</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/zlogging/_aux.html#readline"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#zlogging._aux.readline" title="Permalink to this definition">¶</a></dt>
 <dd><p>Wrapper for <code class="xref py py-meth docutils literal notranslate"><span class="pre">file.readline()</span></code> function.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -60,8 +61,8 @@ and <a class="reference external" href="https://docs.python.org/3/library/stdtyp
 </dd></dl>
 
 <dl class="py function">
-<dt id="zlogging._aux.decimal_toascii">
-<code class="sig-prename descclassname"><span class="pre">zlogging._aux.</span></code><code class="sig-name descname"><span class="pre">decimal_toascii</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">infinite</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/zlogging/_aux.html#decimal_toascii"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#zlogging._aux.decimal_toascii" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="zlogging._aux.decimal_toascii">
+<span class="sig-prename descclassname"><span class="pre">zlogging._aux.</span></span><span class="sig-name descname"><span class="pre">decimal_toascii</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">infinite</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/zlogging/_aux.html#decimal_toascii"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#zlogging._aux.decimal_toascii" title="Permalink to this definition">¶</a></dt>
 <dd><p>Convert <a class="reference external" href="https://docs.python.org/3/library/decimal.html#decimal.Decimal" title="(in Python v3.9)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">decimal.Decimal</span></code></a> to ASCII.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -103,8 +104,8 @@ representation of the number itself, i.e.:</p>
 </dd></dl>
 
 <dl class="py function">
-<dt id="zlogging._aux.float_toascii">
-<code class="sig-prename descclassname"><span class="pre">zlogging._aux.</span></code><code class="sig-name descname"><span class="pre">float_toascii</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">infinite</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/zlogging/_aux.html#float_toascii"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#zlogging._aux.float_toascii" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="zlogging._aux.float_toascii">
+<span class="sig-prename descclassname"><span class="pre">zlogging._aux.</span></span><span class="sig-name descname"><span class="pre">float_toascii</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">infinite</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/zlogging/_aux.html#float_toascii"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#zlogging._aux.float_toascii" title="Permalink to this definition">¶</a></dt>
 <dd><p>Convert <a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.9)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">float</span></code></a> to ASCII.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -146,8 +147,8 @@ representation of the number itself, i.e.:</p>
 </dd></dl>
 
 <dl class="py function">
-<dt id="zlogging._aux.unicode_escape">
-<code class="sig-prename descclassname"><span class="pre">zlogging._aux.</span></code><code class="sig-name descname"><span class="pre">unicode_escape</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">string</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/zlogging/_aux.html#unicode_escape"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#zlogging._aux.unicode_escape" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="zlogging._aux.unicode_escape">
+<span class="sig-prename descclassname"><span class="pre">zlogging._aux.</span></span><span class="sig-name descname"><span class="pre">unicode_escape</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">string</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/zlogging/_aux.html#unicode_escape"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#zlogging._aux.unicode_escape" title="Permalink to this definition">¶</a></dt>
 <dd><p>Conterprocess of <code class="xref py py-meth docutils literal notranslate"><span class="pre">bytes.decode('unicode_escape')()</span></code>.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -172,8 +173,8 @@ representation of the number itself, i.e.:</p>
 </dd></dl>
 
 <dl class="py function">
-<dt id="zlogging._aux.expand_typing">
-<code class="sig-prename descclassname"><span class="pre">zlogging._aux.</span></code><code class="sig-name descname"><span class="pre">expand_typing</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cls</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">exc</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/zlogging/_aux.html#expand_typing"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#zlogging._aux.expand_typing" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="zlogging._aux.expand_typing">
+<span class="sig-prename descclassname"><span class="pre">zlogging._aux.</span></span><span class="sig-name descname"><span class="pre">expand_typing</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cls</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">exc</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/zlogging/_aux.html#expand_typing"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#zlogging._aux.expand_typing" title="Permalink to this definition">¶</a></dt>
 <dd><p>Expand typing annotations.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -260,7 +261,7 @@ plain fields of the <code class="docutils literal notranslate"><span class="pre"
 </div>
 </dd></dl>
 
-</div>
+</section>
 
 
           </div>

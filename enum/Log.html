@@ -4,11 +4,12 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
     <title>Log Namespace &#8212; ZLogging 0.1.1 documentation</title>
-    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
-    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/alabaster.css" />
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
     <script src="../_static/underscore.js"></script>
     <script src="../_static/doctools.js"></script>
@@ -32,12 +33,12 @@
 
           <div class="body" role="main">
             
-  <div class="section" id="log-namespace">
+  <section id="log-namespace">
 <h1><code class="docutils literal notranslate"><span class="pre">Log</span></code> Namespace<a class="headerlink" href="#log-namespace" title="Permalink to this headline">¶</a></h1>
 <p>Namespace: <code class="docutils literal notranslate"><span class="pre">Log</span></code>.</p>
 <dl class="py class">
-<dt>
-<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">zlogging.enum.Log.</span></code><code class="sig-name descname"><span class="pre">ID</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/zlogging/enum/Log.html#ID"><span class="viewcode-link"><span class="pre">[source]</span></span></a></dt>
+<dt class="sig sig-object py">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">zlogging.enum.Log.</span></span><span class="sig-name descname"><span class="pre">ID</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/zlogging/enum/Log.html#ID"><span class="viewcode-link"><span class="pre">[source]</span></span></a></dt>
 <dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/enum.html#enum.IntFlag" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">enum.IntFlag</span></code></a></p>
 <p>Enum: <code class="docutils literal notranslate"><span class="pre">Log::ID</span></code>.</p>
 <p>Type that defines an ID unique to each log stream. Scripts creating new log streams need to redef
@@ -48,345 +49,345 @@ generated log file.</p>
 <p><a class="reference external" href="https://docs.zeek.org/en/stable/scripts/base/frameworks/logging/main.zeek.html#type-Log::ID">base/frameworks/logging/main.zeek</a></p>
 </div>
 <dl class="py attribute">
-<dt>
-<code class="sig-name descname"><span class="pre">UNKNOWN</span></code><em class="property"> <span class="pre">=</span> <span class="pre">1</span></em></dt>
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">UNKNOWN</span></span><em class="property"> <span class="pre">=</span> <span class="pre">1</span></em></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
-<dt>
-<code class="sig-name descname"><span class="pre">PRINTLOG</span></code><em class="property"> <span class="pre">=</span> <span class="pre">2</span></em></dt>
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">PRINTLOG</span></span><em class="property"> <span class="pre">=</span> <span class="pre">2</span></em></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
-<dt>
-<code class="sig-name descname"><span class="pre">Broker__LOG</span></code><em class="property"> <span class="pre">=</span> <span class="pre">4</span></em></dt>
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">Broker__LOG</span></span><em class="property"> <span class="pre">=</span> <span class="pre">4</span></em></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
-<dt>
-<code class="sig-name descname"><span class="pre">Files__LOG</span></code><em class="property"> <span class="pre">=</span> <span class="pre">8</span></em></dt>
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">Files__LOG</span></span><em class="property"> <span class="pre">=</span> <span class="pre">8</span></em></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
-<dt>
-<code class="sig-name descname"><span class="pre">Reporter__LOG</span></code><em class="property"> <span class="pre">=</span> <span class="pre">16</span></em></dt>
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">Reporter__LOG</span></span><em class="property"> <span class="pre">=</span> <span class="pre">16</span></em></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
-<dt>
-<code class="sig-name descname"><span class="pre">Cluster__LOG</span></code><em class="property"> <span class="pre">=</span> <span class="pre">32</span></em></dt>
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">Cluster__LOG</span></span><em class="property"> <span class="pre">=</span> <span class="pre">32</span></em></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
-<dt>
-<code class="sig-name descname"><span class="pre">Notice__LOG</span></code><em class="property"> <span class="pre">=</span> <span class="pre">64</span></em></dt>
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">Notice__LOG</span></span><em class="property"> <span class="pre">=</span> <span class="pre">64</span></em></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
-<dt>
-<code class="sig-name descname"><span class="pre">Notice__ALARM_LOG</span></code><em class="property"> <span class="pre">=</span> <span class="pre">128</span></em></dt>
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">Notice__ALARM_LOG</span></span><em class="property"> <span class="pre">=</span> <span class="pre">128</span></em></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
-<dt>
-<code class="sig-name descname"><span class="pre">Weird__LOG</span></code><em class="property"> <span class="pre">=</span> <span class="pre">256</span></em></dt>
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">Weird__LOG</span></span><em class="property"> <span class="pre">=</span> <span class="pre">256</span></em></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
-<dt>
-<code class="sig-name descname"><span class="pre">DPD__LOG</span></code><em class="property"> <span class="pre">=</span> <span class="pre">512</span></em></dt>
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">DPD__LOG</span></span><em class="property"> <span class="pre">=</span> <span class="pre">512</span></em></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
-<dt>
-<code class="sig-name descname"><span class="pre">Signatures__LOG</span></code><em class="property"> <span class="pre">=</span> <span class="pre">1024</span></em></dt>
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">Signatures__LOG</span></span><em class="property"> <span class="pre">=</span> <span class="pre">1024</span></em></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
-<dt>
-<code class="sig-name descname"><span class="pre">PacketFilter__LOG</span></code><em class="property"> <span class="pre">=</span> <span class="pre">2048</span></em></dt>
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">PacketFilter__LOG</span></span><em class="property"> <span class="pre">=</span> <span class="pre">2048</span></em></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
-<dt>
-<code class="sig-name descname"><span class="pre">Software__LOG</span></code><em class="property"> <span class="pre">=</span> <span class="pre">4096</span></em></dt>
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">Software__LOG</span></span><em class="property"> <span class="pre">=</span> <span class="pre">4096</span></em></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
-<dt>
-<code class="sig-name descname"><span class="pre">Intel__LOG</span></code><em class="property"> <span class="pre">=</span> <span class="pre">8192</span></em></dt>
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">Intel__LOG</span></span><em class="property"> <span class="pre">=</span> <span class="pre">8192</span></em></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
-<dt>
-<code class="sig-name descname"><span class="pre">Config__LOG</span></code><em class="property"> <span class="pre">=</span> <span class="pre">16384</span></em></dt>
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">Config__LOG</span></span><em class="property"> <span class="pre">=</span> <span class="pre">16384</span></em></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
-<dt>
-<code class="sig-name descname"><span class="pre">Tunnel__LOG</span></code><em class="property"> <span class="pre">=</span> <span class="pre">32768</span></em></dt>
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">Tunnel__LOG</span></span><em class="property"> <span class="pre">=</span> <span class="pre">32768</span></em></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
-<dt>
-<code class="sig-name descname"><span class="pre">OpenFlow__LOG</span></code><em class="property"> <span class="pre">=</span> <span class="pre">65536</span></em></dt>
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">OpenFlow__LOG</span></span><em class="property"> <span class="pre">=</span> <span class="pre">65536</span></em></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
-<dt>
-<code class="sig-name descname"><span class="pre">NetControl__LOG</span></code><em class="property"> <span class="pre">=</span> <span class="pre">131072</span></em></dt>
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">NetControl__LOG</span></span><em class="property"> <span class="pre">=</span> <span class="pre">131072</span></em></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
-<dt>
-<code class="sig-name descname"><span class="pre">NetControl__DROP</span></code><em class="property"> <span class="pre">=</span> <span class="pre">262144</span></em></dt>
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">NetControl__DROP</span></span><em class="property"> <span class="pre">=</span> <span class="pre">262144</span></em></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
-<dt>
-<code class="sig-name descname"><span class="pre">NetControl__SHUNT</span></code><em class="property"> <span class="pre">=</span> <span class="pre">524288</span></em></dt>
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">NetControl__SHUNT</span></span><em class="property"> <span class="pre">=</span> <span class="pre">524288</span></em></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
-<dt>
-<code class="sig-name descname"><span class="pre">Conn__LOG</span></code><em class="property"> <span class="pre">=</span> <span class="pre">1048576</span></em></dt>
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">Conn__LOG</span></span><em class="property"> <span class="pre">=</span> <span class="pre">1048576</span></em></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
-<dt>
-<code class="sig-name descname"><span class="pre">DCE_RPC__LOG</span></code><em class="property"> <span class="pre">=</span> <span class="pre">2097152</span></em></dt>
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">DCE_RPC__LOG</span></span><em class="property"> <span class="pre">=</span> <span class="pre">2097152</span></em></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
-<dt>
-<code class="sig-name descname"><span class="pre">DHCP__LOG</span></code><em class="property"> <span class="pre">=</span> <span class="pre">4194304</span></em></dt>
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">DHCP__LOG</span></span><em class="property"> <span class="pre">=</span> <span class="pre">4194304</span></em></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
-<dt>
-<code class="sig-name descname"><span class="pre">DNP3__LOG</span></code><em class="property"> <span class="pre">=</span> <span class="pre">8388608</span></em></dt>
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">DNP3__LOG</span></span><em class="property"> <span class="pre">=</span> <span class="pre">8388608</span></em></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
-<dt>
-<code class="sig-name descname"><span class="pre">DNS__LOG</span></code><em class="property"> <span class="pre">=</span> <span class="pre">16777216</span></em></dt>
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">DNS__LOG</span></span><em class="property"> <span class="pre">=</span> <span class="pre">16777216</span></em></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
-<dt>
-<code class="sig-name descname"><span class="pre">FTP__LOG</span></code><em class="property"> <span class="pre">=</span> <span class="pre">33554432</span></em></dt>
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">FTP__LOG</span></span><em class="property"> <span class="pre">=</span> <span class="pre">33554432</span></em></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
-<dt>
-<code class="sig-name descname"><span class="pre">SSL__LOG</span></code><em class="property"> <span class="pre">=</span> <span class="pre">67108864</span></em></dt>
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">SSL__LOG</span></span><em class="property"> <span class="pre">=</span> <span class="pre">67108864</span></em></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
-<dt>
-<code class="sig-name descname"><span class="pre">X509__LOG</span></code><em class="property"> <span class="pre">=</span> <span class="pre">134217728</span></em></dt>
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">X509__LOG</span></span><em class="property"> <span class="pre">=</span> <span class="pre">134217728</span></em></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
-<dt>
-<code class="sig-name descname"><span class="pre">HTTP__LOG</span></code><em class="property"> <span class="pre">=</span> <span class="pre">268435456</span></em></dt>
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">HTTP__LOG</span></span><em class="property"> <span class="pre">=</span> <span class="pre">268435456</span></em></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
-<dt>
-<code class="sig-name descname"><span class="pre">IRC__LOG</span></code><em class="property"> <span class="pre">=</span> <span class="pre">536870912</span></em></dt>
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">IRC__LOG</span></span><em class="property"> <span class="pre">=</span> <span class="pre">536870912</span></em></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
-<dt>
-<code class="sig-name descname"><span class="pre">KRB__LOG</span></code><em class="property"> <span class="pre">=</span> <span class="pre">1073741824</span></em></dt>
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">KRB__LOG</span></span><em class="property"> <span class="pre">=</span> <span class="pre">1073741824</span></em></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
-<dt>
-<code class="sig-name descname"><span class="pre">Modbus__LOG</span></code><em class="property"> <span class="pre">=</span> <span class="pre">2147483648</span></em></dt>
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">Modbus__LOG</span></span><em class="property"> <span class="pre">=</span> <span class="pre">2147483648</span></em></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
-<dt>
-<code class="sig-name descname"><span class="pre">mysql__LOG</span></code><em class="property"> <span class="pre">=</span> <span class="pre">4294967296</span></em></dt>
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">mysql__LOG</span></span><em class="property"> <span class="pre">=</span> <span class="pre">4294967296</span></em></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
-<dt>
-<code class="sig-name descname"><span class="pre">NTLM__LOG</span></code><em class="property"> <span class="pre">=</span> <span class="pre">8589934592</span></em></dt>
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">NTLM__LOG</span></span><em class="property"> <span class="pre">=</span> <span class="pre">8589934592</span></em></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
-<dt>
-<code class="sig-name descname"><span class="pre">NTP__LOG</span></code><em class="property"> <span class="pre">=</span> <span class="pre">17179869184</span></em></dt>
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">NTP__LOG</span></span><em class="property"> <span class="pre">=</span> <span class="pre">17179869184</span></em></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
-<dt>
-<code class="sig-name descname"><span class="pre">RADIUS__LOG</span></code><em class="property"> <span class="pre">=</span> <span class="pre">34359738368</span></em></dt>
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">RADIUS__LOG</span></span><em class="property"> <span class="pre">=</span> <span class="pre">34359738368</span></em></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
-<dt>
-<code class="sig-name descname"><span class="pre">RDP__LOG</span></code><em class="property"> <span class="pre">=</span> <span class="pre">68719476736</span></em></dt>
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">RDP__LOG</span></span><em class="property"> <span class="pre">=</span> <span class="pre">68719476736</span></em></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
-<dt>
-<code class="sig-name descname"><span class="pre">RFB__LOG</span></code><em class="property"> <span class="pre">=</span> <span class="pre">137438953472</span></em></dt>
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">RFB__LOG</span></span><em class="property"> <span class="pre">=</span> <span class="pre">137438953472</span></em></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
-<dt>
-<code class="sig-name descname"><span class="pre">SIP__LOG</span></code><em class="property"> <span class="pre">=</span> <span class="pre">274877906944</span></em></dt>
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">SIP__LOG</span></span><em class="property"> <span class="pre">=</span> <span class="pre">274877906944</span></em></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
-<dt>
-<code class="sig-name descname"><span class="pre">SNMP__LOG</span></code><em class="property"> <span class="pre">=</span> <span class="pre">549755813888</span></em></dt>
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">SNMP__LOG</span></span><em class="property"> <span class="pre">=</span> <span class="pre">549755813888</span></em></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
-<dt>
-<code class="sig-name descname"><span class="pre">SMB__AUTH_LOG</span></code><em class="property"> <span class="pre">=</span> <span class="pre">1099511627776</span></em></dt>
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">SMB__AUTH_LOG</span></span><em class="property"> <span class="pre">=</span> <span class="pre">1099511627776</span></em></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
-<dt>
-<code class="sig-name descname"><span class="pre">SMB__MAPPING_LOG</span></code><em class="property"> <span class="pre">=</span> <span class="pre">2199023255552</span></em></dt>
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">SMB__MAPPING_LOG</span></span><em class="property"> <span class="pre">=</span> <span class="pre">2199023255552</span></em></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
-<dt>
-<code class="sig-name descname"><span class="pre">SMB__FILES_LOG</span></code><em class="property"> <span class="pre">=</span> <span class="pre">4398046511104</span></em></dt>
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">SMB__FILES_LOG</span></span><em class="property"> <span class="pre">=</span> <span class="pre">4398046511104</span></em></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
-<dt>
-<code class="sig-name descname"><span class="pre">SMTP__LOG</span></code><em class="property"> <span class="pre">=</span> <span class="pre">8796093022208</span></em></dt>
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">SMTP__LOG</span></span><em class="property"> <span class="pre">=</span> <span class="pre">8796093022208</span></em></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
-<dt>
-<code class="sig-name descname"><span class="pre">SOCKS__LOG</span></code><em class="property"> <span class="pre">=</span> <span class="pre">17592186044416</span></em></dt>
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">SOCKS__LOG</span></span><em class="property"> <span class="pre">=</span> <span class="pre">17592186044416</span></em></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
-<dt>
-<code class="sig-name descname"><span class="pre">SSH__LOG</span></code><em class="property"> <span class="pre">=</span> <span class="pre">35184372088832</span></em></dt>
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">SSH__LOG</span></span><em class="property"> <span class="pre">=</span> <span class="pre">35184372088832</span></em></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
-<dt>
-<code class="sig-name descname"><span class="pre">Syslog__LOG</span></code><em class="property"> <span class="pre">=</span> <span class="pre">70368744177664</span></em></dt>
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">Syslog__LOG</span></span><em class="property"> <span class="pre">=</span> <span class="pre">70368744177664</span></em></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
-<dt>
-<code class="sig-name descname"><span class="pre">PE__LOG</span></code><em class="property"> <span class="pre">=</span> <span class="pre">140737488355328</span></em></dt>
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">PE__LOG</span></span><em class="property"> <span class="pre">=</span> <span class="pre">140737488355328</span></em></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
-<dt>
-<code class="sig-name descname"><span class="pre">NetControl__CATCH_RELEASE</span></code><em class="property"> <span class="pre">=</span> <span class="pre">281474976710656</span></em></dt>
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">NetControl__CATCH_RELEASE</span></span><em class="property"> <span class="pre">=</span> <span class="pre">281474976710656</span></em></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
-<dt>
-<code class="sig-name descname"><span class="pre">Unified2__LOG</span></code><em class="property"> <span class="pre">=</span> <span class="pre">562949953421312</span></em></dt>
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">Unified2__LOG</span></span><em class="property"> <span class="pre">=</span> <span class="pre">562949953421312</span></em></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
-<dt>
-<code class="sig-name descname"><span class="pre">OCSP__LOG</span></code><em class="property"> <span class="pre">=</span> <span class="pre">1125899906842624</span></em></dt>
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">OCSP__LOG</span></span><em class="property"> <span class="pre">=</span> <span class="pre">1125899906842624</span></em></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
-<dt>
-<code class="sig-name descname"><span class="pre">Barnyard2__LOG</span></code><em class="property"> <span class="pre">=</span> <span class="pre">2251799813685248</span></em></dt>
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">Barnyard2__LOG</span></span><em class="property"> <span class="pre">=</span> <span class="pre">2251799813685248</span></em></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
-<dt>
-<code class="sig-name descname"><span class="pre">CaptureLoss__LOG</span></code><em class="property"> <span class="pre">=</span> <span class="pre">4503599627370496</span></em></dt>
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">CaptureLoss__LOG</span></span><em class="property"> <span class="pre">=</span> <span class="pre">4503599627370496</span></em></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
-<dt>
-<code class="sig-name descname"><span class="pre">Traceroute__LOG</span></code><em class="property"> <span class="pre">=</span> <span class="pre">9007199254740992</span></em></dt>
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">Traceroute__LOG</span></span><em class="property"> <span class="pre">=</span> <span class="pre">9007199254740992</span></em></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
-<dt>
-<code class="sig-name descname"><span class="pre">LoadedScripts__LOG</span></code><em class="property"> <span class="pre">=</span> <span class="pre">18014398509481984</span></em></dt>
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">LoadedScripts__LOG</span></span><em class="property"> <span class="pre">=</span> <span class="pre">18014398509481984</span></em></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
-<dt>
-<code class="sig-name descname"><span class="pre">Stats__LOG</span></code><em class="property"> <span class="pre">=</span> <span class="pre">36028797018963968</span></em></dt>
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">Stats__LOG</span></span><em class="property"> <span class="pre">=</span> <span class="pre">36028797018963968</span></em></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
-<dt>
-<code class="sig-name descname"><span class="pre">WeirdStats__LOG</span></code><em class="property"> <span class="pre">=</span> <span class="pre">72057594037927936</span></em></dt>
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">WeirdStats__LOG</span></span><em class="property"> <span class="pre">=</span> <span class="pre">72057594037927936</span></em></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
-<dt>
-<code class="sig-name descname"><span class="pre">Known__HOSTS_LOG</span></code><em class="property"> <span class="pre">=</span> <span class="pre">144115188075855872</span></em></dt>
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">Known__HOSTS_LOG</span></span><em class="property"> <span class="pre">=</span> <span class="pre">144115188075855872</span></em></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
-<dt>
-<code class="sig-name descname"><span class="pre">Known__SERVICES_LOG</span></code><em class="property"> <span class="pre">=</span> <span class="pre">288230376151711744</span></em></dt>
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">Known__SERVICES_LOG</span></span><em class="property"> <span class="pre">=</span> <span class="pre">288230376151711744</span></em></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
-<dt>
-<code class="sig-name descname"><span class="pre">Known__MODBUS_LOG</span></code><em class="property"> <span class="pre">=</span> <span class="pre">576460752303423488</span></em></dt>
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">Known__MODBUS_LOG</span></span><em class="property"> <span class="pre">=</span> <span class="pre">576460752303423488</span></em></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
-<dt>
-<code class="sig-name descname"><span class="pre">Modbus__REGISTER_CHANGE_LOG</span></code><em class="property"> <span class="pre">=</span> <span class="pre">1152921504606846976</span></em></dt>
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">Modbus__REGISTER_CHANGE_LOG</span></span><em class="property"> <span class="pre">=</span> <span class="pre">1152921504606846976</span></em></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
-<dt>
-<code class="sig-name descname"><span class="pre">MQTT__CONNECT_LOG</span></code><em class="property"> <span class="pre">=</span> <span class="pre">2305843009213693952</span></em></dt>
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">MQTT__CONNECT_LOG</span></span><em class="property"> <span class="pre">=</span> <span class="pre">2305843009213693952</span></em></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
-<dt>
-<code class="sig-name descname"><span class="pre">MQTT__SUBSCRIBE_LOG</span></code><em class="property"> <span class="pre">=</span> <span class="pre">4611686018427387904</span></em></dt>
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">MQTT__SUBSCRIBE_LOG</span></span><em class="property"> <span class="pre">=</span> <span class="pre">4611686018427387904</span></em></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
-<dt>
-<code class="sig-name descname"><span class="pre">MQTT__PUBLISH_LOG</span></code><em class="property"> <span class="pre">=</span> <span class="pre">9223372036854775808</span></em></dt>
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">MQTT__PUBLISH_LOG</span></span><em class="property"> <span class="pre">=</span> <span class="pre">9223372036854775808</span></em></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
-<dt>
-<code class="sig-name descname"><span class="pre">SMB__CMD_LOG</span></code><em class="property"> <span class="pre">=</span> <span class="pre">18446744073709551616</span></em></dt>
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">SMB__CMD_LOG</span></span><em class="property"> <span class="pre">=</span> <span class="pre">18446744073709551616</span></em></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
-<dt>
-<code class="sig-name descname"><span class="pre">Known__CERTS_LOG</span></code><em class="property"> <span class="pre">=</span> <span class="pre">36893488147419103232</span></em></dt>
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">Known__CERTS_LOG</span></span><em class="property"> <span class="pre">=</span> <span class="pre">36893488147419103232</span></em></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
-<dt>
-<code class="sig-name descname"><span class="pre">ZeekygenExample__LOG</span></code><em class="property"> <span class="pre">=</span> <span class="pre">73786976294838206464</span></em></dt>
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">ZeekygenExample__LOG</span></span><em class="property"> <span class="pre">=</span> <span class="pre">73786976294838206464</span></em></dt>
 <dd></dd></dl>
 
 </dd></dl>
 
 <dl class="py class">
-<dt>
-<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">zlogging.enum.Log.</span></code><code class="sig-name descname"><span class="pre">PrintLogType</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/zlogging/enum/Log.html#PrintLogType"><span class="viewcode-link"><span class="pre">[source]</span></span></a></dt>
+<dt class="sig sig-object py">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">zlogging.enum.Log.</span></span><span class="sig-name descname"><span class="pre">PrintLogType</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/zlogging/enum/Log.html#PrintLogType"><span class="viewcode-link"><span class="pre">[source]</span></span></a></dt>
 <dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/enum.html#enum.IntFlag" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">enum.IntFlag</span></code></a></p>
 <p>Enum: <code class="docutils literal notranslate"><span class="pre">Log::PrintLogType</span></code>.</p>
 <p>Configurations for <code class="docutils literal notranslate"><span class="pre">Log::print_to_log</span></code>.</p>
@@ -395,25 +396,25 @@ generated log file.</p>
 <p><a class="reference external" href="https://docs.zeek.org/en/stable/scripts/base/frameworks/logging/main.zeek.html#type-Log::PrintLogType">base/frameworks/logging/main.zeek</a></p>
 </div>
 <dl class="py attribute">
-<dt>
-<code class="sig-name descname"><span class="pre">REDIRECT_NONE</span></code><em class="property"> <span class="pre">=</span> <span class="pre">1</span></em></dt>
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">REDIRECT_NONE</span></span><em class="property"> <span class="pre">=</span> <span class="pre">1</span></em></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
-<dt>
-<code class="sig-name descname"><span class="pre">REDIRECT_STDOUT</span></code><em class="property"> <span class="pre">=</span> <span class="pre">2</span></em></dt>
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">REDIRECT_STDOUT</span></span><em class="property"> <span class="pre">=</span> <span class="pre">2</span></em></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
-<dt>
-<code class="sig-name descname"><span class="pre">REDIRECT_ALL</span></code><em class="property"> <span class="pre">=</span> <span class="pre">4</span></em></dt>
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">REDIRECT_ALL</span></span><em class="property"> <span class="pre">=</span> <span class="pre">4</span></em></dt>
 <dd></dd></dl>
 
 </dd></dl>
 
 <dl class="py class">
-<dt>
-<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">zlogging.enum.Log.</span></code><code class="sig-name descname"><span class="pre">Writer</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/zlogging/enum/Log.html#Writer"><span class="viewcode-link"><span class="pre">[source]</span></span></a></dt>
+<dt class="sig sig-object py">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">zlogging.enum.Log.</span></span><span class="sig-name descname"><span class="pre">Writer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/zlogging/enum/Log.html#Writer"><span class="viewcode-link"><span class="pre">[source]</span></span></a></dt>
 <dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/enum.html#enum.IntFlag" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">enum.IntFlag</span></code></a></p>
 <p>Enum: <code class="docutils literal notranslate"><span class="pre">Log::Writer</span></code>.</p>
 <div class="admonition seealso">
@@ -421,23 +422,23 @@ generated log file.</p>
 <p><a class="reference external" href="https://docs.zeek.org/en/stable/scripts/base/frameworks/logging/main.zeek.html#type-Log::Writer">base/frameworks/logging/main.zeek</a></p>
 </div>
 <dl class="py attribute">
-<dt>
-<code class="sig-name descname"><span class="pre">WRITER_ASCII</span></code><em class="property"> <span class="pre">=</span> <span class="pre">1</span></em></dt>
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">WRITER_ASCII</span></span><em class="property"> <span class="pre">=</span> <span class="pre">1</span></em></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
-<dt>
-<code class="sig-name descname"><span class="pre">WRITER_NONE</span></code><em class="property"> <span class="pre">=</span> <span class="pre">2</span></em></dt>
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">WRITER_NONE</span></span><em class="property"> <span class="pre">=</span> <span class="pre">2</span></em></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
-<dt>
-<code class="sig-name descname"><span class="pre">WRITER_SQLITE</span></code><em class="property"> <span class="pre">=</span> <span class="pre">4</span></em></dt>
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">WRITER_SQLITE</span></span><em class="property"> <span class="pre">=</span> <span class="pre">4</span></em></dt>
 <dd></dd></dl>
 
 </dd></dl>
 
-</div>
+</section>
 
 
           </div>

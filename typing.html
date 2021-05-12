@@ -4,11 +4,12 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
     <title>Typing Annotations &#8212; ZLogging 0.1.1 documentation</title>
-    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
-    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/alabaster.css" />
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
     <script src="_static/jquery.js"></script>
     <script src="_static/underscore.js"></script>
     <script src="_static/doctools.js"></script>
@@ -32,95 +33,95 @@
 
           <div class="body" role="main">
             
-  <div class="section" id="typing-annotations">
+  <section id="typing-annotations">
 <h1>Typing Annotations<a class="headerlink" href="#typing-annotations" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="zeek-data-types">
+<section id="zeek-data-types">
 <h2>Zeek Data Types<a class="headerlink" href="#zeek-data-types" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="simple-types">
+<section id="simple-types">
 <h3>Simple Types<a class="headerlink" href="#simple-types" title="Permalink to this headline">¶</a></h3>
 <dl class="py data">
-<dt id="zlogging.typing.zeek_addr">
-<code class="sig-prename descclassname"><span class="pre">zlogging.typing.</span></code><code class="sig-name descname"><span class="pre">zeek_addr</span></code><a class="headerlink" href="#zlogging.typing.zeek_addr" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="zlogging.typing.zeek_addr">
+<span class="sig-prename descclassname"><span class="pre">zlogging.typing.</span></span><span class="sig-name descname"><span class="pre">zeek_addr</span></span><a class="headerlink" href="#zlogging.typing.zeek_addr" title="Permalink to this definition">¶</a></dt>
 <dd><p>Zeek <code class="docutils literal notranslate"><span class="pre">addr</span></code> data type.</p>
-<p>alias of TypeVar(‘zeek_addr’)</p>
+<p>alias of TypeVar(‘zeek_addr’, bound=<code class="xref py py-class docutils literal notranslate"><span class="pre">AddrType</span></code>)</p>
 </dd></dl>
 
 <dl class="py data">
-<dt id="zlogging.typing.zeek_bool">
-<code class="sig-prename descclassname"><span class="pre">zlogging.typing.</span></code><code class="sig-name descname"><span class="pre">zeek_bool</span></code><a class="headerlink" href="#zlogging.typing.zeek_bool" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="zlogging.typing.zeek_bool">
+<span class="sig-prename descclassname"><span class="pre">zlogging.typing.</span></span><span class="sig-name descname"><span class="pre">zeek_bool</span></span><a class="headerlink" href="#zlogging.typing.zeek_bool" title="Permalink to this definition">¶</a></dt>
 <dd><p>Zeek <code class="docutils literal notranslate"><span class="pre">bool</span></code> data type.</p>
-<p>alias of TypeVar(‘zeek_bool’)</p>
+<p>alias of TypeVar(‘zeek_bool’, bound=<code class="xref py py-class docutils literal notranslate"><span class="pre">BoolType</span></code>)</p>
 </dd></dl>
 
 <dl class="py data">
-<dt id="zlogging.typing.zeek_count">
-<code class="sig-prename descclassname"><span class="pre">zlogging.typing.</span></code><code class="sig-name descname"><span class="pre">zeek_count</span></code><a class="headerlink" href="#zlogging.typing.zeek_count" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="zlogging.typing.zeek_count">
+<span class="sig-prename descclassname"><span class="pre">zlogging.typing.</span></span><span class="sig-name descname"><span class="pre">zeek_count</span></span><a class="headerlink" href="#zlogging.typing.zeek_count" title="Permalink to this definition">¶</a></dt>
 <dd><p>Zeek <code class="docutils literal notranslate"><span class="pre">count</span></code> data type.</p>
-<p>alias of TypeVar(‘zeek_count’)</p>
+<p>alias of TypeVar(‘zeek_count’, bound=<code class="xref py py-class docutils literal notranslate"><span class="pre">CountType</span></code>)</p>
 </dd></dl>
 
 <dl class="py data">
-<dt id="zlogging.typing.zeek_double">
-<code class="sig-prename descclassname"><span class="pre">zlogging.typing.</span></code><code class="sig-name descname"><span class="pre">zeek_double</span></code><a class="headerlink" href="#zlogging.typing.zeek_double" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="zlogging.typing.zeek_double">
+<span class="sig-prename descclassname"><span class="pre">zlogging.typing.</span></span><span class="sig-name descname"><span class="pre">zeek_double</span></span><a class="headerlink" href="#zlogging.typing.zeek_double" title="Permalink to this definition">¶</a></dt>
 <dd><p>Zeek <code class="docutils literal notranslate"><span class="pre">double</span></code> data type.</p>
-<p>alias of TypeVar(‘zeek_double’)</p>
+<p>alias of TypeVar(‘zeek_double’, bound=<code class="xref py py-class docutils literal notranslate"><span class="pre">DoubleType</span></code>)</p>
 </dd></dl>
 
 <dl class="py data">
-<dt id="zlogging.typing.zeek_enum">
-<code class="sig-prename descclassname"><span class="pre">zlogging.typing.</span></code><code class="sig-name descname"><span class="pre">zeek_enum</span></code><a class="headerlink" href="#zlogging.typing.zeek_enum" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="zlogging.typing.zeek_enum">
+<span class="sig-prename descclassname"><span class="pre">zlogging.typing.</span></span><span class="sig-name descname"><span class="pre">zeek_enum</span></span><a class="headerlink" href="#zlogging.typing.zeek_enum" title="Permalink to this definition">¶</a></dt>
 <dd><p>Zeek <code class="docutils literal notranslate"><span class="pre">enum</span></code> data type.</p>
-<p>alias of TypeVar(‘zeek_enum’)</p>
+<p>alias of TypeVar(‘zeek_enum’, bound=<code class="xref py py-class docutils literal notranslate"><span class="pre">EnumType</span></code>)</p>
 </dd></dl>
 
 <dl class="py data">
-<dt id="zlogging.typing.zeek_interval">
-<code class="sig-prename descclassname"><span class="pre">zlogging.typing.</span></code><code class="sig-name descname"><span class="pre">zeek_interval</span></code><a class="headerlink" href="#zlogging.typing.zeek_interval" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="zlogging.typing.zeek_interval">
+<span class="sig-prename descclassname"><span class="pre">zlogging.typing.</span></span><span class="sig-name descname"><span class="pre">zeek_interval</span></span><a class="headerlink" href="#zlogging.typing.zeek_interval" title="Permalink to this definition">¶</a></dt>
 <dd><p>Zeek <code class="docutils literal notranslate"><span class="pre">interval</span></code> data type.</p>
-<p>alias of TypeVar(‘zeek_interval’)</p>
+<p>alias of TypeVar(‘zeek_interval’, bound=<code class="xref py py-class docutils literal notranslate"><span class="pre">IntervalType</span></code>)</p>
 </dd></dl>
 
 <dl class="py data">
-<dt id="zlogging.typing.zeek_int">
-<code class="sig-prename descclassname"><span class="pre">zlogging.typing.</span></code><code class="sig-name descname"><span class="pre">zeek_int</span></code><a class="headerlink" href="#zlogging.typing.zeek_int" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="zlogging.typing.zeek_int">
+<span class="sig-prename descclassname"><span class="pre">zlogging.typing.</span></span><span class="sig-name descname"><span class="pre">zeek_int</span></span><a class="headerlink" href="#zlogging.typing.zeek_int" title="Permalink to this definition">¶</a></dt>
 <dd><p>Zeek <code class="docutils literal notranslate"><span class="pre">int</span></code> data type.</p>
-<p>alias of TypeVar(‘zeek_int’)</p>
+<p>alias of TypeVar(‘zeek_int’, bound=<code class="xref py py-class docutils literal notranslate"><span class="pre">IntType</span></code>)</p>
 </dd></dl>
 
 <dl class="py data">
-<dt id="zlogging.typing.zeek_port">
-<code class="sig-prename descclassname"><span class="pre">zlogging.typing.</span></code><code class="sig-name descname"><span class="pre">zeek_port</span></code><a class="headerlink" href="#zlogging.typing.zeek_port" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="zlogging.typing.zeek_port">
+<span class="sig-prename descclassname"><span class="pre">zlogging.typing.</span></span><span class="sig-name descname"><span class="pre">zeek_port</span></span><a class="headerlink" href="#zlogging.typing.zeek_port" title="Permalink to this definition">¶</a></dt>
 <dd><p>Zeek <code class="docutils literal notranslate"><span class="pre">port</span></code> data type.</p>
-<p>alias of TypeVar(‘zeek_port’)</p>
+<p>alias of TypeVar(‘zeek_port’, bound=<code class="xref py py-class docutils literal notranslate"><span class="pre">PortType</span></code>)</p>
 </dd></dl>
 
 <dl class="py data">
-<dt id="zlogging.typing.zeek_string">
-<code class="sig-prename descclassname"><span class="pre">zlogging.typing.</span></code><code class="sig-name descname"><span class="pre">zeek_string</span></code><a class="headerlink" href="#zlogging.typing.zeek_string" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="zlogging.typing.zeek_string">
+<span class="sig-prename descclassname"><span class="pre">zlogging.typing.</span></span><span class="sig-name descname"><span class="pre">zeek_string</span></span><a class="headerlink" href="#zlogging.typing.zeek_string" title="Permalink to this definition">¶</a></dt>
 <dd><p>Zeek <code class="docutils literal notranslate"><span class="pre">string</span></code> data type.</p>
-<p>alias of TypeVar(‘zeek_string’)</p>
+<p>alias of TypeVar(‘zeek_string’, bound=<code class="xref py py-class docutils literal notranslate"><span class="pre">StringType</span></code>)</p>
 </dd></dl>
 
 <dl class="py data">
-<dt id="zlogging.typing.zeek_subnet">
-<code class="sig-prename descclassname"><span class="pre">zlogging.typing.</span></code><code class="sig-name descname"><span class="pre">zeek_subnet</span></code><a class="headerlink" href="#zlogging.typing.zeek_subnet" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="zlogging.typing.zeek_subnet">
+<span class="sig-prename descclassname"><span class="pre">zlogging.typing.</span></span><span class="sig-name descname"><span class="pre">zeek_subnet</span></span><a class="headerlink" href="#zlogging.typing.zeek_subnet" title="Permalink to this definition">¶</a></dt>
 <dd><p>Zeek <code class="docutils literal notranslate"><span class="pre">subnet</span></code> data type.</p>
-<p>alias of TypeVar(‘zeek_subnet’)</p>
+<p>alias of TypeVar(‘zeek_subnet’, bound=<code class="xref py py-class docutils literal notranslate"><span class="pre">SubnetType</span></code>)</p>
 </dd></dl>
 
 <dl class="py data">
-<dt id="zlogging.typing.zeek_time">
-<code class="sig-prename descclassname"><span class="pre">zlogging.typing.</span></code><code class="sig-name descname"><span class="pre">zeek_time</span></code><a class="headerlink" href="#zlogging.typing.zeek_time" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="zlogging.typing.zeek_time">
+<span class="sig-prename descclassname"><span class="pre">zlogging.typing.</span></span><span class="sig-name descname"><span class="pre">zeek_time</span></span><a class="headerlink" href="#zlogging.typing.zeek_time" title="Permalink to this definition">¶</a></dt>
 <dd><p>Zeek <code class="docutils literal notranslate"><span class="pre">time</span></code> data type.</p>
-<p>alias of TypeVar(‘zeek_time’)</p>
+<p>alias of TypeVar(‘zeek_time’, bound=<code class="xref py py-class docutils literal notranslate"><span class="pre">TimeType</span></code>)</p>
 </dd></dl>
 
-</div>
-<div class="section" id="generic-types">
+</section>
+<section id="generic-types">
 <h3>Generic Types<a class="headerlink" href="#generic-types" title="Permalink to this headline">¶</a></h3>
 <dl class="py class">
-<dt id="zlogging.typing.zeek_set">
-<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">zlogging.typing.</span></code><code class="sig-name descname"><span class="pre">zeek_set</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">empty_field</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">unset_field</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">set_separator</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">element_type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/zlogging/typing.html#zeek_set"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#zlogging.typing.zeek_set" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="zlogging.typing.zeek_set">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">zlogging.typing.</span></span><span class="sig-name descname"><span class="pre">zeek_set</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">empty_field</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">unset_field</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">set_separator</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">element_type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/zlogging/typing.html#zeek_set"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#zlogging.typing.zeek_set" title="Permalink to this definition">¶</a></dt>
 <dd><p>Zeek <code class="docutils literal notranslate"><span class="pre">set</span></code> data type.</p>
 <div class="admonition-notes admonition">
 <p class="admonition-title">Notes</p>
@@ -136,11 +137,26 @@
 </pre></div>
 </div>
 </div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>empty_field</strong> (<em>Optional</em><em>[</em><em>AnyStr</em><em>]</em>) – </p></li>
+<li><p><strong>unset_field</strong> (<em>Optional</em><em>[</em><em>AnyStr</em><em>]</em>) – </p></li>
+<li><p><strong>set_separator</strong> (<em>Optional</em><em>[</em><em>AnyStr</em><em>]</em>) – </p></li>
+<li><p><strong>element_type</strong> (<em>Optional</em><em>[</em><em>Union</em><em>[</em><em>_S</em><em>, </em><em>Type</em><em>[</em><em>_S</em><em>]</em><em>]</em><em>]</em>) – </p></li>
+<li><p><strong>args</strong> (<em>Any</em>) – </p></li>
+<li><p><strong>kwargs</strong> (<em>Any</em>) – </p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)">None</a></p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py class">
-<dt id="zlogging.typing.zeek_vector">
-<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">zlogging.typing.</span></code><code class="sig-name descname"><span class="pre">zeek_vector</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">empty_field</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">unset_field</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">set_separator</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">element_type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/zlogging/typing.html#zeek_vector"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#zlogging.typing.zeek_vector" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="zlogging.typing.zeek_vector">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">zlogging.typing.</span></span><span class="sig-name descname"><span class="pre">zeek_vector</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">empty_field</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">unset_field</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">set_separator</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">element_type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/zlogging/typing.html#zeek_vector"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#zlogging.typing.zeek_vector" title="Permalink to this definition">¶</a></dt>
 <dd><p>Zeek <code class="docutils literal notranslate"><span class="pre">vector</span></code> data type.</p>
 <div class="admonition-notes admonition">
 <p class="admonition-title">Notes</p>
@@ -156,14 +172,26 @@
 </pre></div>
 </div>
 </div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>empty_field</strong> (<em>Optional</em><em>[</em><em>AnyStr</em><em>]</em>) – </p></li>
+<li><p><strong>unset_field</strong> (<em>Optional</em><em>[</em><em>AnyStr</em><em>]</em>) – </p></li>
+<li><p><strong>set_separator</strong> (<em>Optional</em><em>[</em><em>AnyStr</em><em>]</em>) – </p></li>
+<li><p><strong>element_type</strong> (<em>Optional</em><em>[</em><em>Union</em><em>[</em><em>_S</em><em>, </em><em>Type</em><em>[</em><em>_S</em><em>]</em><em>]</em><em>]</em>) – </p></li>
+<li><p><strong>args</strong> (<em>Any</em>) – </p></li>
+<li><p><strong>kwargs</strong> (<em>Any</em>) – </p></li>
+</ul>
+</dd>
+</dl>
 </dd></dl>
 
-</div>
-<div class="section" id="variadic-types">
+</section>
+<section id="variadic-types">
 <h3>Variadic Types<a class="headerlink" href="#variadic-types" title="Permalink to this headline">¶</a></h3>
 <dl class="py class">
-<dt id="zlogging.typing.zeek_record">
-<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">zlogging.typing.</span></code><code class="sig-name descname"><span class="pre">zeek_record</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">empty_field</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">unset_field</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">set_separator</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">element_mapping</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/zlogging/typing.html#zeek_record"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#zlogging.typing.zeek_record" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="zlogging.typing.zeek_record">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">zlogging.typing.</span></span><span class="sig-name descname"><span class="pre">zeek_record</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">empty_field</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">unset_field</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">set_separator</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">element_mapping</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/zlogging/typing.html#zeek_record"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#zlogging.typing.zeek_record" title="Permalink to this definition">¶</a></dt>
 <dd><p>Zeek <code class="docutils literal notranslate"><span class="pre">record</span></code> data type.</p>
 <div class="admonition-notes admonition">
 <p class="admonition-title">Notes</p>
@@ -185,122 +213,133 @@ introduced in <span class="target" id="index-2"></span><a class="pep reference e
 <p>See <a class="reference internal" href="_aux.html#zlogging._aux.expand_typing" title="zlogging._aux.expand_typing"><code class="xref py py-func docutils literal notranslate"><span class="pre">expand_typing()</span></code></a> for more information about the
 processing of typing proxy.</p>
 </div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>args</strong> (<em>Any</em>) – </p></li>
+<li><p><strong>kwargs</strong> (<em>Any</em>) – </p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference internal" href="types.html#zlogging.types.RecordType" title="zlogging.types.RecordType">RecordType</a></p>
+</dd>
+</dl>
 </dd></dl>
 
-</div>
-</div>
-<div class="section" id="bro-data-types">
+</section>
+</section>
+<section id="bro-data-types">
 <h2>Bro Data Types<a class="headerlink" href="#bro-data-types" title="Permalink to this headline">¶</a></h2>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
 <p>Use of <code class="docutils literal notranslate"><span class="pre">bro</span></code> is deprecated. Please use <code class="docutils literal notranslate"><span class="pre">zeek</span></code> instead.</p>
 </div>
-<div class="section" id="id1">
+<section id="id1">
 <h3>Simple Types<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
 <dl class="py data">
-<dt id="zlogging.typing.bro_addr">
-<code class="sig-prename descclassname"><span class="pre">zlogging.typing.</span></code><code class="sig-name descname"><span class="pre">bro_addr</span></code><a class="headerlink" href="#zlogging.typing.bro_addr" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="zlogging.typing.bro_addr">
+<span class="sig-prename descclassname"><span class="pre">zlogging.typing.</span></span><span class="sig-name descname"><span class="pre">bro_addr</span></span><a class="headerlink" href="#zlogging.typing.bro_addr" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bro <code class="docutils literal notranslate"><span class="pre">addr</span></code> data type.</p>
-<p>alias of TypeVar(‘bro_addr’)</p>
+<p>alias of TypeVar(‘bro_addr’, bound=<code class="xref py py-class docutils literal notranslate"><span class="pre">_BroAddrType</span></code>)</p>
 </dd></dl>
 
 <dl class="py data">
-<dt id="zlogging.typing.bro_bool">
-<code class="sig-prename descclassname"><span class="pre">zlogging.typing.</span></code><code class="sig-name descname"><span class="pre">bro_bool</span></code><a class="headerlink" href="#zlogging.typing.bro_bool" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="zlogging.typing.bro_bool">
+<span class="sig-prename descclassname"><span class="pre">zlogging.typing.</span></span><span class="sig-name descname"><span class="pre">bro_bool</span></span><a class="headerlink" href="#zlogging.typing.bro_bool" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bro <code class="docutils literal notranslate"><span class="pre">bool</span></code> data type.</p>
-<p>alias of TypeVar(‘bro_bool’)</p>
+<p>alias of TypeVar(‘bro_bool’, bound=<code class="xref py py-class docutils literal notranslate"><span class="pre">_BroBoolType</span></code>)</p>
 </dd></dl>
 
 <dl class="py data">
-<dt id="zlogging.typing.bro_count">
-<code class="sig-prename descclassname"><span class="pre">zlogging.typing.</span></code><code class="sig-name descname"><span class="pre">bro_count</span></code><a class="headerlink" href="#zlogging.typing.bro_count" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="zlogging.typing.bro_count">
+<span class="sig-prename descclassname"><span class="pre">zlogging.typing.</span></span><span class="sig-name descname"><span class="pre">bro_count</span></span><a class="headerlink" href="#zlogging.typing.bro_count" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bro <code class="docutils literal notranslate"><span class="pre">count</span></code> data type.</p>
-<p>alias of TypeVar(‘bro_count’)</p>
+<p>alias of TypeVar(‘bro_count’, bound=<code class="xref py py-class docutils literal notranslate"><span class="pre">_BroCountType</span></code>)</p>
 </dd></dl>
 
 <dl class="py data">
-<dt id="zlogging.typing.bro_double">
-<code class="sig-prename descclassname"><span class="pre">zlogging.typing.</span></code><code class="sig-name descname"><span class="pre">bro_double</span></code><a class="headerlink" href="#zlogging.typing.bro_double" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="zlogging.typing.bro_double">
+<span class="sig-prename descclassname"><span class="pre">zlogging.typing.</span></span><span class="sig-name descname"><span class="pre">bro_double</span></span><a class="headerlink" href="#zlogging.typing.bro_double" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bro <code class="docutils literal notranslate"><span class="pre">double</span></code> data type.</p>
-<p>alias of TypeVar(‘bro_double’)</p>
+<p>alias of TypeVar(‘bro_double’, bound=<code class="xref py py-class docutils literal notranslate"><span class="pre">_BroDoubleType</span></code>)</p>
 </dd></dl>
 
 <dl class="py data">
-<dt id="zlogging.typing.bro_enum">
-<code class="sig-prename descclassname"><span class="pre">zlogging.typing.</span></code><code class="sig-name descname"><span class="pre">bro_enum</span></code><a class="headerlink" href="#zlogging.typing.bro_enum" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="zlogging.typing.bro_enum">
+<span class="sig-prename descclassname"><span class="pre">zlogging.typing.</span></span><span class="sig-name descname"><span class="pre">bro_enum</span></span><a class="headerlink" href="#zlogging.typing.bro_enum" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bro <code class="docutils literal notranslate"><span class="pre">enum</span></code> data type.</p>
-<p>alias of TypeVar(‘bro_enum’)</p>
+<p>alias of TypeVar(‘bro_enum’, bound=<code class="xref py py-class docutils literal notranslate"><span class="pre">_BroEnumType</span></code>)</p>
 </dd></dl>
 
 <dl class="py data">
-<dt id="zlogging.typing.bro_interval">
-<code class="sig-prename descclassname"><span class="pre">zlogging.typing.</span></code><code class="sig-name descname"><span class="pre">bro_interval</span></code><a class="headerlink" href="#zlogging.typing.bro_interval" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="zlogging.typing.bro_interval">
+<span class="sig-prename descclassname"><span class="pre">zlogging.typing.</span></span><span class="sig-name descname"><span class="pre">bro_interval</span></span><a class="headerlink" href="#zlogging.typing.bro_interval" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bro <code class="docutils literal notranslate"><span class="pre">interval</span></code> data type.</p>
-<p>alias of TypeVar(‘bro_interval’)</p>
+<p>alias of TypeVar(‘bro_interval’, bound=<code class="xref py py-class docutils literal notranslate"><span class="pre">_BroIntervalType</span></code>)</p>
 </dd></dl>
 
 <dl class="py data">
-<dt id="zlogging.typing.bro_int">
-<code class="sig-prename descclassname"><span class="pre">zlogging.typing.</span></code><code class="sig-name descname"><span class="pre">bro_int</span></code><a class="headerlink" href="#zlogging.typing.bro_int" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="zlogging.typing.bro_int">
+<span class="sig-prename descclassname"><span class="pre">zlogging.typing.</span></span><span class="sig-name descname"><span class="pre">bro_int</span></span><a class="headerlink" href="#zlogging.typing.bro_int" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bro <code class="docutils literal notranslate"><span class="pre">int</span></code> data type.</p>
-<p>alias of TypeVar(‘bro_int’)</p>
+<p>alias of TypeVar(‘bro_int’, bound=<code class="xref py py-class docutils literal notranslate"><span class="pre">_BroIntType</span></code>)</p>
 </dd></dl>
 
 <dl class="py data">
-<dt id="zlogging.typing.bro_port">
-<code class="sig-prename descclassname"><span class="pre">zlogging.typing.</span></code><code class="sig-name descname"><span class="pre">bro_port</span></code><a class="headerlink" href="#zlogging.typing.bro_port" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="zlogging.typing.bro_port">
+<span class="sig-prename descclassname"><span class="pre">zlogging.typing.</span></span><span class="sig-name descname"><span class="pre">bro_port</span></span><a class="headerlink" href="#zlogging.typing.bro_port" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bro <code class="docutils literal notranslate"><span class="pre">port</span></code> data type.</p>
-<p>alias of TypeVar(‘bro_port’)</p>
+<p>alias of TypeVar(‘bro_port’, bound=<code class="xref py py-class docutils literal notranslate"><span class="pre">_BroPortType</span></code>)</p>
 </dd></dl>
 
 <dl class="py data">
-<dt id="zlogging.typing.bro_string">
-<code class="sig-prename descclassname"><span class="pre">zlogging.typing.</span></code><code class="sig-name descname"><span class="pre">bro_string</span></code><a class="headerlink" href="#zlogging.typing.bro_string" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="zlogging.typing.bro_string">
+<span class="sig-prename descclassname"><span class="pre">zlogging.typing.</span></span><span class="sig-name descname"><span class="pre">bro_string</span></span><a class="headerlink" href="#zlogging.typing.bro_string" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bro <code class="docutils literal notranslate"><span class="pre">string</span></code> data type.</p>
-<p>alias of TypeVar(‘bro_string’)</p>
+<p>alias of TypeVar(‘bro_string’, bound=<code class="xref py py-class docutils literal notranslate"><span class="pre">_BroStringType</span></code>)</p>
 </dd></dl>
 
 <dl class="py data">
-<dt id="zlogging.typing.bro_subnet">
-<code class="sig-prename descclassname"><span class="pre">zlogging.typing.</span></code><code class="sig-name descname"><span class="pre">bro_subnet</span></code><a class="headerlink" href="#zlogging.typing.bro_subnet" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="zlogging.typing.bro_subnet">
+<span class="sig-prename descclassname"><span class="pre">zlogging.typing.</span></span><span class="sig-name descname"><span class="pre">bro_subnet</span></span><a class="headerlink" href="#zlogging.typing.bro_subnet" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bro <code class="docutils literal notranslate"><span class="pre">subnet</span></code> data type.</p>
-<p>alias of TypeVar(‘bro_subnet’)</p>
+<p>alias of TypeVar(‘bro_subnet’, bound=<code class="xref py py-class docutils literal notranslate"><span class="pre">_BroSubnetType</span></code>)</p>
 </dd></dl>
 
 <dl class="py data">
-<dt id="zlogging.typing.bro_time">
-<code class="sig-prename descclassname"><span class="pre">zlogging.typing.</span></code><code class="sig-name descname"><span class="pre">bro_time</span></code><a class="headerlink" href="#zlogging.typing.bro_time" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="zlogging.typing.bro_time">
+<span class="sig-prename descclassname"><span class="pre">zlogging.typing.</span></span><span class="sig-name descname"><span class="pre">bro_time</span></span><a class="headerlink" href="#zlogging.typing.bro_time" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bro <code class="docutils literal notranslate"><span class="pre">time</span></code> data type.</p>
-<p>alias of TypeVar(‘bro_time’)</p>
+<p>alias of TypeVar(‘bro_time’, bound=<code class="xref py py-class docutils literal notranslate"><span class="pre">_BroTimeType</span></code>)</p>
 </dd></dl>
 
-</div>
-<div class="section" id="id2">
+</section>
+<section id="id2">
 <h3>Generic Types<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h3>
 <dl class="py attribute">
-<dt id="zlogging.typing.bro_set">
-<code class="sig-prename descclassname"><span class="pre">zlogging.typing.</span></code><code class="sig-name descname"><span class="pre">bro_set</span></code><a class="reference internal" href="_modules/zlogging/typing.html#bro_set"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#zlogging.typing.bro_set" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="zlogging.typing.bro_set">
+<span class="sig-prename descclassname"><span class="pre">zlogging.typing.</span></span><span class="sig-name descname"><span class="pre">bro_set</span></span><a class="reference internal" href="_modules/zlogging/typing.html#bro_set"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#zlogging.typing.bro_set" title="Permalink to this definition">¶</a></dt>
 <dd><p>alias of <code class="xref py py-class docutils literal notranslate"><span class="pre">zlogging.typing._deprecated.&lt;locals&gt;.DeprecatedType</span></code></p>
 </dd></dl>
 
 <dl class="py attribute">
-<dt id="zlogging.typing.bro_vector">
-<code class="sig-prename descclassname"><span class="pre">zlogging.typing.</span></code><code class="sig-name descname"><span class="pre">bro_vector</span></code><a class="reference internal" href="_modules/zlogging/typing.html#bro_vector"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#zlogging.typing.bro_vector" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="zlogging.typing.bro_vector">
+<span class="sig-prename descclassname"><span class="pre">zlogging.typing.</span></span><span class="sig-name descname"><span class="pre">bro_vector</span></span><a class="reference internal" href="_modules/zlogging/typing.html#bro_vector"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#zlogging.typing.bro_vector" title="Permalink to this definition">¶</a></dt>
 <dd><p>alias of <code class="xref py py-class docutils literal notranslate"><span class="pre">zlogging.typing._deprecated.&lt;locals&gt;.DeprecatedType</span></code></p>
 </dd></dl>
 
-</div>
-<div class="section" id="id3">
+</section>
+<section id="id3">
 <h3>Variadic Types<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h3>
 <dl class="py attribute">
-<dt id="zlogging.typing.bro_record">
-<code class="sig-prename descclassname"><span class="pre">zlogging.typing.</span></code><code class="sig-name descname"><span class="pre">bro_record</span></code><a class="reference internal" href="_modules/zlogging/typing.html#bro_record"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#zlogging.typing.bro_record" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="zlogging.typing.bro_record">
+<span class="sig-prename descclassname"><span class="pre">zlogging.typing.</span></span><span class="sig-name descname"><span class="pre">bro_record</span></span><a class="reference internal" href="_modules/zlogging/typing.html#bro_record"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#zlogging.typing.bro_record" title="Permalink to this definition">¶</a></dt>
 <dd><p>alias of <code class="xref py py-class docutils literal notranslate"><span class="pre">zlogging.typing._deprecated.&lt;locals&gt;.DeprecatedType</span></code></p>
 </dd></dl>
 
-</div>
-</div>
-</div>
+</section>
+</section>
+</section>
 
 
           </div>

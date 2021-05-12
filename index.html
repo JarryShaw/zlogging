@@ -4,11 +4,12 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
     <title>ZLogging - Bro/Zeek logging framework for Python &#8212; ZLogging 0.1.1 documentation</title>
-    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
-    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/alabaster.css" />
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
     <script src="_static/jquery.js"></script>
     <script src="_static/underscore.js"></script>
     <script src="_static/doctools.js"></script>
@@ -31,7 +32,7 @@
 
           <div class="body" role="main">
             
-  <div class="section" id="zlogging-bro-zeek-logging-framework-for-python">
+  <section id="zlogging-bro-zeek-logging-framework-for-python">
 <h1>ZLogging - Bro/Zeek logging framework for Python<a class="headerlink" href="#zlogging-bro-zeek-logging-framework-for-python" title="Permalink to this headline">¶</a></h1>
 <div class="toctree-wrapper compound">
 <ul>
@@ -105,7 +106,7 @@ framework of the well-known Bro/Zeek Network Security Monitor (IDS).</p>
 <p>It was originally developed and derived from the <a class="reference external" href="https://broapt.jarryshaw.me"><code class="docutils literal notranslate"><span class="pre">BroAPT</span></code></a> project, which is an
 APT detection framework based on the Bro/Zeek IDS and extended with highly
 customised and customisable Python wrappers.</p>
-<div class="section" id="installation">
+<section id="installation">
 <h2>Installation<a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h2>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
@@ -114,8 +115,8 @@ customised and customisable Python wrappers.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="n">zlogging</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="usage">
+</section>
+<section id="usage">
 <h2>Usage<a class="headerlink" href="#usage" title="Permalink to this headline">¶</a></h2>
 <p>Currently <code class="docutils literal notranslate"><span class="pre">ZLogging</span></code> supports the two builtin formats as supported by the
 Bro/Zeek logging framework, i.e. ASCII and JSON.</p>
@@ -150,7 +151,7 @@ Bro/Zeek logging framework, i.e. ASCII and JSON.</p>
 <span class="p">{</span><span class="nt">&quot;ts&quot;</span><span class="p">:</span> <span class="mf">1581245960.123295</span><span class="p">,</span> <span class="nt">&quot;uid&quot;</span><span class="p">:</span> <span class="s2">&quot;CfAkwf2CFI13b24gqf&quot;</span><span class="p">,</span> <span class="nt">&quot;id.orig_h&quot;</span><span class="p">:</span> <span class="s2">&quot;192.168.2.108&quot;</span><span class="p">,</span> <span class="nt">&quot;id.orig_p&quot;</span><span class="p">:</span> <span class="mi">56889</span><span class="p">,</span> <span class="nt">&quot;id.resp_h&quot;</span><span class="p">:</span> <span class="s2">&quot;176.31.225.118&quot;</span><span class="p">,</span> <span class="nt">&quot;id.resp_p&quot;</span><span class="p">:</span> <span class="mi">80</span><span class="p">,</span> <span class="nt">&quot;trans_depth&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="nt">&quot;method&quot;</span><span class="p">:</span> <span class="s2">&quot;GET&quot;</span><span class="p">,</span> <span class="nt">&quot;host&quot;</span><span class="p">:</span> <span class="s2">&quot;tracker.trackerfix.com&quot;</span><span class="p">,</span> <span class="nt">&quot;uri&quot;</span><span class="p">:</span> <span class="s2">&quot;/announce?info_hash=!u7\\xdad\\x94x\\xecS\\x80\\x89\\x04\\x9c\\x13#\\x84M\\x1b\\xcd\\x1a&amp;peer_id=-qB4210-i36iloGe*QT9&amp;port=63108&amp;uploaded=0&amp;downloaded=0&amp;left=1637966572&amp;corrupt=0&amp;key=ECE6637E&amp;event=started&amp;numwant=200&amp;compact=1&amp;no_peer_id=1&amp;supportcrypto=1&amp;redundant=0&quot;</span><span class="p">,</span> <span class="nt">&quot;referrer&quot;</span><span class="p">:</span> <span class="s2">&quot;-&quot;</span><span class="p">,</span> <span class="nt">&quot;version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.1&quot;</span><span class="p">,</span> <span class="nt">&quot;user_agent&quot;</span><span class="p">:</span> <span class="s2">&quot;-&quot;</span><span class="p">,</span> <span class="nt">&quot;origin&quot;</span><span class="p">:</span> <span class="s2">&quot;-&quot;</span><span class="p">,</span> <span class="nt">&quot;request_body_len&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="nt">&quot;response_body_len&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="nt">&quot;status_code&quot;</span><span class="p">:</span> <span class="mi">307</span><span class="p">,</span> <span class="nt">&quot;status_msg&quot;</span><span class="p">:</span> <span class="s2">&quot;Temporary Redirect&quot;</span><span class="p">,</span> <span class="nt">&quot;info_code&quot;</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span> <span class="nt">&quot;info_msg&quot;</span><span class="p">:</span> <span class="s2">&quot;-&quot;</span><span class="p">,</span> <span class="nt">&quot;tags&quot;</span><span class="p">:</span> <span class="p">[],</span> <span class="nt">&quot;username&quot;</span><span class="p">:</span> <span class="s2">&quot;-&quot;</span><span class="p">,</span> <span class="nt">&quot;password&quot;</span><span class="p">:</span> <span class="s2">&quot;-&quot;</span><span class="p">,</span> <span class="nt">&quot;proxied&quot;</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span> <span class="nt">&quot;orig_fuids&quot;</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span> <span class="nt">&quot;orig_filenames&quot;</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span> <span class="nt">&quot;orig_mime_types&quot;</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span> <span class="nt">&quot;resp_fuids&quot;</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span> <span class="nt">&quot;resp_filenames&quot;</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span> <span class="nt">&quot;resp_mime_types&quot;</span><span class="p">:</span> <span class="kc">null</span><span class="p">}</span>
 </pre></div>
 </div>
-<div class="section" id="how-to-load-parse-a-log-file">
+<section id="how-to-load-parse-a-log-file">
 <h3>How to Load/Parse a Log File?<a class="headerlink" href="#how-to-load-parse-a-log-file" title="Permalink to this headline">¶</a></h3>
 <p>To load (parse) a log file generically, i.e. when you don’t know what format
 the log file is, you can simple call the <a class="reference internal" href="loader.html#zlogging.loader.parse" title="zlogging.loader.parse"><code class="xref py py-func docutils literal notranslate"><span class="pre">parse()</span></code></a>,
@@ -189,8 +190,8 @@ format, e.g. <a class="reference internal" href="loader.html#zlogging.loader.par
 </div>
 <p>If you would like to customise your own parser, just subclass
 <a class="reference internal" href="loader.html#zlogging.loader.BaseParser" title="zlogging.loader.BaseParser"><code class="xref py py-class docutils literal notranslate"><span class="pre">BaseParser</span></code></a> and implement your own ideas.</p>
-</div>
-<div class="section" id="how-to-dump-write-a-log-file">
+</section>
+<section id="how-to-dump-write-a-log-file">
 <h3>How to Dump/Write a Log File?<a class="headerlink" href="#how-to-dump-write-a-log-file" title="Permalink to this headline">¶</a></h3>
 <p>Before dumping (writing) a log file, you need to create a log <strong>data model</strong>
 first. Just like in the Bro/Zeek script language, when customise logging, you
@@ -233,10 +234,10 @@ file with the corresponding functions.</p>
 </div>
 <p>If you would like to customise your own writer, just subclass
 <code class="xref py py-class docutils literal notranslate"><span class="pre">BaseWriter</span></code> and implement your own ideas.</p>
-</div>
-</div>
-</div>
-<div class="section" id="indices-and-tables">
+</section>
+</section>
+</section>
+<section id="indices-and-tables">
 <h1>Indices and tables<a class="headerlink" href="#indices-and-tables" title="Permalink to this headline">¶</a></h1>
 <ul class="simple">
 <li><p><a class="reference internal" href="genindex.html"><span class="std std-ref">Index</span></a></p></li>
@@ -248,7 +249,7 @@ file with the corresponding functions.</p>
 <dd><p><a class="reference external" href="https://blog.zeek.org/2018/10/renaming-bro-project_11.html">https://blog.zeek.org/2018/10/renaming-bro-project_11.html</a></p>
 </dd>
 </dl>
-</div>
+</section>
 
 
           </div>

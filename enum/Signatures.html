@@ -4,11 +4,12 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
     <title>Signatures Namespace &#8212; ZLogging 0.1.1 documentation</title>
-    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
-    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/alabaster.css" />
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
     <script src="../_static/underscore.js"></script>
     <script src="../_static/doctools.js"></script>
@@ -32,12 +33,12 @@
 
           <div class="body" role="main">
             
-  <div class="section" id="signatures-namespace">
+  <section id="signatures-namespace">
 <h1><code class="docutils literal notranslate"><span class="pre">Signatures</span></code> Namespace<a class="headerlink" href="#signatures-namespace" title="Permalink to this headline">¶</a></h1>
 <p>Namespace: <code class="docutils literal notranslate"><span class="pre">Signatures</span></code>.</p>
 <dl class="py class">
-<dt>
-<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">zlogging.enum.Signatures.</span></code><code class="sig-name descname"><span class="pre">Action</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/zlogging/enum/Signatures.html#Action"><span class="viewcode-link"><span class="pre">[source]</span></span></a></dt>
+<dt class="sig sig-object py">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">zlogging.enum.Signatures.</span></span><span class="sig-name descname"><span class="pre">Action</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/zlogging/enum/Signatures.html#Action"><span class="viewcode-link"><span class="pre">[source]</span></span></a></dt>
 <dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/enum.html#enum.IntFlag" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">enum.IntFlag</span></code></a></p>
 <p>Enum: <code class="docutils literal notranslate"><span class="pre">Signatures::Action</span></code>.</p>
 <p>These are the default actions you can apply to signature matches. All of them write the signature
@@ -47,53 +48,53 @@ record to the logging stream unless declared otherwise.</p>
 <p><a class="reference external" href="https://docs.zeek.org/en/stable/scripts/base/frameworks/signatures/main.zeek.html#type-Signatures::Action">base/frameworks/signatures/main.zeek</a></p>
 </div>
 <dl class="py attribute">
-<dt>
-<code class="sig-name descname"><span class="pre">SIG_IGNORE</span></code><em class="property"> <span class="pre">=</span> <span class="pre">1</span></em></dt>
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">SIG_IGNORE</span></span><em class="property"> <span class="pre">=</span> <span class="pre">1</span></em></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
-<dt>
-<code class="sig-name descname"><span class="pre">SIG_QUIET</span></code><em class="property"> <span class="pre">=</span> <span class="pre">2</span></em></dt>
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">SIG_QUIET</span></span><em class="property"> <span class="pre">=</span> <span class="pre">2</span></em></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
-<dt>
-<code class="sig-name descname"><span class="pre">SIG_LOG</span></code><em class="property"> <span class="pre">=</span> <span class="pre">4</span></em></dt>
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">SIG_LOG</span></span><em class="property"> <span class="pre">=</span> <span class="pre">4</span></em></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
-<dt>
-<code class="sig-name descname"><span class="pre">SIG_FILE_BUT_NO_SCAN</span></code><em class="property"> <span class="pre">=</span> <span class="pre">8</span></em></dt>
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">SIG_FILE_BUT_NO_SCAN</span></span><em class="property"> <span class="pre">=</span> <span class="pre">8</span></em></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
-<dt>
-<code class="sig-name descname"><span class="pre">SIG_ALARM</span></code><em class="property"> <span class="pre">=</span> <span class="pre">16</span></em></dt>
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">SIG_ALARM</span></span><em class="property"> <span class="pre">=</span> <span class="pre">16</span></em></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
-<dt>
-<code class="sig-name descname"><span class="pre">SIG_ALARM_PER_ORIG</span></code><em class="property"> <span class="pre">=</span> <span class="pre">32</span></em></dt>
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">SIG_ALARM_PER_ORIG</span></span><em class="property"> <span class="pre">=</span> <span class="pre">32</span></em></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
-<dt>
-<code class="sig-name descname"><span class="pre">SIG_ALARM_ONCE</span></code><em class="property"> <span class="pre">=</span> <span class="pre">64</span></em></dt>
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">SIG_ALARM_ONCE</span></span><em class="property"> <span class="pre">=</span> <span class="pre">64</span></em></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
-<dt>
-<code class="sig-name descname"><span class="pre">SIG_COUNT_PER_RESP</span></code><em class="property"> <span class="pre">=</span> <span class="pre">128</span></em></dt>
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">SIG_COUNT_PER_RESP</span></span><em class="property"> <span class="pre">=</span> <span class="pre">128</span></em></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
-<dt>
-<code class="sig-name descname"><span class="pre">SIG_SUMMARY</span></code><em class="property"> <span class="pre">=</span> <span class="pre">256</span></em></dt>
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">SIG_SUMMARY</span></span><em class="property"> <span class="pre">=</span> <span class="pre">256</span></em></dt>
 <dd></dd></dl>
 
 </dd></dl>
 
-</div>
+</section>
 
 
           </div>

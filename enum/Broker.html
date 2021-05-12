@@ -4,11 +4,12 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
     <title>Broker Namespace &#8212; ZLogging 0.1.1 documentation</title>
-    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
-    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/alabaster.css" />
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
     <script src="../_static/underscore.js"></script>
     <script src="../_static/doctools.js"></script>
@@ -32,12 +33,12 @@
 
           <div class="body" role="main">
             
-  <div class="section" id="broker-namespace">
+  <section id="broker-namespace">
 <h1><code class="docutils literal notranslate"><span class="pre">Broker</span></code> Namespace<a class="headerlink" href="#broker-namespace" title="Permalink to this headline">¶</a></h1>
 <p>Namespace: <code class="docutils literal notranslate"><span class="pre">Broker</span></code>.</p>
 <dl class="py class">
-<dt>
-<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">zlogging.enum.Broker.</span></code><code class="sig-name descname"><span class="pre">DataType</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/zlogging/enum/Broker.html#DataType"><span class="viewcode-link"><span class="pre">[source]</span></span></a></dt>
+<dt class="sig sig-object py">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">zlogging.enum.Broker.</span></span><span class="sig-name descname"><span class="pre">DataType</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/zlogging/enum/Broker.html#DataType"><span class="viewcode-link"><span class="pre">[source]</span></span></a></dt>
 <dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/enum.html#enum.IntFlag" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">enum.IntFlag</span></code></a></p>
 <p>Enum: <code class="docutils literal notranslate"><span class="pre">Broker::DataType</span></code>.</p>
 <p>Enumerates the possible types that <code class="docutils literal notranslate"><span class="pre">Broker::Data</span></code> may be in terms of Zeek data types.</p>
@@ -46,85 +47,85 @@
 <p><a class="reference external" href="https://docs.zeek.org/en/stable/scripts/base/bif/data.bif.zeek.html#type-Broker::DataType">base/bif/data.bif.zeek</a></p>
 </div>
 <dl class="py attribute">
-<dt>
-<code class="sig-name descname"><span class="pre">NONE</span></code><em class="property"> <span class="pre">=</span> <span class="pre">1</span></em></dt>
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">NONE</span></span><em class="property"> <span class="pre">=</span> <span class="pre">1</span></em></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
-<dt>
-<code class="sig-name descname"><span class="pre">BOOL</span></code><em class="property"> <span class="pre">=</span> <span class="pre">2</span></em></dt>
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">BOOL</span></span><em class="property"> <span class="pre">=</span> <span class="pre">2</span></em></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
-<dt>
-<code class="sig-name descname"><span class="pre">INT</span></code><em class="property"> <span class="pre">=</span> <span class="pre">4</span></em></dt>
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">INT</span></span><em class="property"> <span class="pre">=</span> <span class="pre">4</span></em></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
-<dt>
-<code class="sig-name descname"><span class="pre">COUNT</span></code><em class="property"> <span class="pre">=</span> <span class="pre">8</span></em></dt>
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">COUNT</span></span><em class="property"> <span class="pre">=</span> <span class="pre">8</span></em></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
-<dt>
-<code class="sig-name descname"><span class="pre">DOUBLE</span></code><em class="property"> <span class="pre">=</span> <span class="pre">16</span></em></dt>
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">DOUBLE</span></span><em class="property"> <span class="pre">=</span> <span class="pre">16</span></em></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
-<dt>
-<code class="sig-name descname"><span class="pre">STRING</span></code><em class="property"> <span class="pre">=</span> <span class="pre">32</span></em></dt>
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">STRING</span></span><em class="property"> <span class="pre">=</span> <span class="pre">32</span></em></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
-<dt>
-<code class="sig-name descname"><span class="pre">ADDR</span></code><em class="property"> <span class="pre">=</span> <span class="pre">64</span></em></dt>
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">ADDR</span></span><em class="property"> <span class="pre">=</span> <span class="pre">64</span></em></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
-<dt>
-<code class="sig-name descname"><span class="pre">SUBNET</span></code><em class="property"> <span class="pre">=</span> <span class="pre">128</span></em></dt>
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">SUBNET</span></span><em class="property"> <span class="pre">=</span> <span class="pre">128</span></em></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
-<dt>
-<code class="sig-name descname"><span class="pre">PORT</span></code><em class="property"> <span class="pre">=</span> <span class="pre">256</span></em></dt>
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">PORT</span></span><em class="property"> <span class="pre">=</span> <span class="pre">256</span></em></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
-<dt>
-<code class="sig-name descname"><span class="pre">TIME</span></code><em class="property"> <span class="pre">=</span> <span class="pre">512</span></em></dt>
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">TIME</span></span><em class="property"> <span class="pre">=</span> <span class="pre">512</span></em></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
-<dt>
-<code class="sig-name descname"><span class="pre">INTERVAL</span></code><em class="property"> <span class="pre">=</span> <span class="pre">1024</span></em></dt>
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">INTERVAL</span></span><em class="property"> <span class="pre">=</span> <span class="pre">1024</span></em></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
-<dt>
-<code class="sig-name descname"><span class="pre">ENUM</span></code><em class="property"> <span class="pre">=</span> <span class="pre">2048</span></em></dt>
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">ENUM</span></span><em class="property"> <span class="pre">=</span> <span class="pre">2048</span></em></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
-<dt>
-<code class="sig-name descname"><span class="pre">SET</span></code><em class="property"> <span class="pre">=</span> <span class="pre">4096</span></em></dt>
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">SET</span></span><em class="property"> <span class="pre">=</span> <span class="pre">4096</span></em></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
-<dt>
-<code class="sig-name descname"><span class="pre">TABLE</span></code><em class="property"> <span class="pre">=</span> <span class="pre">8192</span></em></dt>
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">TABLE</span></span><em class="property"> <span class="pre">=</span> <span class="pre">8192</span></em></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
-<dt>
-<code class="sig-name descname"><span class="pre">VECTOR</span></code><em class="property"> <span class="pre">=</span> <span class="pre">16384</span></em></dt>
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">VECTOR</span></span><em class="property"> <span class="pre">=</span> <span class="pre">16384</span></em></dt>
 <dd></dd></dl>
 
 </dd></dl>
 
 <dl class="py class">
-<dt>
-<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">zlogging.enum.Broker.</span></code><code class="sig-name descname"><span class="pre">Type</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/zlogging/enum/Broker.html#Type"><span class="viewcode-link"><span class="pre">[source]</span></span></a></dt>
+<dt class="sig sig-object py">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">zlogging.enum.Broker.</span></span><span class="sig-name descname"><span class="pre">Type</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/zlogging/enum/Broker.html#Type"><span class="viewcode-link"><span class="pre">[source]</span></span></a></dt>
 <dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/enum.html#enum.IntFlag" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">enum.IntFlag</span></code></a></p>
 <p>Enum: <code class="docutils literal notranslate"><span class="pre">Broker::Type</span></code>.</p>
 <p>The type of a Broker activity being logged.</p>
@@ -133,20 +134,20 @@
 <p><a class="reference external" href="https://docs.zeek.org/en/stable/scripts/base/frameworks/broker/log.zeek.html#type-Broker::Type">base/frameworks/broker/log.zeek</a></p>
 </div>
 <dl class="py attribute">
-<dt>
-<code class="sig-name descname"><span class="pre">STATUS</span></code><em class="property"> <span class="pre">=</span> <span class="pre">1</span></em></dt>
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">STATUS</span></span><em class="property"> <span class="pre">=</span> <span class="pre">1</span></em></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
-<dt>
-<code class="sig-name descname"><span class="pre">ERROR</span></code><em class="property"> <span class="pre">=</span> <span class="pre">2</span></em></dt>
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">ERROR</span></span><em class="property"> <span class="pre">=</span> <span class="pre">2</span></em></dt>
 <dd></dd></dl>
 
 </dd></dl>
 
 <dl class="py class">
-<dt>
-<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">zlogging.enum.Broker.</span></code><code class="sig-name descname"><span class="pre">ErrorCode</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/zlogging/enum/Broker.html#ErrorCode"><span class="viewcode-link"><span class="pre">[source]</span></span></a></dt>
+<dt class="sig sig-object py">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">zlogging.enum.Broker.</span></span><span class="sig-name descname"><span class="pre">ErrorCode</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/zlogging/enum/Broker.html#ErrorCode"><span class="viewcode-link"><span class="pre">[source]</span></span></a></dt>
 <dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/enum.html#enum.IntFlag" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">enum.IntFlag</span></code></a></p>
 <p>Enum: <code class="docutils literal notranslate"><span class="pre">Broker::ErrorCode</span></code>.</p>
 <p>Enumerates the possible error types.</p>
@@ -155,120 +156,120 @@
 <p><a class="reference external" href="https://docs.zeek.org/en/stable/scripts/base/frameworks/broker/main.zeek.html#type-Broker::ErrorCode">base/frameworks/broker/main.zeek</a></p>
 </div>
 <dl class="py attribute">
-<dt>
-<code class="sig-name descname"><span class="pre">NO_ERROR</span></code><em class="property"> <span class="pre">=</span> <span class="pre">1</span></em></dt>
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">NO_ERROR</span></span><em class="property"> <span class="pre">=</span> <span class="pre">1</span></em></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
-<dt>
-<code class="sig-name descname"><span class="pre">UNSPECIFIED</span></code><em class="property"> <span class="pre">=</span> <span class="pre">2</span></em></dt>
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">UNSPECIFIED</span></span><em class="property"> <span class="pre">=</span> <span class="pre">2</span></em></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
-<dt>
-<code class="sig-name descname"><span class="pre">PEER_INCOMPATIBLE</span></code><em class="property"> <span class="pre">=</span> <span class="pre">4</span></em></dt>
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">PEER_INCOMPATIBLE</span></span><em class="property"> <span class="pre">=</span> <span class="pre">4</span></em></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
-<dt>
-<code class="sig-name descname"><span class="pre">PEER_INVALID</span></code><em class="property"> <span class="pre">=</span> <span class="pre">8</span></em></dt>
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">PEER_INVALID</span></span><em class="property"> <span class="pre">=</span> <span class="pre">8</span></em></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
-<dt>
-<code class="sig-name descname"><span class="pre">PEER_UNAVAILABLE</span></code><em class="property"> <span class="pre">=</span> <span class="pre">16</span></em></dt>
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">PEER_UNAVAILABLE</span></span><em class="property"> <span class="pre">=</span> <span class="pre">16</span></em></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
-<dt>
-<code class="sig-name descname"><span class="pre">PEER_DISCONNECT_DURING_HANDSHAKE</span></code><em class="property"> <span class="pre">=</span> <span class="pre">32</span></em></dt>
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">PEER_DISCONNECT_DURING_HANDSHAKE</span></span><em class="property"> <span class="pre">=</span> <span class="pre">32</span></em></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
-<dt>
-<code class="sig-name descname"><span class="pre">PEER_TIMEOUT</span></code><em class="property"> <span class="pre">=</span> <span class="pre">64</span></em></dt>
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">PEER_TIMEOUT</span></span><em class="property"> <span class="pre">=</span> <span class="pre">64</span></em></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
-<dt>
-<code class="sig-name descname"><span class="pre">MASTER_EXISTS</span></code><em class="property"> <span class="pre">=</span> <span class="pre">128</span></em></dt>
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">MASTER_EXISTS</span></span><em class="property"> <span class="pre">=</span> <span class="pre">128</span></em></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
-<dt>
-<code class="sig-name descname"><span class="pre">NO_SUCH_MASTER</span></code><em class="property"> <span class="pre">=</span> <span class="pre">256</span></em></dt>
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">NO_SUCH_MASTER</span></span><em class="property"> <span class="pre">=</span> <span class="pre">256</span></em></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
-<dt>
-<code class="sig-name descname"><span class="pre">NO_SUCH_KEY</span></code><em class="property"> <span class="pre">=</span> <span class="pre">512</span></em></dt>
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">NO_SUCH_KEY</span></span><em class="property"> <span class="pre">=</span> <span class="pre">512</span></em></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
-<dt>
-<code class="sig-name descname"><span class="pre">REQUEST_TIMEOUT</span></code><em class="property"> <span class="pre">=</span> <span class="pre">1024</span></em></dt>
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">REQUEST_TIMEOUT</span></span><em class="property"> <span class="pre">=</span> <span class="pre">1024</span></em></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
-<dt>
-<code class="sig-name descname"><span class="pre">TYPE_CLASH</span></code><em class="property"> <span class="pre">=</span> <span class="pre">2048</span></em></dt>
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">TYPE_CLASH</span></span><em class="property"> <span class="pre">=</span> <span class="pre">2048</span></em></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
-<dt>
-<code class="sig-name descname"><span class="pre">INVALID_DATA</span></code><em class="property"> <span class="pre">=</span> <span class="pre">4096</span></em></dt>
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">INVALID_DATA</span></span><em class="property"> <span class="pre">=</span> <span class="pre">4096</span></em></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
-<dt>
-<code class="sig-name descname"><span class="pre">BACKEND_FAILURE</span></code><em class="property"> <span class="pre">=</span> <span class="pre">8192</span></em></dt>
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">BACKEND_FAILURE</span></span><em class="property"> <span class="pre">=</span> <span class="pre">8192</span></em></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
-<dt>
-<code class="sig-name descname"><span class="pre">STALE_DATA</span></code><em class="property"> <span class="pre">=</span> <span class="pre">16384</span></em></dt>
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">STALE_DATA</span></span><em class="property"> <span class="pre">=</span> <span class="pre">16384</span></em></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
-<dt>
-<code class="sig-name descname"><span class="pre">CANNOT_OPEN_FILE</span></code><em class="property"> <span class="pre">=</span> <span class="pre">32768</span></em></dt>
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">CANNOT_OPEN_FILE</span></span><em class="property"> <span class="pre">=</span> <span class="pre">32768</span></em></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
-<dt>
-<code class="sig-name descname"><span class="pre">CANNOT_WRITE_FILE</span></code><em class="property"> <span class="pre">=</span> <span class="pre">65536</span></em></dt>
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">CANNOT_WRITE_FILE</span></span><em class="property"> <span class="pre">=</span> <span class="pre">65536</span></em></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
-<dt>
-<code class="sig-name descname"><span class="pre">INVALID_TOPIC_KEY</span></code><em class="property"> <span class="pre">=</span> <span class="pre">131072</span></em></dt>
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">INVALID_TOPIC_KEY</span></span><em class="property"> <span class="pre">=</span> <span class="pre">131072</span></em></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
-<dt>
-<code class="sig-name descname"><span class="pre">END_OF_FILE</span></code><em class="property"> <span class="pre">=</span> <span class="pre">262144</span></em></dt>
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">END_OF_FILE</span></span><em class="property"> <span class="pre">=</span> <span class="pre">262144</span></em></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
-<dt>
-<code class="sig-name descname"><span class="pre">INVALID_TAG</span></code><em class="property"> <span class="pre">=</span> <span class="pre">524288</span></em></dt>
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">INVALID_TAG</span></span><em class="property"> <span class="pre">=</span> <span class="pre">524288</span></em></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
-<dt>
-<code class="sig-name descname"><span class="pre">INVALID_STATUS</span></code><em class="property"> <span class="pre">=</span> <span class="pre">1048576</span></em></dt>
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">INVALID_STATUS</span></span><em class="property"> <span class="pre">=</span> <span class="pre">1048576</span></em></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
-<dt>
-<code class="sig-name descname"><span class="pre">CAF_ERROR</span></code><em class="property"> <span class="pre">=</span> <span class="pre">2097152</span></em></dt>
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">CAF_ERROR</span></span><em class="property"> <span class="pre">=</span> <span class="pre">2097152</span></em></dt>
 <dd></dd></dl>
 
 </dd></dl>
 
 <dl class="py class">
-<dt>
-<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">zlogging.enum.Broker.</span></code><code class="sig-name descname"><span class="pre">PeerStatus</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/zlogging/enum/Broker.html#PeerStatus"><span class="viewcode-link"><span class="pre">[source]</span></span></a></dt>
+<dt class="sig sig-object py">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">zlogging.enum.Broker.</span></span><span class="sig-name descname"><span class="pre">PeerStatus</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/zlogging/enum/Broker.html#PeerStatus"><span class="viewcode-link"><span class="pre">[source]</span></span></a></dt>
 <dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/enum.html#enum.IntFlag" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">enum.IntFlag</span></code></a></p>
 <p>Enum: <code class="docutils literal notranslate"><span class="pre">Broker::PeerStatus</span></code>.</p>
 <p>The possible states of a peer endpoint.</p>
@@ -277,40 +278,40 @@
 <p><a class="reference external" href="https://docs.zeek.org/en/stable/scripts/base/frameworks/broker/main.zeek.html#type-Broker::PeerStatus">base/frameworks/broker/main.zeek</a></p>
 </div>
 <dl class="py attribute">
-<dt>
-<code class="sig-name descname"><span class="pre">INITIALIZING</span></code><em class="property"> <span class="pre">=</span> <span class="pre">1</span></em></dt>
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">INITIALIZING</span></span><em class="property"> <span class="pre">=</span> <span class="pre">1</span></em></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
-<dt>
-<code class="sig-name descname"><span class="pre">CONNECTING</span></code><em class="property"> <span class="pre">=</span> <span class="pre">2</span></em></dt>
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">CONNECTING</span></span><em class="property"> <span class="pre">=</span> <span class="pre">2</span></em></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
-<dt>
-<code class="sig-name descname"><span class="pre">CONNECTED</span></code><em class="property"> <span class="pre">=</span> <span class="pre">4</span></em></dt>
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">CONNECTED</span></span><em class="property"> <span class="pre">=</span> <span class="pre">4</span></em></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
-<dt>
-<code class="sig-name descname"><span class="pre">PEERED</span></code><em class="property"> <span class="pre">=</span> <span class="pre">8</span></em></dt>
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">PEERED</span></span><em class="property"> <span class="pre">=</span> <span class="pre">8</span></em></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
-<dt>
-<code class="sig-name descname"><span class="pre">DISCONNECTED</span></code><em class="property"> <span class="pre">=</span> <span class="pre">16</span></em></dt>
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">DISCONNECTED</span></span><em class="property"> <span class="pre">=</span> <span class="pre">16</span></em></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
-<dt>
-<code class="sig-name descname"><span class="pre">RECONNECTING</span></code><em class="property"> <span class="pre">=</span> <span class="pre">32</span></em></dt>
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">RECONNECTING</span></span><em class="property"> <span class="pre">=</span> <span class="pre">32</span></em></dt>
 <dd></dd></dl>
 
 </dd></dl>
 
 <dl class="py class">
-<dt>
-<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">zlogging.enum.Broker.</span></code><code class="sig-name descname"><span class="pre">BackendType</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/zlogging/enum/Broker.html#BackendType"><span class="viewcode-link"><span class="pre">[source]</span></span></a></dt>
+<dt class="sig sig-object py">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">zlogging.enum.Broker.</span></span><span class="sig-name descname"><span class="pre">BackendType</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/zlogging/enum/Broker.html#BackendType"><span class="viewcode-link"><span class="pre">[source]</span></span></a></dt>
 <dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/enum.html#enum.IntFlag" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">enum.IntFlag</span></code></a></p>
 <p>Enum: <code class="docutils literal notranslate"><span class="pre">Broker::BackendType</span></code>.</p>
 <p>Enumerates the possible storage backends.</p>
@@ -319,25 +320,25 @@
 <p><a class="reference external" href="https://docs.zeek.org/en/stable/scripts/base/frameworks/broker/store.zeek.html#type-Broker::BackendType">base/frameworks/broker/store.zeek</a></p>
 </div>
 <dl class="py attribute">
-<dt>
-<code class="sig-name descname"><span class="pre">MEMORY</span></code><em class="property"> <span class="pre">=</span> <span class="pre">1</span></em></dt>
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">MEMORY</span></span><em class="property"> <span class="pre">=</span> <span class="pre">1</span></em></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
-<dt>
-<code class="sig-name descname"><span class="pre">SQLITE</span></code><em class="property"> <span class="pre">=</span> <span class="pre">2</span></em></dt>
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">SQLITE</span></span><em class="property"> <span class="pre">=</span> <span class="pre">2</span></em></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
-<dt>
-<code class="sig-name descname"><span class="pre">ROCKSDB</span></code><em class="property"> <span class="pre">=</span> <span class="pre">4</span></em></dt>
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">ROCKSDB</span></span><em class="property"> <span class="pre">=</span> <span class="pre">4</span></em></dt>
 <dd></dd></dl>
 
 </dd></dl>
 
 <dl class="py class">
-<dt>
-<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">zlogging.enum.Broker.</span></code><code class="sig-name descname"><span class="pre">QueryStatus</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/zlogging/enum/Broker.html#QueryStatus"><span class="viewcode-link"><span class="pre">[source]</span></span></a></dt>
+<dt class="sig sig-object py">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">zlogging.enum.Broker.</span></span><span class="sig-name descname"><span class="pre">QueryStatus</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/zlogging/enum/Broker.html#QueryStatus"><span class="viewcode-link"><span class="pre">[source]</span></span></a></dt>
 <dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/enum.html#enum.IntFlag" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">enum.IntFlag</span></code></a></p>
 <p>Enum: <code class="docutils literal notranslate"><span class="pre">Broker::QueryStatus</span></code>.</p>
 <p>Whether a data store query could be completed or not.</p>
@@ -346,18 +347,18 @@
 <p><a class="reference external" href="https://docs.zeek.org/en/stable/scripts/base/frameworks/broker/store.zeek.html#type-Broker::QueryStatus">base/frameworks/broker/store.zeek</a></p>
 </div>
 <dl class="py attribute">
-<dt>
-<code class="sig-name descname"><span class="pre">SUCCESS</span></code><em class="property"> <span class="pre">=</span> <span class="pre">1</span></em></dt>
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">SUCCESS</span></span><em class="property"> <span class="pre">=</span> <span class="pre">1</span></em></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
-<dt>
-<code class="sig-name descname"><span class="pre">FAILURE</span></code><em class="property"> <span class="pre">=</span> <span class="pre">2</span></em></dt>
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">FAILURE</span></span><em class="property"> <span class="pre">=</span> <span class="pre">2</span></em></dt>
 <dd></dd></dl>
 
 </dd></dl>
 
-</div>
+</section>
 
 
           </div>
