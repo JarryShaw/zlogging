@@ -13,7 +13,7 @@ from typing import TYPE_CHECKING, TypeVar, cast
 
 from zlogging._aux import readline
 from zlogging._data import ASCIIInfo, JSONInfo
-from zlogging._exc import (ASCIIParserWarning, ASCIIParserError, JSONParserError, JSONParserWarning,
+from zlogging._exc import (ASCIIParserError, ASCIIParserWarning, JSONParserError, JSONParserWarning,
                            ParserError, ZeekValueError)
 from zlogging.model import new_model
 from zlogging.types import (AddrType, AnyType, BaseType, BoolType, CountType, DoubleType, EnumType,
