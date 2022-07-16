@@ -681,7 +681,7 @@ class TimeType(_SimpleType):
         if isinstance(data, datetime.datetime):
             return data
         if isinstance(data, float):
-            return datetime.datetime.fromtimestamp(data)
+            return datetime.datetime.fromtimestamp(data, tz=datetime.timezone.utc)
         if isinstance(data, str):
             data = data.encode('ascii')
 
@@ -690,7 +690,7 @@ class TimeType(_SimpleType):
         with decimal.localcontext() as ctx:
             ctx.prec = 6
             value = decimal.Decimal(data.decode('ascii'))
-        return datetime.datetime.fromtimestamp(float(value))
+        return datetime.datetime.fromtimestamp(float(value), tz=datetime.timezone.utc)
 
     @overload
     def tojson(self, data: 'DateTimeType') -> 'float': ...

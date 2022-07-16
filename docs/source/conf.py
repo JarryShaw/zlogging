@@ -4,6 +4,7 @@
 # list see the documentation:
 # https://www.sphinx-doc.org/en/master/usage/configuration.html
 
+import datetime
 import importlib
 import logging
 import sys
@@ -11,7 +12,8 @@ import typing
 from typing import TYPE_CHECKING
 
 if TYPE_CHECKING:
-    from typing import Any, Dict, List
+    from typing import Any
+
     from sphinx.application import Sphinx
 
 logger = logging.getLogger(__name__)
@@ -32,11 +34,11 @@ logger.setLevel(logging.DEBUG)
 # -- Project information -----------------------------------------------------
 
 project = 'ZLogging'
-copyright = '2020-2021, Jarry Shaw'  # pylint: disable=redefined-builtin
+copyright = f'2020-{datetime.datetime.today().year}, Jarry Shaw'  # pylint: disable=redefined-builtin
 author = 'Jarry Shaw'
 
 # The full version, including alpha/beta/rc tags
-release = '0.1.1'
+release = '0.1.2'
 
 
 # -- General configuration ---------------------------------------------------
@@ -83,7 +85,7 @@ templates_path = ['_templates']
 # List of patterns, relative to source directory, that match files and
 # directories to ignore when looking for source files.
 # This pattern also affects html_static_path and html_extra_path.
-exclude_patterns = []  # type: List[str]
+exclude_patterns = []  # type: list[str]
 
 #set_type_checking_flag = True
 
@@ -115,8 +117,8 @@ html_theme_options = {
 }
 
 
-def reload_module(app: 'Sphinx', what: str, name: str,  # pylint: disable=unused-argument
-                  obj: 'Any', options: 'Dict[str, Any]', lines: 'List[str]') -> None:  # pylint: disable=unused-argument
+def reload_module(app: 'Sphinx', what: 'str', name: 'str',  # pylint: disable=unused-argument
+                  obj: 'Any', options: 'dict[str, Any]', lines: 'list[str]') -> 'None':  # pylint: disable=unused-argument
     if what == 'module' and 'zlogging' in name:
         module = sys.modules.get(name)
         if module is None:
@@ -128,7 +130,7 @@ def reload_module(app: 'Sphinx', what: str, name: str,  # pylint: disable=unused
         logger.info('reloaded module: %s', name)
 
 
-def setup(app: 'Sphinx') -> None:  # pylint: disable=unused-argument
+def setup(app: 'Sphinx') -> 'None':  # pylint: disable=unused-argument
     app.connect('autodoc-process-docstring', reload_module)
 
     # typing.TYPE_CHECKING = True

@@ -4,7 +4,7 @@
 
 import sys
 from ctypes import c_int64, c_uint16, c_uint64
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, timezone
 from decimal import Decimal, localcontext
 from ipaddress import IPv4Address, IPv4Network, IPv6Address, IPv6Network
 from typing import TYPE_CHECKING, Any, List, Set, Union
@@ -364,27 +364,28 @@ class TestTimeType:
         assert field.zeek_type == 'time'
 
     def test_parse(self, field: 'TimeType', expected):
-        now = datetime(2021, 1, 25, 13, 5, 47, 490889)
+        now = datetime(2021, 1, 25, 13, 5, 47, 490889, tzinfo=timezone.utc)
         for data, expected in [
             (now, now),
-            ('1611551147.490889', now),
-            (b'1611551147.490889', now),
+            (1611579947.490889, now),
+            ('1611579947.490889', now),
+            (b'1611579947.490889', now),
             (expected['unset_field'], None),
         ]:
             assert field.parse(data) == expected
 
     def test_tojson(self, field: 'TimeType'):
-        now = datetime(2021, 1, 25, 13, 5, 47, 490889)
+        now = datetime(2021, 1, 25, 13, 5, 47, 490889, tzinfo=timezone.utc)
         for data, expected in [
-            (now, 1611551147.490889),
+            (now, 1611579947.490889),
             (None, None),
         ]:
             assert field.tojson(data) == expected
 
     def test_toascii(self, field: 'TimeType', expected):
-        now = datetime(2021, 1, 25, 13, 5, 47, 490889)
+        now = datetime(2021, 1, 25, 13, 5, 47, 490889, tzinfo=timezone.utc)
         for data, expected in [
-            (now, '1611551147.490889'),
+            (now, '1611579947.490889'),
             (None, expected['unset_field']),
         ]:
             assert field.toascii(data) == expected
@@ -708,7 +709,7 @@ class TestSetType:
         return request.keywords['expected']
 
     def test_python_type(self, field: 'SetType'):
-        assert field.python_type == Union[Set[bytes], Set[memoryview], Set[bytearray]]
+        assert field.python_type == Set[Union[bytes, memoryview, bytearray]]
 
     def test_zeek_type(self, field: 'SetType'):
         assert field.zeek_type == 'set[string]'
@@ -761,7 +762,7 @@ class TestVectorType:
         return request.keywords['expected']
 
     def test_python_type(self, field: 'VectorType'):
-        assert field.python_type == Union[List[bytes], List[memoryview], List[bytearray]]
+        assert field.python_type == List[Union[bytes, memoryview, bytearray]]
 
     def test_zeek_type(self, field: 'VectorType'):
         assert field.zeek_type == 'vector[string]'
