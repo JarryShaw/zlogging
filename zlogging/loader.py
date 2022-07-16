@@ -13,7 +13,7 @@ from typing import TYPE_CHECKING, TypeVar, cast
 
 from zlogging._aux import readline
 from zlogging._data import ASCIIInfo, JSONInfo
-from zlogging._exc import (ASCIIParserWarning, ASCIIPaserError, JSONParserError, JSONParserWarning,
+from zlogging._exc import (ASCIIParserWarning, ASCIIParserError, JSONParserError, JSONParserWarning,
                            ParserError, ZeekValueError)
 from zlogging.model import new_model
 from zlogging.types import (AddrType, AnyType, BaseType, BoolType, CountType, DoubleType, EnumType,
@@ -32,7 +32,7 @@ if TYPE_CHECKING:
     from collections import OrderedDict
     from io import BufferedReader as BinaryFile
     from os import PathLike
-    from typing import Any, Dict, List, Optional, Tuple, Type, Union
+    from typing import Any, Optional, Type, Union
 
     from typing_extensions import Literal
 
@@ -48,8 +48,8 @@ class BaseParser(metaclass=abc.ABCMeta):
 
     @property
     @abc.abstractmethod
-    def format(self) -> str:
-        """str: Log file format."""
+    def format(self) -> 'str':
+        """Log file format."""
 
     def parse(self, filename: 'PathLike[str]', model: 'Optional[Type[Model]]' = None) -> 'Info':
         """Parse log file.
@@ -63,7 +63,7 @@ class BaseParser(metaclass=abc.ABCMeta):
 
         """
         with open(filename, 'rb') as file:
-            data = self.parse_file(file, model=model)  # type: ignore[arg-type]
+            data = self.parse_file(file, model=model)
         return data
 
     @abc.abstractmethod
@@ -80,7 +80,7 @@ class BaseParser(metaclass=abc.ABCMeta):
         """
 
     @abc.abstractmethod
-    def parse_line(self, line: bytes, lineno: 'Optional[int]' = 0,
+    def parse_line(self, line: 'bytes', lineno: 'Optional[int]' = 0,
                    model: 'Optional[Type[Model]]' = None) -> 'Model':
         """Parse log line as one-line record.
 
@@ -106,7 +106,7 @@ class BaseParser(metaclass=abc.ABCMeta):
         """
         return self.parse_file(file)
 
-    def loads(self, line: bytes, lineno: 'Optional[int]' = 0) -> 'Model':
+    def loads(self, line: 'bytes', lineno: 'Optional[int]' = 0) -> 'Model':
         """Parse log line as one-line record.
 
         Args:
@@ -124,28 +124,25 @@ class JSONParser(BaseParser):
     """JSON log parser.
 
     Args:
-        model (:class:`~zlogging.model.Model` class, optional): Field
-            declrations for :class:`~zlogging.loader.JSONParser`, as in JSON
-            logs the field typing information are omitted by the Bro/Zeek
-            logging framework.
-
-    Attributes:
-        model (:class:`~zlogging.model.Model` class, optional): Field
-            declrations for :class:`~zlogging.loader.JSONParser`, as in JSON
-            logs the field typing information are omitted by the Bro/Zeek
-            logging framework.
+        model: Field declrations for :class:`~zlogging.loader.JSONParser`,
+            as in JSON logs the field typing information are omitted by
+            the Bro/Zeek logging framework.
 
     Warns:
         JSONParserWarning: If ``model`` is not specified.
 
     """
+    #: Field declrations for: class: `~zlogging.loader.JSONParser`,
+    #: as in JSON logs the field typing information are omitted by
+    #: the Bro/Zeek logging framework.
+    model: 'Optional[Type[Model]]'
 
     @property
     def format(self) -> 'Literal["json"]':
-        """str: Log file format."""
+        """Log file format."""
         return 'json'
 
-    def __init__(self, model: 'Optional[Type[Model]]' = None):
+    def __init__(self, model: 'Optional[Type[Model]]' = None) -> 'None':
         if model is None:
             warnings.warn('missing log data model specification', JSONParserWarning)
         self.model = model
@@ -162,18 +159,17 @@ class JSONParser(BaseParser):
             model: Field declrations of current log.
 
         Returns:
-            :class:`~zlogging._data.JSONInfo`: The parsed log as a
-                :class:`~zlogging.model.Model` per line.
+            The parsed log as a :class:`~zlogging.model.Model` per line.
 
         """
-        data = list()
+        data = []
         for index, line in enumerate(file, start=1):
             data.append(self.parse_line(line, lineno=index, model=model))
         return JSONInfo(
             data=data
         )
 
-    def parse_line(self, line: bytes, lineno: 'Optional[int]' = 0,
+    def parse_line(self, line: 'bytes', lineno: 'Optional[int]' = 0,
                    model: 'Optional[Type[Model]]' = None) -> 'Model':
         """Parse log line as one-line record.
 
@@ -190,7 +186,7 @@ class JSONParser(BaseParser):
 
         """
         try:
-            data = json.loads(line)  # type: Dict[str, Any]
+            data = json.loads(line)  # type: dict[str, Any]
         except json.JSONDecodeError as error:
             raise JSONParserError(error.msg, lineno) from error
 
@@ -204,27 +200,26 @@ class ASCIIParser(BaseParser):
     """ASCII log parser.
 
     Args:
-        type_hook (:obj:`dict` mapping :obj:`str` and :class:`~zlogging.types.BaseType` class, optional):
-            Bro/Zeek type parser hooks. User may customise subclasses of
+        type_hook: Bro/Zeek type parser hooks. User may customise subclasses of
             :class:`~zlogging.types.BaseType` to modify parsing behaviours.
-        enum_namespaces (:obj:`List[str]`, optional): Namespaces to be loaded.
-        bare (:obj:`bool`, optional): If ``True``, do not load ``zeek`` namespace by default.
-
-    Attributes:
-        __type__ (:obj:`dict` mapping :obj:`str` and :class:`~zlogging.types.BaseType` class):
-            Bro/Zeek type parser hooks.
-        enum_namespaces (:obj:`List[str]`): Namespaces to be loaded.
-        bare (bool): If ``True``, do not load ``zeek`` namespace by default.
+        enum_namespaces: Namespaces to be loaded.
+        bare: If :data:`True`, do not load ``zeek`` namespace by default.
 
     """
+    #: Bro/Zeek type parser hooks.
+    __type__: 'dict[str, Type[BaseType]]'
+    #: Namespaces to be loaded.
+    enum_namespaces: 'list[str]'
+    #: If :data:`True`, do not load ``zeek`` namespace by default.
+    bare: 'bool'
 
     @property
     def format(self) -> 'Literal["ascii"]':
-        """str: Log file format."""
+        """Log file format."""
         return 'ascii'
 
-    def __init__(self, type_hook: 'Optional[Dict[str, Type[BaseType]]]' = None,
-                 enum_namespaces: 'Optional[List[str]]' = None, bare: bool = False) -> None:
+    def __init__(self, type_hook: 'Optional[dict[str, Type[BaseType]]]' = None,
+                 enum_namespaces: 'Optional[list[str]]' = None, bare: bool = False) -> 'None':
         self.__type__ = {
             'bool': BoolType,
             'count': CountType,
@@ -239,11 +234,11 @@ class ASCIIParser(BaseParser):
             'enum': EnumType,
             'set': SetType,
             'vector': VectorType,
-          }  # type: Dict[str, Type[BaseType]]
+          }  # type: dict[str, Type[BaseType]]
         if type_hook is not None:
             self.__type__.update(type_hook)
 
-        self.enum_namespaces = enum_namespaces
+        self.enum_namespaces = enum_namespaces or []
         self.bare = bare
 
     if TYPE_CHECKING:
@@ -261,8 +256,7 @@ class ASCIIParser(BaseParser):
                 be used at runtime.
 
         Returns:
-            :class:`~zlogging._data.ASCIIInfo`: The parsed log as a
-                :class:`~zlogging.model.Model` per line.
+            The parsed log as a :class:`~zlogging.model.Model` per line.
 
         Warns:
             ASCIIParserWarning: If the ASCII log file exited with error, see
@@ -290,7 +284,7 @@ class ASCIIParser(BaseParser):
         # log filed types
         types_line = readline(file, separator, decode=True)[1:]
 
-        field_parser = []  # type: List[Tuple[str, BaseType]]
+        field_parser = []  # type: list[tuple[str, BaseType]]
         model_fields = collections.OrderedDict()
         for (field, type_) in zip(model_line, types_line):
             match_set = re.match(r'set\[(?P<type>.+?)\]', type_)
@@ -330,7 +324,7 @@ class ASCIIParser(BaseParser):
             close_time = datetime.datetime.now()
 
         exit_with_error = True
-        data = list()
+        data = []
         for index, line in enumerate(file, start=1):
             if line.startswith(b'#'):
                 exit_with_error = False
@@ -353,9 +347,9 @@ class ASCIIParser(BaseParser):
             exit_with_error=exit_with_error,
         )
 
-    def parse_line(self, line: bytes, lineno: 'Optional[int]' = 0,  # pylint: disable=arguments-differ
+    def parse_line(self, line: 'bytes', lineno: 'Optional[int]' = 0,  # pylint: disable=arguments-differ
                    model: 'Optional[Type[Model]]' = None, separator: 'Optional[bytes]' = b'\x09',
-                   parser: 'Optional[List[Tuple[str, BaseType]]]' = None) -> 'Model':
+                   parser: 'Optional[list[tuple[str, BaseType]]]' = None) -> 'Model':
         """Parse log line as one-line record.
 
         Args:
@@ -363,18 +357,18 @@ class ASCIIParser(BaseParser):
             lineno: Line number of current line.
             model: Field declrations of current log.
             separator: Data separator.
-            parser (:obj:`List` of :class:`~zlogging.types.BaseType`, required): Field data type parsers.
+            parser: Field data type parsers.
 
         Returns:
             The parsed log as a plain :obj:`dict`.
 
         Raises:
-            :exc:`ASCIIPaserError`: If ``parser`` is not provided; or failed to
+            :exc:`ASCIIParserError`: If ``parser`` is not provided; or failed to
                 serialise ``line`` as ASCII.
 
         """
         if parser is None:
-            raise ASCIIPaserError("parse_line() missing 1 required positional argument: 'parser'")
+            raise ASCIIParserError("parse_line() missing 1 required positional argument: 'parser'")
 
         data = collections.OrderedDict()  # type: OrderedDict[str, Any]
         for i, s in enumerate(line.strip().split(separator)):
@@ -382,27 +376,24 @@ class ASCIIParser(BaseParser):
             try:
                 data[field_name] = field_type(s)
             except ZeekValueError as error:
-                raise ASCIIPaserError(str(error), lineno, field_name) from error
+                raise ASCIIParserError(str(error), lineno, field_name) from error
 
         if model is None:
             model = new_model('<unknown>', **{field: AnyType() for field in data.keys()})
         return model(**data)
 
 
-def parse_json(filename: 'PathLike[str]',  # pylint: disable=unused-argument,keyword-arg-before-vararg
-               parser: 'Optional[Type[JSONParser]]' = None,
-               model: 'Optional[Type[Model]]' = None,
-               *args: 'Any', **kwargs: 'Any') -> JSONInfo:
+def parse_json(filename: 'PathLike[str]', parser: 'Optional[Type[JSONParser]]' = None,  # pylint: disable=unused-argument,keyword-arg-before-vararg
+               model: 'Optional[Type[Model]]' = None, *args: 'Any', **kwargs: 'Any') -> 'JSONInfo':
     """Parse JSON log file.
 
     Args:
         filename: Log file name.
-        parser (:class:`~zlogging.loader.JSONParser`, optional): Parser class.
-        model (:class:`~zlogging.models.Model` class, optional): Field
-            declarations for :class:`~zlogging.loader.JSONParser`, as in JSON
-            logs the field typing information are omitted by the Bro/Zeek
-            logging framework.
-        *args: Variable length argument list.
+        parser: Parser class.
+        model: Field declarations for :class:`~zlogging.loader.JSONParser`,
+            as in JSON logs the field typing information are omitted by the
+            Bro/Zeek logging framework.
+        *args: Arbitrary positional arguments.
         **kwargs: Arbitrary keyword arguments.
 
     Returns:
@@ -415,20 +406,17 @@ def parse_json(filename: 'PathLike[str]',  # pylint: disable=unused-argument,key
     return json_parser.parse(filename)
 
 
-def load_json(file: 'BinaryFile',  # pylint: disable=unused-argument,keyword-arg-before-vararg
-              parser: 'Optional[Type[JSONParser]]' = None,
-              model: 'Optional[Type[Model]]' = None,
-              *args: 'Any', **kwargs: 'Any') -> JSONInfo:
+def load_json(file: 'BinaryFile', parser: 'Optional[Type[JSONParser]]' = None,  # pylint: disable=unused-argument,keyword-arg-before-vararg
+              model: 'Optional[Type[Model]]' = None, *args: 'Any', **kwargs: 'Any') -> 'JSONInfo':
     """Parse JSON log file.
 
     Args:
         file: Log file object opened in binary mode.
-        parser (:class:`~zlogging.loader.JSONParser`, optional): Parser class.
-        model (:class:`~zlogging.models.Model` class, optional): Field
-            declarations for :class:`~zlogging.loader.JSONParser`, as in JSON
-            logs the field typing information are omitted by the Bro/Zeek
-            logging framework.
-        *args: Variable length argument list.
+        parser: Parser class.
+        model: Field declarations for :class:`~zlogging.loader.JSONParser`,
+            as in JSON logs the field typing information are omitted by the
+            Bro/Zeek logging framework.
+        *args: Arbitrary positional arguments.
         **kwargs: Arbitrary keyword arguments.
 
     Returns:
@@ -441,20 +429,17 @@ def load_json(file: 'BinaryFile',  # pylint: disable=unused-argument,keyword-arg
     return json_parser.parse_file(file)
 
 
-def loads_json(data: 'AnyStr',  # pylint: disable=unused-argument,keyword-arg-before-vararg
-               parser: 'Optional[Type[JSONParser]]' = None,
-               model: 'Optional[Type[Model]]' = None,
-               *args: 'Any', **kwargs: 'Any') -> JSONInfo:
+def loads_json(data: 'AnyStr', parser: 'Optional[Type[JSONParser]]' = None,  # pylint: disable=unused-argument,keyword-arg-before-vararg
+               model: 'Optional[Type[Model]]' = None, *args: 'Any', **kwargs: 'Any') -> 'JSONInfo':
     """Parse JSON log string.
 
     Args:
         data: Log string as binary or encoded string.
-        parser (:class:`~zlogging.loader.JSONParser`, optional): Parser class.
-        model (:class:`~zlogging.models.Model` class, optional): Field
-            declarations for :class:`~zlogging.loader.JSONParser`, as in JSON
-            logs the field typing information are omitted by the Bro/Zeek
-            logging framework.
-        *args: Variable length argument list.
+        parser: Parser class.
+        model: Field declarations for :class:`~zlogging.loader.JSONParser`,
+            as in JSON logs the field typing information are omitted by the
+            Bro/Zeek logging framework.
+        *args: Arbitrary positional arguments.
         **kwargs: Arbitrary keyword arguments.
 
     Returns:
@@ -473,22 +458,20 @@ def loads_json(data: 'AnyStr',  # pylint: disable=unused-argument,keyword-arg-be
     return info
 
 
-def parse_ascii(filename: 'PathLike[str]',  # pylint: disable=unused-argument,keyword-arg-before-vararg
-                parser: 'Optional[Type[ASCIIParser]]' = None,
-                type_hook: 'Optional[Dict[str, Type[BaseType]]]' = None,
-                enum_namespaces: 'Optional[List[str]]' = None, bare: bool = False,
-                *args: 'Any', **kwargs: 'Any') -> 'ASCIIInfo':
+def parse_ascii(filename: 'PathLike[str]', parser: 'Optional[Type[ASCIIParser]]' = None,  # pylint: disable=unused-argument,keyword-arg-before-vararg
+                type_hook: 'Optional[dict[str, Type[BaseType]]]' = None,
+                enum_namespaces: 'Optional[list[str]]' = None,
+                bare: 'bool' = False, *args: 'Any', **kwargs: 'Any') -> 'ASCIIInfo':
     """Parse ASCII log file.
 
     Args:
         filename: Log file name.
-        parser (:class:`~zlogging.loader.ASCIIParser`, optional): Parser class.
-        type_hook (:obj:`dict` mapping :obj:`str` and :class:`~zlogging.types.BaseType` class, optional):
-            Bro/Zeek type parser hooks. User may customise subclasses of
+        parser: Parser class.
+        type_hook: Bro/Zeek type parser hooks. User may customise subclasses of
             :class:`~zlogging.types.BaseType` to modify parsing behaviours.
-        enum_namespaces (:obj:`List[str]`, optional): Namespaces to be loaded.
-        bare (:obj:`bool`, optional): If ``True``, do not load ``zeek`` namespace by default.
-        *args: Variable length argument list.
+        enum_namespaces: Namespaces to be loaded.
+        bare: If :data:`True`, do not load ``zeek`` namespace by default.
+        *args: Arbitrary positional arguments.
         **kwargs: Arbitrary keyword arguments.
 
     Returns:
@@ -501,22 +484,20 @@ def parse_ascii(filename: 'PathLike[str]',  # pylint: disable=unused-argument,ke
     return ascii_parser.parse(filename)
 
 
-def load_ascii(file: 'BinaryFile',  # pylint: disable=unused-argument,keyword-arg-before-vararg
-               parser: 'Optional[Type[ASCIIParser]]' = None,
-               type_hook: 'Optional[Dict[str, Type[BaseType]]]' = None,
-               enum_namespaces: 'Optional[List[str]]' = None, bare: bool = False,
-               *args: 'Any', **kwargs: 'Any') -> 'ASCIIInfo':
+def load_ascii(file: 'BinaryFile', parser: 'Optional[Type[ASCIIParser]]' = None,  # pylint: disable=unused-argument,keyword-arg-before-vararg
+               type_hook: 'Optional[dict[str, Type[BaseType]]]' = None,
+               enum_namespaces: 'Optional[list[str]]' = None,
+               bare: 'bool' = False, *args: 'Any', **kwargs: 'Any') -> 'ASCIIInfo':
     """Parse ASCII log file.
 
     Args:
         file: Log file object opened in binary mode.
-        parser (:class:`~zlogging.loader.ASCIIParser`, optional): Parser class.
-        type_hook (:obj:`dict` mapping :obj:`str` and :class:`~zlogging.types.BaseType` class, optional):
-            Bro/Zeek type parser hooks. User may customise subclasses of
+        parser: Parser class.
+        type_hook: Bro/Zeek type parser hooks. User may customise subclasses of
             :class:`~zlogging.types.BaseType` to modify parsing behaviours.
-        enum_namespaces (:obj:`List[str]`, optional): Namespaces to be loaded.
-        bare (:obj:`bool`, optional): If ``True``, do not load ``zeek`` namespace by default.
-        *args: Variable length argument list.
+        enum_namespaces: Namespaces to be loaded.
+        bare: If :data:`True`, do not load ``zeek`` namespace by default.
+        *args: Arbitrary positional arguments.
         **kwargs: Arbitrary keyword arguments.
 
     Returns:
@@ -529,22 +510,20 @@ def load_ascii(file: 'BinaryFile',  # pylint: disable=unused-argument,keyword-ar
     return ascii_parser.parse_file(file)
 
 
-def loads_ascii(data: 'AnyStr',  # pylint: disable=unused-argument,keyword-arg-before-vararg
-                parser: 'Optional[Type[ASCIIParser]]' = None,
-                type_hook: 'Optional[Dict[str, Type[BaseType]]]' = None,
-                enum_namespaces: 'Optional[List[str]]' = None, bare: bool = False,
-                *args: 'Any', **kwargs: 'Any') -> 'ASCIIInfo':
+def loads_ascii(data: 'AnyStr', parser: 'Optional[Type[ASCIIParser]]' = None,  # pylint: disable=unused-argument,keyword-arg-before-vararg
+                type_hook: 'Optional[dict[str, Type[BaseType]]]' = None,
+                enum_namespaces: 'Optional[list[str]]' = None,
+                bare: 'bool' = False, *args: 'Any', **kwargs: 'Any') -> 'ASCIIInfo':
     """Parse ASCII log string.
 
     Args:
         data: Log string as binary or encoded string.
-        parser (:class:`~zlogging.loader.ASCIIParser`, optional): Parser class.
-        type_hook (:obj:`dict` mapping :obj:`str` and :class:`~zlogging.types.BaseType` class, optional):
-            Bro/Zeek type parser hooks. User may customise subclasses of
+        parser: Parser class.
+        type_hook: Bro/Zeek type parser hooks. User may customise subclasses of
             :class:`~zlogging.types.BaseType` to modify parsing behaviours.
-        enum_namespaces (:obj:`List[str]`, optional): Namespaces to be loaded.
-        bare (:obj:`bool`, optional): If ``True``, do not load ``zeek`` namespace by default.
-        *args: Variable length argument list.
+        enum_namespaces: Namespaces to be loaded.
+        bare: If :data:`True`, do not load ``zeek`` namespace by default.
+        *args: Arbitrary positional arguments.
         **kwargs: Arbitrary keyword arguments.
 
     Returns:

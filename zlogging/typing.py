@@ -22,6 +22,7 @@ __all__ = [
 
 _T = TypeVar('_T', bound='Type[BaseType]')
 _S = TypeVar('_S', bound='_SimpleType')
+
 if TYPE_CHECKING:
     from typing import Any, Type
 
@@ -31,15 +32,16 @@ if TYPE_CHECKING:
 def _deprecated(bro_type: '_T') -> '_T':
     """Use of ``'bro'`` is deprecated, please use ``'zeek'`` instead."""
     name = bro_type.__name__
+    orig_init = bro_type.__init__
 
-    class DeprecatedType(bro_type):  # type: ignore[misc,valid-type]
-        def __init__(self, *args: 'Any', **kwargs: 'Any') -> None:
-            warnings.warn(f"Use of 'bro_{name}' is deprecated. "
-                          f"Please use 'zeek_{name}' instead.", BroDeprecationWarning)
-            super().__init__(*args, **kwargs)
 
-    DeprecatedType.__doc__ = bro_type.__doc__
-    return DeprecatedType  # type: ignore[return-value]
+    def __init__(self: 'BaseType', *args: 'Any', **kwargs: 'Any') -> 'None':
+        warnings.warn(f"Use of 'bro_{name}' is deprecated. "
+                        f"Please use 'zeek_{name}' instead.", BroDeprecationWarning)
+        orig_init(self, *args, **kwargs)
+
+    bro_type.__init__ = __init__  # type: ignore[assignment]
+    return bro_type
 
 
 ###########################################################

@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-# pylint: disable=ungrouped-imports
 """Auxiliary functions."""
 
 import collections
@@ -15,25 +14,27 @@ if TYPE_CHECKING:
     from collections import OrderedDict
     from decimal import Decimal
     from io import BufferedReader as BinaryFile
-    from typing import List, Optional, Type, TypeVar, Union
+    from typing import Optional, Type, TypeVar, Union
 
     from typing_extensions import Literal
 
     from zlogging._typing import ExpandedTyping
     from zlogging.model import Model
-    from zlogging.types import RecordType
+    from zlogging.types import _VariadicType
 
 __all__ = ['readline', 'decimal_toascii', 'float_toascii', 'unicode_escape', 'expand_typing']
 
 
 @overload
-def readline(file: 'BinaryFile', seperator: bytes = ..., maxsplit: int = ...,  # type: ignore[misc]
-             decode: 'Literal[False]' = ...) -> 'List[bytes]': ...  # pylint: disable=redefined-outer-name
+def readline(file: 'BinaryFile', seperator: 'bytes' = ..., maxsplit: 'int' = ...,  # type: ignore[misc]
+             decode: 'Literal[False]' = ...) -> 'list[bytes]': ...  # pylint: disable=redefined-outer-name
+
 @overload
-def readline(file: 'BinaryFile', seperator: bytes = ..., maxsplit: int = ...,
-             decode: 'Literal[True]' = ...) -> 'List[str]': ...  # pylint: disable=redefined-outer-name
-def readline(file: 'BinaryFile', separator: bytes = b'\x09',  # type: ignore[misc]
-             maxsplit: int = -1, decode: bool = False) -> 'Union[List[str], List[bytes]]':  # pylint: disable=redefined-outer-name
+def readline(file: 'BinaryFile', seperator: 'bytes' = ..., maxsplit: 'int' = ...,
+             decode: 'Literal[True]' = ...) -> 'list[str]': ...  # pylint: disable=redefined-outer-name
+
+def readline(file: 'BinaryFile', separator: 'bytes' = b'\x09',  # type: ignore[misc]
+             maxsplit: 'int' = -1, decode: 'bool' = False) -> 'Union[list[str], list[bytes]]':  # pylint: disable=redefined-outer-name
     """Wrapper for :meth:`file.readline` function.
 
     Args:
@@ -54,7 +55,7 @@ def readline(file: 'BinaryFile', separator: bytes = b'\x09',  # type: ignore[mis
     return line.split(separator, maxsplit)
 
 
-def decimal_toascii(data: 'Decimal', infinite: 'Optional[str]' = None) -> str:
+def decimal_toascii(data: 'Decimal', infinite: 'Optional[str]' = None) -> 'str':
     """Convert :obj:`decimal.Decimal` to ASCII.
 
     Args:
@@ -65,12 +66,16 @@ def decimal_toascii(data: 'Decimal', infinite: 'Optional[str]' = None) -> str:
         The converted ASCII string.
 
     Example:
-        When converting a :obj:`decimal.Decimal` object, for example::
+        When converting a :obj:`decimal.Decimal` object, for example:
+
+        .. code-block:: python
 
             >>> d = decimal.Decimal('-123.123456789')
 
         the function will preserve only **6 digits** of its fractional part,
-        i.e.::
+        i.e.:
+
+        .. code-block:: python
 
             >>> decimal_toascii(d)
             '-123.123456'
@@ -88,11 +93,11 @@ def decimal_toascii(data: 'Decimal', infinite: 'Optional[str]' = None) -> str:
         if infinite is None:
             return str(data)
         return infinite
-    tpl: decimal.DecimalTuple = data.as_tuple()
+    tpl = data.as_tuple()  # type: decimal.DecimalTuple
 
     exp = tpl.exponent
     if exp >= 0:
-        return '%s%s%s.000000' % ('-' if tpl.sign else '',
+        return '%s%s%s.000000' % ('-' if tpl.sign else '',  # pylint: disable=consider-using-f-string
                                   ''.join(map(str, tpl.digits)),
                                   '0' * exp)
 
@@ -102,7 +107,7 @@ def decimal_toascii(data: 'Decimal', infinite: 'Optional[str]' = None) -> str:
         diff = expabs - dgtlen
         if diff == 0:
             diff = 1
-        return '%s%s.%s%s' % ('-' if tpl.sign else '',
+        return '%s%s.%s%s' % ('-' if tpl.sign else '',  # pylint: disable=consider-using-f-string
                               '0' * diff,
                               ''.join(map(str, tpl.digits[:6])),
                               '0' * (6 - dgtlen))
@@ -114,12 +119,12 @@ def decimal_toascii(data: 'Decimal', infinite: 'Optional[str]' = None) -> str:
             buf_flt = str(digit) + buf_flt
         else:
             buf_int = str(digit) + buf_int
-    return '%s%s.%s%s' % ('-' if tpl.sign else '',
+    return '%s%s.%s%s' % ('-' if tpl.sign else '',  # pylint: disable=consider-using-f-string
                           buf_int, buf_flt[:6],
                           '0' * (6 - len(buf_flt)))
 
 
-def float_toascii(data: float, infinite: 'Optional[str]' = None) -> str:
+def float_toascii(data: 'float', infinite: 'Optional[str]' = None) -> 'str':
     """Convert :obj:`float` to ASCII.
 
     Args:
@@ -130,12 +135,16 @@ def float_toascii(data: float, infinite: 'Optional[str]' = None) -> str:
         The converted ASCII string.
 
     Example:
-        When converting a :obj:`float` number, for example::
+        When converting a :obj:`float` number, for example:
+
+        .. code-block:: python
 
             >>> f = -123.123456789
 
         the function will preserve only **6 digits** of its fractional part,
-        i.e.::
+        i.e.:
+
+        .. code-block:: python
 
             >>> float_toascii(f)
             '-123.123456'
@@ -154,13 +163,13 @@ def float_toascii(data: float, infinite: 'Optional[str]' = None) -> str:
             return str(data)
         return infinite
     int_part, flt_part = str(data).split('.')
-    return '%s.%s%s' % (int_part,
+    return '%s.%s%s' % (int_part,  # pylint: disable=consider-using-f-string
                         flt_part[:6],
                         '0' * (6 - len(flt_part)))
 
 
-def unicode_escape(string: bytes) -> str:
-    """Conterprocess of :meth:`bytes.decode('unicode_escape')`.
+def unicode_escape(string: 'bytes') -> 'str':
+    """Conterprocess of :meth:`bytes.decode('unicode_escape') <bytes.decode>`.
 
     Args:
         string: The bytestring to be escaped.
@@ -176,38 +185,34 @@ def unicode_escape(string: bytes) -> str:
         '\\\\x09'
 
     """
-    return ''.join(map(lambda s: '\\x%s' % s, textwrap.wrap(string.hex(), 2)))
+    return ''.join(map(lambda s: '\\x%s' % s, textwrap.wrap(string.hex(), 2)))  # pylint: disable=consider-using-f-string
 
 
-def expand_typing(cls: 'Union[Model, Type[Model], RecordType, Type[RecordType]]',
+def expand_typing(cls: 'Union[Model, Type[Model], _VariadicType, Type[_VariadicType]]',
                   exc: 'Optional[Type[ValueError]]' = None) -> 'ExpandedTyping':
     """Expand typing annotations.
 
     Args:
-        cls (:class:`~zlogging.model.Model` or :class:`~zlogging.types.RecordType` object):
-            a variadic class which supports `PEP 484`_ style attribute typing
+        cls: a variadic class which supports :pep:`484` style attribute typing
             annotations
-        exc: (:obj:`ValueError`, optional): exception to be used in case of
-            inconsistent values for ``unset_field``, ``empty_field``
-            and ``set_separator``
+        exc: exception to be used in case of inconsistent values for ``unset_field``,
+            ``empty_field`` and ``set_separator``
 
     Returns:
-        :obj:`Dict[str, Any]`: The returned dictionary contains the following directives:
+        The returned dictionary contains the following directives:
 
-            * ``fields`` (:obj:`OrderedDict` mapping :obj:`str` and :class:`~zlogging.types.BaseType`):
-                a mapping proxy of field names and their corresponding data
-                types, i.e. an instance of a :class:`~zlogging.types.BaseType`
-                subclass
+            * ``fields``: a mapping proxy of field names and their corresponding
+              data types, i.e. an instance of a :class:`~zlogging.types.BaseType`
+              subclass
 
-            * ``record_fields`` (:obj:`OrderedDict` mapping :obj:`str` and :class:`~zlogging.types.RecordType`):
-                a mapping proxy for fields of ``record`` data type, i.e. an
-                instance of :class:`~zlogging.types.RecordType`
+            * ``record_fields``: a mapping proxy for fields of ``record`` data type,
+              i.e. an instance of :class:`~zlogging.types.RecordType`
 
-            * ``unset_fields`` (:obj:`bytes`): placeholder for unset field
+            * ``unset_fields``: placeholder for unset field
 
-            * ``empty_fields`` (:obj:`bytes`): placeholder for empty field
+            * ``empty_fields``: placeholder for empty field
 
-            * ``set_separator`` (:obj:`bytes`): separator for ``set``/``vector`` fields
+            * ``set_separator``: separator for ``set``/``vector`` fields
 
     Warns:
         BroDeprecationWarning: Use of ``bro_*`` prefixed typing annotations.
@@ -219,15 +224,19 @@ def expand_typing(cls: 'Union[Model, Type[Model], RecordType, Type[RecordType]]'
     Example:
         Define a custom log data model from :class:`~zlogging.model.Model` using
         the prefines Bro/Zeek data types, or subclasses of
-        :class:`~zlogging.types.BaseType`::
+        :class:`~zlogging.types.BaseType`:
+
+        .. code-block:: python
 
             class MyLog(Model):
                 field_one = StringType()
                 field_two = SetType(element_type=PortType)
 
-        Or you may use type annotations as `PEP 484`_ introduced when declaring
+        Or you may use type annotations as :pep:`484` introduced when declaring
         data models. All available type hints can be found in
-        :mod:`zlogging.typing`::
+        :mod:`zlogging.typing`:
+
+        .. code-block:: python
 
             class MyLog(Model):
                 field_one: zeek_string
@@ -240,7 +249,9 @@ def expand_typing(cls: 'Union[Model, Type[Model], RecordType, Type[RecordType]]'
 
     Note:
         Fields of :class:`zlogging.types.RecordType` type will be expanded as
-        plain fields of the ``cls``, i.e. for the variadic class as below::
+        plain fields of the ``cls``, i.e. for the variadic class as below:
+
+        .. code-block:: python
 
             class MyLog(Model):
                 record = RecrodType(one=StringType(),
@@ -250,9 +261,6 @@ def expand_typing(cls: 'Union[Model, Type[Model], RecordType, Type[RecordType]]'
 
         * ``record.one`` -> ``string`` data type
         * ``record.two`` -> ``vector[count]`` data type
-
-    .. _PEP 484:
-        https://www.python.org/dev/peps/pep-0484/
 
     """
     from zlogging.types import (BaseType, _GenericType,  # pylint: disable=import-outside-toplevel
@@ -275,7 +283,7 @@ def expand_typing(cls: 'Union[Model, Type[Model], RecordType, Type[RecordType]]'
 
     fields = collections.OrderedDict()  # type: OrderedDict[str, Union[_SimpleType, _GenericType]]
     record_fields = collections.OrderedDict()  # type: OrderedDict[str, _VariadicType]
-    for name, attr in itertools.chain(getattr(cls, '__annotations__', dict()).items(), cls.__dict__.items()):
+    for name, attr in itertools.chain(getattr(cls, '__annotations__', {}).items(), cls.__dict__.items()):
         # type instances
         if isinstance(attr, BaseType):
             if isinstance(attr, _VariadicType):

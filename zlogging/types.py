@@ -12,18 +12,16 @@ import warnings
 from typing import TYPE_CHECKING, Any, Generic, List, Set, TypeVar, Union, cast, overload
 
 from mypy_extensions import TypedDict
-from typing_inspect import get_args, is_union_type
 
 from zlogging._aux import decimal_toascii, expand_typing, float_toascii
 from zlogging._compat import enum
 from zlogging._exc import (BroDeprecationWarning, ZeekNotImplemented, ZeekTypeError, ZeekValueError,
                            ZeekValueWarning)
-from zlogging.enum import globals as enum_generator  # type: ignore[attr-defined]
+from zlogging.enum import globals as enum_generator
 
-_T = TypeVar("_T")
+_T = TypeVar('_T')
 _S = TypeVar('_S', bound='_SimpleType')
-_Str = TypeVar('_Str', str, bytes)
-_Bool = TypeVar('_Bool', 'Literal[True]', 'Literal[False]')
+
 if TYPE_CHECKING:
     from collections import OrderedDict
     from ctypes import c_int64 as int64
@@ -32,24 +30,16 @@ if TYPE_CHECKING:
     from datetime import datetime as DateTimeType
     from datetime import timedelta as TimeDeltaType
     from decimal import Decimal
-    from enum import Enum as _Enum
     from ipaddress import IPv4Address, IPv4Network, IPv6Address, IPv6Network
     from json import JSONEncoder
-    from typing import Dict, NoReturn, Optional, Tuple, Type
+    from typing import NoReturn, Optional, Type
 
-    from aenum import Enum as _AEnum
     from typing_extensions import Literal
 
     AnyStr = Union[str, bytes]
     ByteString = Union[bytes, bytearray, memoryview]
     IPAddress = Union[IPv4Address, IPv6Address]
     IPNetwork = Union[IPv4Network, IPv6Network]
-
-    class Enum(_Enum, _AEnum):  # pylint: disable=duplicate-bases
-        def __init__(self, value: str, names: Union[str, List[str], List[Tuple[str, Any]], Dict[str, Any]], *,  # pylint: disable=unused-argument,super-init-not-called
-                     module: Optional[str] = None, qualname: Optional[str] = None,  # pylint: disable=unused-argument
-                     type: Optional[type] = None, start: Optional[int] = 1): ...  # pylint: disable=unused-argument,redefined-builtin
-        def __getitem__(self: '_T', name: str) -> '_T': ...  # pylint: disable=multiple-statements
 
 __all__ = [
     'AddrType', 'BoolType', 'CountType', 'DoubleType', 'EnumType',
@@ -62,39 +52,43 @@ class BaseType(metaclass=abc.ABCMeta):
     """Base Bro/Zeek data type.
 
     Args:
-        empty_field (:obj:`bytes` or :obj:`str`, optional): Placeholder for empty field.
-        unset_field (:obj:`bytes` or :obj:`str`, optional): Placeholder for unset field.
-        set_separator (:obj:`bytes` or :obj:`str`, optional): Separator for ``set``/``vector`` fields.
-        *args: Variable length argument list.
+        empty_field: Placeholder for empty field.
+        unset_field: Placeholder for unset field.
+        set_separator: Separator for ``set``/``vector`` fields.
+        *args: Arbitrary positional arguments.
         **kwargs: Arbitrary keyword arguments.
 
-    Attributes:
-        empty_field (bytes): Placeholder for empty field.
-        unset_field (bytes): Placeholder for unset field.
-        set_separator (bytes): Separator for ``set``/``vector`` fields.
-
     """
+    #: Placeholder for empty field.
+    empty_field: 'bytes'
+    str_empty_field: 'str'
+    #: Placeholder for unset field.
+    unset_field: 'bytes'
+    str_unset_field: 'str'
+    #: Separator for ``set``/``vector`` fields.
+    set_separator: 'bytes'
+    str_set_separator: 'str'
 
     @property
     @abc.abstractmethod
     def python_type(self) -> 'Any':
-        """Any: Corresponding Python type annotation."""
+        """Corresponding Python type annotation."""
 
     @property
     @abc.abstractmethod
-    def zeek_type(self) -> str:
-        """str: Corresponding Zeek type name."""
+    def zeek_type(self) -> 'str':
+        """Corresponding Zeek type name."""
 
     @property
-    def bro_type(self) -> str:
-        """str: Corresponding Bro type name."""
+    def bro_type(self) -> 'str':
+        """Corresponding Bro type name."""
         warnings.warn("Use of 'bro_type' is deprecated. "
                       "Please use 'zeek_type' instead.", BroDeprecationWarning)
         return self.zeek_type
 
     def __init__(self,   # pylint: disable=unused-argument,keyword-arg-before-vararg
                  empty_field: 'Optional[AnyStr]' = None, unset_field: 'Optional[AnyStr]' = None,
-                 set_separator: 'Optional[AnyStr]' = None, *args: 'Any', **kwargs: 'Any') -> None:
+                 set_separator: 'Optional[AnyStr]' = None, *args: 'Any', **kwargs: 'Any') -> 'None':
         if empty_field is None:
             self.empty_field = b'(empty)'
             self.str_empty_field = '(empty)'
@@ -138,11 +132,11 @@ class BaseType(metaclass=abc.ABCMeta):
             return data
         return self.parse(data)
 
-    def __str__(self) -> str:
+    def __str__(self) -> 'str':
         """Returns the corresponding Zeek type name."""
         return self.zeek_type
 
-    def __repr__(self) -> str:
+    def __repr__(self) -> 'str':
         return (f'{self._name}(empty_field={self.str_empty_field!r}, '
                 f'unset_field={self.str_unset_field!r}, set_separator={self.str_set_separator!r})')
 
@@ -155,7 +149,7 @@ class BaseType(metaclass=abc.ABCMeta):
         """Serialize ``data`` as JSON log format."""
 
     @abc.abstractmethod
-    def toascii(self, data: 'Any') -> str:
+    def toascii(self, data: 'Any') -> 'str':
         """Serialize ``data`` as ASCII log format."""
 
 
@@ -176,18 +170,13 @@ class AnyType(_SimpleType):
     """Bro/Zeek ``any`` data type.
 
     Args:
-        empty_field (:obj:`bytes` or :obj:`str`, optional): Placeholder for empty field.
-        unset_field (:obj:`bytes` or :obj:`str`, optional): Placeholder for unset field.
-        set_separator (:obj:`bytes` or :obj:`str`, optional): Separator for ``set``/``vector`` fields.
-        json_encoder (:class:`json.JSONEncoder` object, optional): JSON encoder class for
-            :meth:`~zlogging.types.AnyType.tojson` method calls.
-        *args: Variable length argument list.
+        empty_field: Placeholder for empty field.
+        unset_field: Placeholder for unset field.
+        set_separator: Separator for ``set``/``vector`` fields.
+        json_encoder: JSON encoder class for :meth:`~zlogging.types.AnyType.tojson`
+            method calls.
+        *args: Arbitrary positional arguments.
         **kwargs: Arbitrary keyword arguments.
-
-    Attributes:
-        empty_field (bytes): Placeholder for empty field.
-        unset_field (bytes): Placeholder for unset field.
-        set_separator (bytes): Separator for ``set``/``vector`` fields.
 
     Note:
         The :class:`~zlogging.types.AnyType` is only used for arbitrary typing
@@ -195,21 +184,23 @@ class AnyType(_SimpleType):
         valid type of Bro/Zeek logging framework.
 
     """
+    #: JSON encoder class for :meth:`~zlogging.types.AnyType.tojson` method calls.
+    json_encoder: 'Type[JSONEncoder]'
 
     @property
     def python_type(self) -> 'Any':
-        """Any: Corresponding Python type annotation."""
+        """Corresponding Python type annotation."""
         return Any
 
     @property
     def zeek_type(self) -> 'Literal["any"]':
-        """str: Corresponding Zeek type name."""
+        """Corresponding Zeek type name."""
         return 'any'
 
     def __init__(self,   # pylint: disable=unused-argument,keyword-arg-before-vararg
                  empty_field: 'Optional[AnyStr]' = None, unset_field: 'Optional[AnyStr]' = None,
                  set_separator: 'Optional[AnyStr]' = None, json_encoder: 'Optional[Type[JSONEncoder]]' = None,
-                 *args: 'Any', **kwargs: 'Any') -> None:
+                 *args: 'Any', **kwargs: 'Any') -> 'None':
         if json_encoder is None:
             json_encoder = json.JSONEncoder
         self.json_encoder = json_encoder
@@ -257,7 +248,7 @@ class AnyType(_SimpleType):
             }
         return data
 
-    def toascii(self, data: 'Any') -> str:
+    def toascii(self, data: 'Any') -> 'str':
         """Serialize ``data`` as ASCII log format.
 
         Args:
@@ -276,35 +267,33 @@ class BoolType(_SimpleType):
     """Bro/Zeek ``bool`` data type.
 
     Args:
-        empty_field (:obj:`bytes` or :obj:`str`, optional): Placeholder for empty field.
-        unset_field (:obj:`bytes` or :obj:`str`, optional): Placeholder for unset field.
-        set_separator (:obj:`bytes` or :obj:`str`, optional): Separator for ``set``/``vector`` fields.
-        *args: Variable length argument list.
+        empty_field: Placeholder for empty field.
+        unset_field: Placeholder for unset field.
+        set_separator: Separator for ``set``/``vector`` fields.
+        *args: Arbitrary positional arguments.
         **kwargs: Arbitrary keyword arguments.
-
-    Attributes:
-        empty_field (bytes): Placeholder for empty field.
-        unset_field (bytes): Placeholder for unset field.
-        set_separator (bytes): Separator for ``set``/``vector`` fields.
 
     """
 
     @property
     def python_type(self)-> 'Type[bool]':
-        """Any: Corresponding Python type annotation."""
+        """Corresponding Python type annotation."""
         return bool
 
     @property
     def zeek_type(self) -> 'Literal["bool"]':
-        """str: Corresponding Zeek type name."""
+        """Corresponding Zeek type name."""
         return 'bool'
 
     @overload
     def parse(self, data: 'Literal["T", b"T"]') -> 'Literal[True]': ...
+
     @overload
     def parse(self, data: 'Literal["F", b"F"]') -> 'Literal[False]': ...
+
     @overload
-    def parse(self, data: '_Str') -> 'Optional[bool]': ...
+    def parse(self, data: 'AnyStr') -> 'Optional[bool]': ...
+
     def parse(self, data: 'Union[AnyStr, bool]') -> 'Optional[bool]':
         """Parse ``data`` from string.
 
@@ -331,12 +320,17 @@ class BoolType(_SimpleType):
             return True
         if data == b'F':
             return False
-        raise ZeekValueError('invalid bool value: %s' % data.decode('ascii'))
+        raise ZeekValueError('invalid bool value: %s' % data.decode('ascii'))  # pylint: disable=consider-using-f-string
 
     @overload
-    def tojson(self, data: _Bool) -> _Bool: ...
+    def tojson(self, data: 'Literal[True]') -> 'Literal[True]': ...
+
     @overload
-    def tojson(self, data: None) -> None: ...
+    def tojson(self, data: 'Literal[False]') -> 'Literal[False]': ...
+
+    @overload
+    def tojson(self, data: 'None') -> 'None': ...
+
     def tojson(self, data: 'Optional[bool]') -> 'Optional[bool]':
         """Serialize ``data`` as JSON log format.
 
@@ -351,11 +345,14 @@ class BoolType(_SimpleType):
 
     @overload
     def toascii(self, data: 'Literal[True]') -> 'Literal["T"]': ...
+
     @overload
     def toascii(self, data: 'Literal[False]') -> 'Literal["F"]': ...
+
     @overload
-    def toascii(self, data: None) -> str: ...
-    def toascii(self, data: 'Optional[bool]') -> str:
+    def toascii(self, data: 'None') -> 'str': ...
+
+    def toascii(self, data: 'Optional[bool]') -> 'str':
         """Serialize ``data`` as ASCII log format.
 
         Args:
@@ -374,34 +371,34 @@ class CountType(_SimpleType):
     """Bro/Zeek ``count`` data type.
 
     Args:
-        empty_field (:obj:`bytes` or :obj:`str`, optional): Placeholder for empty field.
-        unset_field (:obj:`bytes` or :obj:`str`, optional): Placeholder for unset field.
-        set_separator (:obj:`bytes` or :obj:`str`, optional): Separator for ``set``/``vector`` fields.
-        *args: Variable length argument list.
+        empty_field: Placeholder for empty field.
+        unset_field: Placeholder for unset field.
+        set_separator: Separator for ``set``/``vector`` fields.
+        *args: Arbitrary positional arguments.
         **kwargs: Arbitrary keyword arguments.
-
-    Attributes:
-        empty_field (bytes): Placeholder for empty field.
-        unset_field (bytes): Placeholder for unset field.
-        set_separator (bytes): Separator for ``set``/``vector`` fields.
 
     """
 
     @property
     def python_type(self) -> 'Type[uint64]':
-        """Any: Corresponding Python type annotation."""
+        """Corresponding Python type annotation."""
         return ctypes.c_uint64
 
     @property
     def zeek_type(self) -> 'Literal["count"]':
-        """str: Corresponding Zeek type name."""
+        """Corresponding Zeek type name."""
         return 'count'
 
     @overload
     def parse(self, data: 'AnyStr') -> 'Optional[uint64]': ...
+
+    @overload
+    def parse(self, data: 'int') -> 'uint64': ...
+
     @overload
     def parse(self, data: 'uint64') -> 'uint64': ...
-    def parse(self, data: 'Union[AnyStr, uint64]') -> 'Optional[uint64]':
+
+    def parse(self, data: 'Union[AnyStr, int, uint64]') -> 'Optional[uint64]':
         """Parse ``data`` from string.
 
         Args:
@@ -414,6 +411,8 @@ class CountType(_SimpleType):
         """
         if isinstance(data, ctypes.c_uint64):
             return data
+        if isinstance(data, int):
+            return ctypes.c_uint64(data)
         if isinstance(data, str):
             data = data.encode('ascii')
 
@@ -422,9 +421,11 @@ class CountType(_SimpleType):
         return ctypes.c_uint64(int(data))
 
     @overload
-    def tojson(self, data: 'uint64') -> int: ...
+    def tojson(self, data: 'uint64') -> 'int': ...
+
     @overload
-    def tojson(self, data: None) -> None: ...
+    def tojson(self, data: 'None') -> 'None': ...
+
     def tojson(self, data: 'Optional[uint64]') -> 'Optional[int]':
         """Serialize ``data`` as JSON log format.
 
@@ -439,7 +440,7 @@ class CountType(_SimpleType):
             return None
         return data.value
 
-    def toascii(self, data: 'Optional[uint64]') -> str:
+    def toascii(self, data: 'Optional[uint64]') -> 'str':
         """Serialize ``data`` as ASCII log format.
 
         Args:
@@ -458,34 +459,34 @@ class IntType(_SimpleType):
     """Bro/Zeek ``int`` data type.
 
     Args:
-        empty_field (:obj:`bytes` or :obj:`str`, optional): Placeholder for empty field.
-        unset_field (:obj:`bytes` or :obj:`str`, optional): Placeholder for unset field.
-        set_separator (:obj:`bytes` or :obj:`str`, optional): Separator for ``set``/``vector`` fields.
-        *args: Variable length argument list.
+        empty_field: Placeholder for empty field.
+        unset_field: Placeholder for unset field.
+        set_separator: Separator for ``set``/``vector`` fields.
+        *args: Arbitrary positional arguments.
         **kwargs: Arbitrary keyword arguments.
-
-    Attributes:
-        empty_field (bytes): Placeholder for empty field.
-        unset_field (bytes): Placeholder for unset field.
-        set_separator (bytes): Separator for ``set``/``vector`` fields.
 
     """
 
     @property
     def python_type(self) -> 'Type[int64]':
-        """Any: Corresponding Python type annotation."""
+        """Corresponding Python type annotation."""
         return ctypes.c_int64
 
     @property
     def zeek_type(self) -> 'Literal["int"]':
-        """str: Corresponding Zeek type name."""
+        """Corresponding Zeek type name."""
         return 'int'
 
     @overload
     def parse(self, data: 'AnyStr') -> 'Optional[int64]': ...
+
+    @overload
+    def parse(self, data: 'int') -> 'int64': ...
+
     @overload
     def parse(self, data: 'int64') -> 'int64': ...
-    def parse(self, data: 'Union[AnyStr, int64]') -> 'Optional[int64]':
+
+    def parse(self, data: 'Union[AnyStr, int, int64]') -> 'Optional[int64]':
         """Parse ``data`` from string.
 
         Args:
@@ -498,6 +499,8 @@ class IntType(_SimpleType):
         """
         if isinstance(data, ctypes.c_int64):
             return data
+        if isinstance(data, int):
+            return ctypes.c_int64(data)
         if isinstance(data, str):
             data = data.encode('ascii')
 
@@ -506,9 +509,11 @@ class IntType(_SimpleType):
         return ctypes.c_int64(int(data))
 
     @overload
-    def tojson(self, data: 'int64') -> int: ...
+    def tojson(self, data: 'int64') -> 'int': ...
+
     @overload
-    def tojson(self, data: None) -> None: ...
+    def tojson(self, data: 'None') -> 'None': ...
+
     def tojson(self, data: 'Optional[int64]') -> 'Optional[int]':
         """Serialize ``data`` as JSON log format.
 
@@ -523,7 +528,7 @@ class IntType(_SimpleType):
             return None
         return data.value
 
-    def toascii(self, data: 'Optional[int64]') -> str:
+    def toascii(self, data: 'Optional[int64]') -> 'str':
         """Serialize ``data`` as ASCII log format.
 
         Args:
@@ -542,34 +547,34 @@ class DoubleType(_SimpleType):
     """Bro/Zeek ``double`` data type.
 
     Args:
-        empty_field (:obj:`bytes` or :obj:`str`, optional): Placeholder for empty field.
-        unset_field (:obj:`bytes` or :obj:`str`, optional): Placeholder for unset field.
-        set_separator (:obj:`bytes` or :obj:`str`, optional): Separator for ``set``/``vector`` fields.
-        *args: Variable length argument list.
+        empty_field: Placeholder for empty field.
+        unset_field: Placeholder for unset field.
+        set_separator: Separator for ``set``/``vector`` fields.
+        *args: Arbitrary positional arguments.
         **kwargs: Arbitrary keyword arguments.
-
-    Attributes:
-        empty_field (bytes): Placeholder for empty field.
-        unset_field (bytes): Placeholder for unset field.
-        set_separator (bytes): Separator for ``set``/``vector`` fields.
 
     """
 
     @property
     def python_type(self) -> 'Type[Decimal]':
-        """Any: Corresponding Python type annotation."""
+        """Corresponding Python type annotation."""
         return decimal.Decimal
 
     @property
     def zeek_type(self) -> 'Literal["double"]':
-        """str: Corresponding Zeek type name."""
+        """Corresponding Zeek type name."""
         return 'double'
 
     @overload
     def parse(self, data: 'AnyStr') -> 'Optional[Decimal]': ...
+
+    @overload
+    def parse(self, data: 'Union[int, float]') -> 'Decimal': ...
+
     @overload
     def parse(self, data: 'Decimal') -> 'Decimal': ...
-    def parse(self, data: 'Union[AnyStr, Decimal]') -> 'Optional[Decimal]':
+
+    def parse(self, data: 'Union[AnyStr, int, float, Decimal]') -> 'Optional[Decimal]':
         """Parse ``data`` from string.
 
         Args:
@@ -582,6 +587,10 @@ class DoubleType(_SimpleType):
         """
         if isinstance(data, decimal.Decimal):
             return data
+        if isinstance(data, (int, float)):
+            with decimal.localcontext() as ctx:
+                value = decimal.Decimal(data)
+            return value
         if isinstance(data, str):
             data = data.encode('ascii')
 
@@ -593,9 +602,11 @@ class DoubleType(_SimpleType):
         return value
 
     @overload
-    def tojson(self, data: 'Decimal') -> float: ...
+    def tojson(self, data: 'Decimal') -> 'float': ...
+
     @overload
-    def tojson(self, data: None) -> None: ...
+    def tojson(self, data: 'None') -> 'None': ...
+
     def tojson(self, data: 'Optional[Decimal]') -> 'Optional[float]':
         """Serialize ``data`` as JSON log format.
 
@@ -610,7 +621,7 @@ class DoubleType(_SimpleType):
             return None
         return float(data)
 
-    def toascii(self, data: 'Optional[Decimal]') -> str:
+    def toascii(self, data: 'Optional[Decimal]') -> 'str':
         """Serialize ``data`` as ASCII log format.
 
         Args:
@@ -629,16 +640,11 @@ class TimeType(_SimpleType):
     """Bro/Zeek ``time`` data type.
 
     Args:
-        empty_field (:obj:`bytes` or :obj:`str`, optional): Placeholder for empty field.
-        unset_field (:obj:`bytes` or :obj:`str`, optional): Placeholder for unset field.
-        set_separator (:obj:`bytes` or :obj:`str`, optional): Separator for ``set``/``vector`` fields.
-        *args: Variable length argument list.
+        empty_field: Placeholder for empty field.
+        unset_field: Placeholder for unset field.
+        set_separator: Separator for ``set``/``vector`` fields.
+        *args: Arbitrary positional arguments.
         **kwargs: Arbitrary keyword arguments.
-
-    Attributes:
-        empty_field (bytes): Placeholder for empty field.
-        unset_field (bytes): Placeholder for unset field.
-        set_separator (bytes): Separator for ``set``/``vector`` fields.
 
     """
 
@@ -654,9 +660,14 @@ class TimeType(_SimpleType):
 
     @overload
     def parse(self, data: 'AnyStr') -> 'Optional[DateTimeType]': ...
+
+    @overload
+    def parse(self, data: 'float') -> 'DateTimeType': ...
+
     @overload
     def parse(self, data: 'DateTimeType') -> 'DateTimeType': ...
-    def parse(self, data: 'Union[AnyStr, DateTimeType]') -> 'Optional[DateTimeType]':
+
+    def parse(self, data: 'Union[AnyStr, float, DateTimeType]') -> 'Optional[DateTimeType]':
         """Parse ``data`` from string.
 
         Args:
@@ -669,6 +680,8 @@ class TimeType(_SimpleType):
         """
         if isinstance(data, datetime.datetime):
             return data
+        if isinstance(data, float):
+            return datetime.datetime.fromtimestamp(data)
         if isinstance(data, str):
             data = data.encode('ascii')
 
@@ -680,9 +693,11 @@ class TimeType(_SimpleType):
         return datetime.datetime.fromtimestamp(float(value))
 
     @overload
-    def tojson(self, data: 'DateTimeType') -> float: ...
+    def tojson(self, data: 'DateTimeType') -> 'float': ...
+
     @overload
-    def tojson(self, data: None) -> None: ...
+    def tojson(self, data: 'None') -> 'None': ...
+
     def tojson(self, data: 'Optional[DateTimeType]') -> 'Optional[float]':
         """Serialize ``data`` as JSON log format.
 
@@ -697,7 +712,7 @@ class TimeType(_SimpleType):
             return None
         return data.timestamp()
 
-    def toascii(self, data: 'Optional[DateTimeType]') -> str:
+    def toascii(self, data: 'Optional[DateTimeType]') -> 'str':
         """Serialize ``data`` as ASCII log format.
 
         Args:
@@ -716,10 +731,10 @@ class IntervalType(_SimpleType):
     """Bro/Zeek ``interval`` data type.
 
     Args:
-        empty_field (:obj:`bytes` or :obj:`str`, optional): Placeholder for empty field.
-        unset_field (:obj:`bytes` or :obj:`str`, optional): Placeholder for unset field.
-        set_separator (:obj:`bytes` or :obj:`str`, optional): Separator for ``set``/``vector`` fields.
-        *args: Variable length argument list.
+        empty_field: Placeholder for empty field.
+        unset_field: Placeholder for unset field.
+        set_separator: Separator for ``set``/``vector`` fields.
+        *args: Arbitrary positional arguments.
         **kwargs: Arbitrary keyword arguments.
 
     Attributes:
@@ -741,9 +756,14 @@ class IntervalType(_SimpleType):
 
     @overload
     def parse(self, data: 'AnyStr') -> 'Optional[TimeDeltaType]': ...
+
+    @overload
+    def parse(self, data: 'float') -> 'TimeDeltaType': ...
+
     @overload
     def parse(self, data: 'TimeDeltaType') -> 'TimeDeltaType': ...
-    def parse(self, data: 'Union[AnyStr, TimeDeltaType]') -> 'Optional[TimeDeltaType]':
+
+    def parse(self, data: 'Union[AnyStr, float, TimeDeltaType]') -> 'Optional[TimeDeltaType]':
         """Parse ``data`` from string.
 
         Args:
@@ -756,6 +776,8 @@ class IntervalType(_SimpleType):
         """
         if isinstance(data, datetime.timedelta):
             return data
+        if isinstance(data, float):
+            data = str(data)  # process as string
         if isinstance(data, str):
             data = data.encode('ascii')
 
@@ -772,9 +794,11 @@ class IntervalType(_SimpleType):
                                   microseconds=int(flt_part[3:]))
 
     @overload
-    def tojson(self, data: 'TimeDeltaType') -> float: ...
+    def tojson(self, data: 'TimeDeltaType') -> 'float': ...
+
     @overload
-    def tojson(self, data: None) -> None: ...
+    def tojson(self, data: 'None') -> 'None': ...
+
     def tojson(self, data: 'Optional[TimeDeltaType]') -> 'Optional[float]':
         """Serialize ``data`` as JSON log format.
 
@@ -789,7 +813,7 @@ class IntervalType(_SimpleType):
             return None
         return data.total_seconds()
 
-    def toascii(self, data: 'Optional[TimeDeltaType]') -> str:
+    def toascii(self, data: 'Optional[TimeDeltaType]') -> 'str':
         """Serialize ``data`` as ASCII log format.
 
         Args:
@@ -808,16 +832,11 @@ class StringType(_SimpleType):
     """Bro/Zeek ``string`` data type.
 
     Args:
-        empty_field (:obj:`bytes` or :obj:`str`, optional): Placeholder for empty field.
-        unset_field (:obj:`bytes` or :obj:`str`, optional): Placeholder for unset field.
-        set_separator (:obj:`bytes` or :obj:`str`, optional): Separator for ``set``/``vector`` fields.
-        *args: Variable length argument list.
+        empty_field: Placeholder for empty field.
+        unset_field: Placeholder for unset field.
+        set_separator: Separator for ``set``/``vector`` fields.
+        *args: Arbitrary positional arguments.
         **kwargs: Arbitrary keyword arguments.
-
-    Attributes:
-        empty_field (bytes): Placeholder for empty field.
-        unset_field (bytes): Placeholder for unset field.
-        set_separator (bytes): Separator for ``set``/``vector`` fields.
 
     """
 
@@ -856,9 +875,11 @@ class StringType(_SimpleType):
         return data
 
     @overload
-    def tojson(self, data: 'ByteString') -> str: ...
+    def tojson(self, data: 'ByteString') -> 'str': ...
+
     @overload
-    def tojson(self, data: None) -> None: ...
+    def tojson(self, data: 'None') -> 'None': ...
+
     def tojson(self, data: 'Optional[ByteString]') -> 'Optional[str]':
         """Serialize ``data`` as JSON log format.
 
@@ -878,7 +899,7 @@ class StringType(_SimpleType):
             data = data.tobytes()
         return data.decode('ascii')
 
-    def toascii(self, data: 'Optional[ByteString]') -> str:
+    def toascii(self, data: 'Optional[ByteString]') -> 'str':
         """Serialize ``data`` as ASCII log format.
 
         Args:
@@ -905,16 +926,11 @@ class AddrType(_SimpleType):
     """Bro/Zeek ``addr`` data type.
 
     Args:
-        empty_field (:obj:`bytes` or :obj:`str`, optional): Placeholder for empty field.
-        unset_field (:obj:`bytes` or :obj:`str`, optional): Placeholder for unset field.
-        set_separator (:obj:`bytes` or :obj:`str`, optional): Separator for ``set``/``vector`` fields.
-        *args: Variable length argument list.
+        empty_field: Placeholder for empty field.
+        unset_field: Placeholder for unset field.
+        set_separator: Separator for ``set``/``vector`` fields.
+        *args: Arbitrary positional arguments.
         **kwargs: Arbitrary keyword arguments.
-
-    Attributes:
-        empty_field (bytes): Placeholder for empty field.
-        unset_field (bytes): Placeholder for unset field.
-        set_separator (bytes): Separator for ``set``/``vector`` fields.
 
     """
 
@@ -924,14 +940,16 @@ class AddrType(_SimpleType):
         return Union[ipaddress.IPv4Address, ipaddress.IPv6Address]
 
     @property
-    def zeek_type(self) -> str:
+    def zeek_type(self) -> 'str':
         """str: Corresponding Zeek type name."""
         return 'addr'
 
     @overload
     def parse(self, data: 'AnyStr') -> 'Optional[IPAddress]': ...
+
     @overload
     def parse(self, data: 'IPAddress') -> 'IPAddress': ...
+
     def parse(self, data: 'Union[AnyStr, IPAddress]') -> 'Optional[IPAddress]':
         """Parse ``data`` from string.
 
@@ -953,9 +971,11 @@ class AddrType(_SimpleType):
         return ipaddress.ip_address(data.decode('ascii'))
 
     @overload
-    def tojson(self, data: 'IPAddress') -> str: ...
+    def tojson(self, data: 'IPAddress') -> 'str': ...
+
     @overload
-    def tojson(self, data: None) -> None: ...
+    def tojson(self, data: 'None') -> 'None': ...
+
     def tojson(self, data: 'Optional[IPAddress]') -> 'Optional[str]':
         """Serialize ``data`` as JSON log format.
 
@@ -970,7 +990,7 @@ class AddrType(_SimpleType):
             return None
         return str(data)
 
-    def toascii(self, data: 'Optional[IPAddress]') -> str:
+    def toascii(self, data: 'Optional[IPAddress]') -> 'str':
         """Serialize ``data`` as ASCII log format.
 
         Args:
@@ -989,16 +1009,11 @@ class PortType(_SimpleType):
     """Bro/Zeek ``port`` data type.
 
     Args:
-        empty_field (:obj:`bytes` or :obj:`str`, optional): Placeholder for empty field.
-        unset_field (:obj:`bytes` or :obj:`str`, optional): Placeholder for unset field.
-        set_separator (:obj:`bytes` or :obj:`str`, optional): Separator for ``set``/``vector`` fields.
-        *args: Variable length argument list.
+        empty_field: Placeholder for empty field.
+        unset_field: Placeholder for unset field.
+        set_separator: Separator for ``set``/``vector`` fields.
+        *args: Arbitrary positional arguments.
         **kwargs: Arbitrary keyword arguments.
-
-    Attributes:
-        empty_field (bytes): Placeholder for empty field.
-        unset_field (bytes): Placeholder for unset field.
-        set_separator (bytes): Separator for ``set``/``vector`` fields.
 
     """
 
@@ -1014,9 +1029,14 @@ class PortType(_SimpleType):
 
     @overload
     def parse(self, data: 'AnyStr') -> 'Optional[uint16]': ...
+
+    @overload
+    def parse(self, data: 'int') -> 'uint16': ...
+
     @overload
     def parse(self, data: 'uint16') -> 'uint16': ...
-    def parse(self, data: 'Union[AnyStr, uint16]') -> 'Optional[uint16]':
+
+    def parse(self, data: 'Union[AnyStr, int, uint16]') -> 'Optional[uint16]':
         """Parse ``data`` from string.
 
         Args:
@@ -1029,6 +1049,8 @@ class PortType(_SimpleType):
         """
         if isinstance(data, ctypes.c_uint16):
             return data
+        if isinstance(data, int):
+            return ctypes.c_uint16(data)
         if isinstance(data, str):
             data = data.encode('ascii')
 
@@ -1037,9 +1059,11 @@ class PortType(_SimpleType):
         return ctypes.c_uint16(int(data))
 
     @overload
-    def tojson(self, data: 'uint16') -> int: ...
+    def tojson(self, data: 'uint16') -> 'int': ...
+
     @overload
-    def tojson(self, data: None) -> None: ...
+    def tojson(self, data: 'None') -> 'None': ...
+
     def tojson(self, data: 'Optional[uint16]') -> 'Optional[int]':
         """Serialize ``data`` as JSON log format.
 
@@ -1054,7 +1078,7 @@ class PortType(_SimpleType):
             return None
         return data.value
 
-    def toascii(self, data: 'Optional[uint16]') -> str:
+    def toascii(self, data: 'Optional[uint16]') -> 'str':
         """Serialize ``data`` as ASCII log format.
 
         Args:
@@ -1073,16 +1097,11 @@ class SubnetType(_SimpleType):
     """Bro/Zeek ``subnet`` data type.
 
     Args:
-        empty_field (:obj:`bytes` or :obj:`str`, optional): Placeholder for empty field.
-        unset_field (:obj:`bytes` or :obj:`str`, optional): Placeholder for unset field.
-        set_separator (:obj:`bytes` or :obj:`str`, optional): Separator for ``set``/``vector`` fields.
-        *args: Variable length argument list.
+        empty_field: Placeholder for empty field.
+        unset_field: Placeholder for unset field.
+        set_separator: Separator for ``set``/``vector`` fields.
+        *args: Arbitrary positional arguments.
         **kwargs: Arbitrary keyword arguments.
-
-    Attributes:
-        empty_field (bytes): Placeholder for empty field.
-        unset_field (bytes): Placeholder for unset field.
-        set_separator (bytes): Separator for ``set``/``vector`` fields.
 
     """
 
@@ -1098,8 +1117,10 @@ class SubnetType(_SimpleType):
 
     @overload
     def parse(self, data: 'AnyStr') -> 'Optional[IPNetwork]': ...
+
     @overload
     def parse(self, data: 'IPNetwork') -> 'IPNetwork': ...
+
     def parse(self, data: 'Union[AnyStr, IPNetwork]') -> 'Optional[IPNetwork]':
         """Parse ``data`` from string.
 
@@ -1121,9 +1142,11 @@ class SubnetType(_SimpleType):
         return ipaddress.ip_network(data.decode('ascii'))
 
     @overload
-    def tojson(self, data: 'IPNetwork') -> str: ...
+    def tojson(self, data: 'IPNetwork') -> 'str': ...
+
     @overload
-    def tojson(self, data: None) -> None: ...
+    def tojson(self, data: 'None') -> 'None': ...
+
     def tojson(self, data: 'Optional[IPNetwork]') -> 'Optional[str]':
         """Serialize ``data`` as JSON log format.
 
@@ -1138,7 +1161,7 @@ class SubnetType(_SimpleType):
             return None
         return str(data)
 
-    def toascii(self, data: 'Optional[IPNetwork]') -> str:
+    def toascii(self, data: 'Optional[IPNetwork]') -> 'str':
         """Serialize ``data`` as ASCII log format.
 
         Args:
@@ -1157,24 +1180,18 @@ class EnumType(_SimpleType):
     """Bro/Zeek ``enum`` data type.
 
     Args:
-        empty_field (:obj:`bytes` or :obj:`str`, optional): Placeholder for empty field.
-        unset_field (:obj:`bytes` or :obj:`str`, optional): Placeholder for unset field.
-        set_separator (:obj:`bytes` or :obj:`str`, optional): Separator for ``set``/``vector`` fields.
-        namespaces (:obj:`List[str]`, optional): Namespaces to be loaded.
-        bare (:obj:`bool`, optional): If :data:`True`, do not load ``zeek`` namespace by default.
-        enum_hook (:obj:`dict` mapping of :obj:`str` and :obj:`enum.Enum`, optional):
-            Additional enum to be included in the namespace.
-        *args: Variable length argument list.
+        empty_field: Placeholder for empty field.
+        unset_field: Placeholder for unset field.
+        set_separator: Separator for ``set``/``vector`` fields.
+        namespaces: Namespaces to be loaded.
+        bare: If :data:`True`, do not load ``zeek`` namespace by default.
+        enum_hook: Additional enum to be included in the namespace.
+        *args: Arbitrary positional arguments.
         **kwargs: Arbitrary keyword arguments.
 
-    Attributes:
-        empty_field (bytes): Placeholder for empty field.
-        unset_field (bytes): Placeholder for unset field.
-        set_separator (bytes): Separator for ``set``/``vector`` fields.
-        enum_namespaces (:obj:`dict` mapping :obj:`str` and :obj:`enum.Enum`):
-            Global namespace for ``enum`` data type.
-
     """
+    #: Namespaces to be loaded.
+    enum_namespaces: 'dict[str, enum.Enum]'
 
     @property
     def python_type(self) -> 'Any':
@@ -1182,7 +1199,7 @@ class EnumType(_SimpleType):
         return enum.Enum
 
     @property
-    def zeek_type(self) -> str:
+    def zeek_type(self) -> 'str':
         """str: Corresponding Zeek type name."""
         return 'enum'
 
@@ -1190,27 +1207,29 @@ class EnumType(_SimpleType):
                  empty_field: 'Optional[AnyStr]' = None,
                  unset_field: 'Optional[AnyStr]' = None,
                  set_separator: 'Optional[AnyStr]' = None,
-                 namespaces: 'Optional[List[str]]' = None,
+                 namespaces: 'Optional[list[str]]' = None,
                  bare: bool = False,
-                 enum_hook: 'Optional[Dict[str, Enum]]' = None,
-                 *args: 'Any', **kwargs: 'Any') -> None:
+                 enum_hook: 'Optional[dict[str, enum.Enum]]' = None,
+                 *args: 'Any', **kwargs: 'Any') -> 'None':
         super().__init__(empty_field=empty_field, unset_field=unset_field, set_separator=set_separator)
 
         if namespaces is None:
-            namespaces = list()
+            namespaces = []
         self.enum_namespaces = enum_generator(*namespaces, bare=bare)
         if enum_hook is not None:
             self.enum_namespaces.update(enum_hook)
 
-    def __repr__(self) -> str:
+    def __repr__(self) -> 'str':
         return (f'{self._name}(empty_field={self.str_empty_field!r}, unset_field={self.str_unset_field!r}, '
                 f'set_separator={self.str_set_separator!r}, enum_namespaces={self.enum_namespaces!r})')
 
     @overload
-    def parse(self, data: 'AnyStr') -> 'Optional[Enum]': ...  # type: ignore[misc]
+    def parse(self, data: 'AnyStr') -> 'Optional[enum.Enum]': ...
+
     @overload
-    def parse(self, data: 'Enum') -> 'Enum': ...
-    def parse(self, data: 'Union[AnyStr, Enum]') -> 'Optional[Enum]':
+    def parse(self, data: 'enum.Enum') -> 'enum.Enum': ...
+
+    def parse(self, data: 'Union[AnyStr, enum.Enum]') -> 'Optional[enum.Enum]':
         """Parse ``data`` from string.
 
         Args:
@@ -1235,18 +1254,20 @@ class EnumType(_SimpleType):
 
         item = self.enum_namespaces.get(data_str)
         if item is None:
-            warnings.warn('unrecognised enum value: %s' % data_str, ZeekValueWarning)
-            unknown = cast('Type[Enum]', enum.IntFlag)('<unknown>', {
+            warnings.warn('unrecognised enum value: %s' % data_str, ZeekValueWarning)  # pylint: disable=consider-using-f-string
+            unknown = enum.IntFlag('<unknown>', {
                 data_str: enum.auto(),
             }, module='zlogging.enum', qualname='zlogging.enum.<unknown>')
-            item = unknown[data_str]
+            item = getattr(unknown, data_str)
         return item
 
     @overload
-    def tojson(self, data: 'Enum') -> str: ...
+    def tojson(self, data: 'enum.Enum') -> 'str': ...
+
     @overload
-    def tojson(self, data: None) -> None: ...
-    def tojson(self, data: 'Optional[Enum]') -> 'Optional[str]':
+    def tojson(self, data: 'None') -> 'None': ...  # type: ignore[misc]
+
+    def tojson(self, data: 'Optional[enum.Enum]') -> 'Optional[str]':
         """Serialize ``data`` as JSON log format.
 
         Args:
@@ -1260,7 +1281,7 @@ class EnumType(_SimpleType):
             return None
         return data.name
 
-    def toascii(self, data: 'Optional[Enum]') -> str:
+    def toascii(self, data: 'Optional[enum.Enum]') -> 'str':
         """Serialize ``data`` as ASCII log format.
 
         Args:
@@ -1275,31 +1296,27 @@ class EnumType(_SimpleType):
         return data.name
 
 
-class _GenericType(BaseType):  # pylint: disable=abstract-method
+class _GenericType(BaseType, Generic[_S]):  # pylint: disable=abstract-method
     """Generic data type.
 
     In Bro/Zeek script language, such generic type includes ``set`` and
     ``vector``, which are also known as *container* types.
 
     """
+    #: Data type of container's elements.
+    element_type: '_S'
 
 
 class SetType(_GenericType, Generic[_S]):
     """Bro/Zeek ``set`` data type.
 
     Args:
-        empty_field (:obj:`bytes` or :obj:`str`, optional): Placeholder for empty field.
-        unset_field (:obj:`bytes` or :obj:`str`, optional): Placeholder for unset field.
-        set_separator (:obj:`bytes` or :obj:`str`, optional): Separator for ``set``/``vector`` fields.
-        element_type (:class:`~zlogging.types.BaseType` instance): Data type of container's elements.
-        *args: Variable length argument list.
+        empty_field: Placeholder for empty field.
+        unset_field: Placeholder for unset field.
+        set_separator: Separator for ``set``/``vector`` fields.
+        element_type: Data type of container's elements.
+        *args: Arbitrary positional arguments.
         **kwargs: Arbitrary keyword arguments.
-
-    Attributes:
-        empty_field (bytes): Placeholder for empty field.
-        unset_field (bytes): Placeholder for unset field.
-        set_separator (bytes): Separator for ``set``/``vector`` fields.
-        element_type (:class:`~zlogging.types.BaseType` instance): Data type of container's elements.
 
     Raises:
         :exc:`ZeekTypeError`: If ``element_type`` is not supplied.
@@ -1307,11 +1324,15 @@ class SetType(_GenericType, Generic[_S]):
 
     Example:
         As a *generic* data type, the class supports the typing proxy as introduced
-        `PEP 484`_::
+        :pep:`484`:
+
+        .. code-block:: python
 
             >>> SetType[StringType]
 
-        which is the same **at runtime** as following::
+        which is the same **at runtime** as following:
+
+        .. code-block:: python
 
             >>> SetType(element_type=StringType())
 
@@ -1319,33 +1340,25 @@ class SetType(_GenericType, Generic[_S]):
         A valid ``element_type`` should be a *simple* data type, i.e. a subclass
         of :class:`~zlogging.types._SimpleType`.
 
-    .. _PEP 484:
-        https://www.python.org/dev/peps/pep-0484/
-
     """
 
     @property
     def python_type(self) -> 'Any':
         """Any: Corresponding Python type annotation."""
         python_type = self.element_type.python_type
-        is_union = is_union_type(python_type)
-        if is_union:
-            args = get_args(python_type)  # type: Tuple[Any]
-            sets = tuple(Set[arg] for arg in args)  # type: ignore[valid-type]
-            return Union[sets]
         return Set[python_type]  # type: ignore[valid-type]
 
     @property
-    def zeek_type(self) -> str:
+    def zeek_type(self) -> 'str':
         """str: Corresponding Zeek type name."""
-        return 'set[%s]' % self.element_type.zeek_type
+        return 'set[%s]' % self.element_type.zeek_type  # pylint: disable=consider-using-f-string
 
     def __init__(self,  # pylint: disable=unused-argument,keyword-arg-before-vararg
                  empty_field: 'Optional[AnyStr]' = None,
                  unset_field: 'Optional[AnyStr]' = None,
                  set_separator: 'Optional[AnyStr]' = None,
                  element_type: 'Optional[Union[_S, Type[_S]]]' = None,
-                 *args: 'Any', **kwargs: 'Any') -> None:
+                 *args: 'Any', **kwargs: 'Any') -> 'None':
         super().__init__(empty_field=empty_field, unset_field=unset_field, set_separator=set_separator)
 
         if element_type is None:
@@ -1354,18 +1367,20 @@ class SetType(_GenericType, Generic[_S]):
             if isinstance(element_type, type) and issubclass(element_type, _SimpleType):
                 element_type = element_type(empty_field=empty_field, unset_field=unset_field, set_separator=set_separator)  # pylint: disable=line-too-long
             else:
-                raise ZeekValueError('invalid element type: %s' % type(element_type).__name__)
-        self.element_type = element_type
+                raise ZeekValueError('invalid element type: %s' % type(element_type).__name__)  # pylint: disable=consider-using-f-string
+        self.element_type = cast('_S', element_type)
 
-    def __repr__(self) -> str:
+    def __repr__(self) -> 'str':
         return (f'{self._name}(empty_field={self.str_empty_field}, unset_field={self.str_unset_field}, '
                 f'set_separator={self.str_set_separator}, element_type={self.element_type})')
 
     @overload
-    def parse(self, data: 'AnyStr') -> 'Optional[Set[_S]]': ...
+    def parse(self, data: 'AnyStr') -> 'Optional[set[_S]]': ...
+
     @overload
-    def parse(self, data: 'Set[_S]') -> 'Set[_S]': ...
-    def parse(self, data: 'Union[AnyStr, Set[_S]]') -> 'Optional[Set[_S]]':
+    def parse(self, data: 'set[_S]') -> 'set[_S]': ...
+
+    def parse(self, data: 'Union[AnyStr, set[_S]]') -> 'Optional[set[_S]]':
         """Parse ``data`` from string.
 
         Args:
@@ -1377,7 +1392,7 @@ class SetType(_GenericType, Generic[_S]):
 
         """
         if isinstance(data, set):
-            return set(self.element_type(element) for element in data)
+            return {self.element_type(element) for element in data}
         if isinstance(data, str):
             data = data.encode('ascii')
 
@@ -1385,34 +1400,36 @@ class SetType(_GenericType, Generic[_S]):
             return None
         if data == self.empty_field:
             return set()
-        return set(self.element_type(element) for element in data.split(self.set_separator))
+        return {self.element_type(element) for element in data.split(self.set_separator)}
 
     @overload
-    def tojson(self, data: 'Set[_S]') -> 'List[Optional[_T]]': ...
+    def tojson(self, data: 'set[_S]') -> 'list[Optional[_T]]': ...
+
     @overload
-    def tojson(self, data: None) -> None: ...
-    def tojson(self, data: 'Optional[Set[_S]]') -> 'Optional[List[Optional[_T]]]':
+    def tojson(self, data: 'None') -> 'None': ...
+
+    def tojson(self, data: 'Optional[set[_S]]') -> 'Optional[list[Optional[_T]]]':
         """Serialize ``data`` as JSON log format.
 
         Args:
             data: raw data
 
         Returns:
-            list: The JSON serialisable set data.
+            The JSON serialisable set data.
 
         """
         if data is None:
             return None
         return sorted(self.element_type.tojson(element) for element in data)
 
-    def toascii(self, data: 'Optional[Set[_S]]') -> str:
+    def toascii(self, data: 'Optional[set[_S]]') -> 'str':
         """Serialize ``data`` as ASCII log format.
 
         Args:
             data: raw data
 
         Returns:
-            str: The ASCII representation of the set data.
+            The ASCII representation of the set data.
 
         """
         if data is None:
@@ -1426,18 +1443,12 @@ class VectorType(_GenericType, Generic[_S]):
     """Bro/Zeek ``vector`` data type.
 
     Args:
-        empty_field (:obj:`bytes` or :obj:`str`, optional): Placeholder for empty field.
-        unset_field (:obj:`bytes` or :obj:`str`, optional): Placeholder for unset field.
-        set_separator (:obj:`bytes` or :obj:`str`, optional): Separator for ``set``/``vector`` fields.
-        element_type (:class:`~zlogging.types.BaseType` instance): Data type of container's elements.
-        *args: Variable length argument list.
+        empty_field: Placeholder for empty field.
+        unset_field: Placeholder for unset field.
+        set_separator: Separator for ``set``/``vector`` fields.
+        element_type: Data type of container's elements.
+        *args: Arbitrary positional arguments.
         **kwargs: Arbitrary keyword arguments.
-
-    Attributes:
-        empty_field (bytes): Placeholder for empty field.
-        unset_field (bytes): Placeholder for unset field.
-        set_separator (bytes): Separator for ``set``/``vector`` fields.
-        element_type (:class:`~zlogging.types.BaseType` instance): Data type of container's elements.
 
     Raises:
         :exc:`ZeekTypeError`: If ``element_type`` is not supplied.
@@ -1445,11 +1456,15 @@ class VectorType(_GenericType, Generic[_S]):
 
     Example:
         As a *generic* data type, the class supports the typing proxy as introduced
-        `PEP 484`_::
+        :pep:`484`:
+
+        .. code-block:: python
 
             >>> VectorType[StringType]
 
-        which is the same **at runtime** as following::
+        which is the same **at runtime** as following:
+
+        .. code-block:: python
 
             >>> VectorType(element_type=StringType())
 
@@ -1457,26 +1472,18 @@ class VectorType(_GenericType, Generic[_S]):
         A valid ``element_type`` should be a *simple* data type, i.e. a subclass
         of :class:`~zlogging.types._SimpleType`.
 
-    .. _PEP 484:
-        https://www.python.org/dev/peps/pep-0484/
-
     """
 
     @property
     def python_type(self) -> 'Any':
         """Any: Corresponding Python type annotation."""
         python_type = self.element_type.python_type
-        is_union = is_union_type(python_type)
-        if is_union:
-            args = get_args(python_type)  # type: Tuple[Any]
-            name = tuple(List[arg] for arg in args)  # type: ignore[valid-type]
-            return Union[name]
         return List[python_type]  # type: ignore[valid-type]
 
     @property
-    def zeek_type(self) -> str:
+    def zeek_type(self) -> 'str':
         """str: Corresponding Zeek type name."""
-        return 'vector[%s]' % self.element_type.zeek_type
+        return 'vector[%s]' % self.element_type.zeek_type  # pylint: disable=consider-using-f-string
 
     def __init__(self,  # pylint: disable=unused-argument,keyword-arg-before-vararg
                  empty_field: 'Optional[AnyStr]' = None,
@@ -1487,23 +1494,25 @@ class VectorType(_GenericType, Generic[_S]):
         super().__init__(empty_field=empty_field, unset_field=unset_field, set_separator=set_separator)
 
         if element_type is None:
-            raise ZeekTypeError('__init__() missing 1 required positional argument: %r' % element_type)
+            raise ZeekTypeError("__init__() missing 1 required positional argument: 'element_type'")
         if not isinstance(element_type, _SimpleType):
             if isinstance(element_type, type) and issubclass(element_type, _SimpleType):
                 element_type = element_type(empty_field=empty_field, unset_field=unset_field, set_separator=set_separator)  # pylint: disable=line-too-long
             else:
-                raise ZeekValueError('invalid element type: %s' % type(element_type).__name__)
-        self.element_type = element_type
+                raise ZeekValueError('invalid element type: %s' % type(element_type).__name__)  # pylint: disable=consider-using-f-string
+        self.element_type = cast('_S', element_type)
 
-    def __repr__(self) -> str:
+    def __repr__(self) -> 'str':
         return (f'{self._name}(empty_field={self.str_empty_field}, unset_field={self.str_unset_field}, '
                 f'set_separator={self.str_set_separator}, element_type={self.element_type})')
 
     @overload
-    def parse(self, data: 'AnyStr') -> 'Optional[List[_S]]': ...
+    def parse(self, data: 'AnyStr') -> 'Optional[list[_S]]': ...
+
     @overload
-    def parse(self, data: 'List[_S]') -> 'List[_S]': ...
-    def parse(self, data: 'Union[AnyStr, List[_S]]') -> 'Optional[List[_S]]':
+    def parse(self, data: 'list[_S]') -> 'list[_S]': ...
+
+    def parse(self, data: 'Union[AnyStr, list[_S]]') -> 'Optional[list[_S]]':
         """Parse ``data`` from string.
 
         Args:
@@ -1522,14 +1531,14 @@ class VectorType(_GenericType, Generic[_S]):
         if data == self.unset_field:
             return None
         if data == self.empty_field:
-            return list()
-        return list(self.element_type(element) for element in data.split(self.set_separator))
+            return []
+        return [self.element_type(element) for element in data.split(self.set_separator)]
 
     @overload
-    def tojson(self, data: 'List[_S]') -> 'List[Optional[_T]]': ...
+    def tojson(self, data: 'list[_S]') -> 'list[Optional[_T]]': ...
     @overload
-    def tojson(self, data: None) -> None: ...
-    def tojson(self, data: 'Optional[List[_S]]') -> 'Optional[List[Optional[_T]]]':
+    def tojson(self, data: 'None') -> 'None': ...
+    def tojson(self, data: 'Optional[list[_S]]') -> 'Optional[list[Optional[_T]]]':
         """Serialize ``data`` as JSON log format.
 
         Args:
@@ -1543,7 +1552,7 @@ class VectorType(_GenericType, Generic[_S]):
             return None
         return list(self.element_type.tojson(element) for element in data)
 
-    def toascii(self, data: 'Optional[List[_S]]') -> str:
+    def toascii(self, data: 'Optional[list[_S]]') -> 'str':
         """Serialize ``data`` as ASCII log format.
 
         Args:
@@ -1567,7 +1576,7 @@ class _VariadicType(BaseType):  # pylint: disable=abstract-method
     is also a *container* type.
 
     """
-
+    #: Data type of container's elements.
     element_mapping: 'OrderedDict[str, Union[_SimpleType, _GenericType]]'
 
     def parse(self, data: 'Any') -> 'NoReturn':
@@ -1611,19 +1620,12 @@ class RecordType(_VariadicType):
     """Bro/Zeek ``record`` data type.
 
     Args:
-        empty_field (:obj:`bytes` or :obj:`str`, optional): Placeholder for empty field.
-        unset_field (:obj:`bytes` or :obj:`str`, optional): Placeholder for unset field.
-        set_separator (:obj:`bytes` or :obj:`str`, optional): Separator for ``set``/``vector`` fields.
-        *args: Variable length argument list.
-        **kwargs: element_mapping (:obj:`dict` mapping :obj:`str` and :class:`~zlogging.types.BaseType` instance):
-            Data type of container's elements.
-
-    Attributes:
-        empty_field (bytes): Placeholder for empty field.
-        unset_field (bytes): Placeholder for unset field.
-        set_separator (bytes): Separator for ``set``/``vector`` fields.
-        element_mapping (:obj:`dict` mapping :obj:`str` and :class:`~zlogging.types.BaseType` instance):
-            Data type of container's elements.
+        empty_field: Placeholder for empty field.
+        unset_field: Placeholder for unset field.
+        set_separator: Separator for ``set``/``vector`` fields.
+        element_mapping: Data type of container's elements.
+        *args: Arbitrary positional arguments.
+        **kwargs: Arbitrary keyword arguments.
 
     Raises:
         :exc:`ZeekTypeError`: If ``element_mapping`` is not supplied.
@@ -1644,16 +1646,16 @@ class RecordType(_VariadicType):
 
     @property
     def python_type(self) -> 'Any':
-        """Any: Corresponding Python type annotation."""
+        """Corresponding Python type annotation."""
         dict_entries = {
             field: element_type.python_type
             for field, element_type in self.element_mapping.items()
-        }  # type: Dict[str, Any]
-        return TypedDict('record', dict_entries)
+        }  # type: dict[str, Any]
+        return TypedDict('record', dict_entries, total=False)
 
     @property
     def zeek_type(self) -> 'Literal["record"]':
-        """str: Corresponding Zeek type name."""
+        """Corresponding Zeek type name."""
         return 'record'
 
     def __new__(cls, *args: 'Any', **kwargs: 'Any') -> 'RecordType':  # pylint: disable=unused-argument
@@ -1664,37 +1666,37 @@ class RecordType(_VariadicType):
                  empty_field: 'Optional[AnyStr]' = None,
                  unset_field: 'Optional[AnyStr]' = None,
                  set_separator: 'Optional[AnyStr]' = None,
-                 *args: 'Any', **element_mapping: 'Union[Type[_SimpleType], _SimpleType, _GenericType]') -> None:
+                 *args: 'Any', **element_mapping: 'Union[Type[_SimpleType], _SimpleType, _GenericType]') -> 'None':
         super().__init__(empty_field=empty_field, unset_field=unset_field, set_separator=set_separator)
 
         expanded = self._expanded
         if expanded['_inited']:
             if self.empty_field != expanded['empty_field']:
-                raise ZeekValueError("inconsistent value of 'empty_field': %r and %r" % (self.empty_field, expanded['empty_field']))  # pylint: disable=line-too-long
+                raise ZeekValueError("inconsistent value of 'empty_field': %r and %r" % (self.empty_field, expanded['empty_field']))  # pylint: disable=line-too-long,consider-using-f-string
             if self.unset_field != expanded['unset_field']:
-                raise ZeekValueError("inconsistent value of 'unset_field': %r and %r" % (self.unset_field, expanded['unset_field']))  # pylint: disable=line-too-long
+                raise ZeekValueError("inconsistent value of 'unset_field': %r and %r" % (self.unset_field, expanded['unset_field']))  # pylint: disable=line-too-long,consider-using-f-string
             if self.set_separator != expanded['set_separator']:
-                raise ZeekValueError("inconsistent value of 'set_separator': %r and %r" % (self.set_separator, expanded['set_separator']))  # pylint: disable=line-too-long
+                raise ZeekValueError("inconsistent value of 'set_separator': %r and %r" % (self.set_separator, expanded['set_separator']))  # pylint: disable=line-too-long,consider-using-f-string
 
         fields = expanded['fields']
         for field, expanded_type in fields.items():
             if isinstance(expanded_type, (_SimpleType, _GenericType)):
                 fields[field] = expanded_type
             else:
-                raise ZeekValueError('invalid element type of field %r: %s' % (field, type(expanded_type).__name__))
+                raise ZeekValueError('invalid element type of field %r: %s' % (field, type(expanded_type).__name__))  # pylint: disable=consider-using-f-string
         for field, element_type in element_mapping.items():
             if not isinstance(element_type, (_SimpleType, _GenericType)):
-                if isinstance(element_type, type) and issubclass(element_type, _SimpleType):  # pylint: disable=line-too-long
+                if isinstance(element_type, type) and issubclass(element_type, _SimpleType):
                     element_type = element_type(empty_field=empty_field, unset_field=unset_field, set_separator=set_separator)  # pylint: disable=line-too-long
                 else:
-                    raise ZeekValueError('invalid element type of field %r: %s' % (field, type(element_type).__name__))
+                    raise ZeekValueError('invalid element type of field %r: %s' % (field, type(element_type).__name__))  # pylint: disable=consider-using-f-string
             else:
                 if self.empty_field != element_type.empty_field:
-                    raise ZeekValueError("inconsistent value of 'empty_field': %r and %r" % (self.empty_field, element_type.empty_field))  # pylint: disable=line-too-long
+                    raise ZeekValueError("inconsistent value of 'empty_field': %r and %r" % (self.empty_field, element_type.empty_field))  # pylint: disable=line-too-long,consider-using-f-string
                 if self.unset_field != element_type.unset_field:
-                    raise ZeekValueError("inconsistent value of 'unset_field': %r and %r" % (self.unset_field, element_type.unset_field))  # pylint: disable=line-too-long
+                    raise ZeekValueError("inconsistent value of 'unset_field': %r and %r" % (self.unset_field, element_type.unset_field))  # pylint: disable=line-too-long,consider-using-f-string
                 if self.set_separator != element_type.set_separator:
-                    raise ZeekValueError("inconsistent value of 'set_separator': %r and %r" % (self.set_separator, element_type.set_separator))  # pylint: disable=line-too-long
+                    raise ZeekValueError("inconsistent value of 'set_separator': %r and %r" % (self.set_separator, element_type.set_separator))  # pylint: disable=line-too-long,consider-using-f-string
 
             existed = fields.get(field)
             if existed is not None and element_type.zeek_type != existed.zeek_type:
@@ -1702,6 +1704,6 @@ class RecordType(_VariadicType):
             fields[field] = element_type
         self.element_mapping = fields
 
-    def __repr__(self) -> str:
+    def __repr__(self) -> 'str':
         return (f'{self._name}(empty_field={self.str_empty_field!r}, unset_field={self.str_unset_field!r}, '
                 f'set_separator={self.str_set_separator!r}, element_mapping={self.element_mapping!r})')
