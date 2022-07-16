@@ -1,4 +1,9 @@
 [[source]]
+name = "pypi"
+url = "https://pypi.org/simple"
+verify_ssl = true
+
+[[source]]
 name = "tuna"
 url = "https://pypi.tuna.tsinghua.edu.cn/simple"
 verify_ssl = true
@@ -8,20 +13,17 @@ name = "sjtu"
 url = "https://mirrors.sjtug.sjtu.edu.cn/pypi/web/simple"
 verify_ssl = true
 
-[[source]]
-name = "pypi"
-url = "https://pypi.org/simple"
-verify_ssl = true
-
 [dev-packages]
 zlogging = {editable = true,path = "."}
 autopep8 = "*"
 bandit = "*"
 mypy = "*"
 pylint = "*"
+vermin = "*"
 ipython = "*"
 coverage = "*"
 codecov = "*"
+esbonio = "*"
 sphinx = "*"
 sphinx-autodoc-typehints = "*"
 rstcheck = "*"
@@ -31,6 +33,7 @@ tox = "*"
 beautifulsoup4 = {extras = ["html5lib"],version = "*"}
 html2text = "*"
 requests = "*"
+types-requests = "*"
 
 [packages]
 aenum = "*"
