@@ -5,7 +5,7 @@
 from collections import OrderedDict
 from typing import Union
 
-from mypy_extensions import TypedDict
+from typing_extensions import TypedDict
 
 from zlogging.types import _GenericType, _SimpleType, _VariadicType
 
