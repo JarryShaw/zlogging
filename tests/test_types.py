@@ -364,28 +364,31 @@ class TestTimeType:
         assert field.zeek_type == 'time'
 
     def test_parse(self, field: 'TimeType', expected):
-        now = datetime(2021, 1, 25, 13, 5, 47, 490889, tzinfo=timezone.utc)
+        now = datetime(2021, 1, 25, 13, 5, 47, 490889)
+        timestamp = now.timestamp()
         for data, expected in [
             (now, now),
-            (1611579947.490889, now),
-            ('1611579947.490889', now),
-            (b'1611579947.490889', now),
+            (timestamp, now),
+            (str(timestamp), now),
+            (str(timestamp).encode('ascii'), now),
             (expected['unset_field'], None),
         ]:
             assert field.parse(data) == expected
 
     def test_tojson(self, field: 'TimeType'):
-        now = datetime(2021, 1, 25, 13, 5, 47, 490889, tzinfo=timezone.utc)
+        now = datetime(2021, 1, 25, 13, 5, 47, 490889)
+        timestamp = now.timestamp()
         for data, expected in [
-            (now, 1611579947.490889),
+            (now, timestamp),
             (None, None),
         ]:
             assert field.tojson(data) == expected
 
     def test_toascii(self, field: 'TimeType', expected):
-        now = datetime(2021, 1, 25, 13, 5, 47, 490889, tzinfo=timezone.utc)
+        now = datetime(2021, 1, 25, 13, 5, 47, 490889)
+        timestamp = now.timestamp()
         for data, expected in [
-            (now, '1611579947.490889'),
+            (now, str(timestamp)),
             (None, expected['unset_field']),
         ]:
             assert field.toascii(data) == expected
