@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# pylint: disable=line-too-long,import-error
+# pylint: disable=line-too-long
 """Namespace: ``SMB``."""
 
 from zlogging._compat import enum
@@ -19,32 +19,32 @@ class Action(enum.IntFlag):
     _ignore_ = 'Action _'
     Action = vars()
 
-    Action['FILE_READ'] = enum.auto()
+    FILE_READ = enum.auto()
 
-    Action['FILE_WRITE'] = enum.auto()
+    FILE_WRITE = enum.auto()
 
-    Action['FILE_OPEN'] = enum.auto()
+    FILE_OPEN = enum.auto()
 
-    Action['FILE_CLOSE'] = enum.auto()
+    FILE_CLOSE = enum.auto()
 
-    Action['FILE_DELETE'] = enum.auto()
+    FILE_DELETE = enum.auto()
 
-    Action['FILE_RENAME'] = enum.auto()
+    FILE_RENAME = enum.auto()
 
-    Action['FILE_SET_ATTRIBUTE'] = enum.auto()
+    FILE_SET_ATTRIBUTE = enum.auto()
 
-    Action['PIPE_READ'] = enum.auto()
+    PIPE_READ = enum.auto()
 
-    Action['PIPE_WRITE'] = enum.auto()
+    PIPE_WRITE = enum.auto()
 
-    Action['PIPE_OPEN'] = enum.auto()
+    PIPE_OPEN = enum.auto()
 
-    Action['PIPE_CLOSE'] = enum.auto()
+    PIPE_CLOSE = enum.auto()
 
-    Action['PRINT_READ'] = enum.auto()
+    PRINT_READ = enum.auto()
 
-    Action['PRINT_WRITE'] = enum.auto()
+    PRINT_WRITE = enum.auto()
 
-    Action['PRINT_OPEN'] = enum.auto()
+    PRINT_OPEN = enum.auto()
 
-    Action['PRINT_CLOSE'] = enum.auto()
+    PRINT_CLOSE = enum.auto()

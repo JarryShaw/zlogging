@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# pylint: disable=line-too-long,import-error
+# pylint: disable=line-too-long
 """Namespace: ``ZeekygenExample``."""
 
 from zlogging._compat import enum
@@ -21,15 +21,15 @@ class SimpleEnum(enum.IntFlag):
 
     #: Documentation for particular enum values is added like this.
     #: And can also span multiple lines.
-    SimpleEnum['ONE'] = enum.auto()
+    ONE = enum.auto()
 
     #: Or this style is valid to document the preceding enum value.
-    SimpleEnum['TWO'] = enum.auto()
+    TWO = enum.auto()
 
-    SimpleEnum['THREE'] = enum.auto()
+    THREE = enum.auto()
 
     #: And some documentation for “FOUR”.
-    SimpleEnum['FOUR'] = enum.auto()
+    FOUR = enum.auto()
 
     #: Also “FIVE”.
-    SimpleEnum['FIVE'] = enum.auto()
+    FIVE = enum.auto()

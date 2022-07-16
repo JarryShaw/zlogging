@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# pylint: disable=line-too-long,import-error
+# pylint: disable=line-too-long
 """Namespace: ``Broker``."""
 
 from zlogging._compat import enum
@@ -19,35 +19,35 @@ class DataType(enum.IntFlag):
     _ignore_ = 'DataType _'
     DataType = vars()
 
-    DataType['NONE'] = enum.auto()
+    NONE = enum.auto()
 
-    DataType['BOOL'] = enum.auto()
+    BOOL = enum.auto()
 
-    DataType['INT'] = enum.auto()
+    INT = enum.auto()
 
-    DataType['COUNT'] = enum.auto()
+    COUNT = enum.auto()
 
-    DataType['DOUBLE'] = enum.auto()
+    DOUBLE = enum.auto()
 
-    DataType['STRING'] = enum.auto()
+    STRING = enum.auto()
 
-    DataType['ADDR'] = enum.auto()
+    ADDR = enum.auto()
 
-    DataType['SUBNET'] = enum.auto()
+    SUBNET = enum.auto()
 
-    DataType['PORT'] = enum.auto()
+    PORT = enum.auto()
 
-    DataType['TIME'] = enum.auto()
+    TIME = enum.auto()
 
-    DataType['INTERVAL'] = enum.auto()
+    INTERVAL = enum.auto()
 
-    DataType['ENUM'] = enum.auto()
+    ENUM = enum.auto()
 
-    DataType['SET'] = enum.auto()
+    SET = enum.auto()
 
-    DataType['TABLE'] = enum.auto()
+    TABLE = enum.auto()
 
-    DataType['VECTOR'] = enum.auto()
+    VECTOR = enum.auto()
 
 
 @enum.unique
@@ -65,10 +65,10 @@ class Type(enum.IntFlag):
     Type = vars()
 
     #: An informational status update.
-    Type['STATUS'] = enum.auto()
+    STATUS = enum.auto()
 
     #: An error situation.
-    Type['ERROR'] = enum.auto()
+    ERROR = enum.auto()
 
 
 @enum.unique
@@ -86,70 +86,70 @@ class ErrorCode(enum.IntFlag):
     ErrorCode = vars()
 
     #: (present if base/bif/comm.bif.zeek is loaded)
-    ErrorCode['NO_ERROR'] = enum.auto()
+    NO_ERROR = enum.auto()
 
     #: The unspecified default error code.
-    ErrorCode['UNSPECIFIED'] = enum.auto()
+    UNSPECIFIED = enum.auto()
 
     #: Version incompatibility.
-    ErrorCode['PEER_INCOMPATIBLE'] = enum.auto()
+    PEER_INCOMPATIBLE = enum.auto()
 
     #: Referenced peer does not exist.
-    ErrorCode['PEER_INVALID'] = enum.auto()
+    PEER_INVALID = enum.auto()
 
     #: Remote peer not listening.
-    ErrorCode['PEER_UNAVAILABLE'] = enum.auto()
+    PEER_UNAVAILABLE = enum.auto()
 
     #: (present if base/bif/comm.bif.zeek is loaded)
-    ErrorCode['PEER_DISCONNECT_DURING_HANDSHAKE'] = enum.auto()
+    PEER_DISCONNECT_DURING_HANDSHAKE = enum.auto()
 
     #: A peering request timed out.
-    ErrorCode['PEER_TIMEOUT'] = enum.auto()
+    PEER_TIMEOUT = enum.auto()
 
     #: Master with given name already exists.
-    ErrorCode['MASTER_EXISTS'] = enum.auto()
+    MASTER_EXISTS = enum.auto()
 
     #: Master with given name does not exist.
-    ErrorCode['NO_SUCH_MASTER'] = enum.auto()
+    NO_SUCH_MASTER = enum.auto()
 
     #: The given data store key does not exist.
-    ErrorCode['NO_SUCH_KEY'] = enum.auto()
+    NO_SUCH_KEY = enum.auto()
 
     #: The store operation timed out.
-    ErrorCode['REQUEST_TIMEOUT'] = enum.auto()
+    REQUEST_TIMEOUT = enum.auto()
 
     #: The operation expected a different type than provided.
-    ErrorCode['TYPE_CLASH'] = enum.auto()
+    TYPE_CLASH = enum.auto()
 
     #: The data value cannot be used to carry out the desired operation.
-    ErrorCode['INVALID_DATA'] = enum.auto()
+    INVALID_DATA = enum.auto()
 
     #: The storage backend failed to execute the operation.
-    ErrorCode['BACKEND_FAILURE'] = enum.auto()
+    BACKEND_FAILURE = enum.auto()
 
     #: The storage backend failed to execute the operation.
-    ErrorCode['STALE_DATA'] = enum.auto()
+    STALE_DATA = enum.auto()
 
     #: (present if base/bif/comm.bif.zeek is loaded)
-    ErrorCode['CANNOT_OPEN_FILE'] = enum.auto()
+    CANNOT_OPEN_FILE = enum.auto()
 
     #: (present if base/bif/comm.bif.zeek is loaded)
-    ErrorCode['CANNOT_WRITE_FILE'] = enum.auto()
+    CANNOT_WRITE_FILE = enum.auto()
 
     #: (present if base/bif/comm.bif.zeek is loaded)
-    ErrorCode['INVALID_TOPIC_KEY'] = enum.auto()
+    INVALID_TOPIC_KEY = enum.auto()
 
     #: (present if base/bif/comm.bif.zeek is loaded)
-    ErrorCode['END_OF_FILE'] = enum.auto()
+    END_OF_FILE = enum.auto()
 
     #: (present if base/bif/comm.bif.zeek is loaded)
-    ErrorCode['INVALID_TAG'] = enum.auto()
+    INVALID_TAG = enum.auto()
 
     #: (present if base/bif/comm.bif.zeek is loaded)
-    ErrorCode['INVALID_STATUS'] = enum.auto()
+    INVALID_STATUS = enum.auto()
 
     #: Catch-all for a CAF-level problem.
-    ErrorCode['CAF_ERROR'] = enum.auto()
+    CAF_ERROR = enum.auto()
 
 
 @enum.unique
@@ -167,22 +167,22 @@ class PeerStatus(enum.IntFlag):
     PeerStatus = vars()
 
     #: The peering process is initiated.
-    PeerStatus['INITIALIZING'] = enum.auto()
+    INITIALIZING = enum.auto()
 
     #: Connection establishment in process.
-    PeerStatus['CONNECTING'] = enum.auto()
+    CONNECTING = enum.auto()
 
     #: Connection established, peering pending.
-    PeerStatus['CONNECTED'] = enum.auto()
+    CONNECTED = enum.auto()
 
     #: Successfully peered.
-    PeerStatus['PEERED'] = enum.auto()
+    PEERED = enum.auto()
 
     #: Connection to remote peer lost.
-    PeerStatus['DISCONNECTED'] = enum.auto()
+    DISCONNECTED = enum.auto()
 
     #: Reconnecting to peer after a lost connection.
-    PeerStatus['RECONNECTING'] = enum.auto()
+    RECONNECTING = enum.auto()
 
 
 @enum.unique
@@ -199,11 +199,11 @@ class BackendType(enum.IntFlag):
     _ignore_ = 'BackendType _'
     BackendType = vars()
 
-    BackendType['MEMORY'] = enum.auto()
+    MEMORY = enum.auto()
 
-    BackendType['SQLITE'] = enum.auto()
+    SQLITE = enum.auto()
 
-    BackendType['ROCKSDB'] = enum.auto()
+    ROCKSDB = enum.auto()
 
 
 @enum.unique
@@ -220,6 +220,6 @@ class QueryStatus(enum.IntFlag):
     _ignore_ = 'QueryStatus _'
     QueryStatus = vars()
 
-    QueryStatus['SUCCESS'] = enum.auto()
+    SUCCESS = enum.auto()
 
-    QueryStatus['FAILURE'] = enum.auto()
+    FAILURE = enum.auto()

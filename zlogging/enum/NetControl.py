@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# pylint: disable=line-too-long,import-error
+# pylint: disable=line-too-long
 """Namespace: ``NetControl``."""
 
 from zlogging._compat import enum
@@ -20,13 +20,13 @@ class InfoCategory(enum.IntFlag):
     InfoCategory = vars()
 
     #: A log entry reflecting a framework message.
-    InfoCategory['MESSAGE'] = enum.auto()
+    MESSAGE = enum.auto()
 
     #: A log entry reflecting a framework message.
-    InfoCategory['ERROR'] = enum.auto()
+    ERROR = enum.auto()
 
     #: A log entry about a rule.
-    InfoCategory['RULE'] = enum.auto()
+    RULE = enum.auto()
 
 
 @enum.unique
@@ -44,22 +44,22 @@ class InfoState(enum.IntFlag):
     InfoState = vars()
 
     #: The request to add/remove a rule was sent to the respective backend.
-    InfoState['REQUESTED'] = enum.auto()
+    REQUESTED = enum.auto()
 
     #: A rule was successfully added by a backend.
-    InfoState['SUCCEEDED'] = enum.auto()
+    SUCCEEDED = enum.auto()
 
     #: A backend reported that a rule was already existing.
-    InfoState['EXISTS'] = enum.auto()
+    EXISTS = enum.auto()
 
     #: A rule addition failed.
-    InfoState['FAILED'] = enum.auto()
+    FAILED = enum.auto()
 
     #: A rule was successfully removed by a backend.
-    InfoState['REMOVED'] = enum.auto()
+    REMOVED = enum.auto()
 
     #: A rule timeout was triggered by the NetControl framework or a backend.
-    InfoState['TIMEOUT'] = enum.auto()
+    TIMEOUT = enum.auto()
 
 
 @enum.unique
@@ -77,16 +77,16 @@ class EntityType(enum.IntFlag):
     EntityType = vars()
 
     #: Activity involving a specific IP address.
-    EntityType['ADDRESS'] = enum.auto()
+    ADDRESS = enum.auto()
 
     #: Activity involving all of a bi-directional connection’s activity.
-    EntityType['CONNECTION'] = enum.auto()
+    CONNECTION = enum.auto()
 
     #: Activity involving a uni-directional flow’s activity. Can contain wildcards.
-    EntityType['FLOW'] = enum.auto()
+    FLOW = enum.auto()
 
     #: Activity involving a MAC address.
-    EntityType['MAC'] = enum.auto()
+    MAC = enum.auto()
 
 
 @enum.unique
@@ -108,22 +108,22 @@ class RuleType(enum.IntFlag):
 
     #: Stop forwarding all packets matching the entity.
     #: No additional arguments.
-    RuleType['DROP'] = enum.auto()
+    DROP = enum.auto()
 
     #: Modify all packets matching entity. The packets
     #: will be modified according to the mod entry of
     #: the rule.
-    RuleType['MODIFY'] = enum.auto()
+    MODIFY = enum.auto()
 
     #: Redirect all packets matching entity to a different switch port,
     #: given in the out\_port argument of the rule.
-    RuleType['REDIRECT'] = enum.auto()
+    REDIRECT = enum.auto()
 
     #: Whitelists all packets of an entity, meaning no restrictions will be applied.
     #: While whitelisting is the default if no rule matches, this type can be
     #: used to override lower-priority rules that would otherwise take effect for the
     #: entity.
-    RuleType['WHITELIST'] = enum.auto()
+    WHITELIST = enum.auto()
 
 
 @enum.unique
@@ -145,9 +145,9 @@ class TargetType(enum.IntFlag):
     _ignore_ = 'TargetType _'
     TargetType = vars()
 
-    TargetType['FORWARD'] = enum.auto()
+    FORWARD = enum.auto()
 
-    TargetType['MONITOR'] = enum.auto()
+    MONITOR = enum.auto()
 
 
 @enum.unique
@@ -165,27 +165,27 @@ class CatchReleaseActions(enum.IntFlag):
     CatchReleaseActions = vars()
 
     #: Log lines marked with info are purely informational; no action was taken.
-    CatchReleaseActions['INFO'] = enum.auto()
+    INFO = enum.auto()
 
     #: A rule for the specified IP address already existed in NetControl (outside
     #: of catch-and-release). Catch and release did not add a new rule, but is now
     #: watching the IP address and will add a new rule after the current rule expires.
-    CatchReleaseActions['ADDED'] = enum.auto()
+    ADDED = enum.auto()
 
     #: (present if base/frameworks/netcontrol/types.zeek is loaded)
     #: Stop forwarding all packets matching the entity.
     #: No additional arguments.
-    CatchReleaseActions['DROP'] = enum.auto()
+    DROP = enum.auto()
 
     #: A drop was requested by catch and release.
     #: An address was successfully blocked by catch and release.
-    CatchReleaseActions['DROPPED'] = enum.auto()
+    DROPPED = enum.auto()
 
     #: An address was unblocked after the timeout expired.
-    CatchReleaseActions['UNBLOCK'] = enum.auto()
+    UNBLOCK = enum.auto()
 
     #: An address was forgotten because it did not reappear within the watch\_until interval.
-    CatchReleaseActions['FORGOTTEN'] = enum.auto()
+    FORGOTTEN = enum.auto()
 
     #: A watched IP address was seen again; catch and release will re-block it.
-    CatchReleaseActions['SEEN_AGAIN'] = enum.auto()
+    SEEN_AGAIN = enum.auto()

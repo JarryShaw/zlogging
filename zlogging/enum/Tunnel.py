@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# pylint: disable=line-too-long,import-error
+# pylint: disable=line-too-long
 """Namespace: ``Tunnel``."""
 
 from zlogging._compat import enum
@@ -17,23 +17,23 @@ class Type(enum.IntFlag):
     _ignore_ = 'Type _'
     Type = vars()
 
-    Type['NONE'] = enum.auto()
+    NONE = enum.auto()
 
-    Type['IP'] = enum.auto()
+    IP = enum.auto()
 
-    Type['AYIYA'] = enum.auto()
+    AYIYA = enum.auto()
 
-    Type['TEREDO'] = enum.auto()
+    TEREDO = enum.auto()
 
-    Type['SOCKS'] = enum.auto()
+    SOCKS = enum.auto()
 
-    Type['GTPv1'] = enum.auto()
+    GTPv1 = enum.auto()
 
-    Type['HTTP'] = enum.auto()
+    HTTP = enum.auto()
 
-    Type['GRE'] = enum.auto()
+    GRE = enum.auto()
 
-    Type['VXLAN'] = enum.auto()
+    VXLAN = enum.auto()
 
 
 @enum.unique
@@ -51,11 +51,11 @@ class Action(enum.IntFlag):
     Action = vars()
 
     #: A new tunnel (encapsulating “connection”) has been seen.
-    Action['DISCOVER'] = enum.auto()
+    DISCOVER = enum.auto()
 
     #: A tunnel connection has closed.
-    Action['CLOSE'] = enum.auto()
+    CLOSE = enum.auto()
 
     #: No new connections over a tunnel happened in the amount of
     #: time indicated by Tunnel::expiration\_interval.
-    Action['EXPIRE'] = enum.auto()
+    EXPIRE = enum.auto()

@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# pylint: disable=line-too-long,import-error
+# pylint: disable=line-too-long
 """Namespace: ``Supervisor``."""
 
 from zlogging._compat import enum
@@ -19,12 +19,12 @@ class ClusterRole(enum.IntFlag):
     _ignore_ = 'ClusterRole _'
     ClusterRole = vars()
 
-    ClusterRole['NONE'] = enum.auto()
+    NONE = enum.auto()
 
-    ClusterRole['LOGGER'] = enum.auto()
+    LOGGER = enum.auto()
 
-    ClusterRole['MANAGER'] = enum.auto()
+    MANAGER = enum.auto()
 
-    ClusterRole['PROXY'] = enum.auto()
+    PROXY = enum.auto()
 
-    ClusterRole['WORKER'] = enum.auto()
+    WORKER = enum.auto()

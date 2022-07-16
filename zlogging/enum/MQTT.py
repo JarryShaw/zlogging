@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# pylint: disable=line-too-long,import-error
+# pylint: disable=line-too-long
 """Namespace: ``MQTT``."""
 
 from zlogging._compat import enum
@@ -17,6 +17,6 @@ class SubUnsub(enum.IntFlag):
     _ignore_ = 'SubUnsub _'
     SubUnsub = vars()
 
-    SubUnsub['SUBSCRIBE'] = enum.auto()
+    SUBSCRIBE = enum.auto()
 
-    SubUnsub['UNSUBSCRIBE'] = enum.auto()
+    UNSUBSCRIBE = enum.auto()

@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# pylint: disable=line-too-long,import-error
+# pylint: disable=line-too-long
 """Namespace: ``LoadBalancing``."""
 
 from zlogging._compat import enum
@@ -19,4 +19,4 @@ class Method(enum.IntFlag):
 
     #: Apply BPF filters to each worker in a way that causes them to
     #: automatically flow balance traffic between them.
-    Method['AUTO_BPF'] = enum.auto()
+    AUTO_BPF = enum.auto()

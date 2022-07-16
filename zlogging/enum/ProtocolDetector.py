@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# pylint: disable=line-too-long,import-error
+# pylint: disable=line-too-long
 """Namespace: ``ProtocolDetector``."""
 
 from zlogging._compat import enum
@@ -17,10 +17,10 @@ class dir(enum.IntFlag):
     _ignore_ = 'dir _'
     dir = vars()
 
-    dir['NONE'] = enum.auto()
+    NONE = enum.auto()
 
-    dir['INCOMING'] = enum.auto()
+    INCOMING = enum.auto()
 
-    dir['OUTGOING'] = enum.auto()
+    OUTGOING = enum.auto()
 
-    dir['BOTH'] = enum.auto()
+    BOTH = enum.auto()

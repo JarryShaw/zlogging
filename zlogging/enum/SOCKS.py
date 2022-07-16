@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# pylint: disable=line-too-long,import-error
+# pylint: disable=line-too-long
 """Namespace: ``SOCKS``."""
 
 from zlogging._compat import enum
@@ -17,8 +17,8 @@ class RequestType(enum.IntFlag):
     _ignore_ = 'RequestType _'
     RequestType = vars()
 
-    RequestType['CONNECTION'] = enum.auto()
+    CONNECTION = enum.auto()
 
-    RequestType['PORT'] = enum.auto()
+    PORT = enum.auto()
 
-    RequestType['UDP_ASSOCIATE'] = enum.auto()
+    UDP_ASSOCIATE = enum.auto()

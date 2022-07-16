@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# pylint: disable=line-too-long,import-error
+# pylint: disable=line-too-long
 """Namespace: ``zeek``."""
 
 from zlogging._compat import enum
@@ -17,13 +17,13 @@ class TableChange(enum.IntFlag):
     _ignore_ = 'TableChange _'
     TableChange = vars()
 
-    TableChange['TABLE_ELEMENT_NEW'] = enum.auto()
+    TABLE_ELEMENT_NEW = enum.auto()
 
-    TableChange['TABLE_ELEMENT_CHANGED'] = enum.auto()
+    TABLE_ELEMENT_CHANGED = enum.auto()
 
-    TableChange['TABLE_ELEMENT_REMOVED'] = enum.auto()
+    TABLE_ELEMENT_REMOVED = enum.auto()
 
-    TableChange['TABLE_ELEMENT_EXPIRED'] = enum.auto()
+    TABLE_ELEMENT_EXPIRED = enum.auto()
 
 
 @enum.unique
@@ -38,13 +38,13 @@ class layer3_proto(enum.IntFlag):
     _ignore_ = 'layer3_proto _'
     layer3_proto = vars()
 
-    layer3_proto['L3_IPV4'] = enum.auto()
+    L3_IPV4 = enum.auto()
 
-    layer3_proto['L3_IPV6'] = enum.auto()
+    L3_IPV6 = enum.auto()
 
-    layer3_proto['L3_ARP'] = enum.auto()
+    L3_ARP = enum.auto()
 
-    layer3_proto['L3_UNKNOWN'] = enum.auto()
+    L3_UNKNOWN = enum.auto()
 
 
 @enum.unique
@@ -59,9 +59,9 @@ class link_encap(enum.IntFlag):
     _ignore_ = 'link_encap _'
     link_encap = vars()
 
-    link_encap['LINK_ETHERNET'] = enum.auto()
+    LINK_ETHERNET = enum.auto()
 
-    link_encap['LINK_UNKNOWN'] = enum.auto()
+    LINK_UNKNOWN = enum.auto()
 
 
 @enum.unique
@@ -76,25 +76,25 @@ class rpc_status(enum.IntFlag):
     _ignore_ = 'rpc_status _'
     rpc_status = vars()
 
-    rpc_status['RPC_SUCCESS'] = enum.auto()
+    RPC_SUCCESS = enum.auto()
 
-    rpc_status['RPC_PROG_UNAVAIL'] = enum.auto()
+    RPC_PROG_UNAVAIL = enum.auto()
 
-    rpc_status['RPC_PROG_MISMATCH'] = enum.auto()
+    RPC_PROG_MISMATCH = enum.auto()
 
-    rpc_status['RPC_PROC_UNAVAIL'] = enum.auto()
+    RPC_PROC_UNAVAIL = enum.auto()
 
-    rpc_status['RPC_GARBAGE_ARGS'] = enum.auto()
+    RPC_GARBAGE_ARGS = enum.auto()
 
-    rpc_status['RPC_SYSTEM_ERR'] = enum.auto()
+    RPC_SYSTEM_ERR = enum.auto()
 
-    rpc_status['RPC_TIMEOUT'] = enum.auto()
+    RPC_TIMEOUT = enum.auto()
 
-    rpc_status['RPC_VERS_MISMATCH'] = enum.auto()
+    RPC_VERS_MISMATCH = enum.auto()
 
-    rpc_status['RPC_AUTH_ERROR'] = enum.auto()
+    RPC_AUTH_ERROR = enum.auto()
 
-    rpc_status['RPC_UNKNOWN_ERROR'] = enum.auto()
+    RPC_UNKNOWN_ERROR = enum.auto()
 
 
 @enum.unique
@@ -111,15 +111,15 @@ class IPAddrAnonymization(enum.IntFlag):
     _ignore_ = 'IPAddrAnonymization _'
     IPAddrAnonymization = vars()
 
-    IPAddrAnonymization['KEEP_ORIG_ADDR'] = enum.auto()
+    KEEP_ORIG_ADDR = enum.auto()
 
-    IPAddrAnonymization['SEQUENTIALLY_NUMBERED'] = enum.auto()
+    SEQUENTIALLY_NUMBERED = enum.auto()
 
-    IPAddrAnonymization['RANDOM_MD5'] = enum.auto()
+    RANDOM_MD5 = enum.auto()
 
-    IPAddrAnonymization['PREFIX_PRESERVING_A50'] = enum.auto()
+    PREFIX_PRESERVING_A50 = enum.auto()
 
-    IPAddrAnonymization['PREFIX_PRESERVING_MD5'] = enum.auto()
+    PREFIX_PRESERVING_MD5 = enum.auto()
 
 
 @enum.unique
@@ -136,11 +136,11 @@ class IPAddrAnonymizationClass(enum.IntFlag):
     _ignore_ = 'IPAddrAnonymizationClass _'
     IPAddrAnonymizationClass = vars()
 
-    IPAddrAnonymizationClass['ORIG_ADDR'] = enum.auto()
+    ORIG_ADDR = enum.auto()
 
-    IPAddrAnonymizationClass['RESP_ADDR'] = enum.auto()
+    RESP_ADDR = enum.auto()
 
-    IPAddrAnonymizationClass['OTHER_ADDR'] = enum.auto()
+    OTHER_ADDR = enum.auto()
 
 
 @enum.unique
@@ -162,11 +162,11 @@ class PcapFilterID(enum.IntFlag):
 
     #: PacketFilter::DefaultPcapFilter
     #: (present if base/frameworks/packet-filter/main.zeek is loaded)
-    PcapFilterID['PacketFilter__DefaultPcapFilter'] = enum.auto()
+    PacketFilter_DefaultPcapFilter = enum.auto()
 
     #: PacketFilter::FilterTester
     #: (present if base/frameworks/packet-filter/main.zeek is loaded)
-    PcapFilterID['PacketFilter__FilterTester'] = enum.auto()
+    PacketFilter_FilterTester = enum.auto()
 
 
 @enum.unique
@@ -186,16 +186,16 @@ class pkt_profile_modes(enum.IntFlag):
     pkt_profile_modes = vars()
 
     #: No output.
-    pkt_profile_modes['PKT_PROFILE_MODE_NONE'] = enum.auto()
+    PKT_PROFILE_MODE_NONE = enum.auto()
 
     #: Output every pkt\_profile\_freq seconds.
-    pkt_profile_modes['PKT_PROFILE_MODE_SECS'] = enum.auto()
+    PKT_PROFILE_MODE_SECS = enum.auto()
 
     #: Output every pkt\_profile\_freq packets.
-    pkt_profile_modes['PKT_PROFILE_MODE_PKTS'] = enum.auto()
+    PKT_PROFILE_MODE_PKTS = enum.auto()
 
     #: Output every pkt\_profile\_freq bytes.
-    pkt_profile_modes['PKT_PROFILE_MODE_BYTES'] = enum.auto()
+    PKT_PROFILE_MODE_BYTES = enum.auto()
 
 
 @enum.unique
@@ -214,16 +214,16 @@ class transport_proto(enum.IntFlag):
     transport_proto = vars()
 
     #: An unknown transport-layer protocol.
-    transport_proto['unknown_transport'] = enum.auto()
+    unknown_transport = enum.auto()
 
     #: TCP.
-    transport_proto['tcp'] = enum.auto()
+    tcp = enum.auto()
 
     #: UDP.
-    transport_proto['udp'] = enum.auto()
+    udp = enum.auto()
 
     #: ICMP.
-    transport_proto['icmp'] = enum.auto()
+    icmp = enum.auto()
 
 
 @enum.unique
@@ -240,18 +240,18 @@ class Direction(enum.IntFlag):
 
     #: The connection originator is not within the locally-monitored
     #: network, but the other endpoint is.
-    Direction['INBOUND'] = enum.auto()
+    INBOUND = enum.auto()
 
     #: The connection originator is within the locally-monitored network,
     #: but the other endpoint is not.
-    Direction['OUTBOUND'] = enum.auto()
+    OUTBOUND = enum.auto()
 
     #: Only one endpoint is within the locally-monitored network, meaning
     #: the connection is either outbound or inbound.
-    Direction['BIDIRECTIONAL'] = enum.auto()
+    BIDIRECTIONAL = enum.auto()
 
     #: This value doesn’t match any connection.
-    Direction['NO_DIRECTION'] = enum.auto()
+    NO_DIRECTION = enum.auto()
 
 
 @enum.unique
@@ -267,13 +267,13 @@ class Host(enum.IntFlag):
     Host = vars()
 
     #: A host within the locally-monitored network.
-    Host['LOCAL_HOSTS'] = enum.auto()
+    LOCAL_HOSTS = enum.auto()
 
     #: A host not within the locally-monitored network.
-    Host['REMOTE_HOSTS'] = enum.auto()
+    REMOTE_HOSTS = enum.auto()
 
     #: Any host.
-    Host['ALL_HOSTS'] = enum.auto()
+    ALL_HOSTS = enum.auto()
 
     #: This value doesn’t match any host.
-    Host['NO_HOSTS'] = enum.auto()
+    NO_HOSTS = enum.auto()

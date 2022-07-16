@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# pylint: disable=line-too-long,import-error
+# pylint: disable=line-too-long
 """Namespace: ``Software``."""
 
 from zlogging._compat import enum
@@ -21,81 +21,81 @@ class Type(enum.IntFlag):
     Type = vars()
 
     #: A placeholder type for when the type of software is not known.
-    Type['UNKNOWN'] = enum.auto()
+    UNKNOWN = enum.auto()
 
     #: OS::WINDOWS
     #: (present if policy/frameworks/software/windows-version-detection.zeek is loaded)
     #: Identifier for Windows operating system versions
-    Type['OS__WINDOWS'] = enum.auto()
+    OS_WINDOWS = enum.auto()
 
     #: DHCP::SERVER
     #: (present if policy/protocols/dhcp/software.zeek is loaded)
     #: Identifier for web servers in the software framework.
-    Type['DHCP__SERVER'] = enum.auto()
+    DHCP_SERVER = enum.auto()
 
     #: DHCP::CLIENT
     #: (present if policy/protocols/dhcp/software.zeek is loaded)
     #: Identifier for web browsers in the software framework.
-    Type['DHCP__CLIENT'] = enum.auto()
+    DHCP_CLIENT = enum.auto()
 
     #: FTP::CLIENT
     #: (present if policy/protocols/ftp/software.zeek is loaded)
     #: Identifier for FTP clients in the software framework.
-    Type['FTP__CLIENT'] = enum.auto()
+    FTP_CLIENT = enum.auto()
 
     #: FTP::SERVER
     #: (present if policy/protocols/ftp/software.zeek is loaded)
     #: Not currently implemented.
-    Type['FTP__SERVER'] = enum.auto()
+    FTP_SERVER = enum.auto()
 
     #: HTTP::WEB_APPLICATION
     #: (present if policy/protocols/http/detect-webapps.zeek is loaded)
     #: Identifier for web applications in the software framework.
-    Type['HTTP__WEB_APPLICATION'] = enum.auto()
+    HTTP_WEB_APPLICATION = enum.auto()
 
     #: HTTP::BROWSER_PLUGIN
     #: (present if policy/protocols/http/software-browser-plugins.zeek is loaded)
     #: Identifier for browser plugins in the software framework.
-    Type['HTTP__BROWSER_PLUGIN'] = enum.auto()
+    HTTP_BROWSER_PLUGIN = enum.auto()
 
     #: HTTP::SERVER
     #: (present if policy/protocols/http/software.zeek is loaded)
     #: Identifier for web servers in the software framework.
-    Type['HTTP__SERVER'] = enum.auto()
+    HTTP_SERVER = enum.auto()
 
     #: HTTP::APPSERVER
     #: (present if policy/protocols/http/software.zeek is loaded)
     #: Identifier for app servers in the software framework.
-    Type['HTTP__APPSERVER'] = enum.auto()
+    HTTP_APPSERVER = enum.auto()
 
     #: HTTP::BROWSER
     #: (present if policy/protocols/http/software.zeek is loaded)
     #: Identifier for web browsers in the software framework.
-    Type['HTTP__BROWSER'] = enum.auto()
+    HTTP_BROWSER = enum.auto()
 
     #: MySQL::SERVER
     #: (present if policy/protocols/mysql/software.zeek is loaded)
     #: Identifier for MySQL servers in the software framework.
-    Type['MySQL__SERVER'] = enum.auto()
+    MySQL_SERVER = enum.auto()
 
     #: SMTP::MAIL_CLIENT
     #: (present if policy/protocols/smtp/software.zeek is loaded)
-    Type['SMTP__MAIL_CLIENT'] = enum.auto()
+    SMTP_MAIL_CLIENT = enum.auto()
 
     #: SMTP::MAIL_SERVER
     #: (present if policy/protocols/smtp/software.zeek is loaded)
-    Type['SMTP__MAIL_SERVER'] = enum.auto()
+    SMTP_MAIL_SERVER = enum.auto()
 
     #: SMTP::WEBMAIL_SERVER
     #: (present if policy/protocols/smtp/software.zeek is loaded)
-    Type['SMTP__WEBMAIL_SERVER'] = enum.auto()
+    SMTP_WEBMAIL_SERVER = enum.auto()
 
     #: SSH::SERVER
     #: (present if policy/protocols/ssh/software.zeek is loaded)
     #: Identifier for SSH clients in the software framework.
-    Type['SSH__SERVER'] = enum.auto()
+    SSH_SERVER = enum.auto()
 
     #: SSH::CLIENT
     #: (present if policy/protocols/ssh/software.zeek is loaded)
     #: Identifier for SSH servers in the software framework.
-    Type['SSH__CLIENT'] = enum.auto()
+    SSH_CLIENT = enum.auto()

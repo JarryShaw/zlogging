@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# pylint: disable=line-too-long,import-error
+# pylint: disable=line-too-long
 """Namespace: ``Known``."""
 
 from zlogging._compat import enum
@@ -17,6 +17,6 @@ class ModbusDeviceType(enum.IntFlag):
     _ignore_ = 'ModbusDeviceType _'
     ModbusDeviceType = vars()
 
-    ModbusDeviceType['MODBUS_MASTER'] = enum.auto()
+    MODBUS_MASTER = enum.auto()
 
-    ModbusDeviceType['MODBUS_SLAVE'] = enum.auto()
+    MODBUS_SLAVE = enum.auto()

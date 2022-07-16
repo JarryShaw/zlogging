@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# pylint: disable=line-too-long,import-error
+# pylint: disable=line-too-long
 """Namespace: ``MOUNT3``."""
 
 from zlogging._compat import enum
@@ -17,13 +17,13 @@ class auth_flavor_t(enum.IntFlag):
     _ignore_ = 'auth_flavor_t _'
     auth_flavor_t = vars()
 
-    auth_flavor_t['AUTH_NULL'] = enum.auto()
+    AUTH_NULL = enum.auto()
 
-    auth_flavor_t['AUTH_UNIX'] = enum.auto()
+    AUTH_UNIX = enum.auto()
 
-    auth_flavor_t['AUTH_SHORT'] = enum.auto()
+    AUTH_SHORT = enum.auto()
 
-    auth_flavor_t['AUTH_DES'] = enum.auto()
+    AUTH_DES = enum.auto()
 
 
 @enum.unique
@@ -38,19 +38,19 @@ class proc_t(enum.IntFlag):
     _ignore_ = 'proc_t _'
     proc_t = vars()
 
-    proc_t['PROC_NULL'] = enum.auto()
+    PROC_NULL = enum.auto()
 
-    proc_t['PROC_MNT'] = enum.auto()
+    PROC_MNT = enum.auto()
 
-    proc_t['PROC_DUMP'] = enum.auto()
+    PROC_DUMP = enum.auto()
 
-    proc_t['PROC_UMNT'] = enum.auto()
+    PROC_UMNT = enum.auto()
 
-    proc_t['PROC_UMNT_ALL'] = enum.auto()
+    PROC_UMNT_ALL = enum.auto()
 
-    proc_t['PROC_EXPORT'] = enum.auto()
+    PROC_EXPORT = enum.auto()
 
-    proc_t['PROC_END_OF_PROCS'] = enum.auto()
+    PROC_END_OF_PROCS = enum.auto()
 
 
 @enum.unique
@@ -65,24 +65,24 @@ class status_t(enum.IntFlag):
     _ignore_ = 'status_t _'
     status_t = vars()
 
-    status_t['MNT3_OK'] = enum.auto()
+    MNT3_OK = enum.auto()
 
-    status_t['MNT3ERR_PERM'] = enum.auto()
+    MNT3ERR_PERM = enum.auto()
 
-    status_t['MNT3ERR_NOENT'] = enum.auto()
+    MNT3ERR_NOENT = enum.auto()
 
-    status_t['MNT3ERR_IO'] = enum.auto()
+    MNT3ERR_IO = enum.auto()
 
-    status_t['MNT3ERR_ACCES'] = enum.auto()
+    MNT3ERR_ACCES = enum.auto()
 
-    status_t['MNT3ERR_NOTDIR'] = enum.auto()
+    MNT3ERR_NOTDIR = enum.auto()
 
-    status_t['MNT3ERR_INVAL'] = enum.auto()
+    MNT3ERR_INVAL = enum.auto()
 
-    status_t['MNT3ERR_NAMETOOLONG'] = enum.auto()
+    MNT3ERR_NAMETOOLONG = enum.auto()
 
-    status_t['MNT3ERR_NOTSUPP'] = enum.auto()
+    MNT3ERR_NOTSUPP = enum.auto()
 
-    status_t['MNT3ERR_SERVERFAULT'] = enum.auto()
+    MNT3ERR_SERVERFAULT = enum.auto()
 
-    status_t['MOUNT3ERR_UNKNOWN'] = enum.auto()
+    MOUNT3ERR_UNKNOWN = enum.auto()

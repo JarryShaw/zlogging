@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# pylint: disable=line-too-long,import-error
+# pylint: disable=line-too-long
 """Namespace: ``Input``."""
 
 from zlogging._compat import enum
@@ -20,13 +20,13 @@ class Event(enum.IntFlag):
     Event = vars()
 
     #: New data has been imported.
-    Event['EVENT_NEW'] = enum.auto()
+    EVENT_NEW = enum.auto()
 
     #: Existing data has been changed.
-    Event['EVENT_CHANGED'] = enum.auto()
+    EVENT_CHANGED = enum.auto()
 
     #: Previously existing data has been removed.
-    Event['EVENT_REMOVED'] = enum.auto()
+    EVENT_REMOVED = enum.auto()
 
 
 @enum.unique
@@ -44,13 +44,13 @@ class Mode(enum.IntFlag):
     Mode = vars()
 
     #: Do not automatically reread the file after it has been read.
-    Mode['MANUAL'] = enum.auto()
+    MANUAL = enum.auto()
 
     #: Reread the entire file each time a change is found.
-    Mode['REREAD'] = enum.auto()
+    REREAD = enum.auto()
 
     #: Read data from end of file each time new data is appended.
-    Mode['STREAM'] = enum.auto()
+    STREAM = enum.auto()
 
 
 @enum.unique
@@ -65,14 +65,14 @@ class Reader(enum.IntFlag):
     _ignore_ = 'Reader _'
     Reader = vars()
 
-    Reader['READER_ASCII'] = enum.auto()
+    READER_ASCII = enum.auto()
 
-    Reader['READER_BENCHMARK'] = enum.auto()
+    READER_BENCHMARK = enum.auto()
 
-    Reader['READER_BINARY'] = enum.auto()
+    READER_BINARY = enum.auto()
 
-    Reader['READER_CONFIG'] = enum.auto()
+    READER_CONFIG = enum.auto()
 
-    Reader['READER_RAW'] = enum.auto()
+    READER_RAW = enum.auto()
 
-    Reader['READER_SQLITE'] = enum.auto()
+    READER_SQLITE = enum.auto()

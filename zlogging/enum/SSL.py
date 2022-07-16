@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# pylint: disable=line-too-long,import-error
+# pylint: disable=line-too-long
 """Namespace: ``SSL``."""
 
 from zlogging._compat import enum
@@ -21,12 +21,12 @@ class SctSource(enum.IntFlag):
 
     #: Signed Certificate Timestamp was encountered in the extension of
     #: an X.509 certificate.
-    SctSource['SCT_X509_EXT'] = enum.auto()
+    SCT_X509_EXT = enum.auto()
 
     #: Signed Certificate Timestamp was encountered in an TLS session
     #: extension.
-    SctSource['SCT_TLS_EXT'] = enum.auto()
+    SCT_TLS_EXT = enum.auto()
 
     #: Signed Certificate Timestamp was encountered in the extension of
     #: an stapled OCSP reply.
-    SctSource['SCT_OCSP_EXT'] = enum.auto()
+    SCT_OCSP_EXT = enum.auto()

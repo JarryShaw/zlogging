@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# pylint: disable=line-too-long,import-error
+# pylint: disable=line-too-long
 """Namespace: ``DCE_RPC``."""
 
 from zlogging._compat import enum
@@ -17,33 +17,33 @@ class IfID(enum.IntFlag):
     _ignore_ = 'IfID _'
     IfID = vars()
 
-    IfID['unknown_if'] = enum.auto()
+    unknown_if = enum.auto()
 
-    IfID['epmapper'] = enum.auto()
+    epmapper = enum.auto()
 
-    IfID['lsarpc'] = enum.auto()
+    lsarpc = enum.auto()
 
-    IfID['lsa_ds'] = enum.auto()
+    lsa_ds = enum.auto()
 
-    IfID['mgmt'] = enum.auto()
+    mgmt = enum.auto()
 
-    IfID['netlogon'] = enum.auto()
+    netlogon = enum.auto()
 
-    IfID['samr'] = enum.auto()
+    samr = enum.auto()
 
-    IfID['srvsvc'] = enum.auto()
+    srvsvc = enum.auto()
 
-    IfID['spoolss'] = enum.auto()
+    spoolss = enum.auto()
 
-    IfID['drs'] = enum.auto()
+    drs = enum.auto()
 
-    IfID['winspipe'] = enum.auto()
+    winspipe = enum.auto()
 
-    IfID['wkssvc'] = enum.auto()
+    wkssvc = enum.auto()
 
-    IfID['oxid'] = enum.auto()
+    oxid = enum.auto()
 
-    IfID['ISCMActivator'] = enum.auto()
+    ISCMActivator = enum.auto()
 
 
 @enum.unique
@@ -58,44 +58,44 @@ class PType(enum.IntFlag):
     _ignore_ = 'PType _'
     PType = vars()
 
-    PType['REQUEST'] = enum.auto()
+    REQUEST = enum.auto()
 
-    PType['PING'] = enum.auto()
+    PING = enum.auto()
 
-    PType['RESPONSE'] = enum.auto()
+    RESPONSE = enum.auto()
 
-    PType['FAULT'] = enum.auto()
+    FAULT = enum.auto()
 
-    PType['WORKING'] = enum.auto()
+    WORKING = enum.auto()
 
-    PType['NOCALL'] = enum.auto()
+    NOCALL = enum.auto()
 
-    PType['REJECT'] = enum.auto()
+    REJECT = enum.auto()
 
-    PType['ACK'] = enum.auto()
+    ACK = enum.auto()
 
-    PType['CL_CANCEL'] = enum.auto()
+    CL_CANCEL = enum.auto()
 
-    PType['FACK'] = enum.auto()
+    FACK = enum.auto()
 
-    PType['CANCEL_ACK'] = enum.auto()
+    CANCEL_ACK = enum.auto()
 
-    PType['BIND'] = enum.auto()
+    BIND = enum.auto()
 
-    PType['BIND_ACK'] = enum.auto()
+    BIND_ACK = enum.auto()
 
-    PType['BIND_NAK'] = enum.auto()
+    BIND_NAK = enum.auto()
 
-    PType['ALTER_CONTEXT'] = enum.auto()
+    ALTER_CONTEXT = enum.auto()
 
-    PType['ALTER_CONTEXT_RESP'] = enum.auto()
+    ALTER_CONTEXT_RESP = enum.auto()
 
-    PType['AUTH3'] = enum.auto()
+    AUTH3 = enum.auto()
 
-    PType['SHUTDOWN'] = enum.auto()
+    SHUTDOWN = enum.auto()
 
-    PType['CO_CANCEL'] = enum.auto()
+    CO_CANCEL = enum.auto()
 
-    PType['ORPHANED'] = enum.auto()
+    ORPHANED = enum.auto()
 
-    PType['RTS'] = enum.auto()
+    RTS = enum.auto()

@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# pylint: disable=line-too-long,import-error
+# pylint: disable=line-too-long
 """Namespace: ``Reporter``."""
 
 from zlogging._compat import enum
@@ -17,8 +17,8 @@ class Level(enum.IntFlag):
     _ignore_ = 'Level _'
     Level = vars()
 
-    Level['INFO'] = enum.auto()
+    INFO = enum.auto()
 
-    Level['WARNING'] = enum.auto()
+    WARNING = enum.auto()
 
-    Level['ERROR'] = enum.auto()
+    ERROR = enum.auto()
