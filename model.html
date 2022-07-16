@@ -1,10 +1,10 @@
 
 <!DOCTYPE html>
 
-<html>
+<html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
     <title>Data Model &#8212; ZLogging 0.1.1 documentation</title>
     <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
@@ -12,11 +12,12 @@
     <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
     <script src="_static/jquery.js"></script>
     <script src="_static/underscore.js"></script>
+    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="_static/doctools.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Data Types" href="types.html" />
-    <link rel="prev" title="Loaders" href="loader.html" />
+    <link rel="prev" title="Log Dumpers" href="dumper.html" />
    
   <link rel="stylesheet" href="_static/custom.css" type="text/css" />
   
@@ -34,42 +35,32 @@
           <div class="body" role="main">
             
   <section id="module-zlogging.model">
-<span id="data-model"></span><h1>Data Model<a class="headerlink" href="#module-zlogging.model" title="Permalink to this headline">¶</a></h1>
-<p>Bro/Zeek log data model.</p>
+<span id="data-model"></span><h1>Data Model<a class="headerlink" href="#module-zlogging.model" title="Permalink to this heading">¶</a></h1>
 <dl class="py class">
 <dt class="sig sig-object py" id="zlogging.model.Model">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">zlogging.model.</span></span><span class="sig-name descname"><span class="pre">Model</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/zlogging/model.html#Model"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#zlogging.model.Model" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
 <p>Log data model.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Variables</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>__fields__</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">OrderedDict</span></code> mapping <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a> and <a class="reference internal" href="types.html#zlogging.types.BaseType" title="zlogging.types.BaseType"><code class="xref py py-class docutils literal notranslate"><span class="pre">BaseType</span></code></a>) – Fields of the data model.</p></li>
-<li><p><strong>__record_fields__</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">OrderedDict</span></code> mapping <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a> and <code class="xref py py-class docutils literal notranslate"><span class="pre">RecordType</span></code>) – Fields of <code class="docutils literal notranslate"><span class="pre">record</span></code> data type in the data model.</p></li>
-<li><p><strong>__empty_field__</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(in Python v3.10)"><em>bytes</em></a>) – Placeholder for empty field.</p></li>
-<li><p><strong>__unset_field__</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(in Python v3.10)"><em>bytes</em></a>) – Placeholder for unset field.</p></li>
-<li><p><strong>__set_separator__</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(in Python v3.10)"><em>bytes</em></a>) – Separator for set/vector fields.</p></li>
+<li><p><strong>*args</strong> (<em>Any</em>) – Arbitrary positional arguments.</p></li>
+<li><p><strong>**kwargs</strong> (<em>Any</em>) – Arbitrary keyword arguments.</p></li>
 </ul>
 </dd>
-<dt class="field-even">Warns</dt>
+<dt class="field-even">Warns<span class="colon">:</span></dt>
 <dd class="field-even"><p><strong>BroDeprecationWarning</strong> – Use of <code class="docutils literal notranslate"><span class="pre">bro_*</span></code> type annotations.</p>
 </dd>
-<dt class="field-odd">Raises</dt>
+<dt class="field-odd">Raises<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><a class="reference internal" href="_exc.html#zlogging._exc.ModelValueError" title="zlogging._exc.ModelValueError"><strong>ModelValueError</strong></a> – In case of inconsistency between field
+<li><p><strong>ModelValueError</strong> – In case of inconsistency between field
     data types, or values of <code class="docutils literal notranslate"><span class="pre">unset_field</span></code>, <code class="docutils literal notranslate"><span class="pre">empty_field</span></code> and
     <code class="docutils literal notranslate"><span class="pre">set_separator</span></code>.</p></li>
-<li><p><a class="reference internal" href="_exc.html#zlogging._exc.ModelTypeError" title="zlogging._exc.ModelTypeError"><strong>ModelTypeError</strong></a> – Wrong parameters when initialisation.</p></li>
+<li><p><strong>ModelTypeError</strong> – Wrong parameters when initialisation.</p></li>
 </ul>
 </dd>
-<dt class="field-even">Parameters</dt>
-<dd class="field-even"><ul class="simple">
-<li><p><strong>args</strong> (<em>Any</em>) – </p></li>
-<li><p><strong>kwargs</strong> (<em>Any</em>) – </p></li>
-</ul>
-</dd>
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p><a class="reference internal" href="#zlogging.model.Model" title="zlogging.model.Model">Model</a></p>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference internal" href="#zlogging.model.Model" title="zlogging.model.Model">Model</a></p>
 </dd>
 </dl>
 <div class="admonition note">
@@ -81,15 +72,15 @@ in your subclassed data model to implement your own ideas.</p>
 <p class="admonition-title">Example</p>
 <p>Define a custom log data model using the prefines Bro/Zeek data types,
 or subclasses of <a class="reference internal" href="types.html#zlogging.types.BaseType" title="zlogging.types.BaseType"><code class="xref py py-class docutils literal notranslate"><span class="pre">BaseType</span></code></a>:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">MyLog</span><span class="p">(</span><span class="n">Model</span><span class="p">):</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">MyLog</span><span class="p">(</span><span class="n">Model</span><span class="p">):</span>
     <span class="n">field_one</span> <span class="o">=</span> <span class="n">StringType</span><span class="p">()</span>
     <span class="n">field_two</span> <span class="o">=</span> <span class="n">SetType</span><span class="p">(</span><span class="n">element_type</span><span class="o">=</span><span class="n">PortType</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>Or you may use type annotations as <a class="reference external" href="https://www.python.org/dev/peps/pep-0484/">PEP 484</a> introduced when declaring
+<p>Or you may use type annotations as <span class="target" id="index-0"></span><a class="pep reference external" href="https://peps.python.org/pep-0484/"><strong>PEP 484</strong></a> introduced when declaring
 data models. All available type hints can be found in
 <code class="xref py py-mod docutils literal notranslate"><span class="pre">zlogging.typing</span></code>:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">MyLog</span><span class="p">(</span><span class="n">Model</span><span class="p">):</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">MyLog</span><span class="p">(</span><span class="n">Model</span><span class="p">):</span>
     <span class="n">field_one</span><span class="p">:</span> <span class="n">zeek_string</span>
     <span class="n">field_two</span><span class="p">:</span> <span class="n">zeek_set</span><span class="p">[</span><span class="n">zeek_port</span><span class="p">]</span>
 </pre></div>
@@ -106,28 +97,17 @@ processing the fields.</p>
 </div>
 <dl class="py property">
 <dt class="sig sig-object py" id="zlogging.model.Model.fields">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">fields</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/collections.html#collections.OrderedDict" title="(in Python v3.10)"><span class="pre">collections.OrderedDict</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><span class="pre">str</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference internal" href="types.html#zlogging.types.BaseType" title="zlogging.types.BaseType"><span class="pre">zlogging.types.BaseType</span></a><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#zlogging.model.Model.fields" title="Permalink to this definition">¶</a></dt>
-<dd><p>fields of the data model</p>
-<dl class="field-list simple">
-<dt class="field-odd">Type</dt>
-<dd class="field-odd"><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">OrderedDict</span></code> mapping <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a> and <a class="reference internal" href="types.html#zlogging.types.BaseType" title="zlogging.types.BaseType"><code class="xref py py-class docutils literal notranslate"><span class="pre">BaseType</span></code></a></p>
-</dd>
-<dt class="field-even">Return type</dt>
-<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/collections.html#collections.OrderedDict" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">OrderedDict</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>, <a class="reference internal" href="types.html#zlogging.types.BaseType" title="zlogging.types.BaseType"><code class="xref py py-class docutils literal notranslate"><span class="pre">BaseType</span></code></a>]</p>
-</dd>
-</dl>
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">fields</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">OrderedDict</span><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><span class="pre">str</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="types.html#zlogging.types._SimpleType" title="zlogging.types._SimpleType"><span class="pre">_SimpleType</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference internal" href="types.html#zlogging.types._GenericType" title="zlogging.types._GenericType"><span class="pre">_GenericType</span></a><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#zlogging.model.Model.fields" title="Permalink to this definition">¶</a></dt>
+<dd><p>Fields of the data model.</p>
 </dd></dl>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="zlogging.model.Model.unset_field">
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">unset_field</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(in Python v3.10)"><span class="pre">bytes</span></a></em><a class="headerlink" href="#zlogging.model.Model.unset_field" title="Permalink to this definition">¶</a></dt>
-<dd><p>placeholder for empty field</p>
+<dd><p>Placeholder for empty field.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(in Python v3.10)">bytes</a></p>
-</dd>
-<dt class="field-even">Return type</dt>
-<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bytes</span></code></a></p>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bytes</span></code></a></p>
 </dd>
 </dl>
 </dd></dl>
@@ -135,13 +115,10 @@ processing the fields.</p>
 <dl class="py property">
 <dt class="sig sig-object py" id="zlogging.model.Model.empty_field">
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">empty_field</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(in Python v3.10)"><span class="pre">bytes</span></a></em><a class="headerlink" href="#zlogging.model.Model.empty_field" title="Permalink to this definition">¶</a></dt>
-<dd><p>placeholder for unset field</p>
+<dd><p>Placeholder for unset field.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(in Python v3.10)">bytes</a></p>
-</dd>
-<dt class="field-even">Return type</dt>
-<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bytes</span></code></a></p>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bytes</span></code></a></p>
 </dd>
 </dl>
 </dd></dl>
@@ -149,13 +126,10 @@ processing the fields.</p>
 <dl class="py property">
 <dt class="sig sig-object py" id="zlogging.model.Model.set_separator">
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">set_separator</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(in Python v3.10)"><span class="pre">bytes</span></a></em><a class="headerlink" href="#zlogging.model.Model.set_separator" title="Permalink to this definition">¶</a></dt>
-<dd><p>separator for set/vector fields</p>
+<dd><p>Separator for set/vector fields.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(in Python v3.10)">bytes</a></p>
-</dd>
-<dt class="field-even">Return type</dt>
-<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bytes</span></code></a></p>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bytes</span></code></a></p>
 </dd>
 </dl>
 </dd></dl>
@@ -165,7 +139,7 @@ processing the fields.</p>
 <span class="sig-name descname"><span class="pre">__post_init__</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/zlogging/model.html#Model.__post_init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#zlogging.model.Model.__post_init__" title="Permalink to this definition">¶</a></dt>
 <dd><p>Post-processing customisation.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Return type</dt>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.10)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a></p>
 </dd>
 </dl>
@@ -176,17 +150,17 @@ processing the fields.</p>
 <span class="sig-name descname"><span class="pre">__call__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">format</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/zlogging/model.html#Model.__call__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#zlogging.model.Model.__call__" title="Permalink to this definition">¶</a></dt>
 <dd><p>Serialise data model with given format.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>format</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>) – Serialisation format.</p>
 </dd>
-<dt class="field-even">Return type</dt>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
 <dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.10)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Any</span></code></a></p>
 </dd>
-<dt class="field-odd">Returns</dt>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
 <dd class="field-odd"><p>The serialised data.</p>
 </dd>
-<dt class="field-even">Raises</dt>
-<dd class="field-even"><p><a class="reference internal" href="_exc.html#zlogging._exc.ModelFormatError" title="zlogging._exc.ModelFormatError"><strong>ModelFormatError</strong></a> – If <code class="docutils literal notranslate"><span class="pre">format</span></code> is not
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ModelFormatError</strong> – If <code class="docutils literal notranslate"><span class="pre">format</span></code> is not
     supproted, i.e. <code class="xref py py-meth docutils literal notranslate"><span class="pre">Mode.to{format}()</span></code> does not
     exist.</p>
 </dd>
@@ -198,12 +172,12 @@ processing the fields.</p>
 <span class="sig-name descname"><span class="pre">tojson</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/zlogging/model.html#Model.tojson"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#zlogging.model.Model.tojson" title="Permalink to this definition">¶</a></dt>
 <dd><p>Serialise data model as JSON log format.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/collections.html#collections.OrderedDict" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">OrderedDict</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>, <a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.10)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Any</span></code></a>]</p>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p>An <code class="xref py py-obj docutils literal notranslate"><span class="pre">OrderedDict</span></code> mapping each field and serialised JSON
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>An <code class="xref py py-obj docutils literal notranslate"><span class="pre">OrderedDict</span></code> mapping each field and serialised JSON
 serialisable data.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>OrderedDict[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)">str</a>, Any]</p>
 </dd>
 </dl>
 </dd></dl>
@@ -213,11 +187,11 @@ serialisable data.</p>
 <span class="sig-name descname"><span class="pre">toascii</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/zlogging/model.html#Model.toascii"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#zlogging.model.Model.toascii" title="Permalink to this definition">¶</a></dt>
 <dd><p>Serialise data model as ASCII log format.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/collections.html#collections.OrderedDict" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">OrderedDict</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>, <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>]</p>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>An <code class="xref py py-obj docutils literal notranslate"><span class="pre">OrderedDict</span></code> mapping each field and serialised text data.</p>
 </dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p>An <code class="xref py py-obj docutils literal notranslate"><span class="pre">OrderedDict</span></code> mapping each field and serialised text data.</p>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>OrderedDict[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)">str</a>, <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)">str</a>]</p>
 </dd>
 </dl>
 </dd></dl>
@@ -227,15 +201,15 @@ serialisable data.</p>
 <span class="sig-name descname"><span class="pre">asdict</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dict_factory</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/zlogging/model.html#Model.asdict"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#zlogging.model.Model.asdict" title="Permalink to this definition">¶</a></dt>
 <dd><p>Convert data model as a dictionary mapping field names to field values.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>dict_factory</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Optional" title="(in Python v3.10)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Type" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Type</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span></code></a>]]) – If given, <code class="docutils literal notranslate"><span class="pre">dict_factory</span></code> will be used instead of
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>dict_factory</strong> (<em>Optional</em><em>[</em><em>Type</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.10)"><em>dict</em></a><em>]</em><em>]</em>) – If given, <code class="docutils literal notranslate"><span class="pre">dict_factory</span></code> will be used instead of
 built-in <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.10)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">dict</span></code></a>.</p>
 </dd>
-<dt class="field-even">Return type</dt>
-<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Dict" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Dict</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>, <a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.10)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Any</span></code></a>]</p>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A dictionary mapping field names to field values.</p>
 </dd>
-<dt class="field-odd">Returns</dt>
-<dd class="field-odd"><p>A dictionary mapping field names to field values.</p>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.10)">dict</a>[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)">str</a>, Any]</p>
 </dd>
 </dl>
 </dd></dl>
@@ -245,15 +219,15 @@ built-in <a class="reference external" href="https://docs.python.org/3/library/s
 <span class="sig-name descname"><span class="pre">astuple</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">tuple_factory</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/zlogging/model.html#Model.astuple"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#zlogging.model.Model.astuple" title="Permalink to this definition">¶</a></dt>
 <dd><p>Convert data model as a tuple of field values.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>tuple_factory</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Optional" title="(in Python v3.10)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Type" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Type</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">tuple</span></code></a>]]) – If given, <code class="docutils literal notranslate"><span class="pre">tuple_factory</span></code> will be used instead of
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>tuple_factory</strong> (<em>Optional</em><em>[</em><em>Type</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.10)"><em>tuple</em></a><em>]</em><em>]</em>) – If given, <code class="docutils literal notranslate"><span class="pre">tuple_factory</span></code> will be used instead of
 built-in <code class="xref py py-class docutils literal notranslate"><span class="pre">namedtuple</span></code>.</p>
 </dd>
-<dt class="field-even">Return type</dt>
-<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Tuple" title="(in Python v3.10)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Tuple</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.10)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Any</span></code></a>, <a class="reference external" href="https://docs.python.org/3/library/constants.html#Ellipsis" title="(in Python v3.10)"><code class="xref py py-data docutils literal notranslate"><span class="pre">...</span></code></a>]</p>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A tuple of field values.</p>
 </dd>
-<dt class="field-odd">Returns</dt>
-<dd class="field-odd"><p>A tuple of field values.</p>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.10)">tuple</a>[Any, …]</p>
 </dd>
 </dl>
 </dd></dl>
@@ -265,32 +239,31 @@ built-in <code class="xref py py-class docutils literal notranslate"><span class
 <span class="sig-prename descclassname"><span class="pre">zlogging.model.</span></span><span class="sig-name descname"><span class="pre">new_model</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">fields</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/zlogging/model.html#new_model"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#zlogging.model.new_model" title="Permalink to this definition">¶</a></dt>
 <dd><p>Create a data model dynamically with the appropriate fields.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>name</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>) – data model name</p></li>
 <li><p><strong>**fields</strong> – defined fields of the data model</p></li>
-<li><p><strong>fields</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.10)"><em>Any</em></a>) – </p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p>created data model</p>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Type" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Type</span></code></a>[<a class="reference internal" href="#zlogging.model.Model" title="zlogging.model.Model"><code class="xref py py-class docutils literal notranslate"><span class="pre">Model</span></code></a>]</p>
 </dd>
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p><a class="reference internal" href="#zlogging.model.Model" title="zlogging.model.Model"><code class="xref py py-class docutils literal notranslate"><span class="pre">Model</span></code></a></p>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Created data model.</p>
 </dd>
 </dl>
 <div class="admonition-examples admonition">
 <p class="admonition-title">Examples</p>
 <p>Typically, we define a data model by subclassing the <a class="reference internal" href="#zlogging.model.Model" title="zlogging.model.Model"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Model</span></code></a>
 class, as following:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">MyLog</span><span class="p">(</span><span class="n">Model</span><span class="p">):</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">MyLog</span><span class="p">(</span><span class="n">Model</span><span class="p">):</span>
     <span class="n">field_one</span> <span class="o">=</span> <span class="n">StringType</span><span class="p">()</span>
     <span class="n">field_two</span> <span class="o">=</span> <span class="n">SetType</span><span class="p">(</span><span class="n">element_type</span><span class="o">=</span><span class="n">PortType</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>when defining dynamically with <a class="reference internal" href="#zlogging.model.new_model" title="zlogging.model.new_model"><code class="xref py py-func docutils literal notranslate"><span class="pre">new_model()</span></code></a>, the definition above
 can be rewrote to:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">MyLog</span> <span class="o">=</span> <span class="n">new_model</span><span class="p">(</span><span class="s1">&#39;MyLog&#39;</span><span class="p">,</span> <span class="n">field_one</span><span class="o">=</span><span class="n">StringType</span><span class="p">(),</span> <span class="n">field_two</span><span class="o">=</span><span class="n">SetType</span><span class="p">(</span><span class="n">element_type</span><span class="o">=</span><span class="n">PortType</span><span class="p">))</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">MyLog</span> <span class="o">=</span> <span class="n">new_model</span><span class="p">(</span><span class="s1">&#39;MyLog&#39;</span><span class="p">,</span> <span class="n">field_one</span><span class="o">=</span><span class="n">StringType</span><span class="p">(),</span> <span class="n">field_two</span><span class="o">=</span><span class="n">SetType</span><span class="p">(</span><span class="n">element_type</span><span class="o">=</span><span class="n">PortType</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>
@@ -323,14 +296,14 @@ can be rewrote to:</p>
 
 <h3>Navigation</h3>
 <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="dumper.html">Dumpers</a></li>
-<li class="toctree-l1"><a class="reference internal" href="loader.html">Loaders</a></li>
+<li class="toctree-l1"><a class="reference internal" href="loader.html">Log Loaders</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dumper.html">Log Dumpers</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Data Model</a></li>
 <li class="toctree-l1"><a class="reference internal" href="types.html">Data Types</a></li>
 <li class="toctree-l1"><a class="reference internal" href="typing.html">Typing Annotations</a></li>
-<li class="toctree-l1"><a class="reference internal" href="_data.html">Data Classes</a></li>
 <li class="toctree-l1"><a class="reference internal" href="_exc.html">Exceptions &amp; Warnings</a></li>
 <li class="toctree-l1"><a class="reference internal" href="_aux.html">Internal Auxiliary Functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_data.html">Data Classes</a></li>
 <li class="toctree-l1"><a class="reference internal" href="enum/index.html">Enum Namespace</a></li>
 </ul>
 
@@ -338,7 +311,7 @@ can be rewrote to:</p>
 <h3>Related Topics</h3>
 <ul>
   <li><a href="index.html">Documentation overview</a><ul>
-      <li>Previous: <a href="loader.html" title="previous chapter">Loaders</a></li>
+      <li>Previous: <a href="dumper.html" title="previous chapter">Log Dumpers</a></li>
       <li>Next: <a href="types.html" title="next chapter">Data Types</a></li>
   </ul></li>
 </ul>
@@ -352,7 +325,7 @@ can be rewrote to:</p>
     </form>
     </div>
 </div>
-<script>$('#searchbox').show(0);</script>
+<script>document.getElementById('searchbox').style.display = "block"</script>
 
 
 

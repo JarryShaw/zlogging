@@ -1,10 +1,10 @@
 
 <!DOCTYPE html>
 
-<html>
+<html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
     <title>Broker Namespace &#8212; ZLogging 0.1.1 documentation</title>
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
@@ -12,6 +12,7 @@
     <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
     <script src="../_static/underscore.js"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="../_static/doctools.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
@@ -34,12 +35,12 @@
           <div class="body" role="main">
             
   <section id="broker-namespace">
-<h1><code class="docutils literal notranslate"><span class="pre">Broker</span></code> Namespace<a class="headerlink" href="#broker-namespace" title="Permalink to this headline">¶</a></h1>
+<h1><code class="docutils literal notranslate"><span class="pre">Broker</span></code> Namespace<a class="headerlink" href="#broker-namespace" title="Permalink to this heading">¶</a></h1>
 <p>Namespace: <code class="docutils literal notranslate"><span class="pre">Broker</span></code>.</p>
 <dl class="py class">
 <dt class="sig sig-object py">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">zlogging.enum.Broker.</span></span><span class="sig-name descname"><span class="pre">DataType</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/zlogging/enum/Broker.html#DataType"><span class="viewcode-link"><span class="pre">[source]</span></span></a></dt>
-<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/enum.html#enum.IntFlag" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">enum.IntFlag</span></code></a></p>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/enum.html#enum.IntFlag" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">IntFlag</span></code></a></p>
 <p>Enum: <code class="docutils literal notranslate"><span class="pre">Broker::DataType</span></code>.</p>
 <p>Enumerates the possible types that <code class="docutils literal notranslate"><span class="pre">Broker::Data</span></code> may be in terms of Zeek data types.</p>
 <div class="admonition seealso">
@@ -126,7 +127,7 @@
 <dl class="py class">
 <dt class="sig sig-object py">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">zlogging.enum.Broker.</span></span><span class="sig-name descname"><span class="pre">Type</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/zlogging/enum/Broker.html#Type"><span class="viewcode-link"><span class="pre">[source]</span></span></a></dt>
-<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/enum.html#enum.IntFlag" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">enum.IntFlag</span></code></a></p>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/enum.html#enum.IntFlag" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">IntFlag</span></code></a></p>
 <p>Enum: <code class="docutils literal notranslate"><span class="pre">Broker::Type</span></code>.</p>
 <p>The type of a Broker activity being logged.</p>
 <div class="admonition seealso">
@@ -136,19 +137,21 @@
 <dl class="py attribute">
 <dt class="sig sig-object py">
 <span class="sig-name descname"><span class="pre">STATUS</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">1</span></em></dt>
-<dd></dd></dl>
+<dd><p>An informational status update.</p>
+</dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py">
 <span class="sig-name descname"><span class="pre">ERROR</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">2</span></em></dt>
-<dd></dd></dl>
+<dd><p>An error situation.</p>
+</dd></dl>
 
 </dd></dl>
 
 <dl class="py class">
 <dt class="sig sig-object py">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">zlogging.enum.Broker.</span></span><span class="sig-name descname"><span class="pre">ErrorCode</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/zlogging/enum/Broker.html#ErrorCode"><span class="viewcode-link"><span class="pre">[source]</span></span></a></dt>
-<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/enum.html#enum.IntFlag" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">enum.IntFlag</span></code></a></p>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/enum.html#enum.IntFlag" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">IntFlag</span></code></a></p>
 <p>Enum: <code class="docutils literal notranslate"><span class="pre">Broker::ErrorCode</span></code>.</p>
 <p>Enumerates the possible error types.</p>
 <div class="admonition seealso">
@@ -158,119 +161,141 @@
 <dl class="py attribute">
 <dt class="sig sig-object py">
 <span class="sig-name descname"><span class="pre">NO_ERROR</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">1</span></em></dt>
-<dd></dd></dl>
+<dd><p>(present if base/bif/comm.bif.zeek is loaded)</p>
+</dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py">
 <span class="sig-name descname"><span class="pre">UNSPECIFIED</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">2</span></em></dt>
-<dd></dd></dl>
+<dd><p>The unspecified default error code.</p>
+</dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py">
 <span class="sig-name descname"><span class="pre">PEER_INCOMPATIBLE</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">4</span></em></dt>
-<dd></dd></dl>
+<dd><p>Version incompatibility.</p>
+</dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py">
 <span class="sig-name descname"><span class="pre">PEER_INVALID</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">8</span></em></dt>
-<dd></dd></dl>
+<dd><p>Referenced peer does not exist.</p>
+</dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py">
 <span class="sig-name descname"><span class="pre">PEER_UNAVAILABLE</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">16</span></em></dt>
-<dd></dd></dl>
+<dd><p>Remote peer not listening.</p>
+</dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py">
 <span class="sig-name descname"><span class="pre">PEER_DISCONNECT_DURING_HANDSHAKE</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">32</span></em></dt>
-<dd></dd></dl>
+<dd><p>(present if base/bif/comm.bif.zeek is loaded)</p>
+</dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py">
 <span class="sig-name descname"><span class="pre">PEER_TIMEOUT</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">64</span></em></dt>
-<dd></dd></dl>
+<dd><p>A peering request timed out.</p>
+</dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py">
 <span class="sig-name descname"><span class="pre">MASTER_EXISTS</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">128</span></em></dt>
-<dd></dd></dl>
+<dd><p>Master with given name already exists.</p>
+</dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py">
 <span class="sig-name descname"><span class="pre">NO_SUCH_MASTER</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">256</span></em></dt>
-<dd></dd></dl>
+<dd><p>Master with given name does not exist.</p>
+</dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py">
 <span class="sig-name descname"><span class="pre">NO_SUCH_KEY</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">512</span></em></dt>
-<dd></dd></dl>
+<dd><p>The given data store key does not exist.</p>
+</dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py">
 <span class="sig-name descname"><span class="pre">REQUEST_TIMEOUT</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">1024</span></em></dt>
-<dd></dd></dl>
+<dd><p>The store operation timed out.</p>
+</dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py">
 <span class="sig-name descname"><span class="pre">TYPE_CLASH</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">2048</span></em></dt>
-<dd></dd></dl>
+<dd><p>The operation expected a different type than provided.</p>
+</dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py">
 <span class="sig-name descname"><span class="pre">INVALID_DATA</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">4096</span></em></dt>
-<dd></dd></dl>
+<dd><p>The data value cannot be used to carry out the desired operation.</p>
+</dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py">
 <span class="sig-name descname"><span class="pre">BACKEND_FAILURE</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">8192</span></em></dt>
-<dd></dd></dl>
+<dd><p>The storage backend failed to execute the operation.</p>
+</dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py">
 <span class="sig-name descname"><span class="pre">STALE_DATA</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">16384</span></em></dt>
-<dd></dd></dl>
+<dd><p>The storage backend failed to execute the operation.</p>
+</dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py">
 <span class="sig-name descname"><span class="pre">CANNOT_OPEN_FILE</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">32768</span></em></dt>
-<dd></dd></dl>
+<dd><p>(present if base/bif/comm.bif.zeek is loaded)</p>
+</dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py">
 <span class="sig-name descname"><span class="pre">CANNOT_WRITE_FILE</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">65536</span></em></dt>
-<dd></dd></dl>
+<dd><p>(present if base/bif/comm.bif.zeek is loaded)</p>
+</dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py">
 <span class="sig-name descname"><span class="pre">INVALID_TOPIC_KEY</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">131072</span></em></dt>
-<dd></dd></dl>
+<dd><p>(present if base/bif/comm.bif.zeek is loaded)</p>
+</dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py">
 <span class="sig-name descname"><span class="pre">END_OF_FILE</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">262144</span></em></dt>
-<dd></dd></dl>
+<dd><p>(present if base/bif/comm.bif.zeek is loaded)</p>
+</dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py">
 <span class="sig-name descname"><span class="pre">INVALID_TAG</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">524288</span></em></dt>
-<dd></dd></dl>
+<dd><p>(present if base/bif/comm.bif.zeek is loaded)</p>
+</dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py">
 <span class="sig-name descname"><span class="pre">INVALID_STATUS</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">1048576</span></em></dt>
-<dd></dd></dl>
+<dd><p>(present if base/bif/comm.bif.zeek is loaded)</p>
+</dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py">
 <span class="sig-name descname"><span class="pre">CAF_ERROR</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">2097152</span></em></dt>
-<dd></dd></dl>
+<dd><p>Catch-all for a CAF-level problem.</p>
+</dd></dl>
 
 </dd></dl>
 
 <dl class="py class">
 <dt class="sig sig-object py">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">zlogging.enum.Broker.</span></span><span class="sig-name descname"><span class="pre">PeerStatus</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/zlogging/enum/Broker.html#PeerStatus"><span class="viewcode-link"><span class="pre">[source]</span></span></a></dt>
-<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/enum.html#enum.IntFlag" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">enum.IntFlag</span></code></a></p>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/enum.html#enum.IntFlag" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">IntFlag</span></code></a></p>
 <p>Enum: <code class="docutils literal notranslate"><span class="pre">Broker::PeerStatus</span></code>.</p>
 <p>The possible states of a peer endpoint.</p>
 <div class="admonition seealso">
@@ -280,39 +305,45 @@
 <dl class="py attribute">
 <dt class="sig sig-object py">
 <span class="sig-name descname"><span class="pre">INITIALIZING</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">1</span></em></dt>
-<dd></dd></dl>
+<dd><p>The peering process is initiated.</p>
+</dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py">
 <span class="sig-name descname"><span class="pre">CONNECTING</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">2</span></em></dt>
-<dd></dd></dl>
+<dd><p>Connection establishment in process.</p>
+</dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py">
 <span class="sig-name descname"><span class="pre">CONNECTED</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">4</span></em></dt>
-<dd></dd></dl>
+<dd><p>Connection established, peering pending.</p>
+</dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py">
 <span class="sig-name descname"><span class="pre">PEERED</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">8</span></em></dt>
-<dd></dd></dl>
+<dd><p>Successfully peered.</p>
+</dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py">
 <span class="sig-name descname"><span class="pre">DISCONNECTED</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">16</span></em></dt>
-<dd></dd></dl>
+<dd><p>Connection to remote peer lost.</p>
+</dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py">
 <span class="sig-name descname"><span class="pre">RECONNECTING</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">32</span></em></dt>
-<dd></dd></dl>
+<dd><p>Reconnecting to peer after a lost connection.</p>
+</dd></dl>
 
 </dd></dl>
 
 <dl class="py class">
 <dt class="sig sig-object py">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">zlogging.enum.Broker.</span></span><span class="sig-name descname"><span class="pre">BackendType</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/zlogging/enum/Broker.html#BackendType"><span class="viewcode-link"><span class="pre">[source]</span></span></a></dt>
-<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/enum.html#enum.IntFlag" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">enum.IntFlag</span></code></a></p>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/enum.html#enum.IntFlag" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">IntFlag</span></code></a></p>
 <p>Enum: <code class="docutils literal notranslate"><span class="pre">Broker::BackendType</span></code>.</p>
 <p>Enumerates the possible storage backends.</p>
 <div class="admonition seealso">
@@ -339,7 +370,7 @@
 <dl class="py class">
 <dt class="sig sig-object py">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">zlogging.enum.Broker.</span></span><span class="sig-name descname"><span class="pre">QueryStatus</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/zlogging/enum/Broker.html#QueryStatus"><span class="viewcode-link"><span class="pre">[source]</span></span></a></dt>
-<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/enum.html#enum.IntFlag" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">enum.IntFlag</span></code></a></p>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/enum.html#enum.IntFlag" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">IntFlag</span></code></a></p>
 <p>Enum: <code class="docutils literal notranslate"><span class="pre">Broker::QueryStatus</span></code>.</p>
 <p>Whether a data store query could be completed or not.</p>
 <div class="admonition seealso">
@@ -385,45 +416,15 @@
 
 <h3>Navigation</h3>
 <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="../dumper.html">Dumpers</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../loader.html">Loaders</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../loader.html">Log Loaders</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dumper.html">Log Dumpers</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../model.html">Data Model</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../types.html">Data Types</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../typing.html">Typing Annotations</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../_data.html">Data Classes</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../_exc.html">Exceptions &amp; Warnings</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../_aux.html">Internal Auxiliary Functions</a></li>
-<li class="toctree-l1 current"><a class="reference internal" href="index.html">Enum Namespace</a><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="zeek.html"><code class="docutils literal notranslate"><span class="pre">zeek</span></code> Namespace</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#"><code class="docutils literal notranslate"><span class="pre">Broker</span></code> Namespace</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Cluster.html"><code class="docutils literal notranslate"><span class="pre">Cluster</span></code> Namespace</a></li>
-<li class="toctree-l2"><a class="reference internal" href="DCE_RPC.html"><code class="docutils literal notranslate"><span class="pre">DCE_RPC</span></code> Namespace</a></li>
-<li class="toctree-l2"><a class="reference internal" href="HTTP.html"><code class="docutils literal notranslate"><span class="pre">HTTP</span></code> Namespace</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Input.html"><code class="docutils literal notranslate"><span class="pre">Input</span></code> Namespace</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Intel.html"><code class="docutils literal notranslate"><span class="pre">Intel</span></code> Namespace</a></li>
-<li class="toctree-l2"><a class="reference internal" href="JSON.html"><code class="docutils literal notranslate"><span class="pre">JSON</span></code> Namespace</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Known.html"><code class="docutils literal notranslate"><span class="pre">Known</span></code> Namespace</a></li>
-<li class="toctree-l2"><a class="reference internal" href="LoadBalancing.html"><code class="docutils literal notranslate"><span class="pre">LoadBalancing</span></code> Namespace</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Log.html"><code class="docutils literal notranslate"><span class="pre">Log</span></code> Namespace</a></li>
-<li class="toctree-l2"><a class="reference internal" href="MOUNT3.html"><code class="docutils literal notranslate"><span class="pre">MOUNT3</span></code> Namespace</a></li>
-<li class="toctree-l2"><a class="reference internal" href="MQTT.html"><code class="docutils literal notranslate"><span class="pre">MQTT</span></code> Namespace</a></li>
-<li class="toctree-l2"><a class="reference internal" href="NFS3.html"><code class="docutils literal notranslate"><span class="pre">NFS3</span></code> Namespace</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Notice.html"><code class="docutils literal notranslate"><span class="pre">Notice</span></code> Namespace</a></li>
-<li class="toctree-l2"><a class="reference internal" href="OpenFlow.html"><code class="docutils literal notranslate"><span class="pre">OpenFlow</span></code> Namespace</a></li>
-<li class="toctree-l2"><a class="reference internal" href="NetControl.html"><code class="docutils literal notranslate"><span class="pre">NetControl</span></code> Namespace</a></li>
-<li class="toctree-l2"><a class="reference internal" href="ProtocolDetector.html"><code class="docutils literal notranslate"><span class="pre">ProtocolDetector</span></code> Namespace</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Reporter.html"><code class="docutils literal notranslate"><span class="pre">Reporter</span></code> Namespace</a></li>
-<li class="toctree-l2"><a class="reference internal" href="SMB.html"><code class="docutils literal notranslate"><span class="pre">SMB</span></code> Namespace</a></li>
-<li class="toctree-l2"><a class="reference internal" href="SOCKS.html"><code class="docutils literal notranslate"><span class="pre">SOCKS</span></code> Namespace</a></li>
-<li class="toctree-l2"><a class="reference internal" href="SSL.html"><code class="docutils literal notranslate"><span class="pre">SSL</span></code> Namespace</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Signatures.html"><code class="docutils literal notranslate"><span class="pre">Signatures</span></code> Namespace</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Software.html"><code class="docutils literal notranslate"><span class="pre">Software</span></code> Namespace</a></li>
-<li class="toctree-l2"><a class="reference internal" href="SumStats.html"><code class="docutils literal notranslate"><span class="pre">SumStats</span></code> Namespace</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Tunnel.html"><code class="docutils literal notranslate"><span class="pre">Tunnel</span></code> Namespace</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Weird.html"><code class="docutils literal notranslate"><span class="pre">Weird</span></code> Namespace</a></li>
-<li class="toctree-l2"><a class="reference internal" href="ZeekygenExample.html"><code class="docutils literal notranslate"><span class="pre">ZeekygenExample</span></code> Namespace</a></li>
-</ul>
-</li>
+<li class="toctree-l1"><a class="reference internal" href="../_data.html">Data Classes</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Enum Namespace</a></li>
 </ul>
 
 <div class="relations">
@@ -446,7 +447,7 @@
     </form>
     </div>
 </div>
-<script>$('#searchbox').show(0);</script>
+<script>document.getElementById('searchbox').style.display = "block"</script>
 
 
 

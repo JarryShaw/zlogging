@@ -1,7 +1,7 @@
 
 <!DOCTYPE html>
 
-<html>
+<html lang="en">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -11,6 +11,7 @@
     <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
     <script src="../../../_static/jquery.js"></script>
     <script src="../../../_static/underscore.js"></script>
+    <script src="../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="../../../_static/doctools.js"></script>
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" />
@@ -32,10 +33,10 @@
             
   <h1>Source code for zlogging.enum.SumStats</h1><div class="highlight"><pre>
 <span></span><span class="c1"># -*- coding: utf-8 -*-</span>
-<span class="c1"># pylint: disable=line-too-long,import-error</span>
+<span class="c1"># pylint: disable=line-too-long</span>
 <span class="sd">&quot;&quot;&quot;Namespace: ``SumStats``.&quot;&quot;&quot;</span>
 
-<span class="kn">from</span> <span class="nn">zlogging._compat</span> <span class="kn">import</span> <span class="n">enum</span>
+<span class="kn">from</span> <span class="nn">zlogging._compat</span> <span class="k">import</span> <span class="n">enum</span>
 
 
 <div class="viewcode-block" id="Calculation"><a class="viewcode-back" href="../../../enum/SumStats.html#zlogging.enum.SumStats.Calculation">[docs]</a><span class="nd">@enum</span><span class="o">.</span><span class="n">unique</span>
@@ -52,53 +53,53 @@
     <span class="n">_ignore_</span> <span class="o">=</span> <span class="s1">&#39;Calculation _&#39;</span>
     <span class="n">Calculation</span> <span class="o">=</span> <span class="nb">vars</span><span class="p">()</span>
 
-    <span class="n">Calculation</span><span class="p">[</span><span class="s1">&#39;PLACEHOLDER&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span>
+    <span class="n">PLACEHOLDER</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span>
 
     <span class="c1">#: (present if base/frameworks/sumstats/plugins/average.zeek is loaded)</span>
     <span class="c1">#: Calculate the average of the values.</span>
-    <span class="n">Calculation</span><span class="p">[</span><span class="s1">&#39;AVERAGE&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span>
+    <span class="n">AVERAGE</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span>
 
     <span class="c1">#: (present if base/frameworks/sumstats/plugins/hll\_unique.zeek is loaded)</span>
     <span class="c1">#: Calculate the number of unique values.</span>
-    <span class="n">Calculation</span><span class="p">[</span><span class="s1">&#39;HLL_UNIQUE&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span>
+    <span class="n">HLL_UNIQUE</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span>
 
     <span class="c1">#: (present if base/frameworks/sumstats/plugins/last.zeek is loaded)</span>
     <span class="c1">#: Keep last X observations in a queue.</span>
-    <span class="n">Calculation</span><span class="p">[</span><span class="s1">&#39;LAST&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span>
+    <span class="n">LAST</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span>
 
     <span class="c1">#: (present if base/frameworks/sumstats/plugins/max.zeek is loaded)</span>
     <span class="c1">#: Find the maximum value.</span>
-    <span class="n">Calculation</span><span class="p">[</span><span class="s1">&#39;MAX&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span>
+    <span class="n">MAX</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span>
 
     <span class="c1">#: (present if base/frameworks/sumstats/plugins/min.zeek is loaded)</span>
     <span class="c1">#: Find the minimum value.</span>
-    <span class="n">Calculation</span><span class="p">[</span><span class="s1">&#39;MIN&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span>
+    <span class="n">MIN</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span>
 
     <span class="c1">#: (present if base/frameworks/sumstats/plugins/sample.zeek is loaded)</span>
     <span class="c1">#: Get uniquely distributed random samples from the observation</span>
     <span class="c1">#: stream.</span>
-    <span class="n">Calculation</span><span class="p">[</span><span class="s1">&#39;SAMPLE&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span>
+    <span class="n">SAMPLE</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span>
 
     <span class="c1">#: (present if base/frameworks/sumstats/plugins/variance.zeek is loaded)</span>
     <span class="c1">#: Calculate the variance of the values.</span>
-    <span class="n">Calculation</span><span class="p">[</span><span class="s1">&#39;VARIANCE&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span>
+    <span class="n">VARIANCE</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span>
 
     <span class="c1">#: (present if base/frameworks/sumstats/plugins/std-dev.zeek is loaded)</span>
     <span class="c1">#: Calculate the standard deviation of the values.</span>
-    <span class="n">Calculation</span><span class="p">[</span><span class="s1">&#39;STD_DEV&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span>
+    <span class="n">STD_DEV</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span>
 
     <span class="c1">#: (present if base/frameworks/sumstats/plugins/sum.zeek is loaded)</span>
     <span class="c1">#: Calculate the sum of the values.  For string values,</span>
     <span class="c1">#: this will be the number of strings.</span>
-    <span class="n">Calculation</span><span class="p">[</span><span class="s1">&#39;SUM&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span>
+    <span class="n">SUM</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span>
 
     <span class="c1">#: (present if base/frameworks/sumstats/plugins/topk.zeek is loaded)</span>
     <span class="c1">#: Keep a top-k list of values.</span>
-    <span class="n">Calculation</span><span class="p">[</span><span class="s1">&#39;TOPK&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span>
+    <span class="n">TOPK</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span>
 
     <span class="c1">#: (present if base/frameworks/sumstats/plugins/unique.zeek is loaded)</span>
     <span class="c1">#: Calculate the number of unique values.</span>
-    <span class="n">Calculation</span><span class="p">[</span><span class="s1">&#39;UNIQUE&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span></div>
+    <span class="n">UNIQUE</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span></div>
 </pre></div>
 
           </div>
@@ -125,14 +126,14 @@
 
 <h3>Navigation</h3>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../../../dumper.html">Dumpers</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../loader.html">Loaders</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../loader.html">Log Loaders</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../dumper.html">Log Dumpers</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../model.html">Data Model</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../types.html">Data Types</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../typing.html">Typing Annotations</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../_data.html">Data Classes</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../_exc.html">Exceptions &amp; Warnings</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../_aux.html">Internal Auxiliary Functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../_data.html">Data Classes</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../enum/index.html">Enum Namespace</a></li>
 </ul>
 
@@ -156,7 +157,7 @@
     </form>
     </div>
 </div>
-<script>$('#searchbox').show(0);</script>
+<script>document.getElementById('searchbox').style.display = "block"</script>
 
 
 

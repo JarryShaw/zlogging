@@ -1,7 +1,7 @@
 
 <!DOCTYPE html>
 
-<html>
+<html lang="en">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -11,6 +11,7 @@
     <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
     <script src="../../../_static/jquery.js"></script>
     <script src="../../../_static/underscore.js"></script>
+    <script src="../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="../../../_static/doctools.js"></script>
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" />
@@ -32,10 +33,10 @@
             
   <h1>Source code for zlogging.enum.Signatures</h1><div class="highlight"><pre>
 <span></span><span class="c1"># -*- coding: utf-8 -*-</span>
-<span class="c1"># pylint: disable=line-too-long,import-error</span>
+<span class="c1"># pylint: disable=line-too-long</span>
 <span class="sd">&quot;&quot;&quot;Namespace: ``Signatures``.&quot;&quot;&quot;</span>
 
-<span class="kn">from</span> <span class="nn">zlogging._compat</span> <span class="kn">import</span> <span class="n">enum</span>
+<span class="kn">from</span> <span class="nn">zlogging._compat</span> <span class="k">import</span> <span class="n">enum</span>
 
 
 <div class="viewcode-block" id="Action"><a class="viewcode-back" href="../../../enum/Signatures.html#zlogging.enum.Signatures.Action">[docs]</a><span class="nd">@enum</span><span class="o">.</span><span class="n">unique</span>
@@ -55,36 +56,36 @@
 
     <span class="c1">#: Ignore this signature completely (even for scan detection).</span>
     <span class="c1">#: Don’t write to the signatures logging stream.</span>
-    <span class="n">Action</span><span class="p">[</span><span class="s1">&#39;SIG_IGNORE&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span>
+    <span class="n">SIG_IGNORE</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span>
 
     <span class="c1">#: Process through the various aggregate techniques, but don’t</span>
     <span class="c1">#: report individually and don’t write to the signatures logging</span>
     <span class="c1">#: stream.</span>
-    <span class="n">Action</span><span class="p">[</span><span class="s1">&#39;SIG_QUIET&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span>
+    <span class="n">SIG_QUIET</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span>
 
     <span class="c1">#: Generate a notice.</span>
-    <span class="n">Action</span><span class="p">[</span><span class="s1">&#39;SIG_LOG&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span>
+    <span class="n">SIG_LOG</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span>
 
     <span class="c1">#: The same as Signatures::SIG\_LOG, but ignore for</span>
     <span class="c1">#: aggregate/scan processing.</span>
-    <span class="n">Action</span><span class="p">[</span><span class="s1">&#39;SIG_FILE_BUT_NO_SCAN&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span>
+    <span class="n">SIG_FILE_BUT_NO_SCAN</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span>
 
     <span class="c1">#: Generate a notice and set it to be alarmed upon.</span>
-    <span class="n">Action</span><span class="p">[</span><span class="s1">&#39;SIG_ALARM&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span>
+    <span class="n">SIG_ALARM</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span>
 
     <span class="c1">#: Alarm once per originator.</span>
-    <span class="n">Action</span><span class="p">[</span><span class="s1">&#39;SIG_ALARM_PER_ORIG&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span>
+    <span class="n">SIG_ALARM_PER_ORIG</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span>
 
     <span class="c1">#: Alarm once and then never again.</span>
-    <span class="n">Action</span><span class="p">[</span><span class="s1">&#39;SIG_ALARM_ONCE&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span>
+    <span class="n">SIG_ALARM_ONCE</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span>
 
     <span class="c1">#: Count signatures per responder host and alarm with the</span>
     <span class="c1">#: Signatures::Count\_Signature notice if a threshold</span>
     <span class="c1">#: defined by Signatures::count\_thresholds is reached.</span>
-    <span class="n">Action</span><span class="p">[</span><span class="s1">&#39;SIG_COUNT_PER_RESP&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span>
+    <span class="n">SIG_COUNT_PER_RESP</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span>
 
     <span class="c1">#: Don’t alarm, but generate per-orig summary.</span>
-    <span class="n">Action</span><span class="p">[</span><span class="s1">&#39;SIG_SUMMARY&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span></div>
+    <span class="n">SIG_SUMMARY</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span></div>
 </pre></div>
 
           </div>
@@ -111,14 +112,14 @@
 
 <h3>Navigation</h3>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../../../dumper.html">Dumpers</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../loader.html">Loaders</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../loader.html">Log Loaders</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../dumper.html">Log Dumpers</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../model.html">Data Model</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../types.html">Data Types</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../typing.html">Typing Annotations</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../_data.html">Data Classes</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../_exc.html">Exceptions &amp; Warnings</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../_aux.html">Internal Auxiliary Functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../_data.html">Data Classes</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../enum/index.html">Enum Namespace</a></li>
 </ul>
 
@@ -142,7 +143,7 @@
     </form>
     </div>
 </div>
-<script>$('#searchbox').show(0);</script>
+<script>document.getElementById('searchbox').style.display = "block"</script>
 
 
 

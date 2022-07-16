@@ -1,7 +1,7 @@
 
 <!DOCTYPE html>
 
-<html>
+<html lang="en">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -11,6 +11,7 @@
     <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
     <script src="../../_static/jquery.js"></script>
     <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="../../_static/doctools.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
@@ -35,10 +36,10 @@
 <span class="sd">&quot;&quot;&quot;Exceptions &amp; warnings.&quot;&quot;&quot;</span>
 
 <span class="kn">import</span> <span class="nn">json</span>
-<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">TYPE_CHECKING</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="k">import</span> <span class="n">TYPE_CHECKING</span>
 
 <span class="k">if</span> <span class="n">TYPE_CHECKING</span><span class="p">:</span>
-    <span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">Tuple</span><span class="p">,</span> <span class="n">Type</span>
+    <span class="kn">from</span> <span class="nn">typing</span> <span class="k">import</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">Type</span>
 
 
 <div class="viewcode-block" id="ZeekException"><a class="viewcode-back" href="../../_exc.html#zlogging._exc.ZeekException">[docs]</a><span class="k">class</span> <span class="nc">ZeekException</span><span class="p">(</span><span class="ne">Exception</span><span class="p">):</span>
@@ -53,32 +54,33 @@
     <span class="sd">&quot;&quot;&quot;Error when parsing logs.</span>
 
 <span class="sd">    Args:</span>
-<span class="sd">        msg (str): The unformatted error message.</span>
-<span class="sd">        lineno (:obj:`int`, optional): The line corresponding to the failure.</span>
-<span class="sd">        field (:obj:`str`, optional): The field name where parsing failed.</span>
-
-<span class="sd">    Attributes:</span>
-<span class="sd">        msg (str): The unformatted error message.</span>
-<span class="sd">        field: (str) The field name where parsing failed.</span>
-<span class="sd">        lineno (int): The line corresponding to the failure.</span>
+<span class="sd">        msg: The unformatted error message.</span>
+<span class="sd">        lineno: The line corresponding to the failure.</span>
+<span class="sd">        field: The field name where parsing failed.</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1">#: The unformatted error message.</span>
+    <span class="n">msg</span><span class="p">:</span> <span class="nb">str</span>
+    <span class="c1">#: The field name where parsing failed.</span>
+    <span class="n">field</span><span class="p">:</span> <span class="s1">&#39;Optional[str]&#39;</span>
+    <span class="c1">#: The line corresponding to the failure.</span>
+    <span class="n">lineno</span><span class="p">:</span> <span class="s1">&#39;Optional[int]&#39;</span>
 
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">msg</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">lineno</span><span class="p">:</span> <span class="s1">&#39;Optional[int]&#39;</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">msg</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">lineno</span><span class="p">:</span> <span class="s1">&#39;Optional[int]&#39;</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
                  <span class="n">field</span><span class="p">:</span> <span class="s1">&#39;Optional[str]&#39;</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="k">if</span> <span class="n">lineno</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">errmsg</span> <span class="o">=</span> <span class="n">msg</span>
         <span class="k">elif</span> <span class="n">field</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="n">errmsg</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">msg</span><span class="si">}</span><span class="s1">: line </span><span class="si">{</span><span class="n">lineno</span><span class="si">}</span><span class="s1">&#39;</span>
+            <span class="n">errmsg</span> <span class="o">=</span> <span class="n">f</span><span class="s1">&#39;</span><span class="si">{msg}</span><span class="s1">: line </span><span class="si">{lineno}</span><span class="s1">&#39;</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="n">errmsg</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">msg</span><span class="si">}</span><span class="s1">: line </span><span class="si">{</span><span class="n">lineno</span><span class="si">}</span><span class="s1"> (field </span><span class="si">{</span><span class="n">field</span><span class="si">!r}</span><span class="s1">)&#39;</span>
+            <span class="n">errmsg</span> <span class="o">=</span> <span class="n">f</span><span class="s1">&#39;</span><span class="si">{msg}</span><span class="s1">: line </span><span class="si">{lineno}</span><span class="s1"> (field </span><span class="si">{field!r}</span><span class="s1">)&#39;</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">errmsg</span><span class="p">)</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">msg</span> <span class="o">=</span> <span class="n">msg</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">field</span> <span class="o">=</span> <span class="n">field</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">lineno</span> <span class="o">=</span> <span class="n">lineno</span>
 
-    <span class="k">def</span> <span class="nf">__reduce__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;Tuple[Type[ParserError], Tuple[str, Optional[int], Optional[str]]]&#39;</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">__reduce__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;tuple[Type[ParserError], tuple[str, Optional[int], Optional[str]]]&#39;</span><span class="p">:</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="p">,</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">msg</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">lineno</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">field</span><span class="p">)</span></div>
 
 
@@ -86,30 +88,20 @@
     <span class="sd">&quot;&quot;&quot;Error when parsing JSON log.</span>
 
 <span class="sd">    Args:</span>
-<span class="sd">        msg (str): The unformatted error message.</span>
-<span class="sd">        lineno (:obj:`int`, optional): The line corresponding to the failure.</span>
-<span class="sd">        field (:obj:`str`, optional): The field name where parsing failed.</span>
-
-<span class="sd">    Attributes:</span>
-<span class="sd">        msg (str): The unformatted error message.</span>
-<span class="sd">        field: (str) The field name where parsing failed.</span>
-<span class="sd">        lineno (int): The line corresponding to the failure.</span>
+<span class="sd">        msg: The unformatted error message.</span>
+<span class="sd">        lineno: The line corresponding to the failure.</span>
+<span class="sd">        field: The field name where parsing failed.</span>
 
 <span class="sd">    &quot;&quot;&quot;</span></div>
 
 
-<div class="viewcode-block" id="ASCIIPaserError"><a class="viewcode-back" href="../../_exc.html#zlogging._exc.ASCIIPaserError">[docs]</a><span class="k">class</span> <span class="nc">ASCIIPaserError</span><span class="p">(</span><span class="n">ParserError</span><span class="p">):</span>
+<div class="viewcode-block" id="ASCIIParserError"><a class="viewcode-back" href="../../_exc.html#zlogging._exc.ASCIIParserError">[docs]</a><span class="k">class</span> <span class="nc">ASCIIParserError</span><span class="p">(</span><span class="n">ParserError</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Error when parsing ASCII log.</span>
 
 <span class="sd">    Args:</span>
-<span class="sd">        msg (str): The unformatted error message.</span>
-<span class="sd">        lineno (:obj:`int`, optional): The line corresponding to the failure.</span>
-<span class="sd">        field (:obj:`str`, optional): The field name where parsing failed.</span>
-
-<span class="sd">    Attributes:</span>
-<span class="sd">        msg (str): The unformatted error message.</span>
-<span class="sd">        field: (str) The field name where parsing failed.</span>
-<span class="sd">        lineno (int): The line corresponding to the failure.</span>
+<span class="sd">        msg: The unformatted error message.</span>
+<span class="sd">        lineno: The line corresponding to the failure.</span>
+<span class="sd">        field: The field name where parsing failed.</span>
 
 <span class="sd">    &quot;&quot;&quot;</span></div>
 
@@ -118,32 +110,33 @@
     <span class="sd">&quot;&quot;&quot;Error when writing logs.</span>
 
 <span class="sd">    Args:</span>
-<span class="sd">        msg (str): The unformatted error message.</span>
-<span class="sd">        lineno (:obj:`int`, optional): The line corresponding to the failure.</span>
-<span class="sd">        field (:obj:`str`, optional): The field name where writing failed.</span>
-
-<span class="sd">    Attributes:</span>
-<span class="sd">        msg (str): The unformatted error message.</span>
-<span class="sd">        field (str): The field name where writing failed.</span>
-<span class="sd">        lineno (int): The line corresponding to the failure.</span>
+<span class="sd">        msg: The unformatted error message.</span>
+<span class="sd">        lineno: The line corresponding to the failure.</span>
+<span class="sd">        field: The field name where parsing failed.</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1">#: The unformatted error message.</span>
+    <span class="n">msg</span><span class="p">:</span> <span class="nb">str</span>
+    <span class="c1">#: The field name where parsing failed.</span>
+    <span class="n">field</span><span class="p">:</span> <span class="s1">&#39;Optional[str]&#39;</span>
+    <span class="c1">#: The line corresponding to the failure.</span>
+    <span class="n">lineno</span><span class="p">:</span> <span class="s1">&#39;Optional[int]&#39;</span>
 
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">msg</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">lineno</span><span class="p">:</span> <span class="s1">&#39;Optional[int]&#39;</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">msg</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">lineno</span><span class="p">:</span> <span class="s1">&#39;Optional[int]&#39;</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
                  <span class="n">field</span><span class="p">:</span> <span class="s1">&#39;Optional[str]&#39;</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="k">if</span> <span class="n">lineno</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">errmsg</span> <span class="o">=</span> <span class="n">msg</span>
         <span class="k">elif</span> <span class="n">field</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="n">errmsg</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">msg</span><span class="si">}</span><span class="s1">: line </span><span class="si">{</span><span class="n">lineno</span><span class="si">}</span><span class="s1">&#39;</span>
+            <span class="n">errmsg</span> <span class="o">=</span> <span class="n">f</span><span class="s1">&#39;</span><span class="si">{msg}</span><span class="s1">: line </span><span class="si">{lineno}</span><span class="s1">&#39;</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="n">errmsg</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">msg</span><span class="si">}</span><span class="s1">: line </span><span class="si">{</span><span class="n">lineno</span><span class="si">}</span><span class="s1"> (field </span><span class="si">{</span><span class="n">field</span><span class="si">!r}</span><span class="s1">)&#39;</span>
+            <span class="n">errmsg</span> <span class="o">=</span> <span class="n">f</span><span class="s1">&#39;</span><span class="si">{msg}</span><span class="s1">: line </span><span class="si">{lineno}</span><span class="s1"> (field </span><span class="si">{field!r}</span><span class="s1">)&#39;</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">errmsg</span><span class="p">)</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">msg</span> <span class="o">=</span> <span class="n">msg</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">field</span> <span class="o">=</span> <span class="n">field</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">lineno</span> <span class="o">=</span> <span class="n">lineno</span>
 
-    <span class="k">def</span> <span class="nf">__reduce__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;Tuple[Type[WriterError], Tuple[str, Optional[int], Optional[str]]]&#39;</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">__reduce__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;tuple[Type[WriterError], tuple[str, Optional[int], Optional[str]]]&#39;</span><span class="p">:</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="p">,</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">msg</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">lineno</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">field</span><span class="p">)</span></div>
 
 
@@ -151,14 +144,9 @@
     <span class="sd">&quot;&quot;&quot;Error when writing JSON logs.</span>
 
 <span class="sd">    Args:</span>
-<span class="sd">        msg (str): The unformatted error message.</span>
-<span class="sd">        lineno (:obj:`int`, optional): The line corresponding to the failure.</span>
-<span class="sd">        field (:obj:`str`, optional): The field name where writing failed.</span>
-
-<span class="sd">    Attributes:</span>
-<span class="sd">        msg (str): The unformatted error message.</span>
-<span class="sd">        field (str): The field name where writing failed.</span>
-<span class="sd">        lineno (int): The line corresponding to the failure.</span>
+<span class="sd">        msg: The unformatted error message.</span>
+<span class="sd">        lineno: The line corresponding to the failure.</span>
+<span class="sd">        field: The field name where parsing failed.</span>
 
 <span class="sd">    &quot;&quot;&quot;</span></div>
 
@@ -167,14 +155,9 @@
     <span class="sd">&quot;&quot;&quot;Error when writing ASCII logs.</span>
 
 <span class="sd">    Args:</span>
-<span class="sd">        msg (str): The unformatted error message.</span>
-<span class="sd">        lineno (:obj:`int`, optional): The line corresponding to the failure.</span>
-<span class="sd">        field (:obj:`str`, optional): The field name where writing failed.</span>
-
-<span class="sd">    Attributes:</span>
-<span class="sd">        msg (str): The unformatted error message.</span>
-<span class="sd">        field (str): The field name where writing failed.</span>
-<span class="sd">        lineno (int): The line corresponding to the failure.</span>
+<span class="sd">        msg: The unformatted error message.</span>
+<span class="sd">        lineno: The line corresponding to the failure.</span>
+<span class="sd">        field: The field name where parsing failed.</span>
 
 <span class="sd">    &quot;&quot;&quot;</span></div>
 
@@ -183,14 +166,9 @@
     <span class="sd">&quot;&quot;&quot;Unsupported format.</span>
 
 <span class="sd">    Args:</span>
-<span class="sd">        msg (str): the unformatted error message</span>
-<span class="sd">        lineno (:obj:`int`, optional): the line corresponding to the failure</span>
-<span class="sd">        field (:obj:`str`, optional): the field name where writing failed</span>
-
-<span class="sd">    Attributes:</span>
-<span class="sd">        msg (str): the unformatted error message</span>
-<span class="sd">        field (str): the field name where writing failed</span>
-<span class="sd">        lineno (int): the line corresponding to the failure</span>
+<span class="sd">        msg: The unformatted error message.</span>
+<span class="sd">        lineno: The line corresponding to the failure.</span>
+<span class="sd">        field: The field name where parsing failed.</span>
 
 <span class="sd">    &quot;&quot;&quot;</span></div>
 
@@ -207,40 +185,40 @@
     <span class="sd">&quot;&quot;&quot;Warning when parsing logs in ASCII format.&quot;&quot;&quot;</span></div>
 
 
-<div class="viewcode-block" id="ZeekTypeError"><a class="viewcode-back" href="../../_exc.html#zlogging._exc.ZeekTypeError">[docs]</a><span class="k">class</span> <span class="nc">ZeekTypeError</span><span class="p">(</span><span class="n">ZeekException</span><span class="p">,</span> <span class="ne">TypeError</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Invalid Bro/Zeek data type.&quot;&quot;&quot;</span></div>
+<span class="k">class</span> <span class="nc">ZeekTypeError</span><span class="p">(</span><span class="n">ZeekException</span><span class="p">,</span> <span class="ne">TypeError</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Invalid Bro/Zeek data type.&quot;&quot;&quot;</span>
 
 
-<div class="viewcode-block" id="ZeekValueError"><a class="viewcode-back" href="../../_exc.html#zlogging._exc.ZeekValueError">[docs]</a><span class="k">class</span> <span class="nc">ZeekValueError</span><span class="p">(</span><span class="n">ZeekException</span><span class="p">,</span> <span class="ne">ValueError</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Invalid Bro/Zeek data value.&quot;&quot;&quot;</span></div>
+<span class="k">class</span> <span class="nc">ZeekValueError</span><span class="p">(</span><span class="n">ZeekException</span><span class="p">,</span> <span class="ne">ValueError</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Invalid Bro/Zeek data value.&quot;&quot;&quot;</span>
 
 
-<div class="viewcode-block" id="ZeekNotImplemented"><a class="viewcode-back" href="../../_exc.html#zlogging._exc.ZeekNotImplemented">[docs]</a><span class="k">class</span> <span class="nc">ZeekNotImplemented</span><span class="p">(</span><span class="n">ZeekException</span><span class="p">,</span> <span class="ne">NotImplementedError</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Method not implemented.&quot;&quot;&quot;</span></div>
+<span class="k">class</span> <span class="nc">ZeekNotImplemented</span><span class="p">(</span><span class="n">ZeekException</span><span class="p">,</span> <span class="ne">NotImplementedError</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Method not implemented.&quot;&quot;&quot;</span>
 
 
-<div class="viewcode-block" id="ModelError"><a class="viewcode-back" href="../../_exc.html#zlogging._exc.ModelError">[docs]</a><span class="k">class</span> <span class="nc">ModelError</span><span class="p">(</span><span class="n">ZeekException</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Invalid model data.&quot;&quot;&quot;</span></div>
+<span class="k">class</span> <span class="nc">ModelError</span><span class="p">(</span><span class="n">ZeekException</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Invalid model data.&quot;&quot;&quot;</span>
 
 
-<div class="viewcode-block" id="ModelTypeError"><a class="viewcode-back" href="../../_exc.html#zlogging._exc.ModelTypeError">[docs]</a><span class="k">class</span> <span class="nc">ModelTypeError</span><span class="p">(</span><span class="n">ModelError</span><span class="p">,</span> <span class="ne">TypeError</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Invalid model data type.&quot;&quot;&quot;</span></div>
+<span class="k">class</span> <span class="nc">ModelTypeError</span><span class="p">(</span><span class="n">ModelError</span><span class="p">,</span> <span class="ne">TypeError</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Invalid model data type.&quot;&quot;&quot;</span>
 
 
-<div class="viewcode-block" id="ModelValueError"><a class="viewcode-back" href="../../_exc.html#zlogging._exc.ModelValueError">[docs]</a><span class="k">class</span> <span class="nc">ModelValueError</span><span class="p">(</span><span class="n">ModelError</span><span class="p">,</span> <span class="ne">ValueError</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Invalid model data value.&quot;&quot;&quot;</span></div>
+<span class="k">class</span> <span class="nc">ModelValueError</span><span class="p">(</span><span class="n">ModelError</span><span class="p">,</span> <span class="ne">ValueError</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Invalid model data value.&quot;&quot;&quot;</span>
 
 
-<div class="viewcode-block" id="ModelFormatError"><a class="viewcode-back" href="../../_exc.html#zlogging._exc.ModelFormatError">[docs]</a><span class="k">class</span> <span class="nc">ModelFormatError</span><span class="p">(</span><span class="n">ModelError</span><span class="p">,</span> <span class="ne">ValueError</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Unsupported format.&quot;&quot;&quot;</span></div>
+<span class="k">class</span> <span class="nc">ModelFormatError</span><span class="p">(</span><span class="n">ModelError</span><span class="p">,</span> <span class="ne">ValueError</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Unsupported format.&quot;&quot;&quot;</span>
 
 
-<div class="viewcode-block" id="ZeekValueWarning"><a class="viewcode-back" href="../../_exc.html#zlogging._exc.ZeekValueWarning">[docs]</a><span class="k">class</span> <span class="nc">ZeekValueWarning</span><span class="p">(</span><span class="n">ZeekWarning</span><span class="p">,</span> <span class="ne">UserWarning</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Dubious Bro/Zeek data value.&quot;&quot;&quot;</span></div>
+<span class="k">class</span> <span class="nc">ZeekValueWarning</span><span class="p">(</span><span class="n">ZeekWarning</span><span class="p">,</span> <span class="ne">UserWarning</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Dubious Bro/Zeek data value.&quot;&quot;&quot;</span>
 
 
-<div class="viewcode-block" id="BroDeprecationWarning"><a class="viewcode-back" href="../../_exc.html#zlogging._exc.BroDeprecationWarning">[docs]</a><span class="k">class</span> <span class="nc">BroDeprecationWarning</span><span class="p">(</span><span class="n">ZeekWarning</span><span class="p">,</span> <span class="ne">DeprecationWarning</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Bro is now deprecated, use Zeek instead.&quot;&quot;&quot;</span></div>
+<span class="k">class</span> <span class="nc">BroDeprecationWarning</span><span class="p">(</span><span class="n">ZeekWarning</span><span class="p">,</span> <span class="ne">DeprecationWarning</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Bro is now deprecated, use Zeek instead.&quot;&quot;&quot;</span>
 </pre></div>
 
           </div>
@@ -267,14 +245,14 @@
 
 <h3>Navigation</h3>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../../dumper.html">Dumpers</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../loader.html">Loaders</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../loader.html">Log Loaders</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../dumper.html">Log Dumpers</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../model.html">Data Model</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../types.html">Data Types</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../typing.html">Typing Annotations</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../_data.html">Data Classes</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../_exc.html">Exceptions &amp; Warnings</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../_aux.html">Internal Auxiliary Functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../_data.html">Data Classes</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../enum/index.html">Enum Namespace</a></li>
 </ul>
 
@@ -296,7 +274,7 @@
     </form>
     </div>
 </div>
-<script>$('#searchbox').show(0);</script>
+<script>document.getElementById('searchbox').style.display = "block"</script>
 
 
 

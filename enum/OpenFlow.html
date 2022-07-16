@@ -1,10 +1,10 @@
 
 <!DOCTYPE html>
 
-<html>
+<html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
     <title>OpenFlow Namespace &#8212; ZLogging 0.1.1 documentation</title>
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
@@ -12,6 +12,7 @@
     <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
     <script src="../_static/underscore.js"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="../_static/doctools.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
@@ -34,12 +35,12 @@
           <div class="body" role="main">
             
   <section id="openflow-namespace">
-<h1><code class="docutils literal notranslate"><span class="pre">OpenFlow</span></code> Namespace<a class="headerlink" href="#openflow-namespace" title="Permalink to this headline">¶</a></h1>
+<h1><code class="docutils literal notranslate"><span class="pre">OpenFlow</span></code> Namespace<a class="headerlink" href="#openflow-namespace" title="Permalink to this heading">¶</a></h1>
 <p>Namespace: <code class="docutils literal notranslate"><span class="pre">OpenFlow</span></code>.</p>
 <dl class="py class">
 <dt class="sig sig-object py">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">zlogging.enum.OpenFlow.</span></span><span class="sig-name descname"><span class="pre">ofp_action_type</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/zlogging/enum/OpenFlow.html#ofp_action_type"><span class="viewcode-link"><span class="pre">[source]</span></span></a></dt>
-<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/enum.html#enum.IntFlag" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">enum.IntFlag</span></code></a></p>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/enum.html#enum.IntFlag" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">IntFlag</span></code></a></p>
 <p>Enum: <code class="docutils literal notranslate"><span class="pre">OpenFlow::ofp_action_type</span></code>.</p>
 <p>Openflow action_type definitions.</p>
 <p>The openflow action type defines what actions openflow can take to modify a packet.</p>
@@ -50,74 +51,87 @@
 <dl class="py attribute">
 <dt class="sig sig-object py">
 <span class="sig-name descname"><span class="pre">OFPAT_OUTPUT</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">1</span></em></dt>
-<dd></dd></dl>
+<dd><p>Output to switch port.</p>
+</dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py">
 <span class="sig-name descname"><span class="pre">OFPAT_SET_VLAN_VID</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">2</span></em></dt>
-<dd></dd></dl>
+<dd><p>Set the 802.1q VLAN id.</p>
+</dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py">
 <span class="sig-name descname"><span class="pre">OFPAT_SET_VLAN_PCP</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">4</span></em></dt>
-<dd></dd></dl>
+<dd><p>Set the 802.1q priority.</p>
+</dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py">
 <span class="sig-name descname"><span class="pre">OFPAT_STRIP_VLAN</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">8</span></em></dt>
-<dd></dd></dl>
+<dd><p>Strip the 802.1q header.</p>
+</dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py">
 <span class="sig-name descname"><span class="pre">OFPAT_SET_DL_SRC</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">16</span></em></dt>
-<dd></dd></dl>
+<dd><p>Ethernet source address.</p>
+</dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py">
 <span class="sig-name descname"><span class="pre">OFPAT_SET_DL_DST</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">32</span></em></dt>
-<dd></dd></dl>
+<dd><p>Ethernet destination address.</p>
+</dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py">
 <span class="sig-name descname"><span class="pre">OFPAT_SET_NW_SRC</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">64</span></em></dt>
-<dd></dd></dl>
+<dd><p>IP source address.</p>
+</dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py">
 <span class="sig-name descname"><span class="pre">OFPAT_SET_NW_DST</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">128</span></em></dt>
-<dd></dd></dl>
+<dd><p>IP destination address.</p>
+</dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py">
 <span class="sig-name descname"><span class="pre">OFPAT_SET_NW_TOS</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">256</span></em></dt>
-<dd></dd></dl>
+<dd><p>IP ToS (DSCP field, 6 bits).</p>
+</dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py">
 <span class="sig-name descname"><span class="pre">OFPAT_SET_TP_SRC</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">512</span></em></dt>
-<dd></dd></dl>
+<dd><p>TCP/UDP source port.</p>
+</dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py">
 <span class="sig-name descname"><span class="pre">OFPAT_SET_TP_DST</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">1024</span></em></dt>
-<dd></dd></dl>
+<dd><p>TCP/UDP destination port.</p>
+</dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py">
 <span class="sig-name descname"><span class="pre">OFPAT_ENQUEUE</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">2048</span></em></dt>
-<dd></dd></dl>
+<dd><p>Output to queue.</p>
+</dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py">
 <span class="sig-name descname"><span class="pre">OFPAT_VENDOR</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">4096</span></em></dt>
-<dd></dd></dl>
+<dd><p>Vendor specific.</p>
+</dd></dl>
 
 </dd></dl>
 
 <dl class="py class">
 <dt class="sig sig-object py">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">zlogging.enum.OpenFlow.</span></span><span class="sig-name descname"><span class="pre">ofp_config_flags</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/zlogging/enum/OpenFlow.html#ofp_config_flags"><span class="viewcode-link"><span class="pre">[source]</span></span></a></dt>
-<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/enum.html#enum.IntFlag" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">enum.IntFlag</span></code></a></p>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/enum.html#enum.IntFlag" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">IntFlag</span></code></a></p>
 <p>Enum: <code class="docutils literal notranslate"><span class="pre">OpenFlow::ofp_config_flags</span></code>.</p>
 <p>Openflow config flag definitions.</p>
 <p>TODO: describe.</p>
@@ -128,17 +142,20 @@
 <dl class="py attribute">
 <dt class="sig sig-object py">
 <span class="sig-name descname"><span class="pre">OFPC_FRAG_NORMAL</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">1</span></em></dt>
-<dd></dd></dl>
+<dd><p>No special handling for fragments.</p>
+</dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py">
 <span class="sig-name descname"><span class="pre">OFPC_FRAG_DROP</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">2</span></em></dt>
-<dd></dd></dl>
+<dd><p>Drop fragments.</p>
+</dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py">
 <span class="sig-name descname"><span class="pre">OFPC_FRAG_REASM</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">4</span></em></dt>
-<dd></dd></dl>
+<dd><p>Reassemble (only if OFPC_IP_REASM set).</p>
+</dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py">
@@ -150,7 +167,7 @@
 <dl class="py class">
 <dt class="sig sig-object py">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">zlogging.enum.OpenFlow.</span></span><span class="sig-name descname"><span class="pre">ofp_flow_mod_command</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/zlogging/enum/OpenFlow.html#ofp_flow_mod_command"><span class="viewcode-link"><span class="pre">[source]</span></span></a></dt>
-<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/enum.html#enum.IntFlag" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">enum.IntFlag</span></code></a></p>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/enum.html#enum.IntFlag" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">IntFlag</span></code></a></p>
 <p>Enum: <code class="docutils literal notranslate"><span class="pre">OpenFlow::ofp_flow_mod_command</span></code>.</p>
 <p>Openflow flow_mod_command definitions.</p>
 <p>The openflow flow_mod_command describes of what kind an action is.</p>
@@ -161,34 +178,39 @@
 <dl class="py attribute">
 <dt class="sig sig-object py">
 <span class="sig-name descname"><span class="pre">OFPFC_ADD</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">1</span></em></dt>
-<dd></dd></dl>
+<dd><p>New flow.</p>
+</dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py">
 <span class="sig-name descname"><span class="pre">OFPFC_MODIFY</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">2</span></em></dt>
-<dd></dd></dl>
+<dd><p>Modify all matching flows.</p>
+</dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py">
 <span class="sig-name descname"><span class="pre">OFPFC_MODIFY_STRICT</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">4</span></em></dt>
-<dd></dd></dl>
+<dd><p>Modify entry strictly matching wildcards.</p>
+</dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py">
 <span class="sig-name descname"><span class="pre">OFPFC_DELETE</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">8</span></em></dt>
-<dd></dd></dl>
+<dd><p>Delete all matching flows.</p>
+</dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py">
 <span class="sig-name descname"><span class="pre">OFPFC_DELETE_STRICT</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">16</span></em></dt>
-<dd></dd></dl>
+<dd><p>Strictly matching wildcards and priority.</p>
+</dd></dl>
 
 </dd></dl>
 
 <dl class="py class">
 <dt class="sig sig-object py">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">zlogging.enum.OpenFlow.</span></span><span class="sig-name descname"><span class="pre">Plugin</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/zlogging/enum/OpenFlow.html#Plugin"><span class="viewcode-link"><span class="pre">[source]</span></span></a></dt>
-<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/enum.html#enum.IntFlag" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">enum.IntFlag</span></code></a></p>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/enum.html#enum.IntFlag" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">IntFlag</span></code></a></p>
 <p>Enum: <code class="docutils literal notranslate"><span class="pre">OpenFlow::Plugin</span></code>.</p>
 <p>Available openflow plugins.</p>
 <div class="admonition seealso">
@@ -198,22 +220,26 @@
 <dl class="py attribute">
 <dt class="sig sig-object py">
 <span class="sig-name descname"><span class="pre">INVALID</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">1</span></em></dt>
-<dd></dd></dl>
+<dd><p>Internal placeholder plugin.</p>
+</dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py">
 <span class="sig-name descname"><span class="pre">RYU</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">2</span></em></dt>
-<dd></dd></dl>
+<dd><p>(present if base/frameworks/openflow/plugins/ryu.zeek is loaded)</p>
+</dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py">
 <span class="sig-name descname"><span class="pre">OFLOG</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">4</span></em></dt>
-<dd></dd></dl>
+<dd><p>(present if base/frameworks/openflow/plugins/log.zeek is loaded)</p>
+</dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py">
 <span class="sig-name descname"><span class="pre">BROKER</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">8</span></em></dt>
-<dd></dd></dl>
+<dd><p>(present if base/frameworks/openflow/plugins/broker.zeek is loaded)</p>
+</dd></dl>
 
 </dd></dl>
 
@@ -244,45 +270,15 @@
 
 <h3>Navigation</h3>
 <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="../dumper.html">Dumpers</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../loader.html">Loaders</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../loader.html">Log Loaders</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dumper.html">Log Dumpers</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../model.html">Data Model</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../types.html">Data Types</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../typing.html">Typing Annotations</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../_data.html">Data Classes</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../_exc.html">Exceptions &amp; Warnings</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../_aux.html">Internal Auxiliary Functions</a></li>
-<li class="toctree-l1 current"><a class="reference internal" href="index.html">Enum Namespace</a><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="zeek.html"><code class="docutils literal notranslate"><span class="pre">zeek</span></code> Namespace</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Broker.html"><code class="docutils literal notranslate"><span class="pre">Broker</span></code> Namespace</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Cluster.html"><code class="docutils literal notranslate"><span class="pre">Cluster</span></code> Namespace</a></li>
-<li class="toctree-l2"><a class="reference internal" href="DCE_RPC.html"><code class="docutils literal notranslate"><span class="pre">DCE_RPC</span></code> Namespace</a></li>
-<li class="toctree-l2"><a class="reference internal" href="HTTP.html"><code class="docutils literal notranslate"><span class="pre">HTTP</span></code> Namespace</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Input.html"><code class="docutils literal notranslate"><span class="pre">Input</span></code> Namespace</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Intel.html"><code class="docutils literal notranslate"><span class="pre">Intel</span></code> Namespace</a></li>
-<li class="toctree-l2"><a class="reference internal" href="JSON.html"><code class="docutils literal notranslate"><span class="pre">JSON</span></code> Namespace</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Known.html"><code class="docutils literal notranslate"><span class="pre">Known</span></code> Namespace</a></li>
-<li class="toctree-l2"><a class="reference internal" href="LoadBalancing.html"><code class="docutils literal notranslate"><span class="pre">LoadBalancing</span></code> Namespace</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Log.html"><code class="docutils literal notranslate"><span class="pre">Log</span></code> Namespace</a></li>
-<li class="toctree-l2"><a class="reference internal" href="MOUNT3.html"><code class="docutils literal notranslate"><span class="pre">MOUNT3</span></code> Namespace</a></li>
-<li class="toctree-l2"><a class="reference internal" href="MQTT.html"><code class="docutils literal notranslate"><span class="pre">MQTT</span></code> Namespace</a></li>
-<li class="toctree-l2"><a class="reference internal" href="NFS3.html"><code class="docutils literal notranslate"><span class="pre">NFS3</span></code> Namespace</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Notice.html"><code class="docutils literal notranslate"><span class="pre">Notice</span></code> Namespace</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#"><code class="docutils literal notranslate"><span class="pre">OpenFlow</span></code> Namespace</a></li>
-<li class="toctree-l2"><a class="reference internal" href="NetControl.html"><code class="docutils literal notranslate"><span class="pre">NetControl</span></code> Namespace</a></li>
-<li class="toctree-l2"><a class="reference internal" href="ProtocolDetector.html"><code class="docutils literal notranslate"><span class="pre">ProtocolDetector</span></code> Namespace</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Reporter.html"><code class="docutils literal notranslate"><span class="pre">Reporter</span></code> Namespace</a></li>
-<li class="toctree-l2"><a class="reference internal" href="SMB.html"><code class="docutils literal notranslate"><span class="pre">SMB</span></code> Namespace</a></li>
-<li class="toctree-l2"><a class="reference internal" href="SOCKS.html"><code class="docutils literal notranslate"><span class="pre">SOCKS</span></code> Namespace</a></li>
-<li class="toctree-l2"><a class="reference internal" href="SSL.html"><code class="docutils literal notranslate"><span class="pre">SSL</span></code> Namespace</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Signatures.html"><code class="docutils literal notranslate"><span class="pre">Signatures</span></code> Namespace</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Software.html"><code class="docutils literal notranslate"><span class="pre">Software</span></code> Namespace</a></li>
-<li class="toctree-l2"><a class="reference internal" href="SumStats.html"><code class="docutils literal notranslate"><span class="pre">SumStats</span></code> Namespace</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Tunnel.html"><code class="docutils literal notranslate"><span class="pre">Tunnel</span></code> Namespace</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Weird.html"><code class="docutils literal notranslate"><span class="pre">Weird</span></code> Namespace</a></li>
-<li class="toctree-l2"><a class="reference internal" href="ZeekygenExample.html"><code class="docutils literal notranslate"><span class="pre">ZeekygenExample</span></code> Namespace</a></li>
-</ul>
-</li>
+<li class="toctree-l1"><a class="reference internal" href="../_data.html">Data Classes</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Enum Namespace</a></li>
 </ul>
 
 <div class="relations">
@@ -305,7 +301,7 @@
     </form>
     </div>
 </div>
-<script>$('#searchbox').show(0);</script>
+<script>document.getElementById('searchbox').style.display = "block"</script>
 
 
 

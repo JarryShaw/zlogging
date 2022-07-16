@@ -1,10 +1,10 @@
 
 <!DOCTYPE html>
 
-<html>
+<html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
     <title>Data Classes &#8212; ZLogging 0.1.1 documentation</title>
     <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
@@ -12,11 +12,12 @@
     <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
     <script src="_static/jquery.js"></script>
     <script src="_static/underscore.js"></script>
+    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="_static/doctools.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Exceptions &amp; Warnings" href="_exc.html" />
-    <link rel="prev" title="Typing Annotations" href="typing.html" />
+    <link rel="next" title="Enum Namespace" href="enum/index.html" />
+    <link rel="prev" title="Internal Auxiliary Functions" href="_aux.html" />
    
   <link rel="stylesheet" href="_static/custom.css" type="text/css" />
   
@@ -33,109 +34,77 @@
 
           <div class="body" role="main">
             
-  <section id="data-classes">
-<h1>Data Classes<a class="headerlink" href="#data-classes" title="Permalink to this headline">¶</a></h1>
-<section id="module-zlogging._data">
-<span id="predefined-data-classes"></span><h2>Predefined Data Classes<a class="headerlink" href="#module-zlogging._data" title="Permalink to this headline">¶</a></h2>
-<p>Data classes for parsed logs.</p>
+  <section id="module-zlogging._data">
+<span id="data-classes"></span><h1>Data Classes<a class="headerlink" href="#module-zlogging._data" title="Permalink to this heading">¶</a></h1>
+<section id="predefined-data-classes">
+<h2>Predefined Data Classes<a class="headerlink" href="#predefined-data-classes" title="Permalink to this heading">¶</a></h2>
 <dl class="py class">
 <dt class="sig sig-object py" id="zlogging._data.ASCIIInfo">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">zlogging._data.</span></span><span class="sig-name descname"><span class="pre">ASCIIInfo</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">open</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">close</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">exit_with_error</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/zlogging/_data.html#ASCIIInfo"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#zlogging._data.ASCIIInfo" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#zlogging._data.Info" title="zlogging._data.Info"><code class="xref py py-class docutils literal notranslate"><span class="pre">zlogging._data.Info</span></code></a></p>
+<dd><p>Bases: <a class="reference internal" href="#zlogging._data.Info" title="zlogging._data.Info"><code class="xref py py-class docutils literal notranslate"><span class="pre">Info</span></code></a></p>
 <p>Parsed log info for ASCII logs.</p>
-<p>The ASCII log will be stored as in this <code class="xref py py-obj docutils literal notranslate"><span class="pre">dataclass</span></code>, as introduced in
-<a class="reference external" href="https://www.python.org/dev/peps/pep-557/">PEP 557</a>.</p>
+<p>The ASCII log will be stored as in this <a class="reference external" href="https://docs.python.org/3/library/dataclasses.html#dataclasses.dataclass" title="(in Python v3.10)"><code class="xref py py-func docutils literal notranslate"><span class="pre">dataclass</span></code></a>,
+as introduced in <span class="target" id="index-0"></span><a class="pep reference external" href="https://peps.python.org/pep-0557/"><strong>PEP 557</strong></a>.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>path</strong> (<a class="reference external" href="https://docs.python.org/3/library/os.html#os.PathLike" title="(in Python v3.10)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">os.PathLike</span></code></a>) – The value is specified in the ASCII log file
+<li><p><strong>path</strong> (<em>PathLike</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><em>str</em></a><em>]</em>) – The value is specified in the ASCII log file
 under <code class="docutils literal notranslate"><span class="pre">#</span> <span class="pre">path</span></code> directive.</p></li>
-<li><p><strong>open</strong> (<a class="reference external" href="https://docs.python.org/3/library/datetime.html#datetime.datetime" title="(in Python v3.10)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">datetime.datetime</span></code></a>) – The value is specified in the ASCII
-log file under <code class="docutils literal notranslate"><span class="pre">#</span> <span class="pre">open</span></code> directive.</p></li>
-<li><p><strong>close</strong> (<a class="reference external" href="https://docs.python.org/3/library/datetime.html#datetime.datetime" title="(in Python v3.10)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">datetime.datetime</span></code></a>) – The value is specified in the ASCII
-log file under <code class="docutils literal notranslate"><span class="pre">#</span> <span class="pre">close</span></code> directive.</p></li>
-<li><p><strong>data</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.10)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code></a> or <a class="reference internal" href="model.html#zlogging.model.Model" title="zlogging.model.Model"><code class="xref py py-class docutils literal notranslate"><span class="pre">Model</span></code></a>) – The log records
-parsed as a <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.10)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code></a> of <a class="reference internal" href="model.html#zlogging.model.Model" title="zlogging.model.Model"><code class="xref py py-class docutils literal notranslate"><span class="pre">Model</span></code></a> per line.</p></li>
-<li><p><strong>exit_with_error</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">bool</span></code></a>) – When exit with error, the ASCII log
+<li><p><strong>open</strong> (<em>DateTimeType</em>) – The value is specified in the ASCII log file
+under <code class="docutils literal notranslate"><span class="pre">#</span> <span class="pre">open</span></code> directive.</p></li>
+<li><p><strong>close</strong> (<em>DateTimeType</em>) – The value is specified in the ASCII log file
+under <code class="docutils literal notranslate"><span class="pre">#</span> <span class="pre">close</span></code> directive.</p></li>
+<li><p><strong>data</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.10)"><em>list</em></a><em>[</em><a class="reference internal" href="model.html#zlogging.model.Model" title="zlogging.model.Model"><em>Model</em></a><em>]</em>) – The log records parsed as a <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.10)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code></a> of
+<a class="reference internal" href="model.html#zlogging.model.Model" title="zlogging.model.Model"><code class="xref py py-class docutils literal notranslate"><span class="pre">Model</span></code></a> per line.</p></li>
+<li><p><strong>exit_with_error</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)"><em>bool</em></a>) – When exit with error, the ASCII log
 file doesn’t has a <code class="docutils literal notranslate"><span class="pre">#</span> <span class="pre">close</span></code> directive.</p></li>
 </ul>
-</dd>
-<dt class="field-even">Return type</dt>
-<dd class="field-even"><p>None</p>
 </dd>
 </dl>
 <dl class="py property">
 <dt class="sig sig-object py" id="zlogging._data.ASCIIInfo.format">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">format</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Literal</span><span class="p"><span class="pre">[</span></span><span class="s"><span class="pre">'ascii'</span></span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#zlogging._data.ASCIIInfo.format" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">format</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Literal" title="(in Python v3.10)"><span class="pre">Literal</span></a><span class="p"><span class="pre">[</span></span><span class="s"><span class="pre">'ascii'</span></span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#zlogging._data.ASCIIInfo.format" title="Permalink to this definition">¶</a></dt>
 <dd><p>Log file format.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)">str</a></p>
-</dd>
-<dt class="field-even">Return type</dt>
-<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Literal" title="(in Python v3.10)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Literal</span></code></a>[‘ascii’]</p>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Literal" title="(in Python v3.10)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Literal</span></code></a>[‘ascii’]</p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="zlogging._data.ASCIIInfo.path">
-<span class="sig-name descname"><span class="pre">path</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/os.html#os.PathLike" title="(in Python v3.10)"><span class="pre">os.PathLike</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><span class="pre">str</span></a><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#zlogging._data.ASCIIInfo.path" title="Permalink to this definition">¶</a></dt>
-<dd><p>Log path.</p>
-<p>The value is specified in the ASCII log file under <code class="docutils literal notranslate"><span class="pre">#</span> <span class="pre">path</span></code> directive.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Type</dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/os.html#os.PathLike" title="(in Python v3.10)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">os.PathLike</span></code></a></p>
-</dd>
-</dl>
+<span class="sig-name descname"><span class="pre">path</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">PathLike</span><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><span class="pre">str</span></a><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#zlogging._data.ASCIIInfo.path" title="Permalink to this definition">¶</a></dt>
+<dd><p>Log path. The value is specified in the ASCII log file
+under <code class="docutils literal notranslate"><span class="pre">#</span> <span class="pre">path</span></code> directive.</p>
 </dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="zlogging._data.ASCIIInfo.open">
-<span class="sig-name descname"><span class="pre">open</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/datetime.html#datetime.datetime" title="(in Python v3.10)"><span class="pre">datetime.datetime</span></a></em><a class="headerlink" href="#zlogging._data.ASCIIInfo.open" title="Permalink to this definition">¶</a></dt>
-<dd><p>Log open time.</p>
-<p>The value is specified in the ASCII log file under <code class="docutils literal notranslate"><span class="pre">#</span> <span class="pre">open</span></code> directive.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Type</dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/datetime.html#datetime.datetime" title="(in Python v3.10)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">datetime.datetime</span></code></a></p>
-</dd>
-</dl>
+<span class="sig-name descname"><span class="pre">open</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">DateTimeType</span></em><a class="headerlink" href="#zlogging._data.ASCIIInfo.open" title="Permalink to this definition">¶</a></dt>
+<dd><p>Log open time. The value is specified in the ASCII log
+file under <code class="docutils literal notranslate"><span class="pre">#</span> <span class="pre">open</span></code> directive.</p>
 </dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="zlogging._data.ASCIIInfo.close">
-<span class="sig-name descname"><span class="pre">close</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/datetime.html#datetime.datetime" title="(in Python v3.10)"><span class="pre">datetime.datetime</span></a></em><a class="headerlink" href="#zlogging._data.ASCIIInfo.close" title="Permalink to this definition">¶</a></dt>
-<dd><p>Log close time.</p>
-<p>The value is specified in the ASCII log file under <code class="docutils literal notranslate"><span class="pre">#</span> <span class="pre">close</span></code> directive.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Type</dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/datetime.html#datetime.datetime" title="(in Python v3.10)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">datetime.datetime</span></code></a></p>
-</dd>
-</dl>
+<span class="sig-name descname"><span class="pre">close</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">DateTimeType</span></em><a class="headerlink" href="#zlogging._data.ASCIIInfo.close" title="Permalink to this definition">¶</a></dt>
+<dd><p>Log close time. The value is specified in the ASCII log
+file under <code class="docutils literal notranslate"><span class="pre">#</span> <span class="pre">close</span></code> directive.</p>
 </dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="zlogging._data.ASCIIInfo.data">
-<span class="sig-name descname"><span class="pre">data</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="model.html#zlogging.model.Model" title="zlogging.model.Model"><span class="pre">zlogging.model.Model</span></a><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#zlogging._data.ASCIIInfo.data" title="Permalink to this definition">¶</a></dt>
-<dd><p>Log records.</p>
-<p>The log records parsed as a <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.10)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code></a> of <a class="reference internal" href="model.html#zlogging.model.Model" title="zlogging.model.Model"><code class="xref py py-class docutils literal notranslate"><span class="pre">Model</span></code></a> per line.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Type</dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.10)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code></a> of <a class="reference internal" href="model.html#zlogging.model.Model" title="zlogging.model.Model"><code class="xref py py-class docutils literal notranslate"><span class="pre">Model</span></code></a></p>
-</dd>
-</dl>
+<span class="sig-name descname"><span class="pre">data</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.10)"><span class="pre">list</span></a><span class="p"><span class="pre">[</span></span><a class="reference internal" href="model.html#zlogging.model.Model" title="zlogging.model.Model"><span class="pre">Model</span></a><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#zlogging._data.ASCIIInfo.data" title="Permalink to this definition">¶</a></dt>
+<dd><p>Log records. The log records parsed as a <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.10)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code></a> of
+<a class="reference internal" href="model.html#zlogging.model.Model" title="zlogging.model.Model"><code class="xref py py-class docutils literal notranslate"><span class="pre">Model</span></code></a> per line.</p>
 </dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="zlogging._data.ASCIIInfo.exit_with_error">
 <span class="sig-name descname"><span class="pre">exit_with_error</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)"><span class="pre">bool</span></a></em><a class="headerlink" href="#zlogging._data.ASCIIInfo.exit_with_error" title="Permalink to this definition">¶</a></dt>
-<dd><p>Log exit with error.</p>
-<p>When exit with error, the ASCII log file doesn’t has a <code class="docutils literal notranslate"><span class="pre">#</span> <span class="pre">close</span></code> directive.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Type</dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">bool</span></code></a></p>
-</dd>
-</dl>
+<dd><p>Log exit with error. When exit with error, the ASCII log
+file doesn’t has a <code class="docutils literal notranslate"><span class="pre">#</span> <span class="pre">close</span></code> directive.</p>
 </dd></dl>
 
 </dd></dl>
@@ -143,67 +112,53 @@ file doesn’t has a <code class="docutils literal notranslate"><span class="pre
 <dl class="py class">
 <dt class="sig sig-object py" id="zlogging._data.JSONInfo">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">zlogging._data.</span></span><span class="sig-name descname"><span class="pre">JSONInfo</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/zlogging/_data.html#JSONInfo"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#zlogging._data.JSONInfo" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#zlogging._data.Info" title="zlogging._data.Info"><code class="xref py py-class docutils literal notranslate"><span class="pre">zlogging._data.Info</span></code></a></p>
+<dd><p>Bases: <a class="reference internal" href="#zlogging._data.Info" title="zlogging._data.Info"><code class="xref py py-class docutils literal notranslate"><span class="pre">Info</span></code></a></p>
 <p>Parsed log info for JSON logs.</p>
-<p>The JSON log will be stored as in this <code class="xref py py-obj docutils literal notranslate"><span class="pre">dataclass</span></code>, as introduced in
-<a class="reference external" href="https://www.python.org/dev/peps/pep-557/">PEP 557</a>.</p>
+<p>The JSON log will be stored as in this <a class="reference external" href="https://docs.python.org/3/library/dataclasses.html#dataclasses.dataclass" title="(in Python v3.10)"><code class="xref py py-func docutils literal notranslate"><span class="pre">dataclass</span></code></a>,
+as introduced in <span class="target" id="index-1"></span><a class="pep reference external" href="https://peps.python.org/pep-0557/"><strong>PEP 557</strong></a>.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>data</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.10)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code></a> of <a class="reference internal" href="model.html#zlogging.model.Model" title="zlogging.model.Model"><code class="xref py py-class docutils literal notranslate"><span class="pre">Model</span></code></a>) – The log records
-parsed as a <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.10)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code></a> of <a class="reference internal" href="model.html#zlogging.model.Model" title="zlogging.model.Model"><code class="xref py py-class docutils literal notranslate"><span class="pre">Model</span></code></a> per line.</p>
-</dd>
-<dt class="field-even">Return type</dt>
-<dd class="field-even"><p>None</p>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>data</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.10)"><em>list</em></a><em>[</em><a class="reference internal" href="model.html#zlogging.model.Model" title="zlogging.model.Model"><em>Model</em></a><em>]</em>) – The log records parsed as a <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.10)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code></a> of
+<a class="reference internal" href="model.html#zlogging.model.Model" title="zlogging.model.Model"><code class="xref py py-class docutils literal notranslate"><span class="pre">Model</span></code></a> per line.</p>
 </dd>
 </dl>
 <dl class="py property">
 <dt class="sig sig-object py" id="zlogging._data.JSONInfo.format">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">format</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Literal</span><span class="p"><span class="pre">[</span></span><span class="s"><span class="pre">'json'</span></span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#zlogging._data.JSONInfo.format" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">format</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Literal" title="(in Python v3.10)"><span class="pre">Literal</span></a><span class="p"><span class="pre">[</span></span><span class="s"><span class="pre">'json'</span></span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#zlogging._data.JSONInfo.format" title="Permalink to this definition">¶</a></dt>
 <dd><p>Log file format.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)">str</a></p>
-</dd>
-<dt class="field-even">Return type</dt>
-<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Literal" title="(in Python v3.10)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Literal</span></code></a>[‘json’]</p>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Literal" title="(in Python v3.10)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Literal</span></code></a>[‘json’]</p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="zlogging._data.JSONInfo.data">
-<span class="sig-name descname"><span class="pre">data</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="model.html#zlogging.model.Model" title="zlogging.model.Model"><span class="pre">zlogging.model.Model</span></a><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#zlogging._data.JSONInfo.data" title="Permalink to this definition">¶</a></dt>
-<dd><p>Log records.</p>
-<p>The log records parsed as a <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.10)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code></a> of <a class="reference internal" href="model.html#zlogging.model.Model" title="zlogging.model.Model"><code class="xref py py-class docutils literal notranslate"><span class="pre">Model</span></code></a> per line.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Type</dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.10)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code></a> of <a class="reference internal" href="model.html#zlogging.model.Model" title="zlogging.model.Model"><code class="xref py py-class docutils literal notranslate"><span class="pre">Model</span></code></a></p>
-</dd>
-</dl>
+<span class="sig-name descname"><span class="pre">data</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.10)"><span class="pre">list</span></a><span class="p"><span class="pre">[</span></span><a class="reference internal" href="model.html#zlogging.model.Model" title="zlogging.model.Model"><span class="pre">Model</span></a><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#zlogging._data.JSONInfo.data" title="Permalink to this definition">¶</a></dt>
+<dd><p>Log records. The log records parsed as a <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.10)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code></a> of
+<a class="reference internal" href="model.html#zlogging.model.Model" title="zlogging.model.Model"><code class="xref py py-class docutils literal notranslate"><span class="pre">Model</span></code></a> per line.</p>
 </dd></dl>
 
 </dd></dl>
 
 </section>
-<section id="abstract-base-data-classes">
-<h2>Abstract Base Data Classes<a class="headerlink" href="#abstract-base-data-classes" title="Permalink to this headline">¶</a></h2>
+<section id="abstract-base-data-class">
+<h2>Abstract Base Data Class<a class="headerlink" href="#abstract-base-data-class" title="Permalink to this heading">¶</a></h2>
 <dl class="py class">
 <dt class="sig sig-object py" id="zlogging._data.Info">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">zlogging._data.</span></span><span class="sig-name descname"><span class="pre">Info</span></span><a class="reference internal" href="_modules/zlogging/_data.html#Info"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#zlogging._data.Info" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
 <p>Parsed log info.</p>
-<p>The parsed log will be stored as in this <code class="xref py py-obj docutils literal notranslate"><span class="pre">dataclass</span></code>, as introduced in
-<a class="reference external" href="https://www.python.org/dev/peps/pep-557/">PEP 557</a>.</p>
+<p>The parsed log will be stored as in this <a class="reference external" href="https://docs.python.org/3/library/dataclasses.html#dataclasses.dataclass" title="(in Python v3.10)"><code class="xref py py-func docutils literal notranslate"><span class="pre">dataclass</span></code></a>,
+as introduced in <span class="target" id="index-2"></span><a class="pep reference external" href="https://peps.python.org/pep-0557/"><strong>PEP 557</strong></a>.</p>
 <dl class="py property">
 <dt class="sig sig-object py" id="zlogging._data.Info.format">
 <em class="property"><span class="pre">abstract</span><span class="w"> </span><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">format</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><span class="pre">str</span></a></em><a class="headerlink" href="#zlogging._data.Info.format" title="Permalink to this definition">¶</a></dt>
 <dd><p>Log file format.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)">str</a></p>
-</dd>
-<dt class="field-even">Return type</dt>
-<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></p>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></p>
 </dd>
 </dl>
 </dd></dl>
@@ -238,18 +193,14 @@ parsed as a <a class="reference external" href="https://docs.python.org/3/librar
 
 <h3>Navigation</h3>
 <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="dumper.html">Dumpers</a></li>
-<li class="toctree-l1"><a class="reference internal" href="loader.html">Loaders</a></li>
+<li class="toctree-l1"><a class="reference internal" href="loader.html">Log Loaders</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dumper.html">Log Dumpers</a></li>
 <li class="toctree-l1"><a class="reference internal" href="model.html">Data Model</a></li>
 <li class="toctree-l1"><a class="reference internal" href="types.html">Data Types</a></li>
 <li class="toctree-l1"><a class="reference internal" href="typing.html">Typing Annotations</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Data Classes</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#module-zlogging._data">Predefined Data Classes</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#abstract-base-data-classes">Abstract Base Data Classes</a></li>
-</ul>
-</li>
 <li class="toctree-l1"><a class="reference internal" href="_exc.html">Exceptions &amp; Warnings</a></li>
 <li class="toctree-l1"><a class="reference internal" href="_aux.html">Internal Auxiliary Functions</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Data Classes</a></li>
 <li class="toctree-l1"><a class="reference internal" href="enum/index.html">Enum Namespace</a></li>
 </ul>
 
@@ -257,8 +208,8 @@ parsed as a <a class="reference external" href="https://docs.python.org/3/librar
 <h3>Related Topics</h3>
 <ul>
   <li><a href="index.html">Documentation overview</a><ul>
-      <li>Previous: <a href="typing.html" title="previous chapter">Typing Annotations</a></li>
-      <li>Next: <a href="_exc.html" title="next chapter">Exceptions &amp; Warnings</a></li>
+      <li>Previous: <a href="_aux.html" title="previous chapter">Internal Auxiliary Functions</a></li>
+      <li>Next: <a href="enum/index.html" title="next chapter">Enum Namespace</a></li>
   </ul></li>
 </ul>
 </div>
@@ -271,7 +222,7 @@ parsed as a <a class="reference external" href="https://docs.python.org/3/librar
     </form>
     </div>
 </div>
-<script>$('#searchbox').show(0);</script>
+<script>document.getElementById('searchbox').style.display = "block"</script>
 
 
 

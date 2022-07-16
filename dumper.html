@@ -1,22 +1,23 @@
 
 <!DOCTYPE html>
 
-<html>
+<html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
-    <title>Dumpers &#8212; ZLogging 0.1.1 documentation</title>
+    <title>Log Dumpers &#8212; ZLogging 0.1.1 documentation</title>
     <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="_static/alabaster.css" />
     <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
     <script src="_static/jquery.js"></script>
     <script src="_static/underscore.js"></script>
+    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="_static/doctools.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Loaders" href="loader.html" />
-    <link rel="prev" title="ZLogging - Bro/Zeek logging framework for Python" href="index.html" />
+    <link rel="next" title="Data Model" href="model.html" />
+    <link rel="prev" title="Log Loaders" href="loader.html" />
    
   <link rel="stylesheet" href="_static/custom.css" type="text/css" />
   
@@ -33,86 +34,34 @@
 
           <div class="body" role="main">
             
-  <section id="dumpers">
-<h1>Dumpers<a class="headerlink" href="#dumpers" title="Permalink to this headline">¶</a></h1>
-<section id="module-zlogging.dumper">
-<span id="predefined-dumpers"></span><h2>Predefined Dumpers<a class="headerlink" href="#module-zlogging.dumper" title="Permalink to this headline">¶</a></h2>
-<p>Bro/Zeek log dumper.</p>
+  <section id="module-zlogging.dumper">
+<span id="log-dumpers"></span><h1>Log Dumpers<a class="headerlink" href="#module-zlogging.dumper" title="Permalink to this heading">¶</a></h1>
+<section id="functional-interfaces">
+<h2>Functional Interfaces<a class="headerlink" href="#functional-interfaces" title="Permalink to this heading">¶</a></h2>
+<section id="general-apis">
+<h3>General APIs<a class="headerlink" href="#general-apis" title="Permalink to this heading">¶</a></h3>
 <dl class="py function">
 <dt class="sig sig-object py" id="zlogging.dumper.write">
 <span class="sig-prename descclassname"><span class="pre">zlogging.dumper.</span></span><span class="sig-name descname"><span class="pre">write</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filename</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">format</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/zlogging/dumper.html#write"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#zlogging.dumper.write" title="Permalink to this definition">¶</a></dt>
 <dd><p>Write Bro/Zeek log file.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>data</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Iterable" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Iterable</span></code></a> of <a class="reference internal" href="model.html#zlogging.model.Model" title="zlogging.model.Model"><code class="xref py py-class docutils literal notranslate"><span class="pre">Model</span></code></a>) – Log
-records as an <a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Iterable" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Iterable</span></code></a> of <a class="reference internal" href="model.html#zlogging.model.Model" title="zlogging.model.Model"><code class="xref py py-class docutils literal notranslate"><span class="pre">Model</span></code></a> per line.</p></li>
-<li><p><strong>filename</strong> (<a class="reference external" href="https://docs.python.org/3/library/os.html#os.PathLike" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">PathLike</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>]) – Log file name.</p></li>
-<li><p><strong>format</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>) – Log format.</p></li>
-<li><p><strong>*args</strong> – See <a class="reference internal" href="#zlogging.dumper.write_json" title="zlogging.dumper.write_json"><code class="xref py py-func docutils literal notranslate"><span class="pre">write_json()</span></code></a> and
+<li><p><strong>data</strong> (<em>Iterable</em><em>[</em><a class="reference internal" href="model.html#zlogging.model.Model" title="zlogging.model.Model"><em>Model</em></a><em>]</em>) – Log records as an <a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Iterable" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Iterable</span></code></a> of
+<a class="reference internal" href="model.html#zlogging.model.Model" title="zlogging.model.Model"><code class="xref py py-class docutils literal notranslate"><span class="pre">Model</span></code></a> per line.</p></li>
+<li><p><strong>filename</strong> (<em>PathLike</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><em>str</em></a><em>]</em>) – Log file name.</p></li>
+<li><p><strong>format</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><em>str</em></a>) – Log format.</p></li>
+<li><p><strong>*args</strong> (<em>Any</em>) – See <a class="reference internal" href="#zlogging.dumper.write_json" title="zlogging.dumper.write_json"><code class="xref py py-func docutils literal notranslate"><span class="pre">write_json()</span></code></a> and
 <a class="reference internal" href="#zlogging.dumper.write_ascii" title="zlogging.dumper.write_ascii"><code class="xref py py-func docutils literal notranslate"><span class="pre">write_ascii()</span></code></a> for more information.</p></li>
-<li><p><strong>**kwargs</strong> – See <a class="reference internal" href="#zlogging.dumper.write_json" title="zlogging.dumper.write_json"><code class="xref py py-func docutils literal notranslate"><span class="pre">write_json()</span></code></a> and
+<li><p><strong>**kwargs</strong> (<em>Any</em>) – See <a class="reference internal" href="#zlogging.dumper.write_json" title="zlogging.dumper.write_json"><code class="xref py py-func docutils literal notranslate"><span class="pre">write_json()</span></code></a> and
 <a class="reference internal" href="#zlogging.dumper.write_ascii" title="zlogging.dumper.write_ascii"><code class="xref py py-func docutils literal notranslate"><span class="pre">write_ascii()</span></code></a> for more information.</p></li>
-<li><p><strong>args</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.10)"><em>Any</em></a>) – </p></li>
-<li><p><strong>kwargs</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.10)"><em>Any</em></a>) – </p></li>
 </ul>
 </dd>
-<dt class="field-even">Raises</dt>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
 <dd class="field-even"><p><a class="reference internal" href="_exc.html#zlogging._exc.WriterFormatError" title="zlogging._exc.WriterFormatError"><strong>WriterFormatError</strong></a> – If <code class="docutils literal notranslate"><span class="pre">format</span></code> is not supported.</p>
 </dd>
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.10)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a></p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="zlogging.dumper.write_ascii">
-<span class="sig-prename descclassname"><span class="pre">zlogging.dumper.</span></span><span class="sig-name descname"><span class="pre">write_ascii</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filename</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">writer</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">separator</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">empty_field</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">unset_field</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">set_separator</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/zlogging/dumper.html#write_ascii"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#zlogging.dumper.write_ascii" title="Permalink to this definition">¶</a></dt>
-<dd><p>Write ASCII log file.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>data</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Iterable" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Iterable</span></code></a> of <a class="reference internal" href="model.html#zlogging.model.Model" title="zlogging.model.Model"><code class="xref py py-class docutils literal notranslate"><span class="pre">Model</span></code></a>) – Log
-records as an <a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Iterable" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Iterable</span></code></a> of <a class="reference internal" href="model.html#zlogging.model.Model" title="zlogging.model.Model"><code class="xref py py-class docutils literal notranslate"><span class="pre">Model</span></code></a> per line.</p></li>
-<li><p><strong>filename</strong> (<a class="reference external" href="https://docs.python.org/3/library/os.html#os.PathLike" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">PathLike</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>]) – Log file name.</p></li>
-<li><p><strong>writer</strong> (<a class="reference internal" href="#zlogging.dumper.ASCIIWriter" title="zlogging.dumper.ASCIIWriter"><code class="xref py py-class docutils literal notranslate"><span class="pre">ASCIIWriter</span></code></a>, optional) – Writer class.</p></li>
-<li><p><strong>separator</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a> or <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(in Python v3.10)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">bytes</span></code></a>, optional) – Field separator when writing log lines.</p></li>
-<li><p><strong>empty_field</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(in Python v3.10)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">bytes</span></code></a> or <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a>, optional) – Placeholder for empty field.</p></li>
-<li><p><strong>unset_field</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(in Python v3.10)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">bytes</span></code></a> or <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a>, optional) – Placeholder for unset field.</p></li>
-<li><p><strong>set_separator</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(in Python v3.10)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">bytes</span></code></a> or <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a>, optional) – Separator for <code class="docutils literal notranslate"><span class="pre">set</span></code>/<code class="docutils literal notranslate"><span class="pre">vector</span></code> fields.</p></li>
-<li><p><strong>*args</strong> – Variable length argument list.</p></li>
-<li><p><strong>**kwargs</strong> – Arbitrary keyword arguments.</p></li>
-<li><p><strong>args</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.10)"><em>Any</em></a>) – </p></li>
-<li><p><strong>kwargs</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.10)"><em>Any</em></a>) – </p></li>
-</ul>
-</dd>
-<dt class="field-even">Return type</dt>
-<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.10)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a></p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="zlogging.dumper.write_json">
-<span class="sig-prename descclassname"><span class="pre">zlogging.dumper.</span></span><span class="sig-name descname"><span class="pre">write_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filename</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">writer</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">encoder</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/zlogging/dumper.html#write_json"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#zlogging.dumper.write_json" title="Permalink to this definition">¶</a></dt>
-<dd><p>Write JSON log file.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>data</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Iterable" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Iterable</span></code></a> of <a class="reference internal" href="model.html#zlogging.model.Model" title="zlogging.model.Model"><code class="xref py py-class docutils literal notranslate"><span class="pre">Model</span></code></a>) – Log
-records as an <a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Iterable" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Iterable</span></code></a> of <a class="reference internal" href="model.html#zlogging.model.Model" title="zlogging.model.Model"><code class="xref py py-class docutils literal notranslate"><span class="pre">Model</span></code></a> per line.</p></li>
-<li><p><strong>filename</strong> (<a class="reference external" href="https://docs.python.org/3/library/os.html#os.PathLike" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">PathLike</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>]) – Log file name.</p></li>
-<li><p><strong>writer</strong> (<a class="reference internal" href="#zlogging.dumper.JSONWriter" title="zlogging.dumper.JSONWriter"><code class="xref py py-class docutils literal notranslate"><span class="pre">JSONWriter</span></code></a>, optional) – Writer class.</p></li>
-<li><p><strong>encoder</strong> (<a class="reference external" href="https://docs.python.org/3/library/json.html#json.JSONEncoder" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">json.JSONEncoder</span></code></a> object, optional) – JSON encoder class.</p></li>
-<li><p><strong>*args</strong> – Variable length argument list.</p></li>
-<li><p><strong>**kwargs</strong> – Arbitrary keyword arguments.</p></li>
-<li><p><strong>args</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.10)"><em>Any</em></a>) – </p></li>
-<li><p><strong>kwargs</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.10)"><em>Any</em></a>) – </p></li>
-</ul>
-</dd>
-<dt class="field-even">Return type</dt>
-<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.10)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a></p>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None</p>
 </dd>
 </dl>
 </dd></dl>
@@ -122,79 +71,22 @@ records as an <a class="reference external" href="https://docs.python.org/3/libr
 <span class="sig-prename descclassname"><span class="pre">zlogging.dumper.</span></span><span class="sig-name descname"><span class="pre">dumps</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">format</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/zlogging/dumper.html#dumps"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#zlogging.dumper.dumps" title="Permalink to this definition">¶</a></dt>
 <dd><p>Write Bro/Zeek log string.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>data</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Iterable" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Iterable</span></code></a> of <a class="reference internal" href="model.html#zlogging.model.Model" title="zlogging.model.Model"><code class="xref py py-class docutils literal notranslate"><span class="pre">Model</span></code></a>) – Log
-records as an <a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Iterable" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Iterable</span></code></a> of <a class="reference internal" href="model.html#zlogging.model.Model" title="zlogging.model.Model"><code class="xref py py-class docutils literal notranslate"><span class="pre">Model</span></code></a> per line.</p></li>
+<li><p><strong>data</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Iterable" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Iterable</span></code></a>[<a class="reference internal" href="model.html#zlogging.model.Model" title="zlogging.model.Model"><code class="xref py py-class docutils literal notranslate"><span class="pre">Model</span></code></a>]) – Log records as an <a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Iterable" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Iterable</span></code></a> of
+<a class="reference internal" href="model.html#zlogging.model.Model" title="zlogging.model.Model"><code class="xref py py-class docutils literal notranslate"><span class="pre">Model</span></code></a> per line.</p></li>
 <li><p><strong>format</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>) – Log format.</p></li>
 <li><p><strong>*args</strong> – See <a class="reference internal" href="#zlogging.dumper.dumps_json" title="zlogging.dumper.dumps_json"><code class="xref py py-func docutils literal notranslate"><span class="pre">dumps_json()</span></code></a> and
 <a class="reference internal" href="#zlogging.dumper.dumps_ascii" title="zlogging.dumper.dumps_ascii"><code class="xref py py-func docutils literal notranslate"><span class="pre">dumps_ascii()</span></code></a> for more information.</p></li>
 <li><p><strong>**kwargs</strong> – See <a class="reference internal" href="#zlogging.dumper.dumps_json" title="zlogging.dumper.dumps_json"><code class="xref py py-func docutils literal notranslate"><span class="pre">dumps_json()</span></code></a> and
 <a class="reference internal" href="#zlogging.dumper.dumps_ascii" title="zlogging.dumper.dumps_ascii"><code class="xref py py-func docutils literal notranslate"><span class="pre">dumps_ascii()</span></code></a> for more information.</p></li>
-<li><p><strong>args</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.10)"><em>Any</em></a>) – </p></li>
-<li><p><strong>kwargs</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.10)"><em>Any</em></a>) – </p></li>
 </ul>
 </dd>
-<dt class="field-even">Raises</dt>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
 <dd class="field-even"><p><a class="reference internal" href="_exc.html#zlogging._exc.WriterFormatError" title="zlogging._exc.WriterFormatError"><strong>WriterFormatError</strong></a> – If <code class="docutils literal notranslate"><span class="pre">format</span></code> is not supported.</p>
 </dd>
-<dt class="field-odd">Return type</dt>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="zlogging.dumper.dumps_ascii">
-<span class="sig-prename descclassname"><span class="pre">zlogging.dumper.</span></span><span class="sig-name descname"><span class="pre">dumps_ascii</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">writer</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">separator</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">empty_field</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">unset_field</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">set_separator</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/zlogging/dumper.html#dumps_ascii"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#zlogging.dumper.dumps_ascii" title="Permalink to this definition">¶</a></dt>
-<dd><p>Write ASCII log string.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>data</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Iterable" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Iterable</span></code></a> of <a class="reference internal" href="model.html#zlogging.model.Model" title="zlogging.model.Model"><code class="xref py py-class docutils literal notranslate"><span class="pre">Model</span></code></a>) – Log
-records as an <a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Iterable" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Iterable</span></code></a> of <a class="reference internal" href="model.html#zlogging.model.Model" title="zlogging.model.Model"><code class="xref py py-class docutils literal notranslate"><span class="pre">Model</span></code></a> per line.</p></li>
-<li><p><strong>writer</strong> (<a class="reference internal" href="#zlogging.dumper.ASCIIWriter" title="zlogging.dumper.ASCIIWriter"><code class="xref py py-class docutils literal notranslate"><span class="pre">ASCIIWriter</span></code></a>, optional) – Writer class.</p></li>
-<li><p><strong>separator</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a> or <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(in Python v3.10)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">bytes</span></code></a>, optional) – Field separator when writing log lines.</p></li>
-<li><p><strong>empty_field</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(in Python v3.10)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">bytes</span></code></a> or <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a>, optional) – Placeholder for empty field.</p></li>
-<li><p><strong>unset_field</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(in Python v3.10)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">bytes</span></code></a> or <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a>, optional) – Placeholder for unset field.</p></li>
-<li><p><strong>set_separator</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(in Python v3.10)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">bytes</span></code></a> or <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a>, optional) – Separator for <code class="docutils literal notranslate"><span class="pre">set</span></code>/<code class="docutils literal notranslate"><span class="pre">vector</span></code> fields.</p></li>
-<li><p><strong>*args</strong> – Variable length argument list.</p></li>
-<li><p><strong>**kwargs</strong> – Arbitrary keyword arguments.</p></li>
-<li><p><strong>args</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.10)"><em>Any</em></a>) – </p></li>
-<li><p><strong>kwargs</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.10)"><em>Any</em></a>) – </p></li>
-</ul>
-</dd>
-<dt class="field-even">Return type</dt>
-<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></p>
-</dd>
-<dt class="field-odd">Returns</dt>
-<dd class="field-odd"><p>The JSON log string.</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="zlogging.dumper.dumps_json">
-<span class="sig-prename descclassname"><span class="pre">zlogging.dumper.</span></span><span class="sig-name descname"><span class="pre">dumps_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">writer</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">encoder</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/zlogging/dumper.html#dumps_json"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#zlogging.dumper.dumps_json" title="Permalink to this definition">¶</a></dt>
-<dd><p>Write JSON log string.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>data</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Iterable" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Iterable</span></code></a> of <a class="reference internal" href="model.html#zlogging.model.Model" title="zlogging.model.Model"><code class="xref py py-class docutils literal notranslate"><span class="pre">Model</span></code></a>) – Log
-records as an <a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Iterable" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Iterable</span></code></a> of <a class="reference internal" href="model.html#zlogging.model.Model" title="zlogging.model.Model"><code class="xref py py-class docutils literal notranslate"><span class="pre">Model</span></code></a> per line.</p></li>
-<li><p><strong>writer</strong> (<a class="reference internal" href="#zlogging.dumper.JSONWriter" title="zlogging.dumper.JSONWriter"><code class="xref py py-class docutils literal notranslate"><span class="pre">JSONWriter</span></code></a>, optional) – Writer class.</p></li>
-<li><p><strong>encoder</strong> (<a class="reference external" href="https://docs.python.org/3/library/json.html#json.JSONEncoder" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">json.JSONEncoder</span></code></a> object, optional) – JSON encoder class.</p></li>
-<li><p><strong>*args</strong> – Variable length argument list.</p></li>
-<li><p><strong>**kwargs</strong> – Arbitrary keyword arguments.</p></li>
-<li><p><strong>args</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.10)"><em>Any</em></a>) – </p></li>
-<li><p><strong>kwargs</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.10)"><em>Any</em></a>) – </p></li>
-</ul>
-</dd>
-<dt class="field-even">Return type</dt>
-<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></p>
-</dd>
-<dt class="field-odd">Returns</dt>
-<dd class="field-odd"><p>The JSON log string.</p>
 </dd>
 </dl>
 </dd></dl>
@@ -204,25 +96,78 @@ records as an <a class="reference external" href="https://docs.python.org/3/libr
 <span class="sig-prename descclassname"><span class="pre">zlogging.dumper.</span></span><span class="sig-name descname"><span class="pre">dump</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">file</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">format</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/zlogging/dumper.html#dump"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#zlogging.dumper.dump" title="Permalink to this definition">¶</a></dt>
 <dd><p>Write Bro/Zeek log file.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>data</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Iterable" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Iterable</span></code></a> of <a class="reference internal" href="model.html#zlogging.model.Model" title="zlogging.model.Model"><code class="xref py py-class docutils literal notranslate"><span class="pre">Model</span></code></a>) – Log
-records as an <a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Iterable" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Iterable</span></code></a> of <a class="reference internal" href="model.html#zlogging.model.Model" title="zlogging.model.Model"><code class="xref py py-class docutils literal notranslate"><span class="pre">Model</span></code></a> per line.</p></li>
+<li><p><strong>data</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Iterable" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Iterable</span></code></a>[<a class="reference internal" href="model.html#zlogging.model.Model" title="zlogging.model.Model"><code class="xref py py-class docutils literal notranslate"><span class="pre">Model</span></code></a>]) – Log records as an <a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Iterable" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Iterable</span></code></a> of
+<a class="reference internal" href="model.html#zlogging.model.Model" title="zlogging.model.Model"><code class="xref py py-class docutils literal notranslate"><span class="pre">Model</span></code></a> per line.</p></li>
 <li><p><strong>format</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>) – Log format.</p></li>
 <li><p><strong>file</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">TextIOWrapper</span></code>) – Log file object opened in text mode.</p></li>
 <li><p><strong>*args</strong> – See <a class="reference internal" href="#zlogging.dumper.dump_json" title="zlogging.dumper.dump_json"><code class="xref py py-func docutils literal notranslate"><span class="pre">dump_json()</span></code></a> and
 <a class="reference internal" href="#zlogging.dumper.dump_ascii" title="zlogging.dumper.dump_ascii"><code class="xref py py-func docutils literal notranslate"><span class="pre">dump_ascii()</span></code></a> for more information.</p></li>
 <li><p><strong>**kwargs</strong> – See <a class="reference internal" href="#zlogging.dumper.dump_json" title="zlogging.dumper.dump_json"><code class="xref py py-func docutils literal notranslate"><span class="pre">dump_json()</span></code></a> and
 <a class="reference internal" href="#zlogging.dumper.dump_ascii" title="zlogging.dumper.dump_ascii"><code class="xref py py-func docutils literal notranslate"><span class="pre">dump_ascii()</span></code></a> for more information.</p></li>
-<li><p><strong>args</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.10)"><em>Any</em></a>) – </p></li>
-<li><p><strong>kwargs</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.10)"><em>Any</em></a>) – </p></li>
 </ul>
 </dd>
-<dt class="field-even">Raises</dt>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
 <dd class="field-even"><p><a class="reference internal" href="_exc.html#zlogging._exc.WriterFormatError" title="zlogging._exc.WriterFormatError"><strong>WriterFormatError</strong></a> – If <code class="docutils literal notranslate"><span class="pre">format</span></code> is not supported.</p>
 </dd>
-<dt class="field-odd">Return type</dt>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.10)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="ascii-format">
+<h3>ASCII Format<a class="headerlink" href="#ascii-format" title="Permalink to this heading">¶</a></h3>
+<dl class="py function">
+<dt class="sig sig-object py" id="zlogging.dumper.write_ascii">
+<span class="sig-prename descclassname"><span class="pre">zlogging.dumper.</span></span><span class="sig-name descname"><span class="pre">write_ascii</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filename</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">writer</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">separator</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">empty_field</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">unset_field</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">set_separator</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/zlogging/dumper.html#write_ascii"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#zlogging.dumper.write_ascii" title="Permalink to this definition">¶</a></dt>
+<dd><p>Write ASCII log file.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>data</strong> (<em>Iterable</em><em>[</em><a class="reference internal" href="model.html#zlogging.model.Model" title="zlogging.model.Model"><em>Model</em></a><em>]</em>) – Log records as an <a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Iterable" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Iterable</span></code></a> of
+<a class="reference internal" href="model.html#zlogging.model.Model" title="zlogging.model.Model"><code class="xref py py-class docutils literal notranslate"><span class="pre">Model</span></code></a> per line.</p></li>
+<li><p><strong>filename</strong> (<em>PathLike</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><em>str</em></a><em>]</em>) – Log file name.</p></li>
+<li><p><strong>writer</strong> (<em>Optional</em><em>[</em><em>Type</em><em>[</em><a class="reference internal" href="#zlogging.dumper.ASCIIWriter" title="zlogging.dumper.ASCIIWriter"><em>ASCIIWriter</em></a><em>]</em><em>]</em>) – Writer class.</p></li>
+<li><p><strong>separator</strong> (<em>Optional</em><em>[</em><em>AnyStr</em><em>]</em>) – Field separator when writing log lines.</p></li>
+<li><p><strong>empty_field</strong> (<em>Optional</em><em>[</em><em>AnyStr</em><em>]</em>) – Placeholder for empty field.</p></li>
+<li><p><strong>unset_field</strong> (<em>Optional</em><em>[</em><em>AnyStr</em><em>]</em>) – Placeholder for unset field.</p></li>
+<li><p><strong>set_separator</strong> (<em>Optional</em><em>[</em><em>AnyStr</em><em>]</em>) – Separator for <code class="docutils literal notranslate"><span class="pre">set</span></code>/<code class="docutils literal notranslate"><span class="pre">vector</span></code> fields.</p></li>
+<li><p><strong>*args</strong> (<em>Any</em>) – Arbitrary positional arguments.</p></li>
+<li><p><strong>**kwargs</strong> (<em>Any</em>) – Arbitrary keyword arguments.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="zlogging.dumper.dumps_ascii">
+<span class="sig-prename descclassname"><span class="pre">zlogging.dumper.</span></span><span class="sig-name descname"><span class="pre">dumps_ascii</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">writer</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">separator</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">empty_field</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">unset_field</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">set_separator</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/zlogging/dumper.html#dumps_ascii"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#zlogging.dumper.dumps_ascii" title="Permalink to this definition">¶</a></dt>
+<dd><p>Write ASCII log string.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>data</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Optional" title="(in Python v3.10)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Iterable" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Iterable</span></code></a>[<a class="reference internal" href="model.html#zlogging.model.Model" title="zlogging.model.Model"><code class="xref py py-class docutils literal notranslate"><span class="pre">Model</span></code></a>]]) – Log records as an <a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Iterable" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Iterable</span></code></a> of
+<a class="reference internal" href="model.html#zlogging.model.Model" title="zlogging.model.Model"><code class="xref py py-class docutils literal notranslate"><span class="pre">Model</span></code></a> per line.</p></li>
+<li><p><strong>writer</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Optional" title="(in Python v3.10)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Type" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Type</span></code></a>[<a class="reference internal" href="#zlogging.dumper.ASCIIWriter" title="zlogging.dumper.ASCIIWriter"><code class="xref py py-class docutils literal notranslate"><span class="pre">ASCIIWriter</span></code></a>]]) – Writer class.</p></li>
+<li><p><strong>separator</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Union" title="(in Python v3.10)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Union</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>, <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bytes</span></code></a>, <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.10)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a>]) – Field separator when writing log lines.</p></li>
+<li><p><strong>empty_field</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Union" title="(in Python v3.10)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Union</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>, <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bytes</span></code></a>, <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.10)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a>]) – Placeholder for empty field.</p></li>
+<li><p><strong>unset_field</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Union" title="(in Python v3.10)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Union</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>, <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bytes</span></code></a>, <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.10)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a>]) – Placeholder for unset field.</p></li>
+<li><p><strong>set_separator</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Union" title="(in Python v3.10)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Union</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>, <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bytes</span></code></a>, <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.10)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a>]) – Separator for <code class="docutils literal notranslate"><span class="pre">set</span></code>/<code class="docutils literal notranslate"><span class="pre">vector</span></code> fields.</p></li>
+<li><p><strong>*args</strong> – Arbitrary positional arguments.</p></li>
+<li><p><strong>**kwargs</strong> – Arbitrary keyword arguments.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The JSON log string.</p>
 </dd>
 </dl>
 </dd></dl>
@@ -232,24 +177,71 @@ records as an <a class="reference external" href="https://docs.python.org/3/libr
 <span class="sig-prename descclassname"><span class="pre">zlogging.dumper.</span></span><span class="sig-name descname"><span class="pre">dump_ascii</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">file</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">writer</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">separator</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">empty_field</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">unset_field</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">set_separator</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/zlogging/dumper.html#dump_ascii"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#zlogging.dumper.dump_ascii" title="Permalink to this definition">¶</a></dt>
 <dd><p>Write ASCII log file.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>data</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Iterable" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Iterable</span></code></a> of <a class="reference internal" href="model.html#zlogging.model.Model" title="zlogging.model.Model"><code class="xref py py-class docutils literal notranslate"><span class="pre">Model</span></code></a>) – Log
-records as an <a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Iterable" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Iterable</span></code></a> of <a class="reference internal" href="model.html#zlogging.model.Model" title="zlogging.model.Model"><code class="xref py py-class docutils literal notranslate"><span class="pre">Model</span></code></a> per line.</p></li>
+<li><p><strong>data</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Iterable" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Iterable</span></code></a>[<a class="reference internal" href="model.html#zlogging.model.Model" title="zlogging.model.Model"><code class="xref py py-class docutils literal notranslate"><span class="pre">Model</span></code></a>]) – Log records as an <a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Iterable" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Iterable</span></code></a> of
+<a class="reference internal" href="model.html#zlogging.model.Model" title="zlogging.model.Model"><code class="xref py py-class docutils literal notranslate"><span class="pre">Model</span></code></a> per line.</p></li>
 <li><p><strong>file</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">TextIOWrapper</span></code>) – Log file object opened in text mode.</p></li>
-<li><p><strong>writer</strong> (<a class="reference internal" href="#zlogging.dumper.ASCIIWriter" title="zlogging.dumper.ASCIIWriter"><code class="xref py py-class docutils literal notranslate"><span class="pre">ASCIIWriter</span></code></a>, optional) – Writer class.</p></li>
-<li><p><strong>separator</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a> or <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(in Python v3.10)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">bytes</span></code></a>, optional) – Field separator when writing log lines.</p></li>
-<li><p><strong>empty_field</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(in Python v3.10)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">bytes</span></code></a> or <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a>, optional) – Placeholder for empty field.</p></li>
-<li><p><strong>unset_field</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(in Python v3.10)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">bytes</span></code></a> or <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a>, optional) – Placeholder for unset field.</p></li>
-<li><p><strong>set_separator</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(in Python v3.10)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">bytes</span></code></a> or <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a>, optional) – Separator for <code class="docutils literal notranslate"><span class="pre">set</span></code>/<code class="docutils literal notranslate"><span class="pre">vector</span></code> fields.</p></li>
-<li><p><strong>*args</strong> – Variable length argument list.</p></li>
+<li><p><strong>writer</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Optional" title="(in Python v3.10)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Type" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Type</span></code></a>[<a class="reference internal" href="#zlogging.dumper.ASCIIWriter" title="zlogging.dumper.ASCIIWriter"><code class="xref py py-class docutils literal notranslate"><span class="pre">ASCIIWriter</span></code></a>]]) – Writer class.</p></li>
+<li><p><strong>separator</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Union" title="(in Python v3.10)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Union</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>, <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bytes</span></code></a>, <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.10)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a>]) – Field separator when writing log lines.</p></li>
+<li><p><strong>empty_field</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Union" title="(in Python v3.10)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Union</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>, <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bytes</span></code></a>, <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.10)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a>]) – Placeholder for empty field.</p></li>
+<li><p><strong>unset_field</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Union" title="(in Python v3.10)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Union</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>, <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bytes</span></code></a>, <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.10)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a>]) – Placeholder for unset field.</p></li>
+<li><p><strong>set_separator</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Union" title="(in Python v3.10)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Union</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>, <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bytes</span></code></a>, <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.10)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a>]) – Separator for <code class="docutils literal notranslate"><span class="pre">set</span></code>/<code class="docutils literal notranslate"><span class="pre">vector</span></code> fields.</p></li>
+<li><p><strong>*args</strong> – Arbitrary positional arguments.</p></li>
 <li><p><strong>**kwargs</strong> – Arbitrary keyword arguments.</p></li>
-<li><p><strong>args</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.10)"><em>Any</em></a>) – </p></li>
-<li><p><strong>kwargs</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.10)"><em>Any</em></a>) – </p></li>
 </ul>
 </dd>
-<dt class="field-even">Return type</dt>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
 <dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.10)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="json-format">
+<h3>JSON Format<a class="headerlink" href="#json-format" title="Permalink to this heading">¶</a></h3>
+<dl class="py function">
+<dt class="sig sig-object py" id="zlogging.dumper.write_json">
+<span class="sig-prename descclassname"><span class="pre">zlogging.dumper.</span></span><span class="sig-name descname"><span class="pre">write_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filename</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">writer</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">encoder</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/zlogging/dumper.html#write_json"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#zlogging.dumper.write_json" title="Permalink to this definition">¶</a></dt>
+<dd><p>Write JSON log file.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>data</strong> (<em>Iterable</em><em>[</em><a class="reference internal" href="model.html#zlogging.model.Model" title="zlogging.model.Model"><em>Model</em></a><em>]</em>) – Log records as an <a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Iterable" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Iterable</span></code></a> of
+<a class="reference internal" href="model.html#zlogging.model.Model" title="zlogging.model.Model"><code class="xref py py-class docutils literal notranslate"><span class="pre">Model</span></code></a> per line.</p></li>
+<li><p><strong>filename</strong> (<em>PathLike</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><em>str</em></a><em>]</em>) – Log file name.</p></li>
+<li><p><strong>writer</strong> (<em>Optional</em><em>[</em><em>Type</em><em>[</em><a class="reference internal" href="#zlogging.dumper.JSONWriter" title="zlogging.dumper.JSONWriter"><em>JSONWriter</em></a><em>]</em><em>]</em>) – Writer class.</p></li>
+<li><p><strong>encoder</strong> (<em>Optional</em><em>[</em><em>Type</em><em>[</em><em>JSONEncoder</em><em>]</em><em>]</em>) – JSON encoder class.</p></li>
+<li><p><strong>*args</strong> (<em>Any</em>) – Arbitrary positional arguments.</p></li>
+<li><p><strong>**kwargs</strong> (<em>Any</em>) – Arbitrary keyword arguments.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="zlogging.dumper.dumps_json">
+<span class="sig-prename descclassname"><span class="pre">zlogging.dumper.</span></span><span class="sig-name descname"><span class="pre">dumps_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">writer</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">encoder</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/zlogging/dumper.html#dumps_json"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#zlogging.dumper.dumps_json" title="Permalink to this definition">¶</a></dt>
+<dd><p>Write JSON log string.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>data</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Optional" title="(in Python v3.10)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Iterable" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Iterable</span></code></a>[<a class="reference internal" href="model.html#zlogging.model.Model" title="zlogging.model.Model"><code class="xref py py-class docutils literal notranslate"><span class="pre">Model</span></code></a>]]) – Log records as an <a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Iterable" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Iterable</span></code></a> of
+<a class="reference internal" href="model.html#zlogging.model.Model" title="zlogging.model.Model"><code class="xref py py-class docutils literal notranslate"><span class="pre">Model</span></code></a> per line.</p></li>
+<li><p><strong>writer</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Optional" title="(in Python v3.10)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Type" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Type</span></code></a>[<a class="reference internal" href="#zlogging.dumper.JSONWriter" title="zlogging.dumper.JSONWriter"><code class="xref py py-class docutils literal notranslate"><span class="pre">JSONWriter</span></code></a>]]) – Writer class.</p></li>
+<li><p><strong>encoder</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Optional" title="(in Python v3.10)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Type" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Type</span></code></a>[<code class="xref py py-class docutils literal notranslate"><span class="pre">JSONEncoder</span></code>]]) – JSON encoder class.</p></li>
+<li><p><strong>*args</strong> – Arbitrary positional arguments.</p></li>
+<li><p><strong>**kwargs</strong> – Arbitrary keyword arguments.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The JSON log string.</p>
 </dd>
 </dl>
 </dd></dl>
@@ -259,49 +251,39 @@ records as an <a class="reference external" href="https://docs.python.org/3/libr
 <span class="sig-prename descclassname"><span class="pre">zlogging.dumper.</span></span><span class="sig-name descname"><span class="pre">dump_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">file</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">writer</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">encoder</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/zlogging/dumper.html#dump_json"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#zlogging.dumper.dump_json" title="Permalink to this definition">¶</a></dt>
 <dd><p>Write JSON log file.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>data</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Iterable" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Iterable</span></code></a> of <a class="reference internal" href="model.html#zlogging.model.Model" title="zlogging.model.Model"><code class="xref py py-class docutils literal notranslate"><span class="pre">Model</span></code></a>) – Log
-records as an <a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Iterable" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Iterable</span></code></a> of <a class="reference internal" href="model.html#zlogging.model.Model" title="zlogging.model.Model"><code class="xref py py-class docutils literal notranslate"><span class="pre">Model</span></code></a> per line.</p></li>
+<li><p><strong>data</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Iterable" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Iterable</span></code></a>[<a class="reference internal" href="model.html#zlogging.model.Model" title="zlogging.model.Model"><code class="xref py py-class docutils literal notranslate"><span class="pre">Model</span></code></a>]) – Log records as an <a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Iterable" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Iterable</span></code></a> of
+<a class="reference internal" href="model.html#zlogging.model.Model" title="zlogging.model.Model"><code class="xref py py-class docutils literal notranslate"><span class="pre">Model</span></code></a> per line.</p></li>
 <li><p><strong>file</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">TextIOWrapper</span></code>) – Log file object opened in text mode.</p></li>
-<li><p><strong>writer</strong> (<a class="reference internal" href="#zlogging.dumper.JSONWriter" title="zlogging.dumper.JSONWriter"><code class="xref py py-class docutils literal notranslate"><span class="pre">JSONWriter</span></code></a>, optional) – Writer class.</p></li>
-<li><p><strong>encoder</strong> (<a class="reference external" href="https://docs.python.org/3/library/json.html#json.JSONEncoder" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">json.JSONEncoder</span></code></a> object, optional) – JSON encoder class.</p></li>
-<li><p><strong>*args</strong> – Variable length argument list.</p></li>
+<li><p><strong>writer</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Optional" title="(in Python v3.10)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Type" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Type</span></code></a>[<a class="reference internal" href="#zlogging.dumper.JSONWriter" title="zlogging.dumper.JSONWriter"><code class="xref py py-class docutils literal notranslate"><span class="pre">JSONWriter</span></code></a>]]) – Writer class.</p></li>
+<li><p><strong>encoder</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Optional" title="(in Python v3.10)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Type" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Type</span></code></a>[<code class="xref py py-class docutils literal notranslate"><span class="pre">JSONEncoder</span></code>]]) – JSON encoder class.</p></li>
+<li><p><strong>*args</strong> – Arbitrary positional arguments.</p></li>
 <li><p><strong>**kwargs</strong> – Arbitrary keyword arguments.</p></li>
-<li><p><strong>args</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.10)"><em>Any</em></a>) – </p></li>
-<li><p><strong>kwargs</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.10)"><em>Any</em></a>) – </p></li>
 </ul>
 </dd>
-<dt class="field-even">Return type</dt>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
 <dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.10)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a></p>
 </dd>
 </dl>
 </dd></dl>
 
+</section>
+</section>
+<section id="predefined-dumpers">
+<h2>Predefined Dumpers<a class="headerlink" href="#predefined-dumpers" title="Permalink to this heading">¶</a></h2>
 <dl class="py class">
 <dt class="sig sig-object py" id="zlogging.dumper.ASCIIWriter">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">zlogging.dumper.</span></span><span class="sig-name descname"><span class="pre">ASCIIWriter</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">separator</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">empty_field</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">unset_field</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">set_separator</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/zlogging/dumper.html#ASCIIWriter"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#zlogging.dumper.ASCIIWriter" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#zlogging.dumper.BaseWriter" title="zlogging.dumper.BaseWriter"><code class="xref py py-class docutils literal notranslate"><span class="pre">zlogging.dumper.BaseWriter</span></code></a></p>
+<dd><p>Bases: <a class="reference internal" href="#zlogging.dumper.BaseWriter" title="zlogging.dumper.BaseWriter"><code class="xref py py-class docutils literal notranslate"><span class="pre">BaseWriter</span></code></a></p>
 <p>ASCII log writer.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>separator</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a> or <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(in Python v3.10)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">bytes</span></code></a>, optional) – Field separator when writing log lines.</p></li>
-<li><p><strong>empty_field</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(in Python v3.10)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">bytes</span></code></a> or <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a>, optional) – Placeholder for empty field.</p></li>
-<li><p><strong>unset_field</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(in Python v3.10)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">bytes</span></code></a> or <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a>, optional) – Placeholder for unset field.</p></li>
-<li><p><strong>set_separator</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(in Python v3.10)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">bytes</span></code></a> or <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a>, optional) – Separator for <code class="docutils literal notranslate"><span class="pre">set</span></code>/<code class="docutils literal notranslate"><span class="pre">vector</span></code> fields.</p></li>
-</ul>
-</dd>
-<dt class="field-even">Variables</dt>
-<dd class="field-even"><ul class="simple">
-<li><p><strong>separator</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(in Python v3.10)"><em>bytes</em></a>) – Field separator when writing log lines.</p></li>
-<li><p><strong>str_separator</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><em>str</em></a>) – Field separator when writing log lines.</p></li>
-<li><p><strong>empty_field</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(in Python v3.10)"><em>bytes</em></a>) – Placeholder for empty field.</p></li>
-<li><p><strong>str_empty_field</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><em>str</em></a>) – Placeholder for empty field.</p></li>
-<li><p><strong>unset_field</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(in Python v3.10)"><em>bytes</em></a>) – Placeholder for unset field.</p></li>
-<li><p><strong>str_unset_field</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><em>str</em></a>) – Placeholder for unset field.</p></li>
-<li><p><strong>set_separator</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(in Python v3.10)"><em>bytes</em></a>) – Separator for set/list fields.</p></li>
-<li><p><strong>str_set_separator</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><em>str</em></a>) – Separator for set/list fields.</p></li>
+<li><p><strong>separator</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Union" title="(in Python v3.10)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Union</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>, <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bytes</span></code></a>, <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.10)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a>]) – Field separator when writing log lines.</p></li>
+<li><p><strong>empty_field</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Union" title="(in Python v3.10)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Union</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>, <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bytes</span></code></a>, <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.10)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a>]) – Placeholder for empty field.</p></li>
+<li><p><strong>unset_field</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Union" title="(in Python v3.10)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Union</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>, <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bytes</span></code></a>, <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.10)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a>]) – Placeholder for unset field.</p></li>
+<li><p><strong>set_separator</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Union" title="(in Python v3.10)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Union</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>, <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bytes</span></code></a>, <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.10)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a>]) – Separator for <code class="docutils literal notranslate"><span class="pre">set</span></code>/<code class="docutils literal notranslate"><span class="pre">vector</span></code> fields.</p></li>
 </ul>
 </dd>
 </dl>
@@ -310,13 +292,34 @@ records as an <a class="reference external" href="https://docs.python.org/3/libr
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">format</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><span class="pre">str</span></a></em><a class="headerlink" href="#zlogging.dumper.ASCIIWriter.format" title="Permalink to this definition">¶</a></dt>
 <dd><p>Log file format.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)">str</a></p>
-</dd>
-<dt class="field-even">Return type</dt>
-<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></p>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></p>
 </dd>
 </dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="zlogging.dumper.ASCIIWriter.separator">
+<span class="sig-name descname"><span class="pre">separator</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(in Python v3.10)"><span class="pre">bytes</span></a></em><a class="headerlink" href="#zlogging.dumper.ASCIIWriter.separator" title="Permalink to this definition">¶</a></dt>
+<dd><p>Field separator when writing log lines.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="zlogging.dumper.ASCIIWriter.empty_field">
+<span class="sig-name descname"><span class="pre">empty_field</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(in Python v3.10)"><span class="pre">bytes</span></a></em><a class="headerlink" href="#zlogging.dumper.ASCIIWriter.empty_field" title="Permalink to this definition">¶</a></dt>
+<dd><p>Placeholder for empty field.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="zlogging.dumper.ASCIIWriter.unset_field">
+<span class="sig-name descname"><span class="pre">unset_field</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(in Python v3.10)"><span class="pre">bytes</span></a></em><a class="headerlink" href="#zlogging.dumper.ASCIIWriter.unset_field" title="Permalink to this definition">¶</a></dt>
+<dd><p>Placeholder for unset field.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="zlogging.dumper.ASCIIWriter.set_separator">
+<span class="sig-name descname"><span class="pre">set_separator</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(in Python v3.10)"><span class="pre">bytes</span></a></em><a class="headerlink" href="#zlogging.dumper.ASCIIWriter.set_separator" title="Permalink to this definition">¶</a></dt>
+<dd><p>Separator for <code class="docutils literal notranslate"><span class="pre">set</span></code>/<code class="docutils literal notranslate"><span class="pre">vector</span></code> fields.</p>
 </dd></dl>
 
 <dl class="py method">
@@ -324,17 +327,17 @@ records as an <a class="reference external" href="https://docs.python.org/3/libr
 <span class="sig-name descname"><span class="pre">write_file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/zlogging/dumper.html#ASCIIWriter.write_file"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#zlogging.dumper.ASCIIWriter.write_file" title="Permalink to this definition">¶</a></dt>
 <dd><p>Write log file.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>file</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">TextIOWrapper</span></code>) – Log file object opened in text mode.</p></li>
-<li><p><strong>data</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Iterable" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Iterable</span></code></a> of <a class="reference internal" href="model.html#zlogging.model.Model" title="zlogging.model.Model"><code class="xref py py-class docutils literal notranslate"><span class="pre">Model</span></code></a>) – Log
-records as an <a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Iterable" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Iterable</span></code></a> of <a class="reference internal" href="model.html#zlogging.model.Model" title="zlogging.model.Model"><code class="xref py py-class docutils literal notranslate"><span class="pre">Model</span></code></a> per line.</p></li>
+<li><p><strong>data</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Iterable" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Iterable</span></code></a>[<a class="reference internal" href="model.html#zlogging.model.Model" title="zlogging.model.Model"><code class="xref py py-class docutils literal notranslate"><span class="pre">Model</span></code></a>]) – Log records as an <a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Iterable" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Iterable</span></code></a> of
+<a class="reference internal" href="model.html#zlogging.model.Model" title="zlogging.model.Model"><code class="xref py py-class docutils literal notranslate"><span class="pre">Model</span></code></a> per line.</p></li>
 </ul>
 </dd>
-<dt class="field-even">Return type</dt>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
 <dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a></p>
 </dd>
-<dt class="field-odd">Returns</dt>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
 <dd class="field-odd"><p>The file offset after writing.</p>
 </dd>
 </dl>
@@ -345,20 +348,20 @@ records as an <a class="reference external" href="https://docs.python.org/3/libr
 <span class="sig-name descname"><span class="pre">write_line</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lineno</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/zlogging/dumper.html#ASCIIWriter.write_line"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#zlogging.dumper.ASCIIWriter.write_line" title="Permalink to this definition">¶</a></dt>
 <dd><p>Write log line as one-line record.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>file</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">TextIOWrapper</span></code>) – Log file object opened in text mode.</p></li>
 <li><p><strong>data</strong> (<a class="reference internal" href="model.html#zlogging.model.Model" title="zlogging.model.Model"><code class="xref py py-class docutils literal notranslate"><span class="pre">Model</span></code></a>) – Log record.</p></li>
 <li><p><strong>lineno</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Optional" title="(in Python v3.10)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>]) – Line number of current line.</p></li>
 </ul>
 </dd>
-<dt class="field-even">Return type</dt>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
 <dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a></p>
 </dd>
-<dt class="field-odd">Returns</dt>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
 <dd class="field-odd"><p>The file offset after writing.</p>
 </dd>
-<dt class="field-even">Raises</dt>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
 <dd class="field-even"><p><a class="reference internal" href="_exc.html#zlogging._exc.ASCIIWriterError" title="zlogging._exc.ASCIIWriterError"><strong>ASCIIWriterError</strong></a> – If failed to serialise <code class="docutils literal notranslate"><span class="pre">data</span></code> as ASCII.</p>
 </dd>
 </dl>
@@ -369,16 +372,16 @@ records as an <a class="reference external" href="https://docs.python.org/3/libr
 <span class="sig-name descname"><span class="pre">write_head</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/zlogging/dumper.html#ASCIIWriter.write_head"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#zlogging.dumper.ASCIIWriter.write_head" title="Permalink to this definition">¶</a></dt>
 <dd><p>Write header fields of ASCII log file.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>file</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">TextIOWrapper</span></code>) – Log file object opened in text mode.</p></li>
-<li><p><strong>data</strong> (<a class="reference internal" href="model.html#zlogging.model.Model" title="zlogging.model.Model"><code class="xref py py-class docutils literal notranslate"><span class="pre">Model</span></code></a>, optional) – Log record.</p></li>
+<li><p><strong>data</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Optional" title="(in Python v3.10)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code></a>[<a class="reference internal" href="model.html#zlogging.model.Model" title="zlogging.model.Model"><code class="xref py py-class docutils literal notranslate"><span class="pre">Model</span></code></a>]) – Log record.</p></li>
 </ul>
 </dd>
-<dt class="field-even">Return type</dt>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
 <dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a></p>
 </dd>
-<dt class="field-odd">Returns</dt>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
 <dd class="field-odd"><p>The file offset after writing.</p>
 </dd>
 </dl>
@@ -389,13 +392,13 @@ records as an <a class="reference external" href="https://docs.python.org/3/libr
 <span class="sig-name descname"><span class="pre">write_tail</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/zlogging/dumper.html#ASCIIWriter.write_tail"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#zlogging.dumper.ASCIIWriter.write_tail" title="Permalink to this definition">¶</a></dt>
 <dd><p>Write trailing fields of ASCII log file.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>file</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">TextIOWrapper</span></code>) – Log file object opened in text mode.</p>
 </dd>
-<dt class="field-even">Return type</dt>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
 <dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a></p>
 </dd>
-<dt class="field-odd">Returns</dt>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
 <dd class="field-odd"><p>The file offset after writing.</p>
 </dd>
 </dl>
@@ -406,17 +409,17 @@ records as an <a class="reference external" href="https://docs.python.org/3/libr
 <span class="sig-name descname"><span class="pre">dump_file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/zlogging/dumper.html#ASCIIWriter.dump_file"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#zlogging.dumper.ASCIIWriter.dump_file" title="Permalink to this definition">¶</a></dt>
 <dd><p>Serialise records to a log line.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>data</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Iterable" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Iterable</span></code></a> of <a class="reference internal" href="model.html#zlogging.model.Model" title="zlogging.model.Model"><code class="xref py py-class docutils literal notranslate"><span class="pre">Model</span></code></a>) – Log
-records as an <a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Iterable" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Iterable</span></code></a> of <a class="reference internal" href="model.html#zlogging.model.Model" title="zlogging.model.Model"><code class="xref py py-class docutils literal notranslate"><span class="pre">Model</span></code></a> per line.</p></li>
+<li><p><strong>data</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Optional" title="(in Python v3.10)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Iterable" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Iterable</span></code></a>[<a class="reference internal" href="model.html#zlogging.model.Model" title="zlogging.model.Model"><code class="xref py py-class docutils literal notranslate"><span class="pre">Model</span></code></a>]]) – Log records as an <a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Iterable" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Iterable</span></code></a> of
+<a class="reference internal" href="model.html#zlogging.model.Model" title="zlogging.model.Model"><code class="xref py py-class docutils literal notranslate"><span class="pre">Model</span></code></a> per line.</p></li>
 <li><p><strong>name</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Optional" title="(in Python v3.10)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>]) – Log file name.</p></li>
 </ul>
 </dd>
-<dt class="field-even">Return type</dt>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
 <dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></p>
 </dd>
-<dt class="field-odd">Returns</dt>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
 <dd class="field-odd"><p>The converted log string.</p>
 </dd>
 </dl>
@@ -427,19 +430,19 @@ records as an <a class="reference external" href="https://docs.python.org/3/libr
 <span class="sig-name descname"><span class="pre">dump_line</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lineno</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/zlogging/dumper.html#ASCIIWriter.dump_line"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#zlogging.dumper.ASCIIWriter.dump_line" title="Permalink to this definition">¶</a></dt>
 <dd><p>Serialise one-line record to a log line.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>data</strong> (<a class="reference internal" href="model.html#zlogging.model.Model" title="zlogging.model.Model"><code class="xref py py-class docutils literal notranslate"><span class="pre">Model</span></code></a>) – Log record.</p></li>
 <li><p><strong>lineno</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Optional" title="(in Python v3.10)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>]) – Line number of current line.</p></li>
 </ul>
 </dd>
-<dt class="field-even">Return type</dt>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
 <dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></p>
 </dd>
-<dt class="field-odd">Returns</dt>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
 <dd class="field-odd"><p>The converted log string.</p>
 </dd>
-<dt class="field-even">Raises</dt>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
 <dd class="field-even"><p><a class="reference internal" href="_exc.html#zlogging._exc.ASCIIWriterError" title="zlogging._exc.ASCIIWriterError"><strong>ASCIIWriterError</strong></a> – If failed to serialise <code class="docutils literal notranslate"><span class="pre">data</span></code> as ASCII.</p>
 </dd>
 </dl>
@@ -450,16 +453,16 @@ records as an <a class="reference external" href="https://docs.python.org/3/libr
 <span class="sig-name descname"><span class="pre">dump_head</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/zlogging/dumper.html#ASCIIWriter.dump_head"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#zlogging.dumper.ASCIIWriter.dump_head" title="Permalink to this definition">¶</a></dt>
 <dd><p>Serialise header fields of ASCII log file.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>data</strong> (<a class="reference internal" href="model.html#zlogging.model.Model" title="zlogging.model.Model"><code class="xref py py-class docutils literal notranslate"><span class="pre">Model</span></code></a>, optional) – Log record.</p></li>
+<li><p><strong>data</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Optional" title="(in Python v3.10)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code></a>[<a class="reference internal" href="model.html#zlogging.model.Model" title="zlogging.model.Model"><code class="xref py py-class docutils literal notranslate"><span class="pre">Model</span></code></a>]) – Log record.</p></li>
 <li><p><strong>name</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Optional" title="(in Python v3.10)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>]) – Log file name.</p></li>
 </ul>
 </dd>
-<dt class="field-even">Return type</dt>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
 <dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></p>
 </dd>
-<dt class="field-odd">Returns</dt>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
 <dd class="field-odd"><p>The converted log string.</p>
 </dd>
 </dl>
@@ -470,10 +473,10 @@ records as an <a class="reference external" href="https://docs.python.org/3/libr
 <span class="sig-name descname"><span class="pre">dump_tail</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/zlogging/dumper.html#ASCIIWriter.dump_tail"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#zlogging.dumper.ASCIIWriter.dump_tail" title="Permalink to this definition">¶</a></dt>
 <dd><p>Serialise trailing fields of ASCII log file.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Return type</dt>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></p>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>The converted log string.</p>
 </dd>
 </dl>
@@ -484,31 +487,28 @@ records as an <a class="reference external" href="https://docs.python.org/3/libr
 <dl class="py class">
 <dt class="sig sig-object py" id="zlogging.dumper.JSONWriter">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">zlogging.dumper.</span></span><span class="sig-name descname"><span class="pre">JSONWriter</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">encoder</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/zlogging/dumper.html#JSONWriter"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#zlogging.dumper.JSONWriter" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#zlogging.dumper.BaseWriter" title="zlogging.dumper.BaseWriter"><code class="xref py py-class docutils literal notranslate"><span class="pre">zlogging.dumper.BaseWriter</span></code></a></p>
+<dd><p>Bases: <a class="reference internal" href="#zlogging.dumper.BaseWriter" title="zlogging.dumper.BaseWriter"><code class="xref py py-class docutils literal notranslate"><span class="pre">BaseWriter</span></code></a></p>
 <p>JSON log writer.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>encoder</strong> (<a class="reference external" href="https://docs.python.org/3/library/json.html#json.JSONEncoder" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">json.JSONEncoder</span></code></a> object, optional) – JSON encoder class.</p>
-</dd>
-<dt class="field-even">Variables</dt>
-<dd class="field-even"><p><strong>encoder</strong> (<a class="reference external" href="https://docs.python.org/3/library/json.html#json.JSONEncoder" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">json.JSONEncoder</span></code></a> object) – JSON encoder class.</p>
-</dd>
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>None</p>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>encoder</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Optional" title="(in Python v3.10)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Type" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Type</span></code></a>[<code class="xref py py-class docutils literal notranslate"><span class="pre">JSONEncoder</span></code>]]) – JSON encoder class.</p>
 </dd>
 </dl>
 <dl class="py property">
 <dt class="sig sig-object py" id="zlogging.dumper.JSONWriter.format">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">format</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Literal</span><span class="p"><span class="pre">[</span></span><span class="s"><span class="pre">'json'</span></span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#zlogging.dumper.JSONWriter.format" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">format</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Literal" title="(in Python v3.10)"><span class="pre">Literal</span></a><span class="p"><span class="pre">[</span></span><span class="s"><span class="pre">'json'</span></span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#zlogging.dumper.JSONWriter.format" title="Permalink to this definition">¶</a></dt>
 <dd><p>Log file format.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)">str</a></p>
-</dd>
-<dt class="field-even">Return type</dt>
-<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Literal" title="(in Python v3.10)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Literal</span></code></a>[‘json’]</p>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Literal" title="(in Python v3.10)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Literal</span></code></a>[‘json’]</p>
 </dd>
 </dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="zlogging.dumper.JSONWriter.encoder">
+<span class="sig-name descname"><span class="pre">encoder</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Type" title="(in Python v3.10)"><span class="pre">Type</span></a><span class="p"><span class="pre">[</span></span><span class="pre">JSONEncoder</span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#zlogging.dumper.JSONWriter.encoder" title="Permalink to this definition">¶</a></dt>
+<dd><p>JSON encoder class.</p>
 </dd></dl>
 
 <dl class="py method">
@@ -516,17 +516,17 @@ records as an <a class="reference external" href="https://docs.python.org/3/libr
 <span class="sig-name descname"><span class="pre">write_file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/zlogging/dumper.html#JSONWriter.write_file"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#zlogging.dumper.JSONWriter.write_file" title="Permalink to this definition">¶</a></dt>
 <dd><p>Write log file.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>file</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">TextIOWrapper</span></code>) – Log file object opened in text mode.</p></li>
-<li><p><strong>data</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Iterable" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Iterable</span></code></a> of <a class="reference internal" href="model.html#zlogging.model.Model" title="zlogging.model.Model"><code class="xref py py-class docutils literal notranslate"><span class="pre">Model</span></code></a>) – Log
-records as an <a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Iterable" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Iterable</span></code></a> of <a class="reference internal" href="model.html#zlogging.model.Model" title="zlogging.model.Model"><code class="xref py py-class docutils literal notranslate"><span class="pre">Model</span></code></a> per line.</p></li>
+<li><p><strong>data</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Iterable" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Iterable</span></code></a>[<a class="reference internal" href="model.html#zlogging.model.Model" title="zlogging.model.Model"><code class="xref py py-class docutils literal notranslate"><span class="pre">Model</span></code></a>]) – Log records as an <a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Iterable" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Iterable</span></code></a> of
+<a class="reference internal" href="model.html#zlogging.model.Model" title="zlogging.model.Model"><code class="xref py py-class docutils literal notranslate"><span class="pre">Model</span></code></a> per line.</p></li>
 </ul>
 </dd>
-<dt class="field-even">Return type</dt>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
 <dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a></p>
 </dd>
-<dt class="field-odd">Returns</dt>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
 <dd class="field-odd"><p>The file offset after writing.</p>
 </dd>
 </dl>
@@ -537,20 +537,20 @@ records as an <a class="reference external" href="https://docs.python.org/3/libr
 <span class="sig-name descname"><span class="pre">write_line</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lineno</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/zlogging/dumper.html#JSONWriter.write_line"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#zlogging.dumper.JSONWriter.write_line" title="Permalink to this definition">¶</a></dt>
 <dd><p>Write log line as one-line record.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>file</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">TextIOWrapper</span></code>) – Log file object opened in text mode.</p></li>
 <li><p><strong>data</strong> (<a class="reference internal" href="model.html#zlogging.model.Model" title="zlogging.model.Model"><code class="xref py py-class docutils literal notranslate"><span class="pre">Model</span></code></a>) – Log record.</p></li>
 <li><p><strong>lineno</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Optional" title="(in Python v3.10)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>]) – Line number of current line.</p></li>
 </ul>
 </dd>
-<dt class="field-even">Return type</dt>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
 <dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a></p>
 </dd>
-<dt class="field-odd">Returns</dt>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
 <dd class="field-odd"><p>The file offset after writing.</p>
 </dd>
-<dt class="field-even">Raises</dt>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
 <dd class="field-even"><p><a class="reference internal" href="_exc.html#zlogging._exc.JSONWriterError" title="zlogging._exc.JSONWriterError"><strong>JSONWriterError</strong></a> – If failed to serialise <code class="docutils literal notranslate"><span class="pre">data</span></code> as JSON.</p>
 </dd>
 </dl>
@@ -561,14 +561,14 @@ records as an <a class="reference external" href="https://docs.python.org/3/libr
 <span class="sig-name descname"><span class="pre">dump_file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/zlogging/dumper.html#JSONWriter.dump_file"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#zlogging.dumper.JSONWriter.dump_file" title="Permalink to this definition">¶</a></dt>
 <dd><p>Serialise records to a log line.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>data</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Iterable" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Iterable</span></code></a> of <a class="reference internal" href="model.html#zlogging.model.Model" title="zlogging.model.Model"><code class="xref py py-class docutils literal notranslate"><span class="pre">Model</span></code></a>) – Log
-records as an <a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Iterable" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Iterable</span></code></a> of <a class="reference internal" href="model.html#zlogging.model.Model" title="zlogging.model.Model"><code class="xref py py-class docutils literal notranslate"><span class="pre">Model</span></code></a> per line.</p>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>data</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Optional" title="(in Python v3.10)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Iterable" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Iterable</span></code></a>[<a class="reference internal" href="model.html#zlogging.model.Model" title="zlogging.model.Model"><code class="xref py py-class docutils literal notranslate"><span class="pre">Model</span></code></a>]]) – Log records as an <a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Iterable" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Iterable</span></code></a> of
+<a class="reference internal" href="model.html#zlogging.model.Model" title="zlogging.model.Model"><code class="xref py py-class docutils literal notranslate"><span class="pre">Model</span></code></a> per line.</p>
 </dd>
-<dt class="field-even">Return type</dt>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
 <dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></p>
 </dd>
-<dt class="field-odd">Returns</dt>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
 <dd class="field-odd"><p>The converted log string.</p>
 </dd>
 </dl>
@@ -579,19 +579,19 @@ records as an <a class="reference external" href="https://docs.python.org/3/libr
 <span class="sig-name descname"><span class="pre">dump_line</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lineno</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/zlogging/dumper.html#JSONWriter.dump_line"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#zlogging.dumper.JSONWriter.dump_line" title="Permalink to this definition">¶</a></dt>
 <dd><p>Serialise one-line record to a log line.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>data</strong> (<a class="reference internal" href="model.html#zlogging.model.Model" title="zlogging.model.Model"><code class="xref py py-class docutils literal notranslate"><span class="pre">Model</span></code></a>) – Log record.</p></li>
 <li><p><strong>lineno</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Optional" title="(in Python v3.10)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>]) – Line number of current line.</p></li>
 </ul>
 </dd>
-<dt class="field-even">Return type</dt>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
 <dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></p>
 </dd>
-<dt class="field-odd">Returns</dt>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
 <dd class="field-odd"><p>The converted log string.</p>
 </dd>
-<dt class="field-even">Raises</dt>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
 <dd class="field-even"><p><a class="reference internal" href="_exc.html#zlogging._exc.JSONWriterError" title="zlogging._exc.JSONWriterError"><strong>JSONWriterError</strong></a> – If failed to serialise <code class="docutils literal notranslate"><span class="pre">data</span></code> as JSON.</p>
 </dd>
 </dl>
@@ -600,8 +600,8 @@ records as an <a class="reference external" href="https://docs.python.org/3/libr
 </dd></dl>
 
 </section>
-<section id="abstract-base-dumpers">
-<h2>Abstract Base Dumpers<a class="headerlink" href="#abstract-base-dumpers" title="Permalink to this headline">¶</a></h2>
+<section id="abstract-base-dumper">
+<h2>Abstract Base Dumper<a class="headerlink" href="#abstract-base-dumper" title="Permalink to this heading">¶</a></h2>
 <dl class="py class">
 <dt class="sig sig-object py" id="zlogging.dumper.BaseWriter">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">zlogging.dumper.</span></span><span class="sig-name descname"><span class="pre">BaseWriter</span></span><a class="reference internal" href="_modules/zlogging/dumper.html#BaseWriter"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#zlogging.dumper.BaseWriter" title="Permalink to this definition">¶</a></dt>
@@ -612,11 +612,8 @@ records as an <a class="reference external" href="https://docs.python.org/3/libr
 <em class="property"><span class="pre">abstract</span><span class="w"> </span><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">format</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><span class="pre">str</span></a></em><a class="headerlink" href="#zlogging.dumper.BaseWriter.format" title="Permalink to this definition">¶</a></dt>
 <dd><p>Log file format.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)">str</a></p>
-</dd>
-<dt class="field-even">Return type</dt>
-<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></p>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></p>
 </dd>
 </dl>
 </dd></dl>
@@ -626,18 +623,18 @@ records as an <a class="reference external" href="https://docs.python.org/3/libr
 <span class="sig-name descname"><span class="pre">write</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/zlogging/dumper.html#BaseWriter.write"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#zlogging.dumper.BaseWriter.write" title="Permalink to this definition">¶</a></dt>
 <dd><p>Write log file.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>filename</strong> (<a class="reference external" href="https://docs.python.org/3/library/os.html#os.PathLike" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">PathLike</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>]) – Log file name.</p></li>
-<li><p><strong>data</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Iterable" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Iterable</span></code></a> of <a class="reference internal" href="model.html#zlogging.model.Model" title="zlogging.model.Model"><code class="xref py py-class docutils literal notranslate"><span class="pre">Model</span></code></a>) – Log
-records as an <a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Iterable" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Iterable</span></code></a> of <a class="reference internal" href="model.html#zlogging.model.Model" title="zlogging.model.Model"><code class="xref py py-class docutils literal notranslate"><span class="pre">Model</span></code></a> per line.</p></li>
+<li><p><strong>filename</strong> (<em>PathLike</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><em>str</em></a><em>]</em>) – Log file name.</p></li>
+<li><p><strong>data</strong> (<em>Iterable</em><em>[</em><a class="reference internal" href="model.html#zlogging.model.Model" title="zlogging.model.Model"><em>Model</em></a><em>]</em>) – Log records as an <a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Iterable" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Iterable</span></code></a> of
+<a class="reference internal" href="model.html#zlogging.model.Model" title="zlogging.model.Model"><code class="xref py py-class docutils literal notranslate"><span class="pre">Model</span></code></a> per line.</p></li>
 </ul>
 </dd>
-<dt class="field-even">Return type</dt>
-<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a></p>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The file offset after writing.</p>
 </dd>
-<dt class="field-odd">Returns</dt>
-<dd class="field-odd"><p>The file offset after writing.</p>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)">int</a></p>
 </dd>
 </dl>
 </dd></dl>
@@ -647,17 +644,17 @@ records as an <a class="reference external" href="https://docs.python.org/3/libr
 <em class="property"><span class="pre">abstract</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">write_file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/zlogging/dumper.html#BaseWriter.write_file"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#zlogging.dumper.BaseWriter.write_file" title="Permalink to this definition">¶</a></dt>
 <dd><p>Write log file.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>file</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">TextIOWrapper</span></code>) – Log file object opened in text mode.</p></li>
-<li><p><strong>data</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Iterable" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Iterable</span></code></a> of <a class="reference internal" href="model.html#zlogging.model.Model" title="zlogging.model.Model"><code class="xref py py-class docutils literal notranslate"><span class="pre">Model</span></code></a>) – Log
-records as an <a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Iterable" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Iterable</span></code></a> of <a class="reference internal" href="model.html#zlogging.model.Model" title="zlogging.model.Model"><code class="xref py py-class docutils literal notranslate"><span class="pre">Model</span></code></a> per line.</p></li>
+<li><p><strong>data</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Iterable" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Iterable</span></code></a>[<a class="reference internal" href="model.html#zlogging.model.Model" title="zlogging.model.Model"><code class="xref py py-class docutils literal notranslate"><span class="pre">Model</span></code></a>]) – Log records as an <a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Iterable" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Iterable</span></code></a> of
+<a class="reference internal" href="model.html#zlogging.model.Model" title="zlogging.model.Model"><code class="xref py py-class docutils literal notranslate"><span class="pre">Model</span></code></a> per line.</p></li>
 </ul>
 </dd>
-<dt class="field-even">Return type</dt>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
 <dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a></p>
 </dd>
-<dt class="field-odd">Returns</dt>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
 <dd class="field-odd"><p>The file offset after writing.</p>
 </dd>
 </dl>
@@ -668,17 +665,17 @@ records as an <a class="reference external" href="https://docs.python.org/3/libr
 <em class="property"><span class="pre">abstract</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">write_line</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lineno</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/zlogging/dumper.html#BaseWriter.write_line"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#zlogging.dumper.BaseWriter.write_line" title="Permalink to this definition">¶</a></dt>
 <dd><p>Write log line as one-line record.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>file</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">TextIOWrapper</span></code>) – Log file object opened in text mode.</p></li>
-<li><p><strong>data</strong> (<a class="reference internal" href="model.html#zlogging.model.Model" title="zlogging.model.Model"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Model</span></code></a>) – Log record.</p></li>
+<li><p><strong>data</strong> (<a class="reference internal" href="model.html#zlogging.model.Model" title="zlogging.model.Model"><code class="xref py py-class docutils literal notranslate"><span class="pre">Model</span></code></a>) – Log record.</p></li>
 <li><p><strong>lineno</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Optional" title="(in Python v3.10)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>]) – Line number of current line.</p></li>
 </ul>
 </dd>
-<dt class="field-even">Return type</dt>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
 <dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a></p>
 </dd>
-<dt class="field-odd">Returns</dt>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
 <dd class="field-odd"><p>The file offset after writing.</p>
 </dd>
 </dl>
@@ -689,14 +686,14 @@ records as an <a class="reference external" href="https://docs.python.org/3/libr
 <em class="property"><span class="pre">abstract</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">dump_file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/zlogging/dumper.html#BaseWriter.dump_file"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#zlogging.dumper.BaseWriter.dump_file" title="Permalink to this definition">¶</a></dt>
 <dd><p>Serialise records to a log line.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>data</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Iterable" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Iterable</span></code></a> of <a class="reference internal" href="model.html#zlogging.model.Model" title="zlogging.model.Model"><code class="xref py py-class docutils literal notranslate"><span class="pre">Model</span></code></a>) – Log
-records as an <a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Iterable" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Iterable</span></code></a> of <a class="reference internal" href="model.html#zlogging.model.Model" title="zlogging.model.Model"><code class="xref py py-class docutils literal notranslate"><span class="pre">Model</span></code></a> per line.</p>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>data</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Iterable" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Iterable</span></code></a>[<a class="reference internal" href="model.html#zlogging.model.Model" title="zlogging.model.Model"><code class="xref py py-class docutils literal notranslate"><span class="pre">Model</span></code></a>]) – Log records as an <a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Iterable" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Iterable</span></code></a> of
+<a class="reference internal" href="model.html#zlogging.model.Model" title="zlogging.model.Model"><code class="xref py py-class docutils literal notranslate"><span class="pre">Model</span></code></a> per line.</p>
 </dd>
-<dt class="field-even">Return type</dt>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
 <dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></p>
 </dd>
-<dt class="field-odd">Returns</dt>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
 <dd class="field-odd"><p>The converted log string.</p>
 </dd>
 </dl>
@@ -707,16 +704,16 @@ records as an <a class="reference external" href="https://docs.python.org/3/libr
 <em class="property"><span class="pre">abstract</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">dump_line</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lineno</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/zlogging/dumper.html#BaseWriter.dump_line"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#zlogging.dumper.BaseWriter.dump_line" title="Permalink to this definition">¶</a></dt>
 <dd><p>Serialise one-line record to a log line.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>data</strong> (<a class="reference internal" href="model.html#zlogging.model.Model" title="zlogging.model.Model"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Model</span></code></a>) – Log record.</p></li>
 <li><p><strong>lineno</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Optional" title="(in Python v3.10)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>]) – Line number of current line.</p></li>
 </ul>
 </dd>
-<dt class="field-even">Return type</dt>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
 <dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></p>
 </dd>
-<dt class="field-odd">Returns</dt>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
 <dd class="field-odd"><p>The converted log string.</p>
 </dd>
 </dl>
@@ -727,17 +724,17 @@ records as an <a class="reference external" href="https://docs.python.org/3/libr
 <span class="sig-name descname"><span class="pre">dump</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">file</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/zlogging/dumper.html#BaseWriter.dump"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#zlogging.dumper.BaseWriter.dump" title="Permalink to this definition">¶</a></dt>
 <dd><p>Write log file.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>data</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Iterable" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Iterable</span></code></a> of <a class="reference internal" href="model.html#zlogging.model.Model" title="zlogging.model.Model"><code class="xref py py-class docutils literal notranslate"><span class="pre">Model</span></code></a>) – Log
-records as an <a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Iterable" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Iterable</span></code></a> of <a class="reference internal" href="model.html#zlogging.model.Model" title="zlogging.model.Model"><code class="xref py py-class docutils literal notranslate"><span class="pre">Model</span></code></a> per line.</p></li>
+<li><p><strong>data</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Iterable" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Iterable</span></code></a>[<a class="reference internal" href="model.html#zlogging.model.Model" title="zlogging.model.Model"><code class="xref py py-class docutils literal notranslate"><span class="pre">Model</span></code></a>]) – Log records as an <a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Iterable" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Iterable</span></code></a> of
+<a class="reference internal" href="model.html#zlogging.model.Model" title="zlogging.model.Model"><code class="xref py py-class docutils literal notranslate"><span class="pre">Model</span></code></a> per line.</p></li>
 <li><p><strong>file</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">TextIOWrapper</span></code>) – Log file object opened in text mode.</p></li>
 </ul>
 </dd>
-<dt class="field-even">Return type</dt>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
 <dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a></p>
 </dd>
-<dt class="field-odd">Returns</dt>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
 <dd class="field-odd"><p>The file offset after writing.</p>
 </dd>
 </dl>
@@ -748,14 +745,14 @@ records as an <a class="reference external" href="https://docs.python.org/3/libr
 <span class="sig-name descname"><span class="pre">dumps</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/zlogging/dumper.html#BaseWriter.dumps"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#zlogging.dumper.BaseWriter.dumps" title="Permalink to this definition">¶</a></dt>
 <dd><p>Serialise records to a log line.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>data</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Iterable" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Iterable</span></code></a> of <a class="reference internal" href="model.html#zlogging.model.Model" title="zlogging.model.Model"><code class="xref py py-class docutils literal notranslate"><span class="pre">Model</span></code></a>) – Log
-records as an <a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Iterable" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Iterable</span></code></a> of <a class="reference internal" href="model.html#zlogging.model.Model" title="zlogging.model.Model"><code class="xref py py-class docutils literal notranslate"><span class="pre">Model</span></code></a> per line.</p>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>data</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Iterable" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Iterable</span></code></a>[<a class="reference internal" href="model.html#zlogging.model.Model" title="zlogging.model.Model"><code class="xref py py-class docutils literal notranslate"><span class="pre">Model</span></code></a>]) – Log records as an <a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Iterable" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Iterable</span></code></a> of
+<a class="reference internal" href="model.html#zlogging.model.Model" title="zlogging.model.Model"><code class="xref py py-class docutils literal notranslate"><span class="pre">Model</span></code></a> per line.</p>
 </dd>
-<dt class="field-even">Return type</dt>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
 <dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></p>
 </dd>
-<dt class="field-odd">Returns</dt>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
 <dd class="field-odd"><p>The converted log string.</p>
 </dd>
 </dl>
@@ -791,18 +788,14 @@ records as an <a class="reference external" href="https://docs.python.org/3/libr
 
 <h3>Navigation</h3>
 <ul class="current">
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Dumpers</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#module-zlogging.dumper">Predefined Dumpers</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#abstract-base-dumpers">Abstract Base Dumpers</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="loader.html">Loaders</a></li>
+<li class="toctree-l1"><a class="reference internal" href="loader.html">Log Loaders</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Log Dumpers</a></li>
 <li class="toctree-l1"><a class="reference internal" href="model.html">Data Model</a></li>
 <li class="toctree-l1"><a class="reference internal" href="types.html">Data Types</a></li>
 <li class="toctree-l1"><a class="reference internal" href="typing.html">Typing Annotations</a></li>
-<li class="toctree-l1"><a class="reference internal" href="_data.html">Data Classes</a></li>
 <li class="toctree-l1"><a class="reference internal" href="_exc.html">Exceptions &amp; Warnings</a></li>
 <li class="toctree-l1"><a class="reference internal" href="_aux.html">Internal Auxiliary Functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_data.html">Data Classes</a></li>
 <li class="toctree-l1"><a class="reference internal" href="enum/index.html">Enum Namespace</a></li>
 </ul>
 
@@ -810,8 +803,8 @@ records as an <a class="reference external" href="https://docs.python.org/3/libr
 <h3>Related Topics</h3>
 <ul>
   <li><a href="index.html">Documentation overview</a><ul>
-      <li>Previous: <a href="index.html" title="previous chapter">ZLogging - Bro/Zeek logging framework for Python</a></li>
-      <li>Next: <a href="loader.html" title="next chapter">Loaders</a></li>
+      <li>Previous: <a href="loader.html" title="previous chapter">Log Loaders</a></li>
+      <li>Next: <a href="model.html" title="next chapter">Data Model</a></li>
   </ul></li>
 </ul>
 </div>
@@ -824,7 +817,7 @@ records as an <a class="reference external" href="https://docs.python.org/3/libr
     </form>
     </div>
 </div>
-<script>$('#searchbox').show(0);</script>
+<script>document.getElementById('searchbox').style.display = "block"</script>
 
 
 

@@ -1,7 +1,7 @@
 
 <!DOCTYPE html>
 
-<html>
+<html lang="en">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -11,6 +11,7 @@
     <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
     <script src="../../../_static/jquery.js"></script>
     <script src="../../../_static/underscore.js"></script>
+    <script src="../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="../../../_static/doctools.js"></script>
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" />
@@ -32,10 +33,10 @@
             
   <h1>Source code for zlogging.enum.Broker</h1><div class="highlight"><pre>
 <span></span><span class="c1"># -*- coding: utf-8 -*-</span>
-<span class="c1"># pylint: disable=line-too-long,import-error</span>
+<span class="c1"># pylint: disable=line-too-long</span>
 <span class="sd">&quot;&quot;&quot;Namespace: ``Broker``.&quot;&quot;&quot;</span>
 
-<span class="kn">from</span> <span class="nn">zlogging._compat</span> <span class="kn">import</span> <span class="n">enum</span>
+<span class="kn">from</span> <span class="nn">zlogging._compat</span> <span class="k">import</span> <span class="n">enum</span>
 
 
 <div class="viewcode-block" id="DataType"><a class="viewcode-back" href="../../../enum/Broker.html#zlogging.enum.Broker.DataType">[docs]</a><span class="nd">@enum</span><span class="o">.</span><span class="n">unique</span>
@@ -52,35 +53,35 @@
     <span class="n">_ignore_</span> <span class="o">=</span> <span class="s1">&#39;DataType _&#39;</span>
     <span class="n">DataType</span> <span class="o">=</span> <span class="nb">vars</span><span class="p">()</span>
 
-    <span class="n">DataType</span><span class="p">[</span><span class="s1">&#39;NONE&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span>
+    <span class="n">NONE</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span>
 
-    <span class="n">DataType</span><span class="p">[</span><span class="s1">&#39;BOOL&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span>
+    <span class="n">BOOL</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span>
 
-    <span class="n">DataType</span><span class="p">[</span><span class="s1">&#39;INT&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span>
+    <span class="n">INT</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span>
 
-    <span class="n">DataType</span><span class="p">[</span><span class="s1">&#39;COUNT&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span>
+    <span class="n">COUNT</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span>
 
-    <span class="n">DataType</span><span class="p">[</span><span class="s1">&#39;DOUBLE&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span>
+    <span class="n">DOUBLE</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span>
 
-    <span class="n">DataType</span><span class="p">[</span><span class="s1">&#39;STRING&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span>
+    <span class="n">STRING</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span>
 
-    <span class="n">DataType</span><span class="p">[</span><span class="s1">&#39;ADDR&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span>
+    <span class="n">ADDR</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span>
 
-    <span class="n">DataType</span><span class="p">[</span><span class="s1">&#39;SUBNET&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span>
+    <span class="n">SUBNET</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span>
 
-    <span class="n">DataType</span><span class="p">[</span><span class="s1">&#39;PORT&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span>
+    <span class="n">PORT</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span>
 
-    <span class="n">DataType</span><span class="p">[</span><span class="s1">&#39;TIME&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span>
+    <span class="n">TIME</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span>
 
-    <span class="n">DataType</span><span class="p">[</span><span class="s1">&#39;INTERVAL&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span>
+    <span class="n">INTERVAL</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span>
 
-    <span class="n">DataType</span><span class="p">[</span><span class="s1">&#39;ENUM&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span>
+    <span class="n">ENUM</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span>
 
-    <span class="n">DataType</span><span class="p">[</span><span class="s1">&#39;SET&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span>
+    <span class="n">SET</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span>
 
-    <span class="n">DataType</span><span class="p">[</span><span class="s1">&#39;TABLE&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span>
+    <span class="n">TABLE</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span>
 
-    <span class="n">DataType</span><span class="p">[</span><span class="s1">&#39;VECTOR&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span></div>
+    <span class="n">VECTOR</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span></div>
 
 
 <div class="viewcode-block" id="Type"><a class="viewcode-back" href="../../../enum/Broker.html#zlogging.enum.Broker.Type">[docs]</a><span class="nd">@enum</span><span class="o">.</span><span class="n">unique</span>
@@ -98,10 +99,10 @@
     <span class="n">Type</span> <span class="o">=</span> <span class="nb">vars</span><span class="p">()</span>
 
     <span class="c1">#: An informational status update.</span>
-    <span class="n">Type</span><span class="p">[</span><span class="s1">&#39;STATUS&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span>
+    <span class="n">STATUS</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span>
 
     <span class="c1">#: An error situation.</span>
-    <span class="n">Type</span><span class="p">[</span><span class="s1">&#39;ERROR&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span></div>
+    <span class="n">ERROR</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span></div>
 
 
 <div class="viewcode-block" id="ErrorCode"><a class="viewcode-back" href="../../../enum/Broker.html#zlogging.enum.Broker.ErrorCode">[docs]</a><span class="nd">@enum</span><span class="o">.</span><span class="n">unique</span>
@@ -119,70 +120,70 @@
     <span class="n">ErrorCode</span> <span class="o">=</span> <span class="nb">vars</span><span class="p">()</span>
 
     <span class="c1">#: (present if base/bif/comm.bif.zeek is loaded)</span>
-    <span class="n">ErrorCode</span><span class="p">[</span><span class="s1">&#39;NO_ERROR&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span>
+    <span class="n">NO_ERROR</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span>
 
     <span class="c1">#: The unspecified default error code.</span>
-    <span class="n">ErrorCode</span><span class="p">[</span><span class="s1">&#39;UNSPECIFIED&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span>
+    <span class="n">UNSPECIFIED</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span>
 
     <span class="c1">#: Version incompatibility.</span>
-    <span class="n">ErrorCode</span><span class="p">[</span><span class="s1">&#39;PEER_INCOMPATIBLE&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span>
+    <span class="n">PEER_INCOMPATIBLE</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span>
 
     <span class="c1">#: Referenced peer does not exist.</span>
-    <span class="n">ErrorCode</span><span class="p">[</span><span class="s1">&#39;PEER_INVALID&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span>
+    <span class="n">PEER_INVALID</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span>
 
     <span class="c1">#: Remote peer not listening.</span>
-    <span class="n">ErrorCode</span><span class="p">[</span><span class="s1">&#39;PEER_UNAVAILABLE&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span>
+    <span class="n">PEER_UNAVAILABLE</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span>
 
     <span class="c1">#: (present if base/bif/comm.bif.zeek is loaded)</span>
-    <span class="n">ErrorCode</span><span class="p">[</span><span class="s1">&#39;PEER_DISCONNECT_DURING_HANDSHAKE&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span>
+    <span class="n">PEER_DISCONNECT_DURING_HANDSHAKE</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span>
 
     <span class="c1">#: A peering request timed out.</span>
-    <span class="n">ErrorCode</span><span class="p">[</span><span class="s1">&#39;PEER_TIMEOUT&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span>
+    <span class="n">PEER_TIMEOUT</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span>
 
     <span class="c1">#: Master with given name already exists.</span>
-    <span class="n">ErrorCode</span><span class="p">[</span><span class="s1">&#39;MASTER_EXISTS&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span>
+    <span class="n">MASTER_EXISTS</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span>
 
     <span class="c1">#: Master with given name does not exist.</span>
-    <span class="n">ErrorCode</span><span class="p">[</span><span class="s1">&#39;NO_SUCH_MASTER&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span>
+    <span class="n">NO_SUCH_MASTER</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span>
 
     <span class="c1">#: The given data store key does not exist.</span>
-    <span class="n">ErrorCode</span><span class="p">[</span><span class="s1">&#39;NO_SUCH_KEY&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span>
+    <span class="n">NO_SUCH_KEY</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span>
 
     <span class="c1">#: The store operation timed out.</span>
-    <span class="n">ErrorCode</span><span class="p">[</span><span class="s1">&#39;REQUEST_TIMEOUT&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span>
+    <span class="n">REQUEST_TIMEOUT</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span>
 
     <span class="c1">#: The operation expected a different type than provided.</span>
-    <span class="n">ErrorCode</span><span class="p">[</span><span class="s1">&#39;TYPE_CLASH&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span>
+    <span class="n">TYPE_CLASH</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span>
 
     <span class="c1">#: The data value cannot be used to carry out the desired operation.</span>
-    <span class="n">ErrorCode</span><span class="p">[</span><span class="s1">&#39;INVALID_DATA&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span>
+    <span class="n">INVALID_DATA</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span>
 
     <span class="c1">#: The storage backend failed to execute the operation.</span>
-    <span class="n">ErrorCode</span><span class="p">[</span><span class="s1">&#39;BACKEND_FAILURE&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span>
+    <span class="n">BACKEND_FAILURE</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span>
 
     <span class="c1">#: The storage backend failed to execute the operation.</span>
-    <span class="n">ErrorCode</span><span class="p">[</span><span class="s1">&#39;STALE_DATA&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span>
+    <span class="n">STALE_DATA</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span>
 
     <span class="c1">#: (present if base/bif/comm.bif.zeek is loaded)</span>
-    <span class="n">ErrorCode</span><span class="p">[</span><span class="s1">&#39;CANNOT_OPEN_FILE&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span>
+    <span class="n">CANNOT_OPEN_FILE</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span>
 
     <span class="c1">#: (present if base/bif/comm.bif.zeek is loaded)</span>
-    <span class="n">ErrorCode</span><span class="p">[</span><span class="s1">&#39;CANNOT_WRITE_FILE&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span>
+    <span class="n">CANNOT_WRITE_FILE</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span>
 
     <span class="c1">#: (present if base/bif/comm.bif.zeek is loaded)</span>
-    <span class="n">ErrorCode</span><span class="p">[</span><span class="s1">&#39;INVALID_TOPIC_KEY&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span>
+    <span class="n">INVALID_TOPIC_KEY</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span>
 
     <span class="c1">#: (present if base/bif/comm.bif.zeek is loaded)</span>
-    <span class="n">ErrorCode</span><span class="p">[</span><span class="s1">&#39;END_OF_FILE&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span>
+    <span class="n">END_OF_FILE</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span>
 
     <span class="c1">#: (present if base/bif/comm.bif.zeek is loaded)</span>
-    <span class="n">ErrorCode</span><span class="p">[</span><span class="s1">&#39;INVALID_TAG&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span>
+    <span class="n">INVALID_TAG</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span>
 
     <span class="c1">#: (present if base/bif/comm.bif.zeek is loaded)</span>
-    <span class="n">ErrorCode</span><span class="p">[</span><span class="s1">&#39;INVALID_STATUS&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span>
+    <span class="n">INVALID_STATUS</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span>
 
     <span class="c1">#: Catch-all for a CAF-level problem.</span>
-    <span class="n">ErrorCode</span><span class="p">[</span><span class="s1">&#39;CAF_ERROR&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span></div>
+    <span class="n">CAF_ERROR</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span></div>
 
 
 <div class="viewcode-block" id="PeerStatus"><a class="viewcode-back" href="../../../enum/Broker.html#zlogging.enum.Broker.PeerStatus">[docs]</a><span class="nd">@enum</span><span class="o">.</span><span class="n">unique</span>
@@ -200,22 +201,22 @@
     <span class="n">PeerStatus</span> <span class="o">=</span> <span class="nb">vars</span><span class="p">()</span>
 
     <span class="c1">#: The peering process is initiated.</span>
-    <span class="n">PeerStatus</span><span class="p">[</span><span class="s1">&#39;INITIALIZING&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span>
+    <span class="n">INITIALIZING</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span>
 
     <span class="c1">#: Connection establishment in process.</span>
-    <span class="n">PeerStatus</span><span class="p">[</span><span class="s1">&#39;CONNECTING&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span>
+    <span class="n">CONNECTING</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span>
 
     <span class="c1">#: Connection established, peering pending.</span>
-    <span class="n">PeerStatus</span><span class="p">[</span><span class="s1">&#39;CONNECTED&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span>
+    <span class="n">CONNECTED</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span>
 
     <span class="c1">#: Successfully peered.</span>
-    <span class="n">PeerStatus</span><span class="p">[</span><span class="s1">&#39;PEERED&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span>
+    <span class="n">PEERED</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span>
 
     <span class="c1">#: Connection to remote peer lost.</span>
-    <span class="n">PeerStatus</span><span class="p">[</span><span class="s1">&#39;DISCONNECTED&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span>
+    <span class="n">DISCONNECTED</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span>
 
     <span class="c1">#: Reconnecting to peer after a lost connection.</span>
-    <span class="n">PeerStatus</span><span class="p">[</span><span class="s1">&#39;RECONNECTING&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span></div>
+    <span class="n">RECONNECTING</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span></div>
 
 
 <div class="viewcode-block" id="BackendType"><a class="viewcode-back" href="../../../enum/Broker.html#zlogging.enum.Broker.BackendType">[docs]</a><span class="nd">@enum</span><span class="o">.</span><span class="n">unique</span>
@@ -232,11 +233,11 @@
     <span class="n">_ignore_</span> <span class="o">=</span> <span class="s1">&#39;BackendType _&#39;</span>
     <span class="n">BackendType</span> <span class="o">=</span> <span class="nb">vars</span><span class="p">()</span>
 
-    <span class="n">BackendType</span><span class="p">[</span><span class="s1">&#39;MEMORY&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span>
+    <span class="n">MEMORY</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span>
 
-    <span class="n">BackendType</span><span class="p">[</span><span class="s1">&#39;SQLITE&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span>
+    <span class="n">SQLITE</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span>
 
-    <span class="n">BackendType</span><span class="p">[</span><span class="s1">&#39;ROCKSDB&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span></div>
+    <span class="n">ROCKSDB</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span></div>
 
 
 <div class="viewcode-block" id="QueryStatus"><a class="viewcode-back" href="../../../enum/Broker.html#zlogging.enum.Broker.QueryStatus">[docs]</a><span class="nd">@enum</span><span class="o">.</span><span class="n">unique</span>
@@ -253,9 +254,9 @@
     <span class="n">_ignore_</span> <span class="o">=</span> <span class="s1">&#39;QueryStatus _&#39;</span>
     <span class="n">QueryStatus</span> <span class="o">=</span> <span class="nb">vars</span><span class="p">()</span>
 
-    <span class="n">QueryStatus</span><span class="p">[</span><span class="s1">&#39;SUCCESS&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span>
+    <span class="n">SUCCESS</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span>
 
-    <span class="n">QueryStatus</span><span class="p">[</span><span class="s1">&#39;FAILURE&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span></div>
+    <span class="n">FAILURE</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span></div>
 </pre></div>
 
           </div>
@@ -282,14 +283,14 @@
 
 <h3>Navigation</h3>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../../../dumper.html">Dumpers</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../loader.html">Loaders</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../loader.html">Log Loaders</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../dumper.html">Log Dumpers</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../model.html">Data Model</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../types.html">Data Types</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../typing.html">Typing Annotations</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../_data.html">Data Classes</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../_exc.html">Exceptions &amp; Warnings</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../_aux.html">Internal Auxiliary Functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../_data.html">Data Classes</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../enum/index.html">Enum Namespace</a></li>
 </ul>
 
@@ -313,7 +314,7 @@
     </form>
     </div>
 </div>
-<script>$('#searchbox').show(0);</script>
+<script>document.getElementById('searchbox').style.display = "block"</script>
 
 
 

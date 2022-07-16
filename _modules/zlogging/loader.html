@@ -1,7 +1,7 @@
 
 <!DOCTYPE html>
 
-<html>
+<html lang="en">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -11,6 +11,7 @@
     <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
     <script src="../../_static/jquery.js"></script>
     <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="../../_static/doctools.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
@@ -42,14 +43,14 @@
 <span class="kn">import</span> <span class="nn">json</span>
 <span class="kn">import</span> <span class="nn">re</span>
 <span class="kn">import</span> <span class="nn">warnings</span>
-<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">TYPE_CHECKING</span><span class="p">,</span> <span class="n">TypeVar</span><span class="p">,</span> <span class="n">cast</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="k">import</span> <span class="n">TYPE_CHECKING</span><span class="p">,</span> <span class="n">TypeVar</span><span class="p">,</span> <span class="n">cast</span>
 
-<span class="kn">from</span> <span class="nn">zlogging._aux</span> <span class="kn">import</span> <span class="n">readline</span>
-<span class="kn">from</span> <span class="nn">zlogging._data</span> <span class="kn">import</span> <span class="n">ASCIIInfo</span><span class="p">,</span> <span class="n">JSONInfo</span>
-<span class="kn">from</span> <span class="nn">zlogging._exc</span> <span class="kn">import</span> <span class="p">(</span><span class="n">ASCIIParserWarning</span><span class="p">,</span> <span class="n">ASCIIPaserError</span><span class="p">,</span> <span class="n">JSONParserError</span><span class="p">,</span> <span class="n">JSONParserWarning</span><span class="p">,</span>
+<span class="kn">from</span> <span class="nn">zlogging._aux</span> <span class="k">import</span> <span class="n">readline</span>
+<span class="kn">from</span> <span class="nn">zlogging._data</span> <span class="k">import</span> <span class="n">ASCIIInfo</span><span class="p">,</span> <span class="n">JSONInfo</span>
+<span class="kn">from</span> <span class="nn">zlogging._exc</span> <span class="k">import</span> <span class="p">(</span><span class="n">ASCIIParserWarning</span><span class="p">,</span> <span class="n">ASCIIParserError</span><span class="p">,</span> <span class="n">JSONParserError</span><span class="p">,</span> <span class="n">JSONParserWarning</span><span class="p">,</span>
                            <span class="n">ParserError</span><span class="p">,</span> <span class="n">ZeekValueError</span><span class="p">)</span>
-<span class="kn">from</span> <span class="nn">zlogging.model</span> <span class="kn">import</span> <span class="n">new_model</span>
-<span class="kn">from</span> <span class="nn">zlogging.types</span> <span class="kn">import</span> <span class="p">(</span><span class="n">AddrType</span><span class="p">,</span> <span class="n">AnyType</span><span class="p">,</span> <span class="n">BaseType</span><span class="p">,</span> <span class="n">BoolType</span><span class="p">,</span> <span class="n">CountType</span><span class="p">,</span> <span class="n">DoubleType</span><span class="p">,</span> <span class="n">EnumType</span><span class="p">,</span>
+<span class="kn">from</span> <span class="nn">zlogging.model</span> <span class="k">import</span> <span class="n">new_model</span>
+<span class="kn">from</span> <span class="nn">zlogging.types</span> <span class="k">import</span> <span class="p">(</span><span class="n">AddrType</span><span class="p">,</span> <span class="n">AnyType</span><span class="p">,</span> <span class="n">BaseType</span><span class="p">,</span> <span class="n">BoolType</span><span class="p">,</span> <span class="n">CountType</span><span class="p">,</span> <span class="n">DoubleType</span><span class="p">,</span> <span class="n">EnumType</span><span class="p">,</span>
                             <span class="n">IntervalType</span><span class="p">,</span> <span class="n">IntType</span><span class="p">,</span> <span class="n">PortType</span><span class="p">,</span> <span class="n">SetType</span><span class="p">,</span> <span class="n">StringType</span><span class="p">,</span> <span class="n">SubnetType</span><span class="p">,</span>
                             <span class="n">TimeType</span><span class="p">,</span> <span class="n">VectorType</span><span class="p">)</span>
 
@@ -62,16 +63,16 @@
 
 <span class="n">_S</span> <span class="o">=</span> <span class="n">TypeVar</span><span class="p">(</span><span class="s1">&#39;_S&#39;</span><span class="p">,</span> <span class="n">bound</span><span class="o">=</span><span class="s1">&#39;_SimpleType&#39;</span><span class="p">)</span>
 <span class="k">if</span> <span class="n">TYPE_CHECKING</span><span class="p">:</span>
-    <span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">OrderedDict</span>
-    <span class="kn">from</span> <span class="nn">io</span> <span class="kn">import</span> <span class="n">BufferedReader</span> <span class="k">as</span> <span class="n">BinaryFile</span>
-    <span class="kn">from</span> <span class="nn">os</span> <span class="kn">import</span> <span class="n">PathLike</span>
-    <span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">List</span><span class="p">,</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">Tuple</span><span class="p">,</span> <span class="n">Type</span><span class="p">,</span> <span class="n">Union</span>
+    <span class="kn">from</span> <span class="nn">collections</span> <span class="k">import</span> <span class="n">OrderedDict</span>
+    <span class="kn">from</span> <span class="nn">io</span> <span class="k">import</span> <span class="n">BufferedReader</span> <span class="k">as</span> <span class="n">BinaryFile</span>
+    <span class="kn">from</span> <span class="nn">os</span> <span class="k">import</span> <span class="n">PathLike</span>
+    <span class="kn">from</span> <span class="nn">typing</span> <span class="k">import</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">Type</span><span class="p">,</span> <span class="n">Union</span>
 
-    <span class="kn">from</span> <span class="nn">typing_extensions</span> <span class="kn">import</span> <span class="n">Literal</span>
+    <span class="kn">from</span> <span class="nn">typing_extensions</span> <span class="k">import</span> <span class="n">Literal</span>
 
-    <span class="kn">from</span> <span class="nn">zlogging._data</span> <span class="kn">import</span> <span class="n">Info</span>
-    <span class="kn">from</span> <span class="nn">zlogging.model</span> <span class="kn">import</span> <span class="n">Model</span>
-    <span class="kn">from</span> <span class="nn">zlogging.types</span> <span class="kn">import</span> <span class="n">_SimpleType</span>
+    <span class="kn">from</span> <span class="nn">zlogging._data</span> <span class="k">import</span> <span class="n">Info</span>
+    <span class="kn">from</span> <span class="nn">zlogging.model</span> <span class="k">import</span> <span class="n">Model</span>
+    <span class="kn">from</span> <span class="nn">zlogging.types</span> <span class="k">import</span> <span class="n">_SimpleType</span>
 
     <span class="n">AnyStr</span> <span class="o">=</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">bytes</span><span class="p">]</span>
 
@@ -81,8 +82,8 @@
 
     <span class="nd">@property</span>
     <span class="nd">@abc</span><span class="o">.</span><span class="n">abstractmethod</span>
-    <span class="k">def</span> <span class="nf">format</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;str: Log file format.&quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="nf">format</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;str&#39;</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Log file format.&quot;&quot;&quot;</span>
 
 <div class="viewcode-block" id="BaseParser.parse"><a class="viewcode-back" href="../../loader.html#zlogging.loader.BaseParser.parse">[docs]</a>    <span class="k">def</span> <span class="nf">parse</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filename</span><span class="p">:</span> <span class="s1">&#39;PathLike[str]&#39;</span><span class="p">,</span> <span class="n">model</span><span class="p">:</span> <span class="s1">&#39;Optional[Type[Model]]&#39;</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;Info&#39;</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;Parse log file.</span>
@@ -96,7 +97,7 @@
 
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="s1">&#39;rb&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">file</span><span class="p">:</span>
-            <span class="n">data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">parse_file</span><span class="p">(</span><span class="n">file</span><span class="p">,</span> <span class="n">model</span><span class="o">=</span><span class="n">model</span><span class="p">)</span>  <span class="c1"># type: ignore[arg-type]</span>
+            <span class="n">data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">parse_file</span><span class="p">(</span><span class="n">file</span><span class="p">,</span> <span class="n">model</span><span class="o">=</span><span class="n">model</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">data</span></div>
 
 <div class="viewcode-block" id="BaseParser.parse_file"><a class="viewcode-back" href="../../loader.html#zlogging.loader.BaseParser.parse_file">[docs]</a>    <span class="nd">@abc</span><span class="o">.</span><span class="n">abstractmethod</span>
@@ -113,7 +114,7 @@
 <span class="sd">        &quot;&quot;&quot;</span></div>
 
 <div class="viewcode-block" id="BaseParser.parse_line"><a class="viewcode-back" href="../../loader.html#zlogging.loader.BaseParser.parse_line">[docs]</a>    <span class="nd">@abc</span><span class="o">.</span><span class="n">abstractmethod</span>
-    <span class="k">def</span> <span class="nf">parse_line</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">line</span><span class="p">:</span> <span class="nb">bytes</span><span class="p">,</span> <span class="n">lineno</span><span class="p">:</span> <span class="s1">&#39;Optional[int]&#39;</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="k">def</span> <span class="nf">parse_line</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">line</span><span class="p">:</span> <span class="s1">&#39;bytes&#39;</span><span class="p">,</span> <span class="n">lineno</span><span class="p">:</span> <span class="s1">&#39;Optional[int]&#39;</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>
                    <span class="n">model</span><span class="p">:</span> <span class="s1">&#39;Optional[Type[Model]]&#39;</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;Model&#39;</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;Parse log line as one-line record.</span>
 
@@ -139,7 +140,7 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">parse_file</span><span class="p">(</span><span class="n">file</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="BaseParser.loads"><a class="viewcode-back" href="../../loader.html#zlogging.loader.BaseParser.loads">[docs]</a>    <span class="k">def</span> <span class="nf">loads</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">line</span><span class="p">:</span> <span class="nb">bytes</span><span class="p">,</span> <span class="n">lineno</span><span class="p">:</span> <span class="s1">&#39;Optional[int]&#39;</span> <span class="o">=</span> <span class="mi">0</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;Model&#39;</span><span class="p">:</span>
+<div class="viewcode-block" id="BaseParser.loads"><a class="viewcode-back" href="../../loader.html#zlogging.loader.BaseParser.loads">[docs]</a>    <span class="k">def</span> <span class="nf">loads</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">line</span><span class="p">:</span> <span class="s1">&#39;bytes&#39;</span><span class="p">,</span> <span class="n">lineno</span><span class="p">:</span> <span class="s1">&#39;Optional[int]&#39;</span> <span class="o">=</span> <span class="mi">0</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;Model&#39;</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;Parse log line as one-line record.</span>
 
 <span class="sd">        Args:</span>
@@ -157,35 +158,32 @@
     <span class="sd">&quot;&quot;&quot;JSON log parser.</span>
 
 <span class="sd">    Args:</span>
-<span class="sd">        model (:class:`~zlogging.model.Model` class, optional): Field</span>
-<span class="sd">            declrations for :class:`~zlogging.loader.JSONParser`, as in JSON</span>
-<span class="sd">            logs the field typing information are omitted by the Bro/Zeek</span>
-<span class="sd">            logging framework.</span>
-
-<span class="sd">    Attributes:</span>
-<span class="sd">        model (:class:`~zlogging.model.Model` class, optional): Field</span>
-<span class="sd">            declrations for :class:`~zlogging.loader.JSONParser`, as in JSON</span>
-<span class="sd">            logs the field typing information are omitted by the Bro/Zeek</span>
-<span class="sd">            logging framework.</span>
+<span class="sd">        model: Field declrations for :class:`~zlogging.loader.JSONParser`,</span>
+<span class="sd">            as in JSON logs the field typing information are omitted by</span>
+<span class="sd">            the Bro/Zeek logging framework.</span>
 
 <span class="sd">    Warns:</span>
 <span class="sd">        JSONParserWarning: If ``model`` is not specified.</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1">#: Field declrations for: class: `~zlogging.loader.JSONParser`,</span>
+    <span class="c1">#: as in JSON logs the field typing information are omitted by</span>
+    <span class="c1">#: the Bro/Zeek logging framework.</span>
+    <span class="n">model</span><span class="p">:</span> <span class="s1">&#39;Optional[Type[Model]]&#39;</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">format</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;Literal[&quot;json&quot;]&#39;</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;str: Log file format.&quot;&quot;&quot;</span>
+        <span class="sd">&quot;&quot;&quot;Log file format.&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="s1">&#39;json&#39;</span>
 
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">model</span><span class="p">:</span> <span class="s1">&#39;Optional[Type[Model]]&#39;</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">model</span><span class="p">:</span> <span class="s1">&#39;Optional[Type[Model]]&#39;</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;None&#39;</span><span class="p">:</span>
         <span class="k">if</span> <span class="n">model</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s1">&#39;missing log data model specification&#39;</span><span class="p">,</span> <span class="n">JSONParserWarning</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">model</span> <span class="o">=</span> <span class="n">model</span>
 
     <span class="k">if</span> <span class="n">TYPE_CHECKING</span><span class="p">:</span>
-<div class="viewcode-block" id="JSONParser.parse"><a class="viewcode-back" href="../../loader.html#zlogging.loader.JSONParser.parse">[docs]</a>        <span class="k">def</span> <span class="nf">parse</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filename</span><span class="p">:</span> <span class="s1">&#39;PathLike[str]&#39;</span><span class="p">,</span> <span class="n">model</span><span class="p">:</span> <span class="s1">&#39;Optional[Type[Model]]&#39;</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;JSONInfo&#39;</span><span class="p">:</span>  <span class="c1"># pylint: disable=signature-differs,line-too-long</span>
-            <span class="o">...</span></div>
+        <span class="k">def</span> <span class="nf">parse</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filename</span><span class="p">:</span> <span class="s1">&#39;PathLike[str]&#39;</span><span class="p">,</span> <span class="n">model</span><span class="p">:</span> <span class="s1">&#39;Optional[Type[Model]]&#39;</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;JSONInfo&#39;</span><span class="p">:</span>  <span class="c1"># pylint: disable=signature-differs,line-too-long</span>
+            <span class="o">...</span>
 
 <div class="viewcode-block" id="JSONParser.parse_file"><a class="viewcode-back" href="../../loader.html#zlogging.loader.JSONParser.parse_file">[docs]</a>    <span class="k">def</span> <span class="nf">parse_file</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">file</span><span class="p">:</span> <span class="s1">&#39;BinaryFile&#39;</span><span class="p">,</span> <span class="n">model</span><span class="p">:</span> <span class="s1">&#39;Optional[Type[Model]]&#39;</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;JSONInfo&#39;</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;Parse log file.</span>
@@ -195,18 +193,17 @@
 <span class="sd">            model: Field declrations of current log.</span>
 
 <span class="sd">        Returns:</span>
-<span class="sd">            :class:`~zlogging._data.JSONInfo`: The parsed log as a</span>
-<span class="sd">                :class:`~zlogging.model.Model` per line.</span>
+<span class="sd">            The parsed log as a :class:`~zlogging.model.Model` per line.</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">data</span> <span class="o">=</span> <span class="nb">list</span><span class="p">()</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="k">for</span> <span class="n">index</span><span class="p">,</span> <span class="n">line</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">file</span><span class="p">,</span> <span class="n">start</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
             <span class="n">data</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">parse_line</span><span class="p">(</span><span class="n">line</span><span class="p">,</span> <span class="n">lineno</span><span class="o">=</span><span class="n">index</span><span class="p">,</span> <span class="n">model</span><span class="o">=</span><span class="n">model</span><span class="p">))</span>
         <span class="k">return</span> <span class="n">JSONInfo</span><span class="p">(</span>
             <span class="n">data</span><span class="o">=</span><span class="n">data</span>
         <span class="p">)</span></div>
 
-<div class="viewcode-block" id="JSONParser.parse_line"><a class="viewcode-back" href="../../loader.html#zlogging.loader.JSONParser.parse_line">[docs]</a>    <span class="k">def</span> <span class="nf">parse_line</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">line</span><span class="p">:</span> <span class="nb">bytes</span><span class="p">,</span> <span class="n">lineno</span><span class="p">:</span> <span class="s1">&#39;Optional[int]&#39;</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>
+<div class="viewcode-block" id="JSONParser.parse_line"><a class="viewcode-back" href="../../loader.html#zlogging.loader.JSONParser.parse_line">[docs]</a>    <span class="k">def</span> <span class="nf">parse_line</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">line</span><span class="p">:</span> <span class="s1">&#39;bytes&#39;</span><span class="p">,</span> <span class="n">lineno</span><span class="p">:</span> <span class="s1">&#39;Optional[int]&#39;</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>
                    <span class="n">model</span><span class="p">:</span> <span class="s1">&#39;Optional[Type[Model]]&#39;</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;Model&#39;</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;Parse log line as one-line record.</span>
 
@@ -223,7 +220,7 @@
 
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">try</span><span class="p">:</span>
-            <span class="n">data</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">line</span><span class="p">)</span>  <span class="c1"># type: Dict[str, Any]</span>
+            <span class="n">data</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">line</span><span class="p">)</span>  <span class="c1"># type: dict[str, Any]</span>
         <span class="k">except</span> <span class="n">json</span><span class="o">.</span><span class="n">JSONDecodeError</span> <span class="k">as</span> <span class="n">error</span><span class="p">:</span>
             <span class="k">raise</span> <span class="n">JSONParserError</span><span class="p">(</span><span class="n">error</span><span class="o">.</span><span class="n">msg</span><span class="p">,</span> <span class="n">lineno</span><span class="p">)</span> <span class="kn">from</span> <span class="nn">error</span>
 
@@ -237,27 +234,26 @@
     <span class="sd">&quot;&quot;&quot;ASCII log parser.</span>
 
 <span class="sd">    Args:</span>
-<span class="sd">        type_hook (:obj:`dict` mapping :obj:`str` and :class:`~zlogging.types.BaseType` class, optional):</span>
-<span class="sd">            Bro/Zeek type parser hooks. User may customise subclasses of</span>
+<span class="sd">        type_hook: Bro/Zeek type parser hooks. User may customise subclasses of</span>
 <span class="sd">            :class:`~zlogging.types.BaseType` to modify parsing behaviours.</span>
-<span class="sd">        enum_namespaces (:obj:`List[str]`, optional): Namespaces to be loaded.</span>
-<span class="sd">        bare (:obj:`bool`, optional): If ``True``, do not load ``zeek`` namespace by default.</span>
-
-<span class="sd">    Attributes:</span>
-<span class="sd">        __type__ (:obj:`dict` mapping :obj:`str` and :class:`~zlogging.types.BaseType` class):</span>
-<span class="sd">            Bro/Zeek type parser hooks.</span>
-<span class="sd">        enum_namespaces (:obj:`List[str]`): Namespaces to be loaded.</span>
-<span class="sd">        bare (bool): If ``True``, do not load ``zeek`` namespace by default.</span>
+<span class="sd">        enum_namespaces: Namespaces to be loaded.</span>
+<span class="sd">        bare: If :data:`True`, do not load ``zeek`` namespace by default.</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1">#: Bro/Zeek type parser hooks.</span>
+    <span class="n">__type__</span><span class="p">:</span> <span class="s1">&#39;dict[str, Type[BaseType]]&#39;</span>
+    <span class="c1">#: Namespaces to be loaded.</span>
+    <span class="n">enum_namespaces</span><span class="p">:</span> <span class="s1">&#39;list[str]&#39;</span>
+    <span class="c1">#: If :data:`True`, do not load ``zeek`` namespace by default.</span>
+    <span class="n">bare</span><span class="p">:</span> <span class="s1">&#39;bool&#39;</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">format</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;Literal[&quot;ascii&quot;]&#39;</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;str: Log file format.&quot;&quot;&quot;</span>
+        <span class="sd">&quot;&quot;&quot;Log file format.&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="s1">&#39;ascii&#39;</span>
 
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">type_hook</span><span class="p">:</span> <span class="s1">&#39;Optional[Dict[str, Type[BaseType]]]&#39;</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-                 <span class="n">enum_namespaces</span><span class="p">:</span> <span class="s1">&#39;Optional[List[str]]&#39;</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">bare</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">type_hook</span><span class="p">:</span> <span class="s1">&#39;Optional[dict[str, Type[BaseType]]]&#39;</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+                 <span class="n">enum_namespaces</span><span class="p">:</span> <span class="s1">&#39;Optional[list[str]]&#39;</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">bare</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;None&#39;</span><span class="p">:</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">__type__</span> <span class="o">=</span> <span class="p">{</span>
             <span class="s1">&#39;bool&#39;</span><span class="p">:</span> <span class="n">BoolType</span><span class="p">,</span>
             <span class="s1">&#39;count&#39;</span><span class="p">:</span> <span class="n">CountType</span><span class="p">,</span>
@@ -272,16 +268,16 @@
             <span class="s1">&#39;enum&#39;</span><span class="p">:</span> <span class="n">EnumType</span><span class="p">,</span>
             <span class="s1">&#39;set&#39;</span><span class="p">:</span> <span class="n">SetType</span><span class="p">,</span>
             <span class="s1">&#39;vector&#39;</span><span class="p">:</span> <span class="n">VectorType</span><span class="p">,</span>
-          <span class="p">}</span>  <span class="c1"># type: Dict[str, Type[BaseType]]</span>
+          <span class="p">}</span>  <span class="c1"># type: dict[str, Type[BaseType]]</span>
         <span class="k">if</span> <span class="n">type_hook</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">__type__</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">type_hook</span><span class="p">)</span>
 
-        <span class="bp">self</span><span class="o">.</span><span class="n">enum_namespaces</span> <span class="o">=</span> <span class="n">enum_namespaces</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">enum_namespaces</span> <span class="o">=</span> <span class="n">enum_namespaces</span> <span class="ow">or</span> <span class="p">[]</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">bare</span> <span class="o">=</span> <span class="n">bare</span>
 
     <span class="k">if</span> <span class="n">TYPE_CHECKING</span><span class="p">:</span>
-<div class="viewcode-block" id="ASCIIParser.parse"><a class="viewcode-back" href="../../loader.html#zlogging.loader.ASCIIParser.parse">[docs]</a>        <span class="k">def</span> <span class="nf">parse</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filename</span><span class="p">:</span> <span class="s1">&#39;PathLike[str]&#39;</span><span class="p">,</span> <span class="n">model</span><span class="p">:</span> <span class="s1">&#39;Optional[Type[Model]]&#39;</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;ASCIIInfo&#39;</span><span class="p">:</span>  <span class="c1"># pylint: disable=signature-differs,line-too-long</span>
-            <span class="o">...</span></div>
+        <span class="k">def</span> <span class="nf">parse</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filename</span><span class="p">:</span> <span class="s1">&#39;PathLike[str]&#39;</span><span class="p">,</span> <span class="n">model</span><span class="p">:</span> <span class="s1">&#39;Optional[Type[Model]]&#39;</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;ASCIIInfo&#39;</span><span class="p">:</span>  <span class="c1"># pylint: disable=signature-differs,line-too-long</span>
+            <span class="o">...</span>
 
 <div class="viewcode-block" id="ASCIIParser.parse_file"><a class="viewcode-back" href="../../loader.html#zlogging.loader.ASCIIParser.parse_file">[docs]</a>    <span class="k">def</span> <span class="nf">parse_file</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">file</span><span class="p">:</span> <span class="s1">&#39;BinaryFile&#39;</span><span class="p">,</span> <span class="n">model</span><span class="p">:</span> <span class="s1">&#39;Optional[Type[Model]]&#39;</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;ASCIIInfo&#39;</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;Parse log file.</span>
@@ -294,8 +290,7 @@
 <span class="sd">                be used at runtime.</span>
 
 <span class="sd">        Returns:</span>
-<span class="sd">            :class:`~zlogging._data.ASCIIInfo`: The parsed log as a</span>
-<span class="sd">                :class:`~zlogging.model.Model` per line.</span>
+<span class="sd">            The parsed log as a :class:`~zlogging.model.Model` per line.</span>
 
 <span class="sd">        Warns:</span>
 <span class="sd">            ASCIIParserWarning: If the ASCII log file exited with error, see</span>
@@ -323,7 +318,7 @@
         <span class="c1"># log filed types</span>
         <span class="n">types_line</span> <span class="o">=</span> <span class="n">readline</span><span class="p">(</span><span class="n">file</span><span class="p">,</span> <span class="n">separator</span><span class="p">,</span> <span class="n">decode</span><span class="o">=</span><span class="kc">True</span><span class="p">)[</span><span class="mi">1</span><span class="p">:]</span>
 
-        <span class="n">field_parser</span> <span class="o">=</span> <span class="p">[]</span>  <span class="c1"># type: List[Tuple[str, BaseType]]</span>
+        <span class="n">field_parser</span> <span class="o">=</span> <span class="p">[]</span>  <span class="c1"># type: list[tuple[str, BaseType]]</span>
         <span class="n">model_fields</span> <span class="o">=</span> <span class="n">collections</span><span class="o">.</span><span class="n">OrderedDict</span><span class="p">()</span>
         <span class="k">for</span> <span class="p">(</span><span class="n">field</span><span class="p">,</span> <span class="n">type_</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">model_line</span><span class="p">,</span> <span class="n">types_line</span><span class="p">):</span>
             <span class="n">match_set</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;set\[(?P&lt;type&gt;.+?)\]&#39;</span><span class="p">,</span> <span class="n">type_</span><span class="p">)</span>
@@ -363,7 +358,7 @@
             <span class="n">close_time</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span>
 
         <span class="n">exit_with_error</span> <span class="o">=</span> <span class="kc">True</span>
-        <span class="n">data</span> <span class="o">=</span> <span class="nb">list</span><span class="p">()</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="k">for</span> <span class="n">index</span><span class="p">,</span> <span class="n">line</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">file</span><span class="p">,</span> <span class="n">start</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
             <span class="k">if</span> <span class="n">line</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="sa">b</span><span class="s1">&#39;#&#39;</span><span class="p">):</span>
                 <span class="n">exit_with_error</span> <span class="o">=</span> <span class="kc">False</span>
@@ -386,9 +381,9 @@
             <span class="n">exit_with_error</span><span class="o">=</span><span class="n">exit_with_error</span><span class="p">,</span>
         <span class="p">)</span></div>
 
-<div class="viewcode-block" id="ASCIIParser.parse_line"><a class="viewcode-back" href="../../loader.html#zlogging.loader.ASCIIParser.parse_line">[docs]</a>    <span class="k">def</span> <span class="nf">parse_line</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">line</span><span class="p">:</span> <span class="nb">bytes</span><span class="p">,</span> <span class="n">lineno</span><span class="p">:</span> <span class="s1">&#39;Optional[int]&#39;</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>  <span class="c1"># pylint: disable=arguments-differ</span>
+<div class="viewcode-block" id="ASCIIParser.parse_line"><a class="viewcode-back" href="../../loader.html#zlogging.loader.ASCIIParser.parse_line">[docs]</a>    <span class="k">def</span> <span class="nf">parse_line</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">line</span><span class="p">:</span> <span class="s1">&#39;bytes&#39;</span><span class="p">,</span> <span class="n">lineno</span><span class="p">:</span> <span class="s1">&#39;Optional[int]&#39;</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>  <span class="c1"># pylint: disable=arguments-differ</span>
                    <span class="n">model</span><span class="p">:</span> <span class="s1">&#39;Optional[Type[Model]]&#39;</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">separator</span><span class="p">:</span> <span class="s1">&#39;Optional[bytes]&#39;</span> <span class="o">=</span> <span class="sa">b</span><span class="s1">&#39;</span><span class="se">\x09</span><span class="s1">&#39;</span><span class="p">,</span>
-                   <span class="n">parser</span><span class="p">:</span> <span class="s1">&#39;Optional[List[Tuple[str, BaseType]]]&#39;</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;Model&#39;</span><span class="p">:</span>
+                   <span class="n">parser</span><span class="p">:</span> <span class="s1">&#39;Optional[list[tuple[str, BaseType]]]&#39;</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;Model&#39;</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;Parse log line as one-line record.</span>
 
 <span class="sd">        Args:</span>
@@ -396,18 +391,18 @@
 <span class="sd">            lineno: Line number of current line.</span>
 <span class="sd">            model: Field declrations of current log.</span>
 <span class="sd">            separator: Data separator.</span>
-<span class="sd">            parser (:obj:`List` of :class:`~zlogging.types.BaseType`, required): Field data type parsers.</span>
+<span class="sd">            parser: Field data type parsers.</span>
 
 <span class="sd">        Returns:</span>
 <span class="sd">            The parsed log as a plain :obj:`dict`.</span>
 
 <span class="sd">        Raises:</span>
-<span class="sd">            :exc:`ASCIIPaserError`: If ``parser`` is not provided; or failed to</span>
+<span class="sd">            :exc:`ASCIIParserError`: If ``parser`` is not provided; or failed to</span>
 <span class="sd">                serialise ``line`` as ASCII.</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="n">parser</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="n">ASCIIPaserError</span><span class="p">(</span><span class="s2">&quot;parse_line() missing 1 required positional argument: &#39;parser&#39;&quot;</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="n">ASCIIParserError</span><span class="p">(</span><span class="s2">&quot;parse_line() missing 1 required positional argument: &#39;parser&#39;&quot;</span><span class="p">)</span>
 
         <span class="n">data</span> <span class="o">=</span> <span class="n">collections</span><span class="o">.</span><span class="n">OrderedDict</span><span class="p">()</span>  <span class="c1"># type: OrderedDict[str, Any]</span>
         <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">s</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">line</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">separator</span><span class="p">)):</span>
@@ -415,27 +410,24 @@
             <span class="k">try</span><span class="p">:</span>
                 <span class="n">data</span><span class="p">[</span><span class="n">field_name</span><span class="p">]</span> <span class="o">=</span> <span class="n">field_type</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
             <span class="k">except</span> <span class="n">ZeekValueError</span> <span class="k">as</span> <span class="n">error</span><span class="p">:</span>
-                <span class="k">raise</span> <span class="n">ASCIIPaserError</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">error</span><span class="p">),</span> <span class="n">lineno</span><span class="p">,</span> <span class="n">field_name</span><span class="p">)</span> <span class="kn">from</span> <span class="nn">error</span>
+                <span class="k">raise</span> <span class="n">ASCIIParserError</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">error</span><span class="p">),</span> <span class="n">lineno</span><span class="p">,</span> <span class="n">field_name</span><span class="p">)</span> <span class="kn">from</span> <span class="nn">error</span>
 
         <span class="k">if</span> <span class="n">model</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">model</span> <span class="o">=</span> <span class="n">new_model</span><span class="p">(</span><span class="s1">&#39;&lt;unknown&gt;&#39;</span><span class="p">,</span> <span class="o">**</span><span class="p">{</span><span class="n">field</span><span class="p">:</span> <span class="n">AnyType</span><span class="p">()</span> <span class="k">for</span> <span class="n">field</span> <span class="ow">in</span> <span class="n">data</span><span class="o">.</span><span class="n">keys</span><span class="p">()})</span>
         <span class="k">return</span> <span class="n">model</span><span class="p">(</span><span class="o">**</span><span class="n">data</span><span class="p">)</span></div></div>
 
 
-<div class="viewcode-block" id="parse_json"><a class="viewcode-back" href="../../loader.html#zlogging.loader.parse_json">[docs]</a><span class="k">def</span> <span class="nf">parse_json</span><span class="p">(</span><span class="n">filename</span><span class="p">:</span> <span class="s1">&#39;PathLike[str]&#39;</span><span class="p">,</span>  <span class="c1"># pylint: disable=unused-argument,keyword-arg-before-vararg</span>
-               <span class="n">parser</span><span class="p">:</span> <span class="s1">&#39;Optional[Type[JSONParser]]&#39;</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-               <span class="n">model</span><span class="p">:</span> <span class="s1">&#39;Optional[Type[Model]]&#39;</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-               <span class="o">*</span><span class="n">args</span><span class="p">:</span> <span class="s1">&#39;Any&#39;</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">:</span> <span class="s1">&#39;Any&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">JSONInfo</span><span class="p">:</span>
+<div class="viewcode-block" id="parse_json"><a class="viewcode-back" href="../../loader.html#zlogging.loader.parse_json">[docs]</a><span class="k">def</span> <span class="nf">parse_json</span><span class="p">(</span><span class="n">filename</span><span class="p">:</span> <span class="s1">&#39;PathLike[str]&#39;</span><span class="p">,</span> <span class="n">parser</span><span class="p">:</span> <span class="s1">&#39;Optional[Type[JSONParser]]&#39;</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>  <span class="c1"># pylint: disable=unused-argument,keyword-arg-before-vararg</span>
+               <span class="n">model</span><span class="p">:</span> <span class="s1">&#39;Optional[Type[Model]]&#39;</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">:</span> <span class="s1">&#39;Any&#39;</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">:</span> <span class="s1">&#39;Any&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;JSONInfo&#39;</span><span class="p">:</span>
     <span class="sd">&quot;&quot;&quot;Parse JSON log file.</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        filename: Log file name.</span>
-<span class="sd">        parser (:class:`~zlogging.loader.JSONParser`, optional): Parser class.</span>
-<span class="sd">        model (:class:`~zlogging.models.Model` class, optional): Field</span>
-<span class="sd">            declarations for :class:`~zlogging.loader.JSONParser`, as in JSON</span>
-<span class="sd">            logs the field typing information are omitted by the Bro/Zeek</span>
-<span class="sd">            logging framework.</span>
-<span class="sd">        *args: Variable length argument list.</span>
+<span class="sd">        parser: Parser class.</span>
+<span class="sd">        model: Field declarations for :class:`~zlogging.loader.JSONParser`,</span>
+<span class="sd">            as in JSON logs the field typing information are omitted by the</span>
+<span class="sd">            Bro/Zeek logging framework.</span>
+<span class="sd">        *args: Arbitrary positional arguments.</span>
 <span class="sd">        **kwargs: Arbitrary keyword arguments.</span>
 
 <span class="sd">    Returns:</span>
@@ -448,20 +440,17 @@
     <span class="k">return</span> <span class="n">json_parser</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span></div>
 
 
-<div class="viewcode-block" id="load_json"><a class="viewcode-back" href="../../loader.html#zlogging.loader.load_json">[docs]</a><span class="k">def</span> <span class="nf">load_json</span><span class="p">(</span><span class="n">file</span><span class="p">:</span> <span class="s1">&#39;BinaryFile&#39;</span><span class="p">,</span>  <span class="c1"># pylint: disable=unused-argument,keyword-arg-before-vararg</span>
-              <span class="n">parser</span><span class="p">:</span> <span class="s1">&#39;Optional[Type[JSONParser]]&#39;</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-              <span class="n">model</span><span class="p">:</span> <span class="s1">&#39;Optional[Type[Model]]&#39;</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-              <span class="o">*</span><span class="n">args</span><span class="p">:</span> <span class="s1">&#39;Any&#39;</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">:</span> <span class="s1">&#39;Any&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">JSONInfo</span><span class="p">:</span>
+<div class="viewcode-block" id="load_json"><a class="viewcode-back" href="../../loader.html#zlogging.loader.load_json">[docs]</a><span class="k">def</span> <span class="nf">load_json</span><span class="p">(</span><span class="n">file</span><span class="p">:</span> <span class="s1">&#39;BinaryFile&#39;</span><span class="p">,</span> <span class="n">parser</span><span class="p">:</span> <span class="s1">&#39;Optional[Type[JSONParser]]&#39;</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>  <span class="c1"># pylint: disable=unused-argument,keyword-arg-before-vararg</span>
+              <span class="n">model</span><span class="p">:</span> <span class="s1">&#39;Optional[Type[Model]]&#39;</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">:</span> <span class="s1">&#39;Any&#39;</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">:</span> <span class="s1">&#39;Any&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;JSONInfo&#39;</span><span class="p">:</span>
     <span class="sd">&quot;&quot;&quot;Parse JSON log file.</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        file: Log file object opened in binary mode.</span>
-<span class="sd">        parser (:class:`~zlogging.loader.JSONParser`, optional): Parser class.</span>
-<span class="sd">        model (:class:`~zlogging.models.Model` class, optional): Field</span>
-<span class="sd">            declarations for :class:`~zlogging.loader.JSONParser`, as in JSON</span>
-<span class="sd">            logs the field typing information are omitted by the Bro/Zeek</span>
-<span class="sd">            logging framework.</span>
-<span class="sd">        *args: Variable length argument list.</span>
+<span class="sd">        parser: Parser class.</span>
+<span class="sd">        model: Field declarations for :class:`~zlogging.loader.JSONParser`,</span>
+<span class="sd">            as in JSON logs the field typing information are omitted by the</span>
+<span class="sd">            Bro/Zeek logging framework.</span>
+<span class="sd">        *args: Arbitrary positional arguments.</span>
 <span class="sd">        **kwargs: Arbitrary keyword arguments.</span>
 
 <span class="sd">    Returns:</span>
@@ -474,20 +463,17 @@
     <span class="k">return</span> <span class="n">json_parser</span><span class="o">.</span><span class="n">parse_file</span><span class="p">(</span><span class="n">file</span><span class="p">)</span></div>
 
 
-<div class="viewcode-block" id="loads_json"><a class="viewcode-back" href="../../loader.html#zlogging.loader.loads_json">[docs]</a><span class="k">def</span> <span class="nf">loads_json</span><span class="p">(</span><span class="n">data</span><span class="p">:</span> <span class="s1">&#39;AnyStr&#39;</span><span class="p">,</span>  <span class="c1"># pylint: disable=unused-argument,keyword-arg-before-vararg</span>
-               <span class="n">parser</span><span class="p">:</span> <span class="s1">&#39;Optional[Type[JSONParser]]&#39;</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-               <span class="n">model</span><span class="p">:</span> <span class="s1">&#39;Optional[Type[Model]]&#39;</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-               <span class="o">*</span><span class="n">args</span><span class="p">:</span> <span class="s1">&#39;Any&#39;</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">:</span> <span class="s1">&#39;Any&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">JSONInfo</span><span class="p">:</span>
+<div class="viewcode-block" id="loads_json"><a class="viewcode-back" href="../../loader.html#zlogging.loader.loads_json">[docs]</a><span class="k">def</span> <span class="nf">loads_json</span><span class="p">(</span><span class="n">data</span><span class="p">:</span> <span class="s1">&#39;AnyStr&#39;</span><span class="p">,</span> <span class="n">parser</span><span class="p">:</span> <span class="s1">&#39;Optional[Type[JSONParser]]&#39;</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>  <span class="c1"># pylint: disable=unused-argument,keyword-arg-before-vararg</span>
+               <span class="n">model</span><span class="p">:</span> <span class="s1">&#39;Optional[Type[Model]]&#39;</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">:</span> <span class="s1">&#39;Any&#39;</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">:</span> <span class="s1">&#39;Any&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;JSONInfo&#39;</span><span class="p">:</span>
     <span class="sd">&quot;&quot;&quot;Parse JSON log string.</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        data: Log string as binary or encoded string.</span>
-<span class="sd">        parser (:class:`~zlogging.loader.JSONParser`, optional): Parser class.</span>
-<span class="sd">        model (:class:`~zlogging.models.Model` class, optional): Field</span>
-<span class="sd">            declarations for :class:`~zlogging.loader.JSONParser`, as in JSON</span>
-<span class="sd">            logs the field typing information are omitted by the Bro/Zeek</span>
-<span class="sd">            logging framework.</span>
-<span class="sd">        *args: Variable length argument list.</span>
+<span class="sd">        parser: Parser class.</span>
+<span class="sd">        model: Field declarations for :class:`~zlogging.loader.JSONParser`,</span>
+<span class="sd">            as in JSON logs the field typing information are omitted by the</span>
+<span class="sd">            Bro/Zeek logging framework.</span>
+<span class="sd">        *args: Arbitrary positional arguments.</span>
 <span class="sd">        **kwargs: Arbitrary keyword arguments.</span>
 
 <span class="sd">    Returns:</span>
@@ -506,22 +492,20 @@
     <span class="k">return</span> <span class="n">info</span></div>
 
 
-<div class="viewcode-block" id="parse_ascii"><a class="viewcode-back" href="../../loader.html#zlogging.loader.parse_ascii">[docs]</a><span class="k">def</span> <span class="nf">parse_ascii</span><span class="p">(</span><span class="n">filename</span><span class="p">:</span> <span class="s1">&#39;PathLike[str]&#39;</span><span class="p">,</span>  <span class="c1"># pylint: disable=unused-argument,keyword-arg-before-vararg</span>
-                <span class="n">parser</span><span class="p">:</span> <span class="s1">&#39;Optional[Type[ASCIIParser]]&#39;</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-                <span class="n">type_hook</span><span class="p">:</span> <span class="s1">&#39;Optional[Dict[str, Type[BaseType]]]&#39;</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-                <span class="n">enum_namespaces</span><span class="p">:</span> <span class="s1">&#39;Optional[List[str]]&#39;</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">bare</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
-                <span class="o">*</span><span class="n">args</span><span class="p">:</span> <span class="s1">&#39;Any&#39;</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">:</span> <span class="s1">&#39;Any&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;ASCIIInfo&#39;</span><span class="p">:</span>
+<div class="viewcode-block" id="parse_ascii"><a class="viewcode-back" href="../../loader.html#zlogging.loader.parse_ascii">[docs]</a><span class="k">def</span> <span class="nf">parse_ascii</span><span class="p">(</span><span class="n">filename</span><span class="p">:</span> <span class="s1">&#39;PathLike[str]&#39;</span><span class="p">,</span> <span class="n">parser</span><span class="p">:</span> <span class="s1">&#39;Optional[Type[ASCIIParser]]&#39;</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>  <span class="c1"># pylint: disable=unused-argument,keyword-arg-before-vararg</span>
+                <span class="n">type_hook</span><span class="p">:</span> <span class="s1">&#39;Optional[dict[str, Type[BaseType]]]&#39;</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+                <span class="n">enum_namespaces</span><span class="p">:</span> <span class="s1">&#39;Optional[list[str]]&#39;</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+                <span class="n">bare</span><span class="p">:</span> <span class="s1">&#39;bool&#39;</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">:</span> <span class="s1">&#39;Any&#39;</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">:</span> <span class="s1">&#39;Any&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;ASCIIInfo&#39;</span><span class="p">:</span>
     <span class="sd">&quot;&quot;&quot;Parse ASCII log file.</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        filename: Log file name.</span>
-<span class="sd">        parser (:class:`~zlogging.loader.ASCIIParser`, optional): Parser class.</span>
-<span class="sd">        type_hook (:obj:`dict` mapping :obj:`str` and :class:`~zlogging.types.BaseType` class, optional):</span>
-<span class="sd">            Bro/Zeek type parser hooks. User may customise subclasses of</span>
+<span class="sd">        parser: Parser class.</span>
+<span class="sd">        type_hook: Bro/Zeek type parser hooks. User may customise subclasses of</span>
 <span class="sd">            :class:`~zlogging.types.BaseType` to modify parsing behaviours.</span>
-<span class="sd">        enum_namespaces (:obj:`List[str]`, optional): Namespaces to be loaded.</span>
-<span class="sd">        bare (:obj:`bool`, optional): If ``True``, do not load ``zeek`` namespace by default.</span>
-<span class="sd">        *args: Variable length argument list.</span>
+<span class="sd">        enum_namespaces: Namespaces to be loaded.</span>
+<span class="sd">        bare: If :data:`True`, do not load ``zeek`` namespace by default.</span>
+<span class="sd">        *args: Arbitrary positional arguments.</span>
 <span class="sd">        **kwargs: Arbitrary keyword arguments.</span>
 
 <span class="sd">    Returns:</span>
@@ -534,22 +518,20 @@
     <span class="k">return</span> <span class="n">ascii_parser</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span></div>
 
 
-<div class="viewcode-block" id="load_ascii"><a class="viewcode-back" href="../../loader.html#zlogging.loader.load_ascii">[docs]</a><span class="k">def</span> <span class="nf">load_ascii</span><span class="p">(</span><span class="n">file</span><span class="p">:</span> <span class="s1">&#39;BinaryFile&#39;</span><span class="p">,</span>  <span class="c1"># pylint: disable=unused-argument,keyword-arg-before-vararg</span>
-               <span class="n">parser</span><span class="p">:</span> <span class="s1">&#39;Optional[Type[ASCIIParser]]&#39;</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-               <span class="n">type_hook</span><span class="p">:</span> <span class="s1">&#39;Optional[Dict[str, Type[BaseType]]]&#39;</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-               <span class="n">enum_namespaces</span><span class="p">:</span> <span class="s1">&#39;Optional[List[str]]&#39;</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">bare</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
-               <span class="o">*</span><span class="n">args</span><span class="p">:</span> <span class="s1">&#39;Any&#39;</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">:</span> <span class="s1">&#39;Any&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;ASCIIInfo&#39;</span><span class="p">:</span>
+<div class="viewcode-block" id="load_ascii"><a class="viewcode-back" href="../../loader.html#zlogging.loader.load_ascii">[docs]</a><span class="k">def</span> <span class="nf">load_ascii</span><span class="p">(</span><span class="n">file</span><span class="p">:</span> <span class="s1">&#39;BinaryFile&#39;</span><span class="p">,</span> <span class="n">parser</span><span class="p">:</span> <span class="s1">&#39;Optional[Type[ASCIIParser]]&#39;</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>  <span class="c1"># pylint: disable=unused-argument,keyword-arg-before-vararg</span>
+               <span class="n">type_hook</span><span class="p">:</span> <span class="s1">&#39;Optional[dict[str, Type[BaseType]]]&#39;</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+               <span class="n">enum_namespaces</span><span class="p">:</span> <span class="s1">&#39;Optional[list[str]]&#39;</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+               <span class="n">bare</span><span class="p">:</span> <span class="s1">&#39;bool&#39;</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">:</span> <span class="s1">&#39;Any&#39;</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">:</span> <span class="s1">&#39;Any&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;ASCIIInfo&#39;</span><span class="p">:</span>
     <span class="sd">&quot;&quot;&quot;Parse ASCII log file.</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        file: Log file object opened in binary mode.</span>
-<span class="sd">        parser (:class:`~zlogging.loader.ASCIIParser`, optional): Parser class.</span>
-<span class="sd">        type_hook (:obj:`dict` mapping :obj:`str` and :class:`~zlogging.types.BaseType` class, optional):</span>
-<span class="sd">            Bro/Zeek type parser hooks. User may customise subclasses of</span>
+<span class="sd">        parser: Parser class.</span>
+<span class="sd">        type_hook: Bro/Zeek type parser hooks. User may customise subclasses of</span>
 <span class="sd">            :class:`~zlogging.types.BaseType` to modify parsing behaviours.</span>
-<span class="sd">        enum_namespaces (:obj:`List[str]`, optional): Namespaces to be loaded.</span>
-<span class="sd">        bare (:obj:`bool`, optional): If ``True``, do not load ``zeek`` namespace by default.</span>
-<span class="sd">        *args: Variable length argument list.</span>
+<span class="sd">        enum_namespaces: Namespaces to be loaded.</span>
+<span class="sd">        bare: If :data:`True`, do not load ``zeek`` namespace by default.</span>
+<span class="sd">        *args: Arbitrary positional arguments.</span>
 <span class="sd">        **kwargs: Arbitrary keyword arguments.</span>
 
 <span class="sd">    Returns:</span>
@@ -562,22 +544,20 @@
     <span class="k">return</span> <span class="n">ascii_parser</span><span class="o">.</span><span class="n">parse_file</span><span class="p">(</span><span class="n">file</span><span class="p">)</span></div>
 
 
-<div class="viewcode-block" id="loads_ascii"><a class="viewcode-back" href="../../loader.html#zlogging.loader.loads_ascii">[docs]</a><span class="k">def</span> <span class="nf">loads_ascii</span><span class="p">(</span><span class="n">data</span><span class="p">:</span> <span class="s1">&#39;AnyStr&#39;</span><span class="p">,</span>  <span class="c1"># pylint: disable=unused-argument,keyword-arg-before-vararg</span>
-                <span class="n">parser</span><span class="p">:</span> <span class="s1">&#39;Optional[Type[ASCIIParser]]&#39;</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-                <span class="n">type_hook</span><span class="p">:</span> <span class="s1">&#39;Optional[Dict[str, Type[BaseType]]]&#39;</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-                <span class="n">enum_namespaces</span><span class="p">:</span> <span class="s1">&#39;Optional[List[str]]&#39;</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">bare</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
-                <span class="o">*</span><span class="n">args</span><span class="p">:</span> <span class="s1">&#39;Any&#39;</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">:</span> <span class="s1">&#39;Any&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;ASCIIInfo&#39;</span><span class="p">:</span>
+<div class="viewcode-block" id="loads_ascii"><a class="viewcode-back" href="../../loader.html#zlogging.loader.loads_ascii">[docs]</a><span class="k">def</span> <span class="nf">loads_ascii</span><span class="p">(</span><span class="n">data</span><span class="p">:</span> <span class="s1">&#39;AnyStr&#39;</span><span class="p">,</span> <span class="n">parser</span><span class="p">:</span> <span class="s1">&#39;Optional[Type[ASCIIParser]]&#39;</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>  <span class="c1"># pylint: disable=unused-argument,keyword-arg-before-vararg</span>
+                <span class="n">type_hook</span><span class="p">:</span> <span class="s1">&#39;Optional[dict[str, Type[BaseType]]]&#39;</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+                <span class="n">enum_namespaces</span><span class="p">:</span> <span class="s1">&#39;Optional[list[str]]&#39;</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+                <span class="n">bare</span><span class="p">:</span> <span class="s1">&#39;bool&#39;</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">:</span> <span class="s1">&#39;Any&#39;</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">:</span> <span class="s1">&#39;Any&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;ASCIIInfo&#39;</span><span class="p">:</span>
     <span class="sd">&quot;&quot;&quot;Parse ASCII log string.</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        data: Log string as binary or encoded string.</span>
-<span class="sd">        parser (:class:`~zlogging.loader.ASCIIParser`, optional): Parser class.</span>
-<span class="sd">        type_hook (:obj:`dict` mapping :obj:`str` and :class:`~zlogging.types.BaseType` class, optional):</span>
-<span class="sd">            Bro/Zeek type parser hooks. User may customise subclasses of</span>
+<span class="sd">        parser: Parser class.</span>
+<span class="sd">        type_hook: Bro/Zeek type parser hooks. User may customise subclasses of</span>
 <span class="sd">            :class:`~zlogging.types.BaseType` to modify parsing behaviours.</span>
-<span class="sd">        enum_namespaces (:obj:`List[str]`, optional): Namespaces to be loaded.</span>
-<span class="sd">        bare (:obj:`bool`, optional): If ``True``, do not load ``zeek`` namespace by default.</span>
-<span class="sd">        *args: Variable length argument list.</span>
+<span class="sd">        enum_namespaces: Namespaces to be loaded.</span>
+<span class="sd">        bare: If :data:`True`, do not load ``zeek`` namespace by default.</span>
+<span class="sd">        *args: Arbitrary positional arguments.</span>
 <span class="sd">        **kwargs: Arbitrary keyword arguments.</span>
 
 <span class="sd">    Returns:</span>
@@ -702,14 +682,14 @@
 
 <h3>Navigation</h3>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../../dumper.html">Dumpers</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../loader.html">Loaders</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../loader.html">Log Loaders</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../dumper.html">Log Dumpers</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../model.html">Data Model</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../types.html">Data Types</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../typing.html">Typing Annotations</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../_data.html">Data Classes</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../_exc.html">Exceptions &amp; Warnings</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../_aux.html">Internal Auxiliary Functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../_data.html">Data Classes</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../enum/index.html">Enum Namespace</a></li>
 </ul>
 
@@ -731,7 +711,7 @@
     </form>
     </div>
 </div>
-<script>$('#searchbox').show(0);</script>
+<script>document.getElementById('searchbox').style.display = "block"</script>
 
 
 

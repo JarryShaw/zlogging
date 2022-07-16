@@ -1,10 +1,10 @@
 
 <!DOCTYPE html>
 
-<html>
+<html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
     <title>Notice Namespace &#8212; ZLogging 0.1.1 documentation</title>
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
@@ -12,6 +12,7 @@
     <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
     <script src="../_static/underscore.js"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="../_static/doctools.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
@@ -34,12 +35,12 @@
           <div class="body" role="main">
             
   <section id="notice-namespace">
-<h1><code class="docutils literal notranslate"><span class="pre">Notice</span></code> Namespace<a class="headerlink" href="#notice-namespace" title="Permalink to this headline">¶</a></h1>
+<h1><code class="docutils literal notranslate"><span class="pre">Notice</span></code> Namespace<a class="headerlink" href="#notice-namespace" title="Permalink to this heading">¶</a></h1>
 <p>Namespace: <code class="docutils literal notranslate"><span class="pre">Notice</span></code>.</p>
 <dl class="py class">
 <dt class="sig sig-object py">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">zlogging.enum.Notice.</span></span><span class="sig-name descname"><span class="pre">Action</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/zlogging/enum/Notice.html#Action"><span class="viewcode-link"><span class="pre">[source]</span></span></a></dt>
-<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/enum.html#enum.IntFlag" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">enum.IntFlag</span></code></a></p>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/enum.html#enum.IntFlag" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">IntFlag</span></code></a></p>
 <p>Enum: <code class="docutils literal notranslate"><span class="pre">Notice::Action</span></code>.</p>
 <p>These are values representing actions that can be taken with notices.</p>
 <div class="admonition seealso">
@@ -49,49 +50,73 @@
 <dl class="py attribute">
 <dt class="sig sig-object py">
 <span class="sig-name descname"><span class="pre">ACTION_NONE</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">1</span></em></dt>
-<dd></dd></dl>
+<dd><p>Indicates that there is no action to be taken.</p>
+</dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py">
 <span class="sig-name descname"><span class="pre">ACTION_LOG</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">2</span></em></dt>
-<dd></dd></dl>
+<dd><p>Indicates that the notice should be sent to the notice
+logging stream.</p>
+</dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py">
 <span class="sig-name descname"><span class="pre">ACTION_EMAIL</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">4</span></em></dt>
-<dd></dd></dl>
+<dd><p>Indicates that the notice should be sent to the email
+address(es) configured in the Notice::mail_dest
+variable.</p>
+</dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py">
 <span class="sig-name descname"><span class="pre">ACTION_ALARM</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">8</span></em></dt>
-<dd></dd></dl>
+<dd><p>Indicates that the notice should be alarmed.  A readable
+ASCII version of the alarm log is emailed in bulk to the
+address(es) configured in Notice::mail_dest.</p>
+</dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py">
 <span class="sig-name descname"><span class="pre">ACTION_EMAIL_ADMIN</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">16</span></em></dt>
-<dd></dd></dl>
+<dd><p>(present if base/frameworks/notice/actions/email_admin.zeek is loaded)
+Indicate that the generated email should be addressed to the
+appropriate email addresses as found by the
+Site::get_emails function based on the relevant
+address or addresses indicated in the notice.</p>
+</dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py">
 <span class="sig-name descname"><span class="pre">ACTION_PAGE</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">32</span></em></dt>
-<dd></dd></dl>
+<dd><p>(present if base/frameworks/notice/actions/page.zeek is loaded)
+Indicates that the notice should be sent to the pager email
+address configured in the Notice::mail_page_dest
+variable.</p>
+</dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py">
 <span class="sig-name descname"><span class="pre">ACTION_ADD_GEODATA</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">64</span></em></dt>
-<dd></dd></dl>
+<dd><p>(present if base/frameworks/notice/actions/add-geodata.zeek is loaded)
+Indicates that the notice should have geodata added for the
+“remote” host.  Site::local_nets must be defined
+in order for this to work.</p>
+</dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py">
 <span class="sig-name descname"><span class="pre">ACTION_DROP</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">128</span></em></dt>
-<dd></dd></dl>
+<dd><p>(present if policy/frameworks/notice/actions/drop.zeek is loaded)
+Drops the address via NetControl::drop_address_catch_release.</p>
+</dd></dl>
 
 </dd></dl>
 
 <dl class="py class">
 <dt class="sig sig-object py">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">zlogging.enum.Notice.</span></span><span class="sig-name descname"><span class="pre">Type</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/zlogging/enum/Notice.html#Type"><span class="viewcode-link"><span class="pre">[source]</span></span></a></dt>
-<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/enum.html#enum.IntFlag" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">enum.IntFlag</span></code></a></p>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/enum.html#enum.IntFlag" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">IntFlag</span></code></a></p>
 <p>Enum: <code class="docutils literal notranslate"><span class="pre">Notice::Type</span></code>.</p>
 <p>Scripts creating new notices need to redef this enum to add their own specific notice types which
 would then get used when they call the <code class="docutils literal notranslate"><span class="pre">NOTICE</span></code> function. The convention is to give a general
@@ -105,267 +130,477 @@ on each word except for abbreviations which are kept in all capitals. For exampl
 <dl class="py attribute">
 <dt class="sig sig-object py">
 <span class="sig-name descname"><span class="pre">Tally</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">1</span></em></dt>
-<dd></dd></dl>
+<dd><p>Notice reporting a count of how often a notice occurred.</p>
+</dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py">
-<span class="sig-name descname"><span class="pre">Weird__Activity</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">2</span></em></dt>
-<dd></dd></dl>
+<span class="sig-name descname"><span class="pre">Weird_Activity</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">2</span></em></dt>
+<dd><p>Weird::Activity
+(present if base/frameworks/notice/weird.zeek is loaded)
+Generic unusual but notice-worthy weird activity.</p>
+</dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py">
-<span class="sig-name descname"><span class="pre">Signatures__Sensitive_Signature</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">4</span></em></dt>
-<dd></dd></dl>
+<span class="sig-name descname"><span class="pre">Signatures_Sensitive_Signature</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">4</span></em></dt>
+<dd><p>Signatures::Sensitive_Signature
+(present if base/frameworks/signatures/main.zeek is loaded)
+Generic notice type for notice-worthy signature matches.</p>
+</dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py">
-<span class="sig-name descname"><span class="pre">Signatures__Multiple_Signatures</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">8</span></em></dt>
-<dd></dd></dl>
+<span class="sig-name descname"><span class="pre">Signatures_Multiple_Signatures</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">8</span></em></dt>
+<dd><p>Signatures::Multiple_Signatures
+(present if base/frameworks/signatures/main.zeek is loaded)
+Host has triggered many signatures on the same host.  The
+number of signatures is defined by the
+Signatures::vert_scan_thresholds variable.</p>
+</dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py">
-<span class="sig-name descname"><span class="pre">Signatures__Multiple_Sig_Responders</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">16</span></em></dt>
-<dd></dd></dl>
+<span class="sig-name descname"><span class="pre">Signatures_Multiple_Sig_Responders</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">16</span></em></dt>
+<dd><p>Signatures::Multiple_Sig_Responders
+(present if base/frameworks/signatures/main.zeek is loaded)
+Host has triggered the same signature on multiple hosts as
+defined by the Signatures::horiz_scan_thresholds
+variable.</p>
+</dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py">
-<span class="sig-name descname"><span class="pre">Signatures__Count_Signature</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">32</span></em></dt>
-<dd></dd></dl>
+<span class="sig-name descname"><span class="pre">Signatures_Count_Signature</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">32</span></em></dt>
+<dd><p>Signatures::Count_Signature
+(present if base/frameworks/signatures/main.zeek is loaded)
+The same signature has triggered multiple times for a host.
+The number of times the signature has been triggered is
+defined by the Signatures::count_thresholds
+variable. To generate this notice, the
+Signatures::SIG_COUNT_PER_RESP action must be
+set for the signature.</p>
+</dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py">
-<span class="sig-name descname"><span class="pre">Signatures__Signature_Summary</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">64</span></em></dt>
-<dd></dd></dl>
+<span class="sig-name descname"><span class="pre">Signatures_Signature_Summary</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">64</span></em></dt>
+<dd><p>Signatures::Signature_Summary
+(present if base/frameworks/signatures/main.zeek is loaded)
+Summarize the number of times a host triggered a signature.
+The interval between summaries is defined by the
+Signatures::summary_interval variable.</p>
+</dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py">
-<span class="sig-name descname"><span class="pre">PacketFilter__Compile_Failure</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">128</span></em></dt>
-<dd></dd></dl>
+<span class="sig-name descname"><span class="pre">PacketFilter_Compile_Failure</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">128</span></em></dt>
+<dd><p>PacketFilter::Compile_Failure
+(present if base/frameworks/packet-filter/main.zeek is loaded)
+This notice is generated if a packet filter cannot be compiled.</p>
+</dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py">
-<span class="sig-name descname"><span class="pre">PacketFilter__Install_Failure</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">256</span></em></dt>
-<dd></dd></dl>
+<span class="sig-name descname"><span class="pre">PacketFilter_Install_Failure</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">256</span></em></dt>
+<dd><p>PacketFilter::Install_Failure
+(present if base/frameworks/packet-filter/main.zeek is loaded)
+Generated if a packet filter fails to install.</p>
+</dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py">
-<span class="sig-name descname"><span class="pre">PacketFilter__Too_Long_To_Compile_Filter</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">512</span></em></dt>
-<dd></dd></dl>
+<span class="sig-name descname"><span class="pre">PacketFilter_Too_Long_To_Compile_Filter</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">512</span></em></dt>
+<dd><p>PacketFilter::Too_Long_To_Compile_Filter
+(present if base/frameworks/packet-filter/main.zeek is loaded)
+Generated when a notice takes too long to compile.</p>
+</dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py">
-<span class="sig-name descname"><span class="pre">PacketFilter__Dropped_Packets</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">1024</span></em></dt>
-<dd></dd></dl>
+<span class="sig-name descname"><span class="pre">PacketFilter_Dropped_Packets</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">1024</span></em></dt>
+<dd><p>PacketFilter::Dropped_Packets
+(present if base/frameworks/packet-filter/netstats.zeek is loaded)
+Indicates packets were dropped by the packet filter.</p>
+</dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py">
-<span class="sig-name descname"><span class="pre">ProtocolDetector__Protocol_Found</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">2048</span></em></dt>
-<dd></dd></dl>
+<span class="sig-name descname"><span class="pre">ProtocolDetector_Protocol_Found</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">2048</span></em></dt>
+<dd><p>ProtocolDetector::Protocol_Found
+(present if policy/frameworks/dpd/detect-protocols.zeek is loaded)</p>
+</dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py">
-<span class="sig-name descname"><span class="pre">ProtocolDetector__Server_Found</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">4096</span></em></dt>
-<dd></dd></dl>
+<span class="sig-name descname"><span class="pre">ProtocolDetector_Server_Found</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">4096</span></em></dt>
+<dd><p>ProtocolDetector::Server_Found
+(present if policy/frameworks/dpd/detect-protocols.zeek is loaded)</p>
+</dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py">
-<span class="sig-name descname"><span class="pre">Intel__Notice</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">8192</span></em></dt>
-<dd></dd></dl>
+<span class="sig-name descname"><span class="pre">Intel_Notice</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">8192</span></em></dt>
+<dd><p>Intel::Notice
+(present if policy/frameworks/intel/do_notice.zeek is loaded)
+This notice is generated when an intelligence
+indicator is denoted to be notice-worthy.</p>
+</dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py">
-<span class="sig-name descname"><span class="pre">TeamCymruMalwareHashRegistry__Match</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">16384</span></em></dt>
-<dd></dd></dl>
+<span class="sig-name descname"><span class="pre">TeamCymruMalwareHashRegistry_Match</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">16384</span></em></dt>
+<dd><p>TeamCymruMalwareHashRegistry::Match
+(present if policy/frameworks/files/detect-MHR.zeek is loaded)
+The hash value of a file transferred over HTTP matched in the
+malware hash registry.</p>
+</dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py">
-<span class="sig-name descname"><span class="pre">PacketFilter__No_More_Conn_Shunts_Available</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">32768</span></em></dt>
-<dd></dd></dl>
+<span class="sig-name descname"><span class="pre">PacketFilter_No_More_Conn_Shunts_Available</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">32768</span></em></dt>
+<dd><p>PacketFilter::No_More_Conn_Shunts_Available
+(present if policy/frameworks/packet-filter/shunt.zeek is loaded)
+Indicative that PacketFilter::max_bpf_shunts
+connections are already being shunted with BPF filters and
+no more are allowed.</p>
+</dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py">
-<span class="sig-name descname"><span class="pre">PacketFilter__Cannot_BPF_Shunt_Conn</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">65536</span></em></dt>
-<dd></dd></dl>
+<span class="sig-name descname"><span class="pre">PacketFilter_Cannot_BPF_Shunt_Conn</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">65536</span></em></dt>
+<dd><p>PacketFilter::Cannot_BPF_Shunt_Conn
+(present if policy/frameworks/packet-filter/shunt.zeek is loaded)
+Limitations in BPF make shunting some connections with BPF
+impossible.  This notice encompasses those various cases.</p>
+</dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py">
-<span class="sig-name descname"><span class="pre">Software__Software_Version_Change</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">131072</span></em></dt>
-<dd></dd></dl>
+<span class="sig-name descname"><span class="pre">Software_Software_Version_Change</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">131072</span></em></dt>
+<dd><p>Software::Software_Version_Change
+(present if policy/frameworks/software/version-changes.zeek is loaded)
+For certain software, a version changing may matter.  In that
+case, this notice will be generated.  Software that matters
+if the version changes can be configured with the
+Software::interesting_version_changes variable.</p>
+</dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py">
-<span class="sig-name descname"><span class="pre">Software__Vulnerable_Version</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">262144</span></em></dt>
-<dd></dd></dl>
+<span class="sig-name descname"><span class="pre">Software_Vulnerable_Version</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">262144</span></em></dt>
+<dd><p>Software::Vulnerable_Version
+(present if policy/frameworks/software/vulnerable.zeek is loaded)
+Indicates that a vulnerable version of software was detected.</p>
+</dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py">
-<span class="sig-name descname"><span class="pre">CaptureLoss__Too_Much_Loss</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">524288</span></em></dt>
-<dd></dd></dl>
+<span class="sig-name descname"><span class="pre">CaptureLoss_Too_Much_Loss</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">524288</span></em></dt>
+<dd><p>CaptureLoss::Too_Much_Loss
+(present if policy/misc/capture-loss.zeek is loaded)
+Report if the detected capture loss exceeds the percentage
+threshold.</p>
+</dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py">
-<span class="sig-name descname"><span class="pre">Traceroute__Detected</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">1048576</span></em></dt>
-<dd></dd></dl>
+<span class="sig-name descname"><span class="pre">Traceroute_Detected</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">1048576</span></em></dt>
+<dd><p>Traceroute::Detected
+(present if policy/misc/detect-traceroute/main.zeek is loaded)
+Indicates that a host was seen running traceroutes.  For more
+detail about specific traceroutes that we run, refer to the
+traceroute.log.</p>
+</dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py">
-<span class="sig-name descname"><span class="pre">Scan__Address_Scan</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">2097152</span></em></dt>
-<dd></dd></dl>
+<span class="sig-name descname"><span class="pre">Scan_Address_Scan</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">2097152</span></em></dt>
+<dd><p>Scan::Address_Scan
+(present if policy/misc/scan.zeek is loaded)
+Address scans detect that a host appears to be scanning some
+number of destinations on a single port. This notice is
+generated when more than Scan::addr_scan_threshold
+unique hosts are seen over the previous
+Scan::addr_scan_interval time range.</p>
+</dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py">
-<span class="sig-name descname"><span class="pre">Scan__Port_Scan</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">4194304</span></em></dt>
-<dd></dd></dl>
+<span class="sig-name descname"><span class="pre">Scan_Port_Scan</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">4194304</span></em></dt>
+<dd><p>Scan::Port_Scan
+(present if policy/misc/scan.zeek is loaded)
+Port scans detect that an attacking host appears to be
+scanning a single victim host on several ports.  This notice
+is generated when an attacking host attempts to connect to
+Scan::port_scan_threshold
+unique ports on a single host over the previous
+Scan::port_scan_interval time range.</p>
+</dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py">
-<span class="sig-name descname"><span class="pre">Conn__Retransmission_Inconsistency</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">8388608</span></em></dt>
-<dd></dd></dl>
+<span class="sig-name descname"><span class="pre">Conn_Retransmission_Inconsistency</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">8388608</span></em></dt>
+<dd><p>Conn::Retransmission_Inconsistency
+(present if policy/protocols/conn/weirds.zeek is loaded)
+Possible evasion; usually just chud.</p>
+</dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py">
-<span class="sig-name descname"><span class="pre">Conn__Content_Gap</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">16777216</span></em></dt>
-<dd></dd></dl>
+<span class="sig-name descname"><span class="pre">Conn_Content_Gap</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">16777216</span></em></dt>
+<dd><p>Conn::Content_Gap
+(present if policy/protocols/conn/weirds.zeek is loaded)
+Data has sequence hole; perhaps due to filtering.</p>
+</dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py">
-<span class="sig-name descname"><span class="pre">DNS__External_Name</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">33554432</span></em></dt>
-<dd></dd></dl>
+<span class="sig-name descname"><span class="pre">DNS_External_Name</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">33554432</span></em></dt>
+<dd><p><a class="reference external" href="DNS::External_Name">DNS::External_Name</a>
+(present if policy/protocols/dns/detect-external-names.zeek is loaded)
+Raised when a non-local name is found to be pointing at a
+local host.  The Site::local_zones variable
+must be set appropriately for this detection.</p>
+</dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py">
-<span class="sig-name descname"><span class="pre">FTP__Bruteforcing</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">67108864</span></em></dt>
-<dd></dd></dl>
+<span class="sig-name descname"><span class="pre">FTP_Bruteforcing</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">67108864</span></em></dt>
+<dd><p><a class="reference external" href="FTP::Bruteforcing">FTP::Bruteforcing</a>
+(present if policy/protocols/ftp/detect-bruteforcing.zeek is loaded)
+Indicates a host bruteforcing FTP logins by watching for too
+many rejected usernames or failed passwords.</p>
+</dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py">
-<span class="sig-name descname"><span class="pre">FTP__Site_Exec_Success</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">134217728</span></em></dt>
-<dd></dd></dl>
+<span class="sig-name descname"><span class="pre">FTP_Site_Exec_Success</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">134217728</span></em></dt>
+<dd><p><a class="reference external" href="FTP::Site_Exec_Success">FTP::Site_Exec_Success</a>
+(present if policy/protocols/ftp/detect.zeek is loaded)
+Indicates that a successful response to a “SITE EXEC”
+command/arg pair was seen.</p>
+</dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py">
-<span class="sig-name descname"><span class="pre">HTTP__SQL_Injection_Attacker</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">268435456</span></em></dt>
-<dd></dd></dl>
+<span class="sig-name descname"><span class="pre">HTTP_SQL_Injection_Attacker</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">268435456</span></em></dt>
+<dd><p><a class="reference external" href="HTTP::SQL_Injection_Attacker">HTTP::SQL_Injection_Attacker</a>
+(present if policy/protocols/http/detect-sqli.zeek is loaded)
+Indicates that a host performing SQL injection attacks was
+detected.</p>
+</dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py">
-<span class="sig-name descname"><span class="pre">HTTP__SQL_Injection_Victim</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">536870912</span></em></dt>
-<dd></dd></dl>
+<span class="sig-name descname"><span class="pre">HTTP_SQL_Injection_Victim</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">536870912</span></em></dt>
+<dd><p><a class="reference external" href="HTTP::SQL_Injection_Victim">HTTP::SQL_Injection_Victim</a>
+(present if policy/protocols/http/detect-sqli.zeek is loaded)
+Indicates that a host was seen to have SQL injection attacks
+against it.  This is tracked by IP address as opposed to
+hostname.</p>
+</dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py">
-<span class="sig-name descname"><span class="pre">SMTP__Blocklist_Error_Message</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">1073741824</span></em></dt>
-<dd></dd></dl>
+<span class="sig-name descname"><span class="pre">SMTP_Blocklist_Error_Message</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">1073741824</span></em></dt>
+<dd><p>SMTP::Blocklist_Error_Message
+(present if policy/protocols/smtp/blocklists.zeek is loaded)
+An SMTP server sent a reply mentioning an SMTP block list.</p>
+</dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py">
-<span class="sig-name descname"><span class="pre">SMTP__Blocklist_Blocked_Host</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">2147483648</span></em></dt>
-<dd></dd></dl>
+<span class="sig-name descname"><span class="pre">SMTP_Blocklist_Blocked_Host</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">2147483648</span></em></dt>
+<dd><p>SMTP::Blocklist_Blocked_Host
+(present if policy/protocols/smtp/blocklists.zeek is loaded)
+The originator’s address is seen in the block list error message.
+This is useful to detect local hosts sending SPAM with a high
+positive rate.</p>
+</dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py">
-<span class="sig-name descname"><span class="pre">SMTP__Suspicious_Origination</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">4294967296</span></em></dt>
-<dd></dd></dl>
+<span class="sig-name descname"><span class="pre">SMTP_Suspicious_Origination</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">4294967296</span></em></dt>
+<dd><p>SMTP::Suspicious_Origination
+(present if policy/protocols/smtp/detect-suspicious-orig.zeek is loaded)</p>
+</dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py">
-<span class="sig-name descname"><span class="pre">SSH__Password_Guessing</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">8589934592</span></em></dt>
-<dd></dd></dl>
+<span class="sig-name descname"><span class="pre">SSH_Password_Guessing</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">8589934592</span></em></dt>
+<dd><p><a class="reference external" href="SSH::Password_Guessing">SSH::Password_Guessing</a>
+(present if policy/protocols/ssh/detect-bruteforcing.zeek is loaded)
+Indicates that a host has been identified as crossing the
+<a class="reference external" href="SSH::password_guesses_limit">SSH::password_guesses_limit</a> threshold with
+failed logins.</p>
+</dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py">
-<span class="sig-name descname"><span class="pre">SSH__Login_By_Password_Guesser</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">17179869184</span></em></dt>
-<dd></dd></dl>
+<span class="sig-name descname"><span class="pre">SSH_Login_By_Password_Guesser</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">17179869184</span></em></dt>
+<dd><p><a class="reference external" href="SSH::Login_By_Password_Guesser">SSH::Login_By_Password_Guesser</a>
+(present if policy/protocols/ssh/detect-bruteforcing.zeek is loaded)
+Indicates that a host previously identified as a “password
+guesser” has now had a successful login
+attempt. This is not currently implemented.</p>
+</dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py">
-<span class="sig-name descname"><span class="pre">SSH__Watched_Country_Login</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">34359738368</span></em></dt>
-<dd></dd></dl>
+<span class="sig-name descname"><span class="pre">SSH_Watched_Country_Login</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">34359738368</span></em></dt>
+<dd><p><a class="reference external" href="SSH::Watched_Country_Login">SSH::Watched_Country_Login</a>
+(present if policy/protocols/ssh/geo-data.zeek is loaded)
+If an SSH login is seen to or from a “watched” country based
+on the <a class="reference external" href="SSH::watched_countries">SSH::watched_countries</a> variable then this
+notice will be generated.</p>
+</dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py">
-<span class="sig-name descname"><span class="pre">SSH__Interesting_Hostname_Login</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">68719476736</span></em></dt>
-<dd></dd></dl>
+<span class="sig-name descname"><span class="pre">SSH_Interesting_Hostname_Login</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">68719476736</span></em></dt>
+<dd><p><a class="reference external" href="SSH::Interesting_Hostname_Login">SSH::Interesting_Hostname_Login</a>
+(present if policy/protocols/ssh/interesting-hostnames.zeek is loaded)
+Generated if a login originates or responds with a host where
+the reverse hostname lookup resolves to a name matched by the
+<a class="reference external" href="SSH::interesting_hostnames">SSH::interesting_hostnames</a> regular expression.</p>
+</dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py">
-<span class="sig-name descname"><span class="pre">SSL__Certificate_Expired</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">137438953472</span></em></dt>
-<dd></dd></dl>
+<span class="sig-name descname"><span class="pre">SSL_Certificate_Expired</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">137438953472</span></em></dt>
+<dd><p>SSL::Certificate_Expired
+(present if policy/protocols/ssl/expiring-certs.zeek is loaded)
+Indicates that a certificate’s NotValidAfter date has lapsed
+and the certificate is now invalid.</p>
+</dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py">
-<span class="sig-name descname"><span class="pre">SSL__Certificate_Expires_Soon</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">274877906944</span></em></dt>
-<dd></dd></dl>
+<span class="sig-name descname"><span class="pre">SSL_Certificate_Expires_Soon</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">274877906944</span></em></dt>
+<dd><p>SSL::Certificate_Expires_Soon
+(present if policy/protocols/ssl/expiring-certs.zeek is loaded)
+Indicates that a certificate is going to expire within
+SSL::notify_when_cert_expiring_in.</p>
+</dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py">
-<span class="sig-name descname"><span class="pre">SSL__Certificate_Not_Valid_Yet</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">549755813888</span></em></dt>
-<dd></dd></dl>
+<span class="sig-name descname"><span class="pre">SSL_Certificate_Not_Valid_Yet</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">549755813888</span></em></dt>
+<dd><p>SSL::Certificate_Not_Valid_Yet
+(present if policy/protocols/ssl/expiring-certs.zeek is loaded)
+Indicates that a certificate’s NotValidBefore date is future
+dated.</p>
+</dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py">
-<span class="sig-name descname"><span class="pre">Heartbleed__SSL_Heartbeat_Attack</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">1099511627776</span></em></dt>
-<dd></dd></dl>
+<span class="sig-name descname"><span class="pre">Heartbleed_SSL_Heartbeat_Attack</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">1099511627776</span></em></dt>
+<dd><p>Heartbleed::SSL_Heartbeat_Attack
+(present if policy/protocols/ssl/heartbleed.zeek is loaded)
+Indicates that a host performed a heartbleed attack or scan.</p>
+</dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py">
-<span class="sig-name descname"><span class="pre">Heartbleed__SSL_Heartbeat_Attack_Success</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">2199023255552</span></em></dt>
-<dd></dd></dl>
+<span class="sig-name descname"><span class="pre">Heartbleed_SSL_Heartbeat_Attack_Success</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">2199023255552</span></em></dt>
+<dd><p>Heartbleed::SSL_Heartbeat_Attack_Success
+(present if policy/protocols/ssl/heartbleed.zeek is loaded)
+Indicates that a host performing a heartbleed attack was probably successful.</p>
+</dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py">
-<span class="sig-name descname"><span class="pre">Heartbleed__SSL_Heartbeat_Odd_Length</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">4398046511104</span></em></dt>
-<dd></dd></dl>
+<span class="sig-name descname"><span class="pre">Heartbleed_SSL_Heartbeat_Odd_Length</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">4398046511104</span></em></dt>
+<dd><p>Heartbleed::SSL_Heartbeat_Odd_Length
+(present if policy/protocols/ssl/heartbleed.zeek is loaded)
+Indicates we saw heartbeat requests with odd length. Probably an attack or scan.</p>
+</dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py">
-<span class="sig-name descname"><span class="pre">Heartbleed__SSL_Heartbeat_Many_Requests</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">8796093022208</span></em></dt>
-<dd></dd></dl>
+<span class="sig-name descname"><span class="pre">Heartbleed_SSL_Heartbeat_Many_Requests</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">8796093022208</span></em></dt>
+<dd><p>Heartbleed::SSL_Heartbeat_Many_Requests
+(present if policy/protocols/ssl/heartbleed.zeek is loaded)
+Indicates we saw many heartbeat requests without a reply. Might be an attack.</p>
+</dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py">
-<span class="sig-name descname"><span class="pre">SSL__Invalid_Server_Cert</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">17592186044416</span></em></dt>
-<dd></dd></dl>
+<span class="sig-name descname"><span class="pre">SSL_Invalid_Server_Cert</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">17592186044416</span></em></dt>
+<dd><p>SSL::Invalid_Server_Cert
+(present if policy/protocols/ssl/validate-certs.zeek is loaded)
+This notice indicates that the result of validating the
+certificate along with its full certificate chain was
+invalid.</p>
+</dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py">
-<span class="sig-name descname"><span class="pre">SSL__Invalid_Ocsp_Response</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">35184372088832</span></em></dt>
-<dd></dd></dl>
+<span class="sig-name descname"><span class="pre">SSL_Invalid_Ocsp_Response</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">35184372088832</span></em></dt>
+<dd><p>SSL::Invalid_Ocsp_Response
+(present if policy/protocols/ssl/validate-ocsp.zeek is loaded)
+This indicates that the OCSP response was not deemed
+to be valid.</p>
+</dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py">
-<span class="sig-name descname"><span class="pre">SSL__Weak_Key</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">70368744177664</span></em></dt>
-<dd></dd></dl>
+<span class="sig-name descname"><span class="pre">SSL_Weak_Key</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">70368744177664</span></em></dt>
+<dd><p>SSL::Weak_Key
+(present if policy/protocols/ssl/weak-keys.zeek is loaded)
+Indicates that a server is using a potentially unsafe key.</p>
+</dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py">
-<span class="sig-name descname"><span class="pre">SSL__Old_Version</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">140737488355328</span></em></dt>
-<dd></dd></dl>
+<span class="sig-name descname"><span class="pre">SSL_Old_Version</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">140737488355328</span></em></dt>
+<dd><p>SSL::Old_Version
+(present if policy/protocols/ssl/weak-keys.zeek is loaded)
+Indicates that a server is using a potentially unsafe version</p>
+</dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py">
-<span class="sig-name descname"><span class="pre">SSL__Weak_Cipher</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">281474976710656</span></em></dt>
-<dd></dd></dl>
+<span class="sig-name descname"><span class="pre">SSL_Weak_Cipher</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">281474976710656</span></em></dt>
+<dd><p>SSL::Weak_Cipher
+(present if policy/protocols/ssl/weak-keys.zeek is loaded)
+Indicates that a server is using a potentially unsafe cipher</p>
+</dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py">
-<span class="sig-name descname"><span class="pre">ZeekygenExample__Zeekygen_One</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">562949953421312</span></em></dt>
-<dd></dd></dl>
+<span class="sig-name descname"><span class="pre">ZeekygenExample_Zeekygen_One</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">562949953421312</span></em></dt>
+<dd><p>ZeekygenExample::Zeekygen_One
+(present if zeekygen/example.zeek is loaded)
+Any number of this type of comment
+will document “Zeekygen_One”.</p>
+</dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py">
-<span class="sig-name descname"><span class="pre">ZeekygenExample__Zeekygen_Two</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">1125899906842624</span></em></dt>
-<dd></dd></dl>
+<span class="sig-name descname"><span class="pre">ZeekygenExample_Zeekygen_Two</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">1125899906842624</span></em></dt>
+<dd><p>ZeekygenExample::Zeekygen_Two
+(present if zeekygen/example.zeek is loaded)
+Any number of this type of comment
+will document “ZEEKYGEN_TWO”.</p>
+</dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py">
-<span class="sig-name descname"><span class="pre">ZeekygenExample__Zeekygen_Three</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">2251799813685248</span></em></dt>
-<dd></dd></dl>
+<span class="sig-name descname"><span class="pre">ZeekygenExample_Zeekygen_Three</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">2251799813685248</span></em></dt>
+<dd><p>ZeekygenExample::Zeekygen_Three
+(present if zeekygen/example.zeek is loaded)</p>
+</dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py">
-<span class="sig-name descname"><span class="pre">ZeekygenExample__Zeekygen_Four</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">4503599627370496</span></em></dt>
-<dd></dd></dl>
+<span class="sig-name descname"><span class="pre">ZeekygenExample_Zeekygen_Four</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">4503599627370496</span></em></dt>
+<dd><p>ZeekygenExample::Zeekygen_Four
+(present if zeekygen/example.zeek is loaded)
+Omitting comments is fine, and so is mixing ## and ##&lt;, but
+it’s probably best to use only one style consistently.</p>
+</dd></dl>
 
 </dd></dl>
 
@@ -396,45 +631,15 @@ on each word except for abbreviations which are kept in all capitals. For exampl
 
 <h3>Navigation</h3>
 <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="../dumper.html">Dumpers</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../loader.html">Loaders</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../loader.html">Log Loaders</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dumper.html">Log Dumpers</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../model.html">Data Model</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../types.html">Data Types</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../typing.html">Typing Annotations</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../_data.html">Data Classes</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../_exc.html">Exceptions &amp; Warnings</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../_aux.html">Internal Auxiliary Functions</a></li>
-<li class="toctree-l1 current"><a class="reference internal" href="index.html">Enum Namespace</a><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="zeek.html"><code class="docutils literal notranslate"><span class="pre">zeek</span></code> Namespace</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Broker.html"><code class="docutils literal notranslate"><span class="pre">Broker</span></code> Namespace</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Cluster.html"><code class="docutils literal notranslate"><span class="pre">Cluster</span></code> Namespace</a></li>
-<li class="toctree-l2"><a class="reference internal" href="DCE_RPC.html"><code class="docutils literal notranslate"><span class="pre">DCE_RPC</span></code> Namespace</a></li>
-<li class="toctree-l2"><a class="reference internal" href="HTTP.html"><code class="docutils literal notranslate"><span class="pre">HTTP</span></code> Namespace</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Input.html"><code class="docutils literal notranslate"><span class="pre">Input</span></code> Namespace</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Intel.html"><code class="docutils literal notranslate"><span class="pre">Intel</span></code> Namespace</a></li>
-<li class="toctree-l2"><a class="reference internal" href="JSON.html"><code class="docutils literal notranslate"><span class="pre">JSON</span></code> Namespace</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Known.html"><code class="docutils literal notranslate"><span class="pre">Known</span></code> Namespace</a></li>
-<li class="toctree-l2"><a class="reference internal" href="LoadBalancing.html"><code class="docutils literal notranslate"><span class="pre">LoadBalancing</span></code> Namespace</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Log.html"><code class="docutils literal notranslate"><span class="pre">Log</span></code> Namespace</a></li>
-<li class="toctree-l2"><a class="reference internal" href="MOUNT3.html"><code class="docutils literal notranslate"><span class="pre">MOUNT3</span></code> Namespace</a></li>
-<li class="toctree-l2"><a class="reference internal" href="MQTT.html"><code class="docutils literal notranslate"><span class="pre">MQTT</span></code> Namespace</a></li>
-<li class="toctree-l2"><a class="reference internal" href="NFS3.html"><code class="docutils literal notranslate"><span class="pre">NFS3</span></code> Namespace</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#"><code class="docutils literal notranslate"><span class="pre">Notice</span></code> Namespace</a></li>
-<li class="toctree-l2"><a class="reference internal" href="OpenFlow.html"><code class="docutils literal notranslate"><span class="pre">OpenFlow</span></code> Namespace</a></li>
-<li class="toctree-l2"><a class="reference internal" href="NetControl.html"><code class="docutils literal notranslate"><span class="pre">NetControl</span></code> Namespace</a></li>
-<li class="toctree-l2"><a class="reference internal" href="ProtocolDetector.html"><code class="docutils literal notranslate"><span class="pre">ProtocolDetector</span></code> Namespace</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Reporter.html"><code class="docutils literal notranslate"><span class="pre">Reporter</span></code> Namespace</a></li>
-<li class="toctree-l2"><a class="reference internal" href="SMB.html"><code class="docutils literal notranslate"><span class="pre">SMB</span></code> Namespace</a></li>
-<li class="toctree-l2"><a class="reference internal" href="SOCKS.html"><code class="docutils literal notranslate"><span class="pre">SOCKS</span></code> Namespace</a></li>
-<li class="toctree-l2"><a class="reference internal" href="SSL.html"><code class="docutils literal notranslate"><span class="pre">SSL</span></code> Namespace</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Signatures.html"><code class="docutils literal notranslate"><span class="pre">Signatures</span></code> Namespace</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Software.html"><code class="docutils literal notranslate"><span class="pre">Software</span></code> Namespace</a></li>
-<li class="toctree-l2"><a class="reference internal" href="SumStats.html"><code class="docutils literal notranslate"><span class="pre">SumStats</span></code> Namespace</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Tunnel.html"><code class="docutils literal notranslate"><span class="pre">Tunnel</span></code> Namespace</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Weird.html"><code class="docutils literal notranslate"><span class="pre">Weird</span></code> Namespace</a></li>
-<li class="toctree-l2"><a class="reference internal" href="ZeekygenExample.html"><code class="docutils literal notranslate"><span class="pre">ZeekygenExample</span></code> Namespace</a></li>
-</ul>
-</li>
+<li class="toctree-l1"><a class="reference internal" href="../_data.html">Data Classes</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Enum Namespace</a></li>
 </ul>
 
 <div class="relations">
@@ -457,7 +662,7 @@ on each word except for abbreviations which are kept in all capitals. For exampl
     </form>
     </div>
 </div>
-<script>$('#searchbox').show(0);</script>
+<script>document.getElementById('searchbox').style.display = "block"</script>
 
 
 

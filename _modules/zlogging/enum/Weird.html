@@ -1,7 +1,7 @@
 
 <!DOCTYPE html>
 
-<html>
+<html lang="en">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -11,6 +11,7 @@
     <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
     <script src="../../../_static/jquery.js"></script>
     <script src="../../../_static/underscore.js"></script>
+    <script src="../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="../../../_static/doctools.js"></script>
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" />
@@ -32,10 +33,10 @@
             
   <h1>Source code for zlogging.enum.Weird</h1><div class="highlight"><pre>
 <span></span><span class="c1"># -*- coding: utf-8 -*-</span>
-<span class="c1"># pylint: disable=line-too-long,import-error</span>
+<span class="c1"># pylint: disable=line-too-long</span>
 <span class="sd">&quot;&quot;&quot;Namespace: ``Weird``.&quot;&quot;&quot;</span>
 
-<span class="kn">from</span> <span class="nn">zlogging._compat</span> <span class="kn">import</span> <span class="n">enum</span>
+<span class="kn">from</span> <span class="nn">zlogging._compat</span> <span class="k">import</span> <span class="n">enum</span>
 
 
 <div class="viewcode-block" id="Action"><a class="viewcode-back" href="../../../enum/Weird.html#zlogging.enum.Weird.Action">[docs]</a><span class="nd">@enum</span><span class="o">.</span><span class="n">unique</span>
@@ -54,34 +55,34 @@
 
     <span class="c1">#: A dummy action indicating the user does not care what</span>
     <span class="c1">#: internal decision is made regarding a given type of weird.</span>
-    <span class="n">Action</span><span class="p">[</span><span class="s1">&#39;ACTION_UNSPECIFIED&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span>
+    <span class="n">ACTION_UNSPECIFIED</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span>
 
     <span class="c1">#: No action is to be taken.</span>
-    <span class="n">Action</span><span class="p">[</span><span class="s1">&#39;ACTION_IGNORE&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span>
+    <span class="n">ACTION_IGNORE</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span>
 
     <span class="c1">#: Log the weird event every time it occurs.</span>
-    <span class="n">Action</span><span class="p">[</span><span class="s1">&#39;ACTION_LOG&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span>
+    <span class="n">ACTION_LOG</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span>
 
     <span class="c1">#: Log the weird event only once.</span>
-    <span class="n">Action</span><span class="p">[</span><span class="s1">&#39;ACTION_LOG_ONCE&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span>
+    <span class="n">ACTION_LOG_ONCE</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span>
 
     <span class="c1">#: Log the weird event once per connection.</span>
-    <span class="n">Action</span><span class="p">[</span><span class="s1">&#39;ACTION_LOG_PER_CONN&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span>
+    <span class="n">ACTION_LOG_PER_CONN</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span>
 
     <span class="c1">#: Log the weird event once per originator host.</span>
-    <span class="n">Action</span><span class="p">[</span><span class="s1">&#39;ACTION_LOG_PER_ORIG&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span>
+    <span class="n">ACTION_LOG_PER_ORIG</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span>
 
     <span class="c1">#: Always generate a notice associated with the weird event.</span>
-    <span class="n">Action</span><span class="p">[</span><span class="s1">&#39;ACTION_NOTICE&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span>
+    <span class="n">ACTION_NOTICE</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span>
 
     <span class="c1">#: Generate a notice associated with the weird event only once.</span>
-    <span class="n">Action</span><span class="p">[</span><span class="s1">&#39;ACTION_NOTICE_ONCE&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span>
+    <span class="n">ACTION_NOTICE_ONCE</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span>
 
     <span class="c1">#: Generate a notice for the weird event once per connection.</span>
-    <span class="n">Action</span><span class="p">[</span><span class="s1">&#39;ACTION_NOTICE_PER_CONN&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span>
+    <span class="n">ACTION_NOTICE_PER_CONN</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span>
 
     <span class="c1">#: Generate a notice for the weird event once per originator host.</span>
-    <span class="n">Action</span><span class="p">[</span><span class="s1">&#39;ACTION_NOTICE_PER_ORIG&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span></div>
+    <span class="n">ACTION_NOTICE_PER_ORIG</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span></div>
 </pre></div>
 
           </div>
@@ -108,14 +109,14 @@
 
 <h3>Navigation</h3>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../../../dumper.html">Dumpers</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../loader.html">Loaders</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../loader.html">Log Loaders</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../dumper.html">Log Dumpers</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../model.html">Data Model</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../types.html">Data Types</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../typing.html">Typing Annotations</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../_data.html">Data Classes</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../_exc.html">Exceptions &amp; Warnings</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../_aux.html">Internal Auxiliary Functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../_data.html">Data Classes</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../enum/index.html">Enum Namespace</a></li>
 </ul>
 
@@ -139,7 +140,7 @@
     </form>
     </div>
 </div>
-<script>$('#searchbox').show(0);</script>
+<script>document.getElementById('searchbox').style.display = "block"</script>
 
 
 

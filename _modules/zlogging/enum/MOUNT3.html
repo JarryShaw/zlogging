@@ -1,7 +1,7 @@
 
 <!DOCTYPE html>
 
-<html>
+<html lang="en">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -11,6 +11,7 @@
     <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
     <script src="../../../_static/jquery.js"></script>
     <script src="../../../_static/underscore.js"></script>
+    <script src="../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="../../../_static/doctools.js"></script>
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" />
@@ -32,10 +33,10 @@
             
   <h1>Source code for zlogging.enum.MOUNT3</h1><div class="highlight"><pre>
 <span></span><span class="c1"># -*- coding: utf-8 -*-</span>
-<span class="c1"># pylint: disable=line-too-long,import-error</span>
+<span class="c1"># pylint: disable=line-too-long</span>
 <span class="sd">&quot;&quot;&quot;Namespace: ``MOUNT3``.&quot;&quot;&quot;</span>
 
-<span class="kn">from</span> <span class="nn">zlogging._compat</span> <span class="kn">import</span> <span class="n">enum</span>
+<span class="kn">from</span> <span class="nn">zlogging._compat</span> <span class="k">import</span> <span class="n">enum</span>
 
 
 <div class="viewcode-block" id="auth_flavor_t"><a class="viewcode-back" href="../../../enum/MOUNT3.html#zlogging.enum.MOUNT3.auth_flavor_t">[docs]</a><span class="nd">@enum</span><span class="o">.</span><span class="n">unique</span>
@@ -50,13 +51,13 @@
     <span class="n">_ignore_</span> <span class="o">=</span> <span class="s1">&#39;auth_flavor_t _&#39;</span>
     <span class="n">auth_flavor_t</span> <span class="o">=</span> <span class="nb">vars</span><span class="p">()</span>
 
-    <span class="n">auth_flavor_t</span><span class="p">[</span><span class="s1">&#39;AUTH_NULL&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span>
+    <span class="n">AUTH_NULL</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span>
 
-    <span class="n">auth_flavor_t</span><span class="p">[</span><span class="s1">&#39;AUTH_UNIX&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span>
+    <span class="n">AUTH_UNIX</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span>
 
-    <span class="n">auth_flavor_t</span><span class="p">[</span><span class="s1">&#39;AUTH_SHORT&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span>
+    <span class="n">AUTH_SHORT</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span>
 
-    <span class="n">auth_flavor_t</span><span class="p">[</span><span class="s1">&#39;AUTH_DES&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span></div>
+    <span class="n">AUTH_DES</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span></div>
 
 
 <div class="viewcode-block" id="proc_t"><a class="viewcode-back" href="../../../enum/MOUNT3.html#zlogging.enum.MOUNT3.proc_t">[docs]</a><span class="nd">@enum</span><span class="o">.</span><span class="n">unique</span>
@@ -71,19 +72,19 @@
     <span class="n">_ignore_</span> <span class="o">=</span> <span class="s1">&#39;proc_t _&#39;</span>
     <span class="n">proc_t</span> <span class="o">=</span> <span class="nb">vars</span><span class="p">()</span>
 
-    <span class="n">proc_t</span><span class="p">[</span><span class="s1">&#39;PROC_NULL&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span>
+    <span class="n">PROC_NULL</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span>
 
-    <span class="n">proc_t</span><span class="p">[</span><span class="s1">&#39;PROC_MNT&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span>
+    <span class="n">PROC_MNT</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span>
 
-    <span class="n">proc_t</span><span class="p">[</span><span class="s1">&#39;PROC_DUMP&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span>
+    <span class="n">PROC_DUMP</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span>
 
-    <span class="n">proc_t</span><span class="p">[</span><span class="s1">&#39;PROC_UMNT&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span>
+    <span class="n">PROC_UMNT</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span>
 
-    <span class="n">proc_t</span><span class="p">[</span><span class="s1">&#39;PROC_UMNT_ALL&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span>
+    <span class="n">PROC_UMNT_ALL</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span>
 
-    <span class="n">proc_t</span><span class="p">[</span><span class="s1">&#39;PROC_EXPORT&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span>
+    <span class="n">PROC_EXPORT</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span>
 
-    <span class="n">proc_t</span><span class="p">[</span><span class="s1">&#39;PROC_END_OF_PROCS&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span></div>
+    <span class="n">PROC_END_OF_PROCS</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span></div>
 
 
 <div class="viewcode-block" id="status_t"><a class="viewcode-back" href="../../../enum/MOUNT3.html#zlogging.enum.MOUNT3.status_t">[docs]</a><span class="nd">@enum</span><span class="o">.</span><span class="n">unique</span>
@@ -98,27 +99,27 @@
     <span class="n">_ignore_</span> <span class="o">=</span> <span class="s1">&#39;status_t _&#39;</span>
     <span class="n">status_t</span> <span class="o">=</span> <span class="nb">vars</span><span class="p">()</span>
 
-    <span class="n">status_t</span><span class="p">[</span><span class="s1">&#39;MNT3_OK&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span>
+    <span class="n">MNT3_OK</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span>
 
-    <span class="n">status_t</span><span class="p">[</span><span class="s1">&#39;MNT3ERR_PERM&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span>
+    <span class="n">MNT3ERR_PERM</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span>
 
-    <span class="n">status_t</span><span class="p">[</span><span class="s1">&#39;MNT3ERR_NOENT&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span>
+    <span class="n">MNT3ERR_NOENT</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span>
 
-    <span class="n">status_t</span><span class="p">[</span><span class="s1">&#39;MNT3ERR_IO&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span>
+    <span class="n">MNT3ERR_IO</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span>
 
-    <span class="n">status_t</span><span class="p">[</span><span class="s1">&#39;MNT3ERR_ACCES&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span>
+    <span class="n">MNT3ERR_ACCES</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span>
 
-    <span class="n">status_t</span><span class="p">[</span><span class="s1">&#39;MNT3ERR_NOTDIR&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span>
+    <span class="n">MNT3ERR_NOTDIR</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span>
 
-    <span class="n">status_t</span><span class="p">[</span><span class="s1">&#39;MNT3ERR_INVAL&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span>
+    <span class="n">MNT3ERR_INVAL</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span>
 
-    <span class="n">status_t</span><span class="p">[</span><span class="s1">&#39;MNT3ERR_NAMETOOLONG&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span>
+    <span class="n">MNT3ERR_NAMETOOLONG</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span>
 
-    <span class="n">status_t</span><span class="p">[</span><span class="s1">&#39;MNT3ERR_NOTSUPP&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span>
+    <span class="n">MNT3ERR_NOTSUPP</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span>
 
-    <span class="n">status_t</span><span class="p">[</span><span class="s1">&#39;MNT3ERR_SERVERFAULT&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span>
+    <span class="n">MNT3ERR_SERVERFAULT</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span>
 
-    <span class="n">status_t</span><span class="p">[</span><span class="s1">&#39;MOUNT3ERR_UNKNOWN&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span></div>
+    <span class="n">MOUNT3ERR_UNKNOWN</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span></div>
 </pre></div>
 
           </div>
@@ -145,14 +146,14 @@
 
 <h3>Navigation</h3>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../../../dumper.html">Dumpers</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../loader.html">Loaders</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../loader.html">Log Loaders</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../dumper.html">Log Dumpers</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../model.html">Data Model</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../types.html">Data Types</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../typing.html">Typing Annotations</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../_data.html">Data Classes</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../_exc.html">Exceptions &amp; Warnings</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../_aux.html">Internal Auxiliary Functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../_data.html">Data Classes</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../enum/index.html">Enum Namespace</a></li>
 </ul>
 
@@ -176,7 +177,7 @@
     </form>
     </div>
 </div>
-<script>$('#searchbox').show(0);</script>
+<script>document.getElementById('searchbox').style.display = "block"</script>
 
 
 

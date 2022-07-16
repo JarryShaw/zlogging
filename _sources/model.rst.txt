@@ -1,7 +1,10 @@
 Data Model
 ==========
 
-.. automodule:: zlogging.model
+.. module:: zlogging.model
+
+.. autoclass:: zlogging.model.Model
    :members:
-   :undoc-members:
    :show-inheritance:
+
+.. autofunction:: zlogging.model.new_model

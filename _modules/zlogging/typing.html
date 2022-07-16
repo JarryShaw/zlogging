@@ -1,7 +1,7 @@
 
 <!DOCTYPE html>
 
-<html>
+<html lang="en">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -11,6 +11,7 @@
     <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
     <script src="../../_static/jquery.js"></script>
     <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="../../_static/doctools.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
@@ -36,10 +37,10 @@
 <span class="sd">&quot;&quot;&quot;Bro/Zeek typing annotations.&quot;&quot;&quot;</span>
 
 <span class="kn">import</span> <span class="nn">warnings</span>
-<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">TYPE_CHECKING</span><span class="p">,</span> <span class="n">Generic</span><span class="p">,</span> <span class="n">TypeVar</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="k">import</span> <span class="n">TYPE_CHECKING</span><span class="p">,</span> <span class="n">Generic</span><span class="p">,</span> <span class="n">TypeVar</span>
 
-<span class="kn">from</span> <span class="nn">zlogging._exc</span> <span class="kn">import</span> <span class="n">BroDeprecationWarning</span>
-<span class="kn">from</span> <span class="nn">zlogging.types</span> <span class="kn">import</span> <span class="p">(</span><span class="n">AddrType</span><span class="p">,</span> <span class="n">BoolType</span><span class="p">,</span> <span class="n">CountType</span><span class="p">,</span> <span class="n">DoubleType</span><span class="p">,</span> <span class="n">EnumType</span><span class="p">,</span> <span class="n">IntervalType</span><span class="p">,</span>
+<span class="kn">from</span> <span class="nn">zlogging._exc</span> <span class="k">import</span> <span class="n">BroDeprecationWarning</span>
+<span class="kn">from</span> <span class="nn">zlogging.types</span> <span class="k">import</span> <span class="p">(</span><span class="n">AddrType</span><span class="p">,</span> <span class="n">BoolType</span><span class="p">,</span> <span class="n">CountType</span><span class="p">,</span> <span class="n">DoubleType</span><span class="p">,</span> <span class="n">EnumType</span><span class="p">,</span> <span class="n">IntervalType</span><span class="p">,</span>
                             <span class="n">IntType</span><span class="p">,</span> <span class="n">PortType</span><span class="p">,</span> <span class="n">RecordType</span><span class="p">,</span> <span class="n">SetType</span><span class="p">,</span> <span class="n">StringType</span><span class="p">,</span> <span class="n">SubnetType</span><span class="p">,</span>
                             <span class="n">TimeType</span><span class="p">,</span> <span class="n">VectorType</span><span class="p">)</span>
 
@@ -55,24 +56,26 @@
 
 <span class="n">_T</span> <span class="o">=</span> <span class="n">TypeVar</span><span class="p">(</span><span class="s1">&#39;_T&#39;</span><span class="p">,</span> <span class="n">bound</span><span class="o">=</span><span class="s1">&#39;Type[BaseType]&#39;</span><span class="p">)</span>
 <span class="n">_S</span> <span class="o">=</span> <span class="n">TypeVar</span><span class="p">(</span><span class="s1">&#39;_S&#39;</span><span class="p">,</span> <span class="n">bound</span><span class="o">=</span><span class="s1">&#39;_SimpleType&#39;</span><span class="p">)</span>
-<span class="k">if</span> <span class="n">TYPE_CHECKING</span><span class="p">:</span>
-    <span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Type</span>
 
-    <span class="kn">from</span> <span class="nn">zlogging.types</span> <span class="kn">import</span> <span class="n">BaseType</span><span class="p">,</span> <span class="n">_SimpleType</span>
+<span class="k">if</span> <span class="n">TYPE_CHECKING</span><span class="p">:</span>
+    <span class="kn">from</span> <span class="nn">typing</span> <span class="k">import</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Type</span>
+
+    <span class="kn">from</span> <span class="nn">zlogging.types</span> <span class="k">import</span> <span class="n">BaseType</span><span class="p">,</span> <span class="n">_SimpleType</span>
 
 
 <span class="k">def</span> <span class="nf">_deprecated</span><span class="p">(</span><span class="n">bro_type</span><span class="p">:</span> <span class="s1">&#39;_T&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;_T&#39;</span><span class="p">:</span>
     <span class="sd">&quot;&quot;&quot;Use of ``&#39;bro&#39;`` is deprecated, please use ``&#39;zeek&#39;`` instead.&quot;&quot;&quot;</span>
     <span class="n">name</span> <span class="o">=</span> <span class="n">bro_type</span><span class="o">.</span><span class="vm">__name__</span>
+    <span class="n">orig_init</span> <span class="o">=</span> <span class="n">bro_type</span><span class="o">.</span><span class="fm">__init__</span>
 
-    <span class="k">class</span> <span class="nc">DeprecatedType</span><span class="p">(</span><span class="n">bro_type</span><span class="p">):</span>  <span class="c1"># type: ignore[misc,valid-type]</span>
-        <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">:</span> <span class="s1">&#39;Any&#39;</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">:</span> <span class="s1">&#39;Any&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Use of &#39;bro_</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">&#39; is deprecated. &quot;</span>
-                          <span class="sa">f</span><span class="s2">&quot;Please use &#39;zeek_</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">&#39; instead.&quot;</span><span class="p">,</span> <span class="n">BroDeprecationWarning</span><span class="p">)</span>
-            <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
 
-    <span class="n">DeprecatedType</span><span class="o">.</span><span class="vm">__doc__</span> <span class="o">=</span> <span class="n">bro_type</span><span class="o">.</span><span class="vm">__doc__</span>
-    <span class="k">return</span> <span class="n">DeprecatedType</span>  <span class="c1"># type: ignore[return-value]</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">:</span> <span class="s1">&#39;BaseType&#39;</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">:</span> <span class="s1">&#39;Any&#39;</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">:</span> <span class="s1">&#39;Any&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;None&#39;</span><span class="p">:</span>
+        <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="n">f</span><span class="s2">&quot;Use of &#39;bro_</span><span class="si">{name}</span><span class="s2">&#39; is deprecated. &quot;</span>
+                        <span class="n">f</span><span class="s2">&quot;Please use &#39;zeek_</span><span class="si">{name}</span><span class="s2">&#39; instead.&quot;</span><span class="p">,</span> <span class="n">BroDeprecationWarning</span><span class="p">)</span>
+        <span class="n">orig_init</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+
+    <span class="n">bro_type</span><span class="o">.</span><span class="fm">__init__</span> <span class="o">=</span> <span class="fm">__init__</span>  <span class="c1"># type: ignore[assignment]</span>
+    <span class="k">return</span> <span class="n">bro_type</span>
 
 
 <span class="c1">###########################################################</span>
@@ -311,14 +314,14 @@
 
 <h3>Navigation</h3>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../../dumper.html">Dumpers</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../loader.html">Loaders</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../loader.html">Log Loaders</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../dumper.html">Log Dumpers</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../model.html">Data Model</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../types.html">Data Types</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../typing.html">Typing Annotations</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../_data.html">Data Classes</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../_exc.html">Exceptions &amp; Warnings</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../_aux.html">Internal Auxiliary Functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../_data.html">Data Classes</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../enum/index.html">Enum Namespace</a></li>
 </ul>
 
@@ -340,7 +343,7 @@
     </form>
     </div>
 </div>
-<script>$('#searchbox').show(0);</script>
+<script>document.getElementById('searchbox').style.display = "block"</script>
 
 
 

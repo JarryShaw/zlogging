@@ -1,8 +1,10 @@
 Enum Namespace
 ==============
 
+.. module:: zlogging.enum
+
 .. toctree::
-   :maxdepth: 3
+   :maxdepth: 2
 
    zeek
    Broker
@@ -33,7 +35,4 @@ Enum Namespace
    Weird
    ZeekygenExample
 
-.. automodule:: zlogging.enum
-   :members:
-   :undoc-members:
-   :show-inheritance:
+.. autofunction:: zlogging.enum.globals
