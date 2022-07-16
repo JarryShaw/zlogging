@@ -1,18 +1,22 @@
 Data Classes
 ============
 
+.. module:: zlogging._data
+
 Predefined Data Classes
 -----------------------
 
-.. automodule:: zlogging._data
+.. autoclass:: zlogging._data.ASCIIInfo
    :members:
-   :undoc-members:
    :show-inheritance:
 
-Abstract Base Data Classes
---------------------------
+.. autoclass:: zlogging._data.JSONInfo
+   :members:
+   :show-inheritance:
+
+Abstract Base Data Class
+------------------------
 
 .. autoclass:: zlogging._data.Info
    :members:
-   :undoc-members:
    :show-inheritance:
