@@ -40,21 +40,21 @@
 <span class="kn">import</span> <span class="nn">itertools</span>
 <span class="kn">import</span> <span class="nn">math</span>
 <span class="kn">import</span> <span class="nn">textwrap</span>
-<span class="kn">from</span> <span class="nn">typing</span> <span class="k">import</span> <span class="n">TYPE_CHECKING</span><span class="p">,</span> <span class="n">cast</span><span class="p">,</span> <span class="n">overload</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">TYPE_CHECKING</span><span class="p">,</span> <span class="n">cast</span><span class="p">,</span> <span class="n">overload</span>
 
-<span class="kn">from</span> <span class="nn">typing_inspect</span> <span class="k">import</span> <span class="n">get_args</span><span class="p">,</span> <span class="n">get_origin</span><span class="p">,</span> <span class="n">is_generic_type</span><span class="p">,</span> <span class="n">is_typevar</span>
+<span class="kn">from</span> <span class="nn">typing_inspect</span> <span class="kn">import</span> <span class="n">get_args</span><span class="p">,</span> <span class="n">get_origin</span><span class="p">,</span> <span class="n">is_generic_type</span><span class="p">,</span> <span class="n">is_typevar</span>
 
 <span class="k">if</span> <span class="n">TYPE_CHECKING</span><span class="p">:</span>
-    <span class="kn">from</span> <span class="nn">collections</span> <span class="k">import</span> <span class="n">OrderedDict</span>
-    <span class="kn">from</span> <span class="nn">decimal</span> <span class="k">import</span> <span class="n">Decimal</span>
-    <span class="kn">from</span> <span class="nn">io</span> <span class="k">import</span> <span class="n">BufferedReader</span> <span class="k">as</span> <span class="n">BinaryFile</span>
-    <span class="kn">from</span> <span class="nn">typing</span> <span class="k">import</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">Type</span><span class="p">,</span> <span class="n">TypeVar</span><span class="p">,</span> <span class="n">Union</span>
+    <span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">OrderedDict</span>
+    <span class="kn">from</span> <span class="nn">decimal</span> <span class="kn">import</span> <span class="n">Decimal</span>
+    <span class="kn">from</span> <span class="nn">io</span> <span class="kn">import</span> <span class="n">BufferedReader</span> <span class="k">as</span> <span class="n">BinaryFile</span>
+    <span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">Type</span><span class="p">,</span> <span class="n">TypeVar</span><span class="p">,</span> <span class="n">Union</span>
 
-    <span class="kn">from</span> <span class="nn">typing_extensions</span> <span class="k">import</span> <span class="n">Literal</span>
+    <span class="kn">from</span> <span class="nn">typing_extensions</span> <span class="kn">import</span> <span class="n">Literal</span>
 
-    <span class="kn">from</span> <span class="nn">zlogging._typing</span> <span class="k">import</span> <span class="n">ExpandedTyping</span>
-    <span class="kn">from</span> <span class="nn">zlogging.model</span> <span class="k">import</span> <span class="n">Model</span>
-    <span class="kn">from</span> <span class="nn">zlogging.types</span> <span class="k">import</span> <span class="n">_VariadicType</span>
+    <span class="kn">from</span> <span class="nn">zlogging._typing</span> <span class="kn">import</span> <span class="n">ExpandedTyping</span>
+    <span class="kn">from</span> <span class="nn">zlogging.model</span> <span class="kn">import</span> <span class="n">Model</span>
+    <span class="kn">from</span> <span class="nn">zlogging.types</span> <span class="kn">import</span> <span class="n">_VariadicType</span>
 
 <span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;readline&#39;</span><span class="p">,</span> <span class="s1">&#39;decimal_toascii&#39;</span><span class="p">,</span> <span class="s1">&#39;float_toascii&#39;</span><span class="p">,</span> <span class="s1">&#39;unicode_escape&#39;</span><span class="p">,</span> <span class="s1">&#39;expand_typing&#39;</span><span class="p">]</span>
 
@@ -297,7 +297,7 @@
 <span class="sd">        * ``record.two`` -&gt; ``vector[count]`` data type</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="kn">from</span> <span class="nn">zlogging.types</span> <span class="k">import</span> <span class="p">(</span><span class="n">BaseType</span><span class="p">,</span> <span class="n">_GenericType</span><span class="p">,</span>  <span class="c1"># pylint: disable=import-outside-toplevel</span>
+    <span class="kn">from</span> <span class="nn">zlogging.types</span> <span class="kn">import</span> <span class="p">(</span><span class="n">BaseType</span><span class="p">,</span> <span class="n">_GenericType</span><span class="p">,</span>  <span class="c1"># pylint: disable=import-outside-toplevel</span>
                                 <span class="n">_SimpleType</span><span class="p">,</span> <span class="n">_VariadicType</span><span class="p">)</span>
 
     <span class="k">if</span> <span class="n">exc</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
@@ -312,7 +312,7 @@
         <span class="sd">&quot;&quot;&quot;Field registry.&quot;&quot;&quot;</span>
         <span class="n">existed</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">existed</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">field</span><span class="o">.</span><span class="n">zeek_type</span> <span class="o">!=</span> <span class="n">existed</span><span class="o">.</span><span class="n">zeek_type</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="n">exc</span><span class="p">(</span><span class="n">f</span><span class="s1">&#39;inconsistent data type of </span><span class="si">{name!r}</span><span class="s1"> field: </span><span class="si">{field!r}</span><span class="s1"> and </span><span class="si">{existed!r}</span><span class="s1">&#39;</span><span class="p">)</span>  <span class="c1"># type: ignore[misc]</span>
+            <span class="k">raise</span> <span class="n">exc</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;inconsistent data type of </span><span class="si">{</span><span class="n">name</span><span class="si">!r}</span><span class="s1"> field: </span><span class="si">{</span><span class="n">field</span><span class="si">!r}</span><span class="s1"> and </span><span class="si">{</span><span class="n">existed</span><span class="si">!r}</span><span class="s1">&#39;</span><span class="p">)</span>  <span class="c1"># type: ignore[misc]</span>
         <span class="n">fields</span><span class="p">[</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="n">field</span>
 
     <span class="n">fields</span> <span class="o">=</span> <span class="n">collections</span><span class="o">.</span><span class="n">OrderedDict</span><span class="p">()</span>  <span class="c1"># type: OrderedDict[str, Union[_SimpleType, _GenericType]]</span>
@@ -322,7 +322,7 @@
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">attr</span><span class="p">,</span> <span class="n">BaseType</span><span class="p">):</span>
             <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">attr</span><span class="p">,</span> <span class="n">_VariadicType</span><span class="p">):</span>
                 <span class="k">for</span> <span class="n">elm_name</span><span class="p">,</span> <span class="n">elm_field</span> <span class="ow">in</span> <span class="n">attr</span><span class="o">.</span><span class="n">element_mapping</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
-                    <span class="n">register</span><span class="p">(</span><span class="n">f</span><span class="s1">&#39;</span><span class="si">{name}</span><span class="s1">.</span><span class="si">{elm_name}</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">elm_field</span><span class="p">)</span>
+                    <span class="n">register</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s1">.</span><span class="si">{</span><span class="n">elm_name</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">elm_field</span><span class="p">)</span>
                 <span class="n">record_fields</span><span class="p">[</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="n">attr</span>
             <span class="k">else</span><span class="p">:</span>
                 <span class="n">register</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">attr</span><span class="p">)</span>  <span class="c1"># type: ignore[arg-type]</span>
@@ -376,9 +376,9 @@
             <span class="k">continue</span>
 
         <span class="k">if</span> <span class="n">unset_field</span> <span class="o">!=</span> <span class="n">attr</span><span class="o">.</span><span class="n">unset_field</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="n">exc</span><span class="p">(</span><span class="n">f</span><span class="s2">&quot;inconsistent value of &#39;unset_field&#39;: </span><span class="si">{unset_field!r}</span><span class="s2"> and </span><span class="si">{attr.unset_field!r}</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="n">exc</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;inconsistent value of &#39;unset_field&#39;: </span><span class="si">{</span><span class="n">unset_field</span><span class="si">!r}</span><span class="s2"> and </span><span class="si">{</span><span class="n">attr</span><span class="o">.</span><span class="n">unset_field</span><span class="si">!r}</span><span class="s2">&quot;</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">empty_field</span> <span class="o">!=</span> <span class="n">attr</span><span class="o">.</span><span class="n">empty_field</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="n">exc</span><span class="p">(</span><span class="n">f</span><span class="s2">&quot;inconsistent value of &#39;empty_field&#39;: </span><span class="si">{empty_field!r}</span><span class="s2"> and </span><span class="si">{attr.empty_field!r}</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="n">exc</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;inconsistent value of &#39;empty_field&#39;: </span><span class="si">{</span><span class="n">empty_field</span><span class="si">!r}</span><span class="s2"> and </span><span class="si">{</span><span class="n">attr</span><span class="o">.</span><span class="n">empty_field</span><span class="si">!r}</span><span class="s2">&quot;</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">set_separator</span> <span class="o">!=</span> <span class="n">attr</span><span class="o">.</span><span class="n">set_separator</span><span class="p">:</span>
             <span class="k">raise</span> <span class="n">exc</span><span class="p">(</span><span class="s2">&quot;inconsistent value of &#39;set_separator&#39;: </span><span class="si">{set_separator!r}</span><span class="s2"> and </span><span class="si">{attr.set_separator!r}</span><span class="s2">&quot;</span><span class="p">)</span>
 

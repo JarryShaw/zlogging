@@ -37,10 +37,10 @@
 <span class="sd">&quot;&quot;&quot;Bro/Zeek typing annotations.&quot;&quot;&quot;</span>
 
 <span class="kn">import</span> <span class="nn">warnings</span>
-<span class="kn">from</span> <span class="nn">typing</span> <span class="k">import</span> <span class="n">TYPE_CHECKING</span><span class="p">,</span> <span class="n">Generic</span><span class="p">,</span> <span class="n">TypeVar</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">TYPE_CHECKING</span><span class="p">,</span> <span class="n">Generic</span><span class="p">,</span> <span class="n">TypeVar</span>
 
-<span class="kn">from</span> <span class="nn">zlogging._exc</span> <span class="k">import</span> <span class="n">BroDeprecationWarning</span>
-<span class="kn">from</span> <span class="nn">zlogging.types</span> <span class="k">import</span> <span class="p">(</span><span class="n">AddrType</span><span class="p">,</span> <span class="n">BoolType</span><span class="p">,</span> <span class="n">CountType</span><span class="p">,</span> <span class="n">DoubleType</span><span class="p">,</span> <span class="n">EnumType</span><span class="p">,</span> <span class="n">IntervalType</span><span class="p">,</span>
+<span class="kn">from</span> <span class="nn">zlogging._exc</span> <span class="kn">import</span> <span class="n">BroDeprecationWarning</span>
+<span class="kn">from</span> <span class="nn">zlogging.types</span> <span class="kn">import</span> <span class="p">(</span><span class="n">AddrType</span><span class="p">,</span> <span class="n">BoolType</span><span class="p">,</span> <span class="n">CountType</span><span class="p">,</span> <span class="n">DoubleType</span><span class="p">,</span> <span class="n">EnumType</span><span class="p">,</span> <span class="n">IntervalType</span><span class="p">,</span>
                             <span class="n">IntType</span><span class="p">,</span> <span class="n">PortType</span><span class="p">,</span> <span class="n">RecordType</span><span class="p">,</span> <span class="n">SetType</span><span class="p">,</span> <span class="n">StringType</span><span class="p">,</span> <span class="n">SubnetType</span><span class="p">,</span>
                             <span class="n">TimeType</span><span class="p">,</span> <span class="n">VectorType</span><span class="p">)</span>
 
@@ -58,9 +58,9 @@
 <span class="n">_S</span> <span class="o">=</span> <span class="n">TypeVar</span><span class="p">(</span><span class="s1">&#39;_S&#39;</span><span class="p">,</span> <span class="n">bound</span><span class="o">=</span><span class="s1">&#39;_SimpleType&#39;</span><span class="p">)</span>
 
 <span class="k">if</span> <span class="n">TYPE_CHECKING</span><span class="p">:</span>
-    <span class="kn">from</span> <span class="nn">typing</span> <span class="k">import</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Type</span>
+    <span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Type</span>
 
-    <span class="kn">from</span> <span class="nn">zlogging.types</span> <span class="k">import</span> <span class="n">BaseType</span><span class="p">,</span> <span class="n">_SimpleType</span>
+    <span class="kn">from</span> <span class="nn">zlogging.types</span> <span class="kn">import</span> <span class="n">BaseType</span><span class="p">,</span> <span class="n">_SimpleType</span>
 
 
 <span class="k">def</span> <span class="nf">_deprecated</span><span class="p">(</span><span class="n">bro_type</span><span class="p">:</span> <span class="s1">&#39;_T&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;_T&#39;</span><span class="p">:</span>
@@ -69,9 +69,9 @@
     <span class="n">orig_init</span> <span class="o">=</span> <span class="n">bro_type</span><span class="o">.</span><span class="fm">__init__</span>
 
 
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">:</span> <span class="s1">&#39;BaseType&#39;</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">:</span> <span class="s1">&#39;Any&#39;</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">:</span> <span class="s1">&#39;Any&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;None&#39;</span><span class="p">:</span>
-        <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="n">f</span><span class="s2">&quot;Use of &#39;bro_</span><span class="si">{name}</span><span class="s2">&#39; is deprecated. &quot;</span>
-                        <span class="n">f</span><span class="s2">&quot;Please use &#39;zeek_</span><span class="si">{name}</span><span class="s2">&#39; instead.&quot;</span><span class="p">,</span> <span class="n">BroDeprecationWarning</span><span class="p">)</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">:</span> <span class="s1">&#39;BaseType&#39;</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">:</span> <span class="s1">&#39;Any&#39;</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">:</span> <span class="s1">&#39;Any&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;None&#39;</span><span class="p">:</span>
+        <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Use of &#39;bro_</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">&#39; is deprecated. &quot;</span>
+                        <span class="sa">f</span><span class="s2">&quot;Please use &#39;zeek_</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">&#39; instead.&quot;</span><span class="p">,</span> <span class="n">BroDeprecationWarning</span><span class="p">)</span>
         <span class="n">orig_init</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
 
     <span class="n">bro_type</span><span class="o">.</span><span class="fm">__init__</span> <span class="o">=</span> <span class="fm">__init__</span>  <span class="c1"># type: ignore[assignment]</span>

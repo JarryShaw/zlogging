@@ -38,81 +38,81 @@
 
 <span class="kn">import</span> <span class="nn">builtins</span>
 <span class="kn">import</span> <span class="nn">warnings</span>
-<span class="kn">from</span> <span class="nn">typing</span> <span class="k">import</span> <span class="n">TYPE_CHECKING</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">TYPE_CHECKING</span>
 
-<span class="kn">from</span> <span class="nn">zlogging._exc</span> <span class="k">import</span> <span class="n">BroDeprecationWarning</span>
-<span class="kn">from</span> <span class="nn">zlogging.enum.Broker</span> <span class="k">import</span> <span class="n">BackendType</span> <span class="k">as</span> <span class="n">Broker_BackendType</span>
-<span class="kn">from</span> <span class="nn">zlogging.enum.Broker</span> <span class="k">import</span> <span class="n">DataType</span> <span class="k">as</span> <span class="n">Broker_DataType</span>
-<span class="kn">from</span> <span class="nn">zlogging.enum.Broker</span> <span class="k">import</span> <span class="n">ErrorCode</span> <span class="k">as</span> <span class="n">Broker_ErrorCode</span>
-<span class="kn">from</span> <span class="nn">zlogging.enum.Broker</span> <span class="k">import</span> <span class="n">PeerStatus</span> <span class="k">as</span> <span class="n">Broker_PeerStatus</span>
-<span class="kn">from</span> <span class="nn">zlogging.enum.Broker</span> <span class="k">import</span> <span class="n">QueryStatus</span> <span class="k">as</span> <span class="n">Broker_QueryStatus</span>
-<span class="kn">from</span> <span class="nn">zlogging.enum.Broker</span> <span class="k">import</span> <span class="n">Type</span> <span class="k">as</span> <span class="n">Broker_Type</span>
-<span class="kn">from</span> <span class="nn">zlogging.enum.Cluster</span> <span class="k">import</span> <span class="n">NodeType</span> <span class="k">as</span> <span class="n">Cluster_NodeType</span>
-<span class="kn">from</span> <span class="nn">zlogging.enum.DCE_RPC</span> <span class="k">import</span> <span class="n">IfID</span> <span class="k">as</span> <span class="n">DCE_RPC_IfID</span>
-<span class="kn">from</span> <span class="nn">zlogging.enum.DCE_RPC</span> <span class="k">import</span> <span class="n">PType</span> <span class="k">as</span> <span class="n">DCE_RPC_PType</span>
-<span class="kn">from</span> <span class="nn">zlogging.enum.HTTP</span> <span class="k">import</span> <span class="n">Tags</span> <span class="k">as</span> <span class="n">HTTP_Tags</span>
-<span class="kn">from</span> <span class="nn">zlogging.enum.Input</span> <span class="k">import</span> <span class="n">Event</span> <span class="k">as</span> <span class="n">Input_Event</span>
-<span class="kn">from</span> <span class="nn">zlogging.enum.Input</span> <span class="k">import</span> <span class="n">Mode</span> <span class="k">as</span> <span class="n">Input_Mode</span>
-<span class="kn">from</span> <span class="nn">zlogging.enum.Input</span> <span class="k">import</span> <span class="n">Reader</span> <span class="k">as</span> <span class="n">Input_Reader</span>
-<span class="kn">from</span> <span class="nn">zlogging.enum.Intel</span> <span class="k">import</span> <span class="n">Type</span> <span class="k">as</span> <span class="n">Intel_Type</span>
-<span class="kn">from</span> <span class="nn">zlogging.enum.Intel</span> <span class="k">import</span> <span class="n">Where</span> <span class="k">as</span> <span class="n">Intel_Where</span>
-<span class="kn">from</span> <span class="nn">zlogging.enum.JSON</span> <span class="k">import</span> <span class="n">TimestampFormat</span> <span class="k">as</span> <span class="n">JSON_TimestampFormat</span>
-<span class="kn">from</span> <span class="nn">zlogging.enum.Known</span> <span class="k">import</span> <span class="n">ModbusDeviceType</span> <span class="k">as</span> <span class="n">Known_ModbusDeviceType</span>
-<span class="kn">from</span> <span class="nn">zlogging.enum.LoadBalancing</span> <span class="k">import</span> <span class="n">Method</span> <span class="k">as</span> <span class="n">LoadBalancing_Method</span>
-<span class="kn">from</span> <span class="nn">zlogging.enum.Log</span> <span class="k">import</span> <span class="n">ID</span> <span class="k">as</span> <span class="n">Log_ID</span>
-<span class="kn">from</span> <span class="nn">zlogging.enum.Log</span> <span class="k">import</span> <span class="n">PrintLogType</span> <span class="k">as</span> <span class="n">Log_PrintLogType</span>
-<span class="kn">from</span> <span class="nn">zlogging.enum.Log</span> <span class="k">import</span> <span class="n">Writer</span> <span class="k">as</span> <span class="n">Log_Writer</span>
-<span class="kn">from</span> <span class="nn">zlogging.enum.MOUNT3</span> <span class="k">import</span> <span class="n">auth_flavor_t</span> <span class="k">as</span> <span class="n">MOUNT3_auth_flavor_t</span>
-<span class="kn">from</span> <span class="nn">zlogging.enum.MOUNT3</span> <span class="k">import</span> <span class="n">proc_t</span> <span class="k">as</span> <span class="n">MOUNT3_proc_t</span>
-<span class="kn">from</span> <span class="nn">zlogging.enum.MOUNT3</span> <span class="k">import</span> <span class="n">status_t</span> <span class="k">as</span> <span class="n">MOUNT3_status_t</span>
-<span class="kn">from</span> <span class="nn">zlogging.enum.MQTT</span> <span class="k">import</span> <span class="n">SubUnsub</span> <span class="k">as</span> <span class="n">MQTT_SubUnsub</span>
-<span class="kn">from</span> <span class="nn">zlogging.enum.NetControl</span> <span class="k">import</span> <span class="n">CatchReleaseActions</span> <span class="k">as</span> <span class="n">NetControl_CatchReleaseActions</span>
-<span class="kn">from</span> <span class="nn">zlogging.enum.NetControl</span> <span class="k">import</span> <span class="n">EntityType</span> <span class="k">as</span> <span class="n">NetControl_EntityType</span>
-<span class="kn">from</span> <span class="nn">zlogging.enum.NetControl</span> <span class="k">import</span> <span class="n">InfoCategory</span> <span class="k">as</span> <span class="n">NetControl_InfoCategory</span>
-<span class="kn">from</span> <span class="nn">zlogging.enum.NetControl</span> <span class="k">import</span> <span class="n">InfoState</span> <span class="k">as</span> <span class="n">NetControl_InfoState</span>
-<span class="kn">from</span> <span class="nn">zlogging.enum.NetControl</span> <span class="k">import</span> <span class="n">RuleType</span> <span class="k">as</span> <span class="n">NetControl_RuleType</span>
-<span class="kn">from</span> <span class="nn">zlogging.enum.NetControl</span> <span class="k">import</span> <span class="n">TargetType</span> <span class="k">as</span> <span class="n">NetControl_TargetType</span>
-<span class="kn">from</span> <span class="nn">zlogging.enum.NFS3</span> <span class="k">import</span> <span class="n">createmode_t</span> <span class="k">as</span> <span class="n">NFS3_createmode_t</span>
-<span class="kn">from</span> <span class="nn">zlogging.enum.NFS3</span> <span class="k">import</span> <span class="n">file_type_t</span> <span class="k">as</span> <span class="n">NFS3_file_type_t</span>
-<span class="kn">from</span> <span class="nn">zlogging.enum.NFS3</span> <span class="k">import</span> <span class="n">proc_t</span> <span class="k">as</span> <span class="n">NFS3_proc_t</span>
-<span class="kn">from</span> <span class="nn">zlogging.enum.NFS3</span> <span class="k">import</span> <span class="n">stable_how_t</span> <span class="k">as</span> <span class="n">NFS3_stable_how_t</span>
-<span class="kn">from</span> <span class="nn">zlogging.enum.NFS3</span> <span class="k">import</span> <span class="n">status_t</span> <span class="k">as</span> <span class="n">NFS3_status_t</span>
-<span class="kn">from</span> <span class="nn">zlogging.enum.NFS3</span> <span class="k">import</span> <span class="n">time_how_t</span> <span class="k">as</span> <span class="n">NFS3_time_how_t</span>
-<span class="kn">from</span> <span class="nn">zlogging.enum.Notice</span> <span class="k">import</span> <span class="n">Action</span> <span class="k">as</span> <span class="n">Notice_Action</span>
-<span class="kn">from</span> <span class="nn">zlogging.enum.Notice</span> <span class="k">import</span> <span class="n">Type</span> <span class="k">as</span> <span class="n">Notice_Type</span>
-<span class="kn">from</span> <span class="nn">zlogging.enum.OpenFlow</span> <span class="k">import</span> <span class="n">Plugin</span> <span class="k">as</span> <span class="n">OpenFlow_Plugin</span>
-<span class="kn">from</span> <span class="nn">zlogging.enum.OpenFlow</span> <span class="k">import</span> <span class="n">ofp_action_type</span> <span class="k">as</span> <span class="n">OpenFlow_ofp_action_type</span>
-<span class="kn">from</span> <span class="nn">zlogging.enum.OpenFlow</span> <span class="k">import</span> <span class="n">ofp_config_flags</span> <span class="k">as</span> <span class="n">OpenFlow_ofp_config_flags</span>
-<span class="kn">from</span> <span class="nn">zlogging.enum.OpenFlow</span> <span class="k">import</span> <span class="n">ofp_flow_mod_command</span> <span class="k">as</span> <span class="n">OpenFlow_ofp_flow_mod_command</span>
-<span class="kn">from</span> <span class="nn">zlogging.enum.ProtocolDetector</span> <span class="k">import</span> <span class="nb">dir</span> <span class="k">as</span> <span class="n">ProtocolDetector_dir</span>
-<span class="kn">from</span> <span class="nn">zlogging.enum.Reporter</span> <span class="k">import</span> <span class="n">Level</span> <span class="k">as</span> <span class="n">Reporter_Level</span>
-<span class="kn">from</span> <span class="nn">zlogging.enum.Signatures</span> <span class="k">import</span> <span class="n">Action</span> <span class="k">as</span> <span class="n">Signatures_Action</span>
-<span class="kn">from</span> <span class="nn">zlogging.enum.SMB</span> <span class="k">import</span> <span class="n">Action</span> <span class="k">as</span> <span class="n">SMB_Action</span>
-<span class="kn">from</span> <span class="nn">zlogging.enum.SOCKS</span> <span class="k">import</span> <span class="n">RequestType</span> <span class="k">as</span> <span class="n">SOCKS_RequestType</span>
-<span class="kn">from</span> <span class="nn">zlogging.enum.Software</span> <span class="k">import</span> <span class="n">Type</span> <span class="k">as</span> <span class="n">Software_Type</span>
-<span class="kn">from</span> <span class="nn">zlogging.enum.SSL</span> <span class="k">import</span> <span class="n">SctSource</span> <span class="k">as</span> <span class="n">SSL_SctSource</span>
-<span class="kn">from</span> <span class="nn">zlogging.enum.SumStats</span> <span class="k">import</span> <span class="n">Calculation</span> <span class="k">as</span> <span class="n">SumStats_Calculation</span>
-<span class="kn">from</span> <span class="nn">zlogging.enum.Supervisor</span> <span class="k">import</span> <span class="n">ClusterRole</span> <span class="k">as</span> <span class="n">Supervisor_ClusterRole</span>
-<span class="kn">from</span> <span class="nn">zlogging.enum.Tunnel</span> <span class="k">import</span> <span class="n">Action</span> <span class="k">as</span> <span class="n">Tunnel_Action</span>
-<span class="kn">from</span> <span class="nn">zlogging.enum.Tunnel</span> <span class="k">import</span> <span class="n">Type</span> <span class="k">as</span> <span class="n">Tunnel_Type</span>
-<span class="kn">from</span> <span class="nn">zlogging.enum.Weird</span> <span class="k">import</span> <span class="n">Action</span> <span class="k">as</span> <span class="n">Weird_Action</span>
-<span class="kn">from</span> <span class="nn">zlogging.enum.zeek</span> <span class="k">import</span> <span class="n">Direction</span> <span class="k">as</span> <span class="n">zeek_Direction</span>
-<span class="kn">from</span> <span class="nn">zlogging.enum.zeek</span> <span class="k">import</span> <span class="n">Host</span> <span class="k">as</span> <span class="n">zeek_Host</span>
-<span class="kn">from</span> <span class="nn">zlogging.enum.zeek</span> <span class="k">import</span> <span class="n">IPAddrAnonymization</span> <span class="k">as</span> <span class="n">zeek_IPAddrAnonymization</span>
-<span class="kn">from</span> <span class="nn">zlogging.enum.zeek</span> <span class="k">import</span> <span class="n">IPAddrAnonymizationClass</span> <span class="k">as</span> <span class="n">zeek_IPAddrAnonymizationClass</span>
-<span class="kn">from</span> <span class="nn">zlogging.enum.zeek</span> <span class="k">import</span> <span class="n">PcapFilterID</span> <span class="k">as</span> <span class="n">zeek_PcapFilterID</span>
-<span class="kn">from</span> <span class="nn">zlogging.enum.zeek</span> <span class="k">import</span> <span class="n">TableChange</span> <span class="k">as</span> <span class="n">zeek_TableChange</span>
-<span class="kn">from</span> <span class="nn">zlogging.enum.zeek</span> <span class="k">import</span> <span class="n">layer3_proto</span> <span class="k">as</span> <span class="n">zeek_layer3_proto</span>
-<span class="kn">from</span> <span class="nn">zlogging.enum.zeek</span> <span class="k">import</span> <span class="n">link_encap</span> <span class="k">as</span> <span class="n">zeek_link_encap</span>
-<span class="kn">from</span> <span class="nn">zlogging.enum.zeek</span> <span class="k">import</span> <span class="n">pkt_profile_modes</span> <span class="k">as</span> <span class="n">zeek_pkt_profile_modes</span>
-<span class="kn">from</span> <span class="nn">zlogging.enum.zeek</span> <span class="k">import</span> <span class="n">rpc_status</span> <span class="k">as</span> <span class="n">zeek_rpc_status</span>
-<span class="kn">from</span> <span class="nn">zlogging.enum.zeek</span> <span class="k">import</span> <span class="n">transport_proto</span> <span class="k">as</span> <span class="n">zeek_transport_proto</span>
-<span class="kn">from</span> <span class="nn">zlogging.enum.ZeekygenExample</span> <span class="k">import</span> <span class="n">SimpleEnum</span> <span class="k">as</span> <span class="n">ZeekygenExample_SimpleEnum</span>
+<span class="kn">from</span> <span class="nn">zlogging._exc</span> <span class="kn">import</span> <span class="n">BroDeprecationWarning</span>
+<span class="kn">from</span> <span class="nn">zlogging.enum.Broker</span> <span class="kn">import</span> <span class="n">BackendType</span> <span class="k">as</span> <span class="n">Broker_BackendType</span>
+<span class="kn">from</span> <span class="nn">zlogging.enum.Broker</span> <span class="kn">import</span> <span class="n">DataType</span> <span class="k">as</span> <span class="n">Broker_DataType</span>
+<span class="kn">from</span> <span class="nn">zlogging.enum.Broker</span> <span class="kn">import</span> <span class="n">ErrorCode</span> <span class="k">as</span> <span class="n">Broker_ErrorCode</span>
+<span class="kn">from</span> <span class="nn">zlogging.enum.Broker</span> <span class="kn">import</span> <span class="n">PeerStatus</span> <span class="k">as</span> <span class="n">Broker_PeerStatus</span>
+<span class="kn">from</span> <span class="nn">zlogging.enum.Broker</span> <span class="kn">import</span> <span class="n">QueryStatus</span> <span class="k">as</span> <span class="n">Broker_QueryStatus</span>
+<span class="kn">from</span> <span class="nn">zlogging.enum.Broker</span> <span class="kn">import</span> <span class="n">Type</span> <span class="k">as</span> <span class="n">Broker_Type</span>
+<span class="kn">from</span> <span class="nn">zlogging.enum.Cluster</span> <span class="kn">import</span> <span class="n">NodeType</span> <span class="k">as</span> <span class="n">Cluster_NodeType</span>
+<span class="kn">from</span> <span class="nn">zlogging.enum.DCE_RPC</span> <span class="kn">import</span> <span class="n">IfID</span> <span class="k">as</span> <span class="n">DCE_RPC_IfID</span>
+<span class="kn">from</span> <span class="nn">zlogging.enum.DCE_RPC</span> <span class="kn">import</span> <span class="n">PType</span> <span class="k">as</span> <span class="n">DCE_RPC_PType</span>
+<span class="kn">from</span> <span class="nn">zlogging.enum.HTTP</span> <span class="kn">import</span> <span class="n">Tags</span> <span class="k">as</span> <span class="n">HTTP_Tags</span>
+<span class="kn">from</span> <span class="nn">zlogging.enum.Input</span> <span class="kn">import</span> <span class="n">Event</span> <span class="k">as</span> <span class="n">Input_Event</span>
+<span class="kn">from</span> <span class="nn">zlogging.enum.Input</span> <span class="kn">import</span> <span class="n">Mode</span> <span class="k">as</span> <span class="n">Input_Mode</span>
+<span class="kn">from</span> <span class="nn">zlogging.enum.Input</span> <span class="kn">import</span> <span class="n">Reader</span> <span class="k">as</span> <span class="n">Input_Reader</span>
+<span class="kn">from</span> <span class="nn">zlogging.enum.Intel</span> <span class="kn">import</span> <span class="n">Type</span> <span class="k">as</span> <span class="n">Intel_Type</span>
+<span class="kn">from</span> <span class="nn">zlogging.enum.Intel</span> <span class="kn">import</span> <span class="n">Where</span> <span class="k">as</span> <span class="n">Intel_Where</span>
+<span class="kn">from</span> <span class="nn">zlogging.enum.JSON</span> <span class="kn">import</span> <span class="n">TimestampFormat</span> <span class="k">as</span> <span class="n">JSON_TimestampFormat</span>
+<span class="kn">from</span> <span class="nn">zlogging.enum.Known</span> <span class="kn">import</span> <span class="n">ModbusDeviceType</span> <span class="k">as</span> <span class="n">Known_ModbusDeviceType</span>
+<span class="kn">from</span> <span class="nn">zlogging.enum.LoadBalancing</span> <span class="kn">import</span> <span class="n">Method</span> <span class="k">as</span> <span class="n">LoadBalancing_Method</span>
+<span class="kn">from</span> <span class="nn">zlogging.enum.Log</span> <span class="kn">import</span> <span class="n">ID</span> <span class="k">as</span> <span class="n">Log_ID</span>
+<span class="kn">from</span> <span class="nn">zlogging.enum.Log</span> <span class="kn">import</span> <span class="n">PrintLogType</span> <span class="k">as</span> <span class="n">Log_PrintLogType</span>
+<span class="kn">from</span> <span class="nn">zlogging.enum.Log</span> <span class="kn">import</span> <span class="n">Writer</span> <span class="k">as</span> <span class="n">Log_Writer</span>
+<span class="kn">from</span> <span class="nn">zlogging.enum.MOUNT3</span> <span class="kn">import</span> <span class="n">auth_flavor_t</span> <span class="k">as</span> <span class="n">MOUNT3_auth_flavor_t</span>
+<span class="kn">from</span> <span class="nn">zlogging.enum.MOUNT3</span> <span class="kn">import</span> <span class="n">proc_t</span> <span class="k">as</span> <span class="n">MOUNT3_proc_t</span>
+<span class="kn">from</span> <span class="nn">zlogging.enum.MOUNT3</span> <span class="kn">import</span> <span class="n">status_t</span> <span class="k">as</span> <span class="n">MOUNT3_status_t</span>
+<span class="kn">from</span> <span class="nn">zlogging.enum.MQTT</span> <span class="kn">import</span> <span class="n">SubUnsub</span> <span class="k">as</span> <span class="n">MQTT_SubUnsub</span>
+<span class="kn">from</span> <span class="nn">zlogging.enum.NetControl</span> <span class="kn">import</span> <span class="n">CatchReleaseActions</span> <span class="k">as</span> <span class="n">NetControl_CatchReleaseActions</span>
+<span class="kn">from</span> <span class="nn">zlogging.enum.NetControl</span> <span class="kn">import</span> <span class="n">EntityType</span> <span class="k">as</span> <span class="n">NetControl_EntityType</span>
+<span class="kn">from</span> <span class="nn">zlogging.enum.NetControl</span> <span class="kn">import</span> <span class="n">InfoCategory</span> <span class="k">as</span> <span class="n">NetControl_InfoCategory</span>
+<span class="kn">from</span> <span class="nn">zlogging.enum.NetControl</span> <span class="kn">import</span> <span class="n">InfoState</span> <span class="k">as</span> <span class="n">NetControl_InfoState</span>
+<span class="kn">from</span> <span class="nn">zlogging.enum.NetControl</span> <span class="kn">import</span> <span class="n">RuleType</span> <span class="k">as</span> <span class="n">NetControl_RuleType</span>
+<span class="kn">from</span> <span class="nn">zlogging.enum.NetControl</span> <span class="kn">import</span> <span class="n">TargetType</span> <span class="k">as</span> <span class="n">NetControl_TargetType</span>
+<span class="kn">from</span> <span class="nn">zlogging.enum.NFS3</span> <span class="kn">import</span> <span class="n">createmode_t</span> <span class="k">as</span> <span class="n">NFS3_createmode_t</span>
+<span class="kn">from</span> <span class="nn">zlogging.enum.NFS3</span> <span class="kn">import</span> <span class="n">file_type_t</span> <span class="k">as</span> <span class="n">NFS3_file_type_t</span>
+<span class="kn">from</span> <span class="nn">zlogging.enum.NFS3</span> <span class="kn">import</span> <span class="n">proc_t</span> <span class="k">as</span> <span class="n">NFS3_proc_t</span>
+<span class="kn">from</span> <span class="nn">zlogging.enum.NFS3</span> <span class="kn">import</span> <span class="n">stable_how_t</span> <span class="k">as</span> <span class="n">NFS3_stable_how_t</span>
+<span class="kn">from</span> <span class="nn">zlogging.enum.NFS3</span> <span class="kn">import</span> <span class="n">status_t</span> <span class="k">as</span> <span class="n">NFS3_status_t</span>
+<span class="kn">from</span> <span class="nn">zlogging.enum.NFS3</span> <span class="kn">import</span> <span class="n">time_how_t</span> <span class="k">as</span> <span class="n">NFS3_time_how_t</span>
+<span class="kn">from</span> <span class="nn">zlogging.enum.Notice</span> <span class="kn">import</span> <span class="n">Action</span> <span class="k">as</span> <span class="n">Notice_Action</span>
+<span class="kn">from</span> <span class="nn">zlogging.enum.Notice</span> <span class="kn">import</span> <span class="n">Type</span> <span class="k">as</span> <span class="n">Notice_Type</span>
+<span class="kn">from</span> <span class="nn">zlogging.enum.OpenFlow</span> <span class="kn">import</span> <span class="n">Plugin</span> <span class="k">as</span> <span class="n">OpenFlow_Plugin</span>
+<span class="kn">from</span> <span class="nn">zlogging.enum.OpenFlow</span> <span class="kn">import</span> <span class="n">ofp_action_type</span> <span class="k">as</span> <span class="n">OpenFlow_ofp_action_type</span>
+<span class="kn">from</span> <span class="nn">zlogging.enum.OpenFlow</span> <span class="kn">import</span> <span class="n">ofp_config_flags</span> <span class="k">as</span> <span class="n">OpenFlow_ofp_config_flags</span>
+<span class="kn">from</span> <span class="nn">zlogging.enum.OpenFlow</span> <span class="kn">import</span> <span class="n">ofp_flow_mod_command</span> <span class="k">as</span> <span class="n">OpenFlow_ofp_flow_mod_command</span>
+<span class="kn">from</span> <span class="nn">zlogging.enum.ProtocolDetector</span> <span class="kn">import</span> <span class="nb">dir</span> <span class="k">as</span> <span class="n">ProtocolDetector_dir</span>
+<span class="kn">from</span> <span class="nn">zlogging.enum.Reporter</span> <span class="kn">import</span> <span class="n">Level</span> <span class="k">as</span> <span class="n">Reporter_Level</span>
+<span class="kn">from</span> <span class="nn">zlogging.enum.Signatures</span> <span class="kn">import</span> <span class="n">Action</span> <span class="k">as</span> <span class="n">Signatures_Action</span>
+<span class="kn">from</span> <span class="nn">zlogging.enum.SMB</span> <span class="kn">import</span> <span class="n">Action</span> <span class="k">as</span> <span class="n">SMB_Action</span>
+<span class="kn">from</span> <span class="nn">zlogging.enum.SOCKS</span> <span class="kn">import</span> <span class="n">RequestType</span> <span class="k">as</span> <span class="n">SOCKS_RequestType</span>
+<span class="kn">from</span> <span class="nn">zlogging.enum.Software</span> <span class="kn">import</span> <span class="n">Type</span> <span class="k">as</span> <span class="n">Software_Type</span>
+<span class="kn">from</span> <span class="nn">zlogging.enum.SSL</span> <span class="kn">import</span> <span class="n">SctSource</span> <span class="k">as</span> <span class="n">SSL_SctSource</span>
+<span class="kn">from</span> <span class="nn">zlogging.enum.SumStats</span> <span class="kn">import</span> <span class="n">Calculation</span> <span class="k">as</span> <span class="n">SumStats_Calculation</span>
+<span class="kn">from</span> <span class="nn">zlogging.enum.Supervisor</span> <span class="kn">import</span> <span class="n">ClusterRole</span> <span class="k">as</span> <span class="n">Supervisor_ClusterRole</span>
+<span class="kn">from</span> <span class="nn">zlogging.enum.Tunnel</span> <span class="kn">import</span> <span class="n">Action</span> <span class="k">as</span> <span class="n">Tunnel_Action</span>
+<span class="kn">from</span> <span class="nn">zlogging.enum.Tunnel</span> <span class="kn">import</span> <span class="n">Type</span> <span class="k">as</span> <span class="n">Tunnel_Type</span>
+<span class="kn">from</span> <span class="nn">zlogging.enum.Weird</span> <span class="kn">import</span> <span class="n">Action</span> <span class="k">as</span> <span class="n">Weird_Action</span>
+<span class="kn">from</span> <span class="nn">zlogging.enum.zeek</span> <span class="kn">import</span> <span class="n">Direction</span> <span class="k">as</span> <span class="n">zeek_Direction</span>
+<span class="kn">from</span> <span class="nn">zlogging.enum.zeek</span> <span class="kn">import</span> <span class="n">Host</span> <span class="k">as</span> <span class="n">zeek_Host</span>
+<span class="kn">from</span> <span class="nn">zlogging.enum.zeek</span> <span class="kn">import</span> <span class="n">IPAddrAnonymization</span> <span class="k">as</span> <span class="n">zeek_IPAddrAnonymization</span>
+<span class="kn">from</span> <span class="nn">zlogging.enum.zeek</span> <span class="kn">import</span> <span class="n">IPAddrAnonymizationClass</span> <span class="k">as</span> <span class="n">zeek_IPAddrAnonymizationClass</span>
+<span class="kn">from</span> <span class="nn">zlogging.enum.zeek</span> <span class="kn">import</span> <span class="n">PcapFilterID</span> <span class="k">as</span> <span class="n">zeek_PcapFilterID</span>
+<span class="kn">from</span> <span class="nn">zlogging.enum.zeek</span> <span class="kn">import</span> <span class="n">TableChange</span> <span class="k">as</span> <span class="n">zeek_TableChange</span>
+<span class="kn">from</span> <span class="nn">zlogging.enum.zeek</span> <span class="kn">import</span> <span class="n">layer3_proto</span> <span class="k">as</span> <span class="n">zeek_layer3_proto</span>
+<span class="kn">from</span> <span class="nn">zlogging.enum.zeek</span> <span class="kn">import</span> <span class="n">link_encap</span> <span class="k">as</span> <span class="n">zeek_link_encap</span>
+<span class="kn">from</span> <span class="nn">zlogging.enum.zeek</span> <span class="kn">import</span> <span class="n">pkt_profile_modes</span> <span class="k">as</span> <span class="n">zeek_pkt_profile_modes</span>
+<span class="kn">from</span> <span class="nn">zlogging.enum.zeek</span> <span class="kn">import</span> <span class="n">rpc_status</span> <span class="k">as</span> <span class="n">zeek_rpc_status</span>
+<span class="kn">from</span> <span class="nn">zlogging.enum.zeek</span> <span class="kn">import</span> <span class="n">transport_proto</span> <span class="k">as</span> <span class="n">zeek_transport_proto</span>
+<span class="kn">from</span> <span class="nn">zlogging.enum.ZeekygenExample</span> <span class="kn">import</span> <span class="n">SimpleEnum</span> <span class="k">as</span> <span class="n">ZeekygenExample_SimpleEnum</span>
 
 <span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;globals&#39;</span><span class="p">]</span>
 
 <span class="k">if</span> <span class="n">TYPE_CHECKING</span><span class="p">:</span>
-    <span class="kn">from</span> <span class="nn">enum</span> <span class="k">import</span> <span class="n">Enum</span>
+    <span class="kn">from</span> <span class="nn">enum</span> <span class="kn">import</span> <span class="n">Enum</span>
 
 <span class="n">_enum_Barnyard2</span> <span class="o">=</span> <span class="p">{</span>
     <span class="s1">&#39;Barnyard2_LOG&#39;</span><span class="p">:</span> <span class="n">Log_ID</span><span class="o">.</span><span class="n">Barnyard2_LOG</span><span class="p">,</span>
