@@ -84,7 +84,7 @@
 
 
 <div class="viewcode-block" id="BaseType"><a class="viewcode-back" href="../../types.html#zlogging.types.BaseType">[docs]</a><span class="k">class</span> <span class="nc">BaseType</span><span class="p">(</span><span class="n">metaclass</span><span class="o">=</span><span class="n">abc</span><span class="o">.</span><span class="n">ABCMeta</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Base Bro/Zeek data type.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Base Bro/Zeek data type.</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        empty_field: Placeholder for empty field.</span>
@@ -107,16 +107,16 @@
     <span class="nd">@property</span>
     <span class="nd">@abc</span><span class="o">.</span><span class="n">abstractmethod</span>
     <span class="k">def</span> <span class="nf">python_type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;Any&#39;</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;Corresponding Python type annotation.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Corresponding Python type annotation.&quot;&quot;&quot;</span>
 
     <span class="nd">@property</span>
     <span class="nd">@abc</span><span class="o">.</span><span class="n">abstractmethod</span>
     <span class="k">def</span> <span class="nf">zeek_type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;str&#39;</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;Corresponding Zeek type name.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Corresponding Zeek type name.&quot;&quot;&quot;</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">bro_type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;str&#39;</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;Corresponding Bro type name.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Corresponding Bro type name.&quot;&quot;&quot;</span>
         <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s2">&quot;Use of &#39;bro_type&#39; is deprecated. &quot;</span>
                       <span class="s2">&quot;Please use &#39;zeek_type&#39; instead.&quot;</span><span class="p">,</span> <span class="n">BroDeprecationWarning</span><span class="p">)</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">zeek_type</span>
@@ -157,7 +157,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">_name</span> <span class="o">=</span> <span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span>
 
 <div class="viewcode-block" id="BaseType.__call__"><a class="viewcode-back" href="../../types.html#zlogging.types.BaseType.__call__">[docs]</a>    <span class="k">def</span> <span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="s1">&#39;Any&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;Any&#39;</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;Parse ``data`` from string.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Parse ``data`` from string.</span>
 
 <span class="sd">        This is a proxy method which calls to :meth:`~zlogging.types.BaseType.parse`</span>
 <span class="sd">        of the type implementation.</span>
@@ -168,7 +168,7 @@
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="n">data</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="BaseType.__str__"><a class="viewcode-back" href="../../types.html#zlogging.types.BaseType.__str__">[docs]</a>    <span class="k">def</span> <span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;str&#39;</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;Returns the corresponding Zeek type name.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Returns the corresponding Zeek type name.&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">zeek_type</span></div>
 
     <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;str&#39;</span><span class="p">:</span>
@@ -177,19 +177,19 @@
 
 <div class="viewcode-block" id="BaseType.parse"><a class="viewcode-back" href="../../types.html#zlogging.types.BaseType.parse">[docs]</a>    <span class="nd">@abc</span><span class="o">.</span><span class="n">abstractmethod</span>
     <span class="k">def</span> <span class="nf">parse</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="s1">&#39;Any&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;Any&#39;</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;Parse ``data`` from string.&quot;&quot;&quot;</span></div>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Parse ``data`` from string.&quot;&quot;&quot;</span></div>
 
 <div class="viewcode-block" id="BaseType.tojson"><a class="viewcode-back" href="../../types.html#zlogging.types.BaseType.tojson">[docs]</a>    <span class="nd">@abc</span><span class="o">.</span><span class="n">abstractmethod</span>
     <span class="k">def</span> <span class="nf">tojson</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="s1">&#39;Any&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;Any&#39;</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;Serialize ``data`` as JSON log format.&quot;&quot;&quot;</span></div>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Serialize ``data`` as JSON log format.&quot;&quot;&quot;</span></div>
 
 <div class="viewcode-block" id="BaseType.toascii"><a class="viewcode-back" href="../../types.html#zlogging.types.BaseType.toascii">[docs]</a>    <span class="nd">@abc</span><span class="o">.</span><span class="n">abstractmethod</span>
     <span class="k">def</span> <span class="nf">toascii</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="s1">&#39;Any&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;str&#39;</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;Serialize ``data`` as ASCII log format.&quot;&quot;&quot;</span></div></div>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Serialize ``data`` as ASCII log format.&quot;&quot;&quot;</span></div></div>
 
 
 <div class="viewcode-block" id="_SimpleType"><a class="viewcode-back" href="../../types.html#zlogging.types._SimpleType">[docs]</a><span class="k">class</span> <span class="nc">_SimpleType</span><span class="p">(</span><span class="n">BaseType</span><span class="p">):</span>  <span class="c1"># pylint: disable=abstract-method</span>
-    <span class="sd">&quot;&quot;&quot;Simple data type.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Simple data type.</span>
 
 <span class="sd">    In Bro/Zeek script language, such simple type includes ``bool``, ``count``,</span>
 <span class="sd">    ``int``, ``double``, ``time``, ``interval``, ``string``, ``addr``,</span>
@@ -202,7 +202,7 @@
 
 
 <div class="viewcode-block" id="AnyType"><a class="viewcode-back" href="../../types.html#zlogging.types.AnyType">[docs]</a><span class="k">class</span> <span class="nc">AnyType</span><span class="p">(</span><span class="n">_SimpleType</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Bro/Zeek ``any`` data type.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Bro/Zeek ``any`` data type.</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        empty_field: Placeholder for empty field.</span>
@@ -224,12 +224,12 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">python_type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;Any&#39;</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;Corresponding Python type annotation.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Corresponding Python type annotation.&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="n">Any</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">zeek_type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;Literal[&quot;any&quot;]&#39;</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;Corresponding Zeek type name.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Corresponding Zeek type name.&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="s1">&#39;any&#39;</span>
 
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>   <span class="c1"># pylint: disable=unused-argument,keyword-arg-before-vararg</span>
@@ -243,7 +243,7 @@
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">empty_field</span><span class="o">=</span><span class="n">empty_field</span><span class="p">,</span> <span class="n">unset_field</span><span class="o">=</span><span class="n">unset_field</span><span class="p">,</span> <span class="n">set_separator</span><span class="o">=</span><span class="n">set_separator</span><span class="p">)</span>
 
 <div class="viewcode-block" id="AnyType.parse"><a class="viewcode-back" href="../../types.html#zlogging.types.AnyType.parse">[docs]</a>    <span class="k">def</span> <span class="nf">parse</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="s1">&#39;_T&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;Optional[_T]&#39;</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;Parse ``data`` from string.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Parse ``data`` from string.</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            data: raw data</span>
@@ -259,7 +259,7 @@
         <span class="k">return</span> <span class="n">data</span></div>
 
 <div class="viewcode-block" id="AnyType.tojson"><a class="viewcode-back" href="../../types.html#zlogging.types.AnyType.tojson">[docs]</a>    <span class="k">def</span> <span class="nf">tojson</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="s1">&#39;Any&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;Any&#39;</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;Serialize ``data`` as JSON log format.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Serialize ``data`` as JSON log format.</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            data: raw data</span>
@@ -284,7 +284,7 @@
         <span class="k">return</span> <span class="n">data</span></div>
 
 <div class="viewcode-block" id="AnyType.toascii"><a class="viewcode-back" href="../../types.html#zlogging.types.AnyType.toascii">[docs]</a>    <span class="k">def</span> <span class="nf">toascii</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="s1">&#39;Any&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;str&#39;</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;Serialize ``data`` as ASCII log format.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Serialize ``data`` as ASCII log format.</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            data: raw data</span>
@@ -299,7 +299,7 @@
 
 
 <div class="viewcode-block" id="BoolType"><a class="viewcode-back" href="../../types.html#zlogging.types.BoolType">[docs]</a><span class="k">class</span> <span class="nc">BoolType</span><span class="p">(</span><span class="n">_SimpleType</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Bro/Zeek ``bool`` data type.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Bro/Zeek ``bool`` data type.</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        empty_field: Placeholder for empty field.</span>
@@ -312,12 +312,12 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">python_type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span><span class="o">-&gt;</span> <span class="s1">&#39;Type[bool]&#39;</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;Corresponding Python type annotation.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Corresponding Python type annotation.&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="nb">bool</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">zeek_type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;Literal[&quot;bool&quot;]&#39;</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;Corresponding Zeek type name.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Corresponding Zeek type name.&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="s1">&#39;bool&#39;</span>
 
     <span class="nd">@overload</span>
@@ -330,7 +330,7 @@
     <span class="k">def</span> <span class="nf">parse</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="s1">&#39;AnyStr&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;Optional[bool]&#39;</span><span class="p">:</span> <span class="o">...</span>
 
 <div class="viewcode-block" id="BoolType.parse"><a class="viewcode-back" href="../../types.html#zlogging.types.BoolType.parse">[docs]</a>    <span class="k">def</span> <span class="nf">parse</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="s1">&#39;Union[AnyStr, bool]&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;Optional[bool]&#39;</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;Parse ``data`` from string.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Parse ``data`` from string.</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            data: raw data</span>
@@ -367,7 +367,7 @@
     <span class="k">def</span> <span class="nf">tojson</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="s1">&#39;None&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;None&#39;</span><span class="p">:</span> <span class="o">...</span>
 
 <div class="viewcode-block" id="BoolType.tojson"><a class="viewcode-back" href="../../types.html#zlogging.types.BoolType.tojson">[docs]</a>    <span class="k">def</span> <span class="nf">tojson</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="s1">&#39;Optional[bool]&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;Optional[bool]&#39;</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;Serialize ``data`` as JSON log format.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Serialize ``data`` as JSON log format.</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            data: raw data</span>
@@ -388,7 +388,7 @@
     <span class="k">def</span> <span class="nf">toascii</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="s1">&#39;None&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;str&#39;</span><span class="p">:</span> <span class="o">...</span>
 
 <div class="viewcode-block" id="BoolType.toascii"><a class="viewcode-back" href="../../types.html#zlogging.types.BoolType.toascii">[docs]</a>    <span class="k">def</span> <span class="nf">toascii</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="s1">&#39;Optional[bool]&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;str&#39;</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;Serialize ``data`` as ASCII log format.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Serialize ``data`` as ASCII log format.</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            data: raw data</span>
@@ -403,7 +403,7 @@
 
 
 <div class="viewcode-block" id="CountType"><a class="viewcode-back" href="../../types.html#zlogging.types.CountType">[docs]</a><span class="k">class</span> <span class="nc">CountType</span><span class="p">(</span><span class="n">_SimpleType</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Bro/Zeek ``count`` data type.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Bro/Zeek ``count`` data type.</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        empty_field: Placeholder for empty field.</span>
@@ -416,12 +416,12 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">python_type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;Type[uint64]&#39;</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;Corresponding Python type annotation.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Corresponding Python type annotation.&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">c_uint64</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">zeek_type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;Literal[&quot;count&quot;]&#39;</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;Corresponding Zeek type name.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Corresponding Zeek type name.&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="s1">&#39;count&#39;</span>
 
     <span class="nd">@overload</span>
@@ -434,7 +434,7 @@
     <span class="k">def</span> <span class="nf">parse</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="s1">&#39;uint64&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;uint64&#39;</span><span class="p">:</span> <span class="o">...</span>
 
 <div class="viewcode-block" id="CountType.parse"><a class="viewcode-back" href="../../types.html#zlogging.types.CountType.parse">[docs]</a>    <span class="k">def</span> <span class="nf">parse</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="s1">&#39;Union[AnyStr, int, uint64]&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;Optional[uint64]&#39;</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;Parse ``data`` from string.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Parse ``data`` from string.</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            data: raw data</span>
@@ -462,7 +462,7 @@
     <span class="k">def</span> <span class="nf">tojson</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="s1">&#39;None&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;None&#39;</span><span class="p">:</span> <span class="o">...</span>
 
 <div class="viewcode-block" id="CountType.tojson"><a class="viewcode-back" href="../../types.html#zlogging.types.CountType.tojson">[docs]</a>    <span class="k">def</span> <span class="nf">tojson</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="s1">&#39;Optional[uint64]&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;Optional[int]&#39;</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;Serialize ``data`` as JSON log format.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Serialize ``data`` as JSON log format.</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            data: raw data</span>
@@ -476,7 +476,7 @@
         <span class="k">return</span> <span class="n">data</span><span class="o">.</span><span class="n">value</span></div>
 
 <div class="viewcode-block" id="CountType.toascii"><a class="viewcode-back" href="../../types.html#zlogging.types.CountType.toascii">[docs]</a>    <span class="k">def</span> <span class="nf">toascii</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="s1">&#39;Optional[uint64]&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;str&#39;</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;Serialize ``data`` as ASCII log format.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Serialize ``data`` as ASCII log format.</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            data: raw data</span>
@@ -491,7 +491,7 @@
 
 
 <div class="viewcode-block" id="IntType"><a class="viewcode-back" href="../../types.html#zlogging.types.IntType">[docs]</a><span class="k">class</span> <span class="nc">IntType</span><span class="p">(</span><span class="n">_SimpleType</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Bro/Zeek ``int`` data type.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Bro/Zeek ``int`` data type.</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        empty_field: Placeholder for empty field.</span>
@@ -504,12 +504,12 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">python_type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;Type[int64]&#39;</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;Corresponding Python type annotation.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Corresponding Python type annotation.&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">c_int64</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">zeek_type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;Literal[&quot;int&quot;]&#39;</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;Corresponding Zeek type name.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Corresponding Zeek type name.&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="s1">&#39;int&#39;</span>
 
     <span class="nd">@overload</span>
@@ -522,7 +522,7 @@
     <span class="k">def</span> <span class="nf">parse</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="s1">&#39;int64&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;int64&#39;</span><span class="p">:</span> <span class="o">...</span>
 
 <div class="viewcode-block" id="IntType.parse"><a class="viewcode-back" href="../../types.html#zlogging.types.IntType.parse">[docs]</a>    <span class="k">def</span> <span class="nf">parse</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="s1">&#39;Union[AnyStr, int, int64]&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;Optional[int64]&#39;</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;Parse ``data`` from string.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Parse ``data`` from string.</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            data: raw data</span>
@@ -550,7 +550,7 @@
     <span class="k">def</span> <span class="nf">tojson</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="s1">&#39;None&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;None&#39;</span><span class="p">:</span> <span class="o">...</span>
 
 <div class="viewcode-block" id="IntType.tojson"><a class="viewcode-back" href="../../types.html#zlogging.types.IntType.tojson">[docs]</a>    <span class="k">def</span> <span class="nf">tojson</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="s1">&#39;Optional[int64]&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;Optional[int]&#39;</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;Serialize ``data`` as JSON log format.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Serialize ``data`` as JSON log format.</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            data: raw data</span>
@@ -564,7 +564,7 @@
         <span class="k">return</span> <span class="n">data</span><span class="o">.</span><span class="n">value</span></div>
 
 <div class="viewcode-block" id="IntType.toascii"><a class="viewcode-back" href="../../types.html#zlogging.types.IntType.toascii">[docs]</a>    <span class="k">def</span> <span class="nf">toascii</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="s1">&#39;Optional[int64]&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;str&#39;</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;Serialize ``data`` as ASCII log format.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Serialize ``data`` as ASCII log format.</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            data: raw data</span>
@@ -579,7 +579,7 @@
 
 
 <div class="viewcode-block" id="DoubleType"><a class="viewcode-back" href="../../types.html#zlogging.types.DoubleType">[docs]</a><span class="k">class</span> <span class="nc">DoubleType</span><span class="p">(</span><span class="n">_SimpleType</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Bro/Zeek ``double`` data type.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Bro/Zeek ``double`` data type.</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        empty_field: Placeholder for empty field.</span>
@@ -592,12 +592,12 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">python_type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;Type[Decimal]&#39;</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;Corresponding Python type annotation.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Corresponding Python type annotation.&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="n">decimal</span><span class="o">.</span><span class="n">Decimal</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">zeek_type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;Literal[&quot;double&quot;]&#39;</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;Corresponding Zeek type name.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Corresponding Zeek type name.&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="s1">&#39;double&#39;</span>
 
     <span class="nd">@overload</span>
@@ -610,7 +610,7 @@
     <span class="k">def</span> <span class="nf">parse</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="s1">&#39;Decimal&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;Decimal&#39;</span><span class="p">:</span> <span class="o">...</span>
 
 <div class="viewcode-block" id="DoubleType.parse"><a class="viewcode-back" href="../../types.html#zlogging.types.DoubleType.parse">[docs]</a>    <span class="k">def</span> <span class="nf">parse</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="s1">&#39;Union[AnyStr, int, float, Decimal]&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;Optional[Decimal]&#39;</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;Parse ``data`` from string.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Parse ``data`` from string.</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            data: raw data</span>
@@ -643,7 +643,7 @@
     <span class="k">def</span> <span class="nf">tojson</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="s1">&#39;None&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;None&#39;</span><span class="p">:</span> <span class="o">...</span>
 
 <div class="viewcode-block" id="DoubleType.tojson"><a class="viewcode-back" href="../../types.html#zlogging.types.DoubleType.tojson">[docs]</a>    <span class="k">def</span> <span class="nf">tojson</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="s1">&#39;Optional[Decimal]&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;Optional[float]&#39;</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;Serialize ``data`` as JSON log format.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Serialize ``data`` as JSON log format.</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            data: raw data</span>
@@ -657,7 +657,7 @@
         <span class="k">return</span> <span class="nb">float</span><span class="p">(</span><span class="n">data</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="DoubleType.toascii"><a class="viewcode-back" href="../../types.html#zlogging.types.DoubleType.toascii">[docs]</a>    <span class="k">def</span> <span class="nf">toascii</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="s1">&#39;Optional[Decimal]&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;str&#39;</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;Serialize ``data`` as ASCII log format.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Serialize ``data`` as ASCII log format.</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            data: raw data</span>
@@ -672,7 +672,7 @@
 
 
 <div class="viewcode-block" id="TimeType"><a class="viewcode-back" href="../../types.html#zlogging.types.TimeType">[docs]</a><span class="k">class</span> <span class="nc">TimeType</span><span class="p">(</span><span class="n">_SimpleType</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Bro/Zeek ``time`` data type.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Bro/Zeek ``time`` data type.</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        empty_field: Placeholder for empty field.</span>
@@ -685,12 +685,12 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">python_type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;Type[DateTimeType]&#39;</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;Any: Corresponding Python type annotation.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Any: Corresponding Python type annotation.&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">zeek_type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;Literal[&quot;time&quot;]&#39;</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;str: Corresponding Zeek type name.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;str: Corresponding Zeek type name.&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="s1">&#39;time&#39;</span>
 
     <span class="nd">@overload</span>
@@ -703,7 +703,7 @@
     <span class="k">def</span> <span class="nf">parse</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="s1">&#39;DateTimeType&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;DateTimeType&#39;</span><span class="p">:</span> <span class="o">...</span>
 
 <div class="viewcode-block" id="TimeType.parse"><a class="viewcode-back" href="../../types.html#zlogging.types.TimeType.parse">[docs]</a>    <span class="k">def</span> <span class="nf">parse</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="s1">&#39;Union[AnyStr, float, DateTimeType]&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;Optional[DateTimeType]&#39;</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;Parse ``data`` from string.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Parse ``data`` from string.</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            data: raw data</span>
@@ -734,7 +734,7 @@
     <span class="k">def</span> <span class="nf">tojson</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="s1">&#39;None&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;None&#39;</span><span class="p">:</span> <span class="o">...</span>
 
 <div class="viewcode-block" id="TimeType.tojson"><a class="viewcode-back" href="../../types.html#zlogging.types.TimeType.tojson">[docs]</a>    <span class="k">def</span> <span class="nf">tojson</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="s1">&#39;Optional[DateTimeType]&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;Optional[float]&#39;</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;Serialize ``data`` as JSON log format.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Serialize ``data`` as JSON log format.</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            data: raw data</span>
@@ -748,7 +748,7 @@
         <span class="k">return</span> <span class="n">data</span><span class="o">.</span><span class="n">timestamp</span><span class="p">()</span></div>
 
 <div class="viewcode-block" id="TimeType.toascii"><a class="viewcode-back" href="../../types.html#zlogging.types.TimeType.toascii">[docs]</a>    <span class="k">def</span> <span class="nf">toascii</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="s1">&#39;Optional[DateTimeType]&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;str&#39;</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;Serialize ``data`` as ASCII log format.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Serialize ``data`` as ASCII log format.</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            data: raw data</span>
@@ -763,7 +763,7 @@
 
 
 <div class="viewcode-block" id="IntervalType"><a class="viewcode-back" href="../../types.html#zlogging.types.IntervalType">[docs]</a><span class="k">class</span> <span class="nc">IntervalType</span><span class="p">(</span><span class="n">_SimpleType</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Bro/Zeek ``interval`` data type.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Bro/Zeek ``interval`` data type.</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        empty_field: Placeholder for empty field.</span>
@@ -781,12 +781,12 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">python_type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;Type[TimeDeltaType]&#39;</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;Any: Corresponding Python type annotation.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Any: Corresponding Python type annotation.&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="n">datetime</span><span class="o">.</span><span class="n">timedelta</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">zeek_type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;Literal[&quot;interval&quot;]&#39;</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;str: Corresponding Zeek type name.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;str: Corresponding Zeek type name.&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="s1">&#39;interval&#39;</span>
 
     <span class="nd">@overload</span>
@@ -799,7 +799,7 @@
     <span class="k">def</span> <span class="nf">parse</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="s1">&#39;TimeDeltaType&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;TimeDeltaType&#39;</span><span class="p">:</span> <span class="o">...</span>
 
 <div class="viewcode-block" id="IntervalType.parse"><a class="viewcode-back" href="../../types.html#zlogging.types.IntervalType.parse">[docs]</a>    <span class="k">def</span> <span class="nf">parse</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="s1">&#39;Union[AnyStr, float, TimeDeltaType]&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;Optional[TimeDeltaType]&#39;</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;Parse ``data`` from string.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Parse ``data`` from string.</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            data: raw data</span>
@@ -835,7 +835,7 @@
     <span class="k">def</span> <span class="nf">tojson</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="s1">&#39;None&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;None&#39;</span><span class="p">:</span> <span class="o">...</span>
 
 <div class="viewcode-block" id="IntervalType.tojson"><a class="viewcode-back" href="../../types.html#zlogging.types.IntervalType.tojson">[docs]</a>    <span class="k">def</span> <span class="nf">tojson</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="s1">&#39;Optional[TimeDeltaType]&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;Optional[float]&#39;</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;Serialize ``data`` as JSON log format.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Serialize ``data`` as JSON log format.</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            data: raw data</span>
@@ -849,7 +849,7 @@
         <span class="k">return</span> <span class="n">data</span><span class="o">.</span><span class="n">total_seconds</span><span class="p">()</span></div>
 
 <div class="viewcode-block" id="IntervalType.toascii"><a class="viewcode-back" href="../../types.html#zlogging.types.IntervalType.toascii">[docs]</a>    <span class="k">def</span> <span class="nf">toascii</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="s1">&#39;Optional[TimeDeltaType]&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;str&#39;</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;Serialize ``data`` as ASCII log format.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Serialize ``data`` as ASCII log format.</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            data: raw data</span>
@@ -864,7 +864,7 @@
 
 
 <div class="viewcode-block" id="StringType"><a class="viewcode-back" href="../../types.html#zlogging.types.StringType">[docs]</a><span class="k">class</span> <span class="nc">StringType</span><span class="p">(</span><span class="n">_SimpleType</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Bro/Zeek ``string`` data type.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Bro/Zeek ``string`` data type.</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        empty_field: Placeholder for empty field.</span>
@@ -877,16 +877,16 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">python_type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;Any&#39;</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;Any: Corresponding Python type annotation.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Any: Corresponding Python type annotation.&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="n">Union</span><span class="p">[</span><span class="nb">bytes</span><span class="p">,</span> <span class="nb">memoryview</span><span class="p">,</span> <span class="nb">bytearray</span><span class="p">]</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">zeek_type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;Literal[&quot;string&quot;]&#39;</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;str: Corresponding Zeek type name.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;str: Corresponding Zeek type name.&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="s1">&#39;string&#39;</span>
 
 <div class="viewcode-block" id="StringType.parse"><a class="viewcode-back" href="../../types.html#zlogging.types.StringType.parse">[docs]</a>    <span class="k">def</span> <span class="nf">parse</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="s1">&#39;Union[AnyStr, ByteString]&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;Optional[bytes]&#39;</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;Parse ``data`` from string.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Parse ``data`` from string.</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            data: raw data</span>
@@ -916,7 +916,7 @@
     <span class="k">def</span> <span class="nf">tojson</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="s1">&#39;None&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;None&#39;</span><span class="p">:</span> <span class="o">...</span>
 
 <div class="viewcode-block" id="StringType.tojson"><a class="viewcode-back" href="../../types.html#zlogging.types.StringType.tojson">[docs]</a>    <span class="k">def</span> <span class="nf">tojson</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="s1">&#39;Optional[ByteString]&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;Optional[str]&#39;</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;Serialize ``data`` as JSON log format.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Serialize ``data`` as JSON log format.</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            data: raw data</span>
@@ -935,7 +935,7 @@
         <span class="k">return</span> <span class="n">data</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s1">&#39;ascii&#39;</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="StringType.toascii"><a class="viewcode-back" href="../../types.html#zlogging.types.StringType.toascii">[docs]</a>    <span class="k">def</span> <span class="nf">toascii</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="s1">&#39;Optional[ByteString]&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;str&#39;</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;Serialize ``data`` as ASCII log format.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Serialize ``data`` as ASCII log format.</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            data: raw data</span>
@@ -958,7 +958,7 @@
 
 
 <div class="viewcode-block" id="AddrType"><a class="viewcode-back" href="../../types.html#zlogging.types.AddrType">[docs]</a><span class="k">class</span> <span class="nc">AddrType</span><span class="p">(</span><span class="n">_SimpleType</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Bro/Zeek ``addr`` data type.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Bro/Zeek ``addr`` data type.</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        empty_field: Placeholder for empty field.</span>
@@ -971,12 +971,12 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">python_type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;Any&#39;</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;Any: Corresponding Python type annotation.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Any: Corresponding Python type annotation.&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="n">Union</span><span class="p">[</span><span class="n">ipaddress</span><span class="o">.</span><span class="n">IPv4Address</span><span class="p">,</span> <span class="n">ipaddress</span><span class="o">.</span><span class="n">IPv6Address</span><span class="p">]</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">zeek_type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;str&#39;</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;str: Corresponding Zeek type name.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;str: Corresponding Zeek type name.&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="s1">&#39;addr&#39;</span>
 
     <span class="nd">@overload</span>
@@ -986,7 +986,7 @@
     <span class="k">def</span> <span class="nf">parse</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="s1">&#39;IPAddress&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;IPAddress&#39;</span><span class="p">:</span> <span class="o">...</span>
 
 <div class="viewcode-block" id="AddrType.parse"><a class="viewcode-back" href="../../types.html#zlogging.types.AddrType.parse">[docs]</a>    <span class="k">def</span> <span class="nf">parse</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="s1">&#39;Union[AnyStr, IPAddress]&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;Optional[IPAddress]&#39;</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;Parse ``data`` from string.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Parse ``data`` from string.</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            data: raw data</span>
@@ -1012,7 +1012,7 @@
     <span class="k">def</span> <span class="nf">tojson</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="s1">&#39;None&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;None&#39;</span><span class="p">:</span> <span class="o">...</span>
 
 <div class="viewcode-block" id="AddrType.tojson"><a class="viewcode-back" href="../../types.html#zlogging.types.AddrType.tojson">[docs]</a>    <span class="k">def</span> <span class="nf">tojson</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="s1">&#39;Optional[IPAddress]&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;Optional[str]&#39;</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;Serialize ``data`` as JSON log format.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Serialize ``data`` as JSON log format.</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            data: raw data</span>
@@ -1026,7 +1026,7 @@
         <span class="k">return</span> <span class="nb">str</span><span class="p">(</span><span class="n">data</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="AddrType.toascii"><a class="viewcode-back" href="../../types.html#zlogging.types.AddrType.toascii">[docs]</a>    <span class="k">def</span> <span class="nf">toascii</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="s1">&#39;Optional[IPAddress]&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;str&#39;</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;Serialize ``data`` as ASCII log format.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Serialize ``data`` as ASCII log format.</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            data: raw data</span>
@@ -1041,7 +1041,7 @@
 
 
 <div class="viewcode-block" id="PortType"><a class="viewcode-back" href="../../types.html#zlogging.types.PortType">[docs]</a><span class="k">class</span> <span class="nc">PortType</span><span class="p">(</span><span class="n">_SimpleType</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Bro/Zeek ``port`` data type.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Bro/Zeek ``port`` data type.</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        empty_field: Placeholder for empty field.</span>
@@ -1054,12 +1054,12 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">python_type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;Type[uint16]&#39;</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;Any: Corresponding Python type annotation.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Any: Corresponding Python type annotation.&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">c_uint16</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">zeek_type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;Literal[&quot;port&quot;]&#39;</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;str: Corresponding Zeek type name.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;str: Corresponding Zeek type name.&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="s1">&#39;port&#39;</span>
 
     <span class="nd">@overload</span>
@@ -1072,7 +1072,7 @@
     <span class="k">def</span> <span class="nf">parse</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="s1">&#39;uint16&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;uint16&#39;</span><span class="p">:</span> <span class="o">...</span>
 
 <div class="viewcode-block" id="PortType.parse"><a class="viewcode-back" href="../../types.html#zlogging.types.PortType.parse">[docs]</a>    <span class="k">def</span> <span class="nf">parse</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="s1">&#39;Union[AnyStr, int, uint16]&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;Optional[uint16]&#39;</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;Parse ``data`` from string.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Parse ``data`` from string.</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            data: raw data</span>
@@ -1100,7 +1100,7 @@
     <span class="k">def</span> <span class="nf">tojson</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="s1">&#39;None&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;None&#39;</span><span class="p">:</span> <span class="o">...</span>
 
 <div class="viewcode-block" id="PortType.tojson"><a class="viewcode-back" href="../../types.html#zlogging.types.PortType.tojson">[docs]</a>    <span class="k">def</span> <span class="nf">tojson</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="s1">&#39;Optional[uint16]&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;Optional[int]&#39;</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;Serialize ``data`` as JSON log format.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Serialize ``data`` as JSON log format.</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            data: raw data</span>
@@ -1114,7 +1114,7 @@
         <span class="k">return</span> <span class="n">data</span><span class="o">.</span><span class="n">value</span></div>
 
 <div class="viewcode-block" id="PortType.toascii"><a class="viewcode-back" href="../../types.html#zlogging.types.PortType.toascii">[docs]</a>    <span class="k">def</span> <span class="nf">toascii</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="s1">&#39;Optional[uint16]&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;str&#39;</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;Serialize ``data`` as ASCII log format.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Serialize ``data`` as ASCII log format.</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            data: raw data</span>
@@ -1129,7 +1129,7 @@
 
 
 <div class="viewcode-block" id="SubnetType"><a class="viewcode-back" href="../../types.html#zlogging.types.SubnetType">[docs]</a><span class="k">class</span> <span class="nc">SubnetType</span><span class="p">(</span><span class="n">_SimpleType</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Bro/Zeek ``subnet`` data type.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Bro/Zeek ``subnet`` data type.</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        empty_field: Placeholder for empty field.</span>
@@ -1142,12 +1142,12 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">python_type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;Any&#39;</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;Any: Corresponding Python type annotation.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Any: Corresponding Python type annotation.&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="n">Union</span><span class="p">[</span><span class="n">ipaddress</span><span class="o">.</span><span class="n">IPv4Network</span><span class="p">,</span> <span class="n">ipaddress</span><span class="o">.</span><span class="n">IPv6Network</span><span class="p">]</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">zeek_type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;Literal[&quot;subnet&quot;]&#39;</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;str: Corresponding Zeek type name.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;str: Corresponding Zeek type name.&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="s1">&#39;subnet&#39;</span>
 
     <span class="nd">@overload</span>
@@ -1157,7 +1157,7 @@
     <span class="k">def</span> <span class="nf">parse</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="s1">&#39;IPNetwork&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;IPNetwork&#39;</span><span class="p">:</span> <span class="o">...</span>
 
 <div class="viewcode-block" id="SubnetType.parse"><a class="viewcode-back" href="../../types.html#zlogging.types.SubnetType.parse">[docs]</a>    <span class="k">def</span> <span class="nf">parse</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="s1">&#39;Union[AnyStr, IPNetwork]&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;Optional[IPNetwork]&#39;</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;Parse ``data`` from string.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Parse ``data`` from string.</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            data: raw data</span>
@@ -1183,7 +1183,7 @@
     <span class="k">def</span> <span class="nf">tojson</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="s1">&#39;None&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;None&#39;</span><span class="p">:</span> <span class="o">...</span>
 
 <div class="viewcode-block" id="SubnetType.tojson"><a class="viewcode-back" href="../../types.html#zlogging.types.SubnetType.tojson">[docs]</a>    <span class="k">def</span> <span class="nf">tojson</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="s1">&#39;Optional[IPNetwork]&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;Optional[str]&#39;</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;Serialize ``data`` as JSON log format.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Serialize ``data`` as JSON log format.</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            data: raw data</span>
@@ -1197,7 +1197,7 @@
         <span class="k">return</span> <span class="nb">str</span><span class="p">(</span><span class="n">data</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="SubnetType.toascii"><a class="viewcode-back" href="../../types.html#zlogging.types.SubnetType.toascii">[docs]</a>    <span class="k">def</span> <span class="nf">toascii</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="s1">&#39;Optional[IPNetwork]&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;str&#39;</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;Serialize ``data`` as ASCII log format.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Serialize ``data`` as ASCII log format.</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            data: raw data</span>
@@ -1212,7 +1212,7 @@
 
 
 <div class="viewcode-block" id="EnumType"><a class="viewcode-back" href="../../types.html#zlogging.types.EnumType">[docs]</a><span class="k">class</span> <span class="nc">EnumType</span><span class="p">(</span><span class="n">_SimpleType</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Bro/Zeek ``enum`` data type.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Bro/Zeek ``enum`` data type.</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        empty_field: Placeholder for empty field.</span>
@@ -1230,12 +1230,12 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">python_type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;Any&#39;</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;Any: Corresponding Python type annotation.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Any: Corresponding Python type annotation.&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="n">enum</span><span class="o">.</span><span class="n">Enum</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">zeek_type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;str&#39;</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;str: Corresponding Zeek type name.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;str: Corresponding Zeek type name.&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="s1">&#39;enum&#39;</span>
 
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>  <span class="c1"># pylint: disable=unused-argument,keyword-arg-before-vararg</span>
@@ -1265,7 +1265,7 @@
     <span class="k">def</span> <span class="nf">parse</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="s1">&#39;enum.Enum&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;enum.Enum&#39;</span><span class="p">:</span> <span class="o">...</span>
 
 <div class="viewcode-block" id="EnumType.parse"><a class="viewcode-back" href="../../types.html#zlogging.types.EnumType.parse">[docs]</a>    <span class="k">def</span> <span class="nf">parse</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="s1">&#39;Union[AnyStr, enum.Enum]&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;Optional[enum.Enum]&#39;</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;Parse ``data`` from string.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Parse ``data`` from string.</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            data: raw data</span>
@@ -1303,7 +1303,7 @@
     <span class="k">def</span> <span class="nf">tojson</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="s1">&#39;None&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;None&#39;</span><span class="p">:</span> <span class="o">...</span>  <span class="c1"># type: ignore[misc]</span>
 
 <div class="viewcode-block" id="EnumType.tojson"><a class="viewcode-back" href="../../types.html#zlogging.types.EnumType.tojson">[docs]</a>    <span class="k">def</span> <span class="nf">tojson</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="s1">&#39;Optional[enum.Enum]&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;Optional[str]&#39;</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;Serialize ``data`` as JSON log format.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Serialize ``data`` as JSON log format.</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            data: raw data</span>
@@ -1317,7 +1317,7 @@
         <span class="k">return</span> <span class="n">data</span><span class="o">.</span><span class="n">name</span></div>
 
 <div class="viewcode-block" id="EnumType.toascii"><a class="viewcode-back" href="../../types.html#zlogging.types.EnumType.toascii">[docs]</a>    <span class="k">def</span> <span class="nf">toascii</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="s1">&#39;Optional[enum.Enum]&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;str&#39;</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;Serialize ``data`` as ASCII log format.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Serialize ``data`` as ASCII log format.</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            data: raw data</span>
@@ -1332,7 +1332,7 @@
 
 
 <div class="viewcode-block" id="_GenericType"><a class="viewcode-back" href="../../types.html#zlogging.types._GenericType">[docs]</a><span class="k">class</span> <span class="nc">_GenericType</span><span class="p">(</span><span class="n">BaseType</span><span class="p">,</span> <span class="n">Generic</span><span class="p">[</span><span class="n">_S</span><span class="p">]):</span>  <span class="c1"># pylint: disable=abstract-method</span>
-    <span class="sd">&quot;&quot;&quot;Generic data type.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Generic data type.</span>
 
 <span class="sd">    In Bro/Zeek script language, such generic type includes ``set`` and</span>
 <span class="sd">    ``vector``, which are also known as *container* types.</span>
@@ -1343,7 +1343,7 @@
 
 
 <div class="viewcode-block" id="SetType"><a class="viewcode-back" href="../../types.html#zlogging.types.SetType">[docs]</a><span class="k">class</span> <span class="nc">SetType</span><span class="p">(</span><span class="n">_GenericType</span><span class="p">,</span> <span class="n">Generic</span><span class="p">[</span><span class="n">_S</span><span class="p">]):</span>
-    <span class="sd">&quot;&quot;&quot;Bro/Zeek ``set`` data type.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Bro/Zeek ``set`` data type.</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        empty_field: Placeholder for empty field.</span>
@@ -1379,13 +1379,13 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">python_type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;Any&#39;</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;Any: Corresponding Python type annotation.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Any: Corresponding Python type annotation.&quot;&quot;&quot;</span>
         <span class="n">python_type</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">element_type</span><span class="o">.</span><span class="n">python_type</span>
         <span class="k">return</span> <span class="n">Set</span><span class="p">[</span><span class="n">python_type</span><span class="p">]</span>  <span class="c1"># type: ignore[valid-type]</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">zeek_type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;str&#39;</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;str: Corresponding Zeek type name.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;str: Corresponding Zeek type name.&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="s1">&#39;set[</span><span class="si">%s</span><span class="s1">]&#39;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">element_type</span><span class="o">.</span><span class="n">zeek_type</span>  <span class="c1"># pylint: disable=consider-using-f-string</span>
 
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>  <span class="c1"># pylint: disable=unused-argument,keyword-arg-before-vararg</span>
@@ -1416,7 +1416,7 @@
     <span class="k">def</span> <span class="nf">parse</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="s1">&#39;set[_S]&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;set[_S]&#39;</span><span class="p">:</span> <span class="o">...</span>
 
 <div class="viewcode-block" id="SetType.parse"><a class="viewcode-back" href="../../types.html#zlogging.types.SetType.parse">[docs]</a>    <span class="k">def</span> <span class="nf">parse</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="s1">&#39;Union[AnyStr, set[_S]]&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;Optional[set[_S]]&#39;</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;Parse ``data`` from string.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Parse ``data`` from string.</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            data: raw data</span>
@@ -1444,7 +1444,7 @@
     <span class="k">def</span> <span class="nf">tojson</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="s1">&#39;None&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;None&#39;</span><span class="p">:</span> <span class="o">...</span>
 
 <div class="viewcode-block" id="SetType.tojson"><a class="viewcode-back" href="../../types.html#zlogging.types.SetType.tojson">[docs]</a>    <span class="k">def</span> <span class="nf">tojson</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="s1">&#39;Optional[set[_S]]&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;Optional[list[Optional[_T]]]&#39;</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;Serialize ``data`` as JSON log format.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Serialize ``data`` as JSON log format.</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            data: raw data</span>
@@ -1458,7 +1458,7 @@
         <span class="k">return</span> <span class="nb">sorted</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">element_type</span><span class="o">.</span><span class="n">tojson</span><span class="p">(</span><span class="n">element</span><span class="p">)</span> <span class="k">for</span> <span class="n">element</span> <span class="ow">in</span> <span class="n">data</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="SetType.toascii"><a class="viewcode-back" href="../../types.html#zlogging.types.SetType.toascii">[docs]</a>    <span class="k">def</span> <span class="nf">toascii</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="s1">&#39;Optional[set[_S]]&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;str&#39;</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;Serialize ``data`` as ASCII log format.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Serialize ``data`` as ASCII log format.</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            data: raw data</span>
@@ -1475,7 +1475,7 @@
 
 
 <div class="viewcode-block" id="VectorType"><a class="viewcode-back" href="../../types.html#zlogging.types.VectorType">[docs]</a><span class="k">class</span> <span class="nc">VectorType</span><span class="p">(</span><span class="n">_GenericType</span><span class="p">,</span> <span class="n">Generic</span><span class="p">[</span><span class="n">_S</span><span class="p">]):</span>
-    <span class="sd">&quot;&quot;&quot;Bro/Zeek ``vector`` data type.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Bro/Zeek ``vector`` data type.</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        empty_field: Placeholder for empty field.</span>
@@ -1511,13 +1511,13 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">python_type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;Any&#39;</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;Any: Corresponding Python type annotation.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Any: Corresponding Python type annotation.&quot;&quot;&quot;</span>
         <span class="n">python_type</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">element_type</span><span class="o">.</span><span class="n">python_type</span>
         <span class="k">return</span> <span class="n">List</span><span class="p">[</span><span class="n">python_type</span><span class="p">]</span>  <span class="c1"># type: ignore[valid-type]</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">zeek_type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;str&#39;</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;str: Corresponding Zeek type name.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;str: Corresponding Zeek type name.&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="s1">&#39;vector[</span><span class="si">%s</span><span class="s1">]&#39;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">element_type</span><span class="o">.</span><span class="n">zeek_type</span>  <span class="c1"># pylint: disable=consider-using-f-string</span>
 
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>  <span class="c1"># pylint: disable=unused-argument,keyword-arg-before-vararg</span>
@@ -1548,7 +1548,7 @@
     <span class="k">def</span> <span class="nf">parse</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="s1">&#39;list[_S]&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;list[_S]&#39;</span><span class="p">:</span> <span class="o">...</span>
 
 <div class="viewcode-block" id="VectorType.parse"><a class="viewcode-back" href="../../types.html#zlogging.types.VectorType.parse">[docs]</a>    <span class="k">def</span> <span class="nf">parse</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="s1">&#39;Union[AnyStr, list[_S]]&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;Optional[list[_S]]&#39;</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;Parse ``data`` from string.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Parse ``data`` from string.</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            data: raw data</span>
@@ -1574,7 +1574,7 @@
     <span class="nd">@overload</span>
     <span class="k">def</span> <span class="nf">tojson</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="s1">&#39;None&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;None&#39;</span><span class="p">:</span> <span class="o">...</span>
 <div class="viewcode-block" id="VectorType.tojson"><a class="viewcode-back" href="../../types.html#zlogging.types.VectorType.tojson">[docs]</a>    <span class="k">def</span> <span class="nf">tojson</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="s1">&#39;Optional[list[_S]]&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;Optional[list[Optional[_T]]]&#39;</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;Serialize ``data`` as JSON log format.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Serialize ``data`` as JSON log format.</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            data: raw data</span>
@@ -1588,7 +1588,7 @@
         <span class="k">return</span> <span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">element_type</span><span class="o">.</span><span class="n">tojson</span><span class="p">(</span><span class="n">element</span><span class="p">)</span> <span class="k">for</span> <span class="n">element</span> <span class="ow">in</span> <span class="n">data</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="VectorType.toascii"><a class="viewcode-back" href="../../types.html#zlogging.types.VectorType.toascii">[docs]</a>    <span class="k">def</span> <span class="nf">toascii</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="s1">&#39;Optional[list[_S]]&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;str&#39;</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;Serialize ``data`` as ASCII log format.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Serialize ``data`` as ASCII log format.</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            data: raw data</span>
@@ -1605,7 +1605,7 @@
 
 
 <div class="viewcode-block" id="_VariadicType"><a class="viewcode-back" href="../../types.html#zlogging.types._VariadicType">[docs]</a><span class="k">class</span> <span class="nc">_VariadicType</span><span class="p">(</span><span class="n">BaseType</span><span class="p">):</span>  <span class="c1"># pylint: disable=abstract-method</span>
-    <span class="sd">&quot;&quot;&quot;Variadic data type.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Variadic data type.</span>
 
 <span class="sd">    In Bro/Zeek script language, such variadic type refers to ``record``, which</span>
 <span class="sd">    is also a *container* type.</span>
@@ -1615,7 +1615,7 @@
     <span class="n">element_mapping</span><span class="p">:</span> <span class="s1">&#39;OrderedDict[str, Union[_SimpleType, _GenericType]]&#39;</span>
 
 <div class="viewcode-block" id="_VariadicType.parse"><a class="viewcode-back" href="../../types.html#zlogging.types._VariadicType.parse">[docs]</a>    <span class="k">def</span> <span class="nf">parse</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="s1">&#39;Any&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;NoReturn&#39;</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;Not supported for a variadic data type.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Not supported for a variadic data type.</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            data: data to process</span>
@@ -1627,7 +1627,7 @@
         <span class="k">raise</span> <span class="n">ZeekNotImplemented</span></div>
 
 <div class="viewcode-block" id="_VariadicType.tojson"><a class="viewcode-back" href="../../types.html#zlogging.types._VariadicType.tojson">[docs]</a>    <span class="k">def</span> <span class="nf">tojson</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="s1">&#39;Any&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;NoReturn&#39;</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;Not supported for a variadic data type.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Not supported for a variadic data type.</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            data: data to process</span>
@@ -1639,7 +1639,7 @@
         <span class="k">raise</span> <span class="n">ZeekNotImplemented</span></div>
 
 <div class="viewcode-block" id="_VariadicType.toascii"><a class="viewcode-back" href="../../types.html#zlogging.types._VariadicType.toascii">[docs]</a>    <span class="k">def</span> <span class="nf">toascii</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="s1">&#39;Any&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;NoReturn&#39;</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;Not supported for a variadic data type.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Not supported for a variadic data type.</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            data: data to process</span>
@@ -1652,7 +1652,7 @@
 
 
 <div class="viewcode-block" id="RecordType"><a class="viewcode-back" href="../../types.html#zlogging.types.RecordType">[docs]</a><span class="k">class</span> <span class="nc">RecordType</span><span class="p">(</span><span class="n">_VariadicType</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Bro/Zeek ``record`` data type.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Bro/Zeek ``record`` data type.</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        empty_field: Placeholder for empty field.</span>
@@ -1681,7 +1681,7 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">python_type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;Any&#39;</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;Corresponding Python type annotation.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Corresponding Python type annotation.&quot;&quot;&quot;</span>
         <span class="n">dict_entries</span> <span class="o">=</span> <span class="p">{</span>
             <span class="n">field</span><span class="p">:</span> <span class="n">element_type</span><span class="o">.</span><span class="n">python_type</span>
             <span class="k">for</span> <span class="n">field</span><span class="p">,</span> <span class="n">element_type</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">element_mapping</span><span class="o">.</span><span class="n">items</span><span class="p">()</span>
@@ -1690,7 +1690,7 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">zeek_type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;Literal[&quot;record&quot;]&#39;</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;Corresponding Zeek type name.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Corresponding Zeek type name.&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="s1">&#39;record&#39;</span>
 
     <span class="k">def</span> <span class="fm">__new__</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">:</span> <span class="s1">&#39;Any&#39;</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">:</span> <span class="s1">&#39;Any&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;RecordType&#39;</span><span class="p">:</span>  <span class="c1"># pylint: disable=unused-argument</span>
@@ -1811,7 +1811,7 @@
       <div class="clearer"></div>
     </div>
     <div class="footer">
-      &copy;2020-2022, Jarry Shaw.
+      &copy;2020-2023, Jarry Shaw.
       
     </div>
 

@@ -79,15 +79,15 @@
 
 
 <div class="viewcode-block" id="BaseParser"><a class="viewcode-back" href="../../loader.html#zlogging.loader.BaseParser">[docs]</a><span class="k">class</span> <span class="nc">BaseParser</span><span class="p">(</span><span class="n">metaclass</span><span class="o">=</span><span class="n">abc</span><span class="o">.</span><span class="n">ABCMeta</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Basic log parser.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Basic log parser.&quot;&quot;&quot;</span>
 
     <span class="nd">@property</span>
     <span class="nd">@abc</span><span class="o">.</span><span class="n">abstractmethod</span>
     <span class="k">def</span> <span class="nf">format</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;str&#39;</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;Log file format.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Log file format.&quot;&quot;&quot;</span>
 
 <div class="viewcode-block" id="BaseParser.parse"><a class="viewcode-back" href="../../loader.html#zlogging.loader.BaseParser.parse">[docs]</a>    <span class="k">def</span> <span class="nf">parse</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filename</span><span class="p">:</span> <span class="s1">&#39;PathLike[str]&#39;</span><span class="p">,</span> <span class="n">model</span><span class="p">:</span> <span class="s1">&#39;Optional[Type[Model]]&#39;</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;Info&#39;</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;Parse log file.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Parse log file.</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            filename: Log file name.</span>
@@ -103,7 +103,7 @@
 
 <div class="viewcode-block" id="BaseParser.parse_file"><a class="viewcode-back" href="../../loader.html#zlogging.loader.BaseParser.parse_file">[docs]</a>    <span class="nd">@abc</span><span class="o">.</span><span class="n">abstractmethod</span>
     <span class="k">def</span> <span class="nf">parse_file</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">file</span><span class="p">:</span> <span class="s1">&#39;BinaryFile&#39;</span><span class="p">,</span> <span class="n">model</span><span class="p">:</span> <span class="s1">&#39;Optional[Type[Model]]&#39;</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;Info&#39;</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;Parse log file.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Parse log file.</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            file: Log file object opened in binary mode.</span>
@@ -117,7 +117,7 @@
 <div class="viewcode-block" id="BaseParser.parse_line"><a class="viewcode-back" href="../../loader.html#zlogging.loader.BaseParser.parse_line">[docs]</a>    <span class="nd">@abc</span><span class="o">.</span><span class="n">abstractmethod</span>
     <span class="k">def</span> <span class="nf">parse_line</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">line</span><span class="p">:</span> <span class="s1">&#39;bytes&#39;</span><span class="p">,</span> <span class="n">lineno</span><span class="p">:</span> <span class="s1">&#39;Optional[int]&#39;</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>
                    <span class="n">model</span><span class="p">:</span> <span class="s1">&#39;Optional[Type[Model]]&#39;</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;Model&#39;</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;Parse log line as one-line record.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Parse log line as one-line record.</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            line: A simple line of log.</span>
@@ -130,7 +130,7 @@
 <span class="sd">        &quot;&quot;&quot;</span></div>
 
 <div class="viewcode-block" id="BaseParser.load"><a class="viewcode-back" href="../../loader.html#zlogging.loader.BaseParser.load">[docs]</a>    <span class="k">def</span> <span class="nf">load</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">file</span><span class="p">:</span> <span class="s1">&#39;BinaryFile&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;Info&#39;</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;Parse log file.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Parse log file.</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            file: Log file object opened in binary mode.</span>
@@ -142,7 +142,7 @@
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">parse_file</span><span class="p">(</span><span class="n">file</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="BaseParser.loads"><a class="viewcode-back" href="../../loader.html#zlogging.loader.BaseParser.loads">[docs]</a>    <span class="k">def</span> <span class="nf">loads</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">line</span><span class="p">:</span> <span class="s1">&#39;bytes&#39;</span><span class="p">,</span> <span class="n">lineno</span><span class="p">:</span> <span class="s1">&#39;Optional[int]&#39;</span> <span class="o">=</span> <span class="mi">0</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;Model&#39;</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;Parse log line as one-line record.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Parse log line as one-line record.</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            line: A simple line of log.</span>
@@ -156,7 +156,7 @@
 
 
 <div class="viewcode-block" id="JSONParser"><a class="viewcode-back" href="../../loader.html#zlogging.loader.JSONParser">[docs]</a><span class="k">class</span> <span class="nc">JSONParser</span><span class="p">(</span><span class="n">BaseParser</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;JSON log parser.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;JSON log parser.</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        model: Field declrations for :class:`~zlogging.loader.JSONParser`,</span>
@@ -174,7 +174,7 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">format</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;Literal[&quot;json&quot;]&#39;</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;Log file format.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Log file format.&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="s1">&#39;json&#39;</span>
 
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">model</span><span class="p">:</span> <span class="s1">&#39;Optional[Type[Model]]&#39;</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;None&#39;</span><span class="p">:</span>
@@ -187,7 +187,7 @@
             <span class="o">...</span>
 
 <div class="viewcode-block" id="JSONParser.parse_file"><a class="viewcode-back" href="../../loader.html#zlogging.loader.JSONParser.parse_file">[docs]</a>    <span class="k">def</span> <span class="nf">parse_file</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">file</span><span class="p">:</span> <span class="s1">&#39;BinaryFile&#39;</span><span class="p">,</span> <span class="n">model</span><span class="p">:</span> <span class="s1">&#39;Optional[Type[Model]]&#39;</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;JSONInfo&#39;</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;Parse log file.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Parse log file.</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            file: Log file object opened in binary mode.</span>
@@ -206,7 +206,7 @@
 
 <div class="viewcode-block" id="JSONParser.parse_line"><a class="viewcode-back" href="../../loader.html#zlogging.loader.JSONParser.parse_line">[docs]</a>    <span class="k">def</span> <span class="nf">parse_line</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">line</span><span class="p">:</span> <span class="s1">&#39;bytes&#39;</span><span class="p">,</span> <span class="n">lineno</span><span class="p">:</span> <span class="s1">&#39;Optional[int]&#39;</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>
                    <span class="n">model</span><span class="p">:</span> <span class="s1">&#39;Optional[Type[Model]]&#39;</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;Model&#39;</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;Parse log line as one-line record.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Parse log line as one-line record.</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            line: A simple line of log.</span>
@@ -232,7 +232,7 @@
 
 
 <div class="viewcode-block" id="ASCIIParser"><a class="viewcode-back" href="../../loader.html#zlogging.loader.ASCIIParser">[docs]</a><span class="k">class</span> <span class="nc">ASCIIParser</span><span class="p">(</span><span class="n">BaseParser</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;ASCII log parser.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;ASCII log parser.</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        type_hook: Bro/Zeek type parser hooks. User may customise subclasses of</span>
@@ -250,7 +250,7 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">format</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;Literal[&quot;ascii&quot;]&#39;</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;Log file format.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Log file format.&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="s1">&#39;ascii&#39;</span>
 
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">type_hook</span><span class="p">:</span> <span class="s1">&#39;Optional[dict[str, Type[BaseType]]]&#39;</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
@@ -281,7 +281,7 @@
             <span class="o">...</span>
 
 <div class="viewcode-block" id="ASCIIParser.parse_file"><a class="viewcode-back" href="../../loader.html#zlogging.loader.ASCIIParser.parse_file">[docs]</a>    <span class="k">def</span> <span class="nf">parse_file</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">file</span><span class="p">:</span> <span class="s1">&#39;BinaryFile&#39;</span><span class="p">,</span> <span class="n">model</span><span class="p">:</span> <span class="s1">&#39;Optional[Type[Model]]&#39;</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;ASCIIInfo&#39;</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;Parse log file.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Parse log file.</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            file: Log file object opened in binary mode.</span>
@@ -385,7 +385,7 @@
 <div class="viewcode-block" id="ASCIIParser.parse_line"><a class="viewcode-back" href="../../loader.html#zlogging.loader.ASCIIParser.parse_line">[docs]</a>    <span class="k">def</span> <span class="nf">parse_line</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">line</span><span class="p">:</span> <span class="s1">&#39;bytes&#39;</span><span class="p">,</span> <span class="n">lineno</span><span class="p">:</span> <span class="s1">&#39;Optional[int]&#39;</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>  <span class="c1"># pylint: disable=arguments-differ</span>
                    <span class="n">model</span><span class="p">:</span> <span class="s1">&#39;Optional[Type[Model]]&#39;</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">separator</span><span class="p">:</span> <span class="s1">&#39;Optional[bytes]&#39;</span> <span class="o">=</span> <span class="sa">b</span><span class="s1">&#39;</span><span class="se">\x09</span><span class="s1">&#39;</span><span class="p">,</span>
                    <span class="n">parser</span><span class="p">:</span> <span class="s1">&#39;Optional[list[tuple[str, BaseType]]]&#39;</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;Model&#39;</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;Parse log line as one-line record.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Parse log line as one-line record.</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            line: A simple line of log.</span>
@@ -420,7 +420,7 @@
 
 <div class="viewcode-block" id="parse_json"><a class="viewcode-back" href="../../loader.html#zlogging.loader.parse_json">[docs]</a><span class="k">def</span> <span class="nf">parse_json</span><span class="p">(</span><span class="n">filename</span><span class="p">:</span> <span class="s1">&#39;PathLike[str]&#39;</span><span class="p">,</span> <span class="n">parser</span><span class="p">:</span> <span class="s1">&#39;Optional[Type[JSONParser]]&#39;</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>  <span class="c1"># pylint: disable=unused-argument,keyword-arg-before-vararg</span>
                <span class="n">model</span><span class="p">:</span> <span class="s1">&#39;Optional[Type[Model]]&#39;</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">:</span> <span class="s1">&#39;Any&#39;</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">:</span> <span class="s1">&#39;Any&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;JSONInfo&#39;</span><span class="p">:</span>
-    <span class="sd">&quot;&quot;&quot;Parse JSON log file.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Parse JSON log file.</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        filename: Log file name.</span>
@@ -443,7 +443,7 @@
 
 <div class="viewcode-block" id="load_json"><a class="viewcode-back" href="../../loader.html#zlogging.loader.load_json">[docs]</a><span class="k">def</span> <span class="nf">load_json</span><span class="p">(</span><span class="n">file</span><span class="p">:</span> <span class="s1">&#39;BinaryFile&#39;</span><span class="p">,</span> <span class="n">parser</span><span class="p">:</span> <span class="s1">&#39;Optional[Type[JSONParser]]&#39;</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>  <span class="c1"># pylint: disable=unused-argument,keyword-arg-before-vararg</span>
               <span class="n">model</span><span class="p">:</span> <span class="s1">&#39;Optional[Type[Model]]&#39;</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">:</span> <span class="s1">&#39;Any&#39;</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">:</span> <span class="s1">&#39;Any&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;JSONInfo&#39;</span><span class="p">:</span>
-    <span class="sd">&quot;&quot;&quot;Parse JSON log file.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Parse JSON log file.</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        file: Log file object opened in binary mode.</span>
@@ -466,7 +466,7 @@
 
 <div class="viewcode-block" id="loads_json"><a class="viewcode-back" href="../../loader.html#zlogging.loader.loads_json">[docs]</a><span class="k">def</span> <span class="nf">loads_json</span><span class="p">(</span><span class="n">data</span><span class="p">:</span> <span class="s1">&#39;AnyStr&#39;</span><span class="p">,</span> <span class="n">parser</span><span class="p">:</span> <span class="s1">&#39;Optional[Type[JSONParser]]&#39;</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>  <span class="c1"># pylint: disable=unused-argument,keyword-arg-before-vararg</span>
                <span class="n">model</span><span class="p">:</span> <span class="s1">&#39;Optional[Type[Model]]&#39;</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">:</span> <span class="s1">&#39;Any&#39;</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">:</span> <span class="s1">&#39;Any&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;JSONInfo&#39;</span><span class="p">:</span>
-    <span class="sd">&quot;&quot;&quot;Parse JSON log string.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Parse JSON log string.</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        data: Log string as binary or encoded string.</span>
@@ -497,7 +497,7 @@
                 <span class="n">type_hook</span><span class="p">:</span> <span class="s1">&#39;Optional[dict[str, Type[BaseType]]]&#39;</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
                 <span class="n">enum_namespaces</span><span class="p">:</span> <span class="s1">&#39;Optional[list[str]]&#39;</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
                 <span class="n">bare</span><span class="p">:</span> <span class="s1">&#39;bool&#39;</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">:</span> <span class="s1">&#39;Any&#39;</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">:</span> <span class="s1">&#39;Any&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;ASCIIInfo&#39;</span><span class="p">:</span>
-    <span class="sd">&quot;&quot;&quot;Parse ASCII log file.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Parse ASCII log file.</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        filename: Log file name.</span>
@@ -523,7 +523,7 @@
                <span class="n">type_hook</span><span class="p">:</span> <span class="s1">&#39;Optional[dict[str, Type[BaseType]]]&#39;</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
                <span class="n">enum_namespaces</span><span class="p">:</span> <span class="s1">&#39;Optional[list[str]]&#39;</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
                <span class="n">bare</span><span class="p">:</span> <span class="s1">&#39;bool&#39;</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">:</span> <span class="s1">&#39;Any&#39;</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">:</span> <span class="s1">&#39;Any&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;ASCIIInfo&#39;</span><span class="p">:</span>
-    <span class="sd">&quot;&quot;&quot;Parse ASCII log file.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Parse ASCII log file.</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        file: Log file object opened in binary mode.</span>
@@ -549,7 +549,7 @@
                 <span class="n">type_hook</span><span class="p">:</span> <span class="s1">&#39;Optional[dict[str, Type[BaseType]]]&#39;</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
                 <span class="n">enum_namespaces</span><span class="p">:</span> <span class="s1">&#39;Optional[list[str]]&#39;</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
                 <span class="n">bare</span><span class="p">:</span> <span class="s1">&#39;bool&#39;</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">:</span> <span class="s1">&#39;Any&#39;</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">:</span> <span class="s1">&#39;Any&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;ASCIIInfo&#39;</span><span class="p">:</span>
-    <span class="sd">&quot;&quot;&quot;Parse ASCII log string.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Parse ASCII log string.</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        data: Log string as binary or encoded string.</span>
@@ -578,7 +578,7 @@
 
 
 <div class="viewcode-block" id="parse"><a class="viewcode-back" href="../../loader.html#zlogging.loader.parse">[docs]</a><span class="k">def</span> <span class="nf">parse</span><span class="p">(</span><span class="n">filename</span><span class="p">:</span> <span class="s1">&#39;PathLike[str]&#39;</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">:</span> <span class="s1">&#39;Any&#39;</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">:</span> <span class="s1">&#39;Any&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;Union[JSONInfo, ASCIIInfo]&#39;</span><span class="p">:</span>
-    <span class="sd">&quot;&quot;&quot;Parse Bro/Zeek log file.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Parse Bro/Zeek log file.</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        filename: Log file name.</span>
@@ -605,7 +605,7 @@
 
 
 <div class="viewcode-block" id="load"><a class="viewcode-back" href="../../loader.html#zlogging.loader.load">[docs]</a><span class="k">def</span> <span class="nf">load</span><span class="p">(</span><span class="n">file</span><span class="p">:</span> <span class="s1">&#39;BinaryFile&#39;</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">:</span> <span class="s1">&#39;Any&#39;</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">:</span> <span class="s1">&#39;Any&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;Union[JSONInfo, ASCIIInfo]&#39;</span><span class="p">:</span>
-    <span class="sd">&quot;&quot;&quot;Parse Bro/Zeek log file.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Parse Bro/Zeek log file.</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        file: Log file object opened in binary mode.</span>
@@ -633,7 +633,7 @@
 
 
 <div class="viewcode-block" id="loads"><a class="viewcode-back" href="../../loader.html#zlogging.loader.loads">[docs]</a><span class="k">def</span> <span class="nf">loads</span><span class="p">(</span><span class="n">data</span><span class="p">:</span> <span class="s1">&#39;AnyStr&#39;</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">:</span> <span class="s1">&#39;Any&#39;</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">:</span> <span class="s1">&#39;Any&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;Union[JSONInfo, ASCIIInfo]&#39;</span><span class="p">:</span>
-    <span class="sd">&quot;&quot;&quot;Parse Bro/Zeek log string.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Parse Bro/Zeek log string.</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        data: Log string as binary or encoded string.</span>
@@ -726,7 +726,7 @@
       <div class="clearer"></div>
     </div>
     <div class="footer">
-      &copy;2020-2022, Jarry Shaw.
+      &copy;2020-2023, Jarry Shaw.
       
     </div>
 

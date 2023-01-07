@@ -65,7 +65,7 @@
 
 
 <span class="k">def</span> <span class="nf">_deprecated</span><span class="p">(</span><span class="n">bro_type</span><span class="p">:</span> <span class="s1">&#39;_T&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;_T&#39;</span><span class="p">:</span>
-    <span class="sd">&quot;&quot;&quot;Use of ``&#39;bro&#39;`` is deprecated, please use ``&#39;zeek&#39;`` instead.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Use of ``&#39;bro&#39;`` is deprecated, please use ``&#39;zeek&#39;`` instead.&quot;&quot;&quot;</span>
     <span class="n">name</span> <span class="o">=</span> <span class="n">bro_type</span><span class="o">.</span><span class="vm">__name__</span>
     <span class="n">orig_init</span> <span class="o">=</span> <span class="n">bro_type</span><span class="o">.</span><span class="fm">__init__</span>
 
@@ -107,7 +107,7 @@
 
 
 <div class="viewcode-block" id="zeek_set"><a class="viewcode-back" href="../../typing.html#zlogging.typing.zeek_set">[docs]</a><span class="k">class</span> <span class="nc">zeek_set</span><span class="p">(</span><span class="n">SetType</span><span class="p">,</span> <span class="n">Generic</span><span class="p">[</span><span class="n">_S</span><span class="p">]):</span>
-    <span class="sd">&quot;&quot;&quot;Zeek ``set`` data type.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Zeek ``set`` data type.</span>
 
 <span class="sd">    Notes:</span>
 <span class="sd">        As a *generic* data type, the class supports the typing proxy as introduced</span>
@@ -129,7 +129,7 @@
 
 
 <div class="viewcode-block" id="zeek_vector"><a class="viewcode-back" href="../../typing.html#zlogging.typing.zeek_vector">[docs]</a><span class="k">class</span> <span class="nc">zeek_vector</span><span class="p">(</span><span class="n">VectorType</span><span class="p">,</span> <span class="n">Generic</span><span class="p">[</span><span class="n">_S</span><span class="p">]):</span>
-    <span class="sd">&quot;&quot;&quot;Zeek ``vector`` data type.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Zeek ``vector`` data type.</span>
 
 <span class="sd">    Notes:</span>
 <span class="sd">        As a *generic* data type, the class supports the typing proxy as introduced</span>
@@ -151,7 +151,7 @@
 
 
 <div class="viewcode-block" id="zeek_record"><a class="viewcode-back" href="../../typing.html#zlogging.typing.zeek_record">[docs]</a><span class="k">class</span> <span class="nc">zeek_record</span><span class="p">(</span><span class="n">RecordType</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Zeek ``record`` data type.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Zeek ``record`` data type.</span>
 
 <span class="sd">    Notes:</span>
 <span class="sd">        As a *variadic* data type, it supports the typing proxy as :class:`~typing.TypedDict`,</span>
@@ -184,57 +184,57 @@
 
 <span class="nd">@_deprecated</span>
 <span class="k">class</span> <span class="nc">_BroAddrType</span><span class="p">(</span><span class="n">AddrType</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Bro ``addr`` data type.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Bro ``addr`` data type.&quot;&quot;&quot;</span>
 
 
 <span class="nd">@_deprecated</span>
 <span class="k">class</span> <span class="nc">_BroBoolType</span><span class="p">(</span><span class="n">BoolType</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Bro ``bool`` data type.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Bro ``bool`` data type.&quot;&quot;&quot;</span>
 
 
 <span class="nd">@_deprecated</span>
 <span class="k">class</span> <span class="nc">_BroCountType</span><span class="p">(</span><span class="n">CountType</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Bro ``count`` data type.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Bro ``count`` data type.&quot;&quot;&quot;</span>
 
 
 <span class="nd">@_deprecated</span>
 <span class="k">class</span> <span class="nc">_BroDoubleType</span><span class="p">(</span><span class="n">DoubleType</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Bro ``double`` data type.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Bro ``double`` data type.&quot;&quot;&quot;</span>
 
 
 <span class="nd">@_deprecated</span>
 <span class="k">class</span> <span class="nc">_BroEnumType</span><span class="p">(</span><span class="n">EnumType</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Bro ``enum`` data type.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Bro ``enum`` data type.&quot;&quot;&quot;</span>
 
 
 <span class="nd">@_deprecated</span>
 <span class="k">class</span> <span class="nc">_BroIntervalType</span><span class="p">(</span><span class="n">IntervalType</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Bro ``interval`` data type.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Bro ``interval`` data type.&quot;&quot;&quot;</span>
 
 
 <span class="nd">@_deprecated</span>
 <span class="k">class</span> <span class="nc">_BroIntType</span><span class="p">(</span><span class="n">IntType</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Bro ``int`` data type.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Bro ``int`` data type.&quot;&quot;&quot;</span>
 
 
 <span class="nd">@_deprecated</span>
 <span class="k">class</span> <span class="nc">_BroPortType</span><span class="p">(</span><span class="n">PortType</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Bro ``port`` data type.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Bro ``port`` data type.&quot;&quot;&quot;</span>
 
 
 <span class="nd">@_deprecated</span>
 <span class="k">class</span> <span class="nc">_BroStringType</span><span class="p">(</span><span class="n">StringType</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Bro ``string`` data type.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Bro ``string`` data type.&quot;&quot;&quot;</span>
 
 
 <span class="nd">@_deprecated</span>
 <span class="k">class</span> <span class="nc">_BroSubnetType</span><span class="p">(</span><span class="n">SubnetType</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Bro ``subnet`` data type.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Bro ``subnet`` data type.&quot;&quot;&quot;</span>
 
 
 <span class="nd">@_deprecated</span>
 <span class="k">class</span> <span class="nc">_BroTimeType</span><span class="p">(</span><span class="n">TimeType</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Bro ``time`` data type.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Bro ``time`` data type.&quot;&quot;&quot;</span>
 
 
 <span class="c1">#: Bro ``addr`` data type.</span>
@@ -263,7 +263,7 @@
 
 <div class="viewcode-block" id="bro_set"><a class="viewcode-back" href="../../typing.html#zlogging.typing.bro_set">[docs]</a><span class="nd">@_deprecated</span>
 <span class="k">class</span> <span class="nc">bro_set</span><span class="p">(</span><span class="n">SetType</span><span class="p">,</span> <span class="n">Generic</span><span class="p">[</span><span class="n">_S</span><span class="p">]):</span>
-    <span class="sd">&quot;&quot;&quot;Bro ``set`` data type.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Bro ``set`` data type.</span>
 
 <span class="sd">    See Also:</span>
 <span class="sd">        See :attr:`~zlogging.typing.zeek_set` for more information.</span>
@@ -273,7 +273,7 @@
 
 <div class="viewcode-block" id="bro_vector"><a class="viewcode-back" href="../../typing.html#zlogging.typing.bro_vector">[docs]</a><span class="nd">@_deprecated</span>
 <span class="k">class</span> <span class="nc">bro_vector</span><span class="p">(</span><span class="n">VectorType</span><span class="p">,</span> <span class="n">Generic</span><span class="p">[</span><span class="n">_S</span><span class="p">]):</span>
-    <span class="sd">&quot;&quot;&quot;Bro ``vector`` data type.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Bro ``vector`` data type.</span>
 
 <span class="sd">    See Also:</span>
 <span class="sd">        See :attr:`~zlogging.typing.zeek_vector` for more information.</span>
@@ -283,7 +283,7 @@
 
 <div class="viewcode-block" id="bro_record"><a class="viewcode-back" href="../../typing.html#zlogging.typing.bro_record">[docs]</a><span class="nd">@_deprecated</span>
 <span class="k">class</span> <span class="nc">bro_record</span><span class="p">(</span><span class="n">RecordType</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Bro ``record`` data type.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Bro ``record`` data type.</span>
 
 <span class="sd">    See Also:</span>
 <span class="sd">        See :attr:`~zlogging.typing.zeek_record` for more information.</span>
@@ -358,7 +358,7 @@
       <div class="clearer"></div>
     </div>
     <div class="footer">
-      &copy;2020-2022, Jarry Shaw.
+      &copy;2020-2023, Jarry Shaw.
       
     </div>
 

@@ -54,7 +54,7 @@
 
 
 <div class="viewcode-block" id="Info"><a class="viewcode-back" href="../../_data.html#zlogging._data.Info">[docs]</a><span class="k">class</span> <span class="nc">Info</span><span class="p">(</span><span class="n">metaclass</span><span class="o">=</span><span class="n">abc</span><span class="o">.</span><span class="n">ABCMeta</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Parsed log info.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Parsed log info.</span>
 
 <span class="sd">    The parsed log will be stored as in this :func:`dataclass &lt;dataclasses.dataclass&gt;`,</span>
 <span class="sd">    as introduced in :pep:`557`.</span>
@@ -64,12 +64,12 @@
     <span class="nd">@property</span>
     <span class="nd">@abc</span><span class="o">.</span><span class="n">abstractmethod</span>
     <span class="k">def</span> <span class="nf">format</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;Log file format.&quot;&quot;&quot;</span></div>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Log file format.&quot;&quot;&quot;</span></div>
 
 
 <div class="viewcode-block" id="ASCIIInfo"><a class="viewcode-back" href="../../_data.html#zlogging._data.ASCIIInfo">[docs]</a><span class="nd">@dataclasses</span><span class="o">.</span><span class="n">dataclass</span><span class="p">(</span><span class="n">frozen</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="k">class</span> <span class="nc">ASCIIInfo</span><span class="p">(</span><span class="n">Info</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Parsed log info for ASCII logs.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Parsed log info for ASCII logs.</span>
 
 <span class="sd">    The ASCII log will be stored as in this :func:`dataclass &lt;dataclasses.dataclass&gt;`,</span>
 <span class="sd">    as introduced in :pep:`557`.</span>
@@ -90,7 +90,7 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">format</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;Literal[&quot;ascii&quot;]&#39;</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;Log file format.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Log file format.&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="s1">&#39;ascii&#39;</span>
 
     <span class="c1">#: Log path. The value is specified in the ASCII log file</span>
@@ -112,7 +112,7 @@
 
 <div class="viewcode-block" id="JSONInfo"><a class="viewcode-back" href="../../_data.html#zlogging._data.JSONInfo">[docs]</a><span class="nd">@dataclasses</span><span class="o">.</span><span class="n">dataclass</span><span class="p">(</span><span class="n">frozen</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="k">class</span> <span class="nc">JSONInfo</span><span class="p">(</span><span class="n">Info</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Parsed log info for JSON logs.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Parsed log info for JSON logs.</span>
 
 <span class="sd">    The JSON log will be stored as in this :func:`dataclass &lt;dataclasses.dataclass&gt;`,</span>
 <span class="sd">    as introduced in :pep:`557`.</span>
@@ -125,7 +125,7 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">format</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;Literal[&quot;json&quot;]&#39;</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;Log file format.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Log file format.&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="s1">&#39;json&#39;</span>
 
     <span class="c1">#: Log records. The log records parsed as a :obj:`list` of</span>
@@ -200,7 +200,7 @@
       <div class="clearer"></div>
     </div>
     <div class="footer">
-      &copy;2020-2022, Jarry Shaw.
+      &copy;2020-2023, Jarry Shaw.
       
     </div>
 

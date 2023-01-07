@@ -56,7 +56,7 @@
 
 
 <div class="viewcode-block" id="Model"><a class="viewcode-back" href="../../model.html#zlogging.model.Model">[docs]</a><span class="k">class</span> <span class="nc">Model</span><span class="p">(</span><span class="n">metaclass</span><span class="o">=</span><span class="n">abc</span><span class="o">.</span><span class="n">ABCMeta</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Log data model.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Log data model.</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        *args: Arbitrary positional arguments.</span>
@@ -119,22 +119,22 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">fields</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;OrderedDict[str, Union[_SimpleType, _GenericType]]&#39;</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;Fields of the data model.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Fields of the data model.&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__fields__</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">unset_field</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;bytes&#39;</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;Placeholder for empty field.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Placeholder for empty field.&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__unset_field__</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">empty_field</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;bytes&#39;</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;Placeholder for unset field.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Placeholder for unset field.&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__empty_field__</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">set_separator</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;bytes&#39;</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;Separator for set/vector fields.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Separator for set/vector fields.&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__set_separator__</span>
 
     <span class="k">def</span> <span class="fm">__new__</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">:</span> <span class="s1">&#39;Any&#39;</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">:</span> <span class="s1">&#39;Any&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;Model&#39;</span><span class="p">:</span>  <span class="c1"># pylint: disable=unused-argument</span>
@@ -193,7 +193,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">__post_init__</span><span class="p">()</span>
 
 <div class="viewcode-block" id="Model.__post_init__"><a class="viewcode-back" href="../../model.html#zlogging.model.Model.__post_init__">[docs]</a>    <span class="k">def</span> <span class="nf">__post_init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;None&#39;</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;Post-processing customisation.&quot;&quot;&quot;</span></div>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Post-processing customisation.&quot;&quot;&quot;</span></div>
 
     <span class="k">def</span> <span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;str&#39;</span><span class="p">:</span>
         <span class="n">fields</span> <span class="o">=</span> <span class="p">[]</span>  <span class="c1"># type: list[str]</span>
@@ -210,7 +210,7 @@
         <span class="k">return</span> <span class="s1">&#39;</span><span class="si">%s</span><span class="s1">(</span><span class="si">%s</span><span class="s1">)&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span><span class="p">,</span> <span class="s1">&#39;, &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">fields</span><span class="p">))</span>  <span class="c1"># pylint: disable=consider-using-f-string</span>
 
 <div class="viewcode-block" id="Model.__call__"><a class="viewcode-back" href="../../model.html#zlogging.model.Model.__call__">[docs]</a>    <span class="k">def</span> <span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">format</span><span class="p">:</span> <span class="s1">&#39;str&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;Any&#39;</span><span class="p">:</span>  <span class="c1"># pylint: disable=redefined-builtin</span>
-        <span class="sd">&quot;&quot;&quot;Serialise data model with given format.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Serialise data model with given format.</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            format: Serialisation format.</span>
@@ -230,7 +230,7 @@
         <span class="k">raise</span> <span class="n">ModelFormatError</span><span class="p">(</span><span class="s1">&#39;unsupported format: </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="nb">format</span><span class="p">)</span>  <span class="c1"># pylint: disable=consider-using-f-string</span></div>
 
 <div class="viewcode-block" id="Model.tojson"><a class="viewcode-back" href="../../model.html#zlogging.model.Model.tojson">[docs]</a>    <span class="k">def</span> <span class="nf">tojson</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;OrderedDict[str, Any]&#39;</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;Serialise data model as JSON log format.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Serialise data model as JSON log format.</span>
 
 <span class="sd">        Returns:</span>
 <span class="sd">            An :obj:`OrderedDict` mapping each field and serialised JSON</span>
@@ -244,7 +244,7 @@
         <span class="k">return</span> <span class="n">fields</span></div>
 
 <div class="viewcode-block" id="Model.toascii"><a class="viewcode-back" href="../../model.html#zlogging.model.Model.toascii">[docs]</a>    <span class="k">def</span> <span class="nf">toascii</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;OrderedDict[str, str]&#39;</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;Serialise data model as ASCII log format.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Serialise data model as ASCII log format.</span>
 
 <span class="sd">        Returns:</span>
 <span class="sd">            An :obj:`OrderedDict` mapping each field and serialised text data.</span>
@@ -257,7 +257,7 @@
         <span class="k">return</span> <span class="n">fields</span></div>
 
 <div class="viewcode-block" id="Model.asdict"><a class="viewcode-back" href="../../model.html#zlogging.model.Model.asdict">[docs]</a>    <span class="k">def</span> <span class="nf">asdict</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dict_factory</span><span class="p">:</span> <span class="s1">&#39;Optional[Type[dict]]&#39;</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;dict[str, Any]&#39;</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;Convert data model as a dictionary mapping field names to field values.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Convert data model as a dictionary mapping field names to field values.</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            dict_factory: If given, ``dict_factory`` will be used instead of</span>
@@ -277,7 +277,7 @@
         <span class="k">return</span> <span class="n">fields</span></div>
 
 <div class="viewcode-block" id="Model.astuple"><a class="viewcode-back" href="../../model.html#zlogging.model.Model.astuple">[docs]</a>    <span class="k">def</span> <span class="nf">astuple</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tuple_factory</span><span class="p">:</span> <span class="s1">&#39;Optional[Type[tuple]]&#39;</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;tuple[Any, ...]&#39;</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;Convert data model as a tuple of field values.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Convert data model as a tuple of field values.</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            tuple_factory: If given, ``tuple_factory`` will be used instead of</span>
@@ -302,7 +302,7 @@
 
 
 <div class="viewcode-block" id="new_model"><a class="viewcode-back" href="../../model.html#zlogging.model.new_model">[docs]</a><span class="k">def</span> <span class="nf">new_model</span><span class="p">(</span><span class="n">name</span><span class="p">:</span> <span class="s1">&#39;str&#39;</span><span class="p">,</span> <span class="o">**</span><span class="n">fields</span><span class="p">:</span> <span class="s1">&#39;Any&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;Type[Model]&#39;</span><span class="p">:</span>
-    <span class="sd">&quot;&quot;&quot;Create a data model dynamically with the appropriate fields.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Create a data model dynamically with the appropriate fields.</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        name: data model name</span>
@@ -330,7 +330,7 @@
 
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">def</span> <span class="nf">gen_body</span><span class="p">(</span><span class="n">ns</span><span class="p">:</span> <span class="s1">&#39;dict[str, Any]&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;None&#39;</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;Generate ``exec_body``.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Generate ``exec_body``.&quot;&quot;&quot;</span>
         <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">type_cls</span> <span class="ow">in</span> <span class="n">fields</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
             <span class="n">ns</span><span class="p">[</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="n">type_cls</span>
     <span class="k">return</span> <span class="n">types</span><span class="o">.</span><span class="n">new_class</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="p">(</span><span class="n">Model</span><span class="p">,),</span> <span class="n">exec_body</span><span class="o">=</span><span class="n">gen_body</span><span class="p">)</span></div>
@@ -403,7 +403,7 @@
       <div class="clearer"></div>
     </div>
     <div class="footer">
-      &copy;2020-2022, Jarry Shaw.
+      &copy;2020-2023, Jarry Shaw.
       
     </div>
 
