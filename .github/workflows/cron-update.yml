@@ -21,18 +21,16 @@ jobs:
           set -x
 
           python -m pip install -U pip setuptools wheel
-          python -m pip install -U beautifulsoup4[html5lib] requests html2text
+          python -m pip install -U beautifulsoup4[html5lib] requests html2text isort
           python -m pip install -e .
 
       - name: Update Vendor
         run: |
           set -x
 
-          export PCAPKIT_VENDOR_RETRY=10
-          export PCAPKIT_CI_MODE=1
-
           python gen/fetch.py
           python gen/make.py
+          isort -l100 -pzlogging zlogging
 
       - name: Verify Changed files
         uses: tj-actions/verify-changed-files@v14
