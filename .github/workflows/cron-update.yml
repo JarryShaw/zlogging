@@ -46,7 +46,7 @@ jobs:
         run: |
           git config --local user.email "github-actions[bot]@users.noreply.github.com"
           git config --local user.name "github-actions[bot]"
-          git commit -am"Bumped version to $(python -c 'import pcapkit; print(pcapkit.__version__)')
+          git commit -am"Bumped version to $(python -c 'import zlogging; print(zlogging.__version__)')
 
           Updated constant enumerations at $(date). The following files
           have been changed: ${{ steps.verify-changed-files.outputs.changed_files }}"
