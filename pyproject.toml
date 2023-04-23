@@ -1,3 +1,68 @@
 [build-system]
-requires = ["setuptools", "wheel"]
-build-backend = "setuptools.build_meta:__legacy__"
+requires = [
+    "setuptools>=61.0.0",
+]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "zlogging"
+dynamic = [ "version", "readme" ]
+authors = [
+    { name="Jarry Shaw", email="jarryshaw@icloud.com" },
+]
+maintainers = [
+    { name="Jarry Shaw" },
+]
+license = { text="BSD 3-Clause License" }
+requires-python = ">=3.6, <4"
+description = "zlogging: Bro/Zeek logging framework for Python."
+keywords = [ "bro", "zeek", "logging" ]
+classifiers = [
+    'Development Status :: 5 - Production/Stable',
+    'Intended Audience :: Developers',
+    'License :: OSI Approved :: BSD License',
+    'Natural Language :: English',
+    'Operating System :: OS Independent',
+    'Programming Language :: Python',
+    'Topic :: Software Development',
+    'Topic :: Utilities',
+]
+dependencies = [
+    'typing-inspect',
+    'typing_extensions',
+
+    # version compatibility
+    'dataclasses; python_version < "3.7"',
+    'aenum; python_version < "3.7"',
+]
+
+[project.urls]
+homepage = "https://jarryshaw.github.io/zlogging/"
+documentation = "https://jarryshaw.github.io/zlogging/"
+repository = "https://github.com/JarryShaw/zlogging"
+changelog = "https://github.com/JarryShaw/zlogging/releases"
+
+[project.optional-dependencies]
+docs = [
+    "Sphinx>=6.1.3",
+    "sphinx-autodoc-typehints", "sphinx-opengraph", "sphinx-copybutton",
+    "furo",
+]
+
+# setuptools specific
+
+[tool.setuptools]
+zip-safe = false  # We use __file__ in zlogging/__init__.py, therefore Scapy isn't zip safe
+
+[tool.setuptools.packages.find]
+include = [
+    "zlogging*",
+]
+exclude = [
+    "test*",
+    "docs*",
+    "sample*",
+]
+
+[tool.setuptools.dynamic]
+version = { attr="zlogging.__version__" }

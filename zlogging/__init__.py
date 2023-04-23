@@ -18,3 +18,6 @@ __all__ = [
     'IntervalType', 'IntType', 'PortType', 'RecordType', 'SetType',
     'StringType', 'SubnetType', 'TimeType', 'VectorType',
 ]
+
+# version string
+__version__ = '0.1.2'

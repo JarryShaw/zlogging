@@ -11,6 +11,8 @@ import sys
 import typing
 from typing import TYPE_CHECKING
 
+import zlogging
+
 if TYPE_CHECKING:
     from typing import Any
 
@@ -38,7 +40,7 @@ copyright = f'2020-{datetime.datetime.today().year}, Jarry Shaw'  # pylint: disa
 author = 'Jarry Shaw'
 
 # The full version, including alpha/beta/rc tags
-release = '0.1.2'
+release = zlogging.__version__
 
 
 # -- General configuration ---------------------------------------------------

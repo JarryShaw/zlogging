@@ -3,16 +3,6 @@ name = "pypi"
 url = "https://pypi.org/simple"
 verify_ssl = true
 
-[[source]]
-name = "tuna"
-url = "https://pypi.tuna.tsinghua.edu.cn/simple"
-verify_ssl = true
-
-[[source]]
-name = "sjtu"
-url = "https://mirrors.sjtug.sjtu.edu.cn/pypi/web/simple"
-verify_ssl = true
-
 [dev-packages]
 zlogging = {editable = true,path = "."}
 autopep8 = "*"
@@ -23,10 +13,13 @@ vermin = "*"
 ipython = "*"
 coverage = "*"
 codecov = "*"
-esbonio = "*"
 sphinx = "*"
 sphinx-autodoc-typehints = "*"
-rstcheck = "*"
+furo = "*"
+sphinxext-opengraph = "*"
+sphinx-copybutton = "*"
+rstcheck = {extras = ["sphinx","toml"],version = "*"}
+esbonio = "*"
 pytest = "*"
 pytest-cov = "*"
 tox = "*"
@@ -34,6 +27,8 @@ beautifulsoup4 = {extras = ["html5lib"],version = "*"}
 html2text = "*"
 requests = "*"
 types-requests = "*"
+build = "*"
+twine = "*"
 
 [packages]
 aenum = "*"

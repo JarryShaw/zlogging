@@ -1,0 +1,61 @@
+name: "Enum Update"
+
+on:
+  schedule:
+    - cron: '0 10 * * 6' # everyday at 10am
+  push:
+    branches: [main, ]
+
+jobs:
+  enum-update:
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+
+      - name: Install and Setup
+        run: |
+          set -x
+
+          python -m pip install -U pip setuptools wheel
+          python -m pip install -U beautifulsoup4[html5lib] requests html2text
+          python -m pip install -e .
+
+      - name: Update Vendor
+        run: |
+          set -x
+
+          export PCAPKIT_VENDOR_RETRY=10
+          export PCAPKIT_CI_MODE=1
+
+          python gen/fetch.py
+          python gen/make.py
+
+      - name: Verify Changed files
+        uses: tj-actions/verify-changed-files@v14
+        id: verify-changed-files
+
+      - name: Bump Version
+        if: steps.verify-changed-files.outputs.files_changed == 'true'
+        run: |
+          python util/bump_version.py
+
+      - name: Commit changes
+        if: steps.verify-changed-files.outputs.files_changed == 'true'
+        run: |
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
+          git commit -am"Bumped version to $(python -c 'import pcapkit; print(pcapkit.__version__)')
+
+          Updated constant enumerations at $(date). The following files
+          have been changed: ${{ steps.verify-changed-files.outputs.changed_files }}"
+
+      - name: Push changes
+        uses: ad-m/github-push-action@master
+        if: steps.verify-changed-files.outputs.files_changed == 'true'
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          branch: ${{ github.ref }}
