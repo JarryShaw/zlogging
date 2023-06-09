@@ -90,8 +90,8 @@ for dirpath, _, filenames in os.walk(os.path.join(ROOT, 'sources')):
         filter(lambda name: os.path.splitext(name)[1] == '.html', filenames)
     ))
 
-# namespace, enum, name
-enum_records = []  # type: list[tuple[str, str, str, str]]
+# namespace, module_name, enum, name, enum_name
+enum_records = []  # type: list[tuple[str, str, str, str, str]]
 
 # postpone checks
 dest_list = []
@@ -149,7 +149,15 @@ for html_file in sorted(file_list):
             namespace = 'zeek'
         enum_name = match.group('enum')
 
-        dest = os.path.join(PATH, f'{namespace}.py')
+        ns_parts = namespace.split('_')
+        for index, part in enumerate(ns_parts):
+            if part.isupper():
+                ns_parts[index] = part.lower()
+                continue
+            ns_parts[index] = re.sub(r'([A-Z])', r'_\1', namespace).lower().lstrip('_')
+        module_name = '_'.join(ns_parts)
+
+        dest = os.path.join(PATH, f'{module_name}.py')
         if not os.path.isfile(dest):
             with open(dest, 'w', encoding='utf-8') as file:
                 file.write(TEMPLATE_ENUM.format(namespace=namespace))
@@ -186,7 +194,7 @@ for html_file in sorted(file_list):
                     print(f'    {safe_enum} = enum.auto()', file=file)
                 if index != length:
                     print('', file=file)
-                enum_records.append((namespace, enum_name, enum, safe_enum))
+                enum_records.append((namespace, module_name, enum_name, enum, safe_enum))
 
         dest_list.append(dest)
 
@@ -194,9 +202,9 @@ imported = []
 enum_line = collections.defaultdict(list)
 with open(os.path.join(PATH, '__init__.py'), 'w', encoding='utf-8') as file:
     file.write(TEMPLATE_INIT)
-    for namespace, enum, name, enum_name in sorted(enum_records):
+    for namespace, module_name, enum, name, enum_name in sorted(enum_records):
         if (namespace, enum) not in imported:
-            print(f'from zlogging.enum.{namespace} import {enum} as {namespace}_{enum}', file=file)
+            print(f'from zlogging.enum.{module_name} import {enum} as {namespace}_{enum}', file=file)
             imported.append((namespace, enum))
 
             enum_line[namespace].append(f'    {enum!r}: {namespace}_{enum},')
