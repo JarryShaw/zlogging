@@ -1,7 +1,7 @@
 ``Log`` Namespace
 -----------------
 
-.. automodule:: zlogging.enum.Log
+.. automodule:: zlogging.enum.log
    :members:
    :undoc-members:
    :show-inheritance:

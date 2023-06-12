@@ -1,7 +1,7 @@
 ``Weird`` Namespace
 -------------------
 
-.. automodule:: zlogging.enum.Weird
+.. automodule:: zlogging.enum.weird
    :members:
    :undoc-members:
    :show-inheritance:

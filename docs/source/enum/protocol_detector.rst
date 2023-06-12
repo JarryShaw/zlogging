@@ -1,7 +1,7 @@
 ``ProtocolDetector`` Namespace
 ------------------------------
 
-.. automodule:: zlogging.enum.ProtocolDetector
+.. automodule:: zlogging.enum.protocol_detector
    :members:
    :undoc-members:
    :show-inheritance:

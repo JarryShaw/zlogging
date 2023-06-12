@@ -1,7 +1,7 @@
-``Signatures`` Namespace
+``Supervisor`` Namespace
 ------------------------
 
-.. automodule:: zlogging.enum.signatures
+.. automodule:: zlogging.enum.supervisor
    :members:
    :undoc-members:
    :show-inheritance:

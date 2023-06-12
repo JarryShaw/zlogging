@@ -1,7 +1,7 @@
 ``Input`` Namespace
 -------------------
 
-.. automodule:: zlogging.enum.Input
+.. automodule:: zlogging.enum.input
    :members:
    :undoc-members:
    :show-inheritance:

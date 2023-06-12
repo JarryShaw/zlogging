@@ -1,7 +1,7 @@
-``JSON`` Namespace
+``Pcap`` Namespace
 ------------------
 
-.. automodule:: zlogging.enum.json
+.. automodule:: zlogging.enum.pcap
    :members:
    :undoc-members:
    :show-inheritance:

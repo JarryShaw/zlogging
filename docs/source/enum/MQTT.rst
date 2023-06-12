@@ -1,7 +1,7 @@
 ``MQTT`` Namespace
 ------------------
 
-.. automodule:: zlogging.enum.MQTT
+.. automodule:: zlogging.enum.mqtt
    :members:
    :undoc-members:
    :show-inheritance:

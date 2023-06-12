@@ -1,7 +1,7 @@
 ``Intel`` Namespace
 -------------------
 
-.. automodule:: zlogging.enum.Intel
+.. automodule:: zlogging.enum.intel
    :members:
    :undoc-members:
    :show-inheritance:

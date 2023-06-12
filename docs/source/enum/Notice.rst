@@ -1,7 +1,7 @@
 ``Notice`` Namespace
 --------------------
 
-.. automodule:: zlogging.enum.Notice
+.. automodule:: zlogging.enum.notice
    :members:
    :undoc-members:
    :show-inheritance:

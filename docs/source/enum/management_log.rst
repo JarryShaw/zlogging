@@ -1,7 +1,7 @@
-``ZeekygenExample`` Namespace
+``Management::Log`` Namespace
 -----------------------------
 
-.. automodule:: zlogging.enum.ZeekygenExample
+.. automodule:: zlogging.enum.management_log
    :members:
    :undoc-members:
    :show-inheritance:

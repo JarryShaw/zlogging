@@ -1,7 +1,7 @@
 ``Cluster`` Namespace
 ---------------------
 
-.. automodule:: zlogging.enum.Cluster
+.. automodule:: zlogging.enum.cluster
    :members:
    :undoc-members:
    :show-inheritance:

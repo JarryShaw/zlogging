@@ -1,7 +1,7 @@
 ``SSL`` Namespace
 -----------------
 
-.. automodule:: zlogging.enum.SSL
+.. automodule:: zlogging.enum.ssl
    :members:
    :undoc-members:
    :show-inheritance:

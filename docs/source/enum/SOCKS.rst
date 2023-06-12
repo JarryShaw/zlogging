@@ -1,7 +1,7 @@
 ``SOCKS`` Namespace
 -------------------
 
-.. automodule:: zlogging.enum.SOCKS
+.. automodule:: zlogging.enum.socks
    :members:
    :undoc-members:
    :show-inheritance:

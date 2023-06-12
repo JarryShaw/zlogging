@@ -39,6 +39,7 @@ jobs:
         run: |
           set -x
 
+          python util/enum_docs.py
           python util/bump_version.py
           isort -l100 -pzlogging zlogging
 

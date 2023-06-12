@@ -1,7 +1,7 @@
 ``Known`` Namespace
 -------------------
 
-.. automodule:: zlogging.enum.Known
+.. automodule:: zlogging.enum.known
    :members:
    :undoc-members:
    :show-inheritance:

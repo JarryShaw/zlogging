@@ -1,7 +1,7 @@
 ``Tunnel`` Namespace
 --------------------
 
-.. automodule:: zlogging.enum.Tunnel
+.. automodule:: zlogging.enum.tunnel
    :members:
    :undoc-members:
    :show-inheritance:
