@@ -19,7 +19,7 @@ pypi-upload:
 
 enum:
 	pipenv run python zlogging/_gen.py --caching
-	pipenv run util/enum_docs.py
+	pipenv run python util/enum_docs.py
 	$(MAKE) isort
 
 sphinx-build:
