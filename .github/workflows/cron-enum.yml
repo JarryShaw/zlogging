@@ -28,9 +28,7 @@ jobs:
         run: |
           set -x
 
-          python gen/fetch.py
-          python gen/make.py
-          isort -l100 -pzlogging zlogging/enum
+          zlogging-gen
 
       - name: Verify Changed files
         uses: tj-actions/verify-changed-files@v14

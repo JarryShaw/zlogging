@@ -25,8 +25,12 @@ pytest-cov = "*"
 tox = "*"
 beautifulsoup4 = {extras = ["html5lib"],version = "*"}
 html2text = "*"
-requests = "*"
+requests = {extras = ["socks"],version = "*"}
+types-docutils = "*"
+types-emoji = "*"
 types-requests = "*"
+types-urllib3 = "*"
+types-setuptools = "*"
 build = "*"
 twine = "*"
 

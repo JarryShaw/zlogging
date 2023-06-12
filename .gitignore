@@ -4,6 +4,8 @@ gen/sources
 temp
 
 _build
+zlogging/_extern
+zlogging/_cache
 
 # Created by https://www.toptal.com/developers/gitignore/api/python,macos,visualstudiocode
 # Edit at https://www.toptal.com/developers/gitignore?templates=python,macos,visualstudiocode
