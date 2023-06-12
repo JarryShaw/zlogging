@@ -1,7 +1,7 @@
 ``LoadBalancing`` Namespace
 ---------------------------
 
-.. automodule:: zlogging.enum.LoadBalancing
+.. automodule:: zlogging.enum.load_balancing
    :members:
    :undoc-members:
    :show-inheritance:

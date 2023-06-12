@@ -1,7 +1,7 @@
 ``Broker`` Namespace
 --------------------
 
-.. automodule:: zlogging.enum.Broker
+.. automodule:: zlogging.enum.broker
    :members:
    :undoc-members:
    :show-inheritance:

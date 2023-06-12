@@ -1,7 +1,7 @@
 ``SumStats`` Namespace
 ----------------------
 
-.. automodule:: zlogging.enum.SumStats
+.. automodule:: zlogging.enum.sum_stats
    :members:
    :undoc-members:
    :show-inheritance:

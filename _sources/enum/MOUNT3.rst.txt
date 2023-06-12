@@ -1,7 +1,7 @@
 ``MOUNT3`` Namespace
 --------------------
 
-.. automodule:: zlogging.enum.MOUNT3
+.. automodule:: zlogging.enum.mount3
    :members:
    :undoc-members:
    :show-inheritance:

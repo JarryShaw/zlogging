@@ -1,7 +1,7 @@
 ``JSON`` Namespace
 ------------------
 
-.. automodule:: zlogging.enum.JSON
+.. automodule:: zlogging.enum.json
    :members:
    :undoc-members:
    :show-inheritance:

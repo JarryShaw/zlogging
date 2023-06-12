@@ -1,7 +1,7 @@
 ``NFS3`` Namespace
 ------------------
 
-.. automodule:: zlogging.enum.NFS3
+.. automodule:: zlogging.enum.nfs3
    :members:
    :undoc-members:
    :show-inheritance:
