@@ -1,6 +1,6 @@
 {% set name = "zlogging" %}
-{% set version = environ['zlogging_VERSION'] %}
-{% set build_number = environ['zlogging_BUILD'] %}
+{% set version = environ['ZLOGGING_VERSION'] %}
+{% set build_number = environ['ZLOGGING_BUILD'] %}
 
 package:
   name: "{{ name|lower }}"
@@ -42,7 +42,7 @@ about:
   license_file:
     - LICENSE
   summary: "ZLogging: Bro/Zeek logging framework for Python."
-  doc_url: https://jarryshaw.github.io/Zlogging
+  doc_url: https://jarryshaw.github.io/zlogging
   dev_url: https://github.com/jarryshaw/zlogging
 
 extra:
