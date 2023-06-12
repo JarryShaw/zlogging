@@ -32,4 +32,4 @@ __all__ = [
 ]
 
 # version string
-__version__ = '0.1.2.post5'
+__version__ = '0.1.3'
