@@ -172,12 +172,9 @@ class CatchReleaseActions(enum.IntFlag):
     #: watching the IP address and will add a new rule after the current rule expires.
     ADDED = enum.auto()
 
-    #: (present if base/frameworks/netcontrol/types.zeek is loaded)
-    #: Stop forwarding all packets matching the entity.
-    #: No additional arguments.
-    DROP = enum.auto()
-
     #: A drop was requested by catch and release.
+    DROP_REQUESTED = enum.auto()
+
     #: An address was successfully blocked by catch and release.
     DROPPED = enum.auto()
 

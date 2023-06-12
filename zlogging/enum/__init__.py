@@ -7,11 +7,17 @@ import warnings
 from typing import TYPE_CHECKING
 
 from zlogging._exc import BroDeprecationWarning
+from zlogging.enum.af_packet import ChecksumMode as AF_Packet_ChecksumMode
+from zlogging.enum.af_packet import FanoutMode as AF_Packet_FanoutMode
 from zlogging.enum.broker import BackendType as Broker_BackendType
+from zlogging.enum.broker import BrokerProtocol as Broker_BrokerProtocol
 from zlogging.enum.broker import DataType as Broker_DataType
 from zlogging.enum.broker import ErrorCode as Broker_ErrorCode
 from zlogging.enum.broker import PeerStatus as Broker_PeerStatus
 from zlogging.enum.broker import QueryStatus as Broker_QueryStatus
+from zlogging.enum.broker import SQLiteFailureMode as Broker_SQLiteFailureMode
+from zlogging.enum.broker import SQLiteJournalMode as Broker_SQLiteJournalMode
+from zlogging.enum.broker import SQLiteSynchronous as Broker_SQLiteSynchronous
 from zlogging.enum.broker import Type as Broker_Type
 from zlogging.enum.cluster import NodeType as Cluster_NodeType
 from zlogging.enum.dce_rpc import IfID as DCE_RPC_IfID
@@ -28,41 +34,47 @@ from zlogging.enum.load_balancing import Method as LoadBalancing_Method
 from zlogging.enum.log import ID as Log_ID
 from zlogging.enum.log import PrintLogType as Log_PrintLogType
 from zlogging.enum.log import Writer as Log_Writer
+from zlogging.enum.management import Role as Management_Role
+from zlogging.enum.management import State as Management_State
+from zlogging.enum.management_controller_runtime import \
+    ConfigState as Management_Controller_Runtime_ConfigState
+from zlogging.enum.management_log import Level as Management_Log_Level
 from zlogging.enum.mount3 import auth_flavor_t as MOUNT3_auth_flavor_t
 from zlogging.enum.mount3 import proc_t as MOUNT3_proc_t
 from zlogging.enum.mount3 import status_t as MOUNT3_status_t
 from zlogging.enum.mqtt import SubUnsub as MQTT_SubUnsub
-from zlogging.enum.nfs3 import createmode_t as NFS3_createmode_t
-from zlogging.enum.nfs3 import file_type_t as NFS3_file_type_t
-from zlogging.enum.nfs3 import proc_t as NFS3_proc_t
-from zlogging.enum.nfs3 import stable_how_t as NFS3_stable_how_t
-from zlogging.enum.nfs3 import status_t as NFS3_status_t
-from zlogging.enum.nfs3 import time_how_t as NFS3_time_how_t
 from zlogging.enum.net_control import CatchReleaseActions as NetControl_CatchReleaseActions
 from zlogging.enum.net_control import EntityType as NetControl_EntityType
 from zlogging.enum.net_control import InfoCategory as NetControl_InfoCategory
 from zlogging.enum.net_control import InfoState as NetControl_InfoState
 from zlogging.enum.net_control import RuleType as NetControl_RuleType
 from zlogging.enum.net_control import TargetType as NetControl_TargetType
+from zlogging.enum.nfs3 import createmode_t as NFS3_createmode_t
+from zlogging.enum.nfs3 import file_type_t as NFS3_file_type_t
+from zlogging.enum.nfs3 import proc_t as NFS3_proc_t
+from zlogging.enum.nfs3 import stable_how_t as NFS3_stable_how_t
+from zlogging.enum.nfs3 import status_t as NFS3_status_t
+from zlogging.enum.nfs3 import time_how_t as NFS3_time_how_t
 from zlogging.enum.notice import Action as Notice_Action
 from zlogging.enum.notice import Type as Notice_Type
 from zlogging.enum.open_flow import Plugin as OpenFlow_Plugin
 from zlogging.enum.open_flow import ofp_action_type as OpenFlow_ofp_action_type
 from zlogging.enum.open_flow import ofp_config_flags as OpenFlow_ofp_config_flags
 from zlogging.enum.open_flow import ofp_flow_mod_command as OpenFlow_ofp_flow_mod_command
+from zlogging.enum.pcap import filter_state as Pcap_filter_state
 from zlogging.enum.protocol_detector import dir as ProtocolDetector_dir
 from zlogging.enum.reporter import Level as Reporter_Level
+from zlogging.enum.signatures import Action as Signatures_Action
 from zlogging.enum.smb import Action as SMB_Action
 from zlogging.enum.socks import RequestType as SOCKS_RequestType
-from zlogging.enum.ssl import SctSource as SSL_SctSource
-from zlogging.enum.signatures import Action as Signatures_Action
 from zlogging.enum.software import Type as Software_Type
+from zlogging.enum.ssl import SctSource as SSL_SctSource
 from zlogging.enum.sum_stats import Calculation as SumStats_Calculation
 from zlogging.enum.supervisor import ClusterRole as Supervisor_ClusterRole
+from zlogging.enum.telemetry import MetricType as Telemetry_MetricType
 from zlogging.enum.tunnel import Action as Tunnel_Action
 from zlogging.enum.tunnel import Type as Tunnel_Type
 from zlogging.enum.weird import Action as Weird_Action
-from zlogging.enum.zeekygen_example import SimpleEnum as ZeekygenExample_SimpleEnum
 from zlogging.enum.zeek import Direction as zeek_Direction
 from zlogging.enum.zeek import Host as zeek_Host
 from zlogging.enum.zeek import IPAddrAnonymization as zeek_IPAddrAnonymization
@@ -74,21 +86,36 @@ from zlogging.enum.zeek import link_encap as zeek_link_encap
 from zlogging.enum.zeek import pkt_profile_modes as zeek_pkt_profile_modes
 from zlogging.enum.zeek import rpc_status as zeek_rpc_status
 from zlogging.enum.zeek import transport_proto as zeek_transport_proto
+from zlogging.enum.zeekygen_example import SimpleEnum as ZeekygenExample_SimpleEnum
 
 __all__ = ['globals']
 
 if TYPE_CHECKING:
     from enum import Enum
 
-_enum_Barnyard2 = {
-    'Barnyard2_LOG': Log_ID.Barnyard2_LOG,
+builtins.globals()['ZLogging::AF_Packet'] = {
+    'CHECKSUM_KERNEL': AF_Packet_ChecksumMode.CHECKSUM_KERNEL,
+    'CHECKSUM_OFF': AF_Packet_ChecksumMode.CHECKSUM_OFF,
+    'CHECKSUM_ON': AF_Packet_ChecksumMode.CHECKSUM_ON,
+    'ChecksumMode': AF_Packet_ChecksumMode,
+    'FANOUT_CBPF': AF_Packet_FanoutMode.FANOUT_CBPF,
+    'FANOUT_CPU': AF_Packet_FanoutMode.FANOUT_CPU,
+    'FANOUT_EBPF': AF_Packet_FanoutMode.FANOUT_EBPF,
+    'FANOUT_HASH': AF_Packet_FanoutMode.FANOUT_HASH,
+    'FANOUT_QM': AF_Packet_FanoutMode.FANOUT_QM,
+    'FanoutMode': AF_Packet_FanoutMode,
 }
 
-_enum_Broker = {
+builtins.globals()['ZLogging::Analyzer::Logging'] = {
+    'Analyzer_Logging_LOG': Log_ID.Analyzer_Logging_LOG,
+}
+
+builtins.globals()['ZLogging::Broker'] = {
     'ADDR': Broker_DataType.ADDR,
     'BACKEND_FAILURE': Broker_ErrorCode.BACKEND_FAILURE,
     'BOOL': Broker_DataType.BOOL,
     'BackendType': Broker_BackendType,
+    'BrokerProtocol': Broker_BrokerProtocol,
     'Broker_LOG': Log_ID.Broker_LOG,
     'CAF_ERROR': Broker_ErrorCode.CAF_ERROR,
     'CANNOT_OPEN_FILE': Broker_ErrorCode.CANNOT_OPEN_FILE,
@@ -113,6 +140,7 @@ _enum_Broker = {
     'INVALID_TOPIC_KEY': Broker_ErrorCode.INVALID_TOPIC_KEY,
     'MASTER_EXISTS': Broker_ErrorCode.MASTER_EXISTS,
     'MEMORY': Broker_BackendType.MEMORY,
+    'NATIVE': Broker_BrokerProtocol.NATIVE,
     'NONE': Broker_DataType.NONE,
     'NO_ERROR': Broker_ErrorCode.NO_ERROR,
     'NO_SUCH_KEY': Broker_ErrorCode.NO_SUCH_KEY,
@@ -128,9 +156,19 @@ _enum_Broker = {
     'QueryStatus': Broker_QueryStatus,
     'RECONNECTING': Broker_PeerStatus.RECONNECTING,
     'REQUEST_TIMEOUT': Broker_ErrorCode.REQUEST_TIMEOUT,
-    'ROCKSDB': Broker_BackendType.ROCKSDB,
     'SET': Broker_DataType.SET,
     'SQLITE': Broker_BackendType.SQLITE,
+    'SQLITE_FAILURE_MODE_DELETE': Broker_SQLiteFailureMode.SQLITE_FAILURE_MODE_DELETE,
+    'SQLITE_FAILURE_MODE_FAIL': Broker_SQLiteFailureMode.SQLITE_FAILURE_MODE_FAIL,
+    'SQLITE_JOURNAL_MODE_DELETE': Broker_SQLiteJournalMode.SQLITE_JOURNAL_MODE_DELETE,
+    'SQLITE_JOURNAL_MODE_WAL': Broker_SQLiteJournalMode.SQLITE_JOURNAL_MODE_WAL,
+    'SQLITE_SYNCHRONOUS_EXTRA': Broker_SQLiteSynchronous.SQLITE_SYNCHRONOUS_EXTRA,
+    'SQLITE_SYNCHRONOUS_FULL': Broker_SQLiteSynchronous.SQLITE_SYNCHRONOUS_FULL,
+    'SQLITE_SYNCHRONOUS_NORMAL': Broker_SQLiteSynchronous.SQLITE_SYNCHRONOUS_NORMAL,
+    'SQLITE_SYNCHRONOUS_OFF': Broker_SQLiteSynchronous.SQLITE_SYNCHRONOUS_OFF,
+    'SQLiteFailureMode': Broker_SQLiteFailureMode,
+    'SQLiteJournalMode': Broker_SQLiteJournalMode,
+    'SQLiteSynchronous': Broker_SQLiteSynchronous,
     'STALE_DATA': Broker_ErrorCode.STALE_DATA,
     'STATUS': Broker_Type.STATUS,
     'STRING': Broker_DataType.STRING,
@@ -142,14 +180,16 @@ _enum_Broker = {
     'Type': Broker_Type,
     'UNSPECIFIED': Broker_ErrorCode.UNSPECIFIED,
     'VECTOR': Broker_DataType.VECTOR,
+    'WEBSOCKET': Broker_BrokerProtocol.WEBSOCKET,
 }
 
-_enum_CaptureLoss = {
+builtins.globals()['ZLogging::CaptureLoss'] = {
     'CaptureLoss_LOG': Log_ID.CaptureLoss_LOG,
+    'CaptureLoss_Too_Little_Traffic': Notice_Type.CaptureLoss_Too_Little_Traffic,
     'CaptureLoss_Too_Much_Loss': Notice_Type.CaptureLoss_Too_Much_Loss,
 }
 
-_enum_Cluster = {
+builtins.globals()['ZLogging::Cluster'] = {
     'CONTROL': Cluster_NodeType.CONTROL,
     'Cluster_LOG': Log_ID.Cluster_LOG,
     'LOGGER': Cluster_NodeType.LOGGER,
@@ -161,11 +201,11 @@ _enum_Cluster = {
     'WORKER': Cluster_NodeType.WORKER,
 }
 
-_enum_Config = {
+builtins.globals()['ZLogging::Config'] = {
     'Config_LOG': Log_ID.Config_LOG,
 }
 
-_enum_Conn = {
+builtins.globals()['ZLogging::Conn'] = {
     'Conn_Content_Gap': Notice_Type.Conn_Content_Gap,
     'Conn_IN_ORIG': Intel_Where.Conn_IN_ORIG,
     'Conn_IN_RESP': Intel_Where.Conn_IN_RESP,
@@ -173,7 +213,7 @@ _enum_Conn = {
     'Conn_Retransmission_Inconsistency': Notice_Type.Conn_Retransmission_Inconsistency,
 }
 
-_enum_DCE_RPC = {
+builtins.globals()['ZLogging::DCE_RPC'] = {
     'ACK': DCE_RPC_PType.ACK,
     'ALTER_CONTEXT': DCE_RPC_PType.ALTER_CONTEXT,
     'ALTER_CONTEXT_RESP': DCE_RPC_PType.ALTER_CONTEXT_RESP,
@@ -214,28 +254,28 @@ _enum_DCE_RPC = {
     'wkssvc': DCE_RPC_IfID.wkssvc,
 }
 
-_enum_DHCP = {
+builtins.globals()['ZLogging::DHCP'] = {
     'DHCP_CLIENT': Software_Type.DHCP_CLIENT,
     'DHCP_LOG': Log_ID.DHCP_LOG,
     'DHCP_SERVER': Software_Type.DHCP_SERVER,
 }
 
-_enum_DNP3 = {
+builtins.globals()['ZLogging::DNP3'] = {
     'DNP3_LOG': Log_ID.DNP3_LOG,
 }
 
-_enum_DNS = {
+builtins.globals()['ZLogging::DNS'] = {
     'DNS_External_Name': Notice_Type.DNS_External_Name,
     'DNS_IN_REQUEST': Intel_Where.DNS_IN_REQUEST,
     'DNS_IN_RESPONSE': Intel_Where.DNS_IN_RESPONSE,
     'DNS_LOG': Log_ID.DNS_LOG,
 }
 
-_enum_DPD = {
+builtins.globals()['ZLogging::DPD'] = {
     'DPD_LOG': Log_ID.DPD_LOG,
 }
 
-_enum_FTP = {
+builtins.globals()['ZLogging::FTP'] = {
     'FTP_Bruteforcing': Notice_Type.FTP_Bruteforcing,
     'FTP_CLIENT': Software_Type.FTP_CLIENT,
     'FTP_LOG': Log_ID.FTP_LOG,
@@ -243,13 +283,13 @@ _enum_FTP = {
     'FTP_Site_Exec_Success': Notice_Type.FTP_Site_Exec_Success,
 }
 
-_enum_Files = {
+builtins.globals()['ZLogging::Files'] = {
     'Files_IN_HASH': Intel_Where.Files_IN_HASH,
     'Files_IN_NAME': Intel_Where.Files_IN_NAME,
     'Files_LOG': Log_ID.Files_LOG,
 }
 
-_enum_HTTP = {
+builtins.globals()['ZLogging::HTTP'] = {
     'COOKIE_SQLI': HTTP_Tags.COOKIE_SQLI,
     'EMPTY': HTTP_Tags.EMPTY,
     'HTTP_APPSERVER': Software_Type.HTTP_APPSERVER,
@@ -270,18 +310,18 @@ _enum_HTTP = {
     'URI_SQLI': HTTP_Tags.URI_SQLI,
 }
 
-_enum_Heartbleed = {
+builtins.globals()['ZLogging::Heartbleed'] = {
     'Heartbleed_SSL_Heartbeat_Attack': Notice_Type.Heartbleed_SSL_Heartbeat_Attack,
     'Heartbleed_SSL_Heartbeat_Attack_Success': Notice_Type.Heartbleed_SSL_Heartbeat_Attack_Success,
     'Heartbleed_SSL_Heartbeat_Many_Requests': Notice_Type.Heartbleed_SSL_Heartbeat_Many_Requests,
     'Heartbleed_SSL_Heartbeat_Odd_Length': Notice_Type.Heartbleed_SSL_Heartbeat_Odd_Length,
 }
 
-_enum_IRC = {
+builtins.globals()['ZLogging::IRC'] = {
     'IRC_LOG': Log_ID.IRC_LOG,
 }
 
-_enum_Input = {
+builtins.globals()['ZLogging::Input'] = {
     'EVENT_CHANGED': Input_Event.EVENT_CHANGED,
     'EVENT_NEW': Input_Event.EVENT_NEW,
     'EVENT_REMOVED': Input_Event.EVENT_REMOVED,
@@ -299,7 +339,7 @@ _enum_Input = {
     'STREAM': Input_Mode.STREAM,
 }
 
-_enum_Intel = {
+builtins.globals()['ZLogging::Intel'] = {
     'ADDR': Intel_Type.ADDR,
     'CERT_HASH': Intel_Type.CERT_HASH,
     'DOMAIN': Intel_Type.DOMAIN,
@@ -318,18 +358,18 @@ _enum_Intel = {
     'Where': Intel_Where,
 }
 
-_enum_JSON = {
+builtins.globals()['ZLogging::JSON'] = {
     'TS_EPOCH': JSON_TimestampFormat.TS_EPOCH,
     'TS_ISO8601': JSON_TimestampFormat.TS_ISO8601,
     'TS_MILLIS': JSON_TimestampFormat.TS_MILLIS,
     'TimestampFormat': JSON_TimestampFormat,
 }
 
-_enum_KRB = {
+builtins.globals()['ZLogging::KRB'] = {
     'KRB_LOG': Log_ID.KRB_LOG,
 }
 
-_enum_Known = {
+builtins.globals()['ZLogging::Known'] = {
     'Known_CERTS_LOG': Log_ID.Known_CERTS_LOG,
     'Known_HOSTS_LOG': Log_ID.Known_HOSTS_LOG,
     'Known_MODBUS_LOG': Log_ID.Known_MODBUS_LOG,
@@ -339,16 +379,16 @@ _enum_Known = {
     'ModbusDeviceType': Known_ModbusDeviceType,
 }
 
-_enum_LoadBalancing = {
+builtins.globals()['ZLogging::LoadBalancing'] = {
     'AUTO_BPF': LoadBalancing_Method.AUTO_BPF,
     'Method': LoadBalancing_Method,
 }
 
-_enum_LoadedScripts = {
+builtins.globals()['ZLogging::LoadedScripts'] = {
     'LoadedScripts_LOG': Log_ID.LoadedScripts_LOG,
 }
 
-_enum_Log = {
+builtins.globals()['ZLogging::Log'] = {
     'ID': Log_ID,
     'PRINTLOG': Log_ID.PRINTLOG,
     'PrintLogType': Log_PrintLogType,
@@ -362,7 +402,7 @@ _enum_Log = {
     'Writer': Log_Writer,
 }
 
-_enum_MOUNT3 = {
+builtins.globals()['ZLogging::MOUNT3'] = {
     'AUTH_DES': MOUNT3_auth_flavor_t.AUTH_DES,
     'AUTH_NULL': MOUNT3_auth_flavor_t.AUTH_NULL,
     'AUTH_SHORT': MOUNT3_auth_flavor_t.AUTH_SHORT,
@@ -390,7 +430,7 @@ _enum_MOUNT3 = {
     'status_t': MOUNT3_status_t,
 }
 
-_enum_MQTT = {
+builtins.globals()['ZLogging::MQTT'] = {
     'MQTT_CONNECT_LOG': Log_ID.MQTT_CONNECT_LOG,
     'MQTT_PUBLISH_LOG': Log_ID.MQTT_PUBLISH_LOG,
     'MQTT_SUBSCRIBE_LOG': Log_ID.MQTT_SUBSCRIBE_LOG,
@@ -399,16 +439,47 @@ _enum_MQTT = {
     'UNSUBSCRIBE': MQTT_SubUnsub.UNSUBSCRIBE,
 }
 
-_enum_Modbus = {
+builtins.globals()['ZLogging::Management'] = {
+    'AGENT': Management_Role.AGENT,
+    'CONTROLLER': Management_Role.CONTROLLER,
+    'CRASHED': Management_State.CRASHED,
+    'FAILED': Management_State.FAILED,
+    'NODE': Management_Role.NODE,
+    'NONE': Management_Role.NONE,
+    'PENDING': Management_State.PENDING,
+    'RUNNING': Management_State.RUNNING,
+    'Role': Management_Role,
+    'STOPPED': Management_State.STOPPED,
+    'State': Management_State,
+    'UNKNOWN': Management_State.UNKNOWN,
+}
+
+builtins.globals()['ZLogging::Management::Controller::Runtime'] = {
+    'ConfigState': Management_Controller_Runtime_ConfigState,
+    'DEPLOYED': Management_Controller_Runtime_ConfigState.DEPLOYED,
+    'READY': Management_Controller_Runtime_ConfigState.READY,
+    'STAGED': Management_Controller_Runtime_ConfigState.STAGED,
+}
+
+builtins.globals()['ZLogging::Management::Log'] = {
+    'DEBUG': Management_Log_Level.DEBUG,
+    'ERROR': Management_Log_Level.ERROR,
+    'INFO': Management_Log_Level.INFO,
+    'Level': Management_Log_Level,
+    'Management_LOG': Log_ID.Management_LOG,
+    'WARNING': Management_Log_Level.WARNING,
+}
+
+builtins.globals()['ZLogging::Modbus'] = {
     'Modbus_LOG': Log_ID.Modbus_LOG,
     'Modbus_REGISTER_CHANGE_LOG': Log_ID.Modbus_REGISTER_CHANGE_LOG,
 }
 
-_enum_MySQL = {
+builtins.globals()['ZLogging::MySQL'] = {
     'MySQL_SERVER': Software_Type.MySQL_SERVER,
 }
 
-_enum_NFS3 = {
+builtins.globals()['ZLogging::NFS3'] = {
     'DATA_SYNC': NFS3_stable_how_t.DATA_SYNC,
     'DONT_CHANGE': NFS3_time_how_t.DONT_CHANGE,
     'EXCLUSIVE': NFS3_createmode_t.EXCLUSIVE,
@@ -486,22 +557,22 @@ _enum_NFS3 = {
     'time_how_t': NFS3_time_how_t,
 }
 
-_enum_NTLM = {
+builtins.globals()['ZLogging::NTLM'] = {
     'NTLM_LOG': Log_ID.NTLM_LOG,
 }
 
-_enum_NTP = {
+builtins.globals()['ZLogging::NTP'] = {
     'NTP_LOG': Log_ID.NTP_LOG,
 }
 
-_enum_NetControl = {
+builtins.globals()['ZLogging::NetControl'] = {
     'ADDED': NetControl_CatchReleaseActions.ADDED,
     'ADDRESS': NetControl_EntityType.ADDRESS,
     'CONNECTION': NetControl_EntityType.CONNECTION,
     'CatchReleaseActions': NetControl_CatchReleaseActions,
-    'DROP': NetControl_CatchReleaseActions.DROP,
     'DROP': NetControl_RuleType.DROP,
     'DROPPED': NetControl_CatchReleaseActions.DROPPED,
+    'DROP_REQUESTED': NetControl_CatchReleaseActions.DROP_REQUESTED,
     'ERROR': NetControl_InfoCategory.ERROR,
     'EXISTS': NetControl_InfoState.EXISTS,
     'EntityType': NetControl_EntityType,
@@ -517,7 +588,7 @@ _enum_NetControl = {
     'MODIFY': NetControl_RuleType.MODIFY,
     'MONITOR': NetControl_TargetType.MONITOR,
     'NetControl_CATCH_RELEASE': Log_ID.NetControl_CATCH_RELEASE,
-    'NetControl_DROP': Log_ID.NetControl_DROP,
+    'NetControl_DROP_LOG': Log_ID.NetControl_DROP_LOG,
     'NetControl_LOG': Log_ID.NetControl_LOG,
     'NetControl_SHUNT': Log_ID.NetControl_SHUNT,
     'REDIRECT': NetControl_RuleType.REDIRECT,
@@ -533,7 +604,7 @@ _enum_NetControl = {
     'WHITELIST': NetControl_RuleType.WHITELIST,
 }
 
-_enum_Notice = {
+builtins.globals()['ZLogging::Notice'] = {
     'ACTION_ADD_GEODATA': Notice_Action.ACTION_ADD_GEODATA,
     'ACTION_ALARM': Notice_Action.ACTION_ALARM,
     'ACTION_DROP': Notice_Action.ACTION_DROP,
@@ -549,15 +620,15 @@ _enum_Notice = {
     'Type': Notice_Type,
 }
 
-_enum_OCSP = {
+builtins.globals()['ZLogging::OCSP'] = {
     'OCSP_LOG': Log_ID.OCSP_LOG,
 }
 
-_enum_OS = {
+builtins.globals()['ZLogging::OS'] = {
     'OS_WINDOWS': Software_Type.OS_WINDOWS,
 }
 
-_enum_OpenFlow = {
+builtins.globals()['ZLogging::OpenFlow'] = {
     'BROKER': OpenFlow_Plugin.BROKER,
     'INVALID': OpenFlow_Plugin.INVALID,
     'OFLOG': OpenFlow_Plugin.OFLOG,
@@ -591,11 +662,11 @@ _enum_OpenFlow = {
     'ofp_flow_mod_command': OpenFlow_ofp_flow_mod_command,
 }
 
-_enum_PE = {
+builtins.globals()['ZLogging::PE'] = {
     'PE_LOG': Log_ID.PE_LOG,
 }
 
-_enum_PacketFilter = {
+builtins.globals()['ZLogging::PacketFilter'] = {
     'PacketFilter_Cannot_BPF_Shunt_Conn': Notice_Type.PacketFilter_Cannot_BPF_Shunt_Conn,
     'PacketFilter_Compile_Failure': Notice_Type.PacketFilter_Compile_Failure,
     'PacketFilter_DefaultPcapFilter': zeek_PcapFilterID.PacketFilter_DefaultPcapFilter,
@@ -607,7 +678,14 @@ _enum_PacketFilter = {
     'PacketFilter_Too_Long_To_Compile_Filter': Notice_Type.PacketFilter_Too_Long_To_Compile_Filter,
 }
 
-_enum_ProtocolDetector = {
+builtins.globals()['ZLogging::Pcap'] = {
+    'fatal': Pcap_filter_state.fatal,
+    'filter_state': Pcap_filter_state,
+    'ok': Pcap_filter_state.ok,
+    'warning': Pcap_filter_state.warning,
+}
+
+builtins.globals()['ZLogging::ProtocolDetector'] = {
     'BOTH': ProtocolDetector_dir.BOTH,
     'INCOMING': ProtocolDetector_dir.INCOMING,
     'NONE': ProtocolDetector_dir.NONE,
@@ -617,19 +695,19 @@ _enum_ProtocolDetector = {
     'dir': ProtocolDetector_dir,
 }
 
-_enum_RADIUS = {
+builtins.globals()['ZLogging::RADIUS'] = {
     'RADIUS_LOG': Log_ID.RADIUS_LOG,
 }
 
-_enum_RDP = {
+builtins.globals()['ZLogging::RDP'] = {
     'RDP_LOG': Log_ID.RDP_LOG,
 }
 
-_enum_RFB = {
+builtins.globals()['ZLogging::RFB'] = {
     'RFB_LOG': Log_ID.RFB_LOG,
 }
 
-_enum_Reporter = {
+builtins.globals()['ZLogging::Reporter'] = {
     'ERROR': Reporter_Level.ERROR,
     'INFO': Reporter_Level.INFO,
     'Level': Reporter_Level,
@@ -637,11 +715,11 @@ _enum_Reporter = {
     'WARNING': Reporter_Level.WARNING,
 }
 
-_enum_SIP = {
+builtins.globals()['ZLogging::SIP'] = {
     'SIP_LOG': Log_ID.SIP_LOG,
 }
 
-_enum_SMB = {
+builtins.globals()['ZLogging::SMB'] = {
     'Action': SMB_Action,
     'FILE_CLOSE': SMB_Action.FILE_CLOSE,
     'FILE_DELETE': SMB_Action.FILE_DELETE,
@@ -658,14 +736,13 @@ _enum_SMB = {
     'PRINT_OPEN': SMB_Action.PRINT_OPEN,
     'PRINT_READ': SMB_Action.PRINT_READ,
     'PRINT_WRITE': SMB_Action.PRINT_WRITE,
-    'SMB_AUTH_LOG': Log_ID.SMB_AUTH_LOG,
     'SMB_CMD_LOG': Log_ID.SMB_CMD_LOG,
     'SMB_FILES_LOG': Log_ID.SMB_FILES_LOG,
     'SMB_IN_FILE_NAME': Intel_Where.SMB_IN_FILE_NAME,
     'SMB_MAPPING_LOG': Log_ID.SMB_MAPPING_LOG,
 }
 
-_enum_SMTP = {
+builtins.globals()['ZLogging::SMTP'] = {
     'SMTP_Blocklist_Blocked_Host': Notice_Type.SMTP_Blocklist_Blocked_Host,
     'SMTP_Blocklist_Error_Message': Notice_Type.SMTP_Blocklist_Error_Message,
     'SMTP_IN_CC': Intel_Where.SMTP_IN_CC,
@@ -685,11 +762,11 @@ _enum_SMTP = {
     'SMTP_WEBMAIL_SERVER': Software_Type.SMTP_WEBMAIL_SERVER,
 }
 
-_enum_SNMP = {
+builtins.globals()['ZLogging::SNMP'] = {
     'SNMP_LOG': Log_ID.SNMP_LOG,
 }
 
-_enum_SOCKS = {
+builtins.globals()['ZLogging::SOCKS'] = {
     'CONNECTION': SOCKS_RequestType.CONNECTION,
     'PORT': SOCKS_RequestType.PORT,
     'RequestType': SOCKS_RequestType,
@@ -697,7 +774,7 @@ _enum_SOCKS = {
     'UDP_ASSOCIATE': SOCKS_RequestType.UDP_ASSOCIATE,
 }
 
-_enum_SSH = {
+builtins.globals()['ZLogging::SSH'] = {
     'SSH_CLIENT': Software_Type.SSH_CLIENT,
     'SSH_IN_SERVER_HOST_KEY': Intel_Where.SSH_IN_SERVER_HOST_KEY,
     'SSH_Interesting_Hostname_Login': Notice_Type.SSH_Interesting_Hostname_Login,
@@ -709,7 +786,7 @@ _enum_SSH = {
     'SSH_Watched_Country_Login': Notice_Type.SSH_Watched_Country_Login,
 }
 
-_enum_SSL = {
+builtins.globals()['ZLogging::SSL'] = {
     'SCT_OCSP_EXT': SSL_SctSource.SCT_OCSP_EXT,
     'SCT_TLS_EXT': SSL_SctSource.SCT_TLS_EXT,
     'SCT_X509_EXT': SSL_SctSource.SCT_X509_EXT,
@@ -726,12 +803,12 @@ _enum_SSL = {
     'SctSource': SSL_SctSource,
 }
 
-_enum_Scan = {
+builtins.globals()['ZLogging::Scan'] = {
     'Scan_Address_Scan': Notice_Type.Scan_Address_Scan,
     'Scan_Port_Scan': Notice_Type.Scan_Port_Scan,
 }
 
-_enum_Signatures = {
+builtins.globals()['ZLogging::Signatures'] = {
     'Action': Signatures_Action,
     'SIG_ALARM': Signatures_Action.SIG_ALARM,
     'SIG_ALARM_ONCE': Signatures_Action.SIG_ALARM_ONCE,
@@ -750,7 +827,7 @@ _enum_Signatures = {
     'Signatures_Signature_Summary': Notice_Type.Signatures_Signature_Summary,
 }
 
-_enum_Software = {
+builtins.globals()['ZLogging::Software'] = {
     'Software_LOG': Log_ID.Software_LOG,
     'Software_Software_Version_Change': Notice_Type.Software_Software_Version_Change,
     'Software_Vulnerable_Version': Notice_Type.Software_Vulnerable_Version,
@@ -758,11 +835,11 @@ _enum_Software = {
     'UNKNOWN': Software_Type.UNKNOWN,
 }
 
-_enum_Stats = {
+builtins.globals()['ZLogging::Stats'] = {
     'Stats_LOG': Log_ID.Stats_LOG,
 }
 
-_enum_SumStats = {
+builtins.globals()['ZLogging::SumStats'] = {
     'AVERAGE': SumStats_Calculation.AVERAGE,
     'Calculation': SumStats_Calculation,
     'HLL_UNIQUE': SumStats_Calculation.HLL_UNIQUE,
@@ -778,7 +855,7 @@ _enum_SumStats = {
     'VARIANCE': SumStats_Calculation.VARIANCE,
 }
 
-_enum_Supervisor = {
+builtins.globals()['ZLogging::Supervisor'] = {
     'ClusterRole': Supervisor_ClusterRole,
     'LOGGER': Supervisor_ClusterRole.LOGGER,
     'MANAGER': Supervisor_ClusterRole.MANAGER,
@@ -787,25 +864,38 @@ _enum_Supervisor = {
     'WORKER': Supervisor_ClusterRole.WORKER,
 }
 
-_enum_Syslog = {
+builtins.globals()['ZLogging::Syslog'] = {
     'Syslog_LOG': Log_ID.Syslog_LOG,
 }
 
-_enum_TeamCymruMalwareHashRegistry = {
+builtins.globals()['ZLogging::TeamCymruMalwareHashRegistry'] = {
     'TeamCymruMalwareHashRegistry_Match': Notice_Type.TeamCymruMalwareHashRegistry_Match,
 }
 
-_enum_Traceroute = {
+builtins.globals()['ZLogging::Telemetry'] = {
+    'DOUBLE_COUNTER': Telemetry_MetricType.DOUBLE_COUNTER,
+    'DOUBLE_GAUGE': Telemetry_MetricType.DOUBLE_GAUGE,
+    'DOUBLE_HISTOGRAM': Telemetry_MetricType.DOUBLE_HISTOGRAM,
+    'INT_COUNTER': Telemetry_MetricType.INT_COUNTER,
+    'INT_GAUGE': Telemetry_MetricType.INT_GAUGE,
+    'INT_HISTOGRAM': Telemetry_MetricType.INT_HISTOGRAM,
+    'MetricType': Telemetry_MetricType,
+    'Telemetry_LOG': Log_ID.Telemetry_LOG,
+    'Telemetry_LOG_HISTOGRAM': Log_ID.Telemetry_LOG_HISTOGRAM,
+}
+
+builtins.globals()['ZLogging::Traceroute'] = {
     'Traceroute_Detected': Notice_Type.Traceroute_Detected,
     'Traceroute_LOG': Log_ID.Traceroute_LOG,
 }
 
-_enum_Tunnel = {
+builtins.globals()['ZLogging::Tunnel'] = {
     'AYIYA': Tunnel_Type.AYIYA,
     'Action': Tunnel_Action,
     'CLOSE': Tunnel_Action.CLOSE,
     'DISCOVER': Tunnel_Action.DISCOVER,
     'EXPIRE': Tunnel_Action.EXPIRE,
+    'GENEVE': Tunnel_Type.GENEVE,
     'GRE': Tunnel_Type.GRE,
     'GTPv1': Tunnel_Type.GTPv1,
     'HTTP': Tunnel_Type.HTTP,
@@ -818,11 +908,11 @@ _enum_Tunnel = {
     'VXLAN': Tunnel_Type.VXLAN,
 }
 
-_enum_Unified2 = {
-    'Unified2_LOG': Log_ID.Unified2_LOG,
+builtins.globals()['ZLogging::UnknownProtocol'] = {
+    'UnknownProtocol_LOG': Log_ID.UnknownProtocol_LOG,
 }
 
-_enum_Weird = {
+builtins.globals()['ZLogging::Weird'] = {
     'ACTION_IGNORE': Weird_Action.ACTION_IGNORE,
     'ACTION_LOG': Weird_Action.ACTION_LOG,
     'ACTION_LOG_ONCE': Weird_Action.ACTION_LOG_ONCE,
@@ -838,16 +928,16 @@ _enum_Weird = {
     'Weird_LOG': Log_ID.Weird_LOG,
 }
 
-_enum_WeirdStats = {
+builtins.globals()['ZLogging::WeirdStats'] = {
     'WeirdStats_LOG': Log_ID.WeirdStats_LOG,
 }
 
-_enum_X509 = {
+builtins.globals()['ZLogging::X509'] = {
     'X509_IN_CERT': Intel_Where.X509_IN_CERT,
     'X509_LOG': Log_ID.X509_LOG,
 }
 
-_enum_ZeekygenExample = {
+builtins.globals()['ZLogging::ZeekygenExample'] = {
     'FIVE': ZeekygenExample_SimpleEnum.FIVE,
     'FOUR': ZeekygenExample_SimpleEnum.FOUR,
     'ONE': ZeekygenExample_SimpleEnum.ONE,
@@ -861,11 +951,11 @@ _enum_ZeekygenExample = {
     'ZeekygenExample_Zeekygen_Two': Notice_Type.ZeekygenExample_Zeekygen_Two,
 }
 
-_enum_mysql = {
+builtins.globals()['ZLogging::mysql'] = {
     'mysql_LOG': Log_ID.mysql_LOG,
 }
 
-_enum_zeek = {
+builtins.globals()['ZLogging::zeek'] = {
     'ALL_HOSTS': zeek_Host.ALL_HOSTS,
     'BIDIRECTIONAL': zeek_Direction.BIDIRECTIONAL,
     'Direction': zeek_Direction,
@@ -949,14 +1039,14 @@ def globals(*namespaces: 'str', bare: 'bool' = False) -> 'dict[str, Enum]':  # p
     if bare:
         enum_data = {}  # type: dict[str, Enum]
     else:
-        enum_data = _enum_zeek.copy()
+        enum_data = builtins.globals()['ZLogging::zeek'].copy()
     for namespace in namespaces:
         if namespace == 'bro':
             warnings.warn("Use of 'bro' is deprecated. "
                           "Please use 'zeek' instead.", BroDeprecationWarning)
             namespace = 'zeek'
 
-        enum_dict = builtins.globals().get('_enum_%s' % namespace)  # pylint: disable=consider-using-f-string
+        enum_dict = builtins.globals().get('ZLogging::%s' % namespace)  # pylint: disable=consider-using-f-string
         if enum_dict is None:
             raise ValueError('undefined namespace: %s' % namespace)  # pylint: disable=consider-using-f-string
         enum_data.update(enum_dict)

@@ -17,11 +17,9 @@ pypi-upload:
 	twine upload dist/* -r pypi --skip-existing
 	twine upload dist/* -r pypitest --skip-existing
 
-enum-fetch:
-	pipenv run python gen/fetch.py
-
-enum-make:
-	pipenv run python gen/make.py
+enum:
+	pipenv run python zlogging/_gen.py --caching
+	$(MAKE) isort
 
 sphinx-build:
 	pipenv run $(MAKE) -C docs html

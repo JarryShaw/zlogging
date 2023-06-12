@@ -32,9 +32,14 @@ class Action(enum.IntFlag):
     ACTION_EMAIL = enum.auto()
 
     #: Indicates that the notice should be alarmed.  A readable
-    #: ASCII version of the alarm log is emailed in bulk to the
-    #: address(es) configured in Notice::mail\_dest.
+    #: ASCII version is saved in notice\_alarm log, and emailed
+    #: in bulk to the address(es) configured in Notice::mail\_dest.
     ACTION_ALARM = enum.auto()
+
+    #: Indicates that the notice should result in a drop action.
+    #: The exact action taken depends on loaded policy scripts;
+    #: see e.g. NetControl::acld\_rule\_policy.
+    ACTION_DROP = enum.auto()
 
     #: (present if base/frameworks/notice/actions/email\_admin.zeek is loaded)
     #: Indicate that the generated email should be addressed to the
@@ -54,10 +59,6 @@ class Action(enum.IntFlag):
     #: “remote” host.  Site::local\_nets must be defined
     #: in order for this to work.
     ACTION_ADD_GEODATA = enum.auto()
-
-    #: (present if policy/frameworks/notice/actions/drop.zeek is loaded)
-    #: Drops the address via NetControl::drop\_address\_catch\_release.
-    ACTION_DROP = enum.auto()
 
 
 @enum.unique
@@ -191,8 +192,14 @@ class Type(enum.IntFlag):
     #: CaptureLoss::Too_Much_Loss
     #: (present if policy/misc/capture-loss.zeek is loaded)
     #: Report if the detected capture loss exceeds the percentage
-    #: threshold.
+    #: threshold defined in CaptureLoss::too\_much\_loss.
     CaptureLoss_Too_Much_Loss = enum.auto()
+
+    #: CaptureLoss::Too_Little_Traffic
+    #: (present if policy/misc/capture-loss.zeek is loaded)
+    #: Report if the traffic seen by a peer within a given watch
+    #: interval is less than CaptureLoss::minimum\_acks.
+    CaptureLoss_Too_Little_Traffic = enum.auto()
 
     #: Traceroute::Detected
     #: (present if policy/misc/detect-traceroute/main.zeek is loaded)

@@ -31,6 +31,22 @@ class ID(enum.IntFlag):
     #: (present if base/frameworks/broker/log.zeek is loaded)
     Broker_LOG = enum.auto()
 
+    #: Cluster::LOG
+    #: (present if base/frameworks/cluster/main.zeek is loaded)
+    Cluster_LOG = enum.auto()
+
+    #: Config::LOG
+    #: (present if base/frameworks/config/main.zeek is loaded)
+    Config_LOG = enum.auto()
+
+    #: DPD::LOG
+    #: (present if base/frameworks/analyzer/dpd.zeek is loaded)
+    DPD_LOG = enum.auto()
+
+    #: Analyzer::Logging::LOG
+    #: (present if base/frameworks/analyzer/logging.zeek is loaded)
+    Analyzer_Logging_LOG = enum.auto()
+
     #: Files::LOG
     #: (present if base/frameworks/files/main.zeek is loaded)
     #: Logging stream for file analysis.
@@ -39,10 +55,6 @@ class ID(enum.IntFlag):
     #: Reporter::LOG
     #: (present if base/frameworks/reporter/main.zeek is loaded)
     Reporter_LOG = enum.auto()
-
-    #: Cluster::LOG
-    #: (present if base/frameworks/cluster/main.zeek is loaded)
-    Cluster_LOG = enum.auto()
 
     #: Notice::LOG
     #: (present if base/frameworks/notice/main.zeek is loaded)
@@ -57,10 +69,6 @@ class ID(enum.IntFlag):
     #: Weird::LOG
     #: (present if base/frameworks/notice/weird.zeek is loaded)
     Weird_LOG = enum.auto()
-
-    #: DPD::LOG
-    #: (present if base/frameworks/dpd/main.zeek is loaded)
-    DPD_LOG = enum.auto()
 
     #: Signatures::LOG
     #: (present if base/frameworks/signatures/main.zeek is loaded)
@@ -78,10 +86,6 @@ class ID(enum.IntFlag):
     #: (present if base/frameworks/intel/main.zeek is loaded)
     Intel_LOG = enum.auto()
 
-    #: Config::LOG
-    #: (present if base/frameworks/config/main.zeek is loaded)
-    Config_LOG = enum.auto()
-
     #: Tunnel::LOG
     #: (present if base/frameworks/tunnels/main.zeek is loaded)
     Tunnel_LOG = enum.auto()
@@ -94,11 +98,9 @@ class ID(enum.IntFlag):
     #: (present if base/frameworks/netcontrol/main.zeek is loaded)
     NetControl_LOG = enum.auto()
 
-    #: NetControl::DROP
-    #: (present if base/frameworks/netcontrol/types.zeek is loaded)
-    #: Stop forwarding all packets matching the entity.
-    #: No additional arguments.
-    NetControl_DROP = enum.auto()
+    #: NetControl::DROP_LOG
+    #: (present if base/frameworks/netcontrol/drop.zeek is loaded)
+    NetControl_DROP_LOG = enum.auto()
 
     #: NetControl::SHUNT
     #: (present if base/frameworks/netcontrol/shunt.zeek is loaded)
@@ -136,6 +138,10 @@ class ID(enum.IntFlag):
     #: (present if base/files/x509/main.zeek is loaded)
     X509_LOG = enum.auto()
 
+    #: OCSP::LOG
+    #: (present if base/files/x509/log-ocsp.zeek is loaded)
+    OCSP_LOG = enum.auto()
+
     #: HTTP::LOG
     #: (present if base/protocols/http/main.zeek is loaded)
     HTTP_LOG = enum.auto()
@@ -151,6 +157,18 @@ class ID(enum.IntFlag):
     #: Modbus::LOG
     #: (present if base/protocols/modbus/main.zeek is loaded)
     Modbus_LOG = enum.auto()
+
+    #: MQTT::CONNECT_LOG
+    #: (present if base/protocols/mqtt/main.zeek is loaded)
+    MQTT_CONNECT_LOG = enum.auto()
+
+    #: MQTT::SUBSCRIBE_LOG
+    #: (present if base/protocols/mqtt/main.zeek is loaded)
+    MQTT_SUBSCRIBE_LOG = enum.auto()
+
+    #: MQTT::PUBLISH_LOG
+    #: (present if base/protocols/mqtt/main.zeek is loaded)
+    MQTT_PUBLISH_LOG = enum.auto()
 
     #: mysql::LOG
     #: (present if base/protocols/mysql/main.zeek is loaded)
@@ -184,10 +202,6 @@ class ID(enum.IntFlag):
     #: (present if base/protocols/snmp/main.zeek is loaded)
     SNMP_LOG = enum.auto()
 
-    #: SMB::AUTH_LOG
-    #: (present if base/protocols/smb/main.zeek is loaded)
-    SMB_AUTH_LOG = enum.auto()
-
     #: SMB::MAPPING_LOG
     #: (present if base/protocols/smb/main.zeek is loaded)
     SMB_MAPPING_LOG = enum.auto()
@@ -216,21 +230,21 @@ class ID(enum.IntFlag):
     #: (present if base/files/pe/main.zeek is loaded)
     PE_LOG = enum.auto()
 
+    #: Management::Log::LOG
+    #: (present if policy/frameworks/management/log.zeek is loaded)
+    Management_LOG = enum.auto()
+
     #: NetControl::CATCH_RELEASE
     #: (present if policy/frameworks/netcontrol/catch-and-release.zeek is loaded)
     NetControl_CATCH_RELEASE = enum.auto()
 
-    #: Unified2::LOG
-    #: (present if policy/files/unified2/main.zeek is loaded)
-    Unified2_LOG = enum.auto()
+    #: Telemetry::LOG
+    #: (present if policy/frameworks/telemetry/log.zeek is loaded)
+    Telemetry_LOG = enum.auto()
 
-    #: OCSP::LOG
-    #: (present if policy/files/x509/log-ocsp.zeek is loaded)
-    OCSP_LOG = enum.auto()
-
-    #: Barnyard2::LOG
-    #: (present if policy/integration/barnyard2/main.zeek is loaded)
-    Barnyard2_LOG = enum.auto()
+    #: Telemetry::LOG_HISTOGRAM
+    #: (present if policy/frameworks/telemetry/log.zeek is loaded)
+    Telemetry_LOG_HISTOGRAM = enum.auto()
 
     #: CaptureLoss::LOG
     #: (present if policy/misc/capture-loss.zeek is loaded)
@@ -252,6 +266,10 @@ class ID(enum.IntFlag):
     #: (present if policy/misc/weird-stats.zeek is loaded)
     WeirdStats_LOG = enum.auto()
 
+    #: UnknownProtocol::LOG
+    #: (present if policy/misc/unknown-protocols.zeek is loaded)
+    UnknownProtocol_LOG = enum.auto()
+
     #: Known::HOSTS_LOG
     #: (present if policy/protocols/conn/known-hosts.zeek is loaded)
     Known_HOSTS_LOG = enum.auto()
@@ -267,18 +285,6 @@ class ID(enum.IntFlag):
     #: Modbus::REGISTER_CHANGE_LOG
     #: (present if policy/protocols/modbus/track-memmap.zeek is loaded)
     Modbus_REGISTER_CHANGE_LOG = enum.auto()
-
-    #: MQTT::CONNECT_LOG
-    #: (present if policy/protocols/mqtt/main.zeek is loaded)
-    MQTT_CONNECT_LOG = enum.auto()
-
-    #: MQTT::SUBSCRIBE_LOG
-    #: (present if policy/protocols/mqtt/main.zeek is loaded)
-    MQTT_SUBSCRIBE_LOG = enum.auto()
-
-    #: MQTT::PUBLISH_LOG
-    #: (present if policy/protocols/mqtt/main.zeek is loaded)
-    MQTT_PUBLISH_LOG = enum.auto()
 
     #: SMB::CMD_LOG
     #: (present if policy/protocols/smb/log-cmds.zeek is loaded)

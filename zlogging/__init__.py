@@ -1,6 +1,18 @@
 # -*- coding: utf-8 -*-
 """Bro/Zeek logging framework."""
 
+###############################################################################
+# conda ``_extern`` module support
+
+import os
+import sys
+
+_extern = os.path.join(os.path.dirname(os.path.realpath(__file__)), '_extern')
+if os.path.exists(_extern):
+    sys.path.append(_extern)
+
+###############################################################################
+
 from zlogging.dumper import dump, dumps, write
 from zlogging.loader import load, loads, parse
 from zlogging.model import Model, new_model

@@ -6,6 +6,23 @@ from zlogging._compat import enum
 
 
 @enum.unique
+class BrokerProtocol(enum.IntFlag):
+    """Enum: ``Broker::BrokerProtocol``.
+
+    See Also:
+        `base/bif/comm.bif.zeek <https://docs.zeek.org/en/stable/scripts/base/bif/comm.bif.zeek.html#type-Broker::BrokerProtocol>`__
+
+    """
+
+    _ignore_ = 'BrokerProtocol _'
+    BrokerProtocol = vars()
+
+    NATIVE = enum.auto()
+
+    WEBSOCKET = enum.auto()
+
+
+@enum.unique
 class DataType(enum.IntFlag):
     """Enum: ``Broker::DataType``.
 
@@ -203,8 +220,6 @@ class BackendType(enum.IntFlag):
 
     SQLITE = enum.auto()
 
-    ROCKSDB = enum.auto()
-
 
 @enum.unique
 class QueryStatus(enum.IntFlag):
@@ -223,3 +238,67 @@ class QueryStatus(enum.IntFlag):
     SUCCESS = enum.auto()
 
     FAILURE = enum.auto()
+
+
+@enum.unique
+class SQLiteFailureMode(enum.IntFlag):
+    """Enum: ``Broker::SQLiteFailureMode``.
+
+    Behavior when the SQLite database file is found to be corrupt or otherwise fails to open or
+    initialize.
+
+    See Also:
+        `base/frameworks/broker/store.zeek <https://docs.zeek.org/en/stable/scripts/base/frameworks/broker/store.zeek.html#type-Broker::SQLiteFailureMode>`__
+
+    """
+
+    _ignore_ = 'SQLiteFailureMode _'
+    SQLiteFailureMode = vars()
+
+    #: Fail during initialization.
+    SQLITE_FAILURE_MODE_FAIL = enum.auto()
+
+    #: Attempt to delete the database file and retry.
+    SQLITE_FAILURE_MODE_DELETE = enum.auto()
+
+
+@enum.unique
+class SQLiteJournalMode(enum.IntFlag):
+    """Enum: ``Broker::SQLiteJournalMode``.
+
+    Values supported for SQLite’s PRAGMA journal_mode statement.
+
+    See Also:
+        `base/frameworks/broker/store.zeek <https://docs.zeek.org/en/stable/scripts/base/frameworks/broker/store.zeek.html#type-Broker::SQLiteJournalMode>`__
+
+    """
+
+    _ignore_ = 'SQLiteJournalMode _'
+    SQLiteJournalMode = vars()
+
+    SQLITE_JOURNAL_MODE_DELETE = enum.auto()
+
+    SQLITE_JOURNAL_MODE_WAL = enum.auto()
+
+
+@enum.unique
+class SQLiteSynchronous(enum.IntFlag):
+    """Enum: ``Broker::SQLiteSynchronous``.
+
+    Values supported for SQLite’s PRAGMA synchronous statement.
+
+    See Also:
+        `base/frameworks/broker/store.zeek <https://docs.zeek.org/en/stable/scripts/base/frameworks/broker/store.zeek.html#type-Broker::SQLiteSynchronous>`__
+
+    """
+
+    _ignore_ = 'SQLiteSynchronous _'
+    SQLiteSynchronous = vars()
+
+    SQLITE_SYNCHRONOUS_OFF = enum.auto()
+
+    SQLITE_SYNCHRONOUS_NORMAL = enum.auto()
+
+    SQLITE_SYNCHRONOUS_FULL = enum.auto()
+
+    SQLITE_SYNCHRONOUS_EXTRA = enum.auto()

@@ -35,6 +35,8 @@ class Type(enum.IntFlag):
 
     VXLAN = enum.auto()
 
+    GENEVE = enum.auto()
+
 
 @enum.unique
 class Action(enum.IntFlag):

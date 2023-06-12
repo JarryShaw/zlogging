@@ -43,7 +43,8 @@ class Type(enum.IntFlag):
     #: Certificate SHA-1 hash.
     CERT_HASH = enum.auto()
 
-    #: Public key MD5 hash. (SSH server host keys are a good example.)
+    #: Public key MD5 hash, formatted as hexadecimal digits delimited by colons.
+    #: (SSH server host keys are a good example.)
     PUBKEY_HASH = enum.auto()
 
     #: (present if base/frameworks/intel/files.zeek is loaded)
