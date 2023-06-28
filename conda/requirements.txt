@@ -1,5 +1,5 @@
 typing-inspect==0.9.0
 mypy-extensions==1.0.0
 typing_extensions==4.6.3
-dataclasses
-aenum
+dataclasses; python_version < "3.7"
+aenum; python_version < "3.7"
