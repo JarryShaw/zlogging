@@ -154,6 +154,14 @@ class ID(enum.IntFlag):
     #: (present if base/protocols/krb/main.zeek is loaded)
     KRB_LOG = enum.auto()
 
+    #: LDAP::LDAP_LOG
+    #: (present if base/protocols/ldap/main.zeek is loaded)
+    LDAP_LDAP_LOG = enum.auto()
+
+    #: LDAP::LDAP_SEARCH_LOG
+    #: (present if base/protocols/ldap/main.zeek is loaded)
+    LDAP_LDAP_SEARCH_LOG = enum.auto()
+
     #: Modbus::LOG
     #: (present if base/protocols/modbus/main.zeek is loaded)
     Modbus_LOG = enum.auto()
@@ -181,6 +189,10 @@ class ID(enum.IntFlag):
     #: NTP::LOG
     #: (present if base/protocols/ntp/main.zeek is loaded)
     NTP_LOG = enum.auto()
+
+    #: QUIC::LOG
+    #: (present if base/protocols/quic/main.zeek is loaded)
+    QUIC_LOG = enum.auto()
 
     #: RADIUS::LOG
     #: (present if base/protocols/radius/main.zeek is loaded)

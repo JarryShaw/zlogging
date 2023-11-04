@@ -379,6 +379,11 @@ builtins.globals()['ZLogging::Known'] = {
     'ModbusDeviceType': Known_ModbusDeviceType,
 }
 
+builtins.globals()['ZLogging::LDAP'] = {
+    'LDAP_LDAP_LOG': Log_ID.LDAP_LDAP_LOG,
+    'LDAP_LDAP_SEARCH_LOG': Log_ID.LDAP_LDAP_SEARCH_LOG,
+}
+
 builtins.globals()['ZLogging::LoadBalancing'] = {
     'AUTO_BPF': LoadBalancing_Method.AUTO_BPF,
     'Method': LoadBalancing_Method,
@@ -695,6 +700,10 @@ builtins.globals()['ZLogging::ProtocolDetector'] = {
     'dir': ProtocolDetector_dir,
 }
 
+builtins.globals()['ZLogging::QUIC'] = {
+    'QUIC_LOG': Log_ID.QUIC_LOG,
+}
+
 builtins.globals()['ZLogging::RADIUS'] = {
     'RADIUS_LOG': Log_ID.RADIUS_LOG,
 }
@@ -803,11 +812,6 @@ builtins.globals()['ZLogging::SSL'] = {
     'SctSource': SSL_SctSource,
 }
 
-builtins.globals()['ZLogging::Scan'] = {
-    'Scan_Address_Scan': Notice_Type.Scan_Address_Scan,
-    'Scan_Port_Scan': Notice_Type.Scan_Port_Scan,
-}
-
 builtins.globals()['ZLogging::Signatures'] = {
     'Action': Signatures_Action,
     'SIG_ALARM': Signatures_Action.SIG_ALARM,
@@ -833,6 +837,10 @@ builtins.globals()['ZLogging::Software'] = {
     'Software_Vulnerable_Version': Notice_Type.Software_Vulnerable_Version,
     'Type': Software_Type,
     'UNKNOWN': Software_Type.UNKNOWN,
+}
+
+builtins.globals()['ZLogging::Spicy'] = {
+    'Spicy_Spicy_Max_File_Depth_Exceeded': Notice_Type.Spicy_Spicy_Max_File_Depth_Exceeded,
 }
 
 builtins.globals()['ZLogging::Stats'] = {

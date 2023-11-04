@@ -143,6 +143,10 @@ class Type(enum.IntFlag):
     #: Indicates packets were dropped by the packet filter.
     PacketFilter_Dropped_Packets = enum.auto()
 
+    #: Spicy::Spicy_Max_File_Depth_Exceeded
+    #: (present if base/frameworks/spicy/main.zeek is loaded)
+    Spicy_Spicy_Max_File_Depth_Exceeded = enum.auto()
+
     #: ProtocolDetector::Protocol_Found
     #: (present if policy/frameworks/dpd/detect-protocols.zeek is loaded)
     ProtocolDetector_Protocol_Found = enum.auto()
@@ -207,25 +211,6 @@ class Type(enum.IntFlag):
     #: detail about specific traceroutes that we run, refer to the
     #: traceroute.log.
     Traceroute_Detected = enum.auto()
-
-    #: Scan::Address_Scan
-    #: (present if policy/misc/scan.zeek is loaded)
-    #: Address scans detect that a host appears to be scanning some
-    #: number of destinations on a single port. This notice is
-    #: generated when more than Scan::addr\_scan\_threshold
-    #: unique hosts are seen over the previous
-    #: Scan::addr\_scan\_interval time range.
-    Scan_Address_Scan = enum.auto()
-
-    #: Scan::Port_Scan
-    #: (present if policy/misc/scan.zeek is loaded)
-    #: Port scans detect that an attacking host appears to be
-    #: scanning a single victim host on several ports.  This notice
-    #: is generated when an attacking host attempts to connect to
-    #: Scan::port\_scan\_threshold
-    #: unique ports on a single host over the previous
-    #: Scan::port\_scan\_interval time range.
-    Scan_Port_Scan = enum.auto()
 
     #: Conn::Retransmission_Inconsistency
     #: (present if policy/protocols/conn/weirds.zeek is loaded)
