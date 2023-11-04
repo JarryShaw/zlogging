@@ -5,10 +5,10 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Notice Namespace &#8212; ZLogging 0.1.3 documentation</title>
+    <title>Notice Namespace &#8212; ZLogging 0.1.3.post1 documentation</title>
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=4f649999" />
     <link rel="stylesheet" type="text/css" href="../_static/alabaster.css?v=039e1c02" />
-    <script src="../_static/documentation_options.js?v=360bc84d"></script>
+    <script src="../_static/documentation_options.js?v=94de01fa"></script>
     <script src="../_static/doctools.js?v=888ff710"></script>
     <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <link rel="index" title="Index" href="../genindex.html" />
@@ -224,21 +224,28 @@ Indicates packets were dropped by the packet filter.</p>
 
 <dl class="py attribute">
 <dt class="sig sig-object py">
-<span class="sig-name descname"><span class="pre">ProtocolDetector_Protocol_Found</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">2048</span></em></dt>
+<span class="sig-name descname"><span class="pre">Spicy_Spicy_Max_File_Depth_Exceeded</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">2048</span></em></dt>
+<dd><p>Spicy::Spicy_Max_File_Depth_Exceeded
+(present if base/frameworks/spicy/main.zeek is loaded)</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">ProtocolDetector_Protocol_Found</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">4096</span></em></dt>
 <dd><p>ProtocolDetector::Protocol_Found
 (present if policy/frameworks/dpd/detect-protocols.zeek is loaded)</p>
 </dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py">
-<span class="sig-name descname"><span class="pre">ProtocolDetector_Server_Found</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">4096</span></em></dt>
+<span class="sig-name descname"><span class="pre">ProtocolDetector_Server_Found</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">8192</span></em></dt>
 <dd><p>ProtocolDetector::Server_Found
 (present if policy/frameworks/dpd/detect-protocols.zeek is loaded)</p>
 </dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py">
-<span class="sig-name descname"><span class="pre">Intel_Notice</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">8192</span></em></dt>
+<span class="sig-name descname"><span class="pre">Intel_Notice</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">16384</span></em></dt>
 <dd><p>Intel::Notice
 (present if policy/frameworks/intel/do_notice.zeek is loaded)
 This notice is generated when an intelligence
@@ -247,7 +254,7 @@ indicator is denoted to be notice-worthy.</p>
 
 <dl class="py attribute">
 <dt class="sig sig-object py">
-<span class="sig-name descname"><span class="pre">TeamCymruMalwareHashRegistry_Match</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">16384</span></em></dt>
+<span class="sig-name descname"><span class="pre">TeamCymruMalwareHashRegistry_Match</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">32768</span></em></dt>
 <dd><p>TeamCymruMalwareHashRegistry::Match
 (present if policy/frameworks/files/detect-MHR.zeek is loaded)
 The hash value of a file transferred over HTTP matched in the
@@ -256,7 +263,7 @@ malware hash registry.</p>
 
 <dl class="py attribute">
 <dt class="sig sig-object py">
-<span class="sig-name descname"><span class="pre">PacketFilter_No_More_Conn_Shunts_Available</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">32768</span></em></dt>
+<span class="sig-name descname"><span class="pre">PacketFilter_No_More_Conn_Shunts_Available</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">65536</span></em></dt>
 <dd><p>PacketFilter::No_More_Conn_Shunts_Available
 (present if policy/frameworks/packet-filter/shunt.zeek is loaded)
 Indicative that PacketFilter::max_bpf_shunts
@@ -266,7 +273,7 @@ no more are allowed.</p>
 
 <dl class="py attribute">
 <dt class="sig sig-object py">
-<span class="sig-name descname"><span class="pre">PacketFilter_Cannot_BPF_Shunt_Conn</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">65536</span></em></dt>
+<span class="sig-name descname"><span class="pre">PacketFilter_Cannot_BPF_Shunt_Conn</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">131072</span></em></dt>
 <dd><p>PacketFilter::Cannot_BPF_Shunt_Conn
 (present if policy/frameworks/packet-filter/shunt.zeek is loaded)
 Limitations in BPF make shunting some connections with BPF
@@ -275,7 +282,7 @@ impossible.  This notice encompasses those various cases.</p>
 
 <dl class="py attribute">
 <dt class="sig sig-object py">
-<span class="sig-name descname"><span class="pre">Software_Software_Version_Change</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">131072</span></em></dt>
+<span class="sig-name descname"><span class="pre">Software_Software_Version_Change</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">262144</span></em></dt>
 <dd><p>Software::Software_Version_Change
 (present if policy/frameworks/software/version-changes.zeek is loaded)
 For certain software, a version changing may matter.  In that
@@ -286,7 +293,7 @@ Software::interesting_version_changes variable.</p>
 
 <dl class="py attribute">
 <dt class="sig sig-object py">
-<span class="sig-name descname"><span class="pre">Software_Vulnerable_Version</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">262144</span></em></dt>
+<span class="sig-name descname"><span class="pre">Software_Vulnerable_Version</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">524288</span></em></dt>
 <dd><p>Software::Vulnerable_Version
 (present if policy/frameworks/software/vulnerable.zeek is loaded)
 Indicates that a vulnerable version of software was detected.</p>
@@ -294,7 +301,7 @@ Indicates that a vulnerable version of software was detected.</p>
 
 <dl class="py attribute">
 <dt class="sig sig-object py">
-<span class="sig-name descname"><span class="pre">CaptureLoss_Too_Much_Loss</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">524288</span></em></dt>
+<span class="sig-name descname"><span class="pre">CaptureLoss_Too_Much_Loss</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">1048576</span></em></dt>
 <dd><p>CaptureLoss::Too_Much_Loss
 (present if policy/misc/capture-loss.zeek is loaded)
 Report if the detected capture loss exceeds the percentage
@@ -303,7 +310,7 @@ threshold defined in CaptureLoss::too_much_loss.</p>
 
 <dl class="py attribute">
 <dt class="sig sig-object py">
-<span class="sig-name descname"><span class="pre">CaptureLoss_Too_Little_Traffic</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">1048576</span></em></dt>
+<span class="sig-name descname"><span class="pre">CaptureLoss_Too_Little_Traffic</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">2097152</span></em></dt>
 <dd><p>CaptureLoss::Too_Little_Traffic
 (present if policy/misc/capture-loss.zeek is loaded)
 Report if the traffic seen by a peer within a given watch
@@ -312,7 +319,7 @@ interval is less than CaptureLoss::minimum_acks.</p>
 
 <dl class="py attribute">
 <dt class="sig sig-object py">
-<span class="sig-name descname"><span class="pre">Traceroute_Detected</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">2097152</span></em></dt>
+<span class="sig-name descname"><span class="pre">Traceroute_Detected</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">4194304</span></em></dt>
 <dd><p>Traceroute::Detected
 (present if policy/misc/detect-traceroute/main.zeek is loaded)
 Indicates that a host was seen running traceroutes.  For more
@@ -322,32 +329,7 @@ traceroute.log.</p>
 
 <dl class="py attribute">
 <dt class="sig sig-object py">
-<span class="sig-name descname"><span class="pre">Scan_Address_Scan</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">4194304</span></em></dt>
-<dd><p>Scan::Address_Scan
-(present if policy/misc/scan.zeek is loaded)
-Address scans detect that a host appears to be scanning some
-number of destinations on a single port. This notice is
-generated when more than Scan::addr_scan_threshold
-unique hosts are seen over the previous
-Scan::addr_scan_interval time range.</p>
-</dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py">
-<span class="sig-name descname"><span class="pre">Scan_Port_Scan</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">8388608</span></em></dt>
-<dd><p>Scan::Port_Scan
-(present if policy/misc/scan.zeek is loaded)
-Port scans detect that an attacking host appears to be
-scanning a single victim host on several ports.  This notice
-is generated when an attacking host attempts to connect to
-Scan::port_scan_threshold
-unique ports on a single host over the previous
-Scan::port_scan_interval time range.</p>
-</dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py">
-<span class="sig-name descname"><span class="pre">Conn_Retransmission_Inconsistency</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">16777216</span></em></dt>
+<span class="sig-name descname"><span class="pre">Conn_Retransmission_Inconsistency</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">8388608</span></em></dt>
 <dd><p>Conn::Retransmission_Inconsistency
 (present if policy/protocols/conn/weirds.zeek is loaded)
 Possible evasion; usually just chud.</p>
@@ -355,7 +337,7 @@ Possible evasion; usually just chud.</p>
 
 <dl class="py attribute">
 <dt class="sig sig-object py">
-<span class="sig-name descname"><span class="pre">Conn_Content_Gap</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">33554432</span></em></dt>
+<span class="sig-name descname"><span class="pre">Conn_Content_Gap</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">16777216</span></em></dt>
 <dd><p>Conn::Content_Gap
 (present if policy/protocols/conn/weirds.zeek is loaded)
 Data has sequence hole; perhaps due to filtering.</p>
@@ -363,7 +345,7 @@ Data has sequence hole; perhaps due to filtering.</p>
 
 <dl class="py attribute">
 <dt class="sig sig-object py">
-<span class="sig-name descname"><span class="pre">DNS_External_Name</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">67108864</span></em></dt>
+<span class="sig-name descname"><span class="pre">DNS_External_Name</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">33554432</span></em></dt>
 <dd><p><a class="reference external" href="DNS::External_Name">DNS::External_Name</a>
 (present if policy/protocols/dns/detect-external-names.zeek is loaded)
 Raised when a non-local name is found to be pointing at a
@@ -373,7 +355,7 @@ must be set appropriately for this detection.</p>
 
 <dl class="py attribute">
 <dt class="sig sig-object py">
-<span class="sig-name descname"><span class="pre">FTP_Bruteforcing</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">134217728</span></em></dt>
+<span class="sig-name descname"><span class="pre">FTP_Bruteforcing</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">67108864</span></em></dt>
 <dd><p><a class="reference external" href="FTP::Bruteforcing">FTP::Bruteforcing</a>
 (present if policy/protocols/ftp/detect-bruteforcing.zeek is loaded)
 Indicates a host bruteforcing FTP logins by watching for too
@@ -382,7 +364,7 @@ many rejected usernames or failed passwords.</p>
 
 <dl class="py attribute">
 <dt class="sig sig-object py">
-<span class="sig-name descname"><span class="pre">FTP_Site_Exec_Success</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">268435456</span></em></dt>
+<span class="sig-name descname"><span class="pre">FTP_Site_Exec_Success</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">134217728</span></em></dt>
 <dd><p><a class="reference external" href="FTP::Site_Exec_Success">FTP::Site_Exec_Success</a>
 (present if policy/protocols/ftp/detect.zeek is loaded)
 Indicates that a successful response to a “SITE EXEC”
@@ -391,7 +373,7 @@ command/arg pair was seen.</p>
 
 <dl class="py attribute">
 <dt class="sig sig-object py">
-<span class="sig-name descname"><span class="pre">HTTP_SQL_Injection_Attacker</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">536870912</span></em></dt>
+<span class="sig-name descname"><span class="pre">HTTP_SQL_Injection_Attacker</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">268435456</span></em></dt>
 <dd><p><a class="reference external" href="HTTP::SQL_Injection_Attacker">HTTP::SQL_Injection_Attacker</a>
 (present if policy/protocols/http/detect-sqli.zeek is loaded)
 Indicates that a host performing SQL injection attacks was
@@ -400,7 +382,7 @@ detected.</p>
 
 <dl class="py attribute">
 <dt class="sig sig-object py">
-<span class="sig-name descname"><span class="pre">HTTP_SQL_Injection_Victim</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">1073741824</span></em></dt>
+<span class="sig-name descname"><span class="pre">HTTP_SQL_Injection_Victim</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">536870912</span></em></dt>
 <dd><p><a class="reference external" href="HTTP::SQL_Injection_Victim">HTTP::SQL_Injection_Victim</a>
 (present if policy/protocols/http/detect-sqli.zeek is loaded)
 Indicates that a host was seen to have SQL injection attacks
@@ -410,7 +392,7 @@ hostname.</p>
 
 <dl class="py attribute">
 <dt class="sig sig-object py">
-<span class="sig-name descname"><span class="pre">SMTP_Blocklist_Error_Message</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">2147483648</span></em></dt>
+<span class="sig-name descname"><span class="pre">SMTP_Blocklist_Error_Message</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">1073741824</span></em></dt>
 <dd><p>SMTP::Blocklist_Error_Message
 (present if policy/protocols/smtp/blocklists.zeek is loaded)
 An SMTP server sent a reply mentioning an SMTP block list.</p>
@@ -418,7 +400,7 @@ An SMTP server sent a reply mentioning an SMTP block list.</p>
 
 <dl class="py attribute">
 <dt class="sig sig-object py">
-<span class="sig-name descname"><span class="pre">SMTP_Blocklist_Blocked_Host</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">4294967296</span></em></dt>
+<span class="sig-name descname"><span class="pre">SMTP_Blocklist_Blocked_Host</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">2147483648</span></em></dt>
 <dd><p>SMTP::Blocklist_Blocked_Host
 (present if policy/protocols/smtp/blocklists.zeek is loaded)
 The originator’s address is seen in the block list error message.
@@ -428,14 +410,14 @@ positive rate.</p>
 
 <dl class="py attribute">
 <dt class="sig sig-object py">
-<span class="sig-name descname"><span class="pre">SMTP_Suspicious_Origination</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">8589934592</span></em></dt>
+<span class="sig-name descname"><span class="pre">SMTP_Suspicious_Origination</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">4294967296</span></em></dt>
 <dd><p>SMTP::Suspicious_Origination
 (present if policy/protocols/smtp/detect-suspicious-orig.zeek is loaded)</p>
 </dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py">
-<span class="sig-name descname"><span class="pre">SSH_Password_Guessing</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">17179869184</span></em></dt>
+<span class="sig-name descname"><span class="pre">SSH_Password_Guessing</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">8589934592</span></em></dt>
 <dd><p><a class="reference external" href="SSH::Password_Guessing">SSH::Password_Guessing</a>
 (present if policy/protocols/ssh/detect-bruteforcing.zeek is loaded)
 Indicates that a host has been identified as crossing the
@@ -445,7 +427,7 @@ failed logins.</p>
 
 <dl class="py attribute">
 <dt class="sig sig-object py">
-<span class="sig-name descname"><span class="pre">SSH_Login_By_Password_Guesser</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">34359738368</span></em></dt>
+<span class="sig-name descname"><span class="pre">SSH_Login_By_Password_Guesser</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">17179869184</span></em></dt>
 <dd><p><a class="reference external" href="SSH::Login_By_Password_Guesser">SSH::Login_By_Password_Guesser</a>
 (present if policy/protocols/ssh/detect-bruteforcing.zeek is loaded)
 Indicates that a host previously identified as a “password
@@ -455,7 +437,7 @@ attempt. This is not currently implemented.</p>
 
 <dl class="py attribute">
 <dt class="sig sig-object py">
-<span class="sig-name descname"><span class="pre">SSH_Watched_Country_Login</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">68719476736</span></em></dt>
+<span class="sig-name descname"><span class="pre">SSH_Watched_Country_Login</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">34359738368</span></em></dt>
 <dd><p><a class="reference external" href="SSH::Watched_Country_Login">SSH::Watched_Country_Login</a>
 (present if policy/protocols/ssh/geo-data.zeek is loaded)
 If an SSH login is seen to or from a “watched” country based
@@ -465,7 +447,7 @@ notice will be generated.</p>
 
 <dl class="py attribute">
 <dt class="sig sig-object py">
-<span class="sig-name descname"><span class="pre">SSH_Interesting_Hostname_Login</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">137438953472</span></em></dt>
+<span class="sig-name descname"><span class="pre">SSH_Interesting_Hostname_Login</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">68719476736</span></em></dt>
 <dd><p><a class="reference external" href="SSH::Interesting_Hostname_Login">SSH::Interesting_Hostname_Login</a>
 (present if policy/protocols/ssh/interesting-hostnames.zeek is loaded)
 Generated if a login originates or responds with a host where
@@ -475,7 +457,7 @@ the reverse hostname lookup resolves to a name matched by the
 
 <dl class="py attribute">
 <dt class="sig sig-object py">
-<span class="sig-name descname"><span class="pre">SSL_Certificate_Expired</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">274877906944</span></em></dt>
+<span class="sig-name descname"><span class="pre">SSL_Certificate_Expired</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">137438953472</span></em></dt>
 <dd><p>SSL::Certificate_Expired
 (present if policy/protocols/ssl/expiring-certs.zeek is loaded)
 Indicates that a certificate’s NotValidAfter date has lapsed
@@ -484,7 +466,7 @@ and the certificate is now invalid.</p>
 
 <dl class="py attribute">
 <dt class="sig sig-object py">
-<span class="sig-name descname"><span class="pre">SSL_Certificate_Expires_Soon</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">549755813888</span></em></dt>
+<span class="sig-name descname"><span class="pre">SSL_Certificate_Expires_Soon</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">274877906944</span></em></dt>
 <dd><p>SSL::Certificate_Expires_Soon
 (present if policy/protocols/ssl/expiring-certs.zeek is loaded)
 Indicates that a certificate is going to expire within
@@ -493,7 +475,7 @@ SSL::notify_when_cert_expiring_in.</p>
 
 <dl class="py attribute">
 <dt class="sig sig-object py">
-<span class="sig-name descname"><span class="pre">SSL_Certificate_Not_Valid_Yet</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">1099511627776</span></em></dt>
+<span class="sig-name descname"><span class="pre">SSL_Certificate_Not_Valid_Yet</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">549755813888</span></em></dt>
 <dd><p>SSL::Certificate_Not_Valid_Yet
 (present if policy/protocols/ssl/expiring-certs.zeek is loaded)
 Indicates that a certificate’s NotValidBefore date is future
@@ -502,7 +484,7 @@ dated.</p>
 
 <dl class="py attribute">
 <dt class="sig sig-object py">
-<span class="sig-name descname"><span class="pre">Heartbleed_SSL_Heartbeat_Attack</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">2199023255552</span></em></dt>
+<span class="sig-name descname"><span class="pre">Heartbleed_SSL_Heartbeat_Attack</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">1099511627776</span></em></dt>
 <dd><p>Heartbleed::SSL_Heartbeat_Attack
 (present if policy/protocols/ssl/heartbleed.zeek is loaded)
 Indicates that a host performed a heartbleed attack or scan.</p>
@@ -510,7 +492,7 @@ Indicates that a host performed a heartbleed attack or scan.</p>
 
 <dl class="py attribute">
 <dt class="sig sig-object py">
-<span class="sig-name descname"><span class="pre">Heartbleed_SSL_Heartbeat_Attack_Success</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">4398046511104</span></em></dt>
+<span class="sig-name descname"><span class="pre">Heartbleed_SSL_Heartbeat_Attack_Success</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">2199023255552</span></em></dt>
 <dd><p>Heartbleed::SSL_Heartbeat_Attack_Success
 (present if policy/protocols/ssl/heartbleed.zeek is loaded)
 Indicates that a host performing a heartbleed attack was probably successful.</p>
@@ -518,7 +500,7 @@ Indicates that a host performing a heartbleed attack was probably successful.</p
 
 <dl class="py attribute">
 <dt class="sig sig-object py">
-<span class="sig-name descname"><span class="pre">Heartbleed_SSL_Heartbeat_Odd_Length</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">8796093022208</span></em></dt>
+<span class="sig-name descname"><span class="pre">Heartbleed_SSL_Heartbeat_Odd_Length</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">4398046511104</span></em></dt>
 <dd><p>Heartbleed::SSL_Heartbeat_Odd_Length
 (present if policy/protocols/ssl/heartbleed.zeek is loaded)
 Indicates we saw heartbeat requests with odd length. Probably an attack or scan.</p>
@@ -526,7 +508,7 @@ Indicates we saw heartbeat requests with odd length. Probably an attack or scan.
 
 <dl class="py attribute">
 <dt class="sig sig-object py">
-<span class="sig-name descname"><span class="pre">Heartbleed_SSL_Heartbeat_Many_Requests</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">17592186044416</span></em></dt>
+<span class="sig-name descname"><span class="pre">Heartbleed_SSL_Heartbeat_Many_Requests</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">8796093022208</span></em></dt>
 <dd><p>Heartbleed::SSL_Heartbeat_Many_Requests
 (present if policy/protocols/ssl/heartbleed.zeek is loaded)
 Indicates we saw many heartbeat requests without a reply. Might be an attack.</p>
@@ -534,7 +516,7 @@ Indicates we saw many heartbeat requests without a reply. Might be an attack.</p
 
 <dl class="py attribute">
 <dt class="sig sig-object py">
-<span class="sig-name descname"><span class="pre">SSL_Invalid_Server_Cert</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">35184372088832</span></em></dt>
+<span class="sig-name descname"><span class="pre">SSL_Invalid_Server_Cert</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">17592186044416</span></em></dt>
 <dd><p>SSL::Invalid_Server_Cert
 (present if policy/protocols/ssl/validate-certs.zeek is loaded)
 This notice indicates that the result of validating the
@@ -544,7 +526,7 @@ invalid.</p>
 
 <dl class="py attribute">
 <dt class="sig sig-object py">
-<span class="sig-name descname"><span class="pre">SSL_Invalid_Ocsp_Response</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">70368744177664</span></em></dt>
+<span class="sig-name descname"><span class="pre">SSL_Invalid_Ocsp_Response</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">35184372088832</span></em></dt>
 <dd><p>SSL::Invalid_Ocsp_Response
 (present if policy/protocols/ssl/validate-ocsp.zeek is loaded)
 This indicates that the OCSP response was not deemed
@@ -553,7 +535,7 @@ to be valid.</p>
 
 <dl class="py attribute">
 <dt class="sig sig-object py">
-<span class="sig-name descname"><span class="pre">SSL_Weak_Key</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">140737488355328</span></em></dt>
+<span class="sig-name descname"><span class="pre">SSL_Weak_Key</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">70368744177664</span></em></dt>
 <dd><p>SSL::Weak_Key
 (present if policy/protocols/ssl/weak-keys.zeek is loaded)
 Indicates that a server is using a potentially unsafe key.</p>
@@ -561,7 +543,7 @@ Indicates that a server is using a potentially unsafe key.</p>
 
 <dl class="py attribute">
 <dt class="sig sig-object py">
-<span class="sig-name descname"><span class="pre">SSL_Old_Version</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">281474976710656</span></em></dt>
+<span class="sig-name descname"><span class="pre">SSL_Old_Version</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">140737488355328</span></em></dt>
 <dd><p>SSL::Old_Version
 (present if policy/protocols/ssl/weak-keys.zeek is loaded)
 Indicates that a server is using a potentially unsafe version</p>
@@ -569,7 +551,7 @@ Indicates that a server is using a potentially unsafe version</p>
 
 <dl class="py attribute">
 <dt class="sig sig-object py">
-<span class="sig-name descname"><span class="pre">SSL_Weak_Cipher</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">562949953421312</span></em></dt>
+<span class="sig-name descname"><span class="pre">SSL_Weak_Cipher</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">281474976710656</span></em></dt>
 <dd><p>SSL::Weak_Cipher
 (present if policy/protocols/ssl/weak-keys.zeek is loaded)
 Indicates that a server is using a potentially unsafe cipher</p>
@@ -577,7 +559,7 @@ Indicates that a server is using a potentially unsafe cipher</p>
 
 <dl class="py attribute">
 <dt class="sig sig-object py">
-<span class="sig-name descname"><span class="pre">ZeekygenExample_Zeekygen_One</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">1125899906842624</span></em></dt>
+<span class="sig-name descname"><span class="pre">ZeekygenExample_Zeekygen_One</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">562949953421312</span></em></dt>
 <dd><p>ZeekygenExample::Zeekygen_One
 (present if zeekygen/example.zeek is loaded)
 Any number of this type of comment
@@ -586,7 +568,7 @@ will document “Zeekygen_One”.</p>
 
 <dl class="py attribute">
 <dt class="sig sig-object py">
-<span class="sig-name descname"><span class="pre">ZeekygenExample_Zeekygen_Two</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">2251799813685248</span></em></dt>
+<span class="sig-name descname"><span class="pre">ZeekygenExample_Zeekygen_Two</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">1125899906842624</span></em></dt>
 <dd><p>ZeekygenExample::Zeekygen_Two
 (present if zeekygen/example.zeek is loaded)
 Any number of this type of comment
@@ -595,14 +577,14 @@ will document “ZEEKYGEN_TWO”.</p>
 
 <dl class="py attribute">
 <dt class="sig sig-object py">
-<span class="sig-name descname"><span class="pre">ZeekygenExample_Zeekygen_Three</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">4503599627370496</span></em></dt>
+<span class="sig-name descname"><span class="pre">ZeekygenExample_Zeekygen_Three</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">2251799813685248</span></em></dt>
 <dd><p>ZeekygenExample::Zeekygen_Three
 (present if zeekygen/example.zeek is loaded)</p>
 </dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py">
-<span class="sig-name descname"><span class="pre">ZeekygenExample_Zeekygen_Four</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">9007199254740992</span></em></dt>
+<span class="sig-name descname"><span class="pre">ZeekygenExample_Zeekygen_Four</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">4503599627370496</span></em></dt>
 <dd><p>ZeekygenExample::Zeekygen_Four
 (present if zeekygen/example.zeek is loaded)
 Omitting comments is fine, and so is mixing ## and ##&lt;, but

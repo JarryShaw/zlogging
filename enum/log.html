@@ -5,10 +5,10 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Log Namespace &#8212; ZLogging 0.1.3 documentation</title>
+    <title>Log Namespace &#8212; ZLogging 0.1.3.post1 documentation</title>
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=4f649999" />
     <link rel="stylesheet" type="text/css" href="../_static/alabaster.css?v=039e1c02" />
-    <script src="../_static/documentation_options.js?v=360bc84d"></script>
+    <script src="../_static/documentation_options.js?v=94de01fa"></script>
     <script src="../_static/doctools.js?v=888ff710"></script>
     <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <link rel="index" title="Index" href="../genindex.html" />
@@ -280,252 +280,273 @@ This is the alarm stream.</p>
 
 <dl class="py attribute">
 <dt class="sig sig-object py">
-<span class="sig-name descname"><span class="pre">Modbus_LOG</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">8589934592</span></em></dt>
+<span class="sig-name descname"><span class="pre">LDAP_LDAP_LOG</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">8589934592</span></em></dt>
+<dd><p><a class="reference external" href="LDAP::LDAP_LOG">LDAP::LDAP_LOG</a>
+(present if base/protocols/ldap/main.zeek is loaded)</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">LDAP_LDAP_SEARCH_LOG</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">17179869184</span></em></dt>
+<dd><p><a class="reference external" href="LDAP::LDAP_SEARCH_LOG">LDAP::LDAP_SEARCH_LOG</a>
+(present if base/protocols/ldap/main.zeek is loaded)</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">Modbus_LOG</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">34359738368</span></em></dt>
 <dd><p>Modbus::LOG
 (present if base/protocols/modbus/main.zeek is loaded)</p>
 </dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py">
-<span class="sig-name descname"><span class="pre">MQTT_CONNECT_LOG</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">17179869184</span></em></dt>
+<span class="sig-name descname"><span class="pre">MQTT_CONNECT_LOG</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">68719476736</span></em></dt>
 <dd><p>MQTT::CONNECT_LOG
 (present if base/protocols/mqtt/main.zeek is loaded)</p>
 </dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py">
-<span class="sig-name descname"><span class="pre">MQTT_SUBSCRIBE_LOG</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">34359738368</span></em></dt>
+<span class="sig-name descname"><span class="pre">MQTT_SUBSCRIBE_LOG</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">137438953472</span></em></dt>
 <dd><p>MQTT::SUBSCRIBE_LOG
 (present if base/protocols/mqtt/main.zeek is loaded)</p>
 </dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py">
-<span class="sig-name descname"><span class="pre">MQTT_PUBLISH_LOG</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">68719476736</span></em></dt>
+<span class="sig-name descname"><span class="pre">MQTT_PUBLISH_LOG</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">274877906944</span></em></dt>
 <dd><p>MQTT::PUBLISH_LOG
 (present if base/protocols/mqtt/main.zeek is loaded)</p>
 </dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py">
-<span class="sig-name descname"><span class="pre">mysql_LOG</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">137438953472</span></em></dt>
+<span class="sig-name descname"><span class="pre">mysql_LOG</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">549755813888</span></em></dt>
 <dd><p>mysql::LOG
 (present if base/protocols/mysql/main.zeek is loaded)</p>
 </dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py">
-<span class="sig-name descname"><span class="pre">NTLM_LOG</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">274877906944</span></em></dt>
+<span class="sig-name descname"><span class="pre">NTLM_LOG</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">1099511627776</span></em></dt>
 <dd><p>NTLM::LOG
 (present if base/protocols/ntlm/main.zeek is loaded)</p>
 </dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py">
-<span class="sig-name descname"><span class="pre">NTP_LOG</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">549755813888</span></em></dt>
+<span class="sig-name descname"><span class="pre">NTP_LOG</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">2199023255552</span></em></dt>
 <dd><p>NTP::LOG
 (present if base/protocols/ntp/main.zeek is loaded)</p>
 </dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py">
-<span class="sig-name descname"><span class="pre">RADIUS_LOG</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">1099511627776</span></em></dt>
+<span class="sig-name descname"><span class="pre">QUIC_LOG</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">4398046511104</span></em></dt>
+<dd><p>QUIC::LOG
+(present if base/protocols/quic/main.zeek is loaded)</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">RADIUS_LOG</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">8796093022208</span></em></dt>
 <dd><p>RADIUS::LOG
 (present if base/protocols/radius/main.zeek is loaded)</p>
 </dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py">
-<span class="sig-name descname"><span class="pre">RDP_LOG</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">2199023255552</span></em></dt>
+<span class="sig-name descname"><span class="pre">RDP_LOG</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">17592186044416</span></em></dt>
 <dd><p>RDP::LOG
 (present if base/protocols/rdp/main.zeek is loaded)</p>
 </dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py">
-<span class="sig-name descname"><span class="pre">RFB_LOG</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">4398046511104</span></em></dt>
+<span class="sig-name descname"><span class="pre">RFB_LOG</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">35184372088832</span></em></dt>
 <dd><p>RFB::LOG
 (present if base/protocols/rfb/main.zeek is loaded)</p>
 </dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py">
-<span class="sig-name descname"><span class="pre">SIP_LOG</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">8796093022208</span></em></dt>
+<span class="sig-name descname"><span class="pre">SIP_LOG</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">70368744177664</span></em></dt>
 <dd><p><a class="reference external" href="SIP::LOG">SIP::LOG</a>
 (present if base/protocols/sip/main.zeek is loaded)</p>
 </dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py">
-<span class="sig-name descname"><span class="pre">SNMP_LOG</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">17592186044416</span></em></dt>
+<span class="sig-name descname"><span class="pre">SNMP_LOG</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">140737488355328</span></em></dt>
 <dd><p><a class="reference external" href="SNMP::LOG">SNMP::LOG</a>
 (present if base/protocols/snmp/main.zeek is loaded)</p>
 </dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py">
-<span class="sig-name descname"><span class="pre">SMB_MAPPING_LOG</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">35184372088832</span></em></dt>
+<span class="sig-name descname"><span class="pre">SMB_MAPPING_LOG</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">281474976710656</span></em></dt>
 <dd><p><a class="reference external" href="SMB::MAPPING_LOG">SMB::MAPPING_LOG</a>
 (present if base/protocols/smb/main.zeek is loaded)</p>
 </dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py">
-<span class="sig-name descname"><span class="pre">SMB_FILES_LOG</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">70368744177664</span></em></dt>
+<span class="sig-name descname"><span class="pre">SMB_FILES_LOG</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">562949953421312</span></em></dt>
 <dd><p><a class="reference external" href="SMB::FILES_LOG">SMB::FILES_LOG</a>
 (present if base/protocols/smb/main.zeek is loaded)</p>
 </dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py">
-<span class="sig-name descname"><span class="pre">SMTP_LOG</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">140737488355328</span></em></dt>
+<span class="sig-name descname"><span class="pre">SMTP_LOG</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">1125899906842624</span></em></dt>
 <dd><p>SMTP::LOG
 (present if base/protocols/smtp/main.zeek is loaded)</p>
 </dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py">
-<span class="sig-name descname"><span class="pre">SOCKS_LOG</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">281474976710656</span></em></dt>
+<span class="sig-name descname"><span class="pre">SOCKS_LOG</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">2251799813685248</span></em></dt>
 <dd><p>SOCKS::LOG
 (present if base/protocols/socks/main.zeek is loaded)</p>
 </dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py">
-<span class="sig-name descname"><span class="pre">SSH_LOG</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">562949953421312</span></em></dt>
+<span class="sig-name descname"><span class="pre">SSH_LOG</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">4503599627370496</span></em></dt>
 <dd><p><a class="reference external" href="SSH::LOG">SSH::LOG</a>
 (present if base/protocols/ssh/main.zeek is loaded)</p>
 </dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py">
-<span class="sig-name descname"><span class="pre">Syslog_LOG</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">1125899906842624</span></em></dt>
+<span class="sig-name descname"><span class="pre">Syslog_LOG</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">9007199254740992</span></em></dt>
 <dd><p>Syslog::LOG
 (present if base/protocols/syslog/main.zeek is loaded)</p>
 </dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py">
-<span class="sig-name descname"><span class="pre">PE_LOG</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">2251799813685248</span></em></dt>
+<span class="sig-name descname"><span class="pre">PE_LOG</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">18014398509481984</span></em></dt>
 <dd><p>PE::LOG
 (present if base/files/pe/main.zeek is loaded)</p>
 </dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py">
-<span class="sig-name descname"><span class="pre">Management_LOG</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">4503599627370496</span></em></dt>
+<span class="sig-name descname"><span class="pre">Management_LOG</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">36028797018963968</span></em></dt>
 <dd><p>Management::Log::LOG
 (present if policy/frameworks/management/log.zeek is loaded)</p>
 </dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py">
-<span class="sig-name descname"><span class="pre">NetControl_CATCH_RELEASE</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">9007199254740992</span></em></dt>
+<span class="sig-name descname"><span class="pre">NetControl_CATCH_RELEASE</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">72057594037927936</span></em></dt>
 <dd><p>NetControl::CATCH_RELEASE
 (present if policy/frameworks/netcontrol/catch-and-release.zeek is loaded)</p>
 </dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py">
-<span class="sig-name descname"><span class="pre">Telemetry_LOG</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">18014398509481984</span></em></dt>
+<span class="sig-name descname"><span class="pre">Telemetry_LOG</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">144115188075855872</span></em></dt>
 <dd><p>Telemetry::LOG
 (present if policy/frameworks/telemetry/log.zeek is loaded)</p>
 </dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py">
-<span class="sig-name descname"><span class="pre">Telemetry_LOG_HISTOGRAM</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">36028797018963968</span></em></dt>
+<span class="sig-name descname"><span class="pre">Telemetry_LOG_HISTOGRAM</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">288230376151711744</span></em></dt>
 <dd><p>Telemetry::LOG_HISTOGRAM
 (present if policy/frameworks/telemetry/log.zeek is loaded)</p>
 </dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py">
-<span class="sig-name descname"><span class="pre">CaptureLoss_LOG</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">72057594037927936</span></em></dt>
+<span class="sig-name descname"><span class="pre">CaptureLoss_LOG</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">576460752303423488</span></em></dt>
 <dd><p>CaptureLoss::LOG
 (present if policy/misc/capture-loss.zeek is loaded)</p>
 </dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py">
-<span class="sig-name descname"><span class="pre">Traceroute_LOG</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">144115188075855872</span></em></dt>
+<span class="sig-name descname"><span class="pre">Traceroute_LOG</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">1152921504606846976</span></em></dt>
 <dd><p>Traceroute::LOG
 (present if policy/misc/detect-traceroute/main.zeek is loaded)</p>
 </dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py">
-<span class="sig-name descname"><span class="pre">LoadedScripts_LOG</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">288230376151711744</span></em></dt>
+<span class="sig-name descname"><span class="pre">LoadedScripts_LOG</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">2305843009213693952</span></em></dt>
 <dd><p>LoadedScripts::LOG
 (present if policy/misc/loaded-scripts.zeek is loaded)</p>
 </dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py">
-<span class="sig-name descname"><span class="pre">Stats_LOG</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">576460752303423488</span></em></dt>
+<span class="sig-name descname"><span class="pre">Stats_LOG</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">4611686018427387904</span></em></dt>
 <dd><p>Stats::LOG
 (present if policy/misc/stats.zeek is loaded)</p>
 </dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py">
-<span class="sig-name descname"><span class="pre">WeirdStats_LOG</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">1152921504606846976</span></em></dt>
+<span class="sig-name descname"><span class="pre">WeirdStats_LOG</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">9223372036854775808</span></em></dt>
 <dd><p>WeirdStats::LOG
 (present if policy/misc/weird-stats.zeek is loaded)</p>
 </dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py">
-<span class="sig-name descname"><span class="pre">UnknownProtocol_LOG</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">2305843009213693952</span></em></dt>
+<span class="sig-name descname"><span class="pre">UnknownProtocol_LOG</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">18446744073709551616</span></em></dt>
 <dd><p>UnknownProtocol::LOG
 (present if policy/misc/unknown-protocols.zeek is loaded)</p>
 </dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py">
-<span class="sig-name descname"><span class="pre">Known_HOSTS_LOG</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">4611686018427387904</span></em></dt>
+<span class="sig-name descname"><span class="pre">Known_HOSTS_LOG</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">36893488147419103232</span></em></dt>
 <dd><p>Known::HOSTS_LOG
 (present if policy/protocols/conn/known-hosts.zeek is loaded)</p>
 </dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py">
-<span class="sig-name descname"><span class="pre">Known_SERVICES_LOG</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">9223372036854775808</span></em></dt>
+<span class="sig-name descname"><span class="pre">Known_SERVICES_LOG</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">73786976294838206464</span></em></dt>
 <dd><p>Known::SERVICES_LOG
 (present if policy/protocols/conn/known-services.zeek is loaded)</p>
 </dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py">
-<span class="sig-name descname"><span class="pre">Known_MODBUS_LOG</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">18446744073709551616</span></em></dt>
+<span class="sig-name descname"><span class="pre">Known_MODBUS_LOG</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">147573952589676412928</span></em></dt>
 <dd><p>Known::MODBUS_LOG
 (present if policy/protocols/modbus/known-masters-slaves.zeek is loaded)</p>
 </dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py">
-<span class="sig-name descname"><span class="pre">Modbus_REGISTER_CHANGE_LOG</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">36893488147419103232</span></em></dt>
+<span class="sig-name descname"><span class="pre">Modbus_REGISTER_CHANGE_LOG</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">295147905179352825856</span></em></dt>
 <dd><p>Modbus::REGISTER_CHANGE_LOG
 (present if policy/protocols/modbus/track-memmap.zeek is loaded)</p>
 </dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py">
-<span class="sig-name descname"><span class="pre">SMB_CMD_LOG</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">73786976294838206464</span></em></dt>
+<span class="sig-name descname"><span class="pre">SMB_CMD_LOG</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">590295810358705651712</span></em></dt>
 <dd><p><a class="reference external" href="SMB::CMD_LOG">SMB::CMD_LOG</a>
 (present if policy/protocols/smb/log-cmds.zeek is loaded)</p>
 </dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py">
-<span class="sig-name descname"><span class="pre">Known_CERTS_LOG</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">147573952589676412928</span></em></dt>
+<span class="sig-name descname"><span class="pre">Known_CERTS_LOG</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">1180591620717411303424</span></em></dt>
 <dd><p>Known::CERTS_LOG
 (present if policy/protocols/ssl/known-certs.zeek is loaded)</p>
 </dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py">
-<span class="sig-name descname"><span class="pre">ZeekygenExample_LOG</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">295147905179352825856</span></em></dt>
+<span class="sig-name descname"><span class="pre">ZeekygenExample_LOG</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">2361183241434822606848</span></em></dt>
 <dd><p>ZeekygenExample::LOG
 (present if zeekygen/example.zeek is loaded)</p>
 </dd></dl>
