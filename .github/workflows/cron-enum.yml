@@ -32,7 +32,7 @@ jobs:
           isort -l100 -pzlogging zlogging/enum/*.py
 
       - name: Verify Changed files
-        uses: tj-actions/verify-changed-files@v14
+        uses: tj-actions/verify-changed-files@v17
         id: verify-changed-files
 
       - name: Bump Version
