@@ -238,6 +238,10 @@ class ID(enum.IntFlag):
     #: (present if base/protocols/syslog/main.zeek is loaded)
     Syslog_LOG = enum.auto()
 
+    #: WebSocket::LOG
+    #: (present if base/protocols/websocket/main.zeek is loaded)
+    WebSocket_LOG = enum.auto()
+
     #: PE::LOG
     #: (present if base/files/pe/main.zeek is loaded)
     PE_LOG = enum.auto()

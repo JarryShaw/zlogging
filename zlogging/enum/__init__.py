@@ -920,6 +920,10 @@ builtins.globals()['ZLogging::UnknownProtocol'] = {
     'UnknownProtocol_LOG': Log_ID.UnknownProtocol_LOG,
 }
 
+builtins.globals()['ZLogging::WebSocket'] = {
+    'WebSocket_LOG': Log_ID.WebSocket_LOG,
+}
+
 builtins.globals()['ZLogging::Weird'] = {
     'ACTION_IGNORE': Weird_Action.ACTION_IGNORE,
     'ACTION_LOG': Weird_Action.ACTION_LOG,
