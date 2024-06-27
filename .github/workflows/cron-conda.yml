@@ -160,7 +160,7 @@ jobs:
           python -m pip download -r conda/requirements.txt -d conda/wheels
 
       - name: Conda environment creation and activation
-        uses: conda-incubator/setup-miniconda@v2
+        uses: conda-incubator/setup-miniconda@v3
         env:
           ZLOGGING_VERSION: ${{ needs.conda-update.outputs.ZLOGGING_VERSION }}
           ZLOGGING_BUILD: ${{ needs.conda-update.outputs.ZLOGGING_BUILD }}
