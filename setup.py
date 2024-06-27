@@ -14,17 +14,13 @@ if sys.version_info[0] <= 2:
 
 try:
     from setuptools import setup
+    from setuptools.command.bdist_wheel import bdist_wheel
     from setuptools.command.build_py import build_py
     from setuptools.command.develop import develop
     from setuptools.command.install import install
     from setuptools.command.sdist import sdist
-except:
-    raise ImportError("setuptools is required to install ZLogging!")
-
-try:
-    from wheel.bdist_wheel import bdist_wheel
 except ImportError:
-    bdist_wheel = None
+    raise ImportError("setuptools is required to install ZLogging!")
 
 # get logger
 logger = logging.getLogger('zlogging.setup')
@@ -120,18 +116,16 @@ class zlogging_install(install):
         refactor(os.path.join(self.install_lib, 'zlogging'))  # type: ignore[arg-type]
 
 
-if bdist_wheel is not None:
-    class zlogging_bdist_wheel(bdist_wheel):
-        """Modified bdist_wheel to run PyBPC conversion."""
+class zlogging_bdist_wheel(bdist_wheel):
+    """Modified bdist_wheel to run PyBPC conversion."""
 
-        def run(self) -> 'None':
-            super(zlogging_bdist_wheel, self).run()
-            logger.info('running bdist_wheel')
+    def run(self) -> 'None':
+        super(zlogging_bdist_wheel, self).run()
+        logger.info('running bdist_wheel')
 
-            # PyBPC compatibility enforcement
-            refactor(os.path.join(self.dist_dir, 'zlogging'))
-else:
-    zlogging_bdist_wheel = None  # type: ignore[misc,assignment]
+        # PyBPC compatibility enforcement
+        refactor(os.path.join(self.dist_dir, 'zlogging'))  # type: ignore[arg-type]
+
 
 setup(
     cmdclass={

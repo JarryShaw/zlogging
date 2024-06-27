@@ -11,13 +11,13 @@ jobs:
     name: Update requirements.txt
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
         with:
           fetch-depth: 0
 
       - uses: actions/setup-python@v4
         with:
-          python-version: '3.11'
+          python-version: '3.12'
 
       - name: Install and Setup
         run: |
@@ -80,7 +80,7 @@ jobs:
     if: needs.conda-update.outputs.CONDA_CHANGED == 'true'
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           token: ${{ secrets.ZLOGGING }}
           fetch-depth: 0
@@ -114,13 +114,13 @@ jobs:
           - ubuntu-latest
           # - windows-latest  # skip for now
         python-version:
-          #- "3.7"  # skip for now
           - "3.8"
           - "3.9"
           - "3.10"
           - "3.11"
+          - "3.12"
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
         with:
           ref: conda-${{ needs.conda-update.outputs.ZLOGGING_VERSION }}+${{ needs.conda-update.outputs.ZLOGGING_BUILD }}
           fetch-depth: 0
