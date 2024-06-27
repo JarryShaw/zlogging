@@ -25,7 +25,7 @@ jobs:
 
           python -m pip install -U pip setuptools wheel packaging
           python -m pip install -e .[all]
-          #python -m pip install aenum dataclasses
+          python -m pip install aenum dataclasses
 
       - name: Setup Conda Distribution
         run: |
