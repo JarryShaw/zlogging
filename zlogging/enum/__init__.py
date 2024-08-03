@@ -881,12 +881,9 @@ builtins.globals()['ZLogging::TeamCymruMalwareHashRegistry'] = {
 }
 
 builtins.globals()['ZLogging::Telemetry'] = {
-    'DOUBLE_COUNTER': Telemetry_MetricType.DOUBLE_COUNTER,
-    'DOUBLE_GAUGE': Telemetry_MetricType.DOUBLE_GAUGE,
-    'DOUBLE_HISTOGRAM': Telemetry_MetricType.DOUBLE_HISTOGRAM,
-    'INT_COUNTER': Telemetry_MetricType.INT_COUNTER,
-    'INT_GAUGE': Telemetry_MetricType.INT_GAUGE,
-    'INT_HISTOGRAM': Telemetry_MetricType.INT_HISTOGRAM,
+    'COUNTER': Telemetry_MetricType.COUNTER,
+    'GAUGE': Telemetry_MetricType.GAUGE,
+    'HISTOGRAM': Telemetry_MetricType.HISTOGRAM,
     'MetricType': Telemetry_MetricType,
     'Telemetry_LOG': Log_ID.Telemetry_LOG,
     'Telemetry_LOG_HISTOGRAM': Log_ID.Telemetry_LOG_HISTOGRAM,
