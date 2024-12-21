@@ -15,8 +15,8 @@ Enum Namespace
    intel
    json
    known
-   load_balancing
    log
+   log_s_q_lite
    management
    management_controller_runtime
    management_log

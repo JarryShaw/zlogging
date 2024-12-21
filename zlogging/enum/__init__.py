@@ -19,6 +19,9 @@ from zlogging.enum.broker import SQLiteFailureMode as Broker_SQLiteFailureMode
 from zlogging.enum.broker import SQLiteJournalMode as Broker_SQLiteJournalMode
 from zlogging.enum.broker import SQLiteSynchronous as Broker_SQLiteSynchronous
 from zlogging.enum.broker import Type as Broker_Type
+from zlogging.enum.cluster import BackendTag as Cluster_BackendTag
+from zlogging.enum.cluster import EventSerializerTag as Cluster_EventSerializerTag
+from zlogging.enum.cluster import LogSerializerTag as Cluster_LogSerializerTag
 from zlogging.enum.cluster import NodeType as Cluster_NodeType
 from zlogging.enum.dce_rpc import IfID as DCE_RPC_IfID
 from zlogging.enum.dce_rpc import PType as DCE_RPC_PType
@@ -30,10 +33,11 @@ from zlogging.enum.intel import Type as Intel_Type
 from zlogging.enum.intel import Where as Intel_Where
 from zlogging.enum.json import TimestampFormat as JSON_TimestampFormat
 from zlogging.enum.known import ModbusDeviceType as Known_ModbusDeviceType
-from zlogging.enum.load_balancing import Method as LoadBalancing_Method
 from zlogging.enum.log import ID as Log_ID
 from zlogging.enum.log import PrintLogType as Log_PrintLogType
 from zlogging.enum.log import Writer as Log_Writer
+from zlogging.enum.log_s_q_lite import SQLiteJournalMode as LogSQLite_SQLiteJournalMode
+from zlogging.enum.log_s_q_lite import SQLiteSynchronous as LogSQLite_SQLiteSynchronous
 from zlogging.enum.management import Role as Management_Role
 from zlogging.enum.management import State as Management_State
 from zlogging.enum.management_controller_runtime import \
@@ -190,14 +194,21 @@ builtins.globals()['ZLogging::CaptureLoss'] = {
 }
 
 builtins.globals()['ZLogging::Cluster'] = {
+    'BackendTag': Cluster_BackendTag,
+    'CLUSTER_BACKEND_BROKER': Cluster_BackendTag.CLUSTER_BACKEND_BROKER,
+    'CLUSTER_BACKEND_ZEROMQ': Cluster_BackendTag.CLUSTER_BACKEND_ZEROMQ,
     'CONTROL': Cluster_NodeType.CONTROL,
     'Cluster_LOG': Log_ID.Cluster_LOG,
+    'EVENT_SERIALIZER_BROKER_BIN_V1': Cluster_EventSerializerTag.EVENT_SERIALIZER_BROKER_BIN_V1,
+    'EVENT_SERIALIZER_BROKER_JSON_V1': Cluster_EventSerializerTag.EVENT_SERIALIZER_BROKER_JSON_V1,
+    'EventSerializerTag': Cluster_EventSerializerTag,
     'LOGGER': Cluster_NodeType.LOGGER,
+    'LOG_SERIALIZER_ZEEK_BIN_V1': Cluster_LogSerializerTag.LOG_SERIALIZER_ZEEK_BIN_V1,
+    'LogSerializerTag': Cluster_LogSerializerTag,
     'MANAGER': Cluster_NodeType.MANAGER,
     'NONE': Cluster_NodeType.NONE,
     'NodeType': Cluster_NodeType,
     'PROXY': Cluster_NodeType.PROXY,
-    'TIME_MACHINE': Cluster_NodeType.TIME_MACHINE,
     'WORKER': Cluster_NodeType.WORKER,
 }
 
@@ -384,11 +395,6 @@ builtins.globals()['ZLogging::LDAP'] = {
     'LDAP_LDAP_SEARCH_LOG': Log_ID.LDAP_LDAP_SEARCH_LOG,
 }
 
-builtins.globals()['ZLogging::LoadBalancing'] = {
-    'AUTO_BPF': LoadBalancing_Method.AUTO_BPF,
-    'Method': LoadBalancing_Method,
-}
-
 builtins.globals()['ZLogging::LoadedScripts'] = {
     'LoadedScripts_LOG': Log_ID.LoadedScripts_LOG,
 }
@@ -405,6 +411,23 @@ builtins.globals()['ZLogging::Log'] = {
     'WRITER_NONE': Log_Writer.WRITER_NONE,
     'WRITER_SQLITE': Log_Writer.WRITER_SQLITE,
     'Writer': Log_Writer,
+}
+
+builtins.globals()['ZLogging::LogSQLite'] = {
+    'SQLITE_JOURNAL_MODE_DEFAULT': LogSQLite_SQLiteJournalMode.SQLITE_JOURNAL_MODE_DEFAULT,
+    'SQLITE_JOURNAL_MODE_DELETE': LogSQLite_SQLiteJournalMode.SQLITE_JOURNAL_MODE_DELETE,
+    'SQLITE_JOURNAL_MODE_MEMORY': LogSQLite_SQLiteJournalMode.SQLITE_JOURNAL_MODE_MEMORY,
+    'SQLITE_JOURNAL_MODE_OFF': LogSQLite_SQLiteJournalMode.SQLITE_JOURNAL_MODE_OFF,
+    'SQLITE_JOURNAL_MODE_PERSIST': LogSQLite_SQLiteJournalMode.SQLITE_JOURNAL_MODE_PERSIST,
+    'SQLITE_JOURNAL_MODE_TRUNCATE': LogSQLite_SQLiteJournalMode.SQLITE_JOURNAL_MODE_TRUNCATE,
+    'SQLITE_JOURNAL_MODE_WAL': LogSQLite_SQLiteJournalMode.SQLITE_JOURNAL_MODE_WAL,
+    'SQLITE_SYNCHRONOUS_DEFAULT': LogSQLite_SQLiteSynchronous.SQLITE_SYNCHRONOUS_DEFAULT,
+    'SQLITE_SYNCHRONOUS_EXTRA': LogSQLite_SQLiteSynchronous.SQLITE_SYNCHRONOUS_EXTRA,
+    'SQLITE_SYNCHRONOUS_FULL': LogSQLite_SQLiteSynchronous.SQLITE_SYNCHRONOUS_FULL,
+    'SQLITE_SYNCHRONOUS_NORMAL': LogSQLite_SQLiteSynchronous.SQLITE_SYNCHRONOUS_NORMAL,
+    'SQLITE_SYNCHRONOUS_OFF': LogSQLite_SQLiteSynchronous.SQLITE_SYNCHRONOUS_OFF,
+    'SQLiteJournalMode': LogSQLite_SQLiteJournalMode,
+    'SQLiteSynchronous': LogSQLite_SQLiteSynchronous,
 }
 
 builtins.globals()['ZLogging::MOUNT3'] = {
@@ -688,6 +711,10 @@ builtins.globals()['ZLogging::Pcap'] = {
     'filter_state': Pcap_filter_state,
     'ok': Pcap_filter_state.ok,
     'warning': Pcap_filter_state.warning,
+}
+
+builtins.globals()['ZLogging::PostgreSQL'] = {
+    'PostgreSQL_LOG': Log_ID.PostgreSQL_LOG,
 }
 
 builtins.globals()['ZLogging::ProtocolDetector'] = {

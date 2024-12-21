@@ -40,7 +40,51 @@ class NodeType(enum.IntFlag):
     #: The node type doing all the actual traffic analysis.
     WORKER = enum.auto()
 
-    #: A node acting as a traffic recorder using the
-    #: Time Machine
-    #: software.
-    TIME_MACHINE = enum.auto()
+
+@enum.unique
+class BackendTag(enum.IntFlag):
+    """Enum: ``Cluster::BackendTag``.
+
+    See Also:
+        `base/frameworks/cluster/main.zeek <https://docs.zeek.org/en/stable/scripts/base/frameworks/cluster/main.zeek.html#type-Cluster::BackendTag>`__
+
+    """
+
+    _ignore_ = 'BackendTag _'
+    BackendTag = vars()
+
+    CLUSTER_BACKEND_BROKER = enum.auto()
+
+    CLUSTER_BACKEND_ZEROMQ = enum.auto()
+
+
+@enum.unique
+class EventSerializerTag(enum.IntFlag):
+    """Enum: ``Cluster::EventSerializerTag``.
+
+    See Also:
+        `base/frameworks/cluster/main.zeek <https://docs.zeek.org/en/stable/scripts/base/frameworks/cluster/main.zeek.html#type-Cluster::EventSerializerTag>`__
+
+    """
+
+    _ignore_ = 'EventSerializerTag _'
+    EventSerializerTag = vars()
+
+    EVENT_SERIALIZER_BROKER_BIN_V1 = enum.auto()
+
+    EVENT_SERIALIZER_BROKER_JSON_V1 = enum.auto()
+
+
+@enum.unique
+class LogSerializerTag(enum.IntFlag):
+    """Enum: ``Cluster::LogSerializerTag``.
+
+    See Also:
+        `base/frameworks/cluster/main.zeek <https://docs.zeek.org/en/stable/scripts/base/frameworks/cluster/main.zeek.html#type-Cluster::LogSerializerTag>`__
+
+    """
+
+    _ignore_ = 'LogSerializerTag _'
+    LogSerializerTag = vars()
+
+    LOG_SERIALIZER_ZEEK_BIN_V1 = enum.auto()

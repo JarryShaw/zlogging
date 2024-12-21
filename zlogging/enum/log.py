@@ -190,6 +190,10 @@ class ID(enum.IntFlag):
     #: (present if base/protocols/ntp/main.zeek is loaded)
     NTP_LOG = enum.auto()
 
+    #: PostgreSQL::LOG
+    #: (present if base/protocols/postgresql/main.zeek is loaded)
+    PostgreSQL_LOG = enum.auto()
+
     #: QUIC::LOG
     #: (present if base/protocols/quic/main.zeek is loaded)
     QUIC_LOG = enum.auto()
