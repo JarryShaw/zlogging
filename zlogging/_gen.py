@@ -42,6 +42,12 @@ REQUEST_RETRY_DELAY = float(os.environ.get('ZLOGGING_GEN_RETRY_DELAY', '60'))
 REQUEST_HEADERS = {
     'User-Agent': 'zlogging enum generator (https://github.com/JarryShaw/zlogging)',
 }
+ZEEK_DOCS_URL = os.environ.get(
+    'ZLOGGING_ZEEK_DOCS_URL', 'https://zeek-docs.readthedocs.io/en/stable/',
+)
+ZEEK_DOCS_PUBLIC_URL = os.environ.get(
+    'ZLOGGING_ZEEK_DOCS_PUBLIC_URL', 'https://docs.zeek.org/en/stable/',
+)
 
 # file template
 TEMPLATE_ENUM = '''\
@@ -148,7 +154,7 @@ def fetch() -> 'None':
 
         raise RuntimeError(f'failed to fetch {link}')
 
-    link = 'https://docs.zeek.org/en/stable/script-reference/scripts.html'
+    link = urllib_parse.urljoin(ZEEK_DOCS_URL, 'script-reference/scripts.html')
     resp = request(link)
 
     page = resp.text
@@ -262,7 +268,10 @@ def make() -> 'None':
             docs_list.insert(0, f'Enum: ``{name}``.')
 
             html_path = os.path.splitext(os.path.relpath(html_file, os.path.join(ROOT, '_cache')))[0]
-            docs_list.append(f'See Also:\n        `{html_path} <https://docs.zeek.org/en/stable/scripts/{html_path}.html#type-{name}>`__\n\n    ')  # pylint: disable=line-too-long
+            docs_url = urllib_parse.urljoin(
+                ZEEK_DOCS_PUBLIC_URL, f'scripts/{html_path}.html#type-{name}',
+            )
+            docs_list.append(f'See Also:\n        `{html_path} <{docs_url}>`__\n\n    ')
 
             enum_docs = '\n\n    '.join(docs_list)
             with open(dest, 'a', encoding='utf-8') as file:
