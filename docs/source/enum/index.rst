@@ -7,16 +7,21 @@ Enum Namespace
    :maxdepth: 2
 
    af_packet
+   all_analyzers
+   analyzer
+   asn1
    broker
    cluster
    dce_rpc
+   files
    http
    input
    intel
    json
    known
+   ldap
+   load_balancing
    log
-   log_s_q_lite
    management
    management_controller_runtime
    management_log
@@ -26,13 +31,16 @@ Enum Namespace
    nfs3
    notice
    open_flow
+   packet_analyzer
    pcap
    protocol_detector
+   redis
    reporter
    signatures
    smb
    socks
    software
+   spicy
    ssl
    sum_stats
    supervisor

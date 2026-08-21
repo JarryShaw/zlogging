@@ -9,21 +9,22 @@ from zlogging._compat import enum
 class MetricType(enum.IntFlag):
     """Enum: ``Telemetry::MetricType``.
 
-    An enum that specifies which type of metric you’re operating on.
-
     See Also:
-        `base/bif/telemetry_types.bif.zeek <https://docs.zeek.org/en/stable/scripts/base/bif/telemetry_types.bif.zeek.html#type-Telemetry::MetricType>`__
+        `base/bif/telemetry.bif.zeek <https://docs.zeek.org/en/stable/scripts/base/bif/telemetry.bif.zeek.html#type-Telemetry::MetricType>`__
 
     """
 
     _ignore_ = 'MetricType _'
     MetricType = vars()
 
-    #: Counters track entities that increment over time.
-    COUNTER = enum.auto()
+    DOUBLE_COUNTER = enum.auto()
 
-    #: Gauges track entities that fluctuate over time.
-    GAUGE = enum.auto()
+    INT_COUNTER = enum.auto()
 
-    #: Histograms group observations into predefined bins.
-    HISTOGRAM = enum.auto()
+    DOUBLE_GAUGE = enum.auto()
+
+    INT_GAUGE = enum.auto()
+
+    DOUBLE_HISTOGRAM = enum.auto()
+
+    INT_HISTOGRAM = enum.auto()

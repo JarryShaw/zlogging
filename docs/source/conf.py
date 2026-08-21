@@ -51,7 +51,7 @@ release = zlogging.__version__
 extensions = [
     'sphinx.ext.viewcode',
     'sphinx.ext.intersphinx',
-    'sphinx.ext.autodoc', 'sphinx.ext.autodoc.typehints',
+    'sphinx.ext.autodoc',
     'sphinx.ext.napoleon',
     'sphinx_autodoc_typehints',
 ]
@@ -60,7 +60,6 @@ intersphinx_mapping = {
     'python': ('https://docs.python.org/3', None),
     'broapt': ('https://broapt.jarryshaw.me/en/latest/', None),
     'zeek': ('https://docs.zeek.org/en/stable/', None),
-    'bro': ('https://docs.zeek.org/en/stable/', None),
 }
 
 autodoc_typehints = 'description'

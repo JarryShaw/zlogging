@@ -154,14 +154,6 @@ class ID(enum.IntFlag):
     #: (present if base/protocols/krb/main.zeek is loaded)
     KRB_LOG = enum.auto()
 
-    #: LDAP::LDAP_LOG
-    #: (present if base/protocols/ldap/main.zeek is loaded)
-    LDAP_LDAP_LOG = enum.auto()
-
-    #: LDAP::LDAP_SEARCH_LOG
-    #: (present if base/protocols/ldap/main.zeek is loaded)
-    LDAP_LDAP_SEARCH_LOG = enum.auto()
-
     #: Modbus::LOG
     #: (present if base/protocols/modbus/main.zeek is loaded)
     Modbus_LOG = enum.auto()
@@ -189,14 +181,6 @@ class ID(enum.IntFlag):
     #: NTP::LOG
     #: (present if base/protocols/ntp/main.zeek is loaded)
     NTP_LOG = enum.auto()
-
-    #: PostgreSQL::LOG
-    #: (present if base/protocols/postgresql/main.zeek is loaded)
-    PostgreSQL_LOG = enum.auto()
-
-    #: QUIC::LOG
-    #: (present if base/protocols/quic/main.zeek is loaded)
-    QUIC_LOG = enum.auto()
 
     #: RADIUS::LOG
     #: (present if base/protocols/radius/main.zeek is loaded)
@@ -241,10 +225,6 @@ class ID(enum.IntFlag):
     #: Syslog::LOG
     #: (present if base/protocols/syslog/main.zeek is loaded)
     Syslog_LOG = enum.auto()
-
-    #: WebSocket::LOG
-    #: (present if base/protocols/websocket/main.zeek is loaded)
-    WebSocket_LOG = enum.auto()
 
     #: PE::LOG
     #: (present if base/files/pe/main.zeek is loaded)

@@ -1,11 +1,9 @@
 # -*- coding: utf-8 -*-
 
 import os
-import pkg_resources
-from typing import TYPE_CHECKING, cast
+from typing import cast
 
-if TYPE_CHECKING:
-    from packaging.version import Version
+from packaging.version import Version
 
 try:
     import zlogging
@@ -23,7 +21,7 @@ except ImportError:
         raise RuntimeError('cannot find version')
 
 # parse version and bump version
-ver_obj = pkg_resources.parse_version(version)  # type: Version
+ver_obj = Version(version)
 base_version = ver_obj.base_version
 
 if ver_obj.is_devrelease:

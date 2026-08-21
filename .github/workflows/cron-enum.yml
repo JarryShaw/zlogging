@@ -10,17 +10,17 @@ jobs:
   enum-update:
     runs-on: macos-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
 
-      - uses: actions/setup-python@v4
+      - uses: actions/setup-python@v7
         with:
-          python-version: '3.12'
+          python-version: '3.14'
 
       - name: Install and Setup
         run: |
           set -x
 
-          python -m pip install -U pip setuptools wheel
+          python -m pip install -U pip setuptools wheel packaging
           python -m pip install -U beautifulsoup4[html5lib] requests html2text isort
           python -m pip install -e .
 
@@ -49,7 +49,8 @@ jobs:
         run: |
           git config --local user.email "github-actions[bot]@users.noreply.github.com"
           git config --local user.name "github-actions[bot]"
-          git commit -am"Bumped version to $(python -c 'import zlogging; print(zlogging.__version__)')
+          git add docs/source/enum zlogging
+          git commit -m"Bumped version to $(python -c 'import zlogging; print(zlogging.__version__)')
 
           Updated constant enumerations at $(date). The following files
           have been changed: ${{ steps.verify-changed-files.outputs.changed_files }}"

@@ -11,21 +11,20 @@ jobs:
     name: Update requirements.txt
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
         with:
           fetch-depth: 0
 
-      - uses: actions/setup-python@v4
+      - uses: actions/setup-python@v7
         with:
-          python-version: '3.12'
+          python-version: '3.14'
 
       - name: Install and Setup
         run: |
           set -x
 
           python -m pip install -U pip setuptools wheel packaging
-          python -m pip install -e .[all]
-          python -m pip install aenum dataclasses
+          python -m pip install -e .
 
       - name: Setup Conda Distribution
         run: |
@@ -45,7 +44,8 @@ jobs:
         run: |
           git config --local user.email "github-actions[bot]@users.noreply.github.com"
           git config --local user.name "github-actions[bot]"
-          git commit -am"Bumped build to $(cat conda/build)
+          git add conda/build conda/requirements.txt
+          git commit -m"Bumped build to $(cat conda/build)
 
           Updated conda distribution at $(date). The following files have been changed:
             ${{ steps.verify-changed-files.outputs.changed_files }}"
@@ -64,7 +64,7 @@ jobs:
           set -ex
 
           echo "ZLOGGING_VERSION=$(python -c 'import zlogging; print(zlogging.__version__)')" >> $GITHUB_OUTPUT
-          echo "ZLOGGING_CONDA_LABEL=$(python -c 'import zlogging, pkg_resources; print("dev" if pkg_resources.parse_version(zlogging.__version__).is_prerelease else "main")')" >> $GITHUB_OUTPUT
+          echo "ZLOGGING_CONDA_LABEL=$(python -c 'import zlogging; from packaging.version import Version; print("dev" if Version(zlogging.__version__).is_prerelease else "main")')" >> $GITHUB_OUTPUT
           echo "ZLOGGING_BUILD=$(cat conda/build)" >> $GITHUB_OUTPUT
 
     outputs:
@@ -80,7 +80,7 @@ jobs:
     if: needs.conda-update.outputs.CONDA_CHANGED == 'true'
     steps:
       - name: Checkout code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
         with:
           token: ${{ secrets.ZLOGGING }}
           fetch-depth: 0
@@ -114,18 +114,18 @@ jobs:
           - ubuntu-latest
           # - windows-latest  # skip for now
         python-version:
-          - "3.8"
-          - "3.9"
           - "3.10"
           - "3.11"
           - "3.12"
+          - "3.13"
+          - "3.14"
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
         with:
           ref: conda-${{ needs.conda-update.outputs.ZLOGGING_VERSION }}+${{ needs.conda-update.outputs.ZLOGGING_BUILD }}
           fetch-depth: 0
 
-      - uses: actions/setup-python@v4
+      - uses: actions/setup-python@v7
         with:
           python-version: ${{ matrix.python-version }}
 
@@ -135,15 +135,13 @@ jobs:
           set -x
 
           python -m pip install -U pip setuptools wheel
-          python -m pip install -e .[all]
-          python -m pip install pathlib2 typing_extensions
+          python -m pip install -e .
 
       - name: Install and Setup (Windows)
         if: ${{ matrix.os == 'windows-latest' }}
         run: |
           python -m pip install -U pip setuptools wheel
-          python -m pip install -e .[all]
-          python -m pip install pathlib2 typing_extensions
+          python -m pip install -e .
 
       - name: Setup Conda Distribution
         if: ${{ matrix.os != 'windows-latest' }}

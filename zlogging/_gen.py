@@ -316,10 +316,15 @@ def main() -> 'int':
                         help='use cached downloaded files')
 
     args = parser.parse_args()
-    if not args.caching and os.path.exists(os.path.join(ROOT, '_cache')):
-        shutil.rmtree(os.path.join(ROOT, '_cache'))
+    cache = os.path.join(ROOT, '_cache')
+    if args.caching:
+        if not os.path.exists(cache):
+            raise FileNotFoundError(cache)
+    else:
+        if os.path.exists(cache):
+            shutil.rmtree(cache)
+        fetch()
 
-    fetch()
     make()
     test()
 

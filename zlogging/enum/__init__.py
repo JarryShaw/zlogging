@@ -9,6 +9,10 @@ from typing import TYPE_CHECKING
 from zlogging._exc import BroDeprecationWarning
 from zlogging.enum.af_packet import ChecksumMode as AF_Packet_ChecksumMode
 from zlogging.enum.af_packet import FanoutMode as AF_Packet_FanoutMode
+from zlogging.enum.all_analyzers import Tag as AllAnalyzers_Tag
+from zlogging.enum.analyzer import Tag as Analyzer_Tag
+from zlogging.enum.asn1 import ASN1Class as ASN1_ASN1Class
+from zlogging.enum.asn1 import ASN1Type as ASN1_ASN1Type
 from zlogging.enum.broker import BackendType as Broker_BackendType
 from zlogging.enum.broker import BrokerProtocol as Broker_BrokerProtocol
 from zlogging.enum.broker import DataType as Broker_DataType
@@ -19,12 +23,10 @@ from zlogging.enum.broker import SQLiteFailureMode as Broker_SQLiteFailureMode
 from zlogging.enum.broker import SQLiteJournalMode as Broker_SQLiteJournalMode
 from zlogging.enum.broker import SQLiteSynchronous as Broker_SQLiteSynchronous
 from zlogging.enum.broker import Type as Broker_Type
-from zlogging.enum.cluster import BackendTag as Cluster_BackendTag
-from zlogging.enum.cluster import EventSerializerTag as Cluster_EventSerializerTag
-from zlogging.enum.cluster import LogSerializerTag as Cluster_LogSerializerTag
 from zlogging.enum.cluster import NodeType as Cluster_NodeType
 from zlogging.enum.dce_rpc import IfID as DCE_RPC_IfID
 from zlogging.enum.dce_rpc import PType as DCE_RPC_PType
+from zlogging.enum.files import Tag as Files_Tag
 from zlogging.enum.http import Tags as HTTP_Tags
 from zlogging.enum.input import Event as Input_Event
 from zlogging.enum.input import Mode as Input_Mode
@@ -33,11 +35,15 @@ from zlogging.enum.intel import Type as Intel_Type
 from zlogging.enum.intel import Where as Intel_Where
 from zlogging.enum.json import TimestampFormat as JSON_TimestampFormat
 from zlogging.enum.known import ModbusDeviceType as Known_ModbusDeviceType
+from zlogging.enum.ldap import BindAuthType as LDAP_BindAuthType
+from zlogging.enum.ldap import ProtocolOpcode as LDAP_ProtocolOpcode
+from zlogging.enum.ldap import ResultCode as LDAP_ResultCode
+from zlogging.enum.ldap import SearchDerefAlias as LDAP_SearchDerefAlias
+from zlogging.enum.ldap import SearchScope as LDAP_SearchScope
+from zlogging.enum.load_balancing import Method as LoadBalancing_Method
 from zlogging.enum.log import ID as Log_ID
 from zlogging.enum.log import PrintLogType as Log_PrintLogType
 from zlogging.enum.log import Writer as Log_Writer
-from zlogging.enum.log_s_q_lite import SQLiteJournalMode as LogSQLite_SQLiteJournalMode
-from zlogging.enum.log_s_q_lite import SQLiteSynchronous as LogSQLite_SQLiteSynchronous
 from zlogging.enum.management import Role as Management_Role
 from zlogging.enum.management import State as Management_State
 from zlogging.enum.management_controller_runtime import \
@@ -65,13 +71,26 @@ from zlogging.enum.open_flow import Plugin as OpenFlow_Plugin
 from zlogging.enum.open_flow import ofp_action_type as OpenFlow_ofp_action_type
 from zlogging.enum.open_flow import ofp_config_flags as OpenFlow_ofp_config_flags
 from zlogging.enum.open_flow import ofp_flow_mod_command as OpenFlow_ofp_flow_mod_command
+from zlogging.enum.packet_analyzer import Tag as PacketAnalyzer_Tag
 from zlogging.enum.pcap import filter_state as Pcap_filter_state
 from zlogging.enum.protocol_detector import dir as ProtocolDetector_dir
+from zlogging.enum.redis import RedisCommand as Redis_RedisCommand
+from zlogging.enum.redis import ReplyType as Redis_ReplyType
 from zlogging.enum.reporter import Level as Reporter_Level
 from zlogging.enum.signatures import Action as Signatures_Action
 from zlogging.enum.smb import Action as SMB_Action
 from zlogging.enum.socks import RequestType as SOCKS_RequestType
 from zlogging.enum.software import Type as Software_Type
+from zlogging.enum.spicy import AddressFamily as spicy_AddressFamily
+from zlogging.enum.spicy import BitOrder as spicy_BitOrder
+from zlogging.enum.spicy import ByteOrder as spicy_ByteOrder
+from zlogging.enum.spicy import Charset as spicy_Charset
+from zlogging.enum.spicy import DecodeErrorStrategy as spicy_DecodeErrorStrategy
+from zlogging.enum.spicy import Direction as spicy_Direction
+from zlogging.enum.spicy import Protocol as spicy_Protocol
+from zlogging.enum.spicy import RealType as spicy_RealType
+from zlogging.enum.spicy import ReassemblerPolicy as spicy_ReassemblerPolicy
+from zlogging.enum.spicy import Side as spicy_Side
 from zlogging.enum.ssl import SctSource as SSL_SctSource
 from zlogging.enum.sum_stats import Calculation as SumStats_Calculation
 from zlogging.enum.supervisor import ClusterRole as Supervisor_ClusterRole
@@ -108,6 +127,256 @@ builtins.globals()['ZLogging::AF_Packet'] = {
     'FANOUT_HASH': AF_Packet_FanoutMode.FANOUT_HASH,
     'FANOUT_QM': AF_Packet_FanoutMode.FANOUT_QM,
     'FanoutMode': AF_Packet_FanoutMode,
+}
+
+builtins.globals()['ZLogging::ASN1'] = {
+    'ASN1Class': ASN1_ASN1Class,
+    'ASN1Class_Application': ASN1_ASN1Class.ASN1Class_Application,
+    'ASN1Class_ContextSpecific': ASN1_ASN1Class.ASN1Class_ContextSpecific,
+    'ASN1Class_Private': ASN1_ASN1Class.ASN1Class_Private,
+    'ASN1Class_Undef': ASN1_ASN1Class.ASN1Class_Undef,
+    'ASN1Class_Universal': ASN1_ASN1Class.ASN1Class_Universal,
+    'ASN1Type': ASN1_ASN1Type,
+    'ASN1Type_BMPString': ASN1_ASN1Type.ASN1Type_BMPString,
+    'ASN1Type_BitString': ASN1_ASN1Type.ASN1Type_BitString,
+    'ASN1Type_Boolean': ASN1_ASN1Type.ASN1Type_Boolean,
+    'ASN1Type_CharacterString': ASN1_ASN1Type.ASN1Type_CharacterString,
+    'ASN1Type_EmbeddedPDV': ASN1_ASN1Type.ASN1Type_EmbeddedPDV,
+    'ASN1Type_Enumerated': ASN1_ASN1Type.ASN1Type_Enumerated,
+    'ASN1Type_GeneralString': ASN1_ASN1Type.ASN1Type_GeneralString,
+    'ASN1Type_GeneralizedTime': ASN1_ASN1Type.ASN1Type_GeneralizedTime,
+    'ASN1Type_GraphicString': ASN1_ASN1Type.ASN1Type_GraphicString,
+    'ASN1Type_IA5String': ASN1_ASN1Type.ASN1Type_IA5String,
+    'ASN1Type_InstanceOf': ASN1_ASN1Type.ASN1Type_InstanceOf,
+    'ASN1Type_Integer': ASN1_ASN1Type.ASN1Type_Integer,
+    'ASN1Type_NullVal': ASN1_ASN1Type.ASN1Type_NullVal,
+    'ASN1Type_NumericString': ASN1_ASN1Type.ASN1Type_NumericString,
+    'ASN1Type_ObjectDescriptor': ASN1_ASN1Type.ASN1Type_ObjectDescriptor,
+    'ASN1Type_ObjectIdentifier': ASN1_ASN1Type.ASN1Type_ObjectIdentifier,
+    'ASN1Type_OctetString': ASN1_ASN1Type.ASN1Type_OctetString,
+    'ASN1Type_PrintableString': ASN1_ASN1Type.ASN1Type_PrintableString,
+    'ASN1Type_Real': ASN1_ASN1Type.ASN1Type_Real,
+    'ASN1Type_RelativeOID': ASN1_ASN1Type.ASN1Type_RelativeOID,
+    'ASN1Type_Sequence': ASN1_ASN1Type.ASN1Type_Sequence,
+    'ASN1Type_Set': ASN1_ASN1Type.ASN1Type_Set,
+    'ASN1Type_TeletextString': ASN1_ASN1Type.ASN1Type_TeletextString,
+    'ASN1Type_UTCTime': ASN1_ASN1Type.ASN1Type_UTCTime,
+    'ASN1Type_UTF8String': ASN1_ASN1Type.ASN1Type_UTF8String,
+    'ASN1Type_Undef': ASN1_ASN1Type.ASN1Type_Undef,
+    'ASN1Type_UniversalString': ASN1_ASN1Type.ASN1Type_UniversalString,
+    'ASN1Type_VideotextString': ASN1_ASN1Type.ASN1Type_VideotextString,
+    'ASN1Type_VisibleString': ASN1_ASN1Type.ASN1Type_VisibleString,
+}
+
+builtins.globals()['ZLogging::AllAnalyzers'] = {
+    'ANALYZER_ANALYZER_BITTORRENT': AllAnalyzers_Tag.ANALYZER_ANALYZER_BITTORRENT,
+    'ANALYZER_ANALYZER_BITTORRENTTRACKER': AllAnalyzers_Tag.ANALYZER_ANALYZER_BITTORRENTTRACKER,
+    'ANALYZER_ANALYZER_CONNSIZE': AllAnalyzers_Tag.ANALYZER_ANALYZER_CONNSIZE,
+    'ANALYZER_ANALYZER_CONTENTLINE': AllAnalyzers_Tag.ANALYZER_ANALYZER_CONTENTLINE,
+    'ANALYZER_ANALYZER_CONTENTS': AllAnalyzers_Tag.ANALYZER_ANALYZER_CONTENTS,
+    'ANALYZER_ANALYZER_CONTENTS_DNS': AllAnalyzers_Tag.ANALYZER_ANALYZER_CONTENTS_DNS,
+    'ANALYZER_ANALYZER_CONTENTS_NCP': AllAnalyzers_Tag.ANALYZER_ANALYZER_CONTENTS_NCP,
+    'ANALYZER_ANALYZER_CONTENTS_NETBIOSSSN': AllAnalyzers_Tag.ANALYZER_ANALYZER_CONTENTS_NETBIOSSSN,
+    'ANALYZER_ANALYZER_CONTENTS_NFS': AllAnalyzers_Tag.ANALYZER_ANALYZER_CONTENTS_NFS,
+    'ANALYZER_ANALYZER_CONTENTS_RLOGIN': AllAnalyzers_Tag.ANALYZER_ANALYZER_CONTENTS_RLOGIN,
+    'ANALYZER_ANALYZER_CONTENTS_RPC': AllAnalyzers_Tag.ANALYZER_ANALYZER_CONTENTS_RPC,
+    'ANALYZER_ANALYZER_CONTENTS_RSH': AllAnalyzers_Tag.ANALYZER_ANALYZER_CONTENTS_RSH,
+    'ANALYZER_ANALYZER_CONTENTS_SMB': AllAnalyzers_Tag.ANALYZER_ANALYZER_CONTENTS_SMB,
+    'ANALYZER_ANALYZER_DCE_RPC': AllAnalyzers_Tag.ANALYZER_ANALYZER_DCE_RPC,
+    'ANALYZER_ANALYZER_DHCP': AllAnalyzers_Tag.ANALYZER_ANALYZER_DHCP,
+    'ANALYZER_ANALYZER_DNP3_TCP': AllAnalyzers_Tag.ANALYZER_ANALYZER_DNP3_TCP,
+    'ANALYZER_ANALYZER_DNP3_UDP': AllAnalyzers_Tag.ANALYZER_ANALYZER_DNP3_UDP,
+    'ANALYZER_ANALYZER_DNS': AllAnalyzers_Tag.ANALYZER_ANALYZER_DNS,
+    'ANALYZER_ANALYZER_DTLS': AllAnalyzers_Tag.ANALYZER_ANALYZER_DTLS,
+    'ANALYZER_ANALYZER_FINGER': AllAnalyzers_Tag.ANALYZER_ANALYZER_FINGER,
+    'ANALYZER_ANALYZER_FTP': AllAnalyzers_Tag.ANALYZER_ANALYZER_FTP,
+    'ANALYZER_ANALYZER_FTP_ADAT': AllAnalyzers_Tag.ANALYZER_ANALYZER_FTP_ADAT,
+    'ANALYZER_ANALYZER_FTP_DATA': AllAnalyzers_Tag.ANALYZER_ANALYZER_FTP_DATA,
+    'ANALYZER_ANALYZER_GNUTELLA': AllAnalyzers_Tag.ANALYZER_ANALYZER_GNUTELLA,
+    'ANALYZER_ANALYZER_GSSAPI': AllAnalyzers_Tag.ANALYZER_ANALYZER_GSSAPI,
+    'ANALYZER_ANALYZER_HTTP': AllAnalyzers_Tag.ANALYZER_ANALYZER_HTTP,
+    'ANALYZER_ANALYZER_ICMP': AllAnalyzers_Tag.ANALYZER_ANALYZER_ICMP,
+    'ANALYZER_ANALYZER_IDENT': AllAnalyzers_Tag.ANALYZER_ANALYZER_IDENT,
+    'ANALYZER_ANALYZER_IMAP': AllAnalyzers_Tag.ANALYZER_ANALYZER_IMAP,
+    'ANALYZER_ANALYZER_IRC': AllAnalyzers_Tag.ANALYZER_ANALYZER_IRC,
+    'ANALYZER_ANALYZER_IRC_DATA': AllAnalyzers_Tag.ANALYZER_ANALYZER_IRC_DATA,
+    'ANALYZER_ANALYZER_KRB': AllAnalyzers_Tag.ANALYZER_ANALYZER_KRB,
+    'ANALYZER_ANALYZER_KRB_TCP': AllAnalyzers_Tag.ANALYZER_ANALYZER_KRB_TCP,
+    'ANALYZER_ANALYZER_LDAP_TCP': AllAnalyzers_Tag.ANALYZER_ANALYZER_LDAP_TCP,
+    'ANALYZER_ANALYZER_LDAP_UDP': AllAnalyzers_Tag.ANALYZER_ANALYZER_LDAP_UDP,
+    'ANALYZER_ANALYZER_LOGIN': AllAnalyzers_Tag.ANALYZER_ANALYZER_LOGIN,
+    'ANALYZER_ANALYZER_MODBUS': AllAnalyzers_Tag.ANALYZER_ANALYZER_MODBUS,
+    'ANALYZER_ANALYZER_MOUNT': AllAnalyzers_Tag.ANALYZER_ANALYZER_MOUNT,
+    'ANALYZER_ANALYZER_MQTT': AllAnalyzers_Tag.ANALYZER_ANALYZER_MQTT,
+    'ANALYZER_ANALYZER_MYSQL': AllAnalyzers_Tag.ANALYZER_ANALYZER_MYSQL,
+    'ANALYZER_ANALYZER_NCP': AllAnalyzers_Tag.ANALYZER_ANALYZER_NCP,
+    'ANALYZER_ANALYZER_NETBIOSSSN': AllAnalyzers_Tag.ANALYZER_ANALYZER_NETBIOSSSN,
+    'ANALYZER_ANALYZER_NFS': AllAnalyzers_Tag.ANALYZER_ANALYZER_NFS,
+    'ANALYZER_ANALYZER_NTLM': AllAnalyzers_Tag.ANALYZER_ANALYZER_NTLM,
+    'ANALYZER_ANALYZER_NTP': AllAnalyzers_Tag.ANALYZER_ANALYZER_NTP,
+    'ANALYZER_ANALYZER_NVT': AllAnalyzers_Tag.ANALYZER_ANALYZER_NVT,
+    'ANALYZER_ANALYZER_PIA_TCP': AllAnalyzers_Tag.ANALYZER_ANALYZER_PIA_TCP,
+    'ANALYZER_ANALYZER_PIA_UDP': AllAnalyzers_Tag.ANALYZER_ANALYZER_PIA_UDP,
+    'ANALYZER_ANALYZER_POP3': AllAnalyzers_Tag.ANALYZER_ANALYZER_POP3,
+    'ANALYZER_ANALYZER_PORTMAPPER': AllAnalyzers_Tag.ANALYZER_ANALYZER_PORTMAPPER,
+    'ANALYZER_ANALYZER_POSTGRESQL': AllAnalyzers_Tag.ANALYZER_ANALYZER_POSTGRESQL,
+    'ANALYZER_ANALYZER_QUIC': AllAnalyzers_Tag.ANALYZER_ANALYZER_QUIC,
+    'ANALYZER_ANALYZER_RADIUS': AllAnalyzers_Tag.ANALYZER_ANALYZER_RADIUS,
+    'ANALYZER_ANALYZER_RDP': AllAnalyzers_Tag.ANALYZER_ANALYZER_RDP,
+    'ANALYZER_ANALYZER_RDPEUDP': AllAnalyzers_Tag.ANALYZER_ANALYZER_RDPEUDP,
+    'ANALYZER_ANALYZER_REDIS': AllAnalyzers_Tag.ANALYZER_ANALYZER_REDIS,
+    'ANALYZER_ANALYZER_RFB': AllAnalyzers_Tag.ANALYZER_ANALYZER_RFB,
+    'ANALYZER_ANALYZER_RLOGIN': AllAnalyzers_Tag.ANALYZER_ANALYZER_RLOGIN,
+    'ANALYZER_ANALYZER_RSH': AllAnalyzers_Tag.ANALYZER_ANALYZER_RSH,
+    'ANALYZER_ANALYZER_SIP': AllAnalyzers_Tag.ANALYZER_ANALYZER_SIP,
+    'ANALYZER_ANALYZER_SMB': AllAnalyzers_Tag.ANALYZER_ANALYZER_SMB,
+    'ANALYZER_ANALYZER_SMTP': AllAnalyzers_Tag.ANALYZER_ANALYZER_SMTP,
+    'ANALYZER_ANALYZER_SMTP_BDAT': AllAnalyzers_Tag.ANALYZER_ANALYZER_SMTP_BDAT,
+    'ANALYZER_ANALYZER_SNMP': AllAnalyzers_Tag.ANALYZER_ANALYZER_SNMP,
+    'ANALYZER_ANALYZER_SOCKS': AllAnalyzers_Tag.ANALYZER_ANALYZER_SOCKS,
+    'ANALYZER_ANALYZER_SPICY_WEBSOCKET': AllAnalyzers_Tag.ANALYZER_ANALYZER_SPICY_WEBSOCKET,
+    'ANALYZER_ANALYZER_SSH': AllAnalyzers_Tag.ANALYZER_ANALYZER_SSH,
+    'ANALYZER_ANALYZER_SSL': AllAnalyzers_Tag.ANALYZER_ANALYZER_SSL,
+    'ANALYZER_ANALYZER_STREAM_EVENT': AllAnalyzers_Tag.ANALYZER_ANALYZER_STREAM_EVENT,
+    'ANALYZER_ANALYZER_SYSLOG': AllAnalyzers_Tag.ANALYZER_ANALYZER_SYSLOG,
+    'ANALYZER_ANALYZER_TCP': AllAnalyzers_Tag.ANALYZER_ANALYZER_TCP,
+    'ANALYZER_ANALYZER_TCPSTATS': AllAnalyzers_Tag.ANALYZER_ANALYZER_TCPSTATS,
+    'ANALYZER_ANALYZER_TELNET': AllAnalyzers_Tag.ANALYZER_ANALYZER_TELNET,
+    'ANALYZER_ANALYZER_UDP': AllAnalyzers_Tag.ANALYZER_ANALYZER_UDP,
+    'ANALYZER_ANALYZER_UNKNOWN_IP_TRANSPORT': AllAnalyzers_Tag.ANALYZER_ANALYZER_UNKNOWN_IP_TRANSPORT,
+    'ANALYZER_ANALYZER_WEBSOCKET': AllAnalyzers_Tag.ANALYZER_ANALYZER_WEBSOCKET,
+    'ANALYZER_ANALYZER_XMPP': AllAnalyzers_Tag.ANALYZER_ANALYZER_XMPP,
+    'ANALYZER_ANALYZER_ZIP': AllAnalyzers_Tag.ANALYZER_ANALYZER_ZIP,
+    'FILES_ANALYZER_DATA_EVENT': AllAnalyzers_Tag.FILES_ANALYZER_DATA_EVENT,
+    'FILES_ANALYZER_ENTROPY': AllAnalyzers_Tag.FILES_ANALYZER_ENTROPY,
+    'FILES_ANALYZER_EXTRACT': AllAnalyzers_Tag.FILES_ANALYZER_EXTRACT,
+    'FILES_ANALYZER_MD5': AllAnalyzers_Tag.FILES_ANALYZER_MD5,
+    'FILES_ANALYZER_OCSP_REPLY': AllAnalyzers_Tag.FILES_ANALYZER_OCSP_REPLY,
+    'FILES_ANALYZER_OCSP_REQUEST': AllAnalyzers_Tag.FILES_ANALYZER_OCSP_REQUEST,
+    'FILES_ANALYZER_PE': AllAnalyzers_Tag.FILES_ANALYZER_PE,
+    'FILES_ANALYZER_SHA1': AllAnalyzers_Tag.FILES_ANALYZER_SHA1,
+    'FILES_ANALYZER_SHA224': AllAnalyzers_Tag.FILES_ANALYZER_SHA224,
+    'FILES_ANALYZER_SHA256': AllAnalyzers_Tag.FILES_ANALYZER_SHA256,
+    'FILES_ANALYZER_SHA384': AllAnalyzers_Tag.FILES_ANALYZER_SHA384,
+    'FILES_ANALYZER_SHA512': AllAnalyzers_Tag.FILES_ANALYZER_SHA512,
+    'FILES_ANALYZER_X509': AllAnalyzers_Tag.FILES_ANALYZER_X509,
+    'PACKETANALYZER_ANALYZER_ARP': AllAnalyzers_Tag.PACKETANALYZER_ANALYZER_ARP,
+    'PACKETANALYZER_ANALYZER_AYIYA': AllAnalyzers_Tag.PACKETANALYZER_ANALYZER_AYIYA,
+    'PACKETANALYZER_ANALYZER_ETHERNET': AllAnalyzers_Tag.PACKETANALYZER_ANALYZER_ETHERNET,
+    'PACKETANALYZER_ANALYZER_FDDI': AllAnalyzers_Tag.PACKETANALYZER_ANALYZER_FDDI,
+    'PACKETANALYZER_ANALYZER_GENEVE': AllAnalyzers_Tag.PACKETANALYZER_ANALYZER_GENEVE,
+    'PACKETANALYZER_ANALYZER_GRE': AllAnalyzers_Tag.PACKETANALYZER_ANALYZER_GRE,
+    'PACKETANALYZER_ANALYZER_GTPV1': AllAnalyzers_Tag.PACKETANALYZER_ANALYZER_GTPV1,
+    'PACKETANALYZER_ANALYZER_ICMP': AllAnalyzers_Tag.PACKETANALYZER_ANALYZER_ICMP,
+    'PACKETANALYZER_ANALYZER_IEEE802_11': AllAnalyzers_Tag.PACKETANALYZER_ANALYZER_IEEE802_11,
+    'PACKETANALYZER_ANALYZER_IEEE802_11_RADIO': AllAnalyzers_Tag.PACKETANALYZER_ANALYZER_IEEE802_11_RADIO,
+    'PACKETANALYZER_ANALYZER_IGMP': AllAnalyzers_Tag.PACKETANALYZER_ANALYZER_IGMP,
+    'PACKETANALYZER_ANALYZER_IP': AllAnalyzers_Tag.PACKETANALYZER_ANALYZER_IP,
+    'PACKETANALYZER_ANALYZER_IPTUNNEL': AllAnalyzers_Tag.PACKETANALYZER_ANALYZER_IPTUNNEL,
+    'PACKETANALYZER_ANALYZER_LINUXSLL': AllAnalyzers_Tag.PACKETANALYZER_ANALYZER_LINUXSLL,
+    'PACKETANALYZER_ANALYZER_LINUXSLL2': AllAnalyzers_Tag.PACKETANALYZER_ANALYZER_LINUXSLL2,
+    'PACKETANALYZER_ANALYZER_LLC': AllAnalyzers_Tag.PACKETANALYZER_ANALYZER_LLC,
+    'PACKETANALYZER_ANALYZER_MPLS': AllAnalyzers_Tag.PACKETANALYZER_ANALYZER_MPLS,
+    'PACKETANALYZER_ANALYZER_NFLOG': AllAnalyzers_Tag.PACKETANALYZER_ANALYZER_NFLOG,
+    'PACKETANALYZER_ANALYZER_NOVELL_802_3': AllAnalyzers_Tag.PACKETANALYZER_ANALYZER_NOVELL_802_3,
+    'PACKETANALYZER_ANALYZER_NULL': AllAnalyzers_Tag.PACKETANALYZER_ANALYZER_NULL,
+    'PACKETANALYZER_ANALYZER_PBB': AllAnalyzers_Tag.PACKETANALYZER_ANALYZER_PBB,
+    'PACKETANALYZER_ANALYZER_PPP': AllAnalyzers_Tag.PACKETANALYZER_ANALYZER_PPP,
+    'PACKETANALYZER_ANALYZER_PPPOE': AllAnalyzers_Tag.PACKETANALYZER_ANALYZER_PPPOE,
+    'PACKETANALYZER_ANALYZER_PPPSERIAL': AllAnalyzers_Tag.PACKETANALYZER_ANALYZER_PPPSERIAL,
+    'PACKETANALYZER_ANALYZER_ROOT': AllAnalyzers_Tag.PACKETANALYZER_ANALYZER_ROOT,
+    'PACKETANALYZER_ANALYZER_SKIP': AllAnalyzers_Tag.PACKETANALYZER_ANALYZER_SKIP,
+    'PACKETANALYZER_ANALYZER_SNAP': AllAnalyzers_Tag.PACKETANALYZER_ANALYZER_SNAP,
+    'PACKETANALYZER_ANALYZER_TCP': AllAnalyzers_Tag.PACKETANALYZER_ANALYZER_TCP,
+    'PACKETANALYZER_ANALYZER_TEREDO': AllAnalyzers_Tag.PACKETANALYZER_ANALYZER_TEREDO,
+    'PACKETANALYZER_ANALYZER_UDP': AllAnalyzers_Tag.PACKETANALYZER_ANALYZER_UDP,
+    'PACKETANALYZER_ANALYZER_UNKNOWN_IP_TRANSPORT': AllAnalyzers_Tag.PACKETANALYZER_ANALYZER_UNKNOWN_IP_TRANSPORT,
+    'PACKETANALYZER_ANALYZER_VLAN': AllAnalyzers_Tag.PACKETANALYZER_ANALYZER_VLAN,
+    'PACKETANALYZER_ANALYZER_VNTAG': AllAnalyzers_Tag.PACKETANALYZER_ANALYZER_VNTAG,
+    'PACKETANALYZER_ANALYZER_VXLAN': AllAnalyzers_Tag.PACKETANALYZER_ANALYZER_VXLAN,
+    'Tag': AllAnalyzers_Tag,
+}
+
+builtins.globals()['ZLogging::Analyzer'] = {
+    'ANALYZER_BITTORRENT': Analyzer_Tag.ANALYZER_BITTORRENT,
+    'ANALYZER_BITTORRENTTRACKER': Analyzer_Tag.ANALYZER_BITTORRENTTRACKER,
+    'ANALYZER_CONNSIZE': Analyzer_Tag.ANALYZER_CONNSIZE,
+    'ANALYZER_CONTENTLINE': Analyzer_Tag.ANALYZER_CONTENTLINE,
+    'ANALYZER_CONTENTS': Analyzer_Tag.ANALYZER_CONTENTS,
+    'ANALYZER_CONTENTS_DNS': Analyzer_Tag.ANALYZER_CONTENTS_DNS,
+    'ANALYZER_CONTENTS_NCP': Analyzer_Tag.ANALYZER_CONTENTS_NCP,
+    'ANALYZER_CONTENTS_NETBIOSSSN': Analyzer_Tag.ANALYZER_CONTENTS_NETBIOSSSN,
+    'ANALYZER_CONTENTS_NFS': Analyzer_Tag.ANALYZER_CONTENTS_NFS,
+    'ANALYZER_CONTENTS_RLOGIN': Analyzer_Tag.ANALYZER_CONTENTS_RLOGIN,
+    'ANALYZER_CONTENTS_RPC': Analyzer_Tag.ANALYZER_CONTENTS_RPC,
+    'ANALYZER_CONTENTS_RSH': Analyzer_Tag.ANALYZER_CONTENTS_RSH,
+    'ANALYZER_CONTENTS_SMB': Analyzer_Tag.ANALYZER_CONTENTS_SMB,
+    'ANALYZER_DCE_RPC': Analyzer_Tag.ANALYZER_DCE_RPC,
+    'ANALYZER_DHCP': Analyzer_Tag.ANALYZER_DHCP,
+    'ANALYZER_DNP3_TCP': Analyzer_Tag.ANALYZER_DNP3_TCP,
+    'ANALYZER_DNP3_UDP': Analyzer_Tag.ANALYZER_DNP3_UDP,
+    'ANALYZER_DNS': Analyzer_Tag.ANALYZER_DNS,
+    'ANALYZER_DTLS': Analyzer_Tag.ANALYZER_DTLS,
+    'ANALYZER_FINGER': Analyzer_Tag.ANALYZER_FINGER,
+    'ANALYZER_FTP': Analyzer_Tag.ANALYZER_FTP,
+    'ANALYZER_FTP_ADAT': Analyzer_Tag.ANALYZER_FTP_ADAT,
+    'ANALYZER_FTP_DATA': Analyzer_Tag.ANALYZER_FTP_DATA,
+    'ANALYZER_GNUTELLA': Analyzer_Tag.ANALYZER_GNUTELLA,
+    'ANALYZER_GSSAPI': Analyzer_Tag.ANALYZER_GSSAPI,
+    'ANALYZER_HTTP': Analyzer_Tag.ANALYZER_HTTP,
+    'ANALYZER_ICMP': Analyzer_Tag.ANALYZER_ICMP,
+    'ANALYZER_IDENT': Analyzer_Tag.ANALYZER_IDENT,
+    'ANALYZER_IMAP': Analyzer_Tag.ANALYZER_IMAP,
+    'ANALYZER_IRC': Analyzer_Tag.ANALYZER_IRC,
+    'ANALYZER_IRC_DATA': Analyzer_Tag.ANALYZER_IRC_DATA,
+    'ANALYZER_KRB': Analyzer_Tag.ANALYZER_KRB,
+    'ANALYZER_KRB_TCP': Analyzer_Tag.ANALYZER_KRB_TCP,
+    'ANALYZER_LDAP_TCP': Analyzer_Tag.ANALYZER_LDAP_TCP,
+    'ANALYZER_LDAP_UDP': Analyzer_Tag.ANALYZER_LDAP_UDP,
+    'ANALYZER_LOGIN': Analyzer_Tag.ANALYZER_LOGIN,
+    'ANALYZER_MODBUS': Analyzer_Tag.ANALYZER_MODBUS,
+    'ANALYZER_MOUNT': Analyzer_Tag.ANALYZER_MOUNT,
+    'ANALYZER_MQTT': Analyzer_Tag.ANALYZER_MQTT,
+    'ANALYZER_MYSQL': Analyzer_Tag.ANALYZER_MYSQL,
+    'ANALYZER_NCP': Analyzer_Tag.ANALYZER_NCP,
+    'ANALYZER_NETBIOSSSN': Analyzer_Tag.ANALYZER_NETBIOSSSN,
+    'ANALYZER_NFS': Analyzer_Tag.ANALYZER_NFS,
+    'ANALYZER_NTLM': Analyzer_Tag.ANALYZER_NTLM,
+    'ANALYZER_NTP': Analyzer_Tag.ANALYZER_NTP,
+    'ANALYZER_NVT': Analyzer_Tag.ANALYZER_NVT,
+    'ANALYZER_PIA_TCP': Analyzer_Tag.ANALYZER_PIA_TCP,
+    'ANALYZER_PIA_UDP': Analyzer_Tag.ANALYZER_PIA_UDP,
+    'ANALYZER_POP3': Analyzer_Tag.ANALYZER_POP3,
+    'ANALYZER_PORTMAPPER': Analyzer_Tag.ANALYZER_PORTMAPPER,
+    'ANALYZER_POSTGRESQL': Analyzer_Tag.ANALYZER_POSTGRESQL,
+    'ANALYZER_QUIC': Analyzer_Tag.ANALYZER_QUIC,
+    'ANALYZER_RADIUS': Analyzer_Tag.ANALYZER_RADIUS,
+    'ANALYZER_RDP': Analyzer_Tag.ANALYZER_RDP,
+    'ANALYZER_RDPEUDP': Analyzer_Tag.ANALYZER_RDPEUDP,
+    'ANALYZER_REDIS': Analyzer_Tag.ANALYZER_REDIS,
+    'ANALYZER_RFB': Analyzer_Tag.ANALYZER_RFB,
+    'ANALYZER_RLOGIN': Analyzer_Tag.ANALYZER_RLOGIN,
+    'ANALYZER_RSH': Analyzer_Tag.ANALYZER_RSH,
+    'ANALYZER_SIP': Analyzer_Tag.ANALYZER_SIP,
+    'ANALYZER_SMB': Analyzer_Tag.ANALYZER_SMB,
+    'ANALYZER_SMTP': Analyzer_Tag.ANALYZER_SMTP,
+    'ANALYZER_SMTP_BDAT': Analyzer_Tag.ANALYZER_SMTP_BDAT,
+    'ANALYZER_SNMP': Analyzer_Tag.ANALYZER_SNMP,
+    'ANALYZER_SOCKS': Analyzer_Tag.ANALYZER_SOCKS,
+    'ANALYZER_SPICY_WEBSOCKET': Analyzer_Tag.ANALYZER_SPICY_WEBSOCKET,
+    'ANALYZER_SSH': Analyzer_Tag.ANALYZER_SSH,
+    'ANALYZER_SSL': Analyzer_Tag.ANALYZER_SSL,
+    'ANALYZER_STREAM_EVENT': Analyzer_Tag.ANALYZER_STREAM_EVENT,
+    'ANALYZER_SYSLOG': Analyzer_Tag.ANALYZER_SYSLOG,
+    'ANALYZER_TCP': Analyzer_Tag.ANALYZER_TCP,
+    'ANALYZER_TCPSTATS': Analyzer_Tag.ANALYZER_TCPSTATS,
+    'ANALYZER_TELNET': Analyzer_Tag.ANALYZER_TELNET,
+    'ANALYZER_UDP': Analyzer_Tag.ANALYZER_UDP,
+    'ANALYZER_UNKNOWN_IP_TRANSPORT': Analyzer_Tag.ANALYZER_UNKNOWN_IP_TRANSPORT,
+    'ANALYZER_WEBSOCKET': Analyzer_Tag.ANALYZER_WEBSOCKET,
+    'ANALYZER_XMPP': Analyzer_Tag.ANALYZER_XMPP,
+    'ANALYZER_ZIP': Analyzer_Tag.ANALYZER_ZIP,
+    'Tag': Analyzer_Tag,
 }
 
 builtins.globals()['ZLogging::Analyzer::Logging'] = {
@@ -194,21 +463,14 @@ builtins.globals()['ZLogging::CaptureLoss'] = {
 }
 
 builtins.globals()['ZLogging::Cluster'] = {
-    'BackendTag': Cluster_BackendTag,
-    'CLUSTER_BACKEND_BROKER': Cluster_BackendTag.CLUSTER_BACKEND_BROKER,
-    'CLUSTER_BACKEND_ZEROMQ': Cluster_BackendTag.CLUSTER_BACKEND_ZEROMQ,
     'CONTROL': Cluster_NodeType.CONTROL,
     'Cluster_LOG': Log_ID.Cluster_LOG,
-    'EVENT_SERIALIZER_BROKER_BIN_V1': Cluster_EventSerializerTag.EVENT_SERIALIZER_BROKER_BIN_V1,
-    'EVENT_SERIALIZER_BROKER_JSON_V1': Cluster_EventSerializerTag.EVENT_SERIALIZER_BROKER_JSON_V1,
-    'EventSerializerTag': Cluster_EventSerializerTag,
     'LOGGER': Cluster_NodeType.LOGGER,
-    'LOG_SERIALIZER_ZEEK_BIN_V1': Cluster_LogSerializerTag.LOG_SERIALIZER_ZEEK_BIN_V1,
-    'LogSerializerTag': Cluster_LogSerializerTag,
     'MANAGER': Cluster_NodeType.MANAGER,
     'NONE': Cluster_NodeType.NONE,
     'NodeType': Cluster_NodeType,
     'PROXY': Cluster_NodeType.PROXY,
+    'TIME_MACHINE': Cluster_NodeType.TIME_MACHINE,
     'WORKER': Cluster_NodeType.WORKER,
 }
 
@@ -226,42 +488,77 @@ builtins.globals()['ZLogging::Conn'] = {
 
 builtins.globals()['ZLogging::DCE_RPC'] = {
     'ACK': DCE_RPC_PType.ACK,
+    'ACK': DCE_RPC_PType.ACK,
+    'ALTER_CONTEXT': DCE_RPC_PType.ALTER_CONTEXT,
     'ALTER_CONTEXT': DCE_RPC_PType.ALTER_CONTEXT,
     'ALTER_CONTEXT_RESP': DCE_RPC_PType.ALTER_CONTEXT_RESP,
+    'ALTER_CONTEXT_RESP': DCE_RPC_PType.ALTER_CONTEXT_RESP,
+    'AUTH3': DCE_RPC_PType.AUTH3,
     'AUTH3': DCE_RPC_PType.AUTH3,
     'BIND': DCE_RPC_PType.BIND,
+    'BIND': DCE_RPC_PType.BIND,
+    'BIND_ACK': DCE_RPC_PType.BIND_ACK,
     'BIND_ACK': DCE_RPC_PType.BIND_ACK,
     'BIND_NAK': DCE_RPC_PType.BIND_NAK,
+    'BIND_NAK': DCE_RPC_PType.BIND_NAK,
+    'CANCEL_ACK': DCE_RPC_PType.CANCEL_ACK,
     'CANCEL_ACK': DCE_RPC_PType.CANCEL_ACK,
     'CL_CANCEL': DCE_RPC_PType.CL_CANCEL,
+    'CL_CANCEL': DCE_RPC_PType.CL_CANCEL,
+    'CO_CANCEL': DCE_RPC_PType.CO_CANCEL,
     'CO_CANCEL': DCE_RPC_PType.CO_CANCEL,
     'DCE_RPC_LOG': Log_ID.DCE_RPC_LOG,
     'FACK': DCE_RPC_PType.FACK,
+    'FACK': DCE_RPC_PType.FACK,
     'FAULT': DCE_RPC_PType.FAULT,
+    'FAULT': DCE_RPC_PType.FAULT,
+    'ISCMActivator': DCE_RPC_IfID.ISCMActivator,
     'ISCMActivator': DCE_RPC_IfID.ISCMActivator,
     'IfID': DCE_RPC_IfID,
     'NOCALL': DCE_RPC_PType.NOCALL,
+    'NOCALL': DCE_RPC_PType.NOCALL,
     'ORPHANED': DCE_RPC_PType.ORPHANED,
+    'ORPHANED': DCE_RPC_PType.ORPHANED,
+    'PING': DCE_RPC_PType.PING,
     'PING': DCE_RPC_PType.PING,
     'PType': DCE_RPC_PType,
     'REJECT': DCE_RPC_PType.REJECT,
+    'REJECT': DCE_RPC_PType.REJECT,
+    'REQUEST': DCE_RPC_PType.REQUEST,
     'REQUEST': DCE_RPC_PType.REQUEST,
     'RESPONSE': DCE_RPC_PType.RESPONSE,
+    'RESPONSE': DCE_RPC_PType.RESPONSE,
+    'RTS': DCE_RPC_PType.RTS,
     'RTS': DCE_RPC_PType.RTS,
     'SHUTDOWN': DCE_RPC_PType.SHUTDOWN,
+    'SHUTDOWN': DCE_RPC_PType.SHUTDOWN,
+    'WORKING': DCE_RPC_PType.WORKING,
     'WORKING': DCE_RPC_PType.WORKING,
     'drs': DCE_RPC_IfID.drs,
+    'drs': DCE_RPC_IfID.drs,
+    'epmapper': DCE_RPC_IfID.epmapper,
     'epmapper': DCE_RPC_IfID.epmapper,
     'lsa_ds': DCE_RPC_IfID.lsa_ds,
+    'lsa_ds': DCE_RPC_IfID.lsa_ds,
+    'lsarpc': DCE_RPC_IfID.lsarpc,
     'lsarpc': DCE_RPC_IfID.lsarpc,
     'mgmt': DCE_RPC_IfID.mgmt,
+    'mgmt': DCE_RPC_IfID.mgmt,
+    'netlogon': DCE_RPC_IfID.netlogon,
     'netlogon': DCE_RPC_IfID.netlogon,
     'oxid': DCE_RPC_IfID.oxid,
+    'oxid': DCE_RPC_IfID.oxid,
+    'samr': DCE_RPC_IfID.samr,
     'samr': DCE_RPC_IfID.samr,
     'spoolss': DCE_RPC_IfID.spoolss,
+    'spoolss': DCE_RPC_IfID.spoolss,
+    'srvsvc': DCE_RPC_IfID.srvsvc,
     'srvsvc': DCE_RPC_IfID.srvsvc,
     'unknown_if': DCE_RPC_IfID.unknown_if,
+    'unknown_if': DCE_RPC_IfID.unknown_if,
     'winspipe': DCE_RPC_IfID.winspipe,
+    'winspipe': DCE_RPC_IfID.winspipe,
+    'wkssvc': DCE_RPC_IfID.wkssvc,
     'wkssvc': DCE_RPC_IfID.wkssvc,
 }
 
@@ -295,9 +592,23 @@ builtins.globals()['ZLogging::FTP'] = {
 }
 
 builtins.globals()['ZLogging::Files'] = {
+    'ANALYZER_DATA_EVENT': Files_Tag.ANALYZER_DATA_EVENT,
+    'ANALYZER_ENTROPY': Files_Tag.ANALYZER_ENTROPY,
+    'ANALYZER_EXTRACT': Files_Tag.ANALYZER_EXTRACT,
+    'ANALYZER_MD5': Files_Tag.ANALYZER_MD5,
+    'ANALYZER_OCSP_REPLY': Files_Tag.ANALYZER_OCSP_REPLY,
+    'ANALYZER_OCSP_REQUEST': Files_Tag.ANALYZER_OCSP_REQUEST,
+    'ANALYZER_PE': Files_Tag.ANALYZER_PE,
+    'ANALYZER_SHA1': Files_Tag.ANALYZER_SHA1,
+    'ANALYZER_SHA224': Files_Tag.ANALYZER_SHA224,
+    'ANALYZER_SHA256': Files_Tag.ANALYZER_SHA256,
+    'ANALYZER_SHA384': Files_Tag.ANALYZER_SHA384,
+    'ANALYZER_SHA512': Files_Tag.ANALYZER_SHA512,
+    'ANALYZER_X509': Files_Tag.ANALYZER_X509,
     'Files_IN_HASH': Intel_Where.Files_IN_HASH,
     'Files_IN_NAME': Intel_Where.Files_IN_NAME,
     'Files_LOG': Log_ID.Files_LOG,
+    'Tag': Files_Tag,
 }
 
 builtins.globals()['ZLogging::HTTP'] = {
@@ -391,8 +702,129 @@ builtins.globals()['ZLogging::Known'] = {
 }
 
 builtins.globals()['ZLogging::LDAP'] = {
-    'LDAP_LDAP_LOG': Log_ID.LDAP_LDAP_LOG,
-    'LDAP_LDAP_SEARCH_LOG': Log_ID.LDAP_LDAP_SEARCH_LOG,
+    'BindAuthType': LDAP_BindAuthType,
+    'BindAuthType_BIND_AUTH_SASL': LDAP_BindAuthType.BindAuthType_BIND_AUTH_SASL,
+    'BindAuthType_BIND_AUTH_SIMPLE': LDAP_BindAuthType.BindAuthType_BIND_AUTH_SIMPLE,
+    'BindAuthType_SICILY_NEGOTIATE': LDAP_BindAuthType.BindAuthType_SICILY_NEGOTIATE,
+    'BindAuthType_SICILY_PACKAGE_DISCOVERY': LDAP_BindAuthType.BindAuthType_SICILY_PACKAGE_DISCOVERY,
+    'BindAuthType_SICILY_RESPONSE': LDAP_BindAuthType.BindAuthType_SICILY_RESPONSE,
+    'BindAuthType_Undef': LDAP_BindAuthType.BindAuthType_Undef,
+    'ProtocolOpcode': LDAP_ProtocolOpcode,
+    'ProtocolOpcode_ABANDON_REQUEST': LDAP_ProtocolOpcode.ProtocolOpcode_ABANDON_REQUEST,
+    'ProtocolOpcode_ADD_REQUEST': LDAP_ProtocolOpcode.ProtocolOpcode_ADD_REQUEST,
+    'ProtocolOpcode_ADD_RESPONSE': LDAP_ProtocolOpcode.ProtocolOpcode_ADD_RESPONSE,
+    'ProtocolOpcode_BIND_REQUEST': LDAP_ProtocolOpcode.ProtocolOpcode_BIND_REQUEST,
+    'ProtocolOpcode_BIND_RESPONSE': LDAP_ProtocolOpcode.ProtocolOpcode_BIND_RESPONSE,
+    'ProtocolOpcode_COMPARE_REQUEST': LDAP_ProtocolOpcode.ProtocolOpcode_COMPARE_REQUEST,
+    'ProtocolOpcode_COMPARE_RESPONSE': LDAP_ProtocolOpcode.ProtocolOpcode_COMPARE_RESPONSE,
+    'ProtocolOpcode_DEL_REQUEST': LDAP_ProtocolOpcode.ProtocolOpcode_DEL_REQUEST,
+    'ProtocolOpcode_DEL_RESPONSE': LDAP_ProtocolOpcode.ProtocolOpcode_DEL_RESPONSE,
+    'ProtocolOpcode_EXTENDED_REQUEST': LDAP_ProtocolOpcode.ProtocolOpcode_EXTENDED_REQUEST,
+    'ProtocolOpcode_EXTENDED_RESPONSE': LDAP_ProtocolOpcode.ProtocolOpcode_EXTENDED_RESPONSE,
+    'ProtocolOpcode_INTERMEDIATE_RESPONSE': LDAP_ProtocolOpcode.ProtocolOpcode_INTERMEDIATE_RESPONSE,
+    'ProtocolOpcode_MODIFY_REQUEST': LDAP_ProtocolOpcode.ProtocolOpcode_MODIFY_REQUEST,
+    'ProtocolOpcode_MODIFY_RESPONSE': LDAP_ProtocolOpcode.ProtocolOpcode_MODIFY_RESPONSE,
+    'ProtocolOpcode_MOD_DN_REQUEST': LDAP_ProtocolOpcode.ProtocolOpcode_MOD_DN_REQUEST,
+    'ProtocolOpcode_MOD_DN_RESPONSE': LDAP_ProtocolOpcode.ProtocolOpcode_MOD_DN_RESPONSE,
+    'ProtocolOpcode_SEARCH_REQUEST': LDAP_ProtocolOpcode.ProtocolOpcode_SEARCH_REQUEST,
+    'ProtocolOpcode_SEARCH_RESULT_DONE': LDAP_ProtocolOpcode.ProtocolOpcode_SEARCH_RESULT_DONE,
+    'ProtocolOpcode_SEARCH_RESULT_ENTRY': LDAP_ProtocolOpcode.ProtocolOpcode_SEARCH_RESULT_ENTRY,
+    'ProtocolOpcode_SEARCH_RESULT_REFERENCE': LDAP_ProtocolOpcode.ProtocolOpcode_SEARCH_RESULT_REFERENCE,
+    'ProtocolOpcode_UNBIND_REQUEST': LDAP_ProtocolOpcode.ProtocolOpcode_UNBIND_REQUEST,
+    'ProtocolOpcode_Undef': LDAP_ProtocolOpcode.ProtocolOpcode_Undef,
+    'ResultCode': LDAP_ResultCode,
+    'ResultCode_ADMIN_LIMIT_EXCEEDED': LDAP_ResultCode.ResultCode_ADMIN_LIMIT_EXCEEDED,
+    'ResultCode_AFFECTS_MULTIPLE_DSAS': LDAP_ResultCode.ResultCode_AFFECTS_MULTIPLE_DSAS,
+    'ResultCode_ALIAS_DEREFERENCING_PROBLEM': LDAP_ResultCode.ResultCode_ALIAS_DEREFERENCING_PROBLEM,
+    'ResultCode_ALIAS_PROBLEM': LDAP_ResultCode.ResultCode_ALIAS_PROBLEM,
+    'ResultCode_AMBIGUOUS_RESPONSE': LDAP_ResultCode.ResultCode_AMBIGUOUS_RESPONSE,
+    'ResultCode_ASSERTION_FAILED': LDAP_ResultCode.ResultCode_ASSERTION_FAILED,
+    'ResultCode_ATTRIBUTE_OR_VALUE_EXISTS': LDAP_ResultCode.ResultCode_ATTRIBUTE_OR_VALUE_EXISTS,
+    'ResultCode_AUTHORIZATION_DENIED': LDAP_ResultCode.ResultCode_AUTHORIZATION_DENIED,
+    'ResultCode_AUTH_METHOD_NOT_SUPPORTED': LDAP_ResultCode.ResultCode_AUTH_METHOD_NOT_SUPPORTED,
+    'ResultCode_AUTH_UNKNOWN': LDAP_ResultCode.ResultCode_AUTH_UNKNOWN,
+    'ResultCode_BUSY': LDAP_ResultCode.ResultCode_BUSY,
+    'ResultCode_CANCELED': LDAP_ResultCode.ResultCode_CANCELED,
+    'ResultCode_CANNOT_CANCEL': LDAP_ResultCode.ResultCode_CANNOT_CANCEL,
+    'ResultCode_CLIENT_LOOP': LDAP_ResultCode.ResultCode_CLIENT_LOOP,
+    'ResultCode_COMPARE_FALSE': LDAP_ResultCode.ResultCode_COMPARE_FALSE,
+    'ResultCode_COMPARE_TRUE': LDAP_ResultCode.ResultCode_COMPARE_TRUE,
+    'ResultCode_CONFIDENTIALITY_REQUIRED': LDAP_ResultCode.ResultCode_CONFIDENTIALITY_REQUIRED,
+    'ResultCode_CONNECT_ERROR': LDAP_ResultCode.ResultCode_CONNECT_ERROR,
+    'ResultCode_CONSTRAINT_VIOLATION': LDAP_ResultCode.ResultCode_CONSTRAINT_VIOLATION,
+    'ResultCode_CONTROL_ERROR': LDAP_ResultCode.ResultCode_CONTROL_ERROR,
+    'ResultCode_CONTROL_NOT_FOUND': LDAP_ResultCode.ResultCode_CONTROL_NOT_FOUND,
+    'ResultCode_DECODING_ERROR': LDAP_ResultCode.ResultCode_DECODING_ERROR,
+    'ResultCode_ENCODING_ERROR': LDAP_ResultCode.ResultCode_ENCODING_ERROR,
+    'ResultCode_ENTRY_ALREADY_EXISTS': LDAP_ResultCode.ResultCode_ENTRY_ALREADY_EXISTS,
+    'ResultCode_FILTER_ERROR': LDAP_ResultCode.ResultCode_FILTER_ERROR,
+    'ResultCode_INAPPROPRIATE_AUTHENTICATION': LDAP_ResultCode.ResultCode_INAPPROPRIATE_AUTHENTICATION,
+    'ResultCode_INAPPROPRIATE_MATCHING': LDAP_ResultCode.ResultCode_INAPPROPRIATE_MATCHING,
+    'ResultCode_INSUFFICIENT_ACCESS_RIGHTS': LDAP_ResultCode.ResultCode_INSUFFICIENT_ACCESS_RIGHTS,
+    'ResultCode_INTERMEDIATE_RESPONSE': LDAP_ResultCode.ResultCode_INTERMEDIATE_RESPONSE,
+    'ResultCode_INVALID_ATTRIBUTE_SYNTAX': LDAP_ResultCode.ResultCode_INVALID_ATTRIBUTE_SYNTAX,
+    'ResultCode_INVALID_CREDENTIALS': LDAP_ResultCode.ResultCode_INVALID_CREDENTIALS,
+    'ResultCode_INVALID_DNSYNTAX': LDAP_ResultCode.ResultCode_INVALID_DNSYNTAX,
+    'ResultCode_INVALID_RESPONSE': LDAP_ResultCode.ResultCode_INVALID_RESPONSE,
+    'ResultCode_LCUP_INVALID_DATA': LDAP_ResultCode.ResultCode_LCUP_INVALID_DATA,
+    'ResultCode_LCUP_RELOAD_REQUIRED': LDAP_ResultCode.ResultCode_LCUP_RELOAD_REQUIRED,
+    'ResultCode_LCUP_UNSUPPORTED_SCHEME': LDAP_ResultCode.ResultCode_LCUP_UNSUPPORTED_SCHEME,
+    'ResultCode_LOCAL_ERROR': LDAP_ResultCode.ResultCode_LOCAL_ERROR,
+    'ResultCode_LOOP_DETECT': LDAP_ResultCode.ResultCode_LOOP_DETECT,
+    'ResultCode_MORE_RESULTS_TO_RETURN': LDAP_ResultCode.ResultCode_MORE_RESULTS_TO_RETURN,
+    'ResultCode_NAMING_VIOLATION': LDAP_ResultCode.ResultCode_NAMING_VIOLATION,
+    'ResultCode_NOT_ALLOWED_ON_NON_LEAF': LDAP_ResultCode.ResultCode_NOT_ALLOWED_ON_NON_LEAF,
+    'ResultCode_NOT_ALLOWED_ON_RDN': LDAP_ResultCode.ResultCode_NOT_ALLOWED_ON_RDN,
+    'ResultCode_NOT_SUPPORTED': LDAP_ResultCode.ResultCode_NOT_SUPPORTED,
+    'ResultCode_NO_MEMORY': LDAP_ResultCode.ResultCode_NO_MEMORY,
+    'ResultCode_NO_RESULTS_RETURNED': LDAP_ResultCode.ResultCode_NO_RESULTS_RETURNED,
+    'ResultCode_NO_SUCH_ATTRIBUTE': LDAP_ResultCode.ResultCode_NO_SUCH_ATTRIBUTE,
+    'ResultCode_NO_SUCH_OBJECT': LDAP_ResultCode.ResultCode_NO_SUCH_OBJECT,
+    'ResultCode_NO_SUCH_OPERATION': LDAP_ResultCode.ResultCode_NO_SUCH_OPERATION,
+    'ResultCode_OBJECT_CLASS_MODS_PROHIBITED': LDAP_ResultCode.ResultCode_OBJECT_CLASS_MODS_PROHIBITED,
+    'ResultCode_OBJECT_CLASS_VIOLATION': LDAP_ResultCode.ResultCode_OBJECT_CLASS_VIOLATION,
+    'ResultCode_OFFSET_RANGE_ERROR': LDAP_ResultCode.ResultCode_OFFSET_RANGE_ERROR,
+    'ResultCode_OPERATIONS_ERROR': LDAP_ResultCode.ResultCode_OPERATIONS_ERROR,
+    'ResultCode_OTHER': LDAP_ResultCode.ResultCode_OTHER,
+    'ResultCode_PARAM_ERROR': LDAP_ResultCode.ResultCode_PARAM_ERROR,
+    'ResultCode_PARTIAL_RESULTS': LDAP_ResultCode.ResultCode_PARTIAL_RESULTS,
+    'ResultCode_PROTOCOL_ERROR': LDAP_ResultCode.ResultCode_PROTOCOL_ERROR,
+    'ResultCode_REFERRAL': LDAP_ResultCode.ResultCode_REFERRAL,
+    'ResultCode_REFERRAL_LIMIT_EXCEEDED': LDAP_ResultCode.ResultCode_REFERRAL_LIMIT_EXCEEDED,
+    'ResultCode_RESULTS_TOO_LARGE': LDAP_ResultCode.ResultCode_RESULTS_TOO_LARGE,
+    'ResultCode_SASL_BIND_IN_PROGRESS': LDAP_ResultCode.ResultCode_SASL_BIND_IN_PROGRESS,
+    'ResultCode_SERVER_DOWN': LDAP_ResultCode.ResultCode_SERVER_DOWN,
+    'ResultCode_SIZE_LIMIT_EXCEEDED': LDAP_ResultCode.ResultCode_SIZE_LIMIT_EXCEEDED,
+    'ResultCode_SORT_CONTROL_MISSING': LDAP_ResultCode.ResultCode_SORT_CONTROL_MISSING,
+    'ResultCode_STRONGER_AUTH_REQUIRED': LDAP_ResultCode.ResultCode_STRONGER_AUTH_REQUIRED,
+    'ResultCode_SUCCESS': LDAP_ResultCode.ResultCode_SUCCESS,
+    'ResultCode_TIMEOUT': LDAP_ResultCode.ResultCode_TIMEOUT,
+    'ResultCode_TIME_LIMIT_EXCEEDED': LDAP_ResultCode.ResultCode_TIME_LIMIT_EXCEEDED,
+    'ResultCode_TLS_NOT_SUPPORTED': LDAP_ResultCode.ResultCode_TLS_NOT_SUPPORTED,
+    'ResultCode_TOO_LATE': LDAP_ResultCode.ResultCode_TOO_LATE,
+    'ResultCode_UNAVAILABLE': LDAP_ResultCode.ResultCode_UNAVAILABLE,
+    'ResultCode_UNAVAILABLE_CRITICAL_EXTENSION': LDAP_ResultCode.ResultCode_UNAVAILABLE_CRITICAL_EXTENSION,
+    'ResultCode_UNDEFINED_ATTRIBUTE_TYPE': LDAP_ResultCode.ResultCode_UNDEFINED_ATTRIBUTE_TYPE,
+    'ResultCode_UNKNOWN_TYPE': LDAP_ResultCode.ResultCode_UNKNOWN_TYPE,
+    'ResultCode_UNWILLING_TO_PERFORM': LDAP_ResultCode.ResultCode_UNWILLING_TO_PERFORM,
+    'ResultCode_USER_CANCELED': LDAP_ResultCode.ResultCode_USER_CANCELED,
+    'ResultCode_Undef': LDAP_ResultCode.ResultCode_Undef,
+    'SearchDerefAlias': LDAP_SearchDerefAlias,
+    'SearchDerefAlias_DEREF_ALWAYS': LDAP_SearchDerefAlias.SearchDerefAlias_DEREF_ALWAYS,
+    'SearchDerefAlias_DEREF_FINDING_BASE': LDAP_SearchDerefAlias.SearchDerefAlias_DEREF_FINDING_BASE,
+    'SearchDerefAlias_DEREF_IN_SEARCHING': LDAP_SearchDerefAlias.SearchDerefAlias_DEREF_IN_SEARCHING,
+    'SearchDerefAlias_DEREF_NEVER': LDAP_SearchDerefAlias.SearchDerefAlias_DEREF_NEVER,
+    'SearchDerefAlias_Undef': LDAP_SearchDerefAlias.SearchDerefAlias_Undef,
+    'SearchScope': LDAP_SearchScope,
+    'SearchScope_SEARCH_BASE': LDAP_SearchScope.SearchScope_SEARCH_BASE,
+    'SearchScope_SEARCH_SINGLE': LDAP_SearchScope.SearchScope_SEARCH_SINGLE,
+    'SearchScope_SEARCH_TREE': LDAP_SearchScope.SearchScope_SEARCH_TREE,
+    'SearchScope_Undef': LDAP_SearchScope.SearchScope_Undef,
+}
+
+builtins.globals()['ZLogging::LoadBalancing'] = {
+    'AUTO_BPF': LoadBalancing_Method.AUTO_BPF,
+    'Method': LoadBalancing_Method,
 }
 
 builtins.globals()['ZLogging::LoadedScripts'] = {
@@ -411,23 +843,6 @@ builtins.globals()['ZLogging::Log'] = {
     'WRITER_NONE': Log_Writer.WRITER_NONE,
     'WRITER_SQLITE': Log_Writer.WRITER_SQLITE,
     'Writer': Log_Writer,
-}
-
-builtins.globals()['ZLogging::LogSQLite'] = {
-    'SQLITE_JOURNAL_MODE_DEFAULT': LogSQLite_SQLiteJournalMode.SQLITE_JOURNAL_MODE_DEFAULT,
-    'SQLITE_JOURNAL_MODE_DELETE': LogSQLite_SQLiteJournalMode.SQLITE_JOURNAL_MODE_DELETE,
-    'SQLITE_JOURNAL_MODE_MEMORY': LogSQLite_SQLiteJournalMode.SQLITE_JOURNAL_MODE_MEMORY,
-    'SQLITE_JOURNAL_MODE_OFF': LogSQLite_SQLiteJournalMode.SQLITE_JOURNAL_MODE_OFF,
-    'SQLITE_JOURNAL_MODE_PERSIST': LogSQLite_SQLiteJournalMode.SQLITE_JOURNAL_MODE_PERSIST,
-    'SQLITE_JOURNAL_MODE_TRUNCATE': LogSQLite_SQLiteJournalMode.SQLITE_JOURNAL_MODE_TRUNCATE,
-    'SQLITE_JOURNAL_MODE_WAL': LogSQLite_SQLiteJournalMode.SQLITE_JOURNAL_MODE_WAL,
-    'SQLITE_SYNCHRONOUS_DEFAULT': LogSQLite_SQLiteSynchronous.SQLITE_SYNCHRONOUS_DEFAULT,
-    'SQLITE_SYNCHRONOUS_EXTRA': LogSQLite_SQLiteSynchronous.SQLITE_SYNCHRONOUS_EXTRA,
-    'SQLITE_SYNCHRONOUS_FULL': LogSQLite_SQLiteSynchronous.SQLITE_SYNCHRONOUS_FULL,
-    'SQLITE_SYNCHRONOUS_NORMAL': LogSQLite_SQLiteSynchronous.SQLITE_SYNCHRONOUS_NORMAL,
-    'SQLITE_SYNCHRONOUS_OFF': LogSQLite_SQLiteSynchronous.SQLITE_SYNCHRONOUS_OFF,
-    'SQLiteJournalMode': LogSQLite_SQLiteJournalMode,
-    'SQLiteSynchronous': LogSQLite_SQLiteSynchronous,
 }
 
 builtins.globals()['ZLogging::MOUNT3'] = {
@@ -694,6 +1109,44 @@ builtins.globals()['ZLogging::PE'] = {
     'PE_LOG': Log_ID.PE_LOG,
 }
 
+builtins.globals()['ZLogging::PacketAnalyzer'] = {
+    'ANALYZER_ARP': PacketAnalyzer_Tag.ANALYZER_ARP,
+    'ANALYZER_AYIYA': PacketAnalyzer_Tag.ANALYZER_AYIYA,
+    'ANALYZER_ETHERNET': PacketAnalyzer_Tag.ANALYZER_ETHERNET,
+    'ANALYZER_FDDI': PacketAnalyzer_Tag.ANALYZER_FDDI,
+    'ANALYZER_GENEVE': PacketAnalyzer_Tag.ANALYZER_GENEVE,
+    'ANALYZER_GRE': PacketAnalyzer_Tag.ANALYZER_GRE,
+    'ANALYZER_GTPV1': PacketAnalyzer_Tag.ANALYZER_GTPV1,
+    'ANALYZER_ICMP': PacketAnalyzer_Tag.ANALYZER_ICMP,
+    'ANALYZER_IEEE802_11': PacketAnalyzer_Tag.ANALYZER_IEEE802_11,
+    'ANALYZER_IEEE802_11_RADIO': PacketAnalyzer_Tag.ANALYZER_IEEE802_11_RADIO,
+    'ANALYZER_IGMP': PacketAnalyzer_Tag.ANALYZER_IGMP,
+    'ANALYZER_IP': PacketAnalyzer_Tag.ANALYZER_IP,
+    'ANALYZER_IPTUNNEL': PacketAnalyzer_Tag.ANALYZER_IPTUNNEL,
+    'ANALYZER_LINUXSLL': PacketAnalyzer_Tag.ANALYZER_LINUXSLL,
+    'ANALYZER_LINUXSLL2': PacketAnalyzer_Tag.ANALYZER_LINUXSLL2,
+    'ANALYZER_LLC': PacketAnalyzer_Tag.ANALYZER_LLC,
+    'ANALYZER_MPLS': PacketAnalyzer_Tag.ANALYZER_MPLS,
+    'ANALYZER_NFLOG': PacketAnalyzer_Tag.ANALYZER_NFLOG,
+    'ANALYZER_NOVELL_802_3': PacketAnalyzer_Tag.ANALYZER_NOVELL_802_3,
+    'ANALYZER_NULL': PacketAnalyzer_Tag.ANALYZER_NULL,
+    'ANALYZER_PBB': PacketAnalyzer_Tag.ANALYZER_PBB,
+    'ANALYZER_PPP': PacketAnalyzer_Tag.ANALYZER_PPP,
+    'ANALYZER_PPPOE': PacketAnalyzer_Tag.ANALYZER_PPPOE,
+    'ANALYZER_PPPSERIAL': PacketAnalyzer_Tag.ANALYZER_PPPSERIAL,
+    'ANALYZER_ROOT': PacketAnalyzer_Tag.ANALYZER_ROOT,
+    'ANALYZER_SKIP': PacketAnalyzer_Tag.ANALYZER_SKIP,
+    'ANALYZER_SNAP': PacketAnalyzer_Tag.ANALYZER_SNAP,
+    'ANALYZER_TCP': PacketAnalyzer_Tag.ANALYZER_TCP,
+    'ANALYZER_TEREDO': PacketAnalyzer_Tag.ANALYZER_TEREDO,
+    'ANALYZER_UDP': PacketAnalyzer_Tag.ANALYZER_UDP,
+    'ANALYZER_UNKNOWN_IP_TRANSPORT': PacketAnalyzer_Tag.ANALYZER_UNKNOWN_IP_TRANSPORT,
+    'ANALYZER_VLAN': PacketAnalyzer_Tag.ANALYZER_VLAN,
+    'ANALYZER_VNTAG': PacketAnalyzer_Tag.ANALYZER_VNTAG,
+    'ANALYZER_VXLAN': PacketAnalyzer_Tag.ANALYZER_VXLAN,
+    'Tag': PacketAnalyzer_Tag,
+}
+
 builtins.globals()['ZLogging::PacketFilter'] = {
     'PacketFilter_Cannot_BPF_Shunt_Conn': Notice_Type.PacketFilter_Cannot_BPF_Shunt_Conn,
     'PacketFilter_Compile_Failure': Notice_Type.PacketFilter_Compile_Failure,
@@ -713,10 +1166,6 @@ builtins.globals()['ZLogging::Pcap'] = {
     'warning': Pcap_filter_state.warning,
 }
 
-builtins.globals()['ZLogging::PostgreSQL'] = {
-    'PostgreSQL_LOG': Log_ID.PostgreSQL_LOG,
-}
-
 builtins.globals()['ZLogging::ProtocolDetector'] = {
     'BOTH': ProtocolDetector_dir.BOTH,
     'INCOMING': ProtocolDetector_dir.INCOMING,
@@ -725,10 +1174,6 @@ builtins.globals()['ZLogging::ProtocolDetector'] = {
     'ProtocolDetector_Protocol_Found': Notice_Type.ProtocolDetector_Protocol_Found,
     'ProtocolDetector_Server_Found': Notice_Type.ProtocolDetector_Server_Found,
     'dir': ProtocolDetector_dir,
-}
-
-builtins.globals()['ZLogging::QUIC'] = {
-    'QUIC_LOG': Log_ID.QUIC_LOG,
 }
 
 builtins.globals()['ZLogging::RADIUS'] = {
@@ -741,6 +1186,66 @@ builtins.globals()['ZLogging::RDP'] = {
 
 builtins.globals()['ZLogging::RFB'] = {
     'RFB_LOG': Log_ID.RFB_LOG,
+}
+
+builtins.globals()['ZLogging::Redis'] = {
+    'RedisCommand': Redis_RedisCommand,
+    'RedisCommand_APPEND': Redis_RedisCommand.RedisCommand_APPEND,
+    'RedisCommand_AUTH': Redis_RedisCommand.RedisCommand_AUTH,
+    'RedisCommand_BITCOUNT': Redis_RedisCommand.RedisCommand_BITCOUNT,
+    'RedisCommand_BITFIELD': Redis_RedisCommand.RedisCommand_BITFIELD,
+    'RedisCommand_BITFIELD_RO': Redis_RedisCommand.RedisCommand_BITFIELD_RO,
+    'RedisCommand_BITOP': Redis_RedisCommand.RedisCommand_BITOP,
+    'RedisCommand_BITPOS': Redis_RedisCommand.RedisCommand_BITPOS,
+    'RedisCommand_BLMPOP': Redis_RedisCommand.RedisCommand_BLMPOP,
+    'RedisCommand_BLPOP': Redis_RedisCommand.RedisCommand_BLPOP,
+    'RedisCommand_BRPOP': Redis_RedisCommand.RedisCommand_BRPOP,
+    'RedisCommand_CLIENT': Redis_RedisCommand.RedisCommand_CLIENT,
+    'RedisCommand_COPY': Redis_RedisCommand.RedisCommand_COPY,
+    'RedisCommand_DECR': Redis_RedisCommand.RedisCommand_DECR,
+    'RedisCommand_DECRBY': Redis_RedisCommand.RedisCommand_DECRBY,
+    'RedisCommand_DEL': Redis_RedisCommand.RedisCommand_DEL,
+    'RedisCommand_DUMP': Redis_RedisCommand.RedisCommand_DUMP,
+    'RedisCommand_EXISTS': Redis_RedisCommand.RedisCommand_EXISTS,
+    'RedisCommand_EXPIRE': Redis_RedisCommand.RedisCommand_EXPIRE,
+    'RedisCommand_EXPIREAT': Redis_RedisCommand.RedisCommand_EXPIREAT,
+    'RedisCommand_EXPIRETIME': Redis_RedisCommand.RedisCommand_EXPIRETIME,
+    'RedisCommand_GET': Redis_RedisCommand.RedisCommand_GET,
+    'RedisCommand_GETBIT': Redis_RedisCommand.RedisCommand_GETBIT,
+    'RedisCommand_GETDEL': Redis_RedisCommand.RedisCommand_GETDEL,
+    'RedisCommand_GETEX': Redis_RedisCommand.RedisCommand_GETEX,
+    'RedisCommand_GETRANGE': Redis_RedisCommand.RedisCommand_GETRANGE,
+    'RedisCommand_GETSET': Redis_RedisCommand.RedisCommand_GETSET,
+    'RedisCommand_HDEL': Redis_RedisCommand.RedisCommand_HDEL,
+    'RedisCommand_HELLO': Redis_RedisCommand.RedisCommand_HELLO,
+    'RedisCommand_HGET': Redis_RedisCommand.RedisCommand_HGET,
+    'RedisCommand_HSET': Redis_RedisCommand.RedisCommand_HSET,
+    'RedisCommand_INCR': Redis_RedisCommand.RedisCommand_INCR,
+    'RedisCommand_INCRBY': Redis_RedisCommand.RedisCommand_INCRBY,
+    'RedisCommand_KEYS': Redis_RedisCommand.RedisCommand_KEYS,
+    'RedisCommand_MGET': Redis_RedisCommand.RedisCommand_MGET,
+    'RedisCommand_MOVE': Redis_RedisCommand.RedisCommand_MOVE,
+    'RedisCommand_MSET': Redis_RedisCommand.RedisCommand_MSET,
+    'RedisCommand_PERSIST': Redis_RedisCommand.RedisCommand_PERSIST,
+    'RedisCommand_PSUBSCRIBE': Redis_RedisCommand.RedisCommand_PSUBSCRIBE,
+    'RedisCommand_PUNSUBSCRIBE': Redis_RedisCommand.RedisCommand_PUNSUBSCRIBE,
+    'RedisCommand_QUIT': Redis_RedisCommand.RedisCommand_QUIT,
+    'RedisCommand_RENAME': Redis_RedisCommand.RedisCommand_RENAME,
+    'RedisCommand_RESET': Redis_RedisCommand.RedisCommand_RESET,
+    'RedisCommand_SET': Redis_RedisCommand.RedisCommand_SET,
+    'RedisCommand_SSUBSCRIBE': Redis_RedisCommand.RedisCommand_SSUBSCRIBE,
+    'RedisCommand_STRLEN': Redis_RedisCommand.RedisCommand_STRLEN,
+    'RedisCommand_SUBSCRIBE': Redis_RedisCommand.RedisCommand_SUBSCRIBE,
+    'RedisCommand_SUNSUBSCRIBE': Redis_RedisCommand.RedisCommand_SUNSUBSCRIBE,
+    'RedisCommand_TTL': Redis_RedisCommand.RedisCommand_TTL,
+    'RedisCommand_TYPE': Redis_RedisCommand.RedisCommand_TYPE,
+    'RedisCommand_UNSUBSCRIBE': Redis_RedisCommand.RedisCommand_UNSUBSCRIBE,
+    'RedisCommand_Undef': Redis_RedisCommand.RedisCommand_Undef,
+    'ReplyType': Redis_ReplyType,
+    'ReplyType_Error': Redis_ReplyType.ReplyType_Error,
+    'ReplyType_Push': Redis_ReplyType.ReplyType_Push,
+    'ReplyType_Reply': Redis_ReplyType.ReplyType_Reply,
+    'ReplyType_Undef': Redis_ReplyType.ReplyType_Undef,
 }
 
 builtins.globals()['ZLogging::Reporter'] = {
@@ -839,6 +1344,11 @@ builtins.globals()['ZLogging::SSL'] = {
     'SctSource': SSL_SctSource,
 }
 
+builtins.globals()['ZLogging::Scan'] = {
+    'Scan_Address_Scan': Notice_Type.Scan_Address_Scan,
+    'Scan_Port_Scan': Notice_Type.Scan_Port_Scan,
+}
+
 builtins.globals()['ZLogging::Signatures'] = {
     'Action': Signatures_Action,
     'SIG_ALARM': Signatures_Action.SIG_ALARM,
@@ -864,10 +1374,6 @@ builtins.globals()['ZLogging::Software'] = {
     'Software_Vulnerable_Version': Notice_Type.Software_Vulnerable_Version,
     'Type': Software_Type,
     'UNKNOWN': Software_Type.UNKNOWN,
-}
-
-builtins.globals()['ZLogging::Spicy'] = {
-    'Spicy_Spicy_Max_File_Depth_Exceeded': Notice_Type.Spicy_Spicy_Max_File_Depth_Exceeded,
 }
 
 builtins.globals()['ZLogging::Stats'] = {
@@ -908,9 +1414,12 @@ builtins.globals()['ZLogging::TeamCymruMalwareHashRegistry'] = {
 }
 
 builtins.globals()['ZLogging::Telemetry'] = {
-    'COUNTER': Telemetry_MetricType.COUNTER,
-    'GAUGE': Telemetry_MetricType.GAUGE,
-    'HISTOGRAM': Telemetry_MetricType.HISTOGRAM,
+    'DOUBLE_COUNTER': Telemetry_MetricType.DOUBLE_COUNTER,
+    'DOUBLE_GAUGE': Telemetry_MetricType.DOUBLE_GAUGE,
+    'DOUBLE_HISTOGRAM': Telemetry_MetricType.DOUBLE_HISTOGRAM,
+    'INT_COUNTER': Telemetry_MetricType.INT_COUNTER,
+    'INT_GAUGE': Telemetry_MetricType.INT_GAUGE,
+    'INT_HISTOGRAM': Telemetry_MetricType.INT_HISTOGRAM,
     'MetricType': Telemetry_MetricType,
     'Telemetry_LOG': Log_ID.Telemetry_LOG,
     'Telemetry_LOG_HISTOGRAM': Log_ID.Telemetry_LOG_HISTOGRAM,
@@ -942,10 +1451,6 @@ builtins.globals()['ZLogging::Tunnel'] = {
 
 builtins.globals()['ZLogging::UnknownProtocol'] = {
     'UnknownProtocol_LOG': Log_ID.UnknownProtocol_LOG,
-}
-
-builtins.globals()['ZLogging::WebSocket'] = {
-    'WebSocket_LOG': Log_ID.WebSocket_LOG,
 }
 
 builtins.globals()['ZLogging::Weird'] = {
@@ -989,6 +1494,55 @@ builtins.globals()['ZLogging::ZeekygenExample'] = {
 
 builtins.globals()['ZLogging::mysql'] = {
     'mysql_LOG': Log_ID.mysql_LOG,
+}
+
+builtins.globals()['ZLogging::spicy'] = {
+    'AddressFamily': spicy_AddressFamily,
+    'AddressFamily_IPv4': spicy_AddressFamily.AddressFamily_IPv4,
+    'AddressFamily_IPv6': spicy_AddressFamily.AddressFamily_IPv6,
+    'AddressFamily_Undef': spicy_AddressFamily.AddressFamily_Undef,
+    'BitOrder': spicy_BitOrder,
+    'BitOrder_LSB0': spicy_BitOrder.BitOrder_LSB0,
+    'BitOrder_MSB0': spicy_BitOrder.BitOrder_MSB0,
+    'BitOrder_Undef': spicy_BitOrder.BitOrder_Undef,
+    'ByteOrder': spicy_ByteOrder,
+    'ByteOrder_Big': spicy_ByteOrder.ByteOrder_Big,
+    'ByteOrder_Host': spicy_ByteOrder.ByteOrder_Host,
+    'ByteOrder_Little': spicy_ByteOrder.ByteOrder_Little,
+    'ByteOrder_Network': spicy_ByteOrder.ByteOrder_Network,
+    'ByteOrder_Undef': spicy_ByteOrder.ByteOrder_Undef,
+    'Charset': spicy_Charset,
+    'Charset_ASCII': spicy_Charset.Charset_ASCII,
+    'Charset_UTF16BE': spicy_Charset.Charset_UTF16BE,
+    'Charset_UTF16LE': spicy_Charset.Charset_UTF16LE,
+    'Charset_UTF8': spicy_Charset.Charset_UTF8,
+    'Charset_Undef': spicy_Charset.Charset_Undef,
+    'DecodeErrorStrategy': spicy_DecodeErrorStrategy,
+    'DecodeErrorStrategy_IGNORE': spicy_DecodeErrorStrategy.DecodeErrorStrategy_IGNORE,
+    'DecodeErrorStrategy_REPLACE': spicy_DecodeErrorStrategy.DecodeErrorStrategy_REPLACE,
+    'DecodeErrorStrategy_STRICT': spicy_DecodeErrorStrategy.DecodeErrorStrategy_STRICT,
+    'DecodeErrorStrategy_Undef': spicy_DecodeErrorStrategy.DecodeErrorStrategy_Undef,
+    'Direction': spicy_Direction,
+    'Direction_Backward': spicy_Direction.Direction_Backward,
+    'Direction_Forward': spicy_Direction.Direction_Forward,
+    'Direction_Undef': spicy_Direction.Direction_Undef,
+    'Protocol': spicy_Protocol,
+    'Protocol_ICMP': spicy_Protocol.Protocol_ICMP,
+    'Protocol_TCP': spicy_Protocol.Protocol_TCP,
+    'Protocol_UDP': spicy_Protocol.Protocol_UDP,
+    'Protocol_Undef': spicy_Protocol.Protocol_Undef,
+    'RealType': spicy_RealType,
+    'RealType_IEEE754_Double': spicy_RealType.RealType_IEEE754_Double,
+    'RealType_IEEE754_Single': spicy_RealType.RealType_IEEE754_Single,
+    'RealType_Undef': spicy_RealType.RealType_Undef,
+    'ReassemblerPolicy': spicy_ReassemblerPolicy,
+    'ReassemblerPolicy_First': spicy_ReassemblerPolicy.ReassemblerPolicy_First,
+    'ReassemblerPolicy_Undef': spicy_ReassemblerPolicy.ReassemblerPolicy_Undef,
+    'Side': spicy_Side,
+    'Side_Both': spicy_Side.Side_Both,
+    'Side_Left': spicy_Side.Side_Left,
+    'Side_Right': spicy_Side.Side_Right,
+    'Side_Undef': spicy_Side.Side_Undef,
 }
 
 builtins.globals()['ZLogging::zeek'] = {
