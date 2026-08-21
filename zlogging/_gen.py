@@ -12,6 +12,7 @@ import shutil
 import subprocess  # nosec: B404
 import sys
 import textwrap
+import time
 import urllib.parse as urllib_parse
 
 ###############################################################################
@@ -34,6 +35,13 @@ PATH = os.path.abspath(os.path.join(ROOT, 'enum'))
 # regular expression
 REGEX_ENUM = re.compile(r'((?P<namespace>([_a-z]+[_a-z0-9]*)(::[_a-z]+[_a-z0-9]*)*)::)?(?P<enum>[_a-z]+[_a-z0-9]*)', re.IGNORECASE)
 REGEX_LINK = re.compile(r'\[(?P<name>.*?)\]\(.*?\)', re.IGNORECASE)
+
+MAX_RETRY = int(os.environ.get('ZLOGGING_GEN_RETRY', '5')) or 1
+REQUEST_TIMEOUT = float(os.environ.get('ZLOGGING_GEN_TIMEOUT', '30'))
+REQUEST_RETRY_DELAY = float(os.environ.get('ZLOGGING_GEN_RETRY_DELAY', '60'))
+REQUEST_HEADERS = {
+    'User-Agent': 'zlogging enum generator (https://github.com/JarryShaw/zlogging)',
+}
 
 # file template
 TEMPLATE_ENUM = '''\
@@ -103,10 +111,45 @@ def fetch() -> 'None':
         caching: Enable caching files.
 
     """
+    def retry_delay(resp: 'requests.Response', counter: 'int') -> 'float':
+        retry_after = resp.headers.get('Retry-After')
+        if retry_after is not None:
+            try:
+                return min(float(retry_after), REQUEST_RETRY_DELAY)
+            except ValueError:
+                pass
+        return min(2 ** (counter - 1), REQUEST_RETRY_DELAY)
+
+    def request(link: 'str') -> 'requests.Response':
+        for counter in range(1, MAX_RETRY + 1):
+            try:
+                resp = requests.get(
+                    link, headers=REQUEST_HEADERS, timeout=REQUEST_TIMEOUT,
+                )  # nosec B113
+            except requests.RequestException as exc:
+                if counter == MAX_RETRY:
+                    raise RuntimeError(f'failed to fetch {link}') from exc
+                wait = min(2 ** (counter - 1), REQUEST_RETRY_DELAY)
+                print(f'! {link} failed; retry {counter}/{MAX_RETRY} in {wait:.1f}s',
+                      file=sys.stderr)
+                time.sleep(wait)
+                continue
+
+            if resp.ok and resp.content:
+                return resp
+            if counter == MAX_RETRY:
+                raise RuntimeError(resp)
+
+            wait = retry_delay(resp, counter)
+            print(f'! {link} returned HTTP {resp.status_code}; '
+                  f'retry {counter}/{MAX_RETRY} in {wait:.1f}s',
+                  file=sys.stderr)
+            time.sleep(wait)
+
+        raise RuntimeError(f'failed to fetch {link}')
+
     link = 'https://docs.zeek.org/en/stable/script-reference/scripts.html'
-    resp = requests.get(link)  # nosec B113
-    if not resp.ok:
-        raise RuntimeError(resp)
+    resp = request(link)
 
     page = resp.text
     soup = bs4.BeautifulSoup(page, 'html5lib')
@@ -122,9 +165,7 @@ def fetch() -> 'None':
             continue
 
         dest = urllib_parse.urljoin(link, href)
-        docs = requests.get(dest)  # nosec B113
-        if not docs.ok:
-            raise RuntimeError(docs)
+        docs = request(dest)
 
         os.makedirs(path.parent, exist_ok=True)
         with open(f'{path}.html', 'wb') as file:
