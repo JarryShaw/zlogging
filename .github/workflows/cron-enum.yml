@@ -3,6 +3,7 @@ name: "Enum Update"
 on:
   schedule:
     - cron: '0 10 * * 6' # everyday at 10am
+  workflow_dispatch:
   push:
     branches: [master, ]
 
@@ -25,11 +26,20 @@ jobs:
           python -m pip install -e .
 
       - name: Update Vendor
+        if: ${{ github.event_name != 'push' }}
         run: |
           set -x
 
           zlogging-gen
           isort -l100 -pzlogging zlogging/enum/*.py
+
+      - name: Verify Vendor
+        if: ${{ github.event_name == 'push' }}
+        run: |
+          set -x
+
+          python -c "import zlogging.enum; zlogging.enum.globals()"
+          isort --check-only -l100 -pzlogging zlogging/enum/*.py
 
       - name: Verify Changed files
         uses: tj-actions/verify-changed-files@v17
