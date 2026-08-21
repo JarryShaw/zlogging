@@ -286,7 +286,7 @@ jobs:
         run: |
           set -x
 
-          conda install -y conda-build anaconda-client
+          conda install -n base -y conda-build anaconda-client
           conda build --version
 
       - name: Build and upload the conda packages (macOS)

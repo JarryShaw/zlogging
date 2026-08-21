@@ -7,6 +7,7 @@ import importlib
 import keyword
 import os
 import pathlib
+import random
 import re
 import shutil
 import subprocess  # nosec: B404
@@ -36,9 +37,11 @@ PATH = os.path.abspath(os.path.join(ROOT, 'enum'))
 REGEX_ENUM = re.compile(r'((?P<namespace>([_a-z]+[_a-z0-9]*)(::[_a-z]+[_a-z0-9]*)*)::)?(?P<enum>[_a-z]+[_a-z0-9]*)', re.IGNORECASE)
 REGEX_LINK = re.compile(r'\[(?P<name>.*?)\]\(.*?\)', re.IGNORECASE)
 
-MAX_RETRY = int(os.environ.get('ZLOGGING_GEN_RETRY', '5')) or 1
+MAX_RETRY = int(os.environ.get('ZLOGGING_GEN_RETRY', '8')) or 1
 REQUEST_TIMEOUT = float(os.environ.get('ZLOGGING_GEN_TIMEOUT', '30'))
-REQUEST_RETRY_DELAY = float(os.environ.get('ZLOGGING_GEN_RETRY_DELAY', '60'))
+REQUEST_BACKOFF_BASE = float(os.environ.get('ZLOGGING_GEN_BACKOFF_BASE', '2'))
+REQUEST_RETRY_DELAY = float(os.environ.get('ZLOGGING_GEN_RETRY_DELAY', '120'))
+REQUEST_JITTER = float(os.environ.get('ZLOGGING_GEN_JITTER', '0.2'))
 REQUEST_HEADERS = {
     'User-Agent': 'zlogging enum generator (https://github.com/JarryShaw/zlogging)',
 }
@@ -121,10 +124,18 @@ def fetch() -> 'None':
         retry_after = resp.headers.get('Retry-After')
         if retry_after is not None:
             try:
-                return min(float(retry_after), REQUEST_RETRY_DELAY)
+                delay = min(float(retry_after), REQUEST_RETRY_DELAY)
+                return jitter_delay(delay)
             except ValueError:
                 pass
-        return min(2 ** (counter - 1), REQUEST_RETRY_DELAY)
+        delay = min(REQUEST_BACKOFF_BASE ** (counter - 1), REQUEST_RETRY_DELAY)
+        return jitter_delay(delay)
+
+    def jitter_delay(delay: 'float') -> 'float':
+        if REQUEST_JITTER <= 0:
+            return delay
+        spread = delay * REQUEST_JITTER
+        return max(0.0, delay + random.uniform(-spread, spread))
 
     def request(link: 'str') -> 'requests.Response':
         for counter in range(1, MAX_RETRY + 1):
@@ -135,7 +146,8 @@ def fetch() -> 'None':
             except requests.RequestException as exc:
                 if counter == MAX_RETRY:
                     raise RuntimeError(f'failed to fetch {link}') from exc
-                wait = min(2 ** (counter - 1), REQUEST_RETRY_DELAY)
+                wait = jitter_delay(min(REQUEST_BACKOFF_BASE ** (counter - 1),
+                                        REQUEST_RETRY_DELAY))
                 print(f'! {link} failed; retry {counter}/{MAX_RETRY} in {wait:.1f}s',
                       file=sys.stderr)
                 time.sleep(wait)
