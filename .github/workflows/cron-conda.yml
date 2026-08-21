@@ -108,6 +108,7 @@ jobs:
     needs: [ conda-tag, conda-update ]
     if: needs.conda-update.outputs.CONDA_CHANGED == 'true'
     strategy:
+      fail-fast: false
       matrix:
         os:
           - macos-latest
@@ -168,6 +169,14 @@ jobs:
           auto-update-conda: false
           auto-activate-base: false
           show-channel-urls: true
+
+      - name: Install Conda Build
+        shell: bash -l {0}
+        run: |
+          set -x
+
+          conda install -y conda-build anaconda-client
+          conda build --version
 
       - name: Build and upload the conda packages (macOS)
         uses: uibcdf/action-build-and-upload-conda-packages@v1.2.0

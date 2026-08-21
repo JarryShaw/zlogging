@@ -150,6 +150,7 @@ jobs:
       contents: write
       id-token: write
     strategy:
+      fail-fast: false
       matrix:
         python-version:
           - "3.10"
@@ -218,6 +219,7 @@ jobs:
     needs: [ tag, github, version_check ]
     if: ${{ startsWith(github.ref_name, 'v') || needs.version_check.outputs.ZLOGGING_TAG_EXISTS == 'false' }}
     strategy:
+      fail-fast: false
       matrix:
         os:
           - macos-latest
@@ -278,6 +280,14 @@ jobs:
           auto-update-conda: false
           auto-activate-base: false
           show-channel-urls: true
+
+      - name: Install Conda Build
+        shell: bash -l {0}
+        run: |
+          set -x
+
+          conda install -y conda-build anaconda-client
+          conda build --version
 
       - name: Build and upload the conda packages (macOS)
         uses: uibcdf/action-build-and-upload-conda-packages@v1.2.0
