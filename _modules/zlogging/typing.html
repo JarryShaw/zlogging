@@ -4,10 +4,10 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>zlogging.typing &#8212; ZLogging 0.1.3.post4 documentation</title>
-    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=d1102ebc" />
+    <title>zlogging.typing &#8212; ZLogging 0.1.3.post6 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=5ecbeea2" />
     <link rel="stylesheet" type="text/css" href="../../_static/alabaster.css?v=12dfc556" />
-    <script src="../../_static/documentation_options.js?v=ccd79f44"></script>
+    <script src="../../_static/documentation_options.js?v=5f579137"></script>
     <script src="../../_static/doctools.js?v=9a2dae69"></script>
     <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
@@ -32,44 +32,44 @@
   <h1>Source code for zlogging.typing</h1><div class="highlight"><pre>
 <span></span><span class="c1"># -*- coding: utf-8 -*-</span>
 <span class="c1"># pylint: disable=ungrouped-imports</span>
-<span class="sd">&quot;&quot;&quot;Bro/Zeek typing annotations.&quot;&quot;&quot;</span>
+<span class="sd">"""Bro/Zeek typing annotations."""</span>
 
-<span class="kn">import</span> <span class="nn">warnings</span>
-<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">TYPE_CHECKING</span><span class="p">,</span> <span class="n">Generic</span><span class="p">,</span> <span class="n">TypeVar</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">warnings</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">TYPE_CHECKING</span><span class="p">,</span> <span class="n">Generic</span><span class="p">,</span> <span class="n">TypeVar</span>
 
-<span class="kn">from</span> <span class="nn">zlogging._exc</span> <span class="kn">import</span> <span class="n">BroDeprecationWarning</span>
-<span class="kn">from</span> <span class="nn">zlogging.types</span> <span class="kn">import</span> <span class="p">(</span><span class="n">AddrType</span><span class="p">,</span> <span class="n">BoolType</span><span class="p">,</span> <span class="n">CountType</span><span class="p">,</span> <span class="n">DoubleType</span><span class="p">,</span> <span class="n">EnumType</span><span class="p">,</span> <span class="n">IntervalType</span><span class="p">,</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">zlogging._exc</span><span class="w"> </span><span class="kn">import</span> <span class="n">BroDeprecationWarning</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">zlogging.types</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span><span class="n">AddrType</span><span class="p">,</span> <span class="n">BoolType</span><span class="p">,</span> <span class="n">CountType</span><span class="p">,</span> <span class="n">DoubleType</span><span class="p">,</span> <span class="n">EnumType</span><span class="p">,</span> <span class="n">IntervalType</span><span class="p">,</span>
                             <span class="n">IntType</span><span class="p">,</span> <span class="n">PortType</span><span class="p">,</span> <span class="n">RecordType</span><span class="p">,</span> <span class="n">SetType</span><span class="p">,</span> <span class="n">StringType</span><span class="p">,</span> <span class="n">SubnetType</span><span class="p">,</span>
                             <span class="n">TimeType</span><span class="p">,</span> <span class="n">VectorType</span><span class="p">)</span>
 
 <span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span>
-    <span class="s1">&#39;zeek_addr&#39;</span><span class="p">,</span> <span class="s1">&#39;zeek_bool&#39;</span><span class="p">,</span> <span class="s1">&#39;zeek_count&#39;</span><span class="p">,</span> <span class="s1">&#39;zeek_double&#39;</span><span class="p">,</span> <span class="s1">&#39;zeek_enum&#39;</span><span class="p">,</span>
-    <span class="s1">&#39;zeek_interval&#39;</span><span class="p">,</span> <span class="s1">&#39;zeek_int&#39;</span><span class="p">,</span> <span class="s1">&#39;zeek_port&#39;</span><span class="p">,</span> <span class="s1">&#39;zeek_record&#39;</span><span class="p">,</span> <span class="s1">&#39;zeek_set&#39;</span><span class="p">,</span>
-    <span class="s1">&#39;zeek_string&#39;</span><span class="p">,</span> <span class="s1">&#39;zeek_subnet&#39;</span><span class="p">,</span> <span class="s1">&#39;zeek_time&#39;</span><span class="p">,</span> <span class="s1">&#39;zeek_vector&#39;</span><span class="p">,</span>
+    <span class="s1">'zeek_addr'</span><span class="p">,</span> <span class="s1">'zeek_bool'</span><span class="p">,</span> <span class="s1">'zeek_count'</span><span class="p">,</span> <span class="s1">'zeek_double'</span><span class="p">,</span> <span class="s1">'zeek_enum'</span><span class="p">,</span>
+    <span class="s1">'zeek_interval'</span><span class="p">,</span> <span class="s1">'zeek_int'</span><span class="p">,</span> <span class="s1">'zeek_port'</span><span class="p">,</span> <span class="s1">'zeek_record'</span><span class="p">,</span> <span class="s1">'zeek_set'</span><span class="p">,</span>
+    <span class="s1">'zeek_string'</span><span class="p">,</span> <span class="s1">'zeek_subnet'</span><span class="p">,</span> <span class="s1">'zeek_time'</span><span class="p">,</span> <span class="s1">'zeek_vector'</span><span class="p">,</span>
 
-    <span class="s1">&#39;bro_addr&#39;</span><span class="p">,</span> <span class="s1">&#39;bro_bool&#39;</span><span class="p">,</span> <span class="s1">&#39;bro_count&#39;</span><span class="p">,</span> <span class="s1">&#39;bro_double&#39;</span><span class="p">,</span> <span class="s1">&#39;bro_enum&#39;</span><span class="p">,</span>
-    <span class="s1">&#39;bro_interval&#39;</span><span class="p">,</span> <span class="s1">&#39;bro_int&#39;</span><span class="p">,</span> <span class="s1">&#39;bro_port&#39;</span><span class="p">,</span> <span class="s1">&#39;bro_record&#39;</span><span class="p">,</span> <span class="s1">&#39;bro_set&#39;</span><span class="p">,</span>
-    <span class="s1">&#39;bro_string&#39;</span><span class="p">,</span> <span class="s1">&#39;bro_subnet&#39;</span><span class="p">,</span> <span class="s1">&#39;bro_time&#39;</span><span class="p">,</span> <span class="s1">&#39;bro_vector&#39;</span><span class="p">,</span>
+    <span class="s1">'bro_addr'</span><span class="p">,</span> <span class="s1">'bro_bool'</span><span class="p">,</span> <span class="s1">'bro_count'</span><span class="p">,</span> <span class="s1">'bro_double'</span><span class="p">,</span> <span class="s1">'bro_enum'</span><span class="p">,</span>
+    <span class="s1">'bro_interval'</span><span class="p">,</span> <span class="s1">'bro_int'</span><span class="p">,</span> <span class="s1">'bro_port'</span><span class="p">,</span> <span class="s1">'bro_record'</span><span class="p">,</span> <span class="s1">'bro_set'</span><span class="p">,</span>
+    <span class="s1">'bro_string'</span><span class="p">,</span> <span class="s1">'bro_subnet'</span><span class="p">,</span> <span class="s1">'bro_time'</span><span class="p">,</span> <span class="s1">'bro_vector'</span><span class="p">,</span>
 <span class="p">]</span>
 
-<span class="n">_T</span> <span class="o">=</span> <span class="n">TypeVar</span><span class="p">(</span><span class="s1">&#39;_T&#39;</span><span class="p">,</span> <span class="n">bound</span><span class="o">=</span><span class="s1">&#39;Type[BaseType]&#39;</span><span class="p">)</span>
-<span class="n">_S</span> <span class="o">=</span> <span class="n">TypeVar</span><span class="p">(</span><span class="s1">&#39;_S&#39;</span><span class="p">,</span> <span class="n">bound</span><span class="o">=</span><span class="s1">&#39;_SimpleType&#39;</span><span class="p">)</span>
+<span class="n">_T</span> <span class="o">=</span> <span class="n">TypeVar</span><span class="p">(</span><span class="s1">'_T'</span><span class="p">,</span> <span class="n">bound</span><span class="o">=</span><span class="s1">'Type[BaseType]'</span><span class="p">)</span>
+<span class="n">_S</span> <span class="o">=</span> <span class="n">TypeVar</span><span class="p">(</span><span class="s1">'_S'</span><span class="p">,</span> <span class="n">bound</span><span class="o">=</span><span class="s1">'_SimpleType'</span><span class="p">)</span>
 
 <span class="k">if</span> <span class="n">TYPE_CHECKING</span><span class="p">:</span>
-    <span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Type</span>
+    <span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Type</span>
 
-    <span class="kn">from</span> <span class="nn">zlogging.types</span> <span class="kn">import</span> <span class="n">BaseType</span><span class="p">,</span> <span class="n">_SimpleType</span>
+    <span class="kn">from</span><span class="w"> </span><span class="nn">zlogging.types</span><span class="w"> </span><span class="kn">import</span> <span class="n">BaseType</span><span class="p">,</span> <span class="n">_SimpleType</span>
 
 
-<span class="k">def</span> <span class="nf">_deprecated</span><span class="p">(</span><span class="n">bro_type</span><span class="p">:</span> <span class="s1">&#39;_T&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;_T&#39;</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Use of ``&#39;bro&#39;`` is deprecated, please use ``&#39;zeek&#39;`` instead.&quot;&quot;&quot;</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">_deprecated</span><span class="p">(</span><span class="n">bro_type</span><span class="p">:</span> <span class="s1">'_T'</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">'_T'</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">"""Use of ``'bro'`` is deprecated, please use ``'zeek'`` instead."""</span>
     <span class="n">name</span> <span class="o">=</span> <span class="n">bro_type</span><span class="o">.</span><span class="vm">__name__</span>
     <span class="n">orig_init</span> <span class="o">=</span> <span class="n">bro_type</span><span class="o">.</span><span class="fm">__init__</span>
 
 
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">:</span> <span class="s1">&#39;BaseType&#39;</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">:</span> <span class="s1">&#39;Any&#39;</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">:</span> <span class="s1">&#39;Any&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;None&#39;</span><span class="p">:</span>
-        <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Use of &#39;bro_</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">&#39; is deprecated. &quot;</span>
-                        <span class="sa">f</span><span class="s2">&quot;Please use &#39;zeek_</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">&#39; instead.&quot;</span><span class="p">,</span> <span class="n">BroDeprecationWarning</span><span class="p">)</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">:</span> <span class="s1">'BaseType'</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">:</span> <span class="s1">'Any'</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">:</span> <span class="s1">'Any'</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">'None'</span><span class="p">:</span>
+        <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Use of 'bro_</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">' is deprecated. "</span>
+                        <span class="sa">f</span><span class="s2">"Please use 'zeek_</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">' instead."</span><span class="p">,</span> <span class="n">BroDeprecationWarning</span><span class="p">)</span>
         <span class="n">orig_init</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
 
     <span class="n">bro_type</span><span class="o">.</span><span class="fm">__init__</span> <span class="o">=</span> <span class="fm">__init__</span>  <span class="c1"># type: ignore[assignment]</span>
@@ -80,33 +80,33 @@
 <span class="c1"># Zeek typing types</span>
 
 <span class="c1">#: Zeek ``addr`` data type.</span>
-<span class="n">zeek_addr</span> <span class="o">=</span> <span class="n">TypeVar</span><span class="p">(</span><span class="s1">&#39;zeek_addr&#39;</span><span class="p">,</span> <span class="n">bound</span><span class="o">=</span><span class="s1">&#39;AddrType&#39;</span><span class="p">)</span>
+<span class="n">zeek_addr</span> <span class="o">=</span> <span class="n">TypeVar</span><span class="p">(</span><span class="s1">'zeek_addr'</span><span class="p">,</span> <span class="n">bound</span><span class="o">=</span><span class="s1">'AddrType'</span><span class="p">)</span>
 <span class="c1">#: Zeek ``bool`` data type.</span>
-<span class="n">zeek_bool</span> <span class="o">=</span> <span class="n">TypeVar</span><span class="p">(</span><span class="s1">&#39;zeek_bool&#39;</span><span class="p">,</span> <span class="n">bound</span><span class="o">=</span><span class="s1">&#39;BoolType&#39;</span><span class="p">)</span>
+<span class="n">zeek_bool</span> <span class="o">=</span> <span class="n">TypeVar</span><span class="p">(</span><span class="s1">'zeek_bool'</span><span class="p">,</span> <span class="n">bound</span><span class="o">=</span><span class="s1">'BoolType'</span><span class="p">)</span>
 <span class="c1">#: Zeek ``count`` data type.</span>
-<span class="n">zeek_count</span> <span class="o">=</span> <span class="n">TypeVar</span><span class="p">(</span><span class="s1">&#39;zeek_count&#39;</span><span class="p">,</span> <span class="n">bound</span><span class="o">=</span><span class="s1">&#39;CountType&#39;</span><span class="p">)</span>
+<span class="n">zeek_count</span> <span class="o">=</span> <span class="n">TypeVar</span><span class="p">(</span><span class="s1">'zeek_count'</span><span class="p">,</span> <span class="n">bound</span><span class="o">=</span><span class="s1">'CountType'</span><span class="p">)</span>
 <span class="c1">#: Zeek ``double`` data type.</span>
-<span class="n">zeek_double</span> <span class="o">=</span> <span class="n">TypeVar</span><span class="p">(</span><span class="s1">&#39;zeek_double&#39;</span><span class="p">,</span> <span class="n">bound</span><span class="o">=</span><span class="s1">&#39;DoubleType&#39;</span><span class="p">)</span>
+<span class="n">zeek_double</span> <span class="o">=</span> <span class="n">TypeVar</span><span class="p">(</span><span class="s1">'zeek_double'</span><span class="p">,</span> <span class="n">bound</span><span class="o">=</span><span class="s1">'DoubleType'</span><span class="p">)</span>
 <span class="c1">#: Zeek ``enum`` data type.</span>
-<span class="n">zeek_enum</span> <span class="o">=</span> <span class="n">TypeVar</span><span class="p">(</span><span class="s1">&#39;zeek_enum&#39;</span><span class="p">,</span> <span class="n">bound</span><span class="o">=</span><span class="s1">&#39;EnumType&#39;</span><span class="p">)</span>
+<span class="n">zeek_enum</span> <span class="o">=</span> <span class="n">TypeVar</span><span class="p">(</span><span class="s1">'zeek_enum'</span><span class="p">,</span> <span class="n">bound</span><span class="o">=</span><span class="s1">'EnumType'</span><span class="p">)</span>
 <span class="c1">#: Zeek ``interval`` data type.</span>
-<span class="n">zeek_interval</span> <span class="o">=</span> <span class="n">TypeVar</span><span class="p">(</span><span class="s1">&#39;zeek_interval&#39;</span><span class="p">,</span> <span class="n">bound</span><span class="o">=</span><span class="s1">&#39;IntervalType&#39;</span><span class="p">)</span>
+<span class="n">zeek_interval</span> <span class="o">=</span> <span class="n">TypeVar</span><span class="p">(</span><span class="s1">'zeek_interval'</span><span class="p">,</span> <span class="n">bound</span><span class="o">=</span><span class="s1">'IntervalType'</span><span class="p">)</span>
 <span class="c1">#: Zeek ``int`` data type.</span>
-<span class="n">zeek_int</span> <span class="o">=</span> <span class="n">TypeVar</span><span class="p">(</span><span class="s1">&#39;zeek_int&#39;</span><span class="p">,</span> <span class="n">bound</span><span class="o">=</span><span class="s1">&#39;IntType&#39;</span><span class="p">)</span>
+<span class="n">zeek_int</span> <span class="o">=</span> <span class="n">TypeVar</span><span class="p">(</span><span class="s1">'zeek_int'</span><span class="p">,</span> <span class="n">bound</span><span class="o">=</span><span class="s1">'IntType'</span><span class="p">)</span>
 <span class="c1">#: Zeek ``port`` data type.</span>
-<span class="n">zeek_port</span> <span class="o">=</span> <span class="n">TypeVar</span><span class="p">(</span><span class="s1">&#39;zeek_port&#39;</span><span class="p">,</span> <span class="n">bound</span><span class="o">=</span><span class="s1">&#39;PortType&#39;</span><span class="p">)</span>
+<span class="n">zeek_port</span> <span class="o">=</span> <span class="n">TypeVar</span><span class="p">(</span><span class="s1">'zeek_port'</span><span class="p">,</span> <span class="n">bound</span><span class="o">=</span><span class="s1">'PortType'</span><span class="p">)</span>
 <span class="c1">#: Zeek ``string`` data type.</span>
-<span class="n">zeek_string</span> <span class="o">=</span> <span class="n">TypeVar</span><span class="p">(</span><span class="s1">&#39;zeek_string&#39;</span><span class="p">,</span> <span class="n">bound</span><span class="o">=</span><span class="s1">&#39;StringType&#39;</span><span class="p">)</span>
+<span class="n">zeek_string</span> <span class="o">=</span> <span class="n">TypeVar</span><span class="p">(</span><span class="s1">'zeek_string'</span><span class="p">,</span> <span class="n">bound</span><span class="o">=</span><span class="s1">'StringType'</span><span class="p">)</span>
 <span class="c1">#: Zeek ``subnet`` data type.</span>
-<span class="n">zeek_subnet</span> <span class="o">=</span> <span class="n">TypeVar</span><span class="p">(</span><span class="s1">&#39;zeek_subnet&#39;</span><span class="p">,</span> <span class="n">bound</span><span class="o">=</span><span class="s1">&#39;SubnetType&#39;</span><span class="p">)</span>
+<span class="n">zeek_subnet</span> <span class="o">=</span> <span class="n">TypeVar</span><span class="p">(</span><span class="s1">'zeek_subnet'</span><span class="p">,</span> <span class="n">bound</span><span class="o">=</span><span class="s1">'SubnetType'</span><span class="p">)</span>
 <span class="c1">#: Zeek ``time`` data type.</span>
-<span class="n">zeek_time</span> <span class="o">=</span> <span class="n">TypeVar</span><span class="p">(</span><span class="s1">&#39;zeek_time&#39;</span><span class="p">,</span> <span class="n">bound</span><span class="o">=</span><span class="s1">&#39;TimeType&#39;</span><span class="p">)</span>
+<span class="n">zeek_time</span> <span class="o">=</span> <span class="n">TypeVar</span><span class="p">(</span><span class="s1">'zeek_time'</span><span class="p">,</span> <span class="n">bound</span><span class="o">=</span><span class="s1">'TimeType'</span><span class="p">)</span>
 
 
 <div class="viewcode-block" id="zeek_set">
 <a class="viewcode-back" href="../../typing.html#zlogging.typing.zeek_set">[docs]</a>
-<span class="k">class</span> <span class="nc">zeek_set</span><span class="p">(</span><span class="n">SetType</span><span class="p">,</span> <span class="n">Generic</span><span class="p">[</span><span class="n">_S</span><span class="p">]):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Zeek ``set`` data type.</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">zeek_set</span><span class="p">(</span><span class="n">SetType</span><span class="p">,</span> <span class="n">Generic</span><span class="p">[</span><span class="n">_S</span><span class="p">]):</span>
+<span class="w">    </span><span class="sd">"""Zeek ``set`` data type.</span>
 
 <span class="sd">    Notes:</span>
 <span class="sd">        As a *generic* data type, the class supports the typing proxy as introduced</span>
@@ -124,14 +124,14 @@
 <span class="sd">            class MyLog(zeek_record):</span>
 <span class="sd">                field_one = SetType(element_type=StringType())</span>
 
-<span class="sd">    &quot;&quot;&quot;</span></div>
+<span class="sd">    """</span></div>
 
 
 
 <div class="viewcode-block" id="zeek_vector">
 <a class="viewcode-back" href="../../typing.html#zlogging.typing.zeek_vector">[docs]</a>
-<span class="k">class</span> <span class="nc">zeek_vector</span><span class="p">(</span><span class="n">VectorType</span><span class="p">,</span> <span class="n">Generic</span><span class="p">[</span><span class="n">_S</span><span class="p">]):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Zeek ``vector`` data type.</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">zeek_vector</span><span class="p">(</span><span class="n">VectorType</span><span class="p">,</span> <span class="n">Generic</span><span class="p">[</span><span class="n">_S</span><span class="p">]):</span>
+<span class="w">    </span><span class="sd">"""Zeek ``vector`` data type.</span>
 
 <span class="sd">    Notes:</span>
 <span class="sd">        As a *generic* data type, the class supports the typing proxy as introduced</span>
@@ -149,14 +149,14 @@
 <span class="sd">            class MyLog(zeek_record):</span>
 <span class="sd">                field_one = VectorType(element_type=StringType())</span>
 
-<span class="sd">    &quot;&quot;&quot;</span></div>
+<span class="sd">    """</span></div>
 
 
 
 <div class="viewcode-block" id="zeek_record">
 <a class="viewcode-back" href="../../typing.html#zlogging.typing.zeek_record">[docs]</a>
-<span class="k">class</span> <span class="nc">zeek_record</span><span class="p">(</span><span class="n">RecordType</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Zeek ``record`` data type.</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">zeek_record</span><span class="p">(</span><span class="n">RecordType</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""Zeek ``record`` data type.</span>
 
 <span class="sd">    Notes:</span>
 <span class="sd">        As a *variadic* data type, it supports the typing proxy as :class:`~typing.TypedDict`,</span>
@@ -180,7 +180,7 @@
 <span class="sd">        See :func:`~zlogging._aux.expand_typing` for more information about the</span>
 <span class="sd">        processing of typing proxy.</span>
 
-<span class="sd">    &quot;&quot;&quot;</span></div>
+<span class="sd">    """</span></div>
 
 
 
@@ -189,120 +189,120 @@
 
 
 <span class="nd">@_deprecated</span>
-<span class="k">class</span> <span class="nc">_BroAddrType</span><span class="p">(</span><span class="n">AddrType</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Bro ``addr`` data type.&quot;&quot;&quot;</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">_BroAddrType</span><span class="p">(</span><span class="n">AddrType</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""Bro ``addr`` data type."""</span>
 
 
 <span class="nd">@_deprecated</span>
-<span class="k">class</span> <span class="nc">_BroBoolType</span><span class="p">(</span><span class="n">BoolType</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Bro ``bool`` data type.&quot;&quot;&quot;</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">_BroBoolType</span><span class="p">(</span><span class="n">BoolType</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""Bro ``bool`` data type."""</span>
 
 
 <span class="nd">@_deprecated</span>
-<span class="k">class</span> <span class="nc">_BroCountType</span><span class="p">(</span><span class="n">CountType</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Bro ``count`` data type.&quot;&quot;&quot;</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">_BroCountType</span><span class="p">(</span><span class="n">CountType</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""Bro ``count`` data type."""</span>
 
 
 <span class="nd">@_deprecated</span>
-<span class="k">class</span> <span class="nc">_BroDoubleType</span><span class="p">(</span><span class="n">DoubleType</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Bro ``double`` data type.&quot;&quot;&quot;</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">_BroDoubleType</span><span class="p">(</span><span class="n">DoubleType</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""Bro ``double`` data type."""</span>
 
 
 <span class="nd">@_deprecated</span>
-<span class="k">class</span> <span class="nc">_BroEnumType</span><span class="p">(</span><span class="n">EnumType</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Bro ``enum`` data type.&quot;&quot;&quot;</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">_BroEnumType</span><span class="p">(</span><span class="n">EnumType</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""Bro ``enum`` data type."""</span>
 
 
 <span class="nd">@_deprecated</span>
-<span class="k">class</span> <span class="nc">_BroIntervalType</span><span class="p">(</span><span class="n">IntervalType</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Bro ``interval`` data type.&quot;&quot;&quot;</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">_BroIntervalType</span><span class="p">(</span><span class="n">IntervalType</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""Bro ``interval`` data type."""</span>
 
 
 <span class="nd">@_deprecated</span>
-<span class="k">class</span> <span class="nc">_BroIntType</span><span class="p">(</span><span class="n">IntType</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Bro ``int`` data type.&quot;&quot;&quot;</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">_BroIntType</span><span class="p">(</span><span class="n">IntType</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""Bro ``int`` data type."""</span>
 
 
 <span class="nd">@_deprecated</span>
-<span class="k">class</span> <span class="nc">_BroPortType</span><span class="p">(</span><span class="n">PortType</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Bro ``port`` data type.&quot;&quot;&quot;</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">_BroPortType</span><span class="p">(</span><span class="n">PortType</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""Bro ``port`` data type."""</span>
 
 
 <span class="nd">@_deprecated</span>
-<span class="k">class</span> <span class="nc">_BroStringType</span><span class="p">(</span><span class="n">StringType</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Bro ``string`` data type.&quot;&quot;&quot;</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">_BroStringType</span><span class="p">(</span><span class="n">StringType</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""Bro ``string`` data type."""</span>
 
 
 <span class="nd">@_deprecated</span>
-<span class="k">class</span> <span class="nc">_BroSubnetType</span><span class="p">(</span><span class="n">SubnetType</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Bro ``subnet`` data type.&quot;&quot;&quot;</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">_BroSubnetType</span><span class="p">(</span><span class="n">SubnetType</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""Bro ``subnet`` data type."""</span>
 
 
 <span class="nd">@_deprecated</span>
-<span class="k">class</span> <span class="nc">_BroTimeType</span><span class="p">(</span><span class="n">TimeType</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Bro ``time`` data type.&quot;&quot;&quot;</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">_BroTimeType</span><span class="p">(</span><span class="n">TimeType</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""Bro ``time`` data type."""</span>
 
 
 <span class="c1">#: Bro ``addr`` data type.</span>
-<span class="n">bro_addr</span> <span class="o">=</span> <span class="n">TypeVar</span><span class="p">(</span><span class="s1">&#39;bro_addr&#39;</span><span class="p">,</span> <span class="n">bound</span><span class="o">=</span><span class="s1">&#39;_BroAddrType&#39;</span><span class="p">)</span>
+<span class="n">bro_addr</span> <span class="o">=</span> <span class="n">TypeVar</span><span class="p">(</span><span class="s1">'bro_addr'</span><span class="p">,</span> <span class="n">bound</span><span class="o">=</span><span class="s1">'_BroAddrType'</span><span class="p">)</span>
 <span class="c1">#: Bro ``bool`` data type.</span>
-<span class="n">bro_bool</span> <span class="o">=</span> <span class="n">TypeVar</span><span class="p">(</span><span class="s1">&#39;bro_bool&#39;</span><span class="p">,</span> <span class="n">bound</span><span class="o">=</span><span class="s1">&#39;_BroBoolType&#39;</span><span class="p">)</span>
+<span class="n">bro_bool</span> <span class="o">=</span> <span class="n">TypeVar</span><span class="p">(</span><span class="s1">'bro_bool'</span><span class="p">,</span> <span class="n">bound</span><span class="o">=</span><span class="s1">'_BroBoolType'</span><span class="p">)</span>
 <span class="c1">#: Bro ``count`` data type.</span>
-<span class="n">bro_count</span> <span class="o">=</span> <span class="n">TypeVar</span><span class="p">(</span><span class="s1">&#39;bro_count&#39;</span><span class="p">,</span> <span class="n">bound</span><span class="o">=</span><span class="s1">&#39;_BroCountType&#39;</span><span class="p">)</span>
+<span class="n">bro_count</span> <span class="o">=</span> <span class="n">TypeVar</span><span class="p">(</span><span class="s1">'bro_count'</span><span class="p">,</span> <span class="n">bound</span><span class="o">=</span><span class="s1">'_BroCountType'</span><span class="p">)</span>
 <span class="c1">#: Bro ``double`` data type.</span>
-<span class="n">bro_double</span> <span class="o">=</span> <span class="n">TypeVar</span><span class="p">(</span><span class="s1">&#39;bro_double&#39;</span><span class="p">,</span> <span class="n">bound</span><span class="o">=</span><span class="s1">&#39;_BroDoubleType&#39;</span><span class="p">)</span>
+<span class="n">bro_double</span> <span class="o">=</span> <span class="n">TypeVar</span><span class="p">(</span><span class="s1">'bro_double'</span><span class="p">,</span> <span class="n">bound</span><span class="o">=</span><span class="s1">'_BroDoubleType'</span><span class="p">)</span>
 <span class="c1">#: Bro ``enum`` data type.</span>
-<span class="n">bro_enum</span> <span class="o">=</span> <span class="n">TypeVar</span><span class="p">(</span><span class="s1">&#39;bro_enum&#39;</span><span class="p">,</span> <span class="n">bound</span><span class="o">=</span><span class="s1">&#39;_BroEnumType&#39;</span><span class="p">)</span>
+<span class="n">bro_enum</span> <span class="o">=</span> <span class="n">TypeVar</span><span class="p">(</span><span class="s1">'bro_enum'</span><span class="p">,</span> <span class="n">bound</span><span class="o">=</span><span class="s1">'_BroEnumType'</span><span class="p">)</span>
 <span class="c1">#: Bro ``interval`` data type.</span>
-<span class="n">bro_interval</span> <span class="o">=</span> <span class="n">TypeVar</span><span class="p">(</span><span class="s1">&#39;bro_interval&#39;</span><span class="p">,</span> <span class="n">bound</span><span class="o">=</span><span class="s1">&#39;_BroIntervalType&#39;</span><span class="p">)</span>
+<span class="n">bro_interval</span> <span class="o">=</span> <span class="n">TypeVar</span><span class="p">(</span><span class="s1">'bro_interval'</span><span class="p">,</span> <span class="n">bound</span><span class="o">=</span><span class="s1">'_BroIntervalType'</span><span class="p">)</span>
 <span class="c1">#: Bro ``int`` data type.</span>
-<span class="n">bro_int</span> <span class="o">=</span> <span class="n">TypeVar</span><span class="p">(</span><span class="s1">&#39;bro_int&#39;</span><span class="p">,</span> <span class="n">bound</span><span class="o">=</span><span class="s1">&#39;_BroIntType&#39;</span><span class="p">)</span>
+<span class="n">bro_int</span> <span class="o">=</span> <span class="n">TypeVar</span><span class="p">(</span><span class="s1">'bro_int'</span><span class="p">,</span> <span class="n">bound</span><span class="o">=</span><span class="s1">'_BroIntType'</span><span class="p">)</span>
 <span class="c1">#: Bro ``port`` data type.</span>
-<span class="n">bro_port</span> <span class="o">=</span> <span class="n">TypeVar</span><span class="p">(</span><span class="s1">&#39;bro_port&#39;</span><span class="p">,</span> <span class="n">bound</span><span class="o">=</span><span class="s1">&#39;_BroPortType&#39;</span><span class="p">)</span>
+<span class="n">bro_port</span> <span class="o">=</span> <span class="n">TypeVar</span><span class="p">(</span><span class="s1">'bro_port'</span><span class="p">,</span> <span class="n">bound</span><span class="o">=</span><span class="s1">'_BroPortType'</span><span class="p">)</span>
 <span class="c1">#: Bro ``string`` data type.</span>
-<span class="n">bro_string</span> <span class="o">=</span> <span class="n">TypeVar</span><span class="p">(</span><span class="s1">&#39;bro_string&#39;</span><span class="p">,</span> <span class="n">bound</span><span class="o">=</span><span class="s1">&#39;_BroStringType&#39;</span><span class="p">)</span>
+<span class="n">bro_string</span> <span class="o">=</span> <span class="n">TypeVar</span><span class="p">(</span><span class="s1">'bro_string'</span><span class="p">,</span> <span class="n">bound</span><span class="o">=</span><span class="s1">'_BroStringType'</span><span class="p">)</span>
 <span class="c1">#: Bro ``subnet`` data type.</span>
-<span class="n">bro_subnet</span> <span class="o">=</span> <span class="n">TypeVar</span><span class="p">(</span><span class="s1">&#39;bro_subnet&#39;</span><span class="p">,</span> <span class="n">bound</span><span class="o">=</span><span class="s1">&#39;_BroSubnetType&#39;</span><span class="p">)</span>
+<span class="n">bro_subnet</span> <span class="o">=</span> <span class="n">TypeVar</span><span class="p">(</span><span class="s1">'bro_subnet'</span><span class="p">,</span> <span class="n">bound</span><span class="o">=</span><span class="s1">'_BroSubnetType'</span><span class="p">)</span>
 <span class="c1">#: Bro ``time`` data type.</span>
-<span class="n">bro_time</span> <span class="o">=</span> <span class="n">TypeVar</span><span class="p">(</span><span class="s1">&#39;bro_time&#39;</span><span class="p">,</span> <span class="n">bound</span><span class="o">=</span><span class="s1">&#39;_BroTimeType&#39;</span><span class="p">)</span>
+<span class="n">bro_time</span> <span class="o">=</span> <span class="n">TypeVar</span><span class="p">(</span><span class="s1">'bro_time'</span><span class="p">,</span> <span class="n">bound</span><span class="o">=</span><span class="s1">'_BroTimeType'</span><span class="p">)</span>
 
 
 <div class="viewcode-block" id="bro_set">
 <a class="viewcode-back" href="../../typing.html#zlogging.typing.bro_set">[docs]</a>
 <span class="nd">@_deprecated</span>
-<span class="k">class</span> <span class="nc">bro_set</span><span class="p">(</span><span class="n">SetType</span><span class="p">,</span> <span class="n">Generic</span><span class="p">[</span><span class="n">_S</span><span class="p">]):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Bro ``set`` data type.</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">bro_set</span><span class="p">(</span><span class="n">SetType</span><span class="p">,</span> <span class="n">Generic</span><span class="p">[</span><span class="n">_S</span><span class="p">]):</span>
+<span class="w">    </span><span class="sd">"""Bro ``set`` data type.</span>
 
 <span class="sd">    See Also:</span>
 <span class="sd">        See :attr:`~zlogging.typing.zeek_set` for more information.</span>
 
-<span class="sd">    &quot;&quot;&quot;</span></div>
+<span class="sd">    """</span></div>
 
 
 
 <div class="viewcode-block" id="bro_vector">
 <a class="viewcode-back" href="../../typing.html#zlogging.typing.bro_vector">[docs]</a>
 <span class="nd">@_deprecated</span>
-<span class="k">class</span> <span class="nc">bro_vector</span><span class="p">(</span><span class="n">VectorType</span><span class="p">,</span> <span class="n">Generic</span><span class="p">[</span><span class="n">_S</span><span class="p">]):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Bro ``vector`` data type.</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">bro_vector</span><span class="p">(</span><span class="n">VectorType</span><span class="p">,</span> <span class="n">Generic</span><span class="p">[</span><span class="n">_S</span><span class="p">]):</span>
+<span class="w">    </span><span class="sd">"""Bro ``vector`` data type.</span>
 
 <span class="sd">    See Also:</span>
 <span class="sd">        See :attr:`~zlogging.typing.zeek_vector` for more information.</span>
 
-<span class="sd">    &quot;&quot;&quot;</span></div>
+<span class="sd">    """</span></div>
 
 
 
 <div class="viewcode-block" id="bro_record">
 <a class="viewcode-back" href="../../typing.html#zlogging.typing.bro_record">[docs]</a>
 <span class="nd">@_deprecated</span>
-<span class="k">class</span> <span class="nc">bro_record</span><span class="p">(</span><span class="n">RecordType</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Bro ``record`` data type.</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">bro_record</span><span class="p">(</span><span class="n">RecordType</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""Bro ``record`` data type.</span>
 
 <span class="sd">    See Also:</span>
 <span class="sd">        See :attr:`~zlogging.typing.zeek_record` for more information.</span>
 
-<span class="sd">    &quot;&quot;&quot;</span></div>
+<span class="sd">    """</span></div>
 
 </pre></div>
 
@@ -373,7 +373,7 @@
       <div class="clearer"></div>
     </div>
     <div class="footer">
-      &#169;2020-2024, Jarry Shaw.
+      &#169;2020-2026, Jarry Shaw.
       
     </div>
 

@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="../../../">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>zlogging.enum.spicy &#8212; ZLogging 0.1.3.post6 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=5ecbeea2" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/alabaster.css?v=12dfc556" />
+    <script src="../../../_static/documentation_options.js?v=5f579137"></script>
+    <script src="../../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+   
+  <link rel="stylesheet" href="../../../_static/custom.css" type="text/css" />
+  
+
+  
+  
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <h1>Source code for zlogging.enum.spicy</h1><div class="highlight"><pre>
+<span></span><span class="c1"># -*- coding: utf-8 -*-</span>
+<span class="c1"># pylint: disable=line-too-long</span>
+<span class="sd">"""Namespace: ``spicy``."""</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">zlogging._compat</span><span class="w"> </span><span class="kn">import</span> <span class="n">enum</span>
+
+
+<div class="viewcode-block" id="AddressFamily">
+<a class="viewcode-back" href="../../../enum/spicy.html#zlogging.enum.spicy.AddressFamily">[docs]</a>
+<span class="nd">@enum</span><span class="o">.</span><span class="n">unique</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">AddressFamily</span><span class="p">(</span><span class="n">enum</span><span class="o">.</span><span class="n">IntFlag</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""Enum: ``spicy::AddressFamily``.</span>
+
+<span class="sd">    See Also:</span>
+<span class="sd">        `Protocol Analyzers &lt;https://docs.zeek.org/en/stable/scripts/Protocol Analyzers.html#type-spicy::AddressFamily&gt;`__</span>
+
+<span class="sd">    """</span>
+
+    <span class="n">_ignore_</span> <span class="o">=</span> <span class="s1">'AddressFamily _'</span>
+    <span class="n">AddressFamily</span> <span class="o">=</span> <span class="nb">vars</span><span class="p">()</span>
+
+    <span class="n">AddressFamily_IPv4</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span>
+
+    <span class="n">AddressFamily_IPv6</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span>
+
+    <span class="n">AddressFamily_Undef</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span></div>
+
+
+
+<div class="viewcode-block" id="BitOrder">
+<a class="viewcode-back" href="../../../enum/spicy.html#zlogging.enum.spicy.BitOrder">[docs]</a>
+<span class="nd">@enum</span><span class="o">.</span><span class="n">unique</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">BitOrder</span><span class="p">(</span><span class="n">enum</span><span class="o">.</span><span class="n">IntFlag</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""Enum: ``spicy::BitOrder``.</span>
+
+<span class="sd">    See Also:</span>
+<span class="sd">        `Protocol Analyzers &lt;https://docs.zeek.org/en/stable/scripts/Protocol Analyzers.html#type-spicy::BitOrder&gt;`__</span>
+
+<span class="sd">    """</span>
+
+    <span class="n">_ignore_</span> <span class="o">=</span> <span class="s1">'BitOrder _'</span>
+    <span class="n">BitOrder</span> <span class="o">=</span> <span class="nb">vars</span><span class="p">()</span>
+
+    <span class="n">BitOrder_LSB0</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span>
+
+    <span class="n">BitOrder_MSB0</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span>
+
+    <span class="n">BitOrder_Undef</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span></div>
+
+
+
+<div class="viewcode-block" id="ByteOrder">
+<a class="viewcode-back" href="../../../enum/spicy.html#zlogging.enum.spicy.ByteOrder">[docs]</a>
+<span class="nd">@enum</span><span class="o">.</span><span class="n">unique</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">ByteOrder</span><span class="p">(</span><span class="n">enum</span><span class="o">.</span><span class="n">IntFlag</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""Enum: ``spicy::ByteOrder``.</span>
+
+<span class="sd">    See Also:</span>
+<span class="sd">        `Protocol Analyzers &lt;https://docs.zeek.org/en/stable/scripts/Protocol Analyzers.html#type-spicy::ByteOrder&gt;`__</span>
+
+<span class="sd">    """</span>
+
+    <span class="n">_ignore_</span> <span class="o">=</span> <span class="s1">'ByteOrder _'</span>
+    <span class="n">ByteOrder</span> <span class="o">=</span> <span class="nb">vars</span><span class="p">()</span>
+
+    <span class="n">ByteOrder_Little</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span>
+
+    <span class="n">ByteOrder_Big</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span>
+
+    <span class="n">ByteOrder_Network</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span>
+
+    <span class="n">ByteOrder_Host</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span>
+
+    <span class="n">ByteOrder_Undef</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span></div>
+
+
+
+<div class="viewcode-block" id="Charset">
+<a class="viewcode-back" href="../../../enum/spicy.html#zlogging.enum.spicy.Charset">[docs]</a>
+<span class="nd">@enum</span><span class="o">.</span><span class="n">unique</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">Charset</span><span class="p">(</span><span class="n">enum</span><span class="o">.</span><span class="n">IntFlag</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""Enum: ``spicy::Charset``.</span>
+
+<span class="sd">    See Also:</span>
+<span class="sd">        `Protocol Analyzers &lt;https://docs.zeek.org/en/stable/scripts/Protocol Analyzers.html#type-spicy::Charset&gt;`__</span>
+
+<span class="sd">    """</span>
+
+    <span class="n">_ignore_</span> <span class="o">=</span> <span class="s1">'Charset _'</span>
+    <span class="n">Charset</span> <span class="o">=</span> <span class="nb">vars</span><span class="p">()</span>
+
+    <span class="n">Charset_ASCII</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span>
+
+    <span class="n">Charset_UTF8</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span>
+
+    <span class="n">Charset_UTF16LE</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span>
+
+    <span class="n">Charset_UTF16BE</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span>
+
+    <span class="n">Charset_Undef</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span></div>
+
+
+
+<div class="viewcode-block" id="DecodeErrorStrategy">
+<a class="viewcode-back" href="../../../enum/spicy.html#zlogging.enum.spicy.DecodeErrorStrategy">[docs]</a>
+<span class="nd">@enum</span><span class="o">.</span><span class="n">unique</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">DecodeErrorStrategy</span><span class="p">(</span><span class="n">enum</span><span class="o">.</span><span class="n">IntFlag</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""Enum: ``spicy::DecodeErrorStrategy``.</span>
+
+<span class="sd">    See Also:</span>
+<span class="sd">        `Protocol Analyzers &lt;https://docs.zeek.org/en/stable/scripts/Protocol Analyzers.html#type-spicy::DecodeErrorStrategy&gt;`__</span>
+
+<span class="sd">    """</span>
+
+    <span class="n">_ignore_</span> <span class="o">=</span> <span class="s1">'DecodeErrorStrategy _'</span>
+    <span class="n">DecodeErrorStrategy</span> <span class="o">=</span> <span class="nb">vars</span><span class="p">()</span>
+
+    <span class="n">DecodeErrorStrategy_IGNORE</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span>
+
+    <span class="n">DecodeErrorStrategy_REPLACE</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span>
+
+    <span class="n">DecodeErrorStrategy_STRICT</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span>
+
+    <span class="n">DecodeErrorStrategy_Undef</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span></div>
+
+
+
+<div class="viewcode-block" id="Protocol">
+<a class="viewcode-back" href="../../../enum/spicy.html#zlogging.enum.spicy.Protocol">[docs]</a>
+<span class="nd">@enum</span><span class="o">.</span><span class="n">unique</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">Protocol</span><span class="p">(</span><span class="n">enum</span><span class="o">.</span><span class="n">IntFlag</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""Enum: ``spicy::Protocol``.</span>
+
+<span class="sd">    See Also:</span>
+<span class="sd">        `Protocol Analyzers &lt;https://docs.zeek.org/en/stable/scripts/Protocol Analyzers.html#type-spicy::Protocol&gt;`__</span>
+
+<span class="sd">    """</span>
+
+    <span class="n">_ignore_</span> <span class="o">=</span> <span class="s1">'Protocol _'</span>
+    <span class="n">Protocol</span> <span class="o">=</span> <span class="nb">vars</span><span class="p">()</span>
+
+    <span class="n">Protocol_TCP</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span>
+
+    <span class="n">Protocol_UDP</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span>
+
+    <span class="n">Protocol_ICMP</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span>
+
+    <span class="n">Protocol_Undef</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span></div>
+
+
+
+<div class="viewcode-block" id="RealType">
+<a class="viewcode-back" href="../../../enum/spicy.html#zlogging.enum.spicy.RealType">[docs]</a>
+<span class="nd">@enum</span><span class="o">.</span><span class="n">unique</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">RealType</span><span class="p">(</span><span class="n">enum</span><span class="o">.</span><span class="n">IntFlag</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""Enum: ``spicy::RealType``.</span>
+
+<span class="sd">    See Also:</span>
+<span class="sd">        `Protocol Analyzers &lt;https://docs.zeek.org/en/stable/scripts/Protocol Analyzers.html#type-spicy::RealType&gt;`__</span>
+
+<span class="sd">    """</span>
+
+    <span class="n">_ignore_</span> <span class="o">=</span> <span class="s1">'RealType _'</span>
+    <span class="n">RealType</span> <span class="o">=</span> <span class="nb">vars</span><span class="p">()</span>
+
+    <span class="n">RealType_IEEE754_Single</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span>
+
+    <span class="n">RealType_IEEE754_Double</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span>
+
+    <span class="n">RealType_Undef</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span></div>
+
+
+
+<div class="viewcode-block" id="ReassemblerPolicy">
+<a class="viewcode-back" href="../../../enum/spicy.html#zlogging.enum.spicy.ReassemblerPolicy">[docs]</a>
+<span class="nd">@enum</span><span class="o">.</span><span class="n">unique</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">ReassemblerPolicy</span><span class="p">(</span><span class="n">enum</span><span class="o">.</span><span class="n">IntFlag</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""Enum: ``spicy::ReassemblerPolicy``.</span>
+
+<span class="sd">    See Also:</span>
+<span class="sd">        `Protocol Analyzers &lt;https://docs.zeek.org/en/stable/scripts/Protocol Analyzers.html#type-spicy::ReassemblerPolicy&gt;`__</span>
+
+<span class="sd">    """</span>
+
+    <span class="n">_ignore_</span> <span class="o">=</span> <span class="s1">'ReassemblerPolicy _'</span>
+    <span class="n">ReassemblerPolicy</span> <span class="o">=</span> <span class="nb">vars</span><span class="p">()</span>
+
+    <span class="n">ReassemblerPolicy_First</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span>
+
+    <span class="n">ReassemblerPolicy_Undef</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span></div>
+
+
+
+<div class="viewcode-block" id="Side">
+<a class="viewcode-back" href="../../../enum/spicy.html#zlogging.enum.spicy.Side">[docs]</a>
+<span class="nd">@enum</span><span class="o">.</span><span class="n">unique</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">Side</span><span class="p">(</span><span class="n">enum</span><span class="o">.</span><span class="n">IntFlag</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""Enum: ``spicy::Side``.</span>
+
+<span class="sd">    See Also:</span>
+<span class="sd">        `Protocol Analyzers &lt;https://docs.zeek.org/en/stable/scripts/Protocol Analyzers.html#type-spicy::Side&gt;`__</span>
+
+<span class="sd">    """</span>
+
+    <span class="n">_ignore_</span> <span class="o">=</span> <span class="s1">'Side _'</span>
+    <span class="n">Side</span> <span class="o">=</span> <span class="nb">vars</span><span class="p">()</span>
+
+    <span class="n">Side_Left</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span>
+
+    <span class="n">Side_Right</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span>
+
+    <span class="n">Side_Both</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span>
+
+    <span class="n">Side_Undef</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span></div>
+
+
+
+<div class="viewcode-block" id="Direction">
+<a class="viewcode-back" href="../../../enum/spicy.html#zlogging.enum.spicy.Direction">[docs]</a>
+<span class="nd">@enum</span><span class="o">.</span><span class="n">unique</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">Direction</span><span class="p">(</span><span class="n">enum</span><span class="o">.</span><span class="n">IntFlag</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""Enum: ``spicy::Direction``.</span>
+
+<span class="sd">    See Also:</span>
+<span class="sd">        `Protocol Analyzers &lt;https://docs.zeek.org/en/stable/scripts/Protocol Analyzers.html#type-spicy::Direction&gt;`__</span>
+
+<span class="sd">    """</span>
+
+    <span class="n">_ignore_</span> <span class="o">=</span> <span class="s1">'Direction _'</span>
+    <span class="n">Direction</span> <span class="o">=</span> <span class="nb">vars</span><span class="p">()</span>
+
+    <span class="n">Direction_Forward</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span>
+
+    <span class="n">Direction_Backward</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span>
+
+    <span class="n">Direction_Undef</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span><span class="p">()</span></div>
+
+</pre></div>
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../../../index.html">ZLogging</a></h1>
+
+
+
+
+
+
+<p>
+<iframe src="https://ghbtns.com/github-btn.html?user=JarryShaw&repo=zlogging&type=star&count=true&size=large&v=2"
+  allowtransparency="true" frameborder="0" scrolling="0" width="200px" height="35px"></iframe>
+</p>
+
+
+
+
+
+<h3>Navigation</h3>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../loader.html">Log Loaders</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../dumper.html">Log Dumpers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../model.html">Data Model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../types.html">Data Types</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../typing.html">Typing Annotations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../_exc.html">Exceptions &amp; Warnings</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../_aux.html">Internal Auxiliary Functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../_data.html">Data Classes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../enum/index.html">Enum Namespace</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../../index.html">Documentation overview</a><ul>
+  <li><a href="../../index.html">Module code</a><ul>
+  <li><a href="../enum.html">zlogging.enum</a><ul>
+  </ul></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<search id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &#169;2020-2026, Jarry Shaw.
+      
+    </div>
+
+    
+    <a href="https://github.com/JarryShaw/zlogging" class="github">
+        <img style="position: absolute; top: 0; right: 0; border: 0;" src="https://github.blog/wp-content/uploads/2008/12/forkme_right_darkblue_121621.png" alt="Fork me on GitHub"  class="github"/>
+    </a>
+    
+
+    
+  </body>
+</html>

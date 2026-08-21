@@ -4,10 +4,10 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>zlogging._aux &#8212; ZLogging 0.1.3.post4 documentation</title>
-    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=d1102ebc" />
+    <title>zlogging._aux &#8212; ZLogging 0.1.3.post6 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=5ecbeea2" />
     <link rel="stylesheet" type="text/css" href="../../_static/alabaster.css?v=12dfc556" />
-    <script src="../../_static/documentation_options.js?v=ccd79f44"></script>
+    <script src="../../_static/documentation_options.js?v=5f579137"></script>
     <script src="../../_static/doctools.js?v=9a2dae69"></script>
     <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
@@ -31,45 +31,45 @@
             
   <h1>Source code for zlogging._aux</h1><div class="highlight"><pre>
 <span></span><span class="c1"># -*- coding: utf-8 -*-</span>
-<span class="sd">&quot;&quot;&quot;Auxiliary functions.&quot;&quot;&quot;</span>
+<span class="sd">"""Auxiliary functions."""</span>
 
-<span class="kn">import</span> <span class="nn">collections</span>
-<span class="kn">import</span> <span class="nn">decimal</span>
-<span class="kn">import</span> <span class="nn">itertools</span>
-<span class="kn">import</span> <span class="nn">math</span>
-<span class="kn">import</span> <span class="nn">textwrap</span>
-<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">TYPE_CHECKING</span><span class="p">,</span> <span class="n">cast</span><span class="p">,</span> <span class="n">overload</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">collections</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">decimal</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">itertools</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">math</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">textwrap</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">TYPE_CHECKING</span><span class="p">,</span> <span class="n">cast</span><span class="p">,</span> <span class="n">overload</span>
 
-<span class="kn">from</span> <span class="nn">typing_inspect</span> <span class="kn">import</span> <span class="n">get_args</span><span class="p">,</span> <span class="n">get_origin</span><span class="p">,</span> <span class="n">is_generic_type</span><span class="p">,</span> <span class="n">is_typevar</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing_inspect</span><span class="w"> </span><span class="kn">import</span> <span class="n">get_args</span><span class="p">,</span> <span class="n">get_origin</span><span class="p">,</span> <span class="n">is_generic_type</span><span class="p">,</span> <span class="n">is_typevar</span>
 
 <span class="k">if</span> <span class="n">TYPE_CHECKING</span><span class="p">:</span>
-    <span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">OrderedDict</span>
-    <span class="kn">from</span> <span class="nn">decimal</span> <span class="kn">import</span> <span class="n">Decimal</span>
-    <span class="kn">from</span> <span class="nn">io</span> <span class="kn">import</span> <span class="n">BufferedReader</span> <span class="k">as</span> <span class="n">BinaryFile</span>
-    <span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">Type</span><span class="p">,</span> <span class="n">TypeVar</span><span class="p">,</span> <span class="n">Union</span>
+    <span class="kn">from</span><span class="w"> </span><span class="nn">collections</span><span class="w"> </span><span class="kn">import</span> <span class="n">OrderedDict</span>
+    <span class="kn">from</span><span class="w"> </span><span class="nn">decimal</span><span class="w"> </span><span class="kn">import</span> <span class="n">Decimal</span>
+    <span class="kn">from</span><span class="w"> </span><span class="nn">io</span><span class="w"> </span><span class="kn">import</span> <span class="n">BufferedReader</span> <span class="k">as</span> <span class="n">BinaryFile</span>
+    <span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">Type</span><span class="p">,</span> <span class="n">TypeVar</span><span class="p">,</span> <span class="n">Union</span>
 
-    <span class="kn">from</span> <span class="nn">typing_extensions</span> <span class="kn">import</span> <span class="n">Literal</span>
+    <span class="kn">from</span><span class="w"> </span><span class="nn">typing_extensions</span><span class="w"> </span><span class="kn">import</span> <span class="n">Literal</span>
 
-    <span class="kn">from</span> <span class="nn">zlogging._typing</span> <span class="kn">import</span> <span class="n">ExpandedTyping</span>
-    <span class="kn">from</span> <span class="nn">zlogging.model</span> <span class="kn">import</span> <span class="n">Model</span>
-    <span class="kn">from</span> <span class="nn">zlogging.types</span> <span class="kn">import</span> <span class="n">_VariadicType</span>
+    <span class="kn">from</span><span class="w"> </span><span class="nn">zlogging._typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">ExpandedTyping</span>
+    <span class="kn">from</span><span class="w"> </span><span class="nn">zlogging.model</span><span class="w"> </span><span class="kn">import</span> <span class="n">Model</span>
+    <span class="kn">from</span><span class="w"> </span><span class="nn">zlogging.types</span><span class="w"> </span><span class="kn">import</span> <span class="n">_VariadicType</span>
 
-<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;readline&#39;</span><span class="p">,</span> <span class="s1">&#39;decimal_toascii&#39;</span><span class="p">,</span> <span class="s1">&#39;float_toascii&#39;</span><span class="p">,</span> <span class="s1">&#39;unicode_escape&#39;</span><span class="p">,</span> <span class="s1">&#39;expand_typing&#39;</span><span class="p">]</span>
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s1">'readline'</span><span class="p">,</span> <span class="s1">'decimal_toascii'</span><span class="p">,</span> <span class="s1">'float_toascii'</span><span class="p">,</span> <span class="s1">'unicode_escape'</span><span class="p">,</span> <span class="s1">'expand_typing'</span><span class="p">]</span>
 
-
-<span class="nd">@overload</span>
-<span class="k">def</span> <span class="nf">readline</span><span class="p">(</span><span class="n">file</span><span class="p">:</span> <span class="s1">&#39;BinaryFile&#39;</span><span class="p">,</span> <span class="n">seperator</span><span class="p">:</span> <span class="s1">&#39;bytes&#39;</span> <span class="o">=</span> <span class="o">...</span><span class="p">,</span> <span class="n">maxsplit</span><span class="p">:</span> <span class="s1">&#39;int&#39;</span> <span class="o">=</span> <span class="o">...</span><span class="p">,</span>  <span class="c1"># type: ignore[misc]</span>
-             <span class="n">decode</span><span class="p">:</span> <span class="s1">&#39;Literal[False]&#39;</span> <span class="o">=</span> <span class="o">...</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;list[bytes]&#39;</span><span class="p">:</span> <span class="o">...</span>  <span class="c1"># pylint: disable=redefined-outer-name</span>
 
 <span class="nd">@overload</span>
-<span class="k">def</span> <span class="nf">readline</span><span class="p">(</span><span class="n">file</span><span class="p">:</span> <span class="s1">&#39;BinaryFile&#39;</span><span class="p">,</span> <span class="n">seperator</span><span class="p">:</span> <span class="s1">&#39;bytes&#39;</span> <span class="o">=</span> <span class="o">...</span><span class="p">,</span> <span class="n">maxsplit</span><span class="p">:</span> <span class="s1">&#39;int&#39;</span> <span class="o">=</span> <span class="o">...</span><span class="p">,</span>
-             <span class="n">decode</span><span class="p">:</span> <span class="s1">&#39;Literal[True]&#39;</span> <span class="o">=</span> <span class="o">...</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;list[str]&#39;</span><span class="p">:</span> <span class="o">...</span>  <span class="c1"># pylint: disable=redefined-outer-name</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">readline</span><span class="p">(</span><span class="n">file</span><span class="p">:</span> <span class="s1">'BinaryFile'</span><span class="p">,</span> <span class="n">seperator</span><span class="p">:</span> <span class="s1">'bytes'</span> <span class="o">=</span> <span class="o">...</span><span class="p">,</span> <span class="n">maxsplit</span><span class="p">:</span> <span class="s1">'int'</span> <span class="o">=</span> <span class="o">...</span><span class="p">,</span>  <span class="c1"># type: ignore[misc]</span>
+             <span class="n">decode</span><span class="p">:</span> <span class="s1">'Literal[False]'</span> <span class="o">=</span> <span class="o">...</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">'list[bytes]'</span><span class="p">:</span> <span class="o">...</span>  <span class="c1"># pylint: disable=redefined-outer-name</span>
+
+<span class="nd">@overload</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">readline</span><span class="p">(</span><span class="n">file</span><span class="p">:</span> <span class="s1">'BinaryFile'</span><span class="p">,</span> <span class="n">seperator</span><span class="p">:</span> <span class="s1">'bytes'</span> <span class="o">=</span> <span class="o">...</span><span class="p">,</span> <span class="n">maxsplit</span><span class="p">:</span> <span class="s1">'int'</span> <span class="o">=</span> <span class="o">...</span><span class="p">,</span>
+             <span class="n">decode</span><span class="p">:</span> <span class="s1">'Literal[True]'</span> <span class="o">=</span> <span class="o">...</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">'list[str]'</span><span class="p">:</span> <span class="o">...</span>  <span class="c1"># pylint: disable=redefined-outer-name</span>
 
 <div class="viewcode-block" id="readline">
 <a class="viewcode-back" href="../../_aux.html#zlogging._aux.readline">[docs]</a>
-<span class="k">def</span> <span class="nf">readline</span><span class="p">(</span><span class="n">file</span><span class="p">:</span> <span class="s1">&#39;BinaryFile&#39;</span><span class="p">,</span> <span class="n">separator</span><span class="p">:</span> <span class="s1">&#39;bytes&#39;</span> <span class="o">=</span> <span class="sa">b</span><span class="s1">&#39;</span><span class="se">\x09</span><span class="s1">&#39;</span><span class="p">,</span>  <span class="c1"># type: ignore[misc]</span>
-             <span class="n">maxsplit</span><span class="p">:</span> <span class="s1">&#39;int&#39;</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">decode</span><span class="p">:</span> <span class="s1">&#39;bool&#39;</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;Union[list[str], list[bytes]]&#39;</span><span class="p">:</span>  <span class="c1"># pylint: disable=redefined-outer-name</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Wrapper for :meth:`file.readline` function.</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">readline</span><span class="p">(</span><span class="n">file</span><span class="p">:</span> <span class="s1">'BinaryFile'</span><span class="p">,</span> <span class="n">separator</span><span class="p">:</span> <span class="s1">'bytes'</span> <span class="o">=</span> <span class="sa">b</span><span class="s1">'</span><span class="se">\x09</span><span class="s1">'</span><span class="p">,</span>  <span class="c1"># type: ignore[misc]</span>
+             <span class="n">maxsplit</span><span class="p">:</span> <span class="s1">'int'</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">decode</span><span class="p">:</span> <span class="s1">'bool'</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">'Union[list[str], list[bytes]]'</span><span class="p">:</span>  <span class="c1"># pylint: disable=redefined-outer-name</span>
+<span class="w">    </span><span class="sd">"""Wrapper for :meth:`file.readline` function.</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        file: Log file object opened in binary mode.</span>
@@ -82,18 +82,18 @@
 <span class="sd">        The splitted line as a :obj:`list` of :obj:`bytes`, or as :obj:`str` if</span>
 <span class="sd">        ``decode`` if set to ``True``.</span>
 
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="n">line</span> <span class="o">=</span> <span class="n">file</span><span class="o">.</span><span class="n">readline</span><span class="p">()</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
     <span class="k">if</span> <span class="n">decode</span><span class="p">:</span>
-        <span class="k">return</span> <span class="n">line</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s1">&#39;ascii&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">separator</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s1">&#39;ascii&#39;</span><span class="p">),</span> <span class="n">maxsplit</span><span class="o">=</span><span class="n">maxsplit</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">line</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s1">'ascii'</span><span class="p">)</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">separator</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s1">'ascii'</span><span class="p">),</span> <span class="n">maxsplit</span><span class="o">=</span><span class="n">maxsplit</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">line</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">separator</span><span class="p">,</span> <span class="n">maxsplit</span><span class="p">)</span></div>
 
 
 
 <div class="viewcode-block" id="decimal_toascii">
 <a class="viewcode-back" href="../../_aux.html#zlogging._aux.decimal_toascii">[docs]</a>
-<span class="k">def</span> <span class="nf">decimal_toascii</span><span class="p">(</span><span class="n">data</span><span class="p">:</span> <span class="s1">&#39;Decimal&#39;</span><span class="p">,</span> <span class="n">infinite</span><span class="p">:</span> <span class="s1">&#39;Optional[str]&#39;</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;str&#39;</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Convert :obj:`decimal.Decimal` to ASCII.</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">decimal_toascii</span><span class="p">(</span><span class="n">data</span><span class="p">:</span> <span class="s1">'Decimal'</span><span class="p">,</span> <span class="n">infinite</span><span class="p">:</span> <span class="s1">'Optional[str]'</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">'str'</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">"""Convert :obj:`decimal.Decimal` to ASCII.</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        data: A :obj:`decimal.Decimal` object.</span>
@@ -107,7 +107,7 @@
 
 <span class="sd">        .. code-block:: python</span>
 
-<span class="sd">            &gt;&gt;&gt; d = decimal.Decimal(&#39;-123.123456789&#39;)</span>
+<span class="sd">            &gt;&gt;&gt; d = decimal.Decimal('-123.123456789')</span>
 
 <span class="sd">        the function will preserve only **6 digits** of its fractional part,</span>
 <span class="sd">        i.e.:</span>
@@ -115,17 +115,17 @@
 <span class="sd">        .. code-block:: python</span>
 
 <span class="sd">            &gt;&gt;&gt; decimal_toascii(d)</span>
-<span class="sd">            &#39;-123.123456&#39;</span>
+<span class="sd">            '-123.123456'</span>
 
 <span class="sd">    Note:</span>
 <span class="sd">        Infinite numbers, i.e. ``NaN`` and infinity (``inf``), will be</span>
 <span class="sd">        converted as the value specified in ``infinite``, in default the string</span>
 <span class="sd">        representation of the number itself, i.e.:</span>
 
-<span class="sd">        * ``NaN`` -&gt; ``&#39;NaN&#39;``</span>
-<span class="sd">        * Infinity -&gt; ``&#39;Infinity&#39;``</span>
+<span class="sd">        * ``NaN`` -&gt; ``'NaN'``</span>
+<span class="sd">        * Infinity -&gt; ``'Infinity'``</span>
 
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="k">if</span> <span class="n">data</span><span class="o">.</span><span class="n">is_infinite</span><span class="p">():</span>
         <span class="k">if</span> <span class="n">infinite</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="k">return</span> <span class="nb">str</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
@@ -134,9 +134,9 @@
 
     <span class="n">exp</span> <span class="o">=</span> <span class="n">tpl</span><span class="o">.</span><span class="n">exponent</span>
     <span class="k">if</span> <span class="n">exp</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">:</span>
-        <span class="k">return</span> <span class="s1">&#39;</span><span class="si">%s%s%s</span><span class="s1">.000000&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="s1">&#39;-&#39;</span> <span class="k">if</span> <span class="n">tpl</span><span class="o">.</span><span class="n">sign</span> <span class="k">else</span> <span class="s1">&#39;&#39;</span><span class="p">,</span>  <span class="c1"># pylint: disable=consider-using-f-string</span>
-                                  <span class="s1">&#39;&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="n">tpl</span><span class="o">.</span><span class="n">digits</span><span class="p">)),</span>
-                                  <span class="s1">&#39;0&#39;</span> <span class="o">*</span> <span class="n">exp</span><span class="p">)</span>
+        <span class="k">return</span> <span class="s1">'</span><span class="si">%s%s%s</span><span class="s1">.000000'</span> <span class="o">%</span> <span class="p">(</span><span class="s1">'-'</span> <span class="k">if</span> <span class="n">tpl</span><span class="o">.</span><span class="n">sign</span> <span class="k">else</span> <span class="s1">''</span><span class="p">,</span>  <span class="c1"># pylint: disable=consider-using-f-string</span>
+                                  <span class="s1">''</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="n">tpl</span><span class="o">.</span><span class="n">digits</span><span class="p">)),</span>
+                                  <span class="s1">'0'</span> <span class="o">*</span> <span class="n">exp</span><span class="p">)</span>
 
     <span class="n">expabs</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">exp</span><span class="p">)</span>
     <span class="n">dgtlen</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">tpl</span><span class="o">.</span><span class="n">digits</span><span class="p">)</span>
@@ -144,28 +144,28 @@
         <span class="n">diff</span> <span class="o">=</span> <span class="n">expabs</span> <span class="o">-</span> <span class="n">dgtlen</span>
         <span class="k">if</span> <span class="n">diff</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
             <span class="n">diff</span> <span class="o">=</span> <span class="mi">1</span>
-        <span class="k">return</span> <span class="s1">&#39;</span><span class="si">%s%s</span><span class="s1">.</span><span class="si">%s%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="s1">&#39;-&#39;</span> <span class="k">if</span> <span class="n">tpl</span><span class="o">.</span><span class="n">sign</span> <span class="k">else</span> <span class="s1">&#39;&#39;</span><span class="p">,</span>  <span class="c1"># pylint: disable=consider-using-f-string</span>
-                              <span class="s1">&#39;0&#39;</span> <span class="o">*</span> <span class="n">diff</span><span class="p">,</span>
-                              <span class="s1">&#39;&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="n">tpl</span><span class="o">.</span><span class="n">digits</span><span class="p">[:</span><span class="mi">6</span><span class="p">])),</span>
-                              <span class="s1">&#39;0&#39;</span> <span class="o">*</span> <span class="p">(</span><span class="mi">6</span> <span class="o">-</span> <span class="n">dgtlen</span><span class="p">))</span>
+        <span class="k">return</span> <span class="s1">'</span><span class="si">%s%s</span><span class="s1">.</span><span class="si">%s%s</span><span class="s1">'</span> <span class="o">%</span> <span class="p">(</span><span class="s1">'-'</span> <span class="k">if</span> <span class="n">tpl</span><span class="o">.</span><span class="n">sign</span> <span class="k">else</span> <span class="s1">''</span><span class="p">,</span>  <span class="c1"># pylint: disable=consider-using-f-string</span>
+                              <span class="s1">'0'</span> <span class="o">*</span> <span class="n">diff</span><span class="p">,</span>
+                              <span class="s1">''</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="n">tpl</span><span class="o">.</span><span class="n">digits</span><span class="p">[:</span><span class="mi">6</span><span class="p">])),</span>
+                              <span class="s1">'0'</span> <span class="o">*</span> <span class="p">(</span><span class="mi">6</span> <span class="o">-</span> <span class="n">dgtlen</span><span class="p">))</span>
 
-    <span class="n">buf_int</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
-    <span class="n">buf_flt</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+    <span class="n">buf_int</span> <span class="o">=</span> <span class="s1">''</span>
+    <span class="n">buf_flt</span> <span class="o">=</span> <span class="s1">''</span>
     <span class="k">for</span> <span class="n">index</span><span class="p">,</span> <span class="n">digit</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="nb">reversed</span><span class="p">(</span><span class="n">tpl</span><span class="o">.</span><span class="n">digits</span><span class="p">),</span> <span class="n">start</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
         <span class="k">if</span> <span class="n">index</span> <span class="o">&lt;=</span> <span class="n">expabs</span><span class="p">:</span>
             <span class="n">buf_flt</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">digit</span><span class="p">)</span> <span class="o">+</span> <span class="n">buf_flt</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="n">buf_int</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">digit</span><span class="p">)</span> <span class="o">+</span> <span class="n">buf_int</span>
-    <span class="k">return</span> <span class="s1">&#39;</span><span class="si">%s%s</span><span class="s1">.</span><span class="si">%s%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="s1">&#39;-&#39;</span> <span class="k">if</span> <span class="n">tpl</span><span class="o">.</span><span class="n">sign</span> <span class="k">else</span> <span class="s1">&#39;&#39;</span><span class="p">,</span>  <span class="c1"># pylint: disable=consider-using-f-string</span>
+    <span class="k">return</span> <span class="s1">'</span><span class="si">%s%s</span><span class="s1">.</span><span class="si">%s%s</span><span class="s1">'</span> <span class="o">%</span> <span class="p">(</span><span class="s1">'-'</span> <span class="k">if</span> <span class="n">tpl</span><span class="o">.</span><span class="n">sign</span> <span class="k">else</span> <span class="s1">''</span><span class="p">,</span>  <span class="c1"># pylint: disable=consider-using-f-string</span>
                           <span class="n">buf_int</span><span class="p">,</span> <span class="n">buf_flt</span><span class="p">[:</span><span class="mi">6</span><span class="p">],</span>
-                          <span class="s1">&#39;0&#39;</span> <span class="o">*</span> <span class="p">(</span><span class="mi">6</span> <span class="o">-</span> <span class="nb">len</span><span class="p">(</span><span class="n">buf_flt</span><span class="p">)))</span></div>
+                          <span class="s1">'0'</span> <span class="o">*</span> <span class="p">(</span><span class="mi">6</span> <span class="o">-</span> <span class="nb">len</span><span class="p">(</span><span class="n">buf_flt</span><span class="p">)))</span></div>
 
 
 
 <div class="viewcode-block" id="float_toascii">
 <a class="viewcode-back" href="../../_aux.html#zlogging._aux.float_toascii">[docs]</a>
-<span class="k">def</span> <span class="nf">float_toascii</span><span class="p">(</span><span class="n">data</span><span class="p">:</span> <span class="s1">&#39;float&#39;</span><span class="p">,</span> <span class="n">infinite</span><span class="p">:</span> <span class="s1">&#39;Optional[str]&#39;</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;str&#39;</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Convert :obj:`float` to ASCII.</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">float_toascii</span><span class="p">(</span><span class="n">data</span><span class="p">:</span> <span class="s1">'float'</span><span class="p">,</span> <span class="n">infinite</span><span class="p">:</span> <span class="s1">'Optional[str]'</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">'str'</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">"""Convert :obj:`float` to ASCII.</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        data: A :obj:`float` number.</span>
@@ -187,32 +187,32 @@
 <span class="sd">        .. code-block:: python</span>
 
 <span class="sd">            &gt;&gt;&gt; float_toascii(f)</span>
-<span class="sd">            &#39;-123.123456&#39;</span>
+<span class="sd">            '-123.123456'</span>
 
 <span class="sd">    Note:</span>
 <span class="sd">        Infinite numbers, i.e. ``NaN`` and infinity (``inf``), will be</span>
 <span class="sd">        converted as the value specified in ``infinite``, in default the string</span>
 <span class="sd">        representation of the number itself, i.e.:</span>
 
-<span class="sd">        * ``NaN`` -&gt; ``&#39;nan&#39;``</span>
-<span class="sd">        * Infinity -&gt; ``&#39;inf&#39;``</span>
+<span class="sd">        * ``NaN`` -&gt; ``'nan'``</span>
+<span class="sd">        * Infinity -&gt; ``'inf'``</span>
 
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="n">math</span><span class="o">.</span><span class="n">isfinite</span><span class="p">(</span><span class="n">data</span><span class="p">):</span>
         <span class="k">if</span> <span class="n">infinite</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="k">return</span> <span class="nb">str</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">infinite</span>
-    <span class="n">int_part</span><span class="p">,</span> <span class="n">flt_part</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">data</span><span class="p">)</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;.&#39;</span><span class="p">)</span>
-    <span class="k">return</span> <span class="s1">&#39;</span><span class="si">%s</span><span class="s1">.</span><span class="si">%s%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">int_part</span><span class="p">,</span>  <span class="c1"># pylint: disable=consider-using-f-string</span>
+    <span class="n">int_part</span><span class="p">,</span> <span class="n">flt_part</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">data</span><span class="p">)</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">'.'</span><span class="p">)</span>
+    <span class="k">return</span> <span class="s1">'</span><span class="si">%s</span><span class="s1">.</span><span class="si">%s%s</span><span class="s1">'</span> <span class="o">%</span> <span class="p">(</span><span class="n">int_part</span><span class="p">,</span>  <span class="c1"># pylint: disable=consider-using-f-string</span>
                         <span class="n">flt_part</span><span class="p">[:</span><span class="mi">6</span><span class="p">],</span>
-                        <span class="s1">&#39;0&#39;</span> <span class="o">*</span> <span class="p">(</span><span class="mi">6</span> <span class="o">-</span> <span class="nb">len</span><span class="p">(</span><span class="n">flt_part</span><span class="p">)))</span></div>
+                        <span class="s1">'0'</span> <span class="o">*</span> <span class="p">(</span><span class="mi">6</span> <span class="o">-</span> <span class="nb">len</span><span class="p">(</span><span class="n">flt_part</span><span class="p">)))</span></div>
 
 
 
 <div class="viewcode-block" id="unicode_escape">
 <a class="viewcode-back" href="../../_aux.html#zlogging._aux.unicode_escape">[docs]</a>
-<span class="k">def</span> <span class="nf">unicode_escape</span><span class="p">(</span><span class="n">string</span><span class="p">:</span> <span class="s1">&#39;bytes&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;str&#39;</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Conterprocess of :meth:`bytes.decode(&#39;unicode_escape&#39;) &lt;bytes.decode&gt;`.</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">unicode_escape</span><span class="p">(</span><span class="n">string</span><span class="p">:</span> <span class="s1">'bytes'</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">'str'</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">"""Conterprocess of :meth:`bytes.decode('unicode_escape') &lt;bytes.decode&gt;`.</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        string: The bytestring to be escaped.</span>
@@ -222,21 +222,21 @@
 
 <span class="sd">    Example:</span>
 
-<span class="sd">        &gt;&gt;&gt; b&#39;\\x09&#39;.decode(&#39;unicode_escape&#39;)</span>
-<span class="sd">        &#39;\\\\t&#39;</span>
-<span class="sd">        &gt;&gt;&gt; unicode_escape(b&#39;\\t&#39;)</span>
-<span class="sd">        &#39;\\\\x09&#39;</span>
+<span class="sd">        &gt;&gt;&gt; b'\\x09'.decode('unicode_escape')</span>
+<span class="sd">        '\\\\t'</span>
+<span class="sd">        &gt;&gt;&gt; unicode_escape(b'\\t')</span>
+<span class="sd">        '\\\\x09'</span>
 
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">return</span> <span class="s1">&#39;&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">s</span><span class="p">:</span> <span class="s1">&#39;</span><span class="se">\\</span><span class="s1">x</span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">s</span><span class="p">,</span> <span class="n">textwrap</span><span class="o">.</span><span class="n">wrap</span><span class="p">(</span><span class="n">string</span><span class="o">.</span><span class="n">hex</span><span class="p">(),</span> <span class="mi">2</span><span class="p">)))</span>  <span class="c1"># pylint: disable=consider-using-f-string</span></div>
+<span class="sd">    """</span>
+    <span class="k">return</span> <span class="s1">''</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">s</span><span class="p">:</span> <span class="s1">'</span><span class="se">\\</span><span class="s1">x</span><span class="si">%s</span><span class="s1">'</span> <span class="o">%</span> <span class="n">s</span><span class="p">,</span> <span class="n">textwrap</span><span class="o">.</span><span class="n">wrap</span><span class="p">(</span><span class="n">string</span><span class="o">.</span><span class="n">hex</span><span class="p">(),</span> <span class="mi">2</span><span class="p">)))</span>  <span class="c1"># pylint: disable=consider-using-f-string</span></div>
 
 
 
 <div class="viewcode-block" id="expand_typing">
 <a class="viewcode-back" href="../../_aux.html#zlogging._aux.expand_typing">[docs]</a>
-<span class="k">def</span> <span class="nf">expand_typing</span><span class="p">(</span><span class="bp">cls</span><span class="p">:</span> <span class="s1">&#39;Union[Model, Type[Model], _VariadicType, Type[_VariadicType]]&#39;</span><span class="p">,</span>
-                  <span class="n">exc</span><span class="p">:</span> <span class="s1">&#39;Optional[Type[ValueError]]&#39;</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;ExpandedTyping&#39;</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Expand typing annotations.</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">expand_typing</span><span class="p">(</span><span class="bp">cls</span><span class="p">:</span> <span class="s1">'Union[Model, Type[Model], _VariadicType, Type[_VariadicType]]'</span><span class="p">,</span>
+                  <span class="n">exc</span><span class="p">:</span> <span class="s1">'Optional[Type[ValueError]]'</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">'ExpandedTyping'</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">"""Expand typing annotations.</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        cls: a variadic class which supports :pep:`484` style attribute typing</span>
@@ -308,33 +308,33 @@
 <span class="sd">        * ``record.one`` -&gt; ``string`` data type</span>
 <span class="sd">        * ``record.two`` -&gt; ``vector[count]`` data type</span>
 
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="kn">from</span> <span class="nn">zlogging.types</span> <span class="kn">import</span> <span class="p">(</span><span class="n">BaseType</span><span class="p">,</span> <span class="n">_GenericType</span><span class="p">,</span>  <span class="c1"># pylint: disable=import-outside-toplevel</span>
+<span class="sd">    """</span>
+    <span class="kn">from</span><span class="w"> </span><span class="nn">zlogging.types</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span><span class="n">BaseType</span><span class="p">,</span> <span class="n">_GenericType</span><span class="p">,</span>  <span class="c1"># pylint: disable=import-outside-toplevel</span>
                                 <span class="n">_SimpleType</span><span class="p">,</span> <span class="n">_VariadicType</span><span class="p">)</span>
 
     <span class="k">if</span> <span class="n">exc</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
         <span class="n">exc</span> <span class="o">=</span> <span class="ne">ValueError</span>
 
     <span class="n">inited</span> <span class="o">=</span> <span class="kc">False</span>
-    <span class="n">unset_field</span> <span class="o">=</span> <span class="sa">b</span><span class="s1">&#39;-&#39;</span>
-    <span class="n">empty_field</span> <span class="o">=</span> <span class="sa">b</span><span class="s1">&#39;(empty)&#39;</span>
-    <span class="n">set_separator</span> <span class="o">=</span> <span class="sa">b</span><span class="s1">&#39;,&#39;</span>
+    <span class="n">unset_field</span> <span class="o">=</span> <span class="sa">b</span><span class="s1">'-'</span>
+    <span class="n">empty_field</span> <span class="o">=</span> <span class="sa">b</span><span class="s1">'(empty)'</span>
+    <span class="n">set_separator</span> <span class="o">=</span> <span class="sa">b</span><span class="s1">','</span>
 
-    <span class="k">def</span> <span class="nf">register</span><span class="p">(</span><span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">field</span><span class="p">:</span> <span class="s1">&#39;Union[_SimpleType, _GenericType]&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Field registry.&quot;&quot;&quot;</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">register</span><span class="p">(</span><span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">field</span><span class="p">:</span> <span class="s1">'Union[_SimpleType, _GenericType]'</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">"""Field registry."""</span>
         <span class="n">existed</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">existed</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">field</span><span class="o">.</span><span class="n">zeek_type</span> <span class="o">!=</span> <span class="n">existed</span><span class="o">.</span><span class="n">zeek_type</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="n">exc</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;inconsistent data type of </span><span class="si">{</span><span class="n">name</span><span class="si">!r}</span><span class="s1"> field: </span><span class="si">{</span><span class="n">field</span><span class="si">!r}</span><span class="s1"> and </span><span class="si">{</span><span class="n">existed</span><span class="si">!r}</span><span class="s1">&#39;</span><span class="p">)</span>  <span class="c1"># type: ignore[misc]</span>
+            <span class="k">raise</span> <span class="n">exc</span><span class="p">(</span><span class="sa">f</span><span class="s1">'inconsistent data type of </span><span class="si">{</span><span class="n">name</span><span class="si">!r}</span><span class="s1"> field: </span><span class="si">{</span><span class="n">field</span><span class="si">!r}</span><span class="s1"> and </span><span class="si">{</span><span class="n">existed</span><span class="si">!r}</span><span class="s1">'</span><span class="p">)</span>  <span class="c1"># type: ignore[misc]</span>
         <span class="n">fields</span><span class="p">[</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="n">field</span>
 
     <span class="n">fields</span> <span class="o">=</span> <span class="n">collections</span><span class="o">.</span><span class="n">OrderedDict</span><span class="p">()</span>  <span class="c1"># type: OrderedDict[str, Union[_SimpleType, _GenericType]]</span>
     <span class="n">record_fields</span> <span class="o">=</span> <span class="n">collections</span><span class="o">.</span><span class="n">OrderedDict</span><span class="p">()</span>  <span class="c1"># type: OrderedDict[str, _VariadicType]</span>
-    <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">attr</span> <span class="ow">in</span> <span class="n">itertools</span><span class="o">.</span><span class="n">chain</span><span class="p">(</span><span class="nb">getattr</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="s1">&#39;__annotations__&#39;</span><span class="p">,</span> <span class="p">{})</span><span class="o">.</span><span class="n">items</span><span class="p">(),</span> <span class="bp">cls</span><span class="o">.</span><span class="vm">__dict__</span><span class="o">.</span><span class="n">items</span><span class="p">()):</span>
+    <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">attr</span> <span class="ow">in</span> <span class="n">itertools</span><span class="o">.</span><span class="n">chain</span><span class="p">(</span><span class="nb">getattr</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="s1">'__annotations__'</span><span class="p">,</span> <span class="p">{})</span><span class="o">.</span><span class="n">items</span><span class="p">(),</span> <span class="bp">cls</span><span class="o">.</span><span class="vm">__dict__</span><span class="o">.</span><span class="n">items</span><span class="p">()):</span>
         <span class="c1"># type instances</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">attr</span><span class="p">,</span> <span class="n">BaseType</span><span class="p">):</span>
             <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">attr</span><span class="p">,</span> <span class="n">_VariadicType</span><span class="p">):</span>
                 <span class="k">for</span> <span class="n">elm_name</span><span class="p">,</span> <span class="n">elm_field</span> <span class="ow">in</span> <span class="n">attr</span><span class="o">.</span><span class="n">element_mapping</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
-                    <span class="n">register</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s1">.</span><span class="si">{</span><span class="n">elm_name</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">elm_field</span><span class="p">)</span>
+                    <span class="n">register</span><span class="p">(</span><span class="sa">f</span><span class="s1">'</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s1">.</span><span class="si">{</span><span class="n">elm_name</span><span class="si">}</span><span class="s1">'</span><span class="p">,</span> <span class="n">elm_field</span><span class="p">)</span>
                 <span class="n">record_fields</span><span class="p">[</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="n">attr</span>
             <span class="k">else</span><span class="p">:</span>
                 <span class="n">register</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">attr</span><span class="p">)</span>  <span class="c1"># type: ignore[arg-type]</span>
@@ -346,7 +346,7 @@
         <span class="c1"># simple typing types</span>
         <span class="k">elif</span> <span class="n">is_typevar</span><span class="p">(</span><span class="n">attr</span><span class="p">):</span>
             <span class="k">if</span> <span class="n">TYPE_CHECKING</span><span class="p">:</span>
-                <span class="n">attr</span> <span class="o">=</span> <span class="n">cast</span><span class="p">(</span><span class="s1">&#39;TypeVar&#39;</span><span class="p">,</span> <span class="n">attr</span><span class="p">)</span>
+                <span class="n">attr</span> <span class="o">=</span> <span class="n">cast</span><span class="p">(</span><span class="s1">'TypeVar'</span><span class="p">,</span> <span class="n">attr</span><span class="p">)</span>
 
             <span class="n">bound</span> <span class="o">=</span> <span class="n">attr</span><span class="o">.</span><span class="n">__bound__</span>
             <span class="k">if</span> <span class="n">bound</span> <span class="ow">and</span> <span class="nb">issubclass</span><span class="p">(</span><span class="n">bound</span><span class="p">,</span> <span class="n">_SimpleType</span><span class="p">):</span>
@@ -366,7 +366,7 @@
             <span class="c1"># simple typing types</span>
             <span class="k">elif</span> <span class="n">is_typevar</span><span class="p">(</span><span class="n">parameter</span><span class="p">):</span>
                 <span class="k">if</span> <span class="n">TYPE_CHECKING</span><span class="p">:</span>
-                    <span class="n">parameter</span> <span class="o">=</span> <span class="n">cast</span><span class="p">(</span><span class="s1">&#39;TypeVar&#39;</span><span class="p">,</span> <span class="n">parameter</span><span class="p">)</span>
+                    <span class="n">parameter</span> <span class="o">=</span> <span class="n">cast</span><span class="p">(</span><span class="s1">'TypeVar'</span><span class="p">,</span> <span class="n">parameter</span><span class="p">)</span>
                 <span class="n">bound</span> <span class="o">=</span> <span class="n">parameter</span><span class="o">.</span><span class="n">__bound__</span>
                 <span class="k">if</span> <span class="n">bound</span> <span class="ow">and</span> <span class="nb">issubclass</span><span class="p">(</span><span class="n">bound</span><span class="p">,</span> <span class="n">_SimpleType</span><span class="p">):</span>
                     <span class="n">element_type</span> <span class="o">=</span> <span class="n">bound</span><span class="p">()</span>
@@ -388,19 +388,19 @@
             <span class="k">continue</span>
 
         <span class="k">if</span> <span class="n">unset_field</span> <span class="o">!=</span> <span class="n">attr</span><span class="o">.</span><span class="n">unset_field</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="n">exc</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;inconsistent value of &#39;unset_field&#39;: </span><span class="si">{</span><span class="n">unset_field</span><span class="si">!r}</span><span class="s2"> and </span><span class="si">{</span><span class="n">attr</span><span class="o">.</span><span class="n">unset_field</span><span class="si">!r}</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="n">exc</span><span class="p">(</span><span class="sa">f</span><span class="s2">"inconsistent value of 'unset_field': </span><span class="si">{</span><span class="n">unset_field</span><span class="si">!r}</span><span class="s2"> and </span><span class="si">{</span><span class="n">attr</span><span class="o">.</span><span class="n">unset_field</span><span class="si">!r}</span><span class="s2">"</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">empty_field</span> <span class="o">!=</span> <span class="n">attr</span><span class="o">.</span><span class="n">empty_field</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="n">exc</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;inconsistent value of &#39;empty_field&#39;: </span><span class="si">{</span><span class="n">empty_field</span><span class="si">!r}</span><span class="s2"> and </span><span class="si">{</span><span class="n">attr</span><span class="o">.</span><span class="n">empty_field</span><span class="si">!r}</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="n">exc</span><span class="p">(</span><span class="sa">f</span><span class="s2">"inconsistent value of 'empty_field': </span><span class="si">{</span><span class="n">empty_field</span><span class="si">!r}</span><span class="s2"> and </span><span class="si">{</span><span class="n">attr</span><span class="o">.</span><span class="n">empty_field</span><span class="si">!r}</span><span class="s2">"</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">set_separator</span> <span class="o">!=</span> <span class="n">attr</span><span class="o">.</span><span class="n">set_separator</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="n">exc</span><span class="p">(</span><span class="s2">&quot;inconsistent value of &#39;set_separator&#39;: </span><span class="si">{set_separator!r}</span><span class="s2"> and </span><span class="si">{attr.set_separator!r}</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="n">exc</span><span class="p">(</span><span class="s2">"inconsistent value of 'set_separator': </span><span class="si">{set_separator!r}</span><span class="s2"> and </span><span class="si">{attr.set_separator!r}</span><span class="s2">"</span><span class="p">)</span>
 
     <span class="k">return</span> <span class="p">{</span>
-        <span class="s1">&#39;_inited&#39;</span><span class="p">:</span> <span class="n">inited</span><span class="p">,</span>
-        <span class="s1">&#39;fields&#39;</span><span class="p">:</span> <span class="n">fields</span><span class="p">,</span>
-        <span class="s1">&#39;record_fields&#39;</span><span class="p">:</span> <span class="n">record_fields</span><span class="p">,</span>
-        <span class="s1">&#39;unset_field&#39;</span><span class="p">:</span> <span class="n">unset_field</span><span class="p">,</span>
-        <span class="s1">&#39;empty_field&#39;</span><span class="p">:</span> <span class="n">empty_field</span><span class="p">,</span>
-        <span class="s1">&#39;set_separator&#39;</span><span class="p">:</span> <span class="n">set_separator</span><span class="p">,</span>
+        <span class="s1">'_inited'</span><span class="p">:</span> <span class="n">inited</span><span class="p">,</span>
+        <span class="s1">'fields'</span><span class="p">:</span> <span class="n">fields</span><span class="p">,</span>
+        <span class="s1">'record_fields'</span><span class="p">:</span> <span class="n">record_fields</span><span class="p">,</span>
+        <span class="s1">'unset_field'</span><span class="p">:</span> <span class="n">unset_field</span><span class="p">,</span>
+        <span class="s1">'empty_field'</span><span class="p">:</span> <span class="n">empty_field</span><span class="p">,</span>
+        <span class="s1">'set_separator'</span><span class="p">:</span> <span class="n">set_separator</span><span class="p">,</span>
     <span class="p">}</span></div>
 
 </pre></div>
@@ -472,7 +472,7 @@
       <div class="clearer"></div>
     </div>
     <div class="footer">
-      &#169;2020-2024, Jarry Shaw.
+      &#169;2020-2026, Jarry Shaw.
       
     </div>
 

@@ -4,10 +4,10 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>zlogging._exc &#8212; ZLogging 0.1.3.post4 documentation</title>
-    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=d1102ebc" />
+    <title>zlogging._exc &#8212; ZLogging 0.1.3.post6 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=5ecbeea2" />
     <link rel="stylesheet" type="text/css" href="../../_static/alabaster.css?v=12dfc556" />
-    <script src="../../_static/documentation_options.js?v=ccd79f44"></script>
+    <script src="../../_static/documentation_options.js?v=5f579137"></script>
     <script src="../../_static/doctools.js?v=9a2dae69"></script>
     <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
@@ -31,228 +31,228 @@
             
   <h1>Source code for zlogging._exc</h1><div class="highlight"><pre>
 <span></span><span class="c1"># -*- coding: utf-8 -*-</span>
-<span class="sd">&quot;&quot;&quot;Exceptions &amp; warnings.&quot;&quot;&quot;</span>
+<span class="sd">"""Exceptions &amp; warnings."""</span>
 
-<span class="kn">import</span> <span class="nn">json</span>
-<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">TYPE_CHECKING</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">json</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">TYPE_CHECKING</span>
 
 <span class="k">if</span> <span class="n">TYPE_CHECKING</span><span class="p">:</span>
-    <span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">Type</span>
+    <span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">Type</span>
 
 
 <div class="viewcode-block" id="ZeekException">
 <a class="viewcode-back" href="../../_exc.html#zlogging._exc.ZeekException">[docs]</a>
-<span class="k">class</span> <span class="nc">ZeekException</span><span class="p">(</span><span class="ne">Exception</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Base exception.&quot;&quot;&quot;</span></div>
+<span class="k">class</span><span class="w"> </span><span class="nc">ZeekException</span><span class="p">(</span><span class="ne">Exception</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""Base exception."""</span></div>
 
 
 
 <div class="viewcode-block" id="ZeekWarning">
 <a class="viewcode-back" href="../../_exc.html#zlogging._exc.ZeekWarning">[docs]</a>
-<span class="k">class</span> <span class="nc">ZeekWarning</span><span class="p">(</span><span class="ne">Warning</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Base warning.&quot;&quot;&quot;</span></div>
+<span class="k">class</span><span class="w"> </span><span class="nc">ZeekWarning</span><span class="p">(</span><span class="ne">Warning</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""Base warning."""</span></div>
 
 
 
 <div class="viewcode-block" id="ParserError">
 <a class="viewcode-back" href="../../_exc.html#zlogging._exc.ParserError">[docs]</a>
-<span class="k">class</span> <span class="nc">ParserError</span><span class="p">(</span><span class="n">ZeekException</span><span class="p">,</span> <span class="ne">ValueError</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Error when parsing logs.</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">ParserError</span><span class="p">(</span><span class="n">ZeekException</span><span class="p">,</span> <span class="ne">ValueError</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""Error when parsing logs.</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        msg: The unformatted error message.</span>
 <span class="sd">        lineno: The line corresponding to the failure.</span>
 <span class="sd">        field: The field name where parsing failed.</span>
 
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="c1">#: The unformatted error message.</span>
     <span class="n">msg</span><span class="p">:</span> <span class="nb">str</span>
     <span class="c1">#: The field name where parsing failed.</span>
-    <span class="n">field</span><span class="p">:</span> <span class="s1">&#39;Optional[str]&#39;</span>
+    <span class="n">field</span><span class="p">:</span> <span class="s1">'Optional[str]'</span>
     <span class="c1">#: The line corresponding to the failure.</span>
-    <span class="n">lineno</span><span class="p">:</span> <span class="s1">&#39;Optional[int]&#39;</span>
+    <span class="n">lineno</span><span class="p">:</span> <span class="s1">'Optional[int]'</span>
 
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">msg</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">lineno</span><span class="p">:</span> <span class="s1">&#39;Optional[int]&#39;</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-                 <span class="n">field</span><span class="p">:</span> <span class="s1">&#39;Optional[str]&#39;</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">msg</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">lineno</span><span class="p">:</span> <span class="s1">'Optional[int]'</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+                 <span class="n">field</span><span class="p">:</span> <span class="s1">'Optional[str]'</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="k">if</span> <span class="n">lineno</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">errmsg</span> <span class="o">=</span> <span class="n">msg</span>
         <span class="k">elif</span> <span class="n">field</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="n">errmsg</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">msg</span><span class="si">}</span><span class="s1">: line </span><span class="si">{</span><span class="n">lineno</span><span class="si">}</span><span class="s1">&#39;</span>
+            <span class="n">errmsg</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">'</span><span class="si">{</span><span class="n">msg</span><span class="si">}</span><span class="s1">: line </span><span class="si">{</span><span class="n">lineno</span><span class="si">}</span><span class="s1">'</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="n">errmsg</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">msg</span><span class="si">}</span><span class="s1">: line </span><span class="si">{</span><span class="n">lineno</span><span class="si">}</span><span class="s1"> (field </span><span class="si">{</span><span class="n">field</span><span class="si">!r}</span><span class="s1">)&#39;</span>
+            <span class="n">errmsg</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">'</span><span class="si">{</span><span class="n">msg</span><span class="si">}</span><span class="s1">: line </span><span class="si">{</span><span class="n">lineno</span><span class="si">}</span><span class="s1"> (field </span><span class="si">{</span><span class="n">field</span><span class="si">!r}</span><span class="s1">)'</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">errmsg</span><span class="p">)</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">msg</span> <span class="o">=</span> <span class="n">msg</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">field</span> <span class="o">=</span> <span class="n">field</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">lineno</span> <span class="o">=</span> <span class="n">lineno</span>
 
-    <span class="k">def</span> <span class="nf">__reduce__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;tuple[Type[ParserError], tuple[str, Optional[int], Optional[str]]]&#39;</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">__reduce__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">'tuple[Type[ParserError], tuple[str, Optional[int], Optional[str]]]'</span><span class="p">:</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="p">,</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">msg</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">lineno</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">field</span><span class="p">)</span></div>
 
 
 
 <div class="viewcode-block" id="JSONParserError">
 <a class="viewcode-back" href="../../_exc.html#zlogging._exc.JSONParserError">[docs]</a>
-<span class="k">class</span> <span class="nc">JSONParserError</span><span class="p">(</span><span class="n">ParserError</span><span class="p">,</span> <span class="n">json</span><span class="o">.</span><span class="n">JSONDecodeError</span><span class="p">):</span>  <span class="c1"># type: ignore[misc]</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Error when parsing JSON log.</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">JSONParserError</span><span class="p">(</span><span class="n">ParserError</span><span class="p">,</span> <span class="n">json</span><span class="o">.</span><span class="n">JSONDecodeError</span><span class="p">):</span>  <span class="c1"># type: ignore[misc]</span>
+<span class="w">    </span><span class="sd">"""Error when parsing JSON log.</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        msg: The unformatted error message.</span>
 <span class="sd">        lineno: The line corresponding to the failure.</span>
 <span class="sd">        field: The field name where parsing failed.</span>
 
-<span class="sd">    &quot;&quot;&quot;</span></div>
+<span class="sd">    """</span></div>
 
 
 
 <div class="viewcode-block" id="ASCIIParserError">
 <a class="viewcode-back" href="../../_exc.html#zlogging._exc.ASCIIParserError">[docs]</a>
-<span class="k">class</span> <span class="nc">ASCIIParserError</span><span class="p">(</span><span class="n">ParserError</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Error when parsing ASCII log.</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">ASCIIParserError</span><span class="p">(</span><span class="n">ParserError</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""Error when parsing ASCII log.</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        msg: The unformatted error message.</span>
 <span class="sd">        lineno: The line corresponding to the failure.</span>
 <span class="sd">        field: The field name where parsing failed.</span>
 
-<span class="sd">    &quot;&quot;&quot;</span></div>
+<span class="sd">    """</span></div>
 
 
 
 <div class="viewcode-block" id="WriterError">
 <a class="viewcode-back" href="../../_exc.html#zlogging._exc.WriterError">[docs]</a>
-<span class="k">class</span> <span class="nc">WriterError</span><span class="p">(</span><span class="n">ZeekException</span><span class="p">,</span> <span class="ne">TypeError</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Error when writing logs.</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">WriterError</span><span class="p">(</span><span class="n">ZeekException</span><span class="p">,</span> <span class="ne">TypeError</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""Error when writing logs.</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        msg: The unformatted error message.</span>
 <span class="sd">        lineno: The line corresponding to the failure.</span>
 <span class="sd">        field: The field name where parsing failed.</span>
 
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="c1">#: The unformatted error message.</span>
     <span class="n">msg</span><span class="p">:</span> <span class="nb">str</span>
     <span class="c1">#: The field name where parsing failed.</span>
-    <span class="n">field</span><span class="p">:</span> <span class="s1">&#39;Optional[str]&#39;</span>
+    <span class="n">field</span><span class="p">:</span> <span class="s1">'Optional[str]'</span>
     <span class="c1">#: The line corresponding to the failure.</span>
-    <span class="n">lineno</span><span class="p">:</span> <span class="s1">&#39;Optional[int]&#39;</span>
+    <span class="n">lineno</span><span class="p">:</span> <span class="s1">'Optional[int]'</span>
 
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">msg</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">lineno</span><span class="p">:</span> <span class="s1">&#39;Optional[int]&#39;</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-                 <span class="n">field</span><span class="p">:</span> <span class="s1">&#39;Optional[str]&#39;</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">msg</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">lineno</span><span class="p">:</span> <span class="s1">'Optional[int]'</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+                 <span class="n">field</span><span class="p">:</span> <span class="s1">'Optional[str]'</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="k">if</span> <span class="n">lineno</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">errmsg</span> <span class="o">=</span> <span class="n">msg</span>
         <span class="k">elif</span> <span class="n">field</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="n">errmsg</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">msg</span><span class="si">}</span><span class="s1">: line </span><span class="si">{</span><span class="n">lineno</span><span class="si">}</span><span class="s1">&#39;</span>
+            <span class="n">errmsg</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">'</span><span class="si">{</span><span class="n">msg</span><span class="si">}</span><span class="s1">: line </span><span class="si">{</span><span class="n">lineno</span><span class="si">}</span><span class="s1">'</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="n">errmsg</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">msg</span><span class="si">}</span><span class="s1">: line </span><span class="si">{</span><span class="n">lineno</span><span class="si">}</span><span class="s1"> (field </span><span class="si">{</span><span class="n">field</span><span class="si">!r}</span><span class="s1">)&#39;</span>
+            <span class="n">errmsg</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">'</span><span class="si">{</span><span class="n">msg</span><span class="si">}</span><span class="s1">: line </span><span class="si">{</span><span class="n">lineno</span><span class="si">}</span><span class="s1"> (field </span><span class="si">{</span><span class="n">field</span><span class="si">!r}</span><span class="s1">)'</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">errmsg</span><span class="p">)</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">msg</span> <span class="o">=</span> <span class="n">msg</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">field</span> <span class="o">=</span> <span class="n">field</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">lineno</span> <span class="o">=</span> <span class="n">lineno</span>
 
-    <span class="k">def</span> <span class="nf">__reduce__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;tuple[Type[WriterError], tuple[str, Optional[int], Optional[str]]]&#39;</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">__reduce__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">'tuple[Type[WriterError], tuple[str, Optional[int], Optional[str]]]'</span><span class="p">:</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="p">,</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">msg</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">lineno</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">field</span><span class="p">)</span></div>
 
 
 
 <div class="viewcode-block" id="JSONWriterError">
 <a class="viewcode-back" href="../../_exc.html#zlogging._exc.JSONWriterError">[docs]</a>
-<span class="k">class</span> <span class="nc">JSONWriterError</span><span class="p">(</span><span class="n">WriterError</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Error when writing JSON logs.</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">JSONWriterError</span><span class="p">(</span><span class="n">WriterError</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""Error when writing JSON logs.</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        msg: The unformatted error message.</span>
 <span class="sd">        lineno: The line corresponding to the failure.</span>
 <span class="sd">        field: The field name where parsing failed.</span>
 
-<span class="sd">    &quot;&quot;&quot;</span></div>
+<span class="sd">    """</span></div>
 
 
 
 <div class="viewcode-block" id="ASCIIWriterError">
 <a class="viewcode-back" href="../../_exc.html#zlogging._exc.ASCIIWriterError">[docs]</a>
-<span class="k">class</span> <span class="nc">ASCIIWriterError</span><span class="p">(</span><span class="n">WriterError</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Error when writing ASCII logs.</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">ASCIIWriterError</span><span class="p">(</span><span class="n">WriterError</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""Error when writing ASCII logs.</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        msg: The unformatted error message.</span>
 <span class="sd">        lineno: The line corresponding to the failure.</span>
 <span class="sd">        field: The field name where parsing failed.</span>
 
-<span class="sd">    &quot;&quot;&quot;</span></div>
+<span class="sd">    """</span></div>
 
 
 
 <div class="viewcode-block" id="WriterFormatError">
 <a class="viewcode-back" href="../../_exc.html#zlogging._exc.WriterFormatError">[docs]</a>
-<span class="k">class</span> <span class="nc">WriterFormatError</span><span class="p">(</span><span class="n">WriterError</span><span class="p">,</span> <span class="ne">ValueError</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Unsupported format.</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">WriterFormatError</span><span class="p">(</span><span class="n">WriterError</span><span class="p">,</span> <span class="ne">ValueError</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""Unsupported format.</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        msg: The unformatted error message.</span>
 <span class="sd">        lineno: The line corresponding to the failure.</span>
 <span class="sd">        field: The field name where parsing failed.</span>
 
-<span class="sd">    &quot;&quot;&quot;</span></div>
+<span class="sd">    """</span></div>
 
 
 
 <div class="viewcode-block" id="ParserWarning">
 <a class="viewcode-back" href="../../_exc.html#zlogging._exc.ParserWarning">[docs]</a>
-<span class="k">class</span> <span class="nc">ParserWarning</span><span class="p">(</span><span class="n">ZeekWarning</span><span class="p">,</span> <span class="ne">UserWarning</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Warning when parsing logs.&quot;&quot;&quot;</span></div>
+<span class="k">class</span><span class="w"> </span><span class="nc">ParserWarning</span><span class="p">(</span><span class="n">ZeekWarning</span><span class="p">,</span> <span class="ne">UserWarning</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""Warning when parsing logs."""</span></div>
 
 
 
 <div class="viewcode-block" id="JSONParserWarning">
 <a class="viewcode-back" href="../../_exc.html#zlogging._exc.JSONParserWarning">[docs]</a>
-<span class="k">class</span> <span class="nc">JSONParserWarning</span><span class="p">(</span><span class="n">ParserWarning</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Warning when parsing logs in JSON format.&quot;&quot;&quot;</span></div>
+<span class="k">class</span><span class="w"> </span><span class="nc">JSONParserWarning</span><span class="p">(</span><span class="n">ParserWarning</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""Warning when parsing logs in JSON format."""</span></div>
 
 
 
 <div class="viewcode-block" id="ASCIIParserWarning">
 <a class="viewcode-back" href="../../_exc.html#zlogging._exc.ASCIIParserWarning">[docs]</a>
-<span class="k">class</span> <span class="nc">ASCIIParserWarning</span><span class="p">(</span><span class="n">ParserWarning</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Warning when parsing logs in ASCII format.&quot;&quot;&quot;</span></div>
+<span class="k">class</span><span class="w"> </span><span class="nc">ASCIIParserWarning</span><span class="p">(</span><span class="n">ParserWarning</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""Warning when parsing logs in ASCII format."""</span></div>
 
 
 
-<span class="k">class</span> <span class="nc">ZeekTypeError</span><span class="p">(</span><span class="n">ZeekException</span><span class="p">,</span> <span class="ne">TypeError</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Invalid Bro/Zeek data type.&quot;&quot;&quot;</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">ZeekTypeError</span><span class="p">(</span><span class="n">ZeekException</span><span class="p">,</span> <span class="ne">TypeError</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""Invalid Bro/Zeek data type."""</span>
 
 
-<span class="k">class</span> <span class="nc">ZeekValueError</span><span class="p">(</span><span class="n">ZeekException</span><span class="p">,</span> <span class="ne">ValueError</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Invalid Bro/Zeek data value.&quot;&quot;&quot;</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">ZeekValueError</span><span class="p">(</span><span class="n">ZeekException</span><span class="p">,</span> <span class="ne">ValueError</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""Invalid Bro/Zeek data value."""</span>
 
 
-<span class="k">class</span> <span class="nc">ZeekNotImplemented</span><span class="p">(</span><span class="n">ZeekException</span><span class="p">,</span> <span class="ne">NotImplementedError</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Method not implemented.&quot;&quot;&quot;</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">ZeekNotImplemented</span><span class="p">(</span><span class="n">ZeekException</span><span class="p">,</span> <span class="ne">NotImplementedError</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""Method not implemented."""</span>
 
 
-<span class="k">class</span> <span class="nc">ModelError</span><span class="p">(</span><span class="n">ZeekException</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Invalid model data.&quot;&quot;&quot;</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">ModelError</span><span class="p">(</span><span class="n">ZeekException</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""Invalid model data."""</span>
 
 
-<span class="k">class</span> <span class="nc">ModelTypeError</span><span class="p">(</span><span class="n">ModelError</span><span class="p">,</span> <span class="ne">TypeError</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Invalid model data type.&quot;&quot;&quot;</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">ModelTypeError</span><span class="p">(</span><span class="n">ModelError</span><span class="p">,</span> <span class="ne">TypeError</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""Invalid model data type."""</span>
 
 
-<span class="k">class</span> <span class="nc">ModelValueError</span><span class="p">(</span><span class="n">ModelError</span><span class="p">,</span> <span class="ne">ValueError</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Invalid model data value.&quot;&quot;&quot;</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">ModelValueError</span><span class="p">(</span><span class="n">ModelError</span><span class="p">,</span> <span class="ne">ValueError</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""Invalid model data value."""</span>
 
 
-<span class="k">class</span> <span class="nc">ModelFormatError</span><span class="p">(</span><span class="n">ModelError</span><span class="p">,</span> <span class="ne">ValueError</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Unsupported format.&quot;&quot;&quot;</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">ModelFormatError</span><span class="p">(</span><span class="n">ModelError</span><span class="p">,</span> <span class="ne">ValueError</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""Unsupported format."""</span>
 
 
-<span class="k">class</span> <span class="nc">ZeekValueWarning</span><span class="p">(</span><span class="n">ZeekWarning</span><span class="p">,</span> <span class="ne">UserWarning</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Dubious Bro/Zeek data value.&quot;&quot;&quot;</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">ZeekValueWarning</span><span class="p">(</span><span class="n">ZeekWarning</span><span class="p">,</span> <span class="ne">UserWarning</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""Dubious Bro/Zeek data value."""</span>
 
 
-<span class="k">class</span> <span class="nc">BroDeprecationWarning</span><span class="p">(</span><span class="n">ZeekWarning</span><span class="p">,</span> <span class="ne">DeprecationWarning</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Bro is now deprecated, use Zeek instead.&quot;&quot;&quot;</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">BroDeprecationWarning</span><span class="p">(</span><span class="n">ZeekWarning</span><span class="p">,</span> <span class="ne">DeprecationWarning</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""Bro is now deprecated, use Zeek instead."""</span>
 </pre></div>
 
           </div>
@@ -322,7 +322,7 @@
       <div class="clearer"></div>
     </div>
     <div class="footer">
-      &#169;2020-2024, Jarry Shaw.
+      &#169;2020-2026, Jarry Shaw.
       
     </div>
 
