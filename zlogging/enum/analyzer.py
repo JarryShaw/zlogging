@@ -145,6 +145,8 @@ class Tag(enum.IntFlag):
 
     ANALYZER_SYSLOG = enum.auto()
 
+    ANALYZER_SYSLOG_TCP = enum.auto()
+
     ANALYZER_SPICY_WEBSOCKET = enum.auto()
 
     ANALYZER_SSH = enum.auto()

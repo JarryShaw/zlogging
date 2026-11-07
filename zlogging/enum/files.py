@@ -37,6 +37,8 @@ class Tag(enum.IntFlag):
 
     ANALYZER_PE = enum.auto()
 
+    ANALYZER_ZIP = enum.auto()
+
     ANALYZER_OCSP_REPLY = enum.auto()
 
     ANALYZER_OCSP_REQUEST = enum.auto()

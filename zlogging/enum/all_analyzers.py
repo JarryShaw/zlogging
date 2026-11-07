@@ -217,9 +217,13 @@ class Tag(enum.IntFlag):
 
     ANALYZER_ANALYZER_SYSLOG = enum.auto()
 
+    ANALYZER_ANALYZER_SYSLOG_TCP = enum.auto()
+
     ANALYZER_ANALYZER_SPICY_WEBSOCKET = enum.auto()
 
     PACKETANALYZER_ANALYZER_IGMP = enum.auto()
+
+    FILES_ANALYZER_ZIP = enum.auto()
 
     ANALYZER_ANALYZER_SSH = enum.auto()
 
