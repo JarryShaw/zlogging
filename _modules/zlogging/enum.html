@@ -4,11 +4,11 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>zlogging.enum &#8212; ZLogging 0.1.3.post10 documentation</title>
+    <title>zlogging.enum &#8212; ZLogging 0.1.3.post11 documentation</title>
     <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=5ecbeea2" />
     <link rel="stylesheet" type="text/css" href="../../_static/basic.css?v=b08954a9" />
     <link rel="stylesheet" type="text/css" href="../../_static/alabaster.css?v=27fed22d" />
-    <script src="../../_static/documentation_options.js?v=26c28d5e"></script>
+    <script src="../../_static/documentation_options.js?v=82ba0947"></script>
     <script src="../../_static/doctools.js?v=fd6eb6e6"></script>
     <script src="../../_static/sphinx_highlight.js?v=6ffebe34"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
@@ -40,80 +40,21 @@
 <span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">TYPE_CHECKING</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">zlogging._exc</span><span class="w"> </span><span class="kn">import</span> <span class="n">BroDeprecationWarning</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">zlogging.enum.af_packet</span><span class="w"> </span><span class="kn">import</span> <span class="n">ChecksumMode</span> <span class="k">as</span> <span class="n">AF_Packet_ChecksumMode</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">zlogging.enum.af_packet</span><span class="w"> </span><span class="kn">import</span> <span class="n">FanoutMode</span> <span class="k">as</span> <span class="n">AF_Packet_FanoutMode</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">zlogging.enum.all_analyzers</span><span class="w"> </span><span class="kn">import</span> <span class="n">Tag</span> <span class="k">as</span> <span class="n">AllAnalyzers_Tag</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">zlogging.enum.analyzer</span><span class="w"> </span><span class="kn">import</span> <span class="n">Tag</span> <span class="k">as</span> <span class="n">Analyzer_Tag</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">zlogging.enum.asn1</span><span class="w"> </span><span class="kn">import</span> <span class="n">ASN1Class</span> <span class="k">as</span> <span class="n">ASN1_ASN1Class</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">zlogging.enum.asn1</span><span class="w"> </span><span class="kn">import</span> <span class="n">ASN1Type</span> <span class="k">as</span> <span class="n">ASN1_ASN1Type</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">zlogging.enum.broker</span><span class="w"> </span><span class="kn">import</span> <span class="n">BackendType</span> <span class="k">as</span> <span class="n">Broker_BackendType</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">zlogging.enum.broker</span><span class="w"> </span><span class="kn">import</span> <span class="n">BrokerProtocol</span> <span class="k">as</span> <span class="n">Broker_BrokerProtocol</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">zlogging.enum.broker</span><span class="w"> </span><span class="kn">import</span> <span class="n">DataType</span> <span class="k">as</span> <span class="n">Broker_DataType</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">zlogging.enum.broker</span><span class="w"> </span><span class="kn">import</span> <span class="n">ErrorCode</span> <span class="k">as</span> <span class="n">Broker_ErrorCode</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">zlogging.enum.broker</span><span class="w"> </span><span class="kn">import</span> <span class="n">PeerStatus</span> <span class="k">as</span> <span class="n">Broker_PeerStatus</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">zlogging.enum.broker</span><span class="w"> </span><span class="kn">import</span> <span class="n">QueryStatus</span> <span class="k">as</span> <span class="n">Broker_QueryStatus</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">zlogging.enum.broker</span><span class="w"> </span><span class="kn">import</span> <span class="n">SQLiteFailureMode</span> <span class="k">as</span> <span class="n">Broker_SQLiteFailureMode</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">zlogging.enum.broker</span><span class="w"> </span><span class="kn">import</span> <span class="n">SQLiteJournalMode</span> <span class="k">as</span> <span class="n">Broker_SQLiteJournalMode</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">zlogging.enum.broker</span><span class="w"> </span><span class="kn">import</span> <span class="n">SQLiteSynchronous</span> <span class="k">as</span> <span class="n">Broker_SQLiteSynchronous</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">zlogging.enum.broker</span><span class="w"> </span><span class="kn">import</span> <span class="n">Type</span> <span class="k">as</span> <span class="n">Broker_Type</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">zlogging.enum.cluster</span><span class="w"> </span><span class="kn">import</span> <span class="n">NodeType</span> <span class="k">as</span> <span class="n">Cluster_NodeType</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">zlogging.enum.dce_rpc</span><span class="w"> </span><span class="kn">import</span> <span class="n">IfID</span> <span class="k">as</span> <span class="n">DCE_RPC_IfID</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">zlogging.enum.dce_rpc</span><span class="w"> </span><span class="kn">import</span> <span class="n">PType</span> <span class="k">as</span> <span class="n">DCE_RPC_PType</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">zlogging.enum.files</span><span class="w"> </span><span class="kn">import</span> <span class="n">Tag</span> <span class="k">as</span> <span class="n">Files_Tag</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">zlogging.enum.http</span><span class="w"> </span><span class="kn">import</span> <span class="n">Tags</span> <span class="k">as</span> <span class="n">HTTP_Tags</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">zlogging.enum.input</span><span class="w"> </span><span class="kn">import</span> <span class="n">Event</span> <span class="k">as</span> <span class="n">Input_Event</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">zlogging.enum.input</span><span class="w"> </span><span class="kn">import</span> <span class="n">Mode</span> <span class="k">as</span> <span class="n">Input_Mode</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">zlogging.enum.input</span><span class="w"> </span><span class="kn">import</span> <span class="n">Reader</span> <span class="k">as</span> <span class="n">Input_Reader</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">zlogging.enum.intel</span><span class="w"> </span><span class="kn">import</span> <span class="n">Type</span> <span class="k">as</span> <span class="n">Intel_Type</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">zlogging.enum.intel</span><span class="w"> </span><span class="kn">import</span> <span class="n">Where</span> <span class="k">as</span> <span class="n">Intel_Where</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">zlogging.enum.json</span><span class="w"> </span><span class="kn">import</span> <span class="n">TimestampFormat</span> <span class="k">as</span> <span class="n">JSON_TimestampFormat</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">zlogging.enum.known</span><span class="w"> </span><span class="kn">import</span> <span class="n">ModbusDeviceType</span> <span class="k">as</span> <span class="n">Known_ModbusDeviceType</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">zlogging.enum.ldap</span><span class="w"> </span><span class="kn">import</span> <span class="n">BindAuthType</span> <span class="k">as</span> <span class="n">LDAP_BindAuthType</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">zlogging.enum.ldap</span><span class="w"> </span><span class="kn">import</span> <span class="n">ProtocolOpcode</span> <span class="k">as</span> <span class="n">LDAP_ProtocolOpcode</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">zlogging.enum.ldap</span><span class="w"> </span><span class="kn">import</span> <span class="n">ResultCode</span> <span class="k">as</span> <span class="n">LDAP_ResultCode</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">zlogging.enum.ldap</span><span class="w"> </span><span class="kn">import</span> <span class="n">SearchDerefAlias</span> <span class="k">as</span> <span class="n">LDAP_SearchDerefAlias</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">zlogging.enum.ldap</span><span class="w"> </span><span class="kn">import</span> <span class="n">SearchScope</span> <span class="k">as</span> <span class="n">LDAP_SearchScope</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">zlogging.enum.load_balancing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Method</span> <span class="k">as</span> <span class="n">LoadBalancing_Method</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">zlogging.enum.log</span><span class="w"> </span><span class="kn">import</span> <span class="n">ID</span> <span class="k">as</span> <span class="n">Log_ID</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">zlogging.enum.log</span><span class="w"> </span><span class="kn">import</span> <span class="n">PrintLogType</span> <span class="k">as</span> <span class="n">Log_PrintLogType</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">zlogging.enum.log</span><span class="w"> </span><span class="kn">import</span> <span class="n">Writer</span> <span class="k">as</span> <span class="n">Log_Writer</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">zlogging.enum.management</span><span class="w"> </span><span class="kn">import</span> <span class="n">Role</span> <span class="k">as</span> <span class="n">Management_Role</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">zlogging.enum.management</span><span class="w"> </span><span class="kn">import</span> <span class="n">State</span> <span class="k">as</span> <span class="n">Management_State</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">zlogging.enum.management_controller_runtime</span><span class="w"> </span><span class="kn">import</span> \
-    <span class="n">ConfigState</span> <span class="k">as</span> <span class="n">Management_Controller_Runtime_ConfigState</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">zlogging.enum.management_log</span><span class="w"> </span><span class="kn">import</span> <span class="n">Level</span> <span class="k">as</span> <span class="n">Management_Log_Level</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">zlogging.enum.mount3</span><span class="w"> </span><span class="kn">import</span> <span class="n">auth_flavor_t</span> <span class="k">as</span> <span class="n">MOUNT3_auth_flavor_t</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">zlogging.enum.mount3</span><span class="w"> </span><span class="kn">import</span> <span class="n">proc_t</span> <span class="k">as</span> <span class="n">MOUNT3_proc_t</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">zlogging.enum.mount3</span><span class="w"> </span><span class="kn">import</span> <span class="n">status_t</span> <span class="k">as</span> <span class="n">MOUNT3_status_t</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">zlogging.enum.mqtt</span><span class="w"> </span><span class="kn">import</span> <span class="n">SubUnsub</span> <span class="k">as</span> <span class="n">MQTT_SubUnsub</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">zlogging.enum.net_control</span><span class="w"> </span><span class="kn">import</span> <span class="n">CatchReleaseActions</span> <span class="k">as</span> <span class="n">NetControl_CatchReleaseActions</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">zlogging.enum.net_control</span><span class="w"> </span><span class="kn">import</span> <span class="n">EntityType</span> <span class="k">as</span> <span class="n">NetControl_EntityType</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">zlogging.enum.net_control</span><span class="w"> </span><span class="kn">import</span> <span class="n">InfoCategory</span> <span class="k">as</span> <span class="n">NetControl_InfoCategory</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">zlogging.enum.net_control</span><span class="w"> </span><span class="kn">import</span> <span class="n">InfoState</span> <span class="k">as</span> <span class="n">NetControl_InfoState</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">zlogging.enum.net_control</span><span class="w"> </span><span class="kn">import</span> <span class="n">RuleType</span> <span class="k">as</span> <span class="n">NetControl_RuleType</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">zlogging.enum.net_control</span><span class="w"> </span><span class="kn">import</span> <span class="n">TargetType</span> <span class="k">as</span> <span class="n">NetControl_TargetType</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">zlogging.enum.nfs3</span><span class="w"> </span><span class="kn">import</span> <span class="n">createmode_t</span> <span class="k">as</span> <span class="n">NFS3_createmode_t</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">zlogging.enum.nfs3</span><span class="w"> </span><span class="kn">import</span> <span class="n">file_type_t</span> <span class="k">as</span> <span class="n">NFS3_file_type_t</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">zlogging.enum.nfs3</span><span class="w"> </span><span class="kn">import</span> <span class="n">proc_t</span> <span class="k">as</span> <span class="n">NFS3_proc_t</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">zlogging.enum.nfs3</span><span class="w"> </span><span class="kn">import</span> <span class="n">stable_how_t</span> <span class="k">as</span> <span class="n">NFS3_stable_how_t</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">zlogging.enum.nfs3</span><span class="w"> </span><span class="kn">import</span> <span class="n">status_t</span> <span class="k">as</span> <span class="n">NFS3_status_t</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">zlogging.enum.nfs3</span><span class="w"> </span><span class="kn">import</span> <span class="n">time_how_t</span> <span class="k">as</span> <span class="n">NFS3_time_how_t</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">zlogging.enum.notice</span><span class="w"> </span><span class="kn">import</span> <span class="n">Action</span> <span class="k">as</span> <span class="n">Notice_Action</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">zlogging.enum.notice</span><span class="w"> </span><span class="kn">import</span> <span class="n">Type</span> <span class="k">as</span> <span class="n">Notice_Type</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">zlogging.enum.open_flow</span><span class="w"> </span><span class="kn">import</span> <span class="n">Plugin</span> <span class="k">as</span> <span class="n">OpenFlow_Plugin</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">zlogging.enum.open_flow</span><span class="w"> </span><span class="kn">import</span> <span class="n">ofp_action_type</span> <span class="k">as</span> <span class="n">OpenFlow_ofp_action_type</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">zlogging.enum.open_flow</span><span class="w"> </span><span class="kn">import</span> <span class="n">ofp_config_flags</span> <span class="k">as</span> <span class="n">OpenFlow_ofp_config_flags</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">zlogging.enum.open_flow</span><span class="w"> </span><span class="kn">import</span> <span class="n">ofp_flow_mod_command</span> <span class="k">as</span> <span class="n">OpenFlow_ofp_flow_mod_command</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">zlogging.enum.packet_analyzer</span><span class="w"> </span><span class="kn">import</span> <span class="n">Tag</span> <span class="k">as</span> <span class="n">PacketAnalyzer_Tag</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">zlogging.enum.pcap</span><span class="w"> </span><span class="kn">import</span> <span class="n">filter_state</span> <span class="k">as</span> <span class="n">Pcap_filter_state</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">zlogging.enum.protocol_detector</span><span class="w"> </span><span class="kn">import</span> <span class="nb">dir</span> <span class="k">as</span> <span class="n">ProtocolDetector_dir</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">zlogging.enum.redis</span><span class="w"> </span><span class="kn">import</span> <span class="n">RedisCommand</span> <span class="k">as</span> <span class="n">Redis_RedisCommand</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">zlogging.enum.redis</span><span class="w"> </span><span class="kn">import</span> <span class="n">ReplyType</span> <span class="k">as</span> <span class="n">Redis_ReplyType</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">zlogging.enum.reporter</span><span class="w"> </span><span class="kn">import</span> <span class="n">Level</span> <span class="k">as</span> <span class="n">Reporter_Level</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">zlogging.enum.signatures</span><span class="w"> </span><span class="kn">import</span> <span class="n">Action</span> <span class="k">as</span> <span class="n">Signatures_Action</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">zlogging.enum.smb</span><span class="w"> </span><span class="kn">import</span> <span class="n">Action</span> <span class="k">as</span> <span class="n">SMB_Action</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">zlogging.enum.socks</span><span class="w"> </span><span class="kn">import</span> <span class="n">RequestType</span> <span class="k">as</span> <span class="n">SOCKS_RequestType</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">zlogging.enum.software</span><span class="w"> </span><span class="kn">import</span> <span class="n">Type</span> <span class="k">as</span> <span class="n">Software_Type</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">zlogging.enum.spicy</span><span class="w"> </span><span class="kn">import</span> <span class="n">AddressFamily</span> <span class="k">as</span> <span class="n">spicy_AddressFamily</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">zlogging.enum.spicy</span><span class="w"> </span><span class="kn">import</span> <span class="n">BitOrder</span> <span class="k">as</span> <span class="n">spicy_BitOrder</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">zlogging.enum.spicy</span><span class="w"> </span><span class="kn">import</span> <span class="n">ByteOrder</span> <span class="k">as</span> <span class="n">spicy_ByteOrder</span>
@@ -124,43 +65,11 @@
 <span class="kn">from</span><span class="w"> </span><span class="nn">zlogging.enum.spicy</span><span class="w"> </span><span class="kn">import</span> <span class="n">RealType</span> <span class="k">as</span> <span class="n">spicy_RealType</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">zlogging.enum.spicy</span><span class="w"> </span><span class="kn">import</span> <span class="n">ReassemblerPolicy</span> <span class="k">as</span> <span class="n">spicy_ReassemblerPolicy</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">zlogging.enum.spicy</span><span class="w"> </span><span class="kn">import</span> <span class="n">Side</span> <span class="k">as</span> <span class="n">spicy_Side</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">zlogging.enum.ssl</span><span class="w"> </span><span class="kn">import</span> <span class="n">SctSource</span> <span class="k">as</span> <span class="n">SSL_SctSource</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">zlogging.enum.sum_stats</span><span class="w"> </span><span class="kn">import</span> <span class="n">Calculation</span> <span class="k">as</span> <span class="n">SumStats_Calculation</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">zlogging.enum.supervisor</span><span class="w"> </span><span class="kn">import</span> <span class="n">ClusterRole</span> <span class="k">as</span> <span class="n">Supervisor_ClusterRole</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">zlogging.enum.telemetry</span><span class="w"> </span><span class="kn">import</span> <span class="n">MetricType</span> <span class="k">as</span> <span class="n">Telemetry_MetricType</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">zlogging.enum.tunnel</span><span class="w"> </span><span class="kn">import</span> <span class="n">Action</span> <span class="k">as</span> <span class="n">Tunnel_Action</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">zlogging.enum.tunnel</span><span class="w"> </span><span class="kn">import</span> <span class="n">Type</span> <span class="k">as</span> <span class="n">Tunnel_Type</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">zlogging.enum.weird</span><span class="w"> </span><span class="kn">import</span> <span class="n">Action</span> <span class="k">as</span> <span class="n">Weird_Action</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">zlogging.enum.zeek</span><span class="w"> </span><span class="kn">import</span> <span class="n">Direction</span> <span class="k">as</span> <span class="n">zeek_Direction</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">zlogging.enum.zeek</span><span class="w"> </span><span class="kn">import</span> <span class="n">Host</span> <span class="k">as</span> <span class="n">zeek_Host</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">zlogging.enum.zeek</span><span class="w"> </span><span class="kn">import</span> <span class="n">IPAddrAnonymization</span> <span class="k">as</span> <span class="n">zeek_IPAddrAnonymization</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">zlogging.enum.zeek</span><span class="w"> </span><span class="kn">import</span> <span class="n">IPAddrAnonymizationClass</span> <span class="k">as</span> <span class="n">zeek_IPAddrAnonymizationClass</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">zlogging.enum.zeek</span><span class="w"> </span><span class="kn">import</span> <span class="n">PcapFilterID</span> <span class="k">as</span> <span class="n">zeek_PcapFilterID</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">zlogging.enum.zeek</span><span class="w"> </span><span class="kn">import</span> <span class="n">TableChange</span> <span class="k">as</span> <span class="n">zeek_TableChange</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">zlogging.enum.zeek</span><span class="w"> </span><span class="kn">import</span> <span class="n">layer3_proto</span> <span class="k">as</span> <span class="n">zeek_layer3_proto</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">zlogging.enum.zeek</span><span class="w"> </span><span class="kn">import</span> <span class="n">link_encap</span> <span class="k">as</span> <span class="n">zeek_link_encap</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">zlogging.enum.zeek</span><span class="w"> </span><span class="kn">import</span> <span class="n">pkt_profile_modes</span> <span class="k">as</span> <span class="n">zeek_pkt_profile_modes</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">zlogging.enum.zeek</span><span class="w"> </span><span class="kn">import</span> <span class="n">rpc_status</span> <span class="k">as</span> <span class="n">zeek_rpc_status</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">zlogging.enum.zeek</span><span class="w"> </span><span class="kn">import</span> <span class="n">transport_proto</span> <span class="k">as</span> <span class="n">zeek_transport_proto</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">zlogging.enum.zeekygen_example</span><span class="w"> </span><span class="kn">import</span> <span class="n">SimpleEnum</span> <span class="k">as</span> <span class="n">ZeekygenExample_SimpleEnum</span>
 
 <span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s1">'globals'</span><span class="p">]</span>
 
 <span class="k">if</span> <span class="n">TYPE_CHECKING</span><span class="p">:</span>
     <span class="kn">from</span><span class="w"> </span><span class="nn">enum</span><span class="w"> </span><span class="kn">import</span> <span class="n">Enum</span>
-
-<span class="n">builtins</span><span class="o">.</span><span class="n">globals</span><span class="p">()[</span><span class="s1">'ZLogging::AF_Packet'</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s1">'CHECKSUM_KERNEL'</span><span class="p">:</span> <span class="n">AF_Packet_ChecksumMode</span><span class="o">.</span><span class="n">CHECKSUM_KERNEL</span><span class="p">,</span>
-    <span class="s1">'CHECKSUM_OFF'</span><span class="p">:</span> <span class="n">AF_Packet_ChecksumMode</span><span class="o">.</span><span class="n">CHECKSUM_OFF</span><span class="p">,</span>
-    <span class="s1">'CHECKSUM_ON'</span><span class="p">:</span> <span class="n">AF_Packet_ChecksumMode</span><span class="o">.</span><span class="n">CHECKSUM_ON</span><span class="p">,</span>
-    <span class="s1">'ChecksumMode'</span><span class="p">:</span> <span class="n">AF_Packet_ChecksumMode</span><span class="p">,</span>
-    <span class="s1">'FANOUT_CBPF'</span><span class="p">:</span> <span class="n">AF_Packet_FanoutMode</span><span class="o">.</span><span class="n">FANOUT_CBPF</span><span class="p">,</span>
-    <span class="s1">'FANOUT_CPU'</span><span class="p">:</span> <span class="n">AF_Packet_FanoutMode</span><span class="o">.</span><span class="n">FANOUT_CPU</span><span class="p">,</span>
-    <span class="s1">'FANOUT_EBPF'</span><span class="p">:</span> <span class="n">AF_Packet_FanoutMode</span><span class="o">.</span><span class="n">FANOUT_EBPF</span><span class="p">,</span>
-    <span class="s1">'FANOUT_HASH'</span><span class="p">:</span> <span class="n">AF_Packet_FanoutMode</span><span class="o">.</span><span class="n">FANOUT_HASH</span><span class="p">,</span>
-    <span class="s1">'FANOUT_QM'</span><span class="p">:</span> <span class="n">AF_Packet_FanoutMode</span><span class="o">.</span><span class="n">FANOUT_QM</span><span class="p">,</span>
-    <span class="s1">'FanoutMode'</span><span class="p">:</span> <span class="n">AF_Packet_FanoutMode</span><span class="p">,</span>
-<span class="p">}</span>
 
 <span class="n">builtins</span><span class="o">.</span><span class="n">globals</span><span class="p">()[</span><span class="s1">'ZLogging::ASN1'</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
     <span class="s1">'ASN1Class'</span><span class="p">:</span> <span class="n">ASN1_ASN1Class</span><span class="p">,</span>
@@ -272,6 +181,7 @@
     <span class="s1">'ANALYZER_ANALYZER_SSL'</span><span class="p">:</span> <span class="n">AllAnalyzers_Tag</span><span class="o">.</span><span class="n">ANALYZER_ANALYZER_SSL</span><span class="p">,</span>
     <span class="s1">'ANALYZER_ANALYZER_STREAM_EVENT'</span><span class="p">:</span> <span class="n">AllAnalyzers_Tag</span><span class="o">.</span><span class="n">ANALYZER_ANALYZER_STREAM_EVENT</span><span class="p">,</span>
     <span class="s1">'ANALYZER_ANALYZER_SYSLOG'</span><span class="p">:</span> <span class="n">AllAnalyzers_Tag</span><span class="o">.</span><span class="n">ANALYZER_ANALYZER_SYSLOG</span><span class="p">,</span>
+    <span class="s1">'ANALYZER_ANALYZER_SYSLOG_TCP'</span><span class="p">:</span> <span class="n">AllAnalyzers_Tag</span><span class="o">.</span><span class="n">ANALYZER_ANALYZER_SYSLOG_TCP</span><span class="p">,</span>
     <span class="s1">'ANALYZER_ANALYZER_TCP'</span><span class="p">:</span> <span class="n">AllAnalyzers_Tag</span><span class="o">.</span><span class="n">ANALYZER_ANALYZER_TCP</span><span class="p">,</span>
     <span class="s1">'ANALYZER_ANALYZER_TCPSTATS'</span><span class="p">:</span> <span class="n">AllAnalyzers_Tag</span><span class="o">.</span><span class="n">ANALYZER_ANALYZER_TCPSTATS</span><span class="p">,</span>
     <span class="s1">'ANALYZER_ANALYZER_TELNET'</span><span class="p">:</span> <span class="n">AllAnalyzers_Tag</span><span class="o">.</span><span class="n">ANALYZER_ANALYZER_TELNET</span><span class="p">,</span>
@@ -293,6 +203,7 @@
     <span class="s1">'FILES_ANALYZER_SHA384'</span><span class="p">:</span> <span class="n">AllAnalyzers_Tag</span><span class="o">.</span><span class="n">FILES_ANALYZER_SHA384</span><span class="p">,</span>
     <span class="s1">'FILES_ANALYZER_SHA512'</span><span class="p">:</span> <span class="n">AllAnalyzers_Tag</span><span class="o">.</span><span class="n">FILES_ANALYZER_SHA512</span><span class="p">,</span>
     <span class="s1">'FILES_ANALYZER_X509'</span><span class="p">:</span> <span class="n">AllAnalyzers_Tag</span><span class="o">.</span><span class="n">FILES_ANALYZER_X509</span><span class="p">,</span>
+    <span class="s1">'FILES_ANALYZER_ZIP'</span><span class="p">:</span> <span class="n">AllAnalyzers_Tag</span><span class="o">.</span><span class="n">FILES_ANALYZER_ZIP</span><span class="p">,</span>
     <span class="s1">'PACKETANALYZER_ANALYZER_ARP'</span><span class="p">:</span> <span class="n">AllAnalyzers_Tag</span><span class="o">.</span><span class="n">PACKETANALYZER_ANALYZER_ARP</span><span class="p">,</span>
     <span class="s1">'PACKETANALYZER_ANALYZER_AYIYA'</span><span class="p">:</span> <span class="n">AllAnalyzers_Tag</span><span class="o">.</span><span class="n">PACKETANALYZER_ANALYZER_AYIYA</span><span class="p">,</span>
     <span class="s1">'PACKETANALYZER_ANALYZER_ETHERNET'</span><span class="p">:</span> <span class="n">AllAnalyzers_Tag</span><span class="o">.</span><span class="n">PACKETANALYZER_ANALYZER_ETHERNET</span><span class="p">,</span>
@@ -401,6 +312,7 @@
     <span class="s1">'ANALYZER_SSL'</span><span class="p">:</span> <span class="n">Analyzer_Tag</span><span class="o">.</span><span class="n">ANALYZER_SSL</span><span class="p">,</span>
     <span class="s1">'ANALYZER_STREAM_EVENT'</span><span class="p">:</span> <span class="n">Analyzer_Tag</span><span class="o">.</span><span class="n">ANALYZER_STREAM_EVENT</span><span class="p">,</span>
     <span class="s1">'ANALYZER_SYSLOG'</span><span class="p">:</span> <span class="n">Analyzer_Tag</span><span class="o">.</span><span class="n">ANALYZER_SYSLOG</span><span class="p">,</span>
+    <span class="s1">'ANALYZER_SYSLOG_TCP'</span><span class="p">:</span> <span class="n">Analyzer_Tag</span><span class="o">.</span><span class="n">ANALYZER_SYSLOG_TCP</span><span class="p">,</span>
     <span class="s1">'ANALYZER_TCP'</span><span class="p">:</span> <span class="n">Analyzer_Tag</span><span class="o">.</span><span class="n">ANALYZER_TCP</span><span class="p">,</span>
     <span class="s1">'ANALYZER_TCPSTATS'</span><span class="p">:</span> <span class="n">Analyzer_Tag</span><span class="o">.</span><span class="n">ANALYZER_TCPSTATS</span><span class="p">,</span>
     <span class="s1">'ANALYZER_TELNET'</span><span class="p">:</span> <span class="n">Analyzer_Tag</span><span class="o">.</span><span class="n">ANALYZER_TELNET</span><span class="p">,</span>
@@ -412,216 +324,44 @@
     <span class="s1">'Tag'</span><span class="p">:</span> <span class="n">Analyzer_Tag</span><span class="p">,</span>
 <span class="p">}</span>
 
-<span class="n">builtins</span><span class="o">.</span><span class="n">globals</span><span class="p">()[</span><span class="s1">'ZLogging::Analyzer::Logging'</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s1">'Analyzer_Logging_LOG'</span><span class="p">:</span> <span class="n">Log_ID</span><span class="o">.</span><span class="n">Analyzer_Logging_LOG</span><span class="p">,</span>
-<span class="p">}</span>
-
-<span class="n">builtins</span><span class="o">.</span><span class="n">globals</span><span class="p">()[</span><span class="s1">'ZLogging::Broker'</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s1">'ADDR'</span><span class="p">:</span> <span class="n">Broker_DataType</span><span class="o">.</span><span class="n">ADDR</span><span class="p">,</span>
-    <span class="s1">'BACKEND_FAILURE'</span><span class="p">:</span> <span class="n">Broker_ErrorCode</span><span class="o">.</span><span class="n">BACKEND_FAILURE</span><span class="p">,</span>
-    <span class="s1">'BOOL'</span><span class="p">:</span> <span class="n">Broker_DataType</span><span class="o">.</span><span class="n">BOOL</span><span class="p">,</span>
-    <span class="s1">'BackendType'</span><span class="p">:</span> <span class="n">Broker_BackendType</span><span class="p">,</span>
-    <span class="s1">'BrokerProtocol'</span><span class="p">:</span> <span class="n">Broker_BrokerProtocol</span><span class="p">,</span>
-    <span class="s1">'Broker_LOG'</span><span class="p">:</span> <span class="n">Log_ID</span><span class="o">.</span><span class="n">Broker_LOG</span><span class="p">,</span>
-    <span class="s1">'CAF_ERROR'</span><span class="p">:</span> <span class="n">Broker_ErrorCode</span><span class="o">.</span><span class="n">CAF_ERROR</span><span class="p">,</span>
-    <span class="s1">'CANNOT_OPEN_FILE'</span><span class="p">:</span> <span class="n">Broker_ErrorCode</span><span class="o">.</span><span class="n">CANNOT_OPEN_FILE</span><span class="p">,</span>
-    <span class="s1">'CANNOT_WRITE_FILE'</span><span class="p">:</span> <span class="n">Broker_ErrorCode</span><span class="o">.</span><span class="n">CANNOT_WRITE_FILE</span><span class="p">,</span>
-    <span class="s1">'CONNECTED'</span><span class="p">:</span> <span class="n">Broker_PeerStatus</span><span class="o">.</span><span class="n">CONNECTED</span><span class="p">,</span>
-    <span class="s1">'CONNECTING'</span><span class="p">:</span> <span class="n">Broker_PeerStatus</span><span class="o">.</span><span class="n">CONNECTING</span><span class="p">,</span>
-    <span class="s1">'COUNT'</span><span class="p">:</span> <span class="n">Broker_DataType</span><span class="o">.</span><span class="n">COUNT</span><span class="p">,</span>
-    <span class="s1">'DISCONNECTED'</span><span class="p">:</span> <span class="n">Broker_PeerStatus</span><span class="o">.</span><span class="n">DISCONNECTED</span><span class="p">,</span>
-    <span class="s1">'DOUBLE'</span><span class="p">:</span> <span class="n">Broker_DataType</span><span class="o">.</span><span class="n">DOUBLE</span><span class="p">,</span>
-    <span class="s1">'DataType'</span><span class="p">:</span> <span class="n">Broker_DataType</span><span class="p">,</span>
-    <span class="s1">'END_OF_FILE'</span><span class="p">:</span> <span class="n">Broker_ErrorCode</span><span class="o">.</span><span class="n">END_OF_FILE</span><span class="p">,</span>
-    <span class="s1">'ENUM'</span><span class="p">:</span> <span class="n">Broker_DataType</span><span class="o">.</span><span class="n">ENUM</span><span class="p">,</span>
-    <span class="s1">'ERROR'</span><span class="p">:</span> <span class="n">Broker_Type</span><span class="o">.</span><span class="n">ERROR</span><span class="p">,</span>
-    <span class="s1">'ErrorCode'</span><span class="p">:</span> <span class="n">Broker_ErrorCode</span><span class="p">,</span>
-    <span class="s1">'FAILURE'</span><span class="p">:</span> <span class="n">Broker_QueryStatus</span><span class="o">.</span><span class="n">FAILURE</span><span class="p">,</span>
-    <span class="s1">'INITIALIZING'</span><span class="p">:</span> <span class="n">Broker_PeerStatus</span><span class="o">.</span><span class="n">INITIALIZING</span><span class="p">,</span>
-    <span class="s1">'INT'</span><span class="p">:</span> <span class="n">Broker_DataType</span><span class="o">.</span><span class="n">INT</span><span class="p">,</span>
-    <span class="s1">'INTERVAL'</span><span class="p">:</span> <span class="n">Broker_DataType</span><span class="o">.</span><span class="n">INTERVAL</span><span class="p">,</span>
-    <span class="s1">'INVALID_DATA'</span><span class="p">:</span> <span class="n">Broker_ErrorCode</span><span class="o">.</span><span class="n">INVALID_DATA</span><span class="p">,</span>
-    <span class="s1">'INVALID_STATUS'</span><span class="p">:</span> <span class="n">Broker_ErrorCode</span><span class="o">.</span><span class="n">INVALID_STATUS</span><span class="p">,</span>
-    <span class="s1">'INVALID_TAG'</span><span class="p">:</span> <span class="n">Broker_ErrorCode</span><span class="o">.</span><span class="n">INVALID_TAG</span><span class="p">,</span>
-    <span class="s1">'INVALID_TOPIC_KEY'</span><span class="p">:</span> <span class="n">Broker_ErrorCode</span><span class="o">.</span><span class="n">INVALID_TOPIC_KEY</span><span class="p">,</span>
-    <span class="s1">'MASTER_EXISTS'</span><span class="p">:</span> <span class="n">Broker_ErrorCode</span><span class="o">.</span><span class="n">MASTER_EXISTS</span><span class="p">,</span>
-    <span class="s1">'MEMORY'</span><span class="p">:</span> <span class="n">Broker_BackendType</span><span class="o">.</span><span class="n">MEMORY</span><span class="p">,</span>
-    <span class="s1">'NATIVE'</span><span class="p">:</span> <span class="n">Broker_BrokerProtocol</span><span class="o">.</span><span class="n">NATIVE</span><span class="p">,</span>
-    <span class="s1">'NONE'</span><span class="p">:</span> <span class="n">Broker_DataType</span><span class="o">.</span><span class="n">NONE</span><span class="p">,</span>
-    <span class="s1">'NO_ERROR'</span><span class="p">:</span> <span class="n">Broker_ErrorCode</span><span class="o">.</span><span class="n">NO_ERROR</span><span class="p">,</span>
-    <span class="s1">'NO_SUCH_KEY'</span><span class="p">:</span> <span class="n">Broker_ErrorCode</span><span class="o">.</span><span class="n">NO_SUCH_KEY</span><span class="p">,</span>
-    <span class="s1">'NO_SUCH_MASTER'</span><span class="p">:</span> <span class="n">Broker_ErrorCode</span><span class="o">.</span><span class="n">NO_SUCH_MASTER</span><span class="p">,</span>
-    <span class="s1">'PEERED'</span><span class="p">:</span> <span class="n">Broker_PeerStatus</span><span class="o">.</span><span class="n">PEERED</span><span class="p">,</span>
-    <span class="s1">'PEER_DISCONNECT_DURING_HANDSHAKE'</span><span class="p">:</span> <span class="n">Broker_ErrorCode</span><span class="o">.</span><span class="n">PEER_DISCONNECT_DURING_HANDSHAKE</span><span class="p">,</span>
-    <span class="s1">'PEER_INCOMPATIBLE'</span><span class="p">:</span> <span class="n">Broker_ErrorCode</span><span class="o">.</span><span class="n">PEER_INCOMPATIBLE</span><span class="p">,</span>
-    <span class="s1">'PEER_INVALID'</span><span class="p">:</span> <span class="n">Broker_ErrorCode</span><span class="o">.</span><span class="n">PEER_INVALID</span><span class="p">,</span>
-    <span class="s1">'PEER_TIMEOUT'</span><span class="p">:</span> <span class="n">Broker_ErrorCode</span><span class="o">.</span><span class="n">PEER_TIMEOUT</span><span class="p">,</span>
-    <span class="s1">'PEER_UNAVAILABLE'</span><span class="p">:</span> <span class="n">Broker_ErrorCode</span><span class="o">.</span><span class="n">PEER_UNAVAILABLE</span><span class="p">,</span>
-    <span class="s1">'PORT'</span><span class="p">:</span> <span class="n">Broker_DataType</span><span class="o">.</span><span class="n">PORT</span><span class="p">,</span>
-    <span class="s1">'PeerStatus'</span><span class="p">:</span> <span class="n">Broker_PeerStatus</span><span class="p">,</span>
-    <span class="s1">'QueryStatus'</span><span class="p">:</span> <span class="n">Broker_QueryStatus</span><span class="p">,</span>
-    <span class="s1">'RECONNECTING'</span><span class="p">:</span> <span class="n">Broker_PeerStatus</span><span class="o">.</span><span class="n">RECONNECTING</span><span class="p">,</span>
-    <span class="s1">'REQUEST_TIMEOUT'</span><span class="p">:</span> <span class="n">Broker_ErrorCode</span><span class="o">.</span><span class="n">REQUEST_TIMEOUT</span><span class="p">,</span>
-    <span class="s1">'SET'</span><span class="p">:</span> <span class="n">Broker_DataType</span><span class="o">.</span><span class="n">SET</span><span class="p">,</span>
-    <span class="s1">'SQLITE'</span><span class="p">:</span> <span class="n">Broker_BackendType</span><span class="o">.</span><span class="n">SQLITE</span><span class="p">,</span>
-    <span class="s1">'SQLITE_FAILURE_MODE_DELETE'</span><span class="p">:</span> <span class="n">Broker_SQLiteFailureMode</span><span class="o">.</span><span class="n">SQLITE_FAILURE_MODE_DELETE</span><span class="p">,</span>
-    <span class="s1">'SQLITE_FAILURE_MODE_FAIL'</span><span class="p">:</span> <span class="n">Broker_SQLiteFailureMode</span><span class="o">.</span><span class="n">SQLITE_FAILURE_MODE_FAIL</span><span class="p">,</span>
-    <span class="s1">'SQLITE_JOURNAL_MODE_DELETE'</span><span class="p">:</span> <span class="n">Broker_SQLiteJournalMode</span><span class="o">.</span><span class="n">SQLITE_JOURNAL_MODE_DELETE</span><span class="p">,</span>
-    <span class="s1">'SQLITE_JOURNAL_MODE_WAL'</span><span class="p">:</span> <span class="n">Broker_SQLiteJournalMode</span><span class="o">.</span><span class="n">SQLITE_JOURNAL_MODE_WAL</span><span class="p">,</span>
-    <span class="s1">'SQLITE_SYNCHRONOUS_EXTRA'</span><span class="p">:</span> <span class="n">Broker_SQLiteSynchronous</span><span class="o">.</span><span class="n">SQLITE_SYNCHRONOUS_EXTRA</span><span class="p">,</span>
-    <span class="s1">'SQLITE_SYNCHRONOUS_FULL'</span><span class="p">:</span> <span class="n">Broker_SQLiteSynchronous</span><span class="o">.</span><span class="n">SQLITE_SYNCHRONOUS_FULL</span><span class="p">,</span>
-    <span class="s1">'SQLITE_SYNCHRONOUS_NORMAL'</span><span class="p">:</span> <span class="n">Broker_SQLiteSynchronous</span><span class="o">.</span><span class="n">SQLITE_SYNCHRONOUS_NORMAL</span><span class="p">,</span>
-    <span class="s1">'SQLITE_SYNCHRONOUS_OFF'</span><span class="p">:</span> <span class="n">Broker_SQLiteSynchronous</span><span class="o">.</span><span class="n">SQLITE_SYNCHRONOUS_OFF</span><span class="p">,</span>
-    <span class="s1">'SQLiteFailureMode'</span><span class="p">:</span> <span class="n">Broker_SQLiteFailureMode</span><span class="p">,</span>
-    <span class="s1">'SQLiteJournalMode'</span><span class="p">:</span> <span class="n">Broker_SQLiteJournalMode</span><span class="p">,</span>
-    <span class="s1">'SQLiteSynchronous'</span><span class="p">:</span> <span class="n">Broker_SQLiteSynchronous</span><span class="p">,</span>
-    <span class="s1">'STALE_DATA'</span><span class="p">:</span> <span class="n">Broker_ErrorCode</span><span class="o">.</span><span class="n">STALE_DATA</span><span class="p">,</span>
-    <span class="s1">'STATUS'</span><span class="p">:</span> <span class="n">Broker_Type</span><span class="o">.</span><span class="n">STATUS</span><span class="p">,</span>
-    <span class="s1">'STRING'</span><span class="p">:</span> <span class="n">Broker_DataType</span><span class="o">.</span><span class="n">STRING</span><span class="p">,</span>
-    <span class="s1">'SUBNET'</span><span class="p">:</span> <span class="n">Broker_DataType</span><span class="o">.</span><span class="n">SUBNET</span><span class="p">,</span>
-    <span class="s1">'SUCCESS'</span><span class="p">:</span> <span class="n">Broker_QueryStatus</span><span class="o">.</span><span class="n">SUCCESS</span><span class="p">,</span>
-    <span class="s1">'TABLE'</span><span class="p">:</span> <span class="n">Broker_DataType</span><span class="o">.</span><span class="n">TABLE</span><span class="p">,</span>
-    <span class="s1">'TIME'</span><span class="p">:</span> <span class="n">Broker_DataType</span><span class="o">.</span><span class="n">TIME</span><span class="p">,</span>
-    <span class="s1">'TYPE_CLASH'</span><span class="p">:</span> <span class="n">Broker_ErrorCode</span><span class="o">.</span><span class="n">TYPE_CLASH</span><span class="p">,</span>
-    <span class="s1">'Type'</span><span class="p">:</span> <span class="n">Broker_Type</span><span class="p">,</span>
-    <span class="s1">'UNSPECIFIED'</span><span class="p">:</span> <span class="n">Broker_ErrorCode</span><span class="o">.</span><span class="n">UNSPECIFIED</span><span class="p">,</span>
-    <span class="s1">'VECTOR'</span><span class="p">:</span> <span class="n">Broker_DataType</span><span class="o">.</span><span class="n">VECTOR</span><span class="p">,</span>
-    <span class="s1">'WEBSOCKET'</span><span class="p">:</span> <span class="n">Broker_BrokerProtocol</span><span class="o">.</span><span class="n">WEBSOCKET</span><span class="p">,</span>
-<span class="p">}</span>
-
-<span class="n">builtins</span><span class="o">.</span><span class="n">globals</span><span class="p">()[</span><span class="s1">'ZLogging::CaptureLoss'</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s1">'CaptureLoss_LOG'</span><span class="p">:</span> <span class="n">Log_ID</span><span class="o">.</span><span class="n">CaptureLoss_LOG</span><span class="p">,</span>
-    <span class="s1">'CaptureLoss_Too_Little_Traffic'</span><span class="p">:</span> <span class="n">Notice_Type</span><span class="o">.</span><span class="n">CaptureLoss_Too_Little_Traffic</span><span class="p">,</span>
-    <span class="s1">'CaptureLoss_Too_Much_Loss'</span><span class="p">:</span> <span class="n">Notice_Type</span><span class="o">.</span><span class="n">CaptureLoss_Too_Much_Loss</span><span class="p">,</span>
-<span class="p">}</span>
-
-<span class="n">builtins</span><span class="o">.</span><span class="n">globals</span><span class="p">()[</span><span class="s1">'ZLogging::Cluster'</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s1">'CONTROL'</span><span class="p">:</span> <span class="n">Cluster_NodeType</span><span class="o">.</span><span class="n">CONTROL</span><span class="p">,</span>
-    <span class="s1">'Cluster_LOG'</span><span class="p">:</span> <span class="n">Log_ID</span><span class="o">.</span><span class="n">Cluster_LOG</span><span class="p">,</span>
-    <span class="s1">'LOGGER'</span><span class="p">:</span> <span class="n">Cluster_NodeType</span><span class="o">.</span><span class="n">LOGGER</span><span class="p">,</span>
-    <span class="s1">'MANAGER'</span><span class="p">:</span> <span class="n">Cluster_NodeType</span><span class="o">.</span><span class="n">MANAGER</span><span class="p">,</span>
-    <span class="s1">'NONE'</span><span class="p">:</span> <span class="n">Cluster_NodeType</span><span class="o">.</span><span class="n">NONE</span><span class="p">,</span>
-    <span class="s1">'NodeType'</span><span class="p">:</span> <span class="n">Cluster_NodeType</span><span class="p">,</span>
-    <span class="s1">'PROXY'</span><span class="p">:</span> <span class="n">Cluster_NodeType</span><span class="o">.</span><span class="n">PROXY</span><span class="p">,</span>
-    <span class="s1">'TIME_MACHINE'</span><span class="p">:</span> <span class="n">Cluster_NodeType</span><span class="o">.</span><span class="n">TIME_MACHINE</span><span class="p">,</span>
-    <span class="s1">'WORKER'</span><span class="p">:</span> <span class="n">Cluster_NodeType</span><span class="o">.</span><span class="n">WORKER</span><span class="p">,</span>
-<span class="p">}</span>
-
-<span class="n">builtins</span><span class="o">.</span><span class="n">globals</span><span class="p">()[</span><span class="s1">'ZLogging::Config'</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s1">'Config_LOG'</span><span class="p">:</span> <span class="n">Log_ID</span><span class="o">.</span><span class="n">Config_LOG</span><span class="p">,</span>
-<span class="p">}</span>
-
-<span class="n">builtins</span><span class="o">.</span><span class="n">globals</span><span class="p">()[</span><span class="s1">'ZLogging::Conn'</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s1">'Conn_Content_Gap'</span><span class="p">:</span> <span class="n">Notice_Type</span><span class="o">.</span><span class="n">Conn_Content_Gap</span><span class="p">,</span>
-    <span class="s1">'Conn_IN_ORIG'</span><span class="p">:</span> <span class="n">Intel_Where</span><span class="o">.</span><span class="n">Conn_IN_ORIG</span><span class="p">,</span>
-    <span class="s1">'Conn_IN_RESP'</span><span class="p">:</span> <span class="n">Intel_Where</span><span class="o">.</span><span class="n">Conn_IN_RESP</span><span class="p">,</span>
-    <span class="s1">'Conn_LOG'</span><span class="p">:</span> <span class="n">Log_ID</span><span class="o">.</span><span class="n">Conn_LOG</span><span class="p">,</span>
-    <span class="s1">'Conn_Retransmission_Inconsistency'</span><span class="p">:</span> <span class="n">Notice_Type</span><span class="o">.</span><span class="n">Conn_Retransmission_Inconsistency</span><span class="p">,</span>
-<span class="p">}</span>
-
 <span class="n">builtins</span><span class="o">.</span><span class="n">globals</span><span class="p">()[</span><span class="s1">'ZLogging::DCE_RPC'</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
     <span class="s1">'ACK'</span><span class="p">:</span> <span class="n">DCE_RPC_PType</span><span class="o">.</span><span class="n">ACK</span><span class="p">,</span>
-    <span class="s1">'ACK'</span><span class="p">:</span> <span class="n">DCE_RPC_PType</span><span class="o">.</span><span class="n">ACK</span><span class="p">,</span>
-    <span class="s1">'ALTER_CONTEXT'</span><span class="p">:</span> <span class="n">DCE_RPC_PType</span><span class="o">.</span><span class="n">ALTER_CONTEXT</span><span class="p">,</span>
     <span class="s1">'ALTER_CONTEXT'</span><span class="p">:</span> <span class="n">DCE_RPC_PType</span><span class="o">.</span><span class="n">ALTER_CONTEXT</span><span class="p">,</span>
     <span class="s1">'ALTER_CONTEXT_RESP'</span><span class="p">:</span> <span class="n">DCE_RPC_PType</span><span class="o">.</span><span class="n">ALTER_CONTEXT_RESP</span><span class="p">,</span>
-    <span class="s1">'ALTER_CONTEXT_RESP'</span><span class="p">:</span> <span class="n">DCE_RPC_PType</span><span class="o">.</span><span class="n">ALTER_CONTEXT_RESP</span><span class="p">,</span>
-    <span class="s1">'AUTH3'</span><span class="p">:</span> <span class="n">DCE_RPC_PType</span><span class="o">.</span><span class="n">AUTH3</span><span class="p">,</span>
     <span class="s1">'AUTH3'</span><span class="p">:</span> <span class="n">DCE_RPC_PType</span><span class="o">.</span><span class="n">AUTH3</span><span class="p">,</span>
     <span class="s1">'BIND'</span><span class="p">:</span> <span class="n">DCE_RPC_PType</span><span class="o">.</span><span class="n">BIND</span><span class="p">,</span>
-    <span class="s1">'BIND'</span><span class="p">:</span> <span class="n">DCE_RPC_PType</span><span class="o">.</span><span class="n">BIND</span><span class="p">,</span>
-    <span class="s1">'BIND_ACK'</span><span class="p">:</span> <span class="n">DCE_RPC_PType</span><span class="o">.</span><span class="n">BIND_ACK</span><span class="p">,</span>
     <span class="s1">'BIND_ACK'</span><span class="p">:</span> <span class="n">DCE_RPC_PType</span><span class="o">.</span><span class="n">BIND_ACK</span><span class="p">,</span>
     <span class="s1">'BIND_NAK'</span><span class="p">:</span> <span class="n">DCE_RPC_PType</span><span class="o">.</span><span class="n">BIND_NAK</span><span class="p">,</span>
-    <span class="s1">'BIND_NAK'</span><span class="p">:</span> <span class="n">DCE_RPC_PType</span><span class="o">.</span><span class="n">BIND_NAK</span><span class="p">,</span>
-    <span class="s1">'CANCEL_ACK'</span><span class="p">:</span> <span class="n">DCE_RPC_PType</span><span class="o">.</span><span class="n">CANCEL_ACK</span><span class="p">,</span>
     <span class="s1">'CANCEL_ACK'</span><span class="p">:</span> <span class="n">DCE_RPC_PType</span><span class="o">.</span><span class="n">CANCEL_ACK</span><span class="p">,</span>
     <span class="s1">'CL_CANCEL'</span><span class="p">:</span> <span class="n">DCE_RPC_PType</span><span class="o">.</span><span class="n">CL_CANCEL</span><span class="p">,</span>
-    <span class="s1">'CL_CANCEL'</span><span class="p">:</span> <span class="n">DCE_RPC_PType</span><span class="o">.</span><span class="n">CL_CANCEL</span><span class="p">,</span>
     <span class="s1">'CO_CANCEL'</span><span class="p">:</span> <span class="n">DCE_RPC_PType</span><span class="o">.</span><span class="n">CO_CANCEL</span><span class="p">,</span>
-    <span class="s1">'CO_CANCEL'</span><span class="p">:</span> <span class="n">DCE_RPC_PType</span><span class="o">.</span><span class="n">CO_CANCEL</span><span class="p">,</span>
-    <span class="s1">'DCE_RPC_LOG'</span><span class="p">:</span> <span class="n">Log_ID</span><span class="o">.</span><span class="n">DCE_RPC_LOG</span><span class="p">,</span>
-    <span class="s1">'FACK'</span><span class="p">:</span> <span class="n">DCE_RPC_PType</span><span class="o">.</span><span class="n">FACK</span><span class="p">,</span>
     <span class="s1">'FACK'</span><span class="p">:</span> <span class="n">DCE_RPC_PType</span><span class="o">.</span><span class="n">FACK</span><span class="p">,</span>
     <span class="s1">'FAULT'</span><span class="p">:</span> <span class="n">DCE_RPC_PType</span><span class="o">.</span><span class="n">FAULT</span><span class="p">,</span>
-    <span class="s1">'FAULT'</span><span class="p">:</span> <span class="n">DCE_RPC_PType</span><span class="o">.</span><span class="n">FAULT</span><span class="p">,</span>
-    <span class="s1">'ISCMActivator'</span><span class="p">:</span> <span class="n">DCE_RPC_IfID</span><span class="o">.</span><span class="n">ISCMActivator</span><span class="p">,</span>
     <span class="s1">'ISCMActivator'</span><span class="p">:</span> <span class="n">DCE_RPC_IfID</span><span class="o">.</span><span class="n">ISCMActivator</span><span class="p">,</span>
     <span class="s1">'IfID'</span><span class="p">:</span> <span class="n">DCE_RPC_IfID</span><span class="p">,</span>
     <span class="s1">'NOCALL'</span><span class="p">:</span> <span class="n">DCE_RPC_PType</span><span class="o">.</span><span class="n">NOCALL</span><span class="p">,</span>
-    <span class="s1">'NOCALL'</span><span class="p">:</span> <span class="n">DCE_RPC_PType</span><span class="o">.</span><span class="n">NOCALL</span><span class="p">,</span>
     <span class="s1">'ORPHANED'</span><span class="p">:</span> <span class="n">DCE_RPC_PType</span><span class="o">.</span><span class="n">ORPHANED</span><span class="p">,</span>
-    <span class="s1">'ORPHANED'</span><span class="p">:</span> <span class="n">DCE_RPC_PType</span><span class="o">.</span><span class="n">ORPHANED</span><span class="p">,</span>
-    <span class="s1">'PING'</span><span class="p">:</span> <span class="n">DCE_RPC_PType</span><span class="o">.</span><span class="n">PING</span><span class="p">,</span>
     <span class="s1">'PING'</span><span class="p">:</span> <span class="n">DCE_RPC_PType</span><span class="o">.</span><span class="n">PING</span><span class="p">,</span>
     <span class="s1">'PType'</span><span class="p">:</span> <span class="n">DCE_RPC_PType</span><span class="p">,</span>
     <span class="s1">'REJECT'</span><span class="p">:</span> <span class="n">DCE_RPC_PType</span><span class="o">.</span><span class="n">REJECT</span><span class="p">,</span>
-    <span class="s1">'REJECT'</span><span class="p">:</span> <span class="n">DCE_RPC_PType</span><span class="o">.</span><span class="n">REJECT</span><span class="p">,</span>
-    <span class="s1">'REQUEST'</span><span class="p">:</span> <span class="n">DCE_RPC_PType</span><span class="o">.</span><span class="n">REQUEST</span><span class="p">,</span>
     <span class="s1">'REQUEST'</span><span class="p">:</span> <span class="n">DCE_RPC_PType</span><span class="o">.</span><span class="n">REQUEST</span><span class="p">,</span>
     <span class="s1">'RESPONSE'</span><span class="p">:</span> <span class="n">DCE_RPC_PType</span><span class="o">.</span><span class="n">RESPONSE</span><span class="p">,</span>
-    <span class="s1">'RESPONSE'</span><span class="p">:</span> <span class="n">DCE_RPC_PType</span><span class="o">.</span><span class="n">RESPONSE</span><span class="p">,</span>
-    <span class="s1">'RTS'</span><span class="p">:</span> <span class="n">DCE_RPC_PType</span><span class="o">.</span><span class="n">RTS</span><span class="p">,</span>
     <span class="s1">'RTS'</span><span class="p">:</span> <span class="n">DCE_RPC_PType</span><span class="o">.</span><span class="n">RTS</span><span class="p">,</span>
     <span class="s1">'SHUTDOWN'</span><span class="p">:</span> <span class="n">DCE_RPC_PType</span><span class="o">.</span><span class="n">SHUTDOWN</span><span class="p">,</span>
-    <span class="s1">'SHUTDOWN'</span><span class="p">:</span> <span class="n">DCE_RPC_PType</span><span class="o">.</span><span class="n">SHUTDOWN</span><span class="p">,</span>
-    <span class="s1">'WORKING'</span><span class="p">:</span> <span class="n">DCE_RPC_PType</span><span class="o">.</span><span class="n">WORKING</span><span class="p">,</span>
     <span class="s1">'WORKING'</span><span class="p">:</span> <span class="n">DCE_RPC_PType</span><span class="o">.</span><span class="n">WORKING</span><span class="p">,</span>
     <span class="s1">'drs'</span><span class="p">:</span> <span class="n">DCE_RPC_IfID</span><span class="o">.</span><span class="n">drs</span><span class="p">,</span>
-    <span class="s1">'drs'</span><span class="p">:</span> <span class="n">DCE_RPC_IfID</span><span class="o">.</span><span class="n">drs</span><span class="p">,</span>
-    <span class="s1">'epmapper'</span><span class="p">:</span> <span class="n">DCE_RPC_IfID</span><span class="o">.</span><span class="n">epmapper</span><span class="p">,</span>
     <span class="s1">'epmapper'</span><span class="p">:</span> <span class="n">DCE_RPC_IfID</span><span class="o">.</span><span class="n">epmapper</span><span class="p">,</span>
     <span class="s1">'lsa_ds'</span><span class="p">:</span> <span class="n">DCE_RPC_IfID</span><span class="o">.</span><span class="n">lsa_ds</span><span class="p">,</span>
-    <span class="s1">'lsa_ds'</span><span class="p">:</span> <span class="n">DCE_RPC_IfID</span><span class="o">.</span><span class="n">lsa_ds</span><span class="p">,</span>
-    <span class="s1">'lsarpc'</span><span class="p">:</span> <span class="n">DCE_RPC_IfID</span><span class="o">.</span><span class="n">lsarpc</span><span class="p">,</span>
     <span class="s1">'lsarpc'</span><span class="p">:</span> <span class="n">DCE_RPC_IfID</span><span class="o">.</span><span class="n">lsarpc</span><span class="p">,</span>
     <span class="s1">'mgmt'</span><span class="p">:</span> <span class="n">DCE_RPC_IfID</span><span class="o">.</span><span class="n">mgmt</span><span class="p">,</span>
-    <span class="s1">'mgmt'</span><span class="p">:</span> <span class="n">DCE_RPC_IfID</span><span class="o">.</span><span class="n">mgmt</span><span class="p">,</span>
-    <span class="s1">'netlogon'</span><span class="p">:</span> <span class="n">DCE_RPC_IfID</span><span class="o">.</span><span class="n">netlogon</span><span class="p">,</span>
     <span class="s1">'netlogon'</span><span class="p">:</span> <span class="n">DCE_RPC_IfID</span><span class="o">.</span><span class="n">netlogon</span><span class="p">,</span>
     <span class="s1">'oxid'</span><span class="p">:</span> <span class="n">DCE_RPC_IfID</span><span class="o">.</span><span class="n">oxid</span><span class="p">,</span>
-    <span class="s1">'oxid'</span><span class="p">:</span> <span class="n">DCE_RPC_IfID</span><span class="o">.</span><span class="n">oxid</span><span class="p">,</span>
-    <span class="s1">'samr'</span><span class="p">:</span> <span class="n">DCE_RPC_IfID</span><span class="o">.</span><span class="n">samr</span><span class="p">,</span>
     <span class="s1">'samr'</span><span class="p">:</span> <span class="n">DCE_RPC_IfID</span><span class="o">.</span><span class="n">samr</span><span class="p">,</span>
     <span class="s1">'spoolss'</span><span class="p">:</span> <span class="n">DCE_RPC_IfID</span><span class="o">.</span><span class="n">spoolss</span><span class="p">,</span>
-    <span class="s1">'spoolss'</span><span class="p">:</span> <span class="n">DCE_RPC_IfID</span><span class="o">.</span><span class="n">spoolss</span><span class="p">,</span>
-    <span class="s1">'srvsvc'</span><span class="p">:</span> <span class="n">DCE_RPC_IfID</span><span class="o">.</span><span class="n">srvsvc</span><span class="p">,</span>
     <span class="s1">'srvsvc'</span><span class="p">:</span> <span class="n">DCE_RPC_IfID</span><span class="o">.</span><span class="n">srvsvc</span><span class="p">,</span>
     <span class="s1">'unknown_if'</span><span class="p">:</span> <span class="n">DCE_RPC_IfID</span><span class="o">.</span><span class="n">unknown_if</span><span class="p">,</span>
-    <span class="s1">'unknown_if'</span><span class="p">:</span> <span class="n">DCE_RPC_IfID</span><span class="o">.</span><span class="n">unknown_if</span><span class="p">,</span>
-    <span class="s1">'winspipe'</span><span class="p">:</span> <span class="n">DCE_RPC_IfID</span><span class="o">.</span><span class="n">winspipe</span><span class="p">,</span>
     <span class="s1">'winspipe'</span><span class="p">:</span> <span class="n">DCE_RPC_IfID</span><span class="o">.</span><span class="n">winspipe</span><span class="p">,</span>
     <span class="s1">'wkssvc'</span><span class="p">:</span> <span class="n">DCE_RPC_IfID</span><span class="o">.</span><span class="n">wkssvc</span><span class="p">,</span>
-    <span class="s1">'wkssvc'</span><span class="p">:</span> <span class="n">DCE_RPC_IfID</span><span class="o">.</span><span class="n">wkssvc</span><span class="p">,</span>
-<span class="p">}</span>
-
-<span class="n">builtins</span><span class="o">.</span><span class="n">globals</span><span class="p">()[</span><span class="s1">'ZLogging::DHCP'</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s1">'DHCP_CLIENT'</span><span class="p">:</span> <span class="n">Software_Type</span><span class="o">.</span><span class="n">DHCP_CLIENT</span><span class="p">,</span>
-    <span class="s1">'DHCP_LOG'</span><span class="p">:</span> <span class="n">Log_ID</span><span class="o">.</span><span class="n">DHCP_LOG</span><span class="p">,</span>
-    <span class="s1">'DHCP_SERVER'</span><span class="p">:</span> <span class="n">Software_Type</span><span class="o">.</span><span class="n">DHCP_SERVER</span><span class="p">,</span>
-<span class="p">}</span>
-
-<span class="n">builtins</span><span class="o">.</span><span class="n">globals</span><span class="p">()[</span><span class="s1">'ZLogging::DNP3'</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s1">'DNP3_LOG'</span><span class="p">:</span> <span class="n">Log_ID</span><span class="o">.</span><span class="n">DNP3_LOG</span><span class="p">,</span>
-<span class="p">}</span>
-
-<span class="n">builtins</span><span class="o">.</span><span class="n">globals</span><span class="p">()[</span><span class="s1">'ZLogging::DNS'</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s1">'DNS_External_Name'</span><span class="p">:</span> <span class="n">Notice_Type</span><span class="o">.</span><span class="n">DNS_External_Name</span><span class="p">,</span>
-    <span class="s1">'DNS_IN_REQUEST'</span><span class="p">:</span> <span class="n">Intel_Where</span><span class="o">.</span><span class="n">DNS_IN_REQUEST</span><span class="p">,</span>
-    <span class="s1">'DNS_IN_RESPONSE'</span><span class="p">:</span> <span class="n">Intel_Where</span><span class="o">.</span><span class="n">DNS_IN_RESPONSE</span><span class="p">,</span>
-    <span class="s1">'DNS_LOG'</span><span class="p">:</span> <span class="n">Log_ID</span><span class="o">.</span><span class="n">DNS_LOG</span><span class="p">,</span>
-<span class="p">}</span>
-
-<span class="n">builtins</span><span class="o">.</span><span class="n">globals</span><span class="p">()[</span><span class="s1">'ZLogging::DPD'</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s1">'DPD_LOG'</span><span class="p">:</span> <span class="n">Log_ID</span><span class="o">.</span><span class="n">DPD_LOG</span><span class="p">,</span>
-<span class="p">}</span>
-
-<span class="n">builtins</span><span class="o">.</span><span class="n">globals</span><span class="p">()[</span><span class="s1">'ZLogging::FTP'</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s1">'FTP_Bruteforcing'</span><span class="p">:</span> <span class="n">Notice_Type</span><span class="o">.</span><span class="n">FTP_Bruteforcing</span><span class="p">,</span>
-    <span class="s1">'FTP_CLIENT'</span><span class="p">:</span> <span class="n">Software_Type</span><span class="o">.</span><span class="n">FTP_CLIENT</span><span class="p">,</span>
-    <span class="s1">'FTP_LOG'</span><span class="p">:</span> <span class="n">Log_ID</span><span class="o">.</span><span class="n">FTP_LOG</span><span class="p">,</span>
-    <span class="s1">'FTP_SERVER'</span><span class="p">:</span> <span class="n">Software_Type</span><span class="o">.</span><span class="n">FTP_SERVER</span><span class="p">,</span>
-    <span class="s1">'FTP_Site_Exec_Success'</span><span class="p">:</span> <span class="n">Notice_Type</span><span class="o">.</span><span class="n">FTP_Site_Exec_Success</span><span class="p">,</span>
 <span class="p">}</span>
 
 <span class="n">builtins</span><span class="o">.</span><span class="n">globals</span><span class="p">()[</span><span class="s1">'ZLogging::Files'</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
@@ -638,100 +378,8 @@
     <span class="s1">'ANALYZER_SHA384'</span><span class="p">:</span> <span class="n">Files_Tag</span><span class="o">.</span><span class="n">ANALYZER_SHA384</span><span class="p">,</span>
     <span class="s1">'ANALYZER_SHA512'</span><span class="p">:</span> <span class="n">Files_Tag</span><span class="o">.</span><span class="n">ANALYZER_SHA512</span><span class="p">,</span>
     <span class="s1">'ANALYZER_X509'</span><span class="p">:</span> <span class="n">Files_Tag</span><span class="o">.</span><span class="n">ANALYZER_X509</span><span class="p">,</span>
-    <span class="s1">'Files_IN_HASH'</span><span class="p">:</span> <span class="n">Intel_Where</span><span class="o">.</span><span class="n">Files_IN_HASH</span><span class="p">,</span>
-    <span class="s1">'Files_IN_NAME'</span><span class="p">:</span> <span class="n">Intel_Where</span><span class="o">.</span><span class="n">Files_IN_NAME</span><span class="p">,</span>
-    <span class="s1">'Files_LOG'</span><span class="p">:</span> <span class="n">Log_ID</span><span class="o">.</span><span class="n">Files_LOG</span><span class="p">,</span>
+    <span class="s1">'ANALYZER_ZIP'</span><span class="p">:</span> <span class="n">Files_Tag</span><span class="o">.</span><span class="n">ANALYZER_ZIP</span><span class="p">,</span>
     <span class="s1">'Tag'</span><span class="p">:</span> <span class="n">Files_Tag</span><span class="p">,</span>
-<span class="p">}</span>
-
-<span class="n">builtins</span><span class="o">.</span><span class="n">globals</span><span class="p">()[</span><span class="s1">'ZLogging::HTTP'</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s1">'COOKIE_SQLI'</span><span class="p">:</span> <span class="n">HTTP_Tags</span><span class="o">.</span><span class="n">COOKIE_SQLI</span><span class="p">,</span>
-    <span class="s1">'EMPTY'</span><span class="p">:</span> <span class="n">HTTP_Tags</span><span class="o">.</span><span class="n">EMPTY</span><span class="p">,</span>
-    <span class="s1">'HTTP_APPSERVER'</span><span class="p">:</span> <span class="n">Software_Type</span><span class="o">.</span><span class="n">HTTP_APPSERVER</span><span class="p">,</span>
-    <span class="s1">'HTTP_BROWSER'</span><span class="p">:</span> <span class="n">Software_Type</span><span class="o">.</span><span class="n">HTTP_BROWSER</span><span class="p">,</span>
-    <span class="s1">'HTTP_BROWSER_PLUGIN'</span><span class="p">:</span> <span class="n">Software_Type</span><span class="o">.</span><span class="n">HTTP_BROWSER_PLUGIN</span><span class="p">,</span>
-    <span class="s1">'HTTP_IN_HOST_HEADER'</span><span class="p">:</span> <span class="n">Intel_Where</span><span class="o">.</span><span class="n">HTTP_IN_HOST_HEADER</span><span class="p">,</span>
-    <span class="s1">'HTTP_IN_REFERRER_HEADER'</span><span class="p">:</span> <span class="n">Intel_Where</span><span class="o">.</span><span class="n">HTTP_IN_REFERRER_HEADER</span><span class="p">,</span>
-    <span class="s1">'HTTP_IN_URL'</span><span class="p">:</span> <span class="n">Intel_Where</span><span class="o">.</span><span class="n">HTTP_IN_URL</span><span class="p">,</span>
-    <span class="s1">'HTTP_IN_USER_AGENT_HEADER'</span><span class="p">:</span> <span class="n">Intel_Where</span><span class="o">.</span><span class="n">HTTP_IN_USER_AGENT_HEADER</span><span class="p">,</span>
-    <span class="s1">'HTTP_IN_X_FORWARDED_FOR_HEADER'</span><span class="p">:</span> <span class="n">Intel_Where</span><span class="o">.</span><span class="n">HTTP_IN_X_FORWARDED_FOR_HEADER</span><span class="p">,</span>
-    <span class="s1">'HTTP_LOG'</span><span class="p">:</span> <span class="n">Log_ID</span><span class="o">.</span><span class="n">HTTP_LOG</span><span class="p">,</span>
-    <span class="s1">'HTTP_SERVER'</span><span class="p">:</span> <span class="n">Software_Type</span><span class="o">.</span><span class="n">HTTP_SERVER</span><span class="p">,</span>
-    <span class="s1">'HTTP_SQL_Injection_Attacker'</span><span class="p">:</span> <span class="n">Notice_Type</span><span class="o">.</span><span class="n">HTTP_SQL_Injection_Attacker</span><span class="p">,</span>
-    <span class="s1">'HTTP_SQL_Injection_Victim'</span><span class="p">:</span> <span class="n">Notice_Type</span><span class="o">.</span><span class="n">HTTP_SQL_Injection_Victim</span><span class="p">,</span>
-    <span class="s1">'HTTP_WEB_APPLICATION'</span><span class="p">:</span> <span class="n">Software_Type</span><span class="o">.</span><span class="n">HTTP_WEB_APPLICATION</span><span class="p">,</span>
-    <span class="s1">'POST_SQLI'</span><span class="p">:</span> <span class="n">HTTP_Tags</span><span class="o">.</span><span class="n">POST_SQLI</span><span class="p">,</span>
-    <span class="s1">'Tags'</span><span class="p">:</span> <span class="n">HTTP_Tags</span><span class="p">,</span>
-    <span class="s1">'URI_SQLI'</span><span class="p">:</span> <span class="n">HTTP_Tags</span><span class="o">.</span><span class="n">URI_SQLI</span><span class="p">,</span>
-<span class="p">}</span>
-
-<span class="n">builtins</span><span class="o">.</span><span class="n">globals</span><span class="p">()[</span><span class="s1">'ZLogging::Heartbleed'</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s1">'Heartbleed_SSL_Heartbeat_Attack'</span><span class="p">:</span> <span class="n">Notice_Type</span><span class="o">.</span><span class="n">Heartbleed_SSL_Heartbeat_Attack</span><span class="p">,</span>
-    <span class="s1">'Heartbleed_SSL_Heartbeat_Attack_Success'</span><span class="p">:</span> <span class="n">Notice_Type</span><span class="o">.</span><span class="n">Heartbleed_SSL_Heartbeat_Attack_Success</span><span class="p">,</span>
-    <span class="s1">'Heartbleed_SSL_Heartbeat_Many_Requests'</span><span class="p">:</span> <span class="n">Notice_Type</span><span class="o">.</span><span class="n">Heartbleed_SSL_Heartbeat_Many_Requests</span><span class="p">,</span>
-    <span class="s1">'Heartbleed_SSL_Heartbeat_Odd_Length'</span><span class="p">:</span> <span class="n">Notice_Type</span><span class="o">.</span><span class="n">Heartbleed_SSL_Heartbeat_Odd_Length</span><span class="p">,</span>
-<span class="p">}</span>
-
-<span class="n">builtins</span><span class="o">.</span><span class="n">globals</span><span class="p">()[</span><span class="s1">'ZLogging::IRC'</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s1">'IRC_LOG'</span><span class="p">:</span> <span class="n">Log_ID</span><span class="o">.</span><span class="n">IRC_LOG</span><span class="p">,</span>
-<span class="p">}</span>
-
-<span class="n">builtins</span><span class="o">.</span><span class="n">globals</span><span class="p">()[</span><span class="s1">'ZLogging::Input'</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s1">'EVENT_CHANGED'</span><span class="p">:</span> <span class="n">Input_Event</span><span class="o">.</span><span class="n">EVENT_CHANGED</span><span class="p">,</span>
-    <span class="s1">'EVENT_NEW'</span><span class="p">:</span> <span class="n">Input_Event</span><span class="o">.</span><span class="n">EVENT_NEW</span><span class="p">,</span>
-    <span class="s1">'EVENT_REMOVED'</span><span class="p">:</span> <span class="n">Input_Event</span><span class="o">.</span><span class="n">EVENT_REMOVED</span><span class="p">,</span>
-    <span class="s1">'Event'</span><span class="p">:</span> <span class="n">Input_Event</span><span class="p">,</span>
-    <span class="s1">'MANUAL'</span><span class="p">:</span> <span class="n">Input_Mode</span><span class="o">.</span><span class="n">MANUAL</span><span class="p">,</span>
-    <span class="s1">'Mode'</span><span class="p">:</span> <span class="n">Input_Mode</span><span class="p">,</span>
-    <span class="s1">'READER_ASCII'</span><span class="p">:</span> <span class="n">Input_Reader</span><span class="o">.</span><span class="n">READER_ASCII</span><span class="p">,</span>
-    <span class="s1">'READER_BENCHMARK'</span><span class="p">:</span> <span class="n">Input_Reader</span><span class="o">.</span><span class="n">READER_BENCHMARK</span><span class="p">,</span>
-    <span class="s1">'READER_BINARY'</span><span class="p">:</span> <span class="n">Input_Reader</span><span class="o">.</span><span class="n">READER_BINARY</span><span class="p">,</span>
-    <span class="s1">'READER_CONFIG'</span><span class="p">:</span> <span class="n">Input_Reader</span><span class="o">.</span><span class="n">READER_CONFIG</span><span class="p">,</span>
-    <span class="s1">'READER_RAW'</span><span class="p">:</span> <span class="n">Input_Reader</span><span class="o">.</span><span class="n">READER_RAW</span><span class="p">,</span>
-    <span class="s1">'READER_SQLITE'</span><span class="p">:</span> <span class="n">Input_Reader</span><span class="o">.</span><span class="n">READER_SQLITE</span><span class="p">,</span>
-    <span class="s1">'REREAD'</span><span class="p">:</span> <span class="n">Input_Mode</span><span class="o">.</span><span class="n">REREAD</span><span class="p">,</span>
-    <span class="s1">'Reader'</span><span class="p">:</span> <span class="n">Input_Reader</span><span class="p">,</span>
-    <span class="s1">'STREAM'</span><span class="p">:</span> <span class="n">Input_Mode</span><span class="o">.</span><span class="n">STREAM</span><span class="p">,</span>
-<span class="p">}</span>
-
-<span class="n">builtins</span><span class="o">.</span><span class="n">globals</span><span class="p">()[</span><span class="s1">'ZLogging::Intel'</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s1">'ADDR'</span><span class="p">:</span> <span class="n">Intel_Type</span><span class="o">.</span><span class="n">ADDR</span><span class="p">,</span>
-    <span class="s1">'CERT_HASH'</span><span class="p">:</span> <span class="n">Intel_Type</span><span class="o">.</span><span class="n">CERT_HASH</span><span class="p">,</span>
-    <span class="s1">'DOMAIN'</span><span class="p">:</span> <span class="n">Intel_Type</span><span class="o">.</span><span class="n">DOMAIN</span><span class="p">,</span>
-    <span class="s1">'EMAIL'</span><span class="p">:</span> <span class="n">Intel_Type</span><span class="o">.</span><span class="n">EMAIL</span><span class="p">,</span>
-    <span class="s1">'FILE_HASH'</span><span class="p">:</span> <span class="n">Intel_Type</span><span class="o">.</span><span class="n">FILE_HASH</span><span class="p">,</span>
-    <span class="s1">'FILE_NAME'</span><span class="p">:</span> <span class="n">Intel_Type</span><span class="o">.</span><span class="n">FILE_NAME</span><span class="p">,</span>
-    <span class="s1">'IN_ANYWHERE'</span><span class="p">:</span> <span class="n">Intel_Where</span><span class="o">.</span><span class="n">IN_ANYWHERE</span><span class="p">,</span>
-    <span class="s1">'Intel_LOG'</span><span class="p">:</span> <span class="n">Log_ID</span><span class="o">.</span><span class="n">Intel_LOG</span><span class="p">,</span>
-    <span class="s1">'Intel_Notice'</span><span class="p">:</span> <span class="n">Notice_Type</span><span class="o">.</span><span class="n">Intel_Notice</span><span class="p">,</span>
-    <span class="s1">'PUBKEY_HASH'</span><span class="p">:</span> <span class="n">Intel_Type</span><span class="o">.</span><span class="n">PUBKEY_HASH</span><span class="p">,</span>
-    <span class="s1">'SOFTWARE'</span><span class="p">:</span> <span class="n">Intel_Type</span><span class="o">.</span><span class="n">SOFTWARE</span><span class="p">,</span>
-    <span class="s1">'SUBNET'</span><span class="p">:</span> <span class="n">Intel_Type</span><span class="o">.</span><span class="n">SUBNET</span><span class="p">,</span>
-    <span class="s1">'Type'</span><span class="p">:</span> <span class="n">Intel_Type</span><span class="p">,</span>
-    <span class="s1">'URL'</span><span class="p">:</span> <span class="n">Intel_Type</span><span class="o">.</span><span class="n">URL</span><span class="p">,</span>
-    <span class="s1">'USER_NAME'</span><span class="p">:</span> <span class="n">Intel_Type</span><span class="o">.</span><span class="n">USER_NAME</span><span class="p">,</span>
-    <span class="s1">'Where'</span><span class="p">:</span> <span class="n">Intel_Where</span><span class="p">,</span>
-<span class="p">}</span>
-
-<span class="n">builtins</span><span class="o">.</span><span class="n">globals</span><span class="p">()[</span><span class="s1">'ZLogging::JSON'</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s1">'TS_EPOCH'</span><span class="p">:</span> <span class="n">JSON_TimestampFormat</span><span class="o">.</span><span class="n">TS_EPOCH</span><span class="p">,</span>
-    <span class="s1">'TS_ISO8601'</span><span class="p">:</span> <span class="n">JSON_TimestampFormat</span><span class="o">.</span><span class="n">TS_ISO8601</span><span class="p">,</span>
-    <span class="s1">'TS_MILLIS'</span><span class="p">:</span> <span class="n">JSON_TimestampFormat</span><span class="o">.</span><span class="n">TS_MILLIS</span><span class="p">,</span>
-    <span class="s1">'TimestampFormat'</span><span class="p">:</span> <span class="n">JSON_TimestampFormat</span><span class="p">,</span>
-<span class="p">}</span>
-
-<span class="n">builtins</span><span class="o">.</span><span class="n">globals</span><span class="p">()[</span><span class="s1">'ZLogging::KRB'</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s1">'KRB_LOG'</span><span class="p">:</span> <span class="n">Log_ID</span><span class="o">.</span><span class="n">KRB_LOG</span><span class="p">,</span>
-<span class="p">}</span>
-
-<span class="n">builtins</span><span class="o">.</span><span class="n">globals</span><span class="p">()[</span><span class="s1">'ZLogging::Known'</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s1">'Known_CERTS_LOG'</span><span class="p">:</span> <span class="n">Log_ID</span><span class="o">.</span><span class="n">Known_CERTS_LOG</span><span class="p">,</span>
-    <span class="s1">'Known_HOSTS_LOG'</span><span class="p">:</span> <span class="n">Log_ID</span><span class="o">.</span><span class="n">Known_HOSTS_LOG</span><span class="p">,</span>
-    <span class="s1">'Known_MODBUS_LOG'</span><span class="p">:</span> <span class="n">Log_ID</span><span class="o">.</span><span class="n">Known_MODBUS_LOG</span><span class="p">,</span>
-    <span class="s1">'Known_SERVICES_LOG'</span><span class="p">:</span> <span class="n">Log_ID</span><span class="o">.</span><span class="n">Known_SERVICES_LOG</span><span class="p">,</span>
-    <span class="s1">'MODBUS_MASTER'</span><span class="p">:</span> <span class="n">Known_ModbusDeviceType</span><span class="o">.</span><span class="n">MODBUS_MASTER</span><span class="p">,</span>
-    <span class="s1">'MODBUS_SLAVE'</span><span class="p">:</span> <span class="n">Known_ModbusDeviceType</span><span class="o">.</span><span class="n">MODBUS_SLAVE</span><span class="p">,</span>
-    <span class="s1">'ModbusDeviceType'</span><span class="p">:</span> <span class="n">Known_ModbusDeviceType</span><span class="p">,</span>
 <span class="p">}</span>
 
 <span class="n">builtins</span><span class="o">.</span><span class="n">globals</span><span class="p">()[</span><span class="s1">'ZLogging::LDAP'</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
@@ -855,293 +503,6 @@
     <span class="s1">'SearchScope_Undef'</span><span class="p">:</span> <span class="n">LDAP_SearchScope</span><span class="o">.</span><span class="n">SearchScope_Undef</span><span class="p">,</span>
 <span class="p">}</span>
 
-<span class="n">builtins</span><span class="o">.</span><span class="n">globals</span><span class="p">()[</span><span class="s1">'ZLogging::LoadBalancing'</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s1">'AUTO_BPF'</span><span class="p">:</span> <span class="n">LoadBalancing_Method</span><span class="o">.</span><span class="n">AUTO_BPF</span><span class="p">,</span>
-    <span class="s1">'Method'</span><span class="p">:</span> <span class="n">LoadBalancing_Method</span><span class="p">,</span>
-<span class="p">}</span>
-
-<span class="n">builtins</span><span class="o">.</span><span class="n">globals</span><span class="p">()[</span><span class="s1">'ZLogging::LoadedScripts'</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s1">'LoadedScripts_LOG'</span><span class="p">:</span> <span class="n">Log_ID</span><span class="o">.</span><span class="n">LoadedScripts_LOG</span><span class="p">,</span>
-<span class="p">}</span>
-
-<span class="n">builtins</span><span class="o">.</span><span class="n">globals</span><span class="p">()[</span><span class="s1">'ZLogging::Log'</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s1">'ID'</span><span class="p">:</span> <span class="n">Log_ID</span><span class="p">,</span>
-    <span class="s1">'PRINTLOG'</span><span class="p">:</span> <span class="n">Log_ID</span><span class="o">.</span><span class="n">PRINTLOG</span><span class="p">,</span>
-    <span class="s1">'PrintLogType'</span><span class="p">:</span> <span class="n">Log_PrintLogType</span><span class="p">,</span>
-    <span class="s1">'REDIRECT_ALL'</span><span class="p">:</span> <span class="n">Log_PrintLogType</span><span class="o">.</span><span class="n">REDIRECT_ALL</span><span class="p">,</span>
-    <span class="s1">'REDIRECT_NONE'</span><span class="p">:</span> <span class="n">Log_PrintLogType</span><span class="o">.</span><span class="n">REDIRECT_NONE</span><span class="p">,</span>
-    <span class="s1">'REDIRECT_STDOUT'</span><span class="p">:</span> <span class="n">Log_PrintLogType</span><span class="o">.</span><span class="n">REDIRECT_STDOUT</span><span class="p">,</span>
-    <span class="s1">'UNKNOWN'</span><span class="p">:</span> <span class="n">Log_ID</span><span class="o">.</span><span class="n">UNKNOWN</span><span class="p">,</span>
-    <span class="s1">'WRITER_ASCII'</span><span class="p">:</span> <span class="n">Log_Writer</span><span class="o">.</span><span class="n">WRITER_ASCII</span><span class="p">,</span>
-    <span class="s1">'WRITER_NONE'</span><span class="p">:</span> <span class="n">Log_Writer</span><span class="o">.</span><span class="n">WRITER_NONE</span><span class="p">,</span>
-    <span class="s1">'WRITER_SQLITE'</span><span class="p">:</span> <span class="n">Log_Writer</span><span class="o">.</span><span class="n">WRITER_SQLITE</span><span class="p">,</span>
-    <span class="s1">'Writer'</span><span class="p">:</span> <span class="n">Log_Writer</span><span class="p">,</span>
-<span class="p">}</span>
-
-<span class="n">builtins</span><span class="o">.</span><span class="n">globals</span><span class="p">()[</span><span class="s1">'ZLogging::MOUNT3'</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s1">'AUTH_DES'</span><span class="p">:</span> <span class="n">MOUNT3_auth_flavor_t</span><span class="o">.</span><span class="n">AUTH_DES</span><span class="p">,</span>
-    <span class="s1">'AUTH_NULL'</span><span class="p">:</span> <span class="n">MOUNT3_auth_flavor_t</span><span class="o">.</span><span class="n">AUTH_NULL</span><span class="p">,</span>
-    <span class="s1">'AUTH_SHORT'</span><span class="p">:</span> <span class="n">MOUNT3_auth_flavor_t</span><span class="o">.</span><span class="n">AUTH_SHORT</span><span class="p">,</span>
-    <span class="s1">'AUTH_UNIX'</span><span class="p">:</span> <span class="n">MOUNT3_auth_flavor_t</span><span class="o">.</span><span class="n">AUTH_UNIX</span><span class="p">,</span>
-    <span class="s1">'MNT3ERR_ACCES'</span><span class="p">:</span> <span class="n">MOUNT3_status_t</span><span class="o">.</span><span class="n">MNT3ERR_ACCES</span><span class="p">,</span>
-    <span class="s1">'MNT3ERR_INVAL'</span><span class="p">:</span> <span class="n">MOUNT3_status_t</span><span class="o">.</span><span class="n">MNT3ERR_INVAL</span><span class="p">,</span>
-    <span class="s1">'MNT3ERR_IO'</span><span class="p">:</span> <span class="n">MOUNT3_status_t</span><span class="o">.</span><span class="n">MNT3ERR_IO</span><span class="p">,</span>
-    <span class="s1">'MNT3ERR_NAMETOOLONG'</span><span class="p">:</span> <span class="n">MOUNT3_status_t</span><span class="o">.</span><span class="n">MNT3ERR_NAMETOOLONG</span><span class="p">,</span>
-    <span class="s1">'MNT3ERR_NOENT'</span><span class="p">:</span> <span class="n">MOUNT3_status_t</span><span class="o">.</span><span class="n">MNT3ERR_NOENT</span><span class="p">,</span>
-    <span class="s1">'MNT3ERR_NOTDIR'</span><span class="p">:</span> <span class="n">MOUNT3_status_t</span><span class="o">.</span><span class="n">MNT3ERR_NOTDIR</span><span class="p">,</span>
-    <span class="s1">'MNT3ERR_NOTSUPP'</span><span class="p">:</span> <span class="n">MOUNT3_status_t</span><span class="o">.</span><span class="n">MNT3ERR_NOTSUPP</span><span class="p">,</span>
-    <span class="s1">'MNT3ERR_PERM'</span><span class="p">:</span> <span class="n">MOUNT3_status_t</span><span class="o">.</span><span class="n">MNT3ERR_PERM</span><span class="p">,</span>
-    <span class="s1">'MNT3ERR_SERVERFAULT'</span><span class="p">:</span> <span class="n">MOUNT3_status_t</span><span class="o">.</span><span class="n">MNT3ERR_SERVERFAULT</span><span class="p">,</span>
-    <span class="s1">'MNT3_OK'</span><span class="p">:</span> <span class="n">MOUNT3_status_t</span><span class="o">.</span><span class="n">MNT3_OK</span><span class="p">,</span>
-    <span class="s1">'MOUNT3ERR_UNKNOWN'</span><span class="p">:</span> <span class="n">MOUNT3_status_t</span><span class="o">.</span><span class="n">MOUNT3ERR_UNKNOWN</span><span class="p">,</span>
-    <span class="s1">'PROC_DUMP'</span><span class="p">:</span> <span class="n">MOUNT3_proc_t</span><span class="o">.</span><span class="n">PROC_DUMP</span><span class="p">,</span>
-    <span class="s1">'PROC_END_OF_PROCS'</span><span class="p">:</span> <span class="n">MOUNT3_proc_t</span><span class="o">.</span><span class="n">PROC_END_OF_PROCS</span><span class="p">,</span>
-    <span class="s1">'PROC_EXPORT'</span><span class="p">:</span> <span class="n">MOUNT3_proc_t</span><span class="o">.</span><span class="n">PROC_EXPORT</span><span class="p">,</span>
-    <span class="s1">'PROC_MNT'</span><span class="p">:</span> <span class="n">MOUNT3_proc_t</span><span class="o">.</span><span class="n">PROC_MNT</span><span class="p">,</span>
-    <span class="s1">'PROC_NULL'</span><span class="p">:</span> <span class="n">MOUNT3_proc_t</span><span class="o">.</span><span class="n">PROC_NULL</span><span class="p">,</span>
-    <span class="s1">'PROC_UMNT'</span><span class="p">:</span> <span class="n">MOUNT3_proc_t</span><span class="o">.</span><span class="n">PROC_UMNT</span><span class="p">,</span>
-    <span class="s1">'PROC_UMNT_ALL'</span><span class="p">:</span> <span class="n">MOUNT3_proc_t</span><span class="o">.</span><span class="n">PROC_UMNT_ALL</span><span class="p">,</span>
-    <span class="s1">'auth_flavor_t'</span><span class="p">:</span> <span class="n">MOUNT3_auth_flavor_t</span><span class="p">,</span>
-    <span class="s1">'proc_t'</span><span class="p">:</span> <span class="n">MOUNT3_proc_t</span><span class="p">,</span>
-    <span class="s1">'status_t'</span><span class="p">:</span> <span class="n">MOUNT3_status_t</span><span class="p">,</span>
-<span class="p">}</span>
-
-<span class="n">builtins</span><span class="o">.</span><span class="n">globals</span><span class="p">()[</span><span class="s1">'ZLogging::MQTT'</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s1">'MQTT_CONNECT_LOG'</span><span class="p">:</span> <span class="n">Log_ID</span><span class="o">.</span><span class="n">MQTT_CONNECT_LOG</span><span class="p">,</span>
-    <span class="s1">'MQTT_PUBLISH_LOG'</span><span class="p">:</span> <span class="n">Log_ID</span><span class="o">.</span><span class="n">MQTT_PUBLISH_LOG</span><span class="p">,</span>
-    <span class="s1">'MQTT_SUBSCRIBE_LOG'</span><span class="p">:</span> <span class="n">Log_ID</span><span class="o">.</span><span class="n">MQTT_SUBSCRIBE_LOG</span><span class="p">,</span>
-    <span class="s1">'SUBSCRIBE'</span><span class="p">:</span> <span class="n">MQTT_SubUnsub</span><span class="o">.</span><span class="n">SUBSCRIBE</span><span class="p">,</span>
-    <span class="s1">'SubUnsub'</span><span class="p">:</span> <span class="n">MQTT_SubUnsub</span><span class="p">,</span>
-    <span class="s1">'UNSUBSCRIBE'</span><span class="p">:</span> <span class="n">MQTT_SubUnsub</span><span class="o">.</span><span class="n">UNSUBSCRIBE</span><span class="p">,</span>
-<span class="p">}</span>
-
-<span class="n">builtins</span><span class="o">.</span><span class="n">globals</span><span class="p">()[</span><span class="s1">'ZLogging::Management'</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s1">'AGENT'</span><span class="p">:</span> <span class="n">Management_Role</span><span class="o">.</span><span class="n">AGENT</span><span class="p">,</span>
-    <span class="s1">'CONTROLLER'</span><span class="p">:</span> <span class="n">Management_Role</span><span class="o">.</span><span class="n">CONTROLLER</span><span class="p">,</span>
-    <span class="s1">'CRASHED'</span><span class="p">:</span> <span class="n">Management_State</span><span class="o">.</span><span class="n">CRASHED</span><span class="p">,</span>
-    <span class="s1">'FAILED'</span><span class="p">:</span> <span class="n">Management_State</span><span class="o">.</span><span class="n">FAILED</span><span class="p">,</span>
-    <span class="s1">'NODE'</span><span class="p">:</span> <span class="n">Management_Role</span><span class="o">.</span><span class="n">NODE</span><span class="p">,</span>
-    <span class="s1">'NONE'</span><span class="p">:</span> <span class="n">Management_Role</span><span class="o">.</span><span class="n">NONE</span><span class="p">,</span>
-    <span class="s1">'PENDING'</span><span class="p">:</span> <span class="n">Management_State</span><span class="o">.</span><span class="n">PENDING</span><span class="p">,</span>
-    <span class="s1">'RUNNING'</span><span class="p">:</span> <span class="n">Management_State</span><span class="o">.</span><span class="n">RUNNING</span><span class="p">,</span>
-    <span class="s1">'Role'</span><span class="p">:</span> <span class="n">Management_Role</span><span class="p">,</span>
-    <span class="s1">'STOPPED'</span><span class="p">:</span> <span class="n">Management_State</span><span class="o">.</span><span class="n">STOPPED</span><span class="p">,</span>
-    <span class="s1">'State'</span><span class="p">:</span> <span class="n">Management_State</span><span class="p">,</span>
-    <span class="s1">'UNKNOWN'</span><span class="p">:</span> <span class="n">Management_State</span><span class="o">.</span><span class="n">UNKNOWN</span><span class="p">,</span>
-<span class="p">}</span>
-
-<span class="n">builtins</span><span class="o">.</span><span class="n">globals</span><span class="p">()[</span><span class="s1">'ZLogging::Management::Controller::Runtime'</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s1">'ConfigState'</span><span class="p">:</span> <span class="n">Management_Controller_Runtime_ConfigState</span><span class="p">,</span>
-    <span class="s1">'DEPLOYED'</span><span class="p">:</span> <span class="n">Management_Controller_Runtime_ConfigState</span><span class="o">.</span><span class="n">DEPLOYED</span><span class="p">,</span>
-    <span class="s1">'READY'</span><span class="p">:</span> <span class="n">Management_Controller_Runtime_ConfigState</span><span class="o">.</span><span class="n">READY</span><span class="p">,</span>
-    <span class="s1">'STAGED'</span><span class="p">:</span> <span class="n">Management_Controller_Runtime_ConfigState</span><span class="o">.</span><span class="n">STAGED</span><span class="p">,</span>
-<span class="p">}</span>
-
-<span class="n">builtins</span><span class="o">.</span><span class="n">globals</span><span class="p">()[</span><span class="s1">'ZLogging::Management::Log'</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s1">'DEBUG'</span><span class="p">:</span> <span class="n">Management_Log_Level</span><span class="o">.</span><span class="n">DEBUG</span><span class="p">,</span>
-    <span class="s1">'ERROR'</span><span class="p">:</span> <span class="n">Management_Log_Level</span><span class="o">.</span><span class="n">ERROR</span><span class="p">,</span>
-    <span class="s1">'INFO'</span><span class="p">:</span> <span class="n">Management_Log_Level</span><span class="o">.</span><span class="n">INFO</span><span class="p">,</span>
-    <span class="s1">'Level'</span><span class="p">:</span> <span class="n">Management_Log_Level</span><span class="p">,</span>
-    <span class="s1">'Management_LOG'</span><span class="p">:</span> <span class="n">Log_ID</span><span class="o">.</span><span class="n">Management_LOG</span><span class="p">,</span>
-    <span class="s1">'WARNING'</span><span class="p">:</span> <span class="n">Management_Log_Level</span><span class="o">.</span><span class="n">WARNING</span><span class="p">,</span>
-<span class="p">}</span>
-
-<span class="n">builtins</span><span class="o">.</span><span class="n">globals</span><span class="p">()[</span><span class="s1">'ZLogging::Modbus'</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s1">'Modbus_LOG'</span><span class="p">:</span> <span class="n">Log_ID</span><span class="o">.</span><span class="n">Modbus_LOG</span><span class="p">,</span>
-    <span class="s1">'Modbus_REGISTER_CHANGE_LOG'</span><span class="p">:</span> <span class="n">Log_ID</span><span class="o">.</span><span class="n">Modbus_REGISTER_CHANGE_LOG</span><span class="p">,</span>
-<span class="p">}</span>
-
-<span class="n">builtins</span><span class="o">.</span><span class="n">globals</span><span class="p">()[</span><span class="s1">'ZLogging::MySQL'</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s1">'MySQL_SERVER'</span><span class="p">:</span> <span class="n">Software_Type</span><span class="o">.</span><span class="n">MySQL_SERVER</span><span class="p">,</span>
-<span class="p">}</span>
-
-<span class="n">builtins</span><span class="o">.</span><span class="n">globals</span><span class="p">()[</span><span class="s1">'ZLogging::NFS3'</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s1">'DATA_SYNC'</span><span class="p">:</span> <span class="n">NFS3_stable_how_t</span><span class="o">.</span><span class="n">DATA_SYNC</span><span class="p">,</span>
-    <span class="s1">'DONT_CHANGE'</span><span class="p">:</span> <span class="n">NFS3_time_how_t</span><span class="o">.</span><span class="n">DONT_CHANGE</span><span class="p">,</span>
-    <span class="s1">'EXCLUSIVE'</span><span class="p">:</span> <span class="n">NFS3_createmode_t</span><span class="o">.</span><span class="n">EXCLUSIVE</span><span class="p">,</span>
-    <span class="s1">'FILE_SYNC'</span><span class="p">:</span> <span class="n">NFS3_stable_how_t</span><span class="o">.</span><span class="n">FILE_SYNC</span><span class="p">,</span>
-    <span class="s1">'FTYPE_BLK'</span><span class="p">:</span> <span class="n">NFS3_file_type_t</span><span class="o">.</span><span class="n">FTYPE_BLK</span><span class="p">,</span>
-    <span class="s1">'FTYPE_CHR'</span><span class="p">:</span> <span class="n">NFS3_file_type_t</span><span class="o">.</span><span class="n">FTYPE_CHR</span><span class="p">,</span>
-    <span class="s1">'FTYPE_DIR'</span><span class="p">:</span> <span class="n">NFS3_file_type_t</span><span class="o">.</span><span class="n">FTYPE_DIR</span><span class="p">,</span>
-    <span class="s1">'FTYPE_FIFO'</span><span class="p">:</span> <span class="n">NFS3_file_type_t</span><span class="o">.</span><span class="n">FTYPE_FIFO</span><span class="p">,</span>
-    <span class="s1">'FTYPE_LNK'</span><span class="p">:</span> <span class="n">NFS3_file_type_t</span><span class="o">.</span><span class="n">FTYPE_LNK</span><span class="p">,</span>
-    <span class="s1">'FTYPE_REG'</span><span class="p">:</span> <span class="n">NFS3_file_type_t</span><span class="o">.</span><span class="n">FTYPE_REG</span><span class="p">,</span>
-    <span class="s1">'FTYPE_SOCK'</span><span class="p">:</span> <span class="n">NFS3_file_type_t</span><span class="o">.</span><span class="n">FTYPE_SOCK</span><span class="p">,</span>
-    <span class="s1">'GUARDED'</span><span class="p">:</span> <span class="n">NFS3_createmode_t</span><span class="o">.</span><span class="n">GUARDED</span><span class="p">,</span>
-    <span class="s1">'NFS3ERR_ACCES'</span><span class="p">:</span> <span class="n">NFS3_status_t</span><span class="o">.</span><span class="n">NFS3ERR_ACCES</span><span class="p">,</span>
-    <span class="s1">'NFS3ERR_BADHANDLE'</span><span class="p">:</span> <span class="n">NFS3_status_t</span><span class="o">.</span><span class="n">NFS3ERR_BADHANDLE</span><span class="p">,</span>
-    <span class="s1">'NFS3ERR_BADTYPE'</span><span class="p">:</span> <span class="n">NFS3_status_t</span><span class="o">.</span><span class="n">NFS3ERR_BADTYPE</span><span class="p">,</span>
-    <span class="s1">'NFS3ERR_BAD_COOKIE'</span><span class="p">:</span> <span class="n">NFS3_status_t</span><span class="o">.</span><span class="n">NFS3ERR_BAD_COOKIE</span><span class="p">,</span>
-    <span class="s1">'NFS3ERR_DQUOT'</span><span class="p">:</span> <span class="n">NFS3_status_t</span><span class="o">.</span><span class="n">NFS3ERR_DQUOT</span><span class="p">,</span>
-    <span class="s1">'NFS3ERR_EXIST'</span><span class="p">:</span> <span class="n">NFS3_status_t</span><span class="o">.</span><span class="n">NFS3ERR_EXIST</span><span class="p">,</span>
-    <span class="s1">'NFS3ERR_FBIG'</span><span class="p">:</span> <span class="n">NFS3_status_t</span><span class="o">.</span><span class="n">NFS3ERR_FBIG</span><span class="p">,</span>
-    <span class="s1">'NFS3ERR_INVAL'</span><span class="p">:</span> <span class="n">NFS3_status_t</span><span class="o">.</span><span class="n">NFS3ERR_INVAL</span><span class="p">,</span>
-    <span class="s1">'NFS3ERR_IO'</span><span class="p">:</span> <span class="n">NFS3_status_t</span><span class="o">.</span><span class="n">NFS3ERR_IO</span><span class="p">,</span>
-    <span class="s1">'NFS3ERR_ISDIR'</span><span class="p">:</span> <span class="n">NFS3_status_t</span><span class="o">.</span><span class="n">NFS3ERR_ISDIR</span><span class="p">,</span>
-    <span class="s1">'NFS3ERR_JUKEBOX'</span><span class="p">:</span> <span class="n">NFS3_status_t</span><span class="o">.</span><span class="n">NFS3ERR_JUKEBOX</span><span class="p">,</span>
-    <span class="s1">'NFS3ERR_MLINK'</span><span class="p">:</span> <span class="n">NFS3_status_t</span><span class="o">.</span><span class="n">NFS3ERR_MLINK</span><span class="p">,</span>
-    <span class="s1">'NFS3ERR_NAMETOOLONG'</span><span class="p">:</span> <span class="n">NFS3_status_t</span><span class="o">.</span><span class="n">NFS3ERR_NAMETOOLONG</span><span class="p">,</span>
-    <span class="s1">'NFS3ERR_NODEV'</span><span class="p">:</span> <span class="n">NFS3_status_t</span><span class="o">.</span><span class="n">NFS3ERR_NODEV</span><span class="p">,</span>
-    <span class="s1">'NFS3ERR_NOENT'</span><span class="p">:</span> <span class="n">NFS3_status_t</span><span class="o">.</span><span class="n">NFS3ERR_NOENT</span><span class="p">,</span>
-    <span class="s1">'NFS3ERR_NOSPC'</span><span class="p">:</span> <span class="n">NFS3_status_t</span><span class="o">.</span><span class="n">NFS3ERR_NOSPC</span><span class="p">,</span>
-    <span class="s1">'NFS3ERR_NOTDIR'</span><span class="p">:</span> <span class="n">NFS3_status_t</span><span class="o">.</span><span class="n">NFS3ERR_NOTDIR</span><span class="p">,</span>
-    <span class="s1">'NFS3ERR_NOTEMPTY'</span><span class="p">:</span> <span class="n">NFS3_status_t</span><span class="o">.</span><span class="n">NFS3ERR_NOTEMPTY</span><span class="p">,</span>
-    <span class="s1">'NFS3ERR_NOTSUPP'</span><span class="p">:</span> <span class="n">NFS3_status_t</span><span class="o">.</span><span class="n">NFS3ERR_NOTSUPP</span><span class="p">,</span>
-    <span class="s1">'NFS3ERR_NOT_SYNC'</span><span class="p">:</span> <span class="n">NFS3_status_t</span><span class="o">.</span><span class="n">NFS3ERR_NOT_SYNC</span><span class="p">,</span>
-    <span class="s1">'NFS3ERR_NXIO'</span><span class="p">:</span> <span class="n">NFS3_status_t</span><span class="o">.</span><span class="n">NFS3ERR_NXIO</span><span class="p">,</span>
-    <span class="s1">'NFS3ERR_OK'</span><span class="p">:</span> <span class="n">NFS3_status_t</span><span class="o">.</span><span class="n">NFS3ERR_OK</span><span class="p">,</span>
-    <span class="s1">'NFS3ERR_PERM'</span><span class="p">:</span> <span class="n">NFS3_status_t</span><span class="o">.</span><span class="n">NFS3ERR_PERM</span><span class="p">,</span>
-    <span class="s1">'NFS3ERR_REMOTE'</span><span class="p">:</span> <span class="n">NFS3_status_t</span><span class="o">.</span><span class="n">NFS3ERR_REMOTE</span><span class="p">,</span>
-    <span class="s1">'NFS3ERR_ROFS'</span><span class="p">:</span> <span class="n">NFS3_status_t</span><span class="o">.</span><span class="n">NFS3ERR_ROFS</span><span class="p">,</span>
-    <span class="s1">'NFS3ERR_SERVERFAULT'</span><span class="p">:</span> <span class="n">NFS3_status_t</span><span class="o">.</span><span class="n">NFS3ERR_SERVERFAULT</span><span class="p">,</span>
-    <span class="s1">'NFS3ERR_STALE'</span><span class="p">:</span> <span class="n">NFS3_status_t</span><span class="o">.</span><span class="n">NFS3ERR_STALE</span><span class="p">,</span>
-    <span class="s1">'NFS3ERR_TOOSMALL'</span><span class="p">:</span> <span class="n">NFS3_status_t</span><span class="o">.</span><span class="n">NFS3ERR_TOOSMALL</span><span class="p">,</span>
-    <span class="s1">'NFS3ERR_UNKNOWN'</span><span class="p">:</span> <span class="n">NFS3_status_t</span><span class="o">.</span><span class="n">NFS3ERR_UNKNOWN</span><span class="p">,</span>
-    <span class="s1">'NFS3ERR_XDEV'</span><span class="p">:</span> <span class="n">NFS3_status_t</span><span class="o">.</span><span class="n">NFS3ERR_XDEV</span><span class="p">,</span>
-    <span class="s1">'PROC_ACCESS'</span><span class="p">:</span> <span class="n">NFS3_proc_t</span><span class="o">.</span><span class="n">PROC_ACCESS</span><span class="p">,</span>
-    <span class="s1">'PROC_COMMIT'</span><span class="p">:</span> <span class="n">NFS3_proc_t</span><span class="o">.</span><span class="n">PROC_COMMIT</span><span class="p">,</span>
-    <span class="s1">'PROC_CREATE'</span><span class="p">:</span> <span class="n">NFS3_proc_t</span><span class="o">.</span><span class="n">PROC_CREATE</span><span class="p">,</span>
-    <span class="s1">'PROC_END_OF_PROCS'</span><span class="p">:</span> <span class="n">NFS3_proc_t</span><span class="o">.</span><span class="n">PROC_END_OF_PROCS</span><span class="p">,</span>
-    <span class="s1">'PROC_FSINFO'</span><span class="p">:</span> <span class="n">NFS3_proc_t</span><span class="o">.</span><span class="n">PROC_FSINFO</span><span class="p">,</span>
-    <span class="s1">'PROC_FSSTAT'</span><span class="p">:</span> <span class="n">NFS3_proc_t</span><span class="o">.</span><span class="n">PROC_FSSTAT</span><span class="p">,</span>
-    <span class="s1">'PROC_GETATTR'</span><span class="p">:</span> <span class="n">NFS3_proc_t</span><span class="o">.</span><span class="n">PROC_GETATTR</span><span class="p">,</span>
-    <span class="s1">'PROC_LINK'</span><span class="p">:</span> <span class="n">NFS3_proc_t</span><span class="o">.</span><span class="n">PROC_LINK</span><span class="p">,</span>
-    <span class="s1">'PROC_LOOKUP'</span><span class="p">:</span> <span class="n">NFS3_proc_t</span><span class="o">.</span><span class="n">PROC_LOOKUP</span><span class="p">,</span>
-    <span class="s1">'PROC_MKDIR'</span><span class="p">:</span> <span class="n">NFS3_proc_t</span><span class="o">.</span><span class="n">PROC_MKDIR</span><span class="p">,</span>
-    <span class="s1">'PROC_MKNOD'</span><span class="p">:</span> <span class="n">NFS3_proc_t</span><span class="o">.</span><span class="n">PROC_MKNOD</span><span class="p">,</span>
-    <span class="s1">'PROC_NULL'</span><span class="p">:</span> <span class="n">NFS3_proc_t</span><span class="o">.</span><span class="n">PROC_NULL</span><span class="p">,</span>
-    <span class="s1">'PROC_PATHCONF'</span><span class="p">:</span> <span class="n">NFS3_proc_t</span><span class="o">.</span><span class="n">PROC_PATHCONF</span><span class="p">,</span>
-    <span class="s1">'PROC_READ'</span><span class="p">:</span> <span class="n">NFS3_proc_t</span><span class="o">.</span><span class="n">PROC_READ</span><span class="p">,</span>
-    <span class="s1">'PROC_READDIR'</span><span class="p">:</span> <span class="n">NFS3_proc_t</span><span class="o">.</span><span class="n">PROC_READDIR</span><span class="p">,</span>
-    <span class="s1">'PROC_READDIRPLUS'</span><span class="p">:</span> <span class="n">NFS3_proc_t</span><span class="o">.</span><span class="n">PROC_READDIRPLUS</span><span class="p">,</span>
-    <span class="s1">'PROC_READLINK'</span><span class="p">:</span> <span class="n">NFS3_proc_t</span><span class="o">.</span><span class="n">PROC_READLINK</span><span class="p">,</span>
-    <span class="s1">'PROC_REMOVE'</span><span class="p">:</span> <span class="n">NFS3_proc_t</span><span class="o">.</span><span class="n">PROC_REMOVE</span><span class="p">,</span>
-    <span class="s1">'PROC_RENAME'</span><span class="p">:</span> <span class="n">NFS3_proc_t</span><span class="o">.</span><span class="n">PROC_RENAME</span><span class="p">,</span>
-    <span class="s1">'PROC_RMDIR'</span><span class="p">:</span> <span class="n">NFS3_proc_t</span><span class="o">.</span><span class="n">PROC_RMDIR</span><span class="p">,</span>
-    <span class="s1">'PROC_SETATTR'</span><span class="p">:</span> <span class="n">NFS3_proc_t</span><span class="o">.</span><span class="n">PROC_SETATTR</span><span class="p">,</span>
-    <span class="s1">'PROC_SYMLINK'</span><span class="p">:</span> <span class="n">NFS3_proc_t</span><span class="o">.</span><span class="n">PROC_SYMLINK</span><span class="p">,</span>
-    <span class="s1">'PROC_WRITE'</span><span class="p">:</span> <span class="n">NFS3_proc_t</span><span class="o">.</span><span class="n">PROC_WRITE</span><span class="p">,</span>
-    <span class="s1">'SET_TO_CLIENT_TIME'</span><span class="p">:</span> <span class="n">NFS3_time_how_t</span><span class="o">.</span><span class="n">SET_TO_CLIENT_TIME</span><span class="p">,</span>
-    <span class="s1">'SET_TO_SERVER_TIME'</span><span class="p">:</span> <span class="n">NFS3_time_how_t</span><span class="o">.</span><span class="n">SET_TO_SERVER_TIME</span><span class="p">,</span>
-    <span class="s1">'UNCHECKED'</span><span class="p">:</span> <span class="n">NFS3_createmode_t</span><span class="o">.</span><span class="n">UNCHECKED</span><span class="p">,</span>
-    <span class="s1">'UNSTABLE'</span><span class="p">:</span> <span class="n">NFS3_stable_how_t</span><span class="o">.</span><span class="n">UNSTABLE</span><span class="p">,</span>
-    <span class="s1">'createmode_t'</span><span class="p">:</span> <span class="n">NFS3_createmode_t</span><span class="p">,</span>
-    <span class="s1">'file_type_t'</span><span class="p">:</span> <span class="n">NFS3_file_type_t</span><span class="p">,</span>
-    <span class="s1">'proc_t'</span><span class="p">:</span> <span class="n">NFS3_proc_t</span><span class="p">,</span>
-    <span class="s1">'stable_how_t'</span><span class="p">:</span> <span class="n">NFS3_stable_how_t</span><span class="p">,</span>
-    <span class="s1">'status_t'</span><span class="p">:</span> <span class="n">NFS3_status_t</span><span class="p">,</span>
-    <span class="s1">'time_how_t'</span><span class="p">:</span> <span class="n">NFS3_time_how_t</span><span class="p">,</span>
-<span class="p">}</span>
-
-<span class="n">builtins</span><span class="o">.</span><span class="n">globals</span><span class="p">()[</span><span class="s1">'ZLogging::NTLM'</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s1">'NTLM_LOG'</span><span class="p">:</span> <span class="n">Log_ID</span><span class="o">.</span><span class="n">NTLM_LOG</span><span class="p">,</span>
-<span class="p">}</span>
-
-<span class="n">builtins</span><span class="o">.</span><span class="n">globals</span><span class="p">()[</span><span class="s1">'ZLogging::NTP'</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s1">'NTP_LOG'</span><span class="p">:</span> <span class="n">Log_ID</span><span class="o">.</span><span class="n">NTP_LOG</span><span class="p">,</span>
-<span class="p">}</span>
-
-<span class="n">builtins</span><span class="o">.</span><span class="n">globals</span><span class="p">()[</span><span class="s1">'ZLogging::NetControl'</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s1">'ADDED'</span><span class="p">:</span> <span class="n">NetControl_CatchReleaseActions</span><span class="o">.</span><span class="n">ADDED</span><span class="p">,</span>
-    <span class="s1">'ADDRESS'</span><span class="p">:</span> <span class="n">NetControl_EntityType</span><span class="o">.</span><span class="n">ADDRESS</span><span class="p">,</span>
-    <span class="s1">'CONNECTION'</span><span class="p">:</span> <span class="n">NetControl_EntityType</span><span class="o">.</span><span class="n">CONNECTION</span><span class="p">,</span>
-    <span class="s1">'CatchReleaseActions'</span><span class="p">:</span> <span class="n">NetControl_CatchReleaseActions</span><span class="p">,</span>
-    <span class="s1">'DROP'</span><span class="p">:</span> <span class="n">NetControl_RuleType</span><span class="o">.</span><span class="n">DROP</span><span class="p">,</span>
-    <span class="s1">'DROPPED'</span><span class="p">:</span> <span class="n">NetControl_CatchReleaseActions</span><span class="o">.</span><span class="n">DROPPED</span><span class="p">,</span>
-    <span class="s1">'DROP_REQUESTED'</span><span class="p">:</span> <span class="n">NetControl_CatchReleaseActions</span><span class="o">.</span><span class="n">DROP_REQUESTED</span><span class="p">,</span>
-    <span class="s1">'ERROR'</span><span class="p">:</span> <span class="n">NetControl_InfoCategory</span><span class="o">.</span><span class="n">ERROR</span><span class="p">,</span>
-    <span class="s1">'EXISTS'</span><span class="p">:</span> <span class="n">NetControl_InfoState</span><span class="o">.</span><span class="n">EXISTS</span><span class="p">,</span>
-    <span class="s1">'EntityType'</span><span class="p">:</span> <span class="n">NetControl_EntityType</span><span class="p">,</span>
-    <span class="s1">'FAILED'</span><span class="p">:</span> <span class="n">NetControl_InfoState</span><span class="o">.</span><span class="n">FAILED</span><span class="p">,</span>
-    <span class="s1">'FLOW'</span><span class="p">:</span> <span class="n">NetControl_EntityType</span><span class="o">.</span><span class="n">FLOW</span><span class="p">,</span>
-    <span class="s1">'FORGOTTEN'</span><span class="p">:</span> <span class="n">NetControl_CatchReleaseActions</span><span class="o">.</span><span class="n">FORGOTTEN</span><span class="p">,</span>
-    <span class="s1">'FORWARD'</span><span class="p">:</span> <span class="n">NetControl_TargetType</span><span class="o">.</span><span class="n">FORWARD</span><span class="p">,</span>
-    <span class="s1">'INFO'</span><span class="p">:</span> <span class="n">NetControl_CatchReleaseActions</span><span class="o">.</span><span class="n">INFO</span><span class="p">,</span>
-    <span class="s1">'InfoCategory'</span><span class="p">:</span> <span class="n">NetControl_InfoCategory</span><span class="p">,</span>
-    <span class="s1">'InfoState'</span><span class="p">:</span> <span class="n">NetControl_InfoState</span><span class="p">,</span>
-    <span class="s1">'MAC'</span><span class="p">:</span> <span class="n">NetControl_EntityType</span><span class="o">.</span><span class="n">MAC</span><span class="p">,</span>
-    <span class="s1">'MESSAGE'</span><span class="p">:</span> <span class="n">NetControl_InfoCategory</span><span class="o">.</span><span class="n">MESSAGE</span><span class="p">,</span>
-    <span class="s1">'MODIFY'</span><span class="p">:</span> <span class="n">NetControl_RuleType</span><span class="o">.</span><span class="n">MODIFY</span><span class="p">,</span>
-    <span class="s1">'MONITOR'</span><span class="p">:</span> <span class="n">NetControl_TargetType</span><span class="o">.</span><span class="n">MONITOR</span><span class="p">,</span>
-    <span class="s1">'NetControl_CATCH_RELEASE'</span><span class="p">:</span> <span class="n">Log_ID</span><span class="o">.</span><span class="n">NetControl_CATCH_RELEASE</span><span class="p">,</span>
-    <span class="s1">'NetControl_DROP_LOG'</span><span class="p">:</span> <span class="n">Log_ID</span><span class="o">.</span><span class="n">NetControl_DROP_LOG</span><span class="p">,</span>
-    <span class="s1">'NetControl_LOG'</span><span class="p">:</span> <span class="n">Log_ID</span><span class="o">.</span><span class="n">NetControl_LOG</span><span class="p">,</span>
-    <span class="s1">'NetControl_SHUNT'</span><span class="p">:</span> <span class="n">Log_ID</span><span class="o">.</span><span class="n">NetControl_SHUNT</span><span class="p">,</span>
-    <span class="s1">'REDIRECT'</span><span class="p">:</span> <span class="n">NetControl_RuleType</span><span class="o">.</span><span class="n">REDIRECT</span><span class="p">,</span>
-    <span class="s1">'REMOVED'</span><span class="p">:</span> <span class="n">NetControl_InfoState</span><span class="o">.</span><span class="n">REMOVED</span><span class="p">,</span>
-    <span class="s1">'REQUESTED'</span><span class="p">:</span> <span class="n">NetControl_InfoState</span><span class="o">.</span><span class="n">REQUESTED</span><span class="p">,</span>
-    <span class="s1">'RULE'</span><span class="p">:</span> <span class="n">NetControl_InfoCategory</span><span class="o">.</span><span class="n">RULE</span><span class="p">,</span>
-    <span class="s1">'RuleType'</span><span class="p">:</span> <span class="n">NetControl_RuleType</span><span class="p">,</span>
-    <span class="s1">'SEEN_AGAIN'</span><span class="p">:</span> <span class="n">NetControl_CatchReleaseActions</span><span class="o">.</span><span class="n">SEEN_AGAIN</span><span class="p">,</span>
-    <span class="s1">'SUCCEEDED'</span><span class="p">:</span> <span class="n">NetControl_InfoState</span><span class="o">.</span><span class="n">SUCCEEDED</span><span class="p">,</span>
-    <span class="s1">'TIMEOUT'</span><span class="p">:</span> <span class="n">NetControl_InfoState</span><span class="o">.</span><span class="n">TIMEOUT</span><span class="p">,</span>
-    <span class="s1">'TargetType'</span><span class="p">:</span> <span class="n">NetControl_TargetType</span><span class="p">,</span>
-    <span class="s1">'UNBLOCK'</span><span class="p">:</span> <span class="n">NetControl_CatchReleaseActions</span><span class="o">.</span><span class="n">UNBLOCK</span><span class="p">,</span>
-    <span class="s1">'WHITELIST'</span><span class="p">:</span> <span class="n">NetControl_RuleType</span><span class="o">.</span><span class="n">WHITELIST</span><span class="p">,</span>
-<span class="p">}</span>
-
-<span class="n">builtins</span><span class="o">.</span><span class="n">globals</span><span class="p">()[</span><span class="s1">'ZLogging::Notice'</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s1">'ACTION_ADD_GEODATA'</span><span class="p">:</span> <span class="n">Notice_Action</span><span class="o">.</span><span class="n">ACTION_ADD_GEODATA</span><span class="p">,</span>
-    <span class="s1">'ACTION_ALARM'</span><span class="p">:</span> <span class="n">Notice_Action</span><span class="o">.</span><span class="n">ACTION_ALARM</span><span class="p">,</span>
-    <span class="s1">'ACTION_DROP'</span><span class="p">:</span> <span class="n">Notice_Action</span><span class="o">.</span><span class="n">ACTION_DROP</span><span class="p">,</span>
-    <span class="s1">'ACTION_EMAIL'</span><span class="p">:</span> <span class="n">Notice_Action</span><span class="o">.</span><span class="n">ACTION_EMAIL</span><span class="p">,</span>
-    <span class="s1">'ACTION_EMAIL_ADMIN'</span><span class="p">:</span> <span class="n">Notice_Action</span><span class="o">.</span><span class="n">ACTION_EMAIL_ADMIN</span><span class="p">,</span>
-    <span class="s1">'ACTION_LOG'</span><span class="p">:</span> <span class="n">Notice_Action</span><span class="o">.</span><span class="n">ACTION_LOG</span><span class="p">,</span>
-    <span class="s1">'ACTION_NONE'</span><span class="p">:</span> <span class="n">Notice_Action</span><span class="o">.</span><span class="n">ACTION_NONE</span><span class="p">,</span>
-    <span class="s1">'ACTION_PAGE'</span><span class="p">:</span> <span class="n">Notice_Action</span><span class="o">.</span><span class="n">ACTION_PAGE</span><span class="p">,</span>
-    <span class="s1">'Action'</span><span class="p">:</span> <span class="n">Notice_Action</span><span class="p">,</span>
-    <span class="s1">'Notice_ALARM_LOG'</span><span class="p">:</span> <span class="n">Log_ID</span><span class="o">.</span><span class="n">Notice_ALARM_LOG</span><span class="p">,</span>
-    <span class="s1">'Notice_LOG'</span><span class="p">:</span> <span class="n">Log_ID</span><span class="o">.</span><span class="n">Notice_LOG</span><span class="p">,</span>
-    <span class="s1">'Tally'</span><span class="p">:</span> <span class="n">Notice_Type</span><span class="o">.</span><span class="n">Tally</span><span class="p">,</span>
-    <span class="s1">'Type'</span><span class="p">:</span> <span class="n">Notice_Type</span><span class="p">,</span>
-<span class="p">}</span>
-
-<span class="n">builtins</span><span class="o">.</span><span class="n">globals</span><span class="p">()[</span><span class="s1">'ZLogging::OCSP'</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s1">'OCSP_LOG'</span><span class="p">:</span> <span class="n">Log_ID</span><span class="o">.</span><span class="n">OCSP_LOG</span><span class="p">,</span>
-<span class="p">}</span>
-
-<span class="n">builtins</span><span class="o">.</span><span class="n">globals</span><span class="p">()[</span><span class="s1">'ZLogging::OS'</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s1">'OS_WINDOWS'</span><span class="p">:</span> <span class="n">Software_Type</span><span class="o">.</span><span class="n">OS_WINDOWS</span><span class="p">,</span>
-<span class="p">}</span>
-
-<span class="n">builtins</span><span class="o">.</span><span class="n">globals</span><span class="p">()[</span><span class="s1">'ZLogging::OpenFlow'</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s1">'BROKER'</span><span class="p">:</span> <span class="n">OpenFlow_Plugin</span><span class="o">.</span><span class="n">BROKER</span><span class="p">,</span>
-    <span class="s1">'INVALID'</span><span class="p">:</span> <span class="n">OpenFlow_Plugin</span><span class="o">.</span><span class="n">INVALID</span><span class="p">,</span>
-    <span class="s1">'OFLOG'</span><span class="p">:</span> <span class="n">OpenFlow_Plugin</span><span class="o">.</span><span class="n">OFLOG</span><span class="p">,</span>
-    <span class="s1">'OFPAT_ENQUEUE'</span><span class="p">:</span> <span class="n">OpenFlow_ofp_action_type</span><span class="o">.</span><span class="n">OFPAT_ENQUEUE</span><span class="p">,</span>
-    <span class="s1">'OFPAT_OUTPUT'</span><span class="p">:</span> <span class="n">OpenFlow_ofp_action_type</span><span class="o">.</span><span class="n">OFPAT_OUTPUT</span><span class="p">,</span>
-    <span class="s1">'OFPAT_SET_DL_DST'</span><span class="p">:</span> <span class="n">OpenFlow_ofp_action_type</span><span class="o">.</span><span class="n">OFPAT_SET_DL_DST</span><span class="p">,</span>
-    <span class="s1">'OFPAT_SET_DL_SRC'</span><span class="p">:</span> <span class="n">OpenFlow_ofp_action_type</span><span class="o">.</span><span class="n">OFPAT_SET_DL_SRC</span><span class="p">,</span>
-    <span class="s1">'OFPAT_SET_NW_DST'</span><span class="p">:</span> <span class="n">OpenFlow_ofp_action_type</span><span class="o">.</span><span class="n">OFPAT_SET_NW_DST</span><span class="p">,</span>
-    <span class="s1">'OFPAT_SET_NW_SRC'</span><span class="p">:</span> <span class="n">OpenFlow_ofp_action_type</span><span class="o">.</span><span class="n">OFPAT_SET_NW_SRC</span><span class="p">,</span>
-    <span class="s1">'OFPAT_SET_NW_TOS'</span><span class="p">:</span> <span class="n">OpenFlow_ofp_action_type</span><span class="o">.</span><span class="n">OFPAT_SET_NW_TOS</span><span class="p">,</span>
-    <span class="s1">'OFPAT_SET_TP_DST'</span><span class="p">:</span> <span class="n">OpenFlow_ofp_action_type</span><span class="o">.</span><span class="n">OFPAT_SET_TP_DST</span><span class="p">,</span>
-    <span class="s1">'OFPAT_SET_TP_SRC'</span><span class="p">:</span> <span class="n">OpenFlow_ofp_action_type</span><span class="o">.</span><span class="n">OFPAT_SET_TP_SRC</span><span class="p">,</span>
-    <span class="s1">'OFPAT_SET_VLAN_PCP'</span><span class="p">:</span> <span class="n">OpenFlow_ofp_action_type</span><span class="o">.</span><span class="n">OFPAT_SET_VLAN_PCP</span><span class="p">,</span>
-    <span class="s1">'OFPAT_SET_VLAN_VID'</span><span class="p">:</span> <span class="n">OpenFlow_ofp_action_type</span><span class="o">.</span><span class="n">OFPAT_SET_VLAN_VID</span><span class="p">,</span>
-    <span class="s1">'OFPAT_STRIP_VLAN'</span><span class="p">:</span> <span class="n">OpenFlow_ofp_action_type</span><span class="o">.</span><span class="n">OFPAT_STRIP_VLAN</span><span class="p">,</span>
-    <span class="s1">'OFPAT_VENDOR'</span><span class="p">:</span> <span class="n">OpenFlow_ofp_action_type</span><span class="o">.</span><span class="n">OFPAT_VENDOR</span><span class="p">,</span>
-    <span class="s1">'OFPC_FRAG_DROP'</span><span class="p">:</span> <span class="n">OpenFlow_ofp_config_flags</span><span class="o">.</span><span class="n">OFPC_FRAG_DROP</span><span class="p">,</span>
-    <span class="s1">'OFPC_FRAG_MASK'</span><span class="p">:</span> <span class="n">OpenFlow_ofp_config_flags</span><span class="o">.</span><span class="n">OFPC_FRAG_MASK</span><span class="p">,</span>
-    <span class="s1">'OFPC_FRAG_NORMAL'</span><span class="p">:</span> <span class="n">OpenFlow_ofp_config_flags</span><span class="o">.</span><span class="n">OFPC_FRAG_NORMAL</span><span class="p">,</span>
-    <span class="s1">'OFPC_FRAG_REASM'</span><span class="p">:</span> <span class="n">OpenFlow_ofp_config_flags</span><span class="o">.</span><span class="n">OFPC_FRAG_REASM</span><span class="p">,</span>
-    <span class="s1">'OFPFC_ADD'</span><span class="p">:</span> <span class="n">OpenFlow_ofp_flow_mod_command</span><span class="o">.</span><span class="n">OFPFC_ADD</span><span class="p">,</span>
-    <span class="s1">'OFPFC_DELETE'</span><span class="p">:</span> <span class="n">OpenFlow_ofp_flow_mod_command</span><span class="o">.</span><span class="n">OFPFC_DELETE</span><span class="p">,</span>
-    <span class="s1">'OFPFC_DELETE_STRICT'</span><span class="p">:</span> <span class="n">OpenFlow_ofp_flow_mod_command</span><span class="o">.</span><span class="n">OFPFC_DELETE_STRICT</span><span class="p">,</span>
-    <span class="s1">'OFPFC_MODIFY'</span><span class="p">:</span> <span class="n">OpenFlow_ofp_flow_mod_command</span><span class="o">.</span><span class="n">OFPFC_MODIFY</span><span class="p">,</span>
-    <span class="s1">'OFPFC_MODIFY_STRICT'</span><span class="p">:</span> <span class="n">OpenFlow_ofp_flow_mod_command</span><span class="o">.</span><span class="n">OFPFC_MODIFY_STRICT</span><span class="p">,</span>
-    <span class="s1">'OpenFlow_LOG'</span><span class="p">:</span> <span class="n">Log_ID</span><span class="o">.</span><span class="n">OpenFlow_LOG</span><span class="p">,</span>
-    <span class="s1">'Plugin'</span><span class="p">:</span> <span class="n">OpenFlow_Plugin</span><span class="p">,</span>
-    <span class="s1">'RYU'</span><span class="p">:</span> <span class="n">OpenFlow_Plugin</span><span class="o">.</span><span class="n">RYU</span><span class="p">,</span>
-    <span class="s1">'ofp_action_type'</span><span class="p">:</span> <span class="n">OpenFlow_ofp_action_type</span><span class="p">,</span>
-    <span class="s1">'ofp_config_flags'</span><span class="p">:</span> <span class="n">OpenFlow_ofp_config_flags</span><span class="p">,</span>
-    <span class="s1">'ofp_flow_mod_command'</span><span class="p">:</span> <span class="n">OpenFlow_ofp_flow_mod_command</span><span class="p">,</span>
-<span class="p">}</span>
-
-<span class="n">builtins</span><span class="o">.</span><span class="n">globals</span><span class="p">()[</span><span class="s1">'ZLogging::PE'</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s1">'PE_LOG'</span><span class="p">:</span> <span class="n">Log_ID</span><span class="o">.</span><span class="n">PE_LOG</span><span class="p">,</span>
-<span class="p">}</span>
-
 <span class="n">builtins</span><span class="o">.</span><span class="n">globals</span><span class="p">()[</span><span class="s1">'ZLogging::PacketAnalyzer'</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
     <span class="s1">'ANALYZER_ARP'</span><span class="p">:</span> <span class="n">PacketAnalyzer_Tag</span><span class="o">.</span><span class="n">ANALYZER_ARP</span><span class="p">,</span>
     <span class="s1">'ANALYZER_AYIYA'</span><span class="p">:</span> <span class="n">PacketAnalyzer_Tag</span><span class="o">.</span><span class="n">ANALYZER_AYIYA</span><span class="p">,</span>
@@ -1178,47 +539,6 @@
     <span class="s1">'ANALYZER_VNTAG'</span><span class="p">:</span> <span class="n">PacketAnalyzer_Tag</span><span class="o">.</span><span class="n">ANALYZER_VNTAG</span><span class="p">,</span>
     <span class="s1">'ANALYZER_VXLAN'</span><span class="p">:</span> <span class="n">PacketAnalyzer_Tag</span><span class="o">.</span><span class="n">ANALYZER_VXLAN</span><span class="p">,</span>
     <span class="s1">'Tag'</span><span class="p">:</span> <span class="n">PacketAnalyzer_Tag</span><span class="p">,</span>
-<span class="p">}</span>
-
-<span class="n">builtins</span><span class="o">.</span><span class="n">globals</span><span class="p">()[</span><span class="s1">'ZLogging::PacketFilter'</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s1">'PacketFilter_Cannot_BPF_Shunt_Conn'</span><span class="p">:</span> <span class="n">Notice_Type</span><span class="o">.</span><span class="n">PacketFilter_Cannot_BPF_Shunt_Conn</span><span class="p">,</span>
-    <span class="s1">'PacketFilter_Compile_Failure'</span><span class="p">:</span> <span class="n">Notice_Type</span><span class="o">.</span><span class="n">PacketFilter_Compile_Failure</span><span class="p">,</span>
-    <span class="s1">'PacketFilter_DefaultPcapFilter'</span><span class="p">:</span> <span class="n">zeek_PcapFilterID</span><span class="o">.</span><span class="n">PacketFilter_DefaultPcapFilter</span><span class="p">,</span>
-    <span class="s1">'PacketFilter_Dropped_Packets'</span><span class="p">:</span> <span class="n">Notice_Type</span><span class="o">.</span><span class="n">PacketFilter_Dropped_Packets</span><span class="p">,</span>
-    <span class="s1">'PacketFilter_FilterTester'</span><span class="p">:</span> <span class="n">zeek_PcapFilterID</span><span class="o">.</span><span class="n">PacketFilter_FilterTester</span><span class="p">,</span>
-    <span class="s1">'PacketFilter_Install_Failure'</span><span class="p">:</span> <span class="n">Notice_Type</span><span class="o">.</span><span class="n">PacketFilter_Install_Failure</span><span class="p">,</span>
-    <span class="s1">'PacketFilter_LOG'</span><span class="p">:</span> <span class="n">Log_ID</span><span class="o">.</span><span class="n">PacketFilter_LOG</span><span class="p">,</span>
-    <span class="s1">'PacketFilter_No_More_Conn_Shunts_Available'</span><span class="p">:</span> <span class="n">Notice_Type</span><span class="o">.</span><span class="n">PacketFilter_No_More_Conn_Shunts_Available</span><span class="p">,</span>
-    <span class="s1">'PacketFilter_Too_Long_To_Compile_Filter'</span><span class="p">:</span> <span class="n">Notice_Type</span><span class="o">.</span><span class="n">PacketFilter_Too_Long_To_Compile_Filter</span><span class="p">,</span>
-<span class="p">}</span>
-
-<span class="n">builtins</span><span class="o">.</span><span class="n">globals</span><span class="p">()[</span><span class="s1">'ZLogging::Pcap'</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s1">'fatal'</span><span class="p">:</span> <span class="n">Pcap_filter_state</span><span class="o">.</span><span class="n">fatal</span><span class="p">,</span>
-    <span class="s1">'filter_state'</span><span class="p">:</span> <span class="n">Pcap_filter_state</span><span class="p">,</span>
-    <span class="s1">'ok'</span><span class="p">:</span> <span class="n">Pcap_filter_state</span><span class="o">.</span><span class="n">ok</span><span class="p">,</span>
-    <span class="s1">'warning'</span><span class="p">:</span> <span class="n">Pcap_filter_state</span><span class="o">.</span><span class="n">warning</span><span class="p">,</span>
-<span class="p">}</span>
-
-<span class="n">builtins</span><span class="o">.</span><span class="n">globals</span><span class="p">()[</span><span class="s1">'ZLogging::ProtocolDetector'</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s1">'BOTH'</span><span class="p">:</span> <span class="n">ProtocolDetector_dir</span><span class="o">.</span><span class="n">BOTH</span><span class="p">,</span>
-    <span class="s1">'INCOMING'</span><span class="p">:</span> <span class="n">ProtocolDetector_dir</span><span class="o">.</span><span class="n">INCOMING</span><span class="p">,</span>
-    <span class="s1">'NONE'</span><span class="p">:</span> <span class="n">ProtocolDetector_dir</span><span class="o">.</span><span class="n">NONE</span><span class="p">,</span>
-    <span class="s1">'OUTGOING'</span><span class="p">:</span> <span class="n">ProtocolDetector_dir</span><span class="o">.</span><span class="n">OUTGOING</span><span class="p">,</span>
-    <span class="s1">'ProtocolDetector_Protocol_Found'</span><span class="p">:</span> <span class="n">Notice_Type</span><span class="o">.</span><span class="n">ProtocolDetector_Protocol_Found</span><span class="p">,</span>
-    <span class="s1">'ProtocolDetector_Server_Found'</span><span class="p">:</span> <span class="n">Notice_Type</span><span class="o">.</span><span class="n">ProtocolDetector_Server_Found</span><span class="p">,</span>
-    <span class="s1">'dir'</span><span class="p">:</span> <span class="n">ProtocolDetector_dir</span><span class="p">,</span>
-<span class="p">}</span>
-
-<span class="n">builtins</span><span class="o">.</span><span class="n">globals</span><span class="p">()[</span><span class="s1">'ZLogging::RADIUS'</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s1">'RADIUS_LOG'</span><span class="p">:</span> <span class="n">Log_ID</span><span class="o">.</span><span class="n">RADIUS_LOG</span><span class="p">,</span>
-<span class="p">}</span>
-
-<span class="n">builtins</span><span class="o">.</span><span class="n">globals</span><span class="p">()[</span><span class="s1">'ZLogging::RDP'</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s1">'RDP_LOG'</span><span class="p">:</span> <span class="n">Log_ID</span><span class="o">.</span><span class="n">RDP_LOG</span><span class="p">,</span>
-<span class="p">}</span>
-
-<span class="n">builtins</span><span class="o">.</span><span class="n">globals</span><span class="p">()[</span><span class="s1">'ZLogging::RFB'</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s1">'RFB_LOG'</span><span class="p">:</span> <span class="n">Log_ID</span><span class="o">.</span><span class="n">RFB_LOG</span><span class="p">,</span>
 <span class="p">}</span>
 
 <span class="n">builtins</span><span class="o">.</span><span class="n">globals</span><span class="p">()[</span><span class="s1">'ZLogging::Redis'</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
@@ -1281,254 +601,6 @@
     <span class="s1">'ReplyType_Undef'</span><span class="p">:</span> <span class="n">Redis_ReplyType</span><span class="o">.</span><span class="n">ReplyType_Undef</span><span class="p">,</span>
 <span class="p">}</span>
 
-<span class="n">builtins</span><span class="o">.</span><span class="n">globals</span><span class="p">()[</span><span class="s1">'ZLogging::Reporter'</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s1">'ERROR'</span><span class="p">:</span> <span class="n">Reporter_Level</span><span class="o">.</span><span class="n">ERROR</span><span class="p">,</span>
-    <span class="s1">'INFO'</span><span class="p">:</span> <span class="n">Reporter_Level</span><span class="o">.</span><span class="n">INFO</span><span class="p">,</span>
-    <span class="s1">'Level'</span><span class="p">:</span> <span class="n">Reporter_Level</span><span class="p">,</span>
-    <span class="s1">'Reporter_LOG'</span><span class="p">:</span> <span class="n">Log_ID</span><span class="o">.</span><span class="n">Reporter_LOG</span><span class="p">,</span>
-    <span class="s1">'WARNING'</span><span class="p">:</span> <span class="n">Reporter_Level</span><span class="o">.</span><span class="n">WARNING</span><span class="p">,</span>
-<span class="p">}</span>
-
-<span class="n">builtins</span><span class="o">.</span><span class="n">globals</span><span class="p">()[</span><span class="s1">'ZLogging::SIP'</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s1">'SIP_LOG'</span><span class="p">:</span> <span class="n">Log_ID</span><span class="o">.</span><span class="n">SIP_LOG</span><span class="p">,</span>
-<span class="p">}</span>
-
-<span class="n">builtins</span><span class="o">.</span><span class="n">globals</span><span class="p">()[</span><span class="s1">'ZLogging::SMB'</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s1">'Action'</span><span class="p">:</span> <span class="n">SMB_Action</span><span class="p">,</span>
-    <span class="s1">'FILE_CLOSE'</span><span class="p">:</span> <span class="n">SMB_Action</span><span class="o">.</span><span class="n">FILE_CLOSE</span><span class="p">,</span>
-    <span class="s1">'FILE_DELETE'</span><span class="p">:</span> <span class="n">SMB_Action</span><span class="o">.</span><span class="n">FILE_DELETE</span><span class="p">,</span>
-    <span class="s1">'FILE_OPEN'</span><span class="p">:</span> <span class="n">SMB_Action</span><span class="o">.</span><span class="n">FILE_OPEN</span><span class="p">,</span>
-    <span class="s1">'FILE_READ'</span><span class="p">:</span> <span class="n">SMB_Action</span><span class="o">.</span><span class="n">FILE_READ</span><span class="p">,</span>
-    <span class="s1">'FILE_RENAME'</span><span class="p">:</span> <span class="n">SMB_Action</span><span class="o">.</span><span class="n">FILE_RENAME</span><span class="p">,</span>
-    <span class="s1">'FILE_SET_ATTRIBUTE'</span><span class="p">:</span> <span class="n">SMB_Action</span><span class="o">.</span><span class="n">FILE_SET_ATTRIBUTE</span><span class="p">,</span>
-    <span class="s1">'FILE_WRITE'</span><span class="p">:</span> <span class="n">SMB_Action</span><span class="o">.</span><span class="n">FILE_WRITE</span><span class="p">,</span>
-    <span class="s1">'PIPE_CLOSE'</span><span class="p">:</span> <span class="n">SMB_Action</span><span class="o">.</span><span class="n">PIPE_CLOSE</span><span class="p">,</span>
-    <span class="s1">'PIPE_OPEN'</span><span class="p">:</span> <span class="n">SMB_Action</span><span class="o">.</span><span class="n">PIPE_OPEN</span><span class="p">,</span>
-    <span class="s1">'PIPE_READ'</span><span class="p">:</span> <span class="n">SMB_Action</span><span class="o">.</span><span class="n">PIPE_READ</span><span class="p">,</span>
-    <span class="s1">'PIPE_WRITE'</span><span class="p">:</span> <span class="n">SMB_Action</span><span class="o">.</span><span class="n">PIPE_WRITE</span><span class="p">,</span>
-    <span class="s1">'PRINT_CLOSE'</span><span class="p">:</span> <span class="n">SMB_Action</span><span class="o">.</span><span class="n">PRINT_CLOSE</span><span class="p">,</span>
-    <span class="s1">'PRINT_OPEN'</span><span class="p">:</span> <span class="n">SMB_Action</span><span class="o">.</span><span class="n">PRINT_OPEN</span><span class="p">,</span>
-    <span class="s1">'PRINT_READ'</span><span class="p">:</span> <span class="n">SMB_Action</span><span class="o">.</span><span class="n">PRINT_READ</span><span class="p">,</span>
-    <span class="s1">'PRINT_WRITE'</span><span class="p">:</span> <span class="n">SMB_Action</span><span class="o">.</span><span class="n">PRINT_WRITE</span><span class="p">,</span>
-    <span class="s1">'SMB_CMD_LOG'</span><span class="p">:</span> <span class="n">Log_ID</span><span class="o">.</span><span class="n">SMB_CMD_LOG</span><span class="p">,</span>
-    <span class="s1">'SMB_FILES_LOG'</span><span class="p">:</span> <span class="n">Log_ID</span><span class="o">.</span><span class="n">SMB_FILES_LOG</span><span class="p">,</span>
-    <span class="s1">'SMB_IN_FILE_NAME'</span><span class="p">:</span> <span class="n">Intel_Where</span><span class="o">.</span><span class="n">SMB_IN_FILE_NAME</span><span class="p">,</span>
-    <span class="s1">'SMB_MAPPING_LOG'</span><span class="p">:</span> <span class="n">Log_ID</span><span class="o">.</span><span class="n">SMB_MAPPING_LOG</span><span class="p">,</span>
-<span class="p">}</span>
-
-<span class="n">builtins</span><span class="o">.</span><span class="n">globals</span><span class="p">()[</span><span class="s1">'ZLogging::SMTP'</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s1">'SMTP_Blocklist_Blocked_Host'</span><span class="p">:</span> <span class="n">Notice_Type</span><span class="o">.</span><span class="n">SMTP_Blocklist_Blocked_Host</span><span class="p">,</span>
-    <span class="s1">'SMTP_Blocklist_Error_Message'</span><span class="p">:</span> <span class="n">Notice_Type</span><span class="o">.</span><span class="n">SMTP_Blocklist_Error_Message</span><span class="p">,</span>
-    <span class="s1">'SMTP_IN_CC'</span><span class="p">:</span> <span class="n">Intel_Where</span><span class="o">.</span><span class="n">SMTP_IN_CC</span><span class="p">,</span>
-    <span class="s1">'SMTP_IN_FROM'</span><span class="p">:</span> <span class="n">Intel_Where</span><span class="o">.</span><span class="n">SMTP_IN_FROM</span><span class="p">,</span>
-    <span class="s1">'SMTP_IN_HEADER'</span><span class="p">:</span> <span class="n">Intel_Where</span><span class="o">.</span><span class="n">SMTP_IN_HEADER</span><span class="p">,</span>
-    <span class="s1">'SMTP_IN_MAIL_FROM'</span><span class="p">:</span> <span class="n">Intel_Where</span><span class="o">.</span><span class="n">SMTP_IN_MAIL_FROM</span><span class="p">,</span>
-    <span class="s1">'SMTP_IN_MESSAGE'</span><span class="p">:</span> <span class="n">Intel_Where</span><span class="o">.</span><span class="n">SMTP_IN_MESSAGE</span><span class="p">,</span>
-    <span class="s1">'SMTP_IN_RCPT_TO'</span><span class="p">:</span> <span class="n">Intel_Where</span><span class="o">.</span><span class="n">SMTP_IN_RCPT_TO</span><span class="p">,</span>
-    <span class="s1">'SMTP_IN_RECEIVED_HEADER'</span><span class="p">:</span> <span class="n">Intel_Where</span><span class="o">.</span><span class="n">SMTP_IN_RECEIVED_HEADER</span><span class="p">,</span>
-    <span class="s1">'SMTP_IN_REPLY_TO'</span><span class="p">:</span> <span class="n">Intel_Where</span><span class="o">.</span><span class="n">SMTP_IN_REPLY_TO</span><span class="p">,</span>
-    <span class="s1">'SMTP_IN_TO'</span><span class="p">:</span> <span class="n">Intel_Where</span><span class="o">.</span><span class="n">SMTP_IN_TO</span><span class="p">,</span>
-    <span class="s1">'SMTP_IN_X_ORIGINATING_IP_HEADER'</span><span class="p">:</span> <span class="n">Intel_Where</span><span class="o">.</span><span class="n">SMTP_IN_X_ORIGINATING_IP_HEADER</span><span class="p">,</span>
-    <span class="s1">'SMTP_LOG'</span><span class="p">:</span> <span class="n">Log_ID</span><span class="o">.</span><span class="n">SMTP_LOG</span><span class="p">,</span>
-    <span class="s1">'SMTP_MAIL_CLIENT'</span><span class="p">:</span> <span class="n">Software_Type</span><span class="o">.</span><span class="n">SMTP_MAIL_CLIENT</span><span class="p">,</span>
-    <span class="s1">'SMTP_MAIL_SERVER'</span><span class="p">:</span> <span class="n">Software_Type</span><span class="o">.</span><span class="n">SMTP_MAIL_SERVER</span><span class="p">,</span>
-    <span class="s1">'SMTP_Suspicious_Origination'</span><span class="p">:</span> <span class="n">Notice_Type</span><span class="o">.</span><span class="n">SMTP_Suspicious_Origination</span><span class="p">,</span>
-    <span class="s1">'SMTP_WEBMAIL_SERVER'</span><span class="p">:</span> <span class="n">Software_Type</span><span class="o">.</span><span class="n">SMTP_WEBMAIL_SERVER</span><span class="p">,</span>
-<span class="p">}</span>
-
-<span class="n">builtins</span><span class="o">.</span><span class="n">globals</span><span class="p">()[</span><span class="s1">'ZLogging::SNMP'</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s1">'SNMP_LOG'</span><span class="p">:</span> <span class="n">Log_ID</span><span class="o">.</span><span class="n">SNMP_LOG</span><span class="p">,</span>
-<span class="p">}</span>
-
-<span class="n">builtins</span><span class="o">.</span><span class="n">globals</span><span class="p">()[</span><span class="s1">'ZLogging::SOCKS'</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s1">'CONNECTION'</span><span class="p">:</span> <span class="n">SOCKS_RequestType</span><span class="o">.</span><span class="n">CONNECTION</span><span class="p">,</span>
-    <span class="s1">'PORT'</span><span class="p">:</span> <span class="n">SOCKS_RequestType</span><span class="o">.</span><span class="n">PORT</span><span class="p">,</span>
-    <span class="s1">'RequestType'</span><span class="p">:</span> <span class="n">SOCKS_RequestType</span><span class="p">,</span>
-    <span class="s1">'SOCKS_LOG'</span><span class="p">:</span> <span class="n">Log_ID</span><span class="o">.</span><span class="n">SOCKS_LOG</span><span class="p">,</span>
-    <span class="s1">'UDP_ASSOCIATE'</span><span class="p">:</span> <span class="n">SOCKS_RequestType</span><span class="o">.</span><span class="n">UDP_ASSOCIATE</span><span class="p">,</span>
-<span class="p">}</span>
-
-<span class="n">builtins</span><span class="o">.</span><span class="n">globals</span><span class="p">()[</span><span class="s1">'ZLogging::SSH'</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s1">'SSH_CLIENT'</span><span class="p">:</span> <span class="n">Software_Type</span><span class="o">.</span><span class="n">SSH_CLIENT</span><span class="p">,</span>
-    <span class="s1">'SSH_IN_SERVER_HOST_KEY'</span><span class="p">:</span> <span class="n">Intel_Where</span><span class="o">.</span><span class="n">SSH_IN_SERVER_HOST_KEY</span><span class="p">,</span>
-    <span class="s1">'SSH_Interesting_Hostname_Login'</span><span class="p">:</span> <span class="n">Notice_Type</span><span class="o">.</span><span class="n">SSH_Interesting_Hostname_Login</span><span class="p">,</span>
-    <span class="s1">'SSH_LOG'</span><span class="p">:</span> <span class="n">Log_ID</span><span class="o">.</span><span class="n">SSH_LOG</span><span class="p">,</span>
-    <span class="s1">'SSH_Login_By_Password_Guesser'</span><span class="p">:</span> <span class="n">Notice_Type</span><span class="o">.</span><span class="n">SSH_Login_By_Password_Guesser</span><span class="p">,</span>
-    <span class="s1">'SSH_Password_Guessing'</span><span class="p">:</span> <span class="n">Notice_Type</span><span class="o">.</span><span class="n">SSH_Password_Guessing</span><span class="p">,</span>
-    <span class="s1">'SSH_SERVER'</span><span class="p">:</span> <span class="n">Software_Type</span><span class="o">.</span><span class="n">SSH_SERVER</span><span class="p">,</span>
-    <span class="s1">'SSH_SUCCESSFUL_LOGIN'</span><span class="p">:</span> <span class="n">Intel_Where</span><span class="o">.</span><span class="n">SSH_SUCCESSFUL_LOGIN</span><span class="p">,</span>
-    <span class="s1">'SSH_Watched_Country_Login'</span><span class="p">:</span> <span class="n">Notice_Type</span><span class="o">.</span><span class="n">SSH_Watched_Country_Login</span><span class="p">,</span>
-<span class="p">}</span>
-
-<span class="n">builtins</span><span class="o">.</span><span class="n">globals</span><span class="p">()[</span><span class="s1">'ZLogging::SSL'</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s1">'SCT_OCSP_EXT'</span><span class="p">:</span> <span class="n">SSL_SctSource</span><span class="o">.</span><span class="n">SCT_OCSP_EXT</span><span class="p">,</span>
-    <span class="s1">'SCT_TLS_EXT'</span><span class="p">:</span> <span class="n">SSL_SctSource</span><span class="o">.</span><span class="n">SCT_TLS_EXT</span><span class="p">,</span>
-    <span class="s1">'SCT_X509_EXT'</span><span class="p">:</span> <span class="n">SSL_SctSource</span><span class="o">.</span><span class="n">SCT_X509_EXT</span><span class="p">,</span>
-    <span class="s1">'SSL_Certificate_Expired'</span><span class="p">:</span> <span class="n">Notice_Type</span><span class="o">.</span><span class="n">SSL_Certificate_Expired</span><span class="p">,</span>
-    <span class="s1">'SSL_Certificate_Expires_Soon'</span><span class="p">:</span> <span class="n">Notice_Type</span><span class="o">.</span><span class="n">SSL_Certificate_Expires_Soon</span><span class="p">,</span>
-    <span class="s1">'SSL_Certificate_Not_Valid_Yet'</span><span class="p">:</span> <span class="n">Notice_Type</span><span class="o">.</span><span class="n">SSL_Certificate_Not_Valid_Yet</span><span class="p">,</span>
-    <span class="s1">'SSL_IN_SERVER_NAME'</span><span class="p">:</span> <span class="n">Intel_Where</span><span class="o">.</span><span class="n">SSL_IN_SERVER_NAME</span><span class="p">,</span>
-    <span class="s1">'SSL_Invalid_Ocsp_Response'</span><span class="p">:</span> <span class="n">Notice_Type</span><span class="o">.</span><span class="n">SSL_Invalid_Ocsp_Response</span><span class="p">,</span>
-    <span class="s1">'SSL_Invalid_Server_Cert'</span><span class="p">:</span> <span class="n">Notice_Type</span><span class="o">.</span><span class="n">SSL_Invalid_Server_Cert</span><span class="p">,</span>
-    <span class="s1">'SSL_LOG'</span><span class="p">:</span> <span class="n">Log_ID</span><span class="o">.</span><span class="n">SSL_LOG</span><span class="p">,</span>
-    <span class="s1">'SSL_Old_Version'</span><span class="p">:</span> <span class="n">Notice_Type</span><span class="o">.</span><span class="n">SSL_Old_Version</span><span class="p">,</span>
-    <span class="s1">'SSL_Weak_Cipher'</span><span class="p">:</span> <span class="n">Notice_Type</span><span class="o">.</span><span class="n">SSL_Weak_Cipher</span><span class="p">,</span>
-    <span class="s1">'SSL_Weak_Key'</span><span class="p">:</span> <span class="n">Notice_Type</span><span class="o">.</span><span class="n">SSL_Weak_Key</span><span class="p">,</span>
-    <span class="s1">'SctSource'</span><span class="p">:</span> <span class="n">SSL_SctSource</span><span class="p">,</span>
-<span class="p">}</span>
-
-<span class="n">builtins</span><span class="o">.</span><span class="n">globals</span><span class="p">()[</span><span class="s1">'ZLogging::Scan'</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s1">'Scan_Address_Scan'</span><span class="p">:</span> <span class="n">Notice_Type</span><span class="o">.</span><span class="n">Scan_Address_Scan</span><span class="p">,</span>
-    <span class="s1">'Scan_Port_Scan'</span><span class="p">:</span> <span class="n">Notice_Type</span><span class="o">.</span><span class="n">Scan_Port_Scan</span><span class="p">,</span>
-<span class="p">}</span>
-
-<span class="n">builtins</span><span class="o">.</span><span class="n">globals</span><span class="p">()[</span><span class="s1">'ZLogging::Signatures'</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s1">'Action'</span><span class="p">:</span> <span class="n">Signatures_Action</span><span class="p">,</span>
-    <span class="s1">'SIG_ALARM'</span><span class="p">:</span> <span class="n">Signatures_Action</span><span class="o">.</span><span class="n">SIG_ALARM</span><span class="p">,</span>
-    <span class="s1">'SIG_ALARM_ONCE'</span><span class="p">:</span> <span class="n">Signatures_Action</span><span class="o">.</span><span class="n">SIG_ALARM_ONCE</span><span class="p">,</span>
-    <span class="s1">'SIG_ALARM_PER_ORIG'</span><span class="p">:</span> <span class="n">Signatures_Action</span><span class="o">.</span><span class="n">SIG_ALARM_PER_ORIG</span><span class="p">,</span>
-    <span class="s1">'SIG_COUNT_PER_RESP'</span><span class="p">:</span> <span class="n">Signatures_Action</span><span class="o">.</span><span class="n">SIG_COUNT_PER_RESP</span><span class="p">,</span>
-    <span class="s1">'SIG_FILE_BUT_NO_SCAN'</span><span class="p">:</span> <span class="n">Signatures_Action</span><span class="o">.</span><span class="n">SIG_FILE_BUT_NO_SCAN</span><span class="p">,</span>
-    <span class="s1">'SIG_IGNORE'</span><span class="p">:</span> <span class="n">Signatures_Action</span><span class="o">.</span><span class="n">SIG_IGNORE</span><span class="p">,</span>
-    <span class="s1">'SIG_LOG'</span><span class="p">:</span> <span class="n">Signatures_Action</span><span class="o">.</span><span class="n">SIG_LOG</span><span class="p">,</span>
-    <span class="s1">'SIG_QUIET'</span><span class="p">:</span> <span class="n">Signatures_Action</span><span class="o">.</span><span class="n">SIG_QUIET</span><span class="p">,</span>
-    <span class="s1">'SIG_SUMMARY'</span><span class="p">:</span> <span class="n">Signatures_Action</span><span class="o">.</span><span class="n">SIG_SUMMARY</span><span class="p">,</span>
-    <span class="s1">'Signatures_Count_Signature'</span><span class="p">:</span> <span class="n">Notice_Type</span><span class="o">.</span><span class="n">Signatures_Count_Signature</span><span class="p">,</span>
-    <span class="s1">'Signatures_LOG'</span><span class="p">:</span> <span class="n">Log_ID</span><span class="o">.</span><span class="n">Signatures_LOG</span><span class="p">,</span>
-    <span class="s1">'Signatures_Multiple_Sig_Responders'</span><span class="p">:</span> <span class="n">Notice_Type</span><span class="o">.</span><span class="n">Signatures_Multiple_Sig_Responders</span><span class="p">,</span>
-    <span class="s1">'Signatures_Multiple_Signatures'</span><span class="p">:</span> <span class="n">Notice_Type</span><span class="o">.</span><span class="n">Signatures_Multiple_Signatures</span><span class="p">,</span>
-    <span class="s1">'Signatures_Sensitive_Signature'</span><span class="p">:</span> <span class="n">Notice_Type</span><span class="o">.</span><span class="n">Signatures_Sensitive_Signature</span><span class="p">,</span>
-    <span class="s1">'Signatures_Signature_Summary'</span><span class="p">:</span> <span class="n">Notice_Type</span><span class="o">.</span><span class="n">Signatures_Signature_Summary</span><span class="p">,</span>
-<span class="p">}</span>
-
-<span class="n">builtins</span><span class="o">.</span><span class="n">globals</span><span class="p">()[</span><span class="s1">'ZLogging::Software'</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s1">'Software_LOG'</span><span class="p">:</span> <span class="n">Log_ID</span><span class="o">.</span><span class="n">Software_LOG</span><span class="p">,</span>
-    <span class="s1">'Software_Software_Version_Change'</span><span class="p">:</span> <span class="n">Notice_Type</span><span class="o">.</span><span class="n">Software_Software_Version_Change</span><span class="p">,</span>
-    <span class="s1">'Software_Vulnerable_Version'</span><span class="p">:</span> <span class="n">Notice_Type</span><span class="o">.</span><span class="n">Software_Vulnerable_Version</span><span class="p">,</span>
-    <span class="s1">'Type'</span><span class="p">:</span> <span class="n">Software_Type</span><span class="p">,</span>
-    <span class="s1">'UNKNOWN'</span><span class="p">:</span> <span class="n">Software_Type</span><span class="o">.</span><span class="n">UNKNOWN</span><span class="p">,</span>
-<span class="p">}</span>
-
-<span class="n">builtins</span><span class="o">.</span><span class="n">globals</span><span class="p">()[</span><span class="s1">'ZLogging::Stats'</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s1">'Stats_LOG'</span><span class="p">:</span> <span class="n">Log_ID</span><span class="o">.</span><span class="n">Stats_LOG</span><span class="p">,</span>
-<span class="p">}</span>
-
-<span class="n">builtins</span><span class="o">.</span><span class="n">globals</span><span class="p">()[</span><span class="s1">'ZLogging::SumStats'</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s1">'AVERAGE'</span><span class="p">:</span> <span class="n">SumStats_Calculation</span><span class="o">.</span><span class="n">AVERAGE</span><span class="p">,</span>
-    <span class="s1">'Calculation'</span><span class="p">:</span> <span class="n">SumStats_Calculation</span><span class="p">,</span>
-    <span class="s1">'HLL_UNIQUE'</span><span class="p">:</span> <span class="n">SumStats_Calculation</span><span class="o">.</span><span class="n">HLL_UNIQUE</span><span class="p">,</span>
-    <span class="s1">'LAST'</span><span class="p">:</span> <span class="n">SumStats_Calculation</span><span class="o">.</span><span class="n">LAST</span><span class="p">,</span>
-    <span class="s1">'MAX'</span><span class="p">:</span> <span class="n">SumStats_Calculation</span><span class="o">.</span><span class="n">MAX</span><span class="p">,</span>
-    <span class="s1">'MIN'</span><span class="p">:</span> <span class="n">SumStats_Calculation</span><span class="o">.</span><span class="n">MIN</span><span class="p">,</span>
-    <span class="s1">'PLACEHOLDER'</span><span class="p">:</span> <span class="n">SumStats_Calculation</span><span class="o">.</span><span class="n">PLACEHOLDER</span><span class="p">,</span>
-    <span class="s1">'SAMPLE'</span><span class="p">:</span> <span class="n">SumStats_Calculation</span><span class="o">.</span><span class="n">SAMPLE</span><span class="p">,</span>
-    <span class="s1">'STD_DEV'</span><span class="p">:</span> <span class="n">SumStats_Calculation</span><span class="o">.</span><span class="n">STD_DEV</span><span class="p">,</span>
-    <span class="s1">'SUM'</span><span class="p">:</span> <span class="n">SumStats_Calculation</span><span class="o">.</span><span class="n">SUM</span><span class="p">,</span>
-    <span class="s1">'TOPK'</span><span class="p">:</span> <span class="n">SumStats_Calculation</span><span class="o">.</span><span class="n">TOPK</span><span class="p">,</span>
-    <span class="s1">'UNIQUE'</span><span class="p">:</span> <span class="n">SumStats_Calculation</span><span class="o">.</span><span class="n">UNIQUE</span><span class="p">,</span>
-    <span class="s1">'VARIANCE'</span><span class="p">:</span> <span class="n">SumStats_Calculation</span><span class="o">.</span><span class="n">VARIANCE</span><span class="p">,</span>
-<span class="p">}</span>
-
-<span class="n">builtins</span><span class="o">.</span><span class="n">globals</span><span class="p">()[</span><span class="s1">'ZLogging::Supervisor'</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s1">'ClusterRole'</span><span class="p">:</span> <span class="n">Supervisor_ClusterRole</span><span class="p">,</span>
-    <span class="s1">'LOGGER'</span><span class="p">:</span> <span class="n">Supervisor_ClusterRole</span><span class="o">.</span><span class="n">LOGGER</span><span class="p">,</span>
-    <span class="s1">'MANAGER'</span><span class="p">:</span> <span class="n">Supervisor_ClusterRole</span><span class="o">.</span><span class="n">MANAGER</span><span class="p">,</span>
-    <span class="s1">'NONE'</span><span class="p">:</span> <span class="n">Supervisor_ClusterRole</span><span class="o">.</span><span class="n">NONE</span><span class="p">,</span>
-    <span class="s1">'PROXY'</span><span class="p">:</span> <span class="n">Supervisor_ClusterRole</span><span class="o">.</span><span class="n">PROXY</span><span class="p">,</span>
-    <span class="s1">'WORKER'</span><span class="p">:</span> <span class="n">Supervisor_ClusterRole</span><span class="o">.</span><span class="n">WORKER</span><span class="p">,</span>
-<span class="p">}</span>
-
-<span class="n">builtins</span><span class="o">.</span><span class="n">globals</span><span class="p">()[</span><span class="s1">'ZLogging::Syslog'</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s1">'Syslog_LOG'</span><span class="p">:</span> <span class="n">Log_ID</span><span class="o">.</span><span class="n">Syslog_LOG</span><span class="p">,</span>
-<span class="p">}</span>
-
-<span class="n">builtins</span><span class="o">.</span><span class="n">globals</span><span class="p">()[</span><span class="s1">'ZLogging::TeamCymruMalwareHashRegistry'</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s1">'TeamCymruMalwareHashRegistry_Match'</span><span class="p">:</span> <span class="n">Notice_Type</span><span class="o">.</span><span class="n">TeamCymruMalwareHashRegistry_Match</span><span class="p">,</span>
-<span class="p">}</span>
-
-<span class="n">builtins</span><span class="o">.</span><span class="n">globals</span><span class="p">()[</span><span class="s1">'ZLogging::Telemetry'</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s1">'DOUBLE_COUNTER'</span><span class="p">:</span> <span class="n">Telemetry_MetricType</span><span class="o">.</span><span class="n">DOUBLE_COUNTER</span><span class="p">,</span>
-    <span class="s1">'DOUBLE_GAUGE'</span><span class="p">:</span> <span class="n">Telemetry_MetricType</span><span class="o">.</span><span class="n">DOUBLE_GAUGE</span><span class="p">,</span>
-    <span class="s1">'DOUBLE_HISTOGRAM'</span><span class="p">:</span> <span class="n">Telemetry_MetricType</span><span class="o">.</span><span class="n">DOUBLE_HISTOGRAM</span><span class="p">,</span>
-    <span class="s1">'INT_COUNTER'</span><span class="p">:</span> <span class="n">Telemetry_MetricType</span><span class="o">.</span><span class="n">INT_COUNTER</span><span class="p">,</span>
-    <span class="s1">'INT_GAUGE'</span><span class="p">:</span> <span class="n">Telemetry_MetricType</span><span class="o">.</span><span class="n">INT_GAUGE</span><span class="p">,</span>
-    <span class="s1">'INT_HISTOGRAM'</span><span class="p">:</span> <span class="n">Telemetry_MetricType</span><span class="o">.</span><span class="n">INT_HISTOGRAM</span><span class="p">,</span>
-    <span class="s1">'MetricType'</span><span class="p">:</span> <span class="n">Telemetry_MetricType</span><span class="p">,</span>
-    <span class="s1">'Telemetry_LOG'</span><span class="p">:</span> <span class="n">Log_ID</span><span class="o">.</span><span class="n">Telemetry_LOG</span><span class="p">,</span>
-    <span class="s1">'Telemetry_LOG_HISTOGRAM'</span><span class="p">:</span> <span class="n">Log_ID</span><span class="o">.</span><span class="n">Telemetry_LOG_HISTOGRAM</span><span class="p">,</span>
-<span class="p">}</span>
-
-<span class="n">builtins</span><span class="o">.</span><span class="n">globals</span><span class="p">()[</span><span class="s1">'ZLogging::Traceroute'</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s1">'Traceroute_Detected'</span><span class="p">:</span> <span class="n">Notice_Type</span><span class="o">.</span><span class="n">Traceroute_Detected</span><span class="p">,</span>
-    <span class="s1">'Traceroute_LOG'</span><span class="p">:</span> <span class="n">Log_ID</span><span class="o">.</span><span class="n">Traceroute_LOG</span><span class="p">,</span>
-<span class="p">}</span>
-
-<span class="n">builtins</span><span class="o">.</span><span class="n">globals</span><span class="p">()[</span><span class="s1">'ZLogging::Tunnel'</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s1">'AYIYA'</span><span class="p">:</span> <span class="n">Tunnel_Type</span><span class="o">.</span><span class="n">AYIYA</span><span class="p">,</span>
-    <span class="s1">'Action'</span><span class="p">:</span> <span class="n">Tunnel_Action</span><span class="p">,</span>
-    <span class="s1">'CLOSE'</span><span class="p">:</span> <span class="n">Tunnel_Action</span><span class="o">.</span><span class="n">CLOSE</span><span class="p">,</span>
-    <span class="s1">'DISCOVER'</span><span class="p">:</span> <span class="n">Tunnel_Action</span><span class="o">.</span><span class="n">DISCOVER</span><span class="p">,</span>
-    <span class="s1">'EXPIRE'</span><span class="p">:</span> <span class="n">Tunnel_Action</span><span class="o">.</span><span class="n">EXPIRE</span><span class="p">,</span>
-    <span class="s1">'GENEVE'</span><span class="p">:</span> <span class="n">Tunnel_Type</span><span class="o">.</span><span class="n">GENEVE</span><span class="p">,</span>
-    <span class="s1">'GRE'</span><span class="p">:</span> <span class="n">Tunnel_Type</span><span class="o">.</span><span class="n">GRE</span><span class="p">,</span>
-    <span class="s1">'GTPv1'</span><span class="p">:</span> <span class="n">Tunnel_Type</span><span class="o">.</span><span class="n">GTPv1</span><span class="p">,</span>
-    <span class="s1">'HTTP'</span><span class="p">:</span> <span class="n">Tunnel_Type</span><span class="o">.</span><span class="n">HTTP</span><span class="p">,</span>
-    <span class="s1">'IP'</span><span class="p">:</span> <span class="n">Tunnel_Type</span><span class="o">.</span><span class="n">IP</span><span class="p">,</span>
-    <span class="s1">'NONE'</span><span class="p">:</span> <span class="n">Tunnel_Type</span><span class="o">.</span><span class="n">NONE</span><span class="p">,</span>
-    <span class="s1">'SOCKS'</span><span class="p">:</span> <span class="n">Tunnel_Type</span><span class="o">.</span><span class="n">SOCKS</span><span class="p">,</span>
-    <span class="s1">'TEREDO'</span><span class="p">:</span> <span class="n">Tunnel_Type</span><span class="o">.</span><span class="n">TEREDO</span><span class="p">,</span>
-    <span class="s1">'Tunnel_LOG'</span><span class="p">:</span> <span class="n">Log_ID</span><span class="o">.</span><span class="n">Tunnel_LOG</span><span class="p">,</span>
-    <span class="s1">'Type'</span><span class="p">:</span> <span class="n">Tunnel_Type</span><span class="p">,</span>
-    <span class="s1">'VXLAN'</span><span class="p">:</span> <span class="n">Tunnel_Type</span><span class="o">.</span><span class="n">VXLAN</span><span class="p">,</span>
-<span class="p">}</span>
-
-<span class="n">builtins</span><span class="o">.</span><span class="n">globals</span><span class="p">()[</span><span class="s1">'ZLogging::UnknownProtocol'</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s1">'UnknownProtocol_LOG'</span><span class="p">:</span> <span class="n">Log_ID</span><span class="o">.</span><span class="n">UnknownProtocol_LOG</span><span class="p">,</span>
-<span class="p">}</span>
-
-<span class="n">builtins</span><span class="o">.</span><span class="n">globals</span><span class="p">()[</span><span class="s1">'ZLogging::Weird'</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s1">'ACTION_IGNORE'</span><span class="p">:</span> <span class="n">Weird_Action</span><span class="o">.</span><span class="n">ACTION_IGNORE</span><span class="p">,</span>
-    <span class="s1">'ACTION_LOG'</span><span class="p">:</span> <span class="n">Weird_Action</span><span class="o">.</span><span class="n">ACTION_LOG</span><span class="p">,</span>
-    <span class="s1">'ACTION_LOG_ONCE'</span><span class="p">:</span> <span class="n">Weird_Action</span><span class="o">.</span><span class="n">ACTION_LOG_ONCE</span><span class="p">,</span>
-    <span class="s1">'ACTION_LOG_PER_CONN'</span><span class="p">:</span> <span class="n">Weird_Action</span><span class="o">.</span><span class="n">ACTION_LOG_PER_CONN</span><span class="p">,</span>
-    <span class="s1">'ACTION_LOG_PER_ORIG'</span><span class="p">:</span> <span class="n">Weird_Action</span><span class="o">.</span><span class="n">ACTION_LOG_PER_ORIG</span><span class="p">,</span>
-    <span class="s1">'ACTION_NOTICE'</span><span class="p">:</span> <span class="n">Weird_Action</span><span class="o">.</span><span class="n">ACTION_NOTICE</span><span class="p">,</span>
-    <span class="s1">'ACTION_NOTICE_ONCE'</span><span class="p">:</span> <span class="n">Weird_Action</span><span class="o">.</span><span class="n">ACTION_NOTICE_ONCE</span><span class="p">,</span>
-    <span class="s1">'ACTION_NOTICE_PER_CONN'</span><span class="p">:</span> <span class="n">Weird_Action</span><span class="o">.</span><span class="n">ACTION_NOTICE_PER_CONN</span><span class="p">,</span>
-    <span class="s1">'ACTION_NOTICE_PER_ORIG'</span><span class="p">:</span> <span class="n">Weird_Action</span><span class="o">.</span><span class="n">ACTION_NOTICE_PER_ORIG</span><span class="p">,</span>
-    <span class="s1">'ACTION_UNSPECIFIED'</span><span class="p">:</span> <span class="n">Weird_Action</span><span class="o">.</span><span class="n">ACTION_UNSPECIFIED</span><span class="p">,</span>
-    <span class="s1">'Action'</span><span class="p">:</span> <span class="n">Weird_Action</span><span class="p">,</span>
-    <span class="s1">'Weird_Activity'</span><span class="p">:</span> <span class="n">Notice_Type</span><span class="o">.</span><span class="n">Weird_Activity</span><span class="p">,</span>
-    <span class="s1">'Weird_LOG'</span><span class="p">:</span> <span class="n">Log_ID</span><span class="o">.</span><span class="n">Weird_LOG</span><span class="p">,</span>
-<span class="p">}</span>
-
-<span class="n">builtins</span><span class="o">.</span><span class="n">globals</span><span class="p">()[</span><span class="s1">'ZLogging::WeirdStats'</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s1">'WeirdStats_LOG'</span><span class="p">:</span> <span class="n">Log_ID</span><span class="o">.</span><span class="n">WeirdStats_LOG</span><span class="p">,</span>
-<span class="p">}</span>
-
-<span class="n">builtins</span><span class="o">.</span><span class="n">globals</span><span class="p">()[</span><span class="s1">'ZLogging::X509'</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s1">'X509_IN_CERT'</span><span class="p">:</span> <span class="n">Intel_Where</span><span class="o">.</span><span class="n">X509_IN_CERT</span><span class="p">,</span>
-    <span class="s1">'X509_LOG'</span><span class="p">:</span> <span class="n">Log_ID</span><span class="o">.</span><span class="n">X509_LOG</span><span class="p">,</span>
-<span class="p">}</span>
-
-<span class="n">builtins</span><span class="o">.</span><span class="n">globals</span><span class="p">()[</span><span class="s1">'ZLogging::ZeekygenExample'</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s1">'FIVE'</span><span class="p">:</span> <span class="n">ZeekygenExample_SimpleEnum</span><span class="o">.</span><span class="n">FIVE</span><span class="p">,</span>
-    <span class="s1">'FOUR'</span><span class="p">:</span> <span class="n">ZeekygenExample_SimpleEnum</span><span class="o">.</span><span class="n">FOUR</span><span class="p">,</span>
-    <span class="s1">'ONE'</span><span class="p">:</span> <span class="n">ZeekygenExample_SimpleEnum</span><span class="o">.</span><span class="n">ONE</span><span class="p">,</span>
-    <span class="s1">'SimpleEnum'</span><span class="p">:</span> <span class="n">ZeekygenExample_SimpleEnum</span><span class="p">,</span>
-    <span class="s1">'THREE'</span><span class="p">:</span> <span class="n">ZeekygenExample_SimpleEnum</span><span class="o">.</span><span class="n">THREE</span><span class="p">,</span>
-    <span class="s1">'TWO'</span><span class="p">:</span> <span class="n">ZeekygenExample_SimpleEnum</span><span class="o">.</span><span class="n">TWO</span><span class="p">,</span>
-    <span class="s1">'ZeekygenExample_LOG'</span><span class="p">:</span> <span class="n">Log_ID</span><span class="o">.</span><span class="n">ZeekygenExample_LOG</span><span class="p">,</span>
-    <span class="s1">'ZeekygenExample_Zeekygen_Four'</span><span class="p">:</span> <span class="n">Notice_Type</span><span class="o">.</span><span class="n">ZeekygenExample_Zeekygen_Four</span><span class="p">,</span>
-    <span class="s1">'ZeekygenExample_Zeekygen_One'</span><span class="p">:</span> <span class="n">Notice_Type</span><span class="o">.</span><span class="n">ZeekygenExample_Zeekygen_One</span><span class="p">,</span>
-    <span class="s1">'ZeekygenExample_Zeekygen_Three'</span><span class="p">:</span> <span class="n">Notice_Type</span><span class="o">.</span><span class="n">ZeekygenExample_Zeekygen_Three</span><span class="p">,</span>
-    <span class="s1">'ZeekygenExample_Zeekygen_Two'</span><span class="p">:</span> <span class="n">Notice_Type</span><span class="o">.</span><span class="n">ZeekygenExample_Zeekygen_Two</span><span class="p">,</span>
-<span class="p">}</span>
-
-<span class="n">builtins</span><span class="o">.</span><span class="n">globals</span><span class="p">()[</span><span class="s1">'ZLogging::mysql'</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s1">'mysql_LOG'</span><span class="p">:</span> <span class="n">Log_ID</span><span class="o">.</span><span class="n">mysql_LOG</span><span class="p">,</span>
-<span class="p">}</span>
-
 <span class="n">builtins</span><span class="o">.</span><span class="n">globals</span><span class="p">()[</span><span class="s1">'ZLogging::spicy'</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
     <span class="s1">'AddressFamily'</span><span class="p">:</span> <span class="n">spicy_AddressFamily</span><span class="p">,</span>
     <span class="s1">'AddressFamily_IPv4'</span><span class="p">:</span> <span class="n">spicy_AddressFamily</span><span class="o">.</span><span class="n">AddressFamily_IPv4</span><span class="p">,</span>
@@ -1576,65 +648,6 @@
     <span class="s1">'Side_Left'</span><span class="p">:</span> <span class="n">spicy_Side</span><span class="o">.</span><span class="n">Side_Left</span><span class="p">,</span>
     <span class="s1">'Side_Right'</span><span class="p">:</span> <span class="n">spicy_Side</span><span class="o">.</span><span class="n">Side_Right</span><span class="p">,</span>
     <span class="s1">'Side_Undef'</span><span class="p">:</span> <span class="n">spicy_Side</span><span class="o">.</span><span class="n">Side_Undef</span><span class="p">,</span>
-<span class="p">}</span>
-
-<span class="n">builtins</span><span class="o">.</span><span class="n">globals</span><span class="p">()[</span><span class="s1">'ZLogging::zeek'</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s1">'ALL_HOSTS'</span><span class="p">:</span> <span class="n">zeek_Host</span><span class="o">.</span><span class="n">ALL_HOSTS</span><span class="p">,</span>
-    <span class="s1">'BIDIRECTIONAL'</span><span class="p">:</span> <span class="n">zeek_Direction</span><span class="o">.</span><span class="n">BIDIRECTIONAL</span><span class="p">,</span>
-    <span class="s1">'Direction'</span><span class="p">:</span> <span class="n">zeek_Direction</span><span class="p">,</span>
-    <span class="s1">'Host'</span><span class="p">:</span> <span class="n">zeek_Host</span><span class="p">,</span>
-    <span class="s1">'INBOUND'</span><span class="p">:</span> <span class="n">zeek_Direction</span><span class="o">.</span><span class="n">INBOUND</span><span class="p">,</span>
-    <span class="s1">'IPAddrAnonymization'</span><span class="p">:</span> <span class="n">zeek_IPAddrAnonymization</span><span class="p">,</span>
-    <span class="s1">'IPAddrAnonymizationClass'</span><span class="p">:</span> <span class="n">zeek_IPAddrAnonymizationClass</span><span class="p">,</span>
-    <span class="s1">'KEEP_ORIG_ADDR'</span><span class="p">:</span> <span class="n">zeek_IPAddrAnonymization</span><span class="o">.</span><span class="n">KEEP_ORIG_ADDR</span><span class="p">,</span>
-    <span class="s1">'L3_ARP'</span><span class="p">:</span> <span class="n">zeek_layer3_proto</span><span class="o">.</span><span class="n">L3_ARP</span><span class="p">,</span>
-    <span class="s1">'L3_IPV4'</span><span class="p">:</span> <span class="n">zeek_layer3_proto</span><span class="o">.</span><span class="n">L3_IPV4</span><span class="p">,</span>
-    <span class="s1">'L3_IPV6'</span><span class="p">:</span> <span class="n">zeek_layer3_proto</span><span class="o">.</span><span class="n">L3_IPV6</span><span class="p">,</span>
-    <span class="s1">'L3_UNKNOWN'</span><span class="p">:</span> <span class="n">zeek_layer3_proto</span><span class="o">.</span><span class="n">L3_UNKNOWN</span><span class="p">,</span>
-    <span class="s1">'LINK_ETHERNET'</span><span class="p">:</span> <span class="n">zeek_link_encap</span><span class="o">.</span><span class="n">LINK_ETHERNET</span><span class="p">,</span>
-    <span class="s1">'LINK_UNKNOWN'</span><span class="p">:</span> <span class="n">zeek_link_encap</span><span class="o">.</span><span class="n">LINK_UNKNOWN</span><span class="p">,</span>
-    <span class="s1">'LOCAL_HOSTS'</span><span class="p">:</span> <span class="n">zeek_Host</span><span class="o">.</span><span class="n">LOCAL_HOSTS</span><span class="p">,</span>
-    <span class="s1">'NO_DIRECTION'</span><span class="p">:</span> <span class="n">zeek_Direction</span><span class="o">.</span><span class="n">NO_DIRECTION</span><span class="p">,</span>
-    <span class="s1">'NO_HOSTS'</span><span class="p">:</span> <span class="n">zeek_Host</span><span class="o">.</span><span class="n">NO_HOSTS</span><span class="p">,</span>
-    <span class="s1">'None'</span><span class="p">:</span> <span class="n">zeek_PcapFilterID</span><span class="p">[</span><span class="s1">'None'</span><span class="p">],</span>  <span class="c1"># type: ignore[misc]</span>
-    <span class="s1">'ORIG_ADDR'</span><span class="p">:</span> <span class="n">zeek_IPAddrAnonymizationClass</span><span class="o">.</span><span class="n">ORIG_ADDR</span><span class="p">,</span>
-    <span class="s1">'OTHER_ADDR'</span><span class="p">:</span> <span class="n">zeek_IPAddrAnonymizationClass</span><span class="o">.</span><span class="n">OTHER_ADDR</span><span class="p">,</span>
-    <span class="s1">'OUTBOUND'</span><span class="p">:</span> <span class="n">zeek_Direction</span><span class="o">.</span><span class="n">OUTBOUND</span><span class="p">,</span>
-    <span class="s1">'PKT_PROFILE_MODE_BYTES'</span><span class="p">:</span> <span class="n">zeek_pkt_profile_modes</span><span class="o">.</span><span class="n">PKT_PROFILE_MODE_BYTES</span><span class="p">,</span>
-    <span class="s1">'PKT_PROFILE_MODE_NONE'</span><span class="p">:</span> <span class="n">zeek_pkt_profile_modes</span><span class="o">.</span><span class="n">PKT_PROFILE_MODE_NONE</span><span class="p">,</span>
-    <span class="s1">'PKT_PROFILE_MODE_PKTS'</span><span class="p">:</span> <span class="n">zeek_pkt_profile_modes</span><span class="o">.</span><span class="n">PKT_PROFILE_MODE_PKTS</span><span class="p">,</span>
-    <span class="s1">'PKT_PROFILE_MODE_SECS'</span><span class="p">:</span> <span class="n">zeek_pkt_profile_modes</span><span class="o">.</span><span class="n">PKT_PROFILE_MODE_SECS</span><span class="p">,</span>
-    <span class="s1">'PREFIX_PRESERVING_A50'</span><span class="p">:</span> <span class="n">zeek_IPAddrAnonymization</span><span class="o">.</span><span class="n">PREFIX_PRESERVING_A50</span><span class="p">,</span>
-    <span class="s1">'PREFIX_PRESERVING_MD5'</span><span class="p">:</span> <span class="n">zeek_IPAddrAnonymization</span><span class="o">.</span><span class="n">PREFIX_PRESERVING_MD5</span><span class="p">,</span>
-    <span class="s1">'PcapFilterID'</span><span class="p">:</span> <span class="n">zeek_PcapFilterID</span><span class="p">,</span>
-    <span class="s1">'RANDOM_MD5'</span><span class="p">:</span> <span class="n">zeek_IPAddrAnonymization</span><span class="o">.</span><span class="n">RANDOM_MD5</span><span class="p">,</span>
-    <span class="s1">'REMOTE_HOSTS'</span><span class="p">:</span> <span class="n">zeek_Host</span><span class="o">.</span><span class="n">REMOTE_HOSTS</span><span class="p">,</span>
-    <span class="s1">'RESP_ADDR'</span><span class="p">:</span> <span class="n">zeek_IPAddrAnonymizationClass</span><span class="o">.</span><span class="n">RESP_ADDR</span><span class="p">,</span>
-    <span class="s1">'RPC_AUTH_ERROR'</span><span class="p">:</span> <span class="n">zeek_rpc_status</span><span class="o">.</span><span class="n">RPC_AUTH_ERROR</span><span class="p">,</span>
-    <span class="s1">'RPC_GARBAGE_ARGS'</span><span class="p">:</span> <span class="n">zeek_rpc_status</span><span class="o">.</span><span class="n">RPC_GARBAGE_ARGS</span><span class="p">,</span>
-    <span class="s1">'RPC_PROC_UNAVAIL'</span><span class="p">:</span> <span class="n">zeek_rpc_status</span><span class="o">.</span><span class="n">RPC_PROC_UNAVAIL</span><span class="p">,</span>
-    <span class="s1">'RPC_PROG_MISMATCH'</span><span class="p">:</span> <span class="n">zeek_rpc_status</span><span class="o">.</span><span class="n">RPC_PROG_MISMATCH</span><span class="p">,</span>
-    <span class="s1">'RPC_PROG_UNAVAIL'</span><span class="p">:</span> <span class="n">zeek_rpc_status</span><span class="o">.</span><span class="n">RPC_PROG_UNAVAIL</span><span class="p">,</span>
-    <span class="s1">'RPC_SUCCESS'</span><span class="p">:</span> <span class="n">zeek_rpc_status</span><span class="o">.</span><span class="n">RPC_SUCCESS</span><span class="p">,</span>
-    <span class="s1">'RPC_SYSTEM_ERR'</span><span class="p">:</span> <span class="n">zeek_rpc_status</span><span class="o">.</span><span class="n">RPC_SYSTEM_ERR</span><span class="p">,</span>
-    <span class="s1">'RPC_TIMEOUT'</span><span class="p">:</span> <span class="n">zeek_rpc_status</span><span class="o">.</span><span class="n">RPC_TIMEOUT</span><span class="p">,</span>
-    <span class="s1">'RPC_UNKNOWN_ERROR'</span><span class="p">:</span> <span class="n">zeek_rpc_status</span><span class="o">.</span><span class="n">RPC_UNKNOWN_ERROR</span><span class="p">,</span>
-    <span class="s1">'RPC_VERS_MISMATCH'</span><span class="p">:</span> <span class="n">zeek_rpc_status</span><span class="o">.</span><span class="n">RPC_VERS_MISMATCH</span><span class="p">,</span>
-    <span class="s1">'SEQUENTIALLY_NUMBERED'</span><span class="p">:</span> <span class="n">zeek_IPAddrAnonymization</span><span class="o">.</span><span class="n">SEQUENTIALLY_NUMBERED</span><span class="p">,</span>
-    <span class="s1">'TABLE_ELEMENT_CHANGED'</span><span class="p">:</span> <span class="n">zeek_TableChange</span><span class="o">.</span><span class="n">TABLE_ELEMENT_CHANGED</span><span class="p">,</span>
-    <span class="s1">'TABLE_ELEMENT_EXPIRED'</span><span class="p">:</span> <span class="n">zeek_TableChange</span><span class="o">.</span><span class="n">TABLE_ELEMENT_EXPIRED</span><span class="p">,</span>
-    <span class="s1">'TABLE_ELEMENT_NEW'</span><span class="p">:</span> <span class="n">zeek_TableChange</span><span class="o">.</span><span class="n">TABLE_ELEMENT_NEW</span><span class="p">,</span>
-    <span class="s1">'TABLE_ELEMENT_REMOVED'</span><span class="p">:</span> <span class="n">zeek_TableChange</span><span class="o">.</span><span class="n">TABLE_ELEMENT_REMOVED</span><span class="p">,</span>
-    <span class="s1">'TableChange'</span><span class="p">:</span> <span class="n">zeek_TableChange</span><span class="p">,</span>
-    <span class="s1">'icmp'</span><span class="p">:</span> <span class="n">zeek_transport_proto</span><span class="o">.</span><span class="n">icmp</span><span class="p">,</span>
-    <span class="s1">'layer3_proto'</span><span class="p">:</span> <span class="n">zeek_layer3_proto</span><span class="p">,</span>
-    <span class="s1">'link_encap'</span><span class="p">:</span> <span class="n">zeek_link_encap</span><span class="p">,</span>
-    <span class="s1">'pkt_profile_modes'</span><span class="p">:</span> <span class="n">zeek_pkt_profile_modes</span><span class="p">,</span>
-    <span class="s1">'rpc_status'</span><span class="p">:</span> <span class="n">zeek_rpc_status</span><span class="p">,</span>
-    <span class="s1">'tcp'</span><span class="p">:</span> <span class="n">zeek_transport_proto</span><span class="o">.</span><span class="n">tcp</span><span class="p">,</span>
-    <span class="s1">'transport_proto'</span><span class="p">:</span> <span class="n">zeek_transport_proto</span><span class="p">,</span>
-    <span class="s1">'udp'</span><span class="p">:</span> <span class="n">zeek_transport_proto</span><span class="o">.</span><span class="n">udp</span><span class="p">,</span>
-    <span class="s1">'unknown_transport'</span><span class="p">:</span> <span class="n">zeek_transport_proto</span><span class="o">.</span><span class="n">unknown_transport</span><span class="p">,</span>
 <span class="p">}</span>
 
 
